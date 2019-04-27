@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -59,4 +61,20 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Bullet configuration
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+  end
+
+  # Devise configuration
+  config.action_mailer.default_url_options = {host: 'http://localhost:3000'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {address: 'http://localhost', port: 1025}
+
+  ActiveRecordQueryTrace.enabled = true
 end
