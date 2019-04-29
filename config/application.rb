@@ -26,6 +26,9 @@ module IcadUbs
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    # Rack attack
+    config.middleware.use Rack::Attack
+
     # Lograge config
     config.lograge.enabled = true
     config.lograge.formatter = Lograge::Formatters::Logstash.new

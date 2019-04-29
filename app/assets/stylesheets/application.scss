@@ -1,0 +1,224 @@
+@import url("https://preview.tabler.io/assets/css/dashboard.css");
+
+$color-red: #f22613;
+$color-validation: #cd201f;
+$color-green: #00887a;
+$color-skin: #ffccbc;
+$color-white: #ffffff;
+$color-aqua: #d3e3fc;
+$color-blue: #228be6;
+$color-yellow: #FFCE00;
+$color-blue-night: #0375b4;
+$color-green-irises: #007849;
+$color-black-evening: #262228;
+$color-jade: #5cdb95;
+$color-blue-deep: #05386b;
+$color-green-smoke: #379683;
+$color-green-leaf: #8ee4af;
+$color-sand: #edf5e1;
+$color-muted: #6c757d;
+
+body {
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  background: $color-blue-deep;
+  color: $color-jade;
+  background: linear-gradient(to right, $color-sand);
+
+  ::selection {
+    background: $color-jade;
+  }
+
+  ::-moz-selection {
+    background: $color-jade;
+  }
+}
+
+.text-green {
+  color: $color-green;
+}
+
+.text-skin {
+  color: $color-skin;
+}
+
+.text-white {
+  color: $color-white;
+}
+
+.text-aqua {
+  color: $color-aqua;
+}
+
+.text-blue {
+  color: $color-blue;
+}
+
+.text-yellow {
+  color: $color-yellow;
+}
+
+.text-blue-night {
+  color: $color-blue-night;
+}
+
+.text-green-irises {
+  color: $color-green-irises;
+}
+
+.text-black-evening {
+  color: $color-black-evening;
+}
+
+.text-jade {
+  color: $color-jade;
+}
+
+.text-blue-deep {
+  color: $color-blue-deep;
+}
+
+.text-green-smoke {
+  color: $color-green-smoke;
+}
+
+.text-green-leaf {
+  color: $color-green-leaf;
+}
+
+.text-sand {
+  color: $color-sand;
+}
+
+.bg-green {
+  color: $color-white;
+  background: $color-green;
+}
+
+.bg-skin {
+  color: $color-black-evening;
+  background: $color-skin;
+}
+
+.bg-white {
+  color: $color-black-evening;
+  background: $color-white;
+}
+
+.bg-aqua {
+  color: $color-white;
+  background: $color-aqua;
+}
+
+.bg-blue {
+  color: $color-white;
+  background: $color-blue;
+}
+
+.bg-yellow {
+  color: $color-green-irises;
+  background: $color-yellow;
+}
+
+.bg-blue-night {
+  color: $color-white;
+  background: $color-blue-night;
+}
+
+.bg-green-irises {
+  color: $color-white;
+  background: $color-green-irises;
+}
+
+.bg-black-evening {
+  color: $color-white;
+  background: $color-black-evening;
+}
+
+.bg-jade {
+  color: $color-blue-deep;
+  background: $color-jade;
+}
+
+.bg-blue-deep {
+  color: $color-white;
+  background: $color-blue-deep;
+}
+
+.btn.bg-blue-deep:hover {
+  color: $color-aqua;
+}
+
+.bg-green-smoke {
+  color: $color-green-smoke;
+  background: $color-jade;
+}
+
+.bg-green-leaf {
+  color: $color-green-leaf;
+  background: $color-jade;
+}
+
+.bg-sand {
+  color: $color-sand;
+  background: $color-jade;
+}
+
+.form-group .label-invalid {
+  color: $color-validation;
+}
+
+.nav-tabs .nav-link.active {
+  color: $color-blue;
+  font-weight: 900;
+  border-color: $color-blue;
+  background: transparent;
+  margin-bottom: -1px;
+  transition: .3s border-color;
+}
+
+.nav-tabs .nav-link:hover:not(.disabled) {
+  color: $color-blue;
+  font-weight: 900;
+  border-color: $color-blue;
+  background: transparent;
+  margin-bottom: -1px;
+  transition: .3s border-color;
+}
+
+.nav-tabs .nav-link:active:not(.disabled) {
+  color: $color-blue;
+  font-weight: 900;
+  border-color: $color-blue;
+  background: transparent;
+  margin-bottom: -1px;
+  transition: .3s border-color;
+}
+
+.nav-tabs .nav-item.show .nav-link {
+  color: $color-blue;
+  font-weight: 900;
+  background-color: transparent;
+  border-color: $color-blue;
+}
+
+

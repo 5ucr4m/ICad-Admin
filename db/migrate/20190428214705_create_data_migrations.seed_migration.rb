@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+# This migration comes from seed_migration (originally 20140310150145)
+class CreateDataMigrations < ActiveRecord::Migration[6.0]
+  def up
+    create_table SeedMigration.migration_table_name do |t|
+      t.string :version
+      t.integer :runtime
+      t.datetime :migrated_on
+
+      t.timestamps
+    end
+  end
+
+  def down
+    drop_table SeedMigration.migration_table_name
+  end
+end

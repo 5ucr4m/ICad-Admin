@@ -1,0 +1,12 @@
+<%= link_to f, class: 'btn btn-info btn-sm mr-1', role: 'button' do %>
+  <i class="far fa-search p-0"></i>
+<% end %>
+<%= link_to send("edit_#{f.model_name.singular}_path", f),
+            class: 'btn btn-primary btn-sm mr-1', role: 'button' do %>
+  <i class="far fa-edit p-0"></i>
+<% end %>
+<%= link_to f, class: 'btn btn-danger btn-sm', method: :delete,
+            data: {confirm: "Confirma a remoção do registro de código ##{f.id}?"},
+            role: 'button' do %>
+  <i class="far fa-trash p-0"></i>
+<% end %>

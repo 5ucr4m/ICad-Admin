@@ -46,7 +46,7 @@ RSpec.configure do |config|
                                  # with a Rack app under test that does *not* share a database
                                  # connection with the specs, so we must use truncation strategy.
                                  :truncation
-                               end
+    end
   end
 
   config.before(:each) do
