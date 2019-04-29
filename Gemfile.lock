@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/rails-api/active_model_serializers.git
+  revision: 1ebdda331a37770a2b4ecb101cd933cc926bdf54
+  branch: 0-10-stable
+  specs:
+    active_model_serializers (0.10.9)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,11 +48,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_model_serializers (0.10.9)
-      actionpack (>= 4.1, < 6)
-      activemodel (>= 4.1, < 6)
-      case_transform (>= 0.2)
-      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     active_record_query_trace (1.6.2)
     activejob (6.0.0.rc1)
       activesupport (= 6.0.0.rc1)
@@ -112,6 +118,8 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.8.0)
+      devise (>= 4.6)
     devise_token_auth (1.1.0)
       devise (> 3.5.2, < 4.7)
       rails (>= 4.2.0, < 6)
@@ -202,9 +210,10 @@ GEM
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     orm_adapter (0.5.0)
+    pager_api (0.2.4)
     pagy (3.0.0)
     parallel (1.17.0)
-    parser (2.6.2.1)
+    parser (2.6.3.0)
       ast (~> 2.4.0)
     pg (1.1.4)
     pry (0.12.2)
@@ -218,7 +227,6 @@ GEM
       yard (~> 0.9.11)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
     rack (2.0.7)
@@ -296,11 +304,10 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.67.2)
+    rubocop (0.68.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
-      psych (>= 3.1.0)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.6)
@@ -410,7 +417,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers
+  active_model_serializers!
   active_record_query_trace
   annotate
   bcrypt (~> 3.1.7)
@@ -423,6 +430,7 @@ DEPENDENCIES
   cancancan
   capybara
   database_cleaner
+  devise-i18n
   devise_token_auth
   dotenv-rails
   factory_bot_rails
@@ -435,6 +443,7 @@ DEPENDENCIES
   lograge
   logstash-event
   money-rails
+  pager_api
   pagy
   pg (>= 0.18, < 2.0)
   pry-byebug

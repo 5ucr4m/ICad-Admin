@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
-module ExceptionHandler
+module JsonExceptionHandler
   extend ActiveSupport::Concern
 
   included do
-    rescue_from ActiveRecord::RecordNotFound, with: :login_request
-    rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
-    rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    rescue_from CanCan::AccessDenied, with: :not_authorized
+    respond_to do |format|
+      if format.json
+        rescue_from ActiveRecord::RecordNotFound, with: :login_request
+        rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
+        rescue_from ActiveRecord::RecordNotFound, with: :not_found
+        rescue_from CanCan::AccessDenied, with: :not_authorized
+      end
+    end
   end
 
   def login_request
@@ -31,6 +35,6 @@ module ExceptionHandler
   end
 
   def unprocessable_entity(model)
-    render json: model.errors.full_messages.as_json, status: :unprocessable_entity
+    render json: model.errors, status: :unprocessable_entity
   end
 end

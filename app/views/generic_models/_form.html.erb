@@ -1,0 +1,47 @@
+<%= form_with(model: @generic_model, id: :generic_model) do |f| %>
+  <% content_for :body do %>
+      <div class="form-group col-md-4">
+        <%= f.label :name, {class: 'form-label'} %>
+        
+          <%= f.text_field :name, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :description, {class: 'form-label'} %>
+        
+          <%= f.text_field :description, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :reference, {class: 'form-label'} %>
+        
+          <%= f.text_field :reference, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :generic_field, {class: 'form-label'} %>
+        
+          <%= f.text_field :generic_field, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :generic_class, {class: 'form-label'} %>
+        
+          <%= f.text_field :generic_class, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :generic_model_id, {class: 'form-label'} %>
+        
+          <%= f.select :generic_model_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :slug, {class: 'form-label'} %>
+        
+          <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+  <% end %>
+  <%= render template: 'application/form', locals: {form: @generic_model} %>
+<% end %>

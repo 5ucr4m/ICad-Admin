@@ -5,10 +5,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'active_model_serializers'
+gem 'active_model_serializers',
+    git: 'https://github.com/rails-api/active_model_serializers.git',
+    branch: '0-10-stable'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cancancan'
+gem 'devise-i18n'
 gem 'devise_token_auth'
 gem 'faraday'
 gem 'friendly_id'
@@ -17,6 +20,7 @@ gem 'kaminari'
 gem 'lograge'
 gem 'logstash-event'
 gem 'money-rails'
+gem 'pager_api'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'

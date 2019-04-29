@@ -33,6 +33,10 @@ module IcadUbs
     config.lograge.enabled = true
     config.lograge.formatter = Lograge::Formatters::Logstash.new
 
+    # Disable assets and helper generators
+    config.generators.assets = false
+    config.generators.helper = false
+
     # Active Storage variant processor
     config.active_storage.variant_processor = :vips
 

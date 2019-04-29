@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_000944) do
+ActiveRecord::Schema.define(version: 2019_04_29_174917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(version: 2019_04_29_000944) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "generic_models", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "reference"
+    t.string "generic_field"
+    t.string "generic_class"
+    t.bigint "generic_model_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["generic_model_id"], name: "index_generic_models_on_generic_model_id"
+  end
+
   create_table "seed_migration_data_migrations", force: :cascade do |t|
     t.string "version"
     t.integer "runtime"
@@ -56,15 +69,21 @@ ActiveRecord::Schema.define(version: 2019_04_29_000944) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "provider", default: "email", null: false
     t.string "email"
+    t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "cns"
+    t.string "full_name"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.boolean "allow_password_change", default: false
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -72,7 +91,6 @@ ActiveRecord::Schema.define(version: 2019_04_29_000944) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.string "full_name"
     t.json "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -84,4 +102,5 @@ ActiveRecord::Schema.define(version: 2019_04_29_000944) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "generic_models", "generic_models"
 end
