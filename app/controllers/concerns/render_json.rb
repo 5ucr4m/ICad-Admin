@@ -6,8 +6,10 @@ module RenderJson
   def render_json(object, status = :ok, persisted = false)
     if object.is_a? ActiveRecord::Relation
       paginate object, per_page: 20
+    elsif persisted
+      render(json: object, status: status, location: object)
     else
-      persisted ? render(json: object, status: status, location: object) : render(json: object, status: status)
+      render(json: object, status: status)
     end
   end
 end

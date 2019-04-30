@@ -40,16 +40,17 @@ body {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  background: $color-blue-deep;
-  color: $color-jade;
+  color: $color-blue-deep;
   background: linear-gradient(to right, $color-sand);
 
   ::selection {
-    background: $color-jade;
+    color: $color-white;
+    background: $color-blue;
   }
 
   ::-moz-selection {
-    background: $color-jade;
+    color: $color-white;
+    background: $color-blue;
   }
 }
 
@@ -219,6 +220,10 @@ body {
   font-weight: 900;
   background-color: transparent;
   border-color: $color-blue;
+}
+
+.pagination {
+  margin-bottom: 0;
 }
 
 

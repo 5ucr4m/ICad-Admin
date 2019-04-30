@@ -24,5 +24,7 @@ Rails.application.routes.draw do
       sessions: 'api/overrides/sessions',
       registrations: 'api/overrides/registrations'
     }
-    end
+  end
+
+  root to: 'generic_models#index'
 end
