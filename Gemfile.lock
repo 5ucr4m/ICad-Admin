@@ -9,6 +9,20 @@ GIT
       case_transform (>= 0.2)
       jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
 
+GIT
+  remote: https://github.com/savonrb/savon.git
+  revision: 0fa08fc30ecce2cd1109474bfcc14abf13a0c297
+  specs:
+    savon (2.12.0)
+      akami (~> 1.2)
+      builder (>= 2.1.2)
+      gyoku (~> 1.2)
+      httpi (~> 2.3)
+      mail (~> 2.5)
+      nokogiri (>= 1.8.1)
+      nori (~> 2.4)
+      wasabi (~> 3.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -304,7 +318,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
-    rubocop (0.68.0)
+    rubocop (0.68.1)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -334,14 +348,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    savon (2.12.0)
-      akami (~> 1.2)
-      builder (>= 2.1.2)
-      gyoku (~> 1.2)
-      httpi (~> 2.3)
-      nokogiri (>= 1.8.1)
-      nori (~> 2.4)
-      wasabi (~> 3.4)
     seed_migration (1.2.3)
     shoulda-matchers (4.0.1)
       activesupport (>= 4.2.0)
@@ -392,11 +398,11 @@ GEM
     wasabi (3.5.0)
       httpi (~> 2.0)
       nokogiri (>= 1.4.2)
-    web-console (3.7.0)
-      actionview (>= 5.0)
-      activemodel (>= 5.0)
+    web-console (4.0.0)
+      actionview (>= 6.0.0.a)
+      activemodel (>= 6.0.0.a)
       bindex (>= 0.4.0)
-      railties (>= 5.0)
+      railties (>= 6.0.0.a)
     webmock (3.5.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -411,7 +417,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.19)
-    zeitwerk (2.1.5)
+    zeitwerk (2.1.6)
 
 PLATFORMS
   ruby
@@ -462,7 +468,7 @@ DEPENDENCIES
   rubocop-rails_config
   rubocop-rspec
   sass-rails (~> 5)
-  savon
+  savon!
   seed_migration
   shoulda-matchers
   sidekiq
