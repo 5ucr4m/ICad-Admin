@@ -55,8 +55,8 @@ class GenericModelsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def generic_model_params
-    params.require(:generic_model).permit(:name, :description,
-                                          :reference, :generic_field,
-                                          :generic_class, :generic_model_id, :slug)
+    params.require(:generic_model).permit(:name, :description, :reference,
+                                          :generic_field, :generic_class,
+                                          :generic_model_id)
   end
 end

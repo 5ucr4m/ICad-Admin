@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Api
-  class GenericModelsController < Api::ApplicationController
+  class GenericModelsController < Api::ApiController
+    include Pagy::Backend
     before_action :set_generic_model, only: %i[show edit update destroy]
 
     # GET /generic_models
     def index
-      @query = GenericModel.ransack(params[:q])
-      @pagy, @generic_models = pagy(@query.result, page: params[:page])
+      render_json GenericModel.ransack(params[:q]).result
     end
 
     # GET /generic_models/1
