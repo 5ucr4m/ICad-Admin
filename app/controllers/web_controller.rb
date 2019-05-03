@@ -12,7 +12,7 @@ class WebController < ApplicationController
     respond_to do |format|
       format.json { head :forbidden, content_type: 'application/json' }
       format.html do
-        redirect_to @referrer, flash: { error: t('errors.forbidden') }
+        redirect_to send(@referrer), flash: { error: t('errors.forbidden') }
       end
       format.js { head :forbidden, content_type: 'text/html' }
     end

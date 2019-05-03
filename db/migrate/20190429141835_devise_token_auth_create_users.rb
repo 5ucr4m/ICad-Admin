@@ -41,6 +41,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
 
       ## Tokens
       t.json :tokens
+      t.string :slug
 
       t.timestamps
     end

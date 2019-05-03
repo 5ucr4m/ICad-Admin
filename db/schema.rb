@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_174917) do
+ActiveRecord::Schema.define(version: 2019_05_03_005536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,26 @@ ActiveRecord::Schema.define(version: 2019_04_29_174917) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.string "abbreviation"
+    t.string "code"
+    t.bigint "state_id"
+    t.string "reference"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["state_id"], name: "index_cities_on_state_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.bigint "registry_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["registry_id"], name: "index_companies_on_registry_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -60,12 +80,64 @@ ActiveRecord::Schema.define(version: 2019_04_29_174917) do
     t.index ["generic_model_id"], name: "index_generic_models_on_generic_model_id"
   end
 
+  create_table "registries", force: :cascade do |t|
+    t.bigint "person_type_id"
+    t.string "legal_full_name"
+    t.string "fancy_name"
+    t.string "federal_registry"
+    t.string "state_registry"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_type_id"], name: "index_registries_on_person_type_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "role_id"
+    t.bigint "app_module_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["app_module_id"], name: "index_roles_on_app_module_id"
+    t.index ["role_id"], name: "index_roles_on_role_id"
+  end
+
   create_table "seed_migration_data_migrations", force: :cascade do |t|
     t.string "version"
     t.integer "runtime"
     t.datetime "migrated_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.string "abbreviation"
+    t.string "code"
+    t.string "reference"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_companies", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.boolean "current"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_user_companies_on_company_id"
+    t.index ["user_id"], name: "index_user_companies_on_user_id"
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.bigint "user_company_id"
+    t.bigint "role_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_company_id"], name: "index_user_roles_on_user_company_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,6 +164,7 @@ ActiveRecord::Schema.define(version: 2019_04_29_174917) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.json "tokens"
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -102,5 +175,14 @@ ActiveRecord::Schema.define(version: 2019_04_29_174917) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cities", "states"
+  add_foreign_key "companies", "registries"
   add_foreign_key "generic_models", "generic_models"
+  add_foreign_key "registries", "generic_models", column: "person_type_id"
+  add_foreign_key "roles", "generic_models", column: "app_module_id"
+  add_foreign_key "roles", "roles"
+  add_foreign_key "user_companies", "companies"
+  add_foreign_key "user_companies", "users"
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "user_companies"
 end

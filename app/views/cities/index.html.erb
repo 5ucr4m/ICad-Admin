@@ -1,0 +1,68 @@
+<%= render 'application/page_header', model: City %>
+<div class="card">
+  <div class="card-status bg-blue"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+                  <th><%= City.human_attribute_name :name %></th>
+                  <th><%= City.human_attribute_name :abbreviation %></th>
+                  <th><%= City.human_attribute_name :code %></th>
+                  <th><%= City.human_attribute_name :state %></th>
+                  <th><%= City.human_attribute_name :reference %></th>
+                  <th><%= City.human_attribute_name :slug %></th>
+                <% if can? :manage, City %>
+        <th><%= t('helpers.labels.actions') %></th>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @cities.each do |city| %>
+      <tr>
+                  <td><%= city.name %></td>
+                  <td><%= city.abbreviation %></td>
+                  <td><%= city.code %></td>
+                  <td><%= city.state_id %></td>
+                  <td><%= city.reference %></td>
+                  <td><%= city.slug %></td>
+                <% if can? :manage, City %>
+        <td>
+          <%= render 'application/table_links', f: city %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <div class="col-sm-12 col-lg-12 p-0">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= link_to new_city_path, class: 'btn btn-primary align-middle mb-md-0 mb-sm-3' do %>
+          <i class="fas fa-plus mr-2"></i>Novo
+          <% end %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <div class="float-right">
+            <%= pagy_bootstrap_nav(@pagy).html_safe %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+class CreateStates < ActiveRecord::Migration[6.0]
+  def change
+    create_table :states do |t|
+      t.string :name
+      t.string :abbreviation
+      t.string :code
+      t.string :reference
+      t.string :slug
+
+      t.timestamps
+    end
+  end
+end
