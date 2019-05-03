@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_roles
@@ -20,9 +22,10 @@
 #
 
 class UserRole < ApplicationRecord
+  belongs_to :user_company
+  belongs_to :role
 
-  belongs_to :user_company, optional: true
-  belongs_to :role, optional: true
+  has_one :user, through: :user_company
 
   ransack_alias :search, :id_to_s
 end

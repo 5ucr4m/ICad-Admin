@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_companies
@@ -21,9 +23,11 @@
 #
 
 class UserCompany < ApplicationRecord
+  belongs_to :user
+  belongs_to :company
 
-  belongs_to :user, optional: true
-  belongs_to :company, optional: true
+  has_many :user_roles, dependent: :destroy
+  has_many :roles, through: :user_roles
 
   ransack_alias :search, :id_to_s
 end

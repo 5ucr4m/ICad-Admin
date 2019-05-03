@@ -54,6 +54,7 @@ class User < ApplicationRecord
 
   has_many :user_companies, dependent: :destroy
   has_many :companies, through: :user_companies
+  has_many :roles, through: :user_companies
 
   ransacker :id_to_s do
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")
@@ -63,7 +64,7 @@ class User < ApplicationRecord
 
   ransack_alias :search, :id_to_s
 
-  def user_company
+  def current_company
     user_companies.find(&:current)
   end
 

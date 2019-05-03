@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Sluggable
   extend ActiveSupport::Concern
 
@@ -14,6 +16,6 @@ module Sluggable
   private
 
   def generate_slug
-    self.slug = SecureRandom.uuid.delete('-') if id.blank?
+    self.slug = SecureRandom.uuid.delete('-') if slug.blank?
   end
 end

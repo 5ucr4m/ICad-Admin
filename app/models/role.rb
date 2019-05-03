@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: roles
@@ -23,9 +25,13 @@
 #
 
 class Role < ApplicationRecord
+  include Sluggable
 
   belongs_to :role, optional: true
-  belongs_to :app_module, class_name: 'GenericModel', optional: true
+  belongs_to :app_module, class_name: 'GenericModel'
+
+  has_many :actions, class_name: 'Role', dependent: :destroy
+  has_many :user_roles, dependent: :destroy
 
   ransack_alias :search, :id_to_s
 end

@@ -18,10 +18,20 @@
 #
 
 class Company < ApplicationRecord
+  include Sluggable
 
-  belongs_to :registry, optional: true
-  has_many :user_companies
+  belongs_to :registry
+  has_many :user_companies, dependent: :destroy
   has_many :users, through: :user_companies
 
+  accepts_nested_attributes_for :registry, allow_destroy: false
+
   ransack_alias :search, :id_to_s
+
+  def build_nested
+    build_registry
+    registry.build_nested
+  end
+
+
 end

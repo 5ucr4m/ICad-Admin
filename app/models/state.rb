@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: states
@@ -13,7 +15,13 @@
 #
 
 class State < ApplicationRecord
+  include Sluggable
+
   has_many :cities, dependent: :destroy
 
   ransack_alias :search, :id_to_s
+
+  def name_formatted
+    "#{name} - #{abbreviation}"
+  end
 end

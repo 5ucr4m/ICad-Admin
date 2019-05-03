@@ -21,7 +21,7 @@
       <div class="form-group col-md-4">
         <%= f.label :state_id, {class: 'form-label'} %>
         
-          <%= f.select :state_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+          <%= f.select :state_id, options_from_collection_for_select(State.all, 'id', 'name_formatted'), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
         
       </div>
       <div class="form-group col-md-4">

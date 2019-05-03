@@ -22,6 +22,7 @@
 #
 
 class City < ApplicationRecord
+  include Sluggable
 
   belongs_to :state, optional: true
 
