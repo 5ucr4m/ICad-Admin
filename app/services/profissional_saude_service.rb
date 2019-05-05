@@ -6,12 +6,41 @@ require 'libxml'
 class ProfissionalSaudeService
   include LibXML
 
-  WSDL_HOM = 'https://servicoshm.saude.gov.br/cnes/ProfissionalSaudeService/v1r0?wsdl'
-  WSDL_PRO = 'https://servicos.saude.gov.br/cnes/ProfissionalSaudeService/v1r0?wsdl'
+  WSDL_HOMOLOGACAO = 'https://servicos.saude.gov.br/cnes/ProfissionalSaudeService/v1r0'
+  WSDL_PRODUCAO = 'https://servicos.saude.gov.br/cnes/ProfissionalSaudeService/v1r0'
+
+  NAMESPACES_HOMOLOGACAO = {
+    'xmlns:xsd': 'http://www.w3.org/2001/XMLSchema',
+    'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+    'xmlns:soap': 'http://www.w3.org/2003/05/soap-envelope',
+    'xmlns:tns': 'http://servicos.saude.gov.br/cnes/v1r0/profissionalsaudeservice',
+    'xmlns:fil': 'http://servicos.saude.gov.br/wsdl/mensageria/v1r0/filtropesquisaestabelecimentosaude',
+    'xmlns:cod': 'http://servicos.saude.gov.br/schema/cnes/v1r0/codigocnes',
+    'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj'
+  }.freeze
+
+  NAMESPACES_PRODUCAO = {
+    'xmlns:xsd': 'http://www.w3.org/2001/XMLSchema',
+    'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+    'xmlns:soap': 'http://www.w3.org/2003/05/soap-envelope',
+    'xmlns:tns': 'http://servicos.saude.gov.br/cnes/v1r0/profissionalsaudeservice',
+    'xmlns:fil': 'http://servicos.saude.gov.br/wsdl/mensageria/v1r0/filtropesquisaestabelecimentosaude',
+    'xmlns:cod': 'http://servicos.saude.gov.br/schema/cnes/v1r0/codigocnes',
+    'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj'
+  }.freeze
 
   class << self
-    def call(method, obj)
-      SoapService.call(method, send(method, obj), Rails.env.development? ? WSDL_HOM : WSDL_PRO)
+    include LibXML
+
+    def call(operation, obj)
+      urls = if Rails.env.development?
+               [URL_HOMOLOGACAO, NAMESPACES_HOMOLOGACAO]
+             else
+               [URL_PRODUCAO, NAMESPACES_PRODUCAO]
+             end
+      request = OpenStruct.new(operation: operation, url: urls[0],
+                               body: send(operation, obj), namespaces: urls[1])
+      SoapService.call(request)
     end
 
     private
@@ -20,13 +49,14 @@ class ProfissionalSaudeService
       xml = XML::Document.new
       xml.root = XML::Node.new('prof:requestConsultarProfissionaisSaude')
       xml.root << fil_node = XML::Node.new('fil:FiltroPesquisaEstabelecimentoSaude')
-
-      fil_node << cnes_node = XML::Node.new('cod:CodigoCNES')
-      cnes_node << XML::Node.new('cod:codigo', obj.cnes)
-
-      fil_node << cnpj_node = XML::Node.new('cnpj:CNPJ')
-      cnpj_node << XML::Node.new('cnpj:numeroCNPJ', obj.cnpj)
-
+      if obj.cnes
+        fil_node << cnes_node = XML::Node.new('cod:CodigoCNES')
+        cnes_node << XML::Node.new('cod:codigo', obj.cnes)
+      end
+      if obj.cnpj
+        fil_node << cnpj_node = XML::Node.new('cnpj:CNPJ')
+        cnpj_node << XML::Node.new('cnpj:numeroCNPJ', obj.cnpj)
+      end
       xml.root
     end
 
@@ -35,15 +65,19 @@ class ProfissionalSaudeService
       xml.root = XML::Node.new('prof:requestConsultarProfissionalSaude')
       xml.root << fil_node = XML::Node.new('fil:FiltroPesquisaProfissionalSaude')
 
-      fil_node << cns_node = XML::Node.new('cns:CNS')
-      cns_node << XML::Node.new('cns:numeroCNS', obj.cns)
-      cns_node << XML::Node.new('cns:dataAtribuicao', obj.data_atribuicao)
-      cns_node << XML::Node.new('cns:tipoCartao', obj.tipo_cartao)
-      cns_node << XML::Node.new('cns:manual', obj.manual)
-      cns_node << XML::Node.new('cns:justificativaManual', obj.justificativa)
+      if obj.cns
+        fil_node << cns_node = XML::Node.new('cns:CNS')
+        cns_node << XML::Node.new('cns:numeroCNS', obj.cns)
+        cns_node << XML::Node.new('cns:dataAtribuicao', obj.data_atribuicao) if obj.data_atribuicao
+        cns_node << XML::Node.new('cns:tipoCartao', obj.tipo_cartao) if obj.tipo_cartao
+        cns_node << XML::Node.new('cns:manual', obj.manual) if obj.manual
+        cns_node << XML::Node.new('cns:justificativaManual', obj.justificativa) if obj.justificativa
+      end
 
-      fil_node << cpf_node = XML::Node.new('cpf:CPF')
-      cpf_node << XML::Node.new('cpf:numeroCPF', obj.cpf)
+      if obj.cpf
+        fil_node << cpf_node = XML::Node.new('cpf:CPF')
+        cpf_node << XML::Node.new('cpf:numeroCPF', obj.cpf)
+      end
 
       xml.root
     end

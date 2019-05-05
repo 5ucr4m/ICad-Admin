@@ -65,7 +65,7 @@ class User < ApplicationRecord
   ransack_alias :search, :id_to_s
 
   def current_company
-    user_companies.find(&:current)
+    user_companies.find(&:current) || user_companies.first
   end
 
   def send_confirmation_notification?

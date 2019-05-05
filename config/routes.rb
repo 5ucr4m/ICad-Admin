@@ -3,11 +3,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
-  resources :roles
-  resources :companies
-  resources :cities
-  resources :states
   # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
@@ -16,6 +11,10 @@ Rails.application.routes.draw do
   Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 
   root to: 'states#index'
+  resources :roles
+  resources :companies
+  resources :cities
+  resources :states
   resources :generic_models
 
   devise_for :users, path: 'auth'

@@ -1,0 +1,71 @@
+<Envelope>
+  <Header>
+    <WorkContext>rO0ABXdNABd3ZWJsb2dpYy5hcHAuY25lcy1lYXItMQAAANYAAAAjd2VibG9naWMud29ya2FyZWEuU3RyaW5nV29ya0NvbnRleHQABTEuMy42AAA=</WorkContext>
+  </Header>
+  <Body>
+    <responseConsultarEstabelecimentoSaude>
+      <DadosGeraisEstabelecimentoSaude>
+        <CodigoCNES>
+          <codigo>2726971</codigo>
+        </CodigoCNES>
+        <CodigoUnidade>
+          <codigo>2211002726971</codigo>
+        </CodigoUnidade>
+        <nomeFantasia>
+          <Nome>HOSPITAL GETULIO VARGAS</Nome>
+        </nomeFantasia>
+        <nomeEmpresarial>
+          <Nome>PIAUI SECRETARIA DE SAUDE</Nome>
+        </nomeEmpresarial>
+        <CNPJ>
+          <numeroCNPJ>06553564010443</numeroCNPJ>
+        </CNPJ>
+        <Endereco>
+          <nomeLogradouro>FREI SERAFIM</nomeLogradouro>
+          <numero>2352</numero>
+          <Bairro>
+            <descricaoBairro>CENTRO</descricaoBairro>
+          </Bairro>
+          <CEP>
+            <numeroCEP>64001020</numeroCEP>
+          </CEP>
+          <Municipio>
+            <codigoMunicipio>221100</codigoMunicipio>
+            <nomeMunicipio>TERESINA</nomeMunicipio>
+            <UF>
+              <codigoUF>22</codigoUF>
+              <siglaUF>PI</siglaUF>
+            </UF>
+          </Municipio>
+        </Endereco>
+        <dataAtualizacao>2019-02-14</dataAtualizacao>
+        <Diretor>
+          <CPF>
+            <numeroCPF>28700171387</numeroCPF>
+          </CPF>
+          <nome>
+            <Nome>INGRACIO BARBOSA AMORIM JUNIOR</Nome>
+          </nome>
+        </Diretor>
+        <tipoUnidade>
+          <codigo>05</codigo>
+          <descricao>HOSPITAL GERAL</descricao>
+        </tipoUnidade>
+        <Telefone>
+          <TipoTelefone>
+            <codigoTipoTelefone>4</codigoTipoTelefone>
+            <descricaoTipoTelefone>FAX</descricaoTipoTelefone>
+          </TipoTelefone>
+          <DDD>86</DDD>
+          <numeroTelefone>32216962</numeroTelefone>
+        </Telefone>
+        <Localizacao>
+          <longitude>-42.802</longitude>
+          <latitude>-5.089</latitude>
+          <geoJson>{"type":"Feature","geometry":{"type":"Point","coordinates":["-42.802","-5.089"]}}</geoJson>
+        </Localizacao>
+        <perteceSistemaSUS>true</perteceSistemaSUS>
+      </DadosGeraisEstabelecimentoSaude>
+    </responseConsultarEstabelecimentoSaude>
+  </Body>
+</Envelope>
