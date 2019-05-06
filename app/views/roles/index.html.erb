@@ -21,11 +21,13 @@
       <tr>
                   <th><%= Role.human_attribute_name :name %></th>
                   <th><%= Role.human_attribute_name :description %></th>
+                  <th><%= Role.human_attribute_name :icon %></th>
+                  <th><%= Role.human_attribute_name :reference %></th>
                   <th><%= Role.human_attribute_name :role %></th>
                   <th><%= Role.human_attribute_name :app_module %></th>
                   <th><%= Role.human_attribute_name :slug %></th>
                 <% if can? :manage, Role %>
-        <th><%= t('helpers.labels.actions') %></th>
+          <th><%= t('helpers.labels.actions') %></th>
         <% end %>
       </tr>
       </thead>
@@ -34,6 +36,8 @@
       <tr>
                   <td><%= role.name %></td>
                   <td><%= role.description %></td>
+                  <td><%= role.icon %></td>
+                  <td><%= role.reference %></td>
                   <td><%= role.role_id %></td>
                   <td><%= role.app_module_id %></td>
                   <td><%= role.slug %></td>
@@ -48,19 +52,6 @@
     </table>
   </div>
   <div class="card-footer">
-    <div class="col-sm-12 col-lg-12 p-0">
-      <div class="form-row">
-        <div class="col-sm-12 col-lg-6 p-0">
-          <%= link_to new_role_path, class: 'btn btn-primary align-middle mb-md-0 mb-sm-3' do %>
-          <i class="fas fa-plus mr-2"></i>Novo
-          <% end %>
-        </div>
-        <div class="col-sm-12 col-lg-6 p-0">
-          <div class="float-right">
-            <%= pagy_bootstrap_nav(@pagy).html_safe %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'application/footer_links', url: new_role_path, model: Role %> %>
   </div>
 </div>

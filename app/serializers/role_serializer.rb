@@ -4,7 +4,9 @@
 #
 #  id            :bigint           not null, primary key
 #  description   :string
+#  icon          :string
 #  name          :string
+#  reference     :string
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -23,7 +25,7 @@
 #
 
 class RoleSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :slug
+  attributes :id, :name, :description, :icon, :reference, :slug
   has_one :role
   has_one :app_module
 end

@@ -197,29 +197,12 @@ body {
   transition: .3s border-color;
 }
 
-.nav-tabs .nav-link:hover:not(.disabled) {
-  color: $color-blue;
-  font-weight: 900;
-  border-color: $color-blue;
-  background: transparent;
-  margin-bottom: -1px;
-  transition: .3s border-color;
-}
-
-.nav-tabs .nav-link:active:not(.disabled) {
-  color: $color-blue;
-  font-weight: 900;
-  border-color: $color-blue;
-  background: transparent;
-  margin-bottom: -1px;
-  transition: .3s border-color;
-}
-
-.nav-tabs .nav-item.show .nav-link {
-  color: $color-blue;
-  font-weight: 900;
-  background-color: transparent;
-  border-color: $color-blue;
+.dropdown-menu-arrow {
+  position: absolute;
+  transform: translate3d(12px, 55px, 0px);
+  top: 0;
+  left: 0;
+  will-change: transform;
 }
 
 .pagination {

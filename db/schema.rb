@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 2019_05_03_005536) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "icon"
+    t.string "reference"
     t.bigint "role_id"
     t.bigint "app_module_id"
     t.string "slug"

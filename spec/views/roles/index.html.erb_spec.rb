@@ -6,6 +6,8 @@ RSpec.describe "roles/index", type: :view do
       Role.create!(
         :name => "Name",
         :description => "Description",
+        :icon => "Icon",
+        :reference => "Reference",
         :role => nil,
         :app_module => nil,
         :slug => "Slug"
@@ -13,6 +15,8 @@ RSpec.describe "roles/index", type: :view do
       Role.create!(
         :name => "Name",
         :description => "Description",
+        :icon => "Icon",
+        :reference => "Reference",
         :role => nil,
         :app_module => nil,
         :slug => "Slug"
@@ -24,6 +28,8 @@ RSpec.describe "roles/index", type: :view do
     render
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => "Description".to_s, :count => 2
+    assert_select "tr>td", :text => "Icon".to_s, :count => 2
+    assert_select "tr>td", :text => "Reference".to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => "Slug".to_s, :count => 2

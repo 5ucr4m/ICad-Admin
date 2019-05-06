@@ -5,6 +5,8 @@ RSpec.describe "roles/edit", type: :view do
     @role = assign(:role, Role.create!(
       :name => "MyString",
       :description => "MyString",
+      :icon => "MyString",
+      :reference => "MyString",
       :role => nil,
       :app_module => nil,
       :slug => "MyString"
@@ -19,6 +21,10 @@ RSpec.describe "roles/edit", type: :view do
       assert_select "input[name=?]", "role[name]"
 
       assert_select "input[name=?]", "role[description]"
+
+      assert_select "input[name=?]", "role[icon]"
+
+      assert_select "input[name=?]", "role[reference]"
 
       assert_select "input[name=?]", "role[role_id]"
 

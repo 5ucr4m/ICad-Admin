@@ -23,7 +23,7 @@
           <th><%%= <%= model_resource_name.camelize %>.human_attribute_name :<%= attribute.name %> %></th>
         <% end -%>
         <%% if can? :manage, <%= model_resource_name.camelize %> %>
-        <th><%%= t('helpers.labels.actions') %></th>
+          <th><%%= t('helpers.labels.actions') %></th>
         <%% end %>
       </tr>
       </thead>

@@ -6,7 +6,9 @@
 #
 #  id            :bigint           not null, primary key
 #  description   :string
+#  icon          :string
 #  name          :string
+#  reference     :string
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

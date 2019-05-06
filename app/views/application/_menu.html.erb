@@ -5,10 +5,24 @@
       <div class="col-lg order-lg-first">
         <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
           <li class="nav-item">
-            <%= link_to root_path, class: "nav-link #{active_action? controller_name} py-5" do %>
+            <%= link_to root_path, class: "nav-link link #{active_action? controller_name} py-5" do %>
               <i class="fas fa-chart-line mr-2"></i>Dashboard
             <% end %>
           </li>
+          <% current_user.roles.each do |role| %>
+            <li class="nav-item dropdown">
+              <a href="javascript:void(0)" class="nav-link py-5" data-toggle="dropdown" aria-expanded="false">
+                <i class="<%= role.icon %>"></i><%= role.description %>
+              </a>
+              <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+                <% role.actions do |action| %>
+                  <%= link_to send("#{action.split('_')[1]}_path"), class: 'dropdown-item' do %>
+                    <i class="<%= action.icon %> dropdown-icon"></i><%= action.description %>
+                  <% end %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

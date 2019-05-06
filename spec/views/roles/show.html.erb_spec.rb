@@ -5,6 +5,8 @@ RSpec.describe "roles/show", type: :view do
     @role = assign(:role, Role.create!(
       :name => "Name",
       :description => "Description",
+      :icon => "Icon",
+      :reference => "Reference",
       :role => nil,
       :app_module => nil,
       :slug => "Slug"
@@ -15,6 +17,8 @@ RSpec.describe "roles/show", type: :view do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Description/)
+    expect(rendered).to match(/Icon/)
+    expect(rendered).to match(/Reference/)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(/Slug/)

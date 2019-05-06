@@ -17,7 +17,18 @@ Rails.application.routes.draw do
   resources :states
   resources :generic_models
 
-  devise_for :users, path: 'auth'
+  devise_for :users, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    password: 'password',
+    confirmation: 'verification',
+    registration: 'register',
+    edit: 'user/profile'
+  }
+
+  devise_scope :user do
+    resources :users, path: 'profile', only: %i[index edit update destroy]
+  end
 
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
