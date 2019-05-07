@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: generic_models
@@ -28,4 +30,6 @@ class GenericModel < ApplicationRecord
   belongs_to :generic_model, optional: true
 
   ransack_alias :search, :id_to_s
+
+  scope :app_modules, -> { where(generic_class: Role.to_s, generic_field: :app_module) }
 end

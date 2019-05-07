@@ -9,7 +9,7 @@
     <i class="fas fa-edit p-0"></i>
   <% end %>
 <% end %>
-<% if can? :update, f.model_name.singular.camelize.constantize %>
+<% if can? :destroy, f.model_name.singular.camelize.constantize %>
   <%= link_to f, class: 'btn p-1 btn-danger', method: :delete,
               data: {confirm: "Confirma a remoção do registro de código ##{f.id}?"},
               role: 'button' do %>
