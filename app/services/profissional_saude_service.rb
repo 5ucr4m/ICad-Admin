@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'libxml'
+require 'xml'
 
 # app/services/profissional_saude_service.rb
 class ProfissionalSaudeService
-  include LibXML
+  include XML
 
-  WSDL_HOMOLOGACAO = 'https://servicos.saude.gov.br/cnes/ProfissionalSaudeService/v1r0'
-  WSDL_PRODUCAO = 'https://servicos.saude.gov.br/cnes/ProfissionalSaudeService/v1r0'
+  URL_HOMOLOGACAO = 'https://servicos.saude.gov.br/cnes/ProfissionalSaudeService/v1r0'
+  URL_PRODUCAO = 'https://servicos.saude.gov.br/cnes/ProfissionalSaudeService/v1r0'
 
   NAMESPACES_HOMOLOGACAO = {
     'xmlns:xsd': 'http://www.w3.org/2001/XMLSchema',
@@ -16,6 +16,8 @@ class ProfissionalSaudeService
     'xmlns:tns': 'http://servicos.saude.gov.br/cnes/v1r0/profissionalsaudeservice',
     'xmlns:fil': 'http://servicos.saude.gov.br/wsdl/mensageria/v1r0/filtropesquisaestabelecimentosaude',
     'xmlns:cod': 'http://servicos.saude.gov.br/schema/cnes/v1r0/codigocnes',
+    'xmlns:cns': 'http://servicos.saude.gov.br/schema/cadsus/v5r0/cns',
+    'xmlns:cpf': 'http://servicos.saude.gov.br/schema/corporativo/documento/v1r2/cpf',
     'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj'
   }.freeze
 
@@ -26,11 +28,12 @@ class ProfissionalSaudeService
     'xmlns:tns': 'http://servicos.saude.gov.br/cnes/v1r0/profissionalsaudeservice',
     'xmlns:fil': 'http://servicos.saude.gov.br/wsdl/mensageria/v1r0/filtropesquisaestabelecimentosaude',
     'xmlns:cod': 'http://servicos.saude.gov.br/schema/cnes/v1r0/codigocnes',
+    'xmlns:cns': 'http://servicos.saude.gov.br/schema/cadsus/v5r0/cns',
+    'xmlns:cpf': 'http://servicos.saude.gov.br/schema/corporativo/documento/v1r2/cpf',
     'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj'
   }.freeze
 
   class << self
-    include LibXML
 
     def call(operation, obj)
       urls = if Rails.env.development?
@@ -46,9 +49,8 @@ class ProfissionalSaudeService
     private
 
     def consultar_profissionais_saude(obj)
-      xml = XML::Document.new
-      xml.root = XML::Node.new('prof:requestConsultarProfissionaisSaude')
-      xml.root << fil_node = XML::Node.new('fil:FiltroPesquisaEstabelecimentoSaude')
+      xml = XML::Node.new('tns:requestConsultarProfissionaisSaude')
+      xml << fil_node = XML::Node.new('fil:FiltroPesquisaEstabelecimentoSaude')
       if obj.cnes
         fil_node << cnes_node = XML::Node.new('cod:CodigoCNES')
         cnes_node << XML::Node.new('cod:codigo', obj.cnes)
@@ -57,14 +59,12 @@ class ProfissionalSaudeService
         fil_node << cnpj_node = XML::Node.new('cnpj:CNPJ')
         cnpj_node << XML::Node.new('cnpj:numeroCNPJ', obj.cnpj)
       end
-      xml.root
+      xml
     end
 
     def consultar_profissional_saude(obj)
-      xml = Document.new
-      xml.root = XML::Node.new('prof:requestConsultarProfissionalSaude')
-      xml.root << fil_node = XML::Node.new('fil:FiltroPesquisaProfissionalSaude')
-
+      xml = XML::Node.new('tns:requestConsultarProfissionalSaude')
+      xml << fil_node = XML::Node.new('fil:FiltroPesquisaProfissionalSaude')
       if obj.cns
         fil_node << cns_node = XML::Node.new('cns:CNS')
         cns_node << XML::Node.new('cns:numeroCNS', obj.cns)
@@ -73,13 +73,11 @@ class ProfissionalSaudeService
         cns_node << XML::Node.new('cns:manual', obj.manual) if obj.manual
         cns_node << XML::Node.new('cns:justificativaManual', obj.justificativa) if obj.justificativa
       end
-
       if obj.cpf
         fil_node << cpf_node = XML::Node.new('cpf:CPF')
         cpf_node << XML::Node.new('cpf:numeroCPF', obj.cpf)
       end
-
-      xml.root
+      xml
     end
   end
 end

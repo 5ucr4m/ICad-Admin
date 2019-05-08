@@ -19,13 +19,15 @@ module SoapService
       wsse_security['xmlns:wsse'] = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd'
       wsse_security['xmlns:wsu'] = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd'
       wsse_security << wsse_username_token = LibXML::XML::Node.new('wsse:UsernameToken')
-      wsse_username_token['wsu:Id'] = 'UsernameToken-5FCA58BED9F27C406E14576381084652'
+      wsse_username_token['wsu:Id'] = 'UsernameToken-1'
       wsse_username_token << LibXML::XML::Node.new('wsse:Username', 'CNES.PUBLICO')
       wsse_username_token << wsse_password = LibXML::XML::Node.new('wsse:Password', 'cnes#2015public')
       wsse_password['Type'] = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText'
 
       soap_envelope.root << soap_body = LibXML::XML::Node.new('soap:Body')
       soap_body << request.body
+
+      puts soap_envelope
 
       client = Faraday.new(url: request.url)
 
