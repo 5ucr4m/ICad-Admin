@@ -7,6 +7,12 @@
         
       </div>
       <div class="form-group col-md-4">
+        <%= f.label :cbo_code, {class: 'form-label'} %>
+        
+          <%= f.text_field :cbo_code, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
         <%= f.label :registry_id, {class: 'form-label'} %>
         
           <%= f.select :registry_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>

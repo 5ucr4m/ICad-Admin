@@ -20,6 +20,7 @@
       <thead>
       <tr>
                   <th><%= HealthProfessional.human_attribute_name :cns_code %></th>
+                  <th><%= HealthProfessional.human_attribute_name :cbo_code %></th>
                   <th><%= HealthProfessional.human_attribute_name :registry %></th>
                   <th><%= HealthProfessional.human_attribute_name :health_establishment %></th>
                   <th><%= HealthProfessional.human_attribute_name :professional_team %></th>
@@ -32,6 +33,7 @@
       <% @health_professionals.each do |health_professional| %>
         <tr>
                       <td><%= health_professional.cns_code %></td>
+                      <td><%= health_professional.cbo_code %></td>
                       <td><%= health_professional.registry_id %></td>
                       <td><%= health_professional.health_establishment_id %></td>
                       <td><%= health_professional.professional_team_id %></td>

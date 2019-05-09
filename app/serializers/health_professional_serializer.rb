@@ -3,6 +3,7 @@
 # Table name: health_professionals
 #
 #  id                      :bigint           not null, primary key
+#  cbo_code                :string
 #  cns_code                :string
 #  slug                    :string
 #  created_at              :datetime         not null
@@ -28,7 +29,7 @@
 #
 
 class HealthProfessionalSerializer < ActiveModel::Serializer
-  attributes :id, :cns_code, :slug
+  attributes :id, :cns_code, :cbo_code, :slug
   has_one :registry
   has_one :health_establishment
   has_one :professional_team

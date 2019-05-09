@@ -4,6 +4,7 @@ RSpec.describe "health_professionals/edit", type: :view do
   before(:each) do
     @health_professional = assign(:health_professional, HealthProfessional.create!(
       :cns_code => "MyString",
+      :cbo_code => "MyString",
       :registry => nil,
       :health_establishment => nil,
       :professional_team => nil,
@@ -18,6 +19,8 @@ RSpec.describe "health_professionals/edit", type: :view do
     assert_select "form[action=?][method=?]", health_professional_path(@health_professional), "post" do
 
       assert_select "input[name=?]", "health_professional[cns_code]"
+
+      assert_select "input[name=?]", "health_professional[cbo_code]"
 
       assert_select "input[name=?]", "health_professional[registry_id]"
 

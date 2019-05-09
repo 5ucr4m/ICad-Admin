@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HealthProfessionalsController < ApplicationController
   before_action :set_health_professional, only: %i[show edit update destroy]
 
@@ -8,8 +10,7 @@ class HealthProfessionalsController < ApplicationController
   end
 
   # GET /health_professionals/1
-  def show
-  end
+  def show; end
 
   # GET /health_professionals/new
   def new
@@ -17,8 +18,7 @@ class HealthProfessionalsController < ApplicationController
   end
 
   # GET /health_professionals/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /health_professionals
   def create
@@ -47,13 +47,14 @@ class HealthProfessionalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_health_professional
-      @health_professional = HealthProfessional.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def health_professional_params
-      params.require(:health_professional).permit(:cns_code, :registry_id, :health_establishment_id, :professional_team_id, :company_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_health_professional
+    @health_professional = HealthProfessional.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def health_professional_params
+    params.require(:health_professional).permit(:cns_code, :cbo_code, :registry_id, :health_establishment_id, :professional_team_id, :company_id, :slug)
+  end
 end

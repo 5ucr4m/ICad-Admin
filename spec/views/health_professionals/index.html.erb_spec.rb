@@ -5,6 +5,7 @@ RSpec.describe "health_professionals/index", type: :view do
     assign(:health_professionals, [
       HealthProfessional.create!(
         :cns_code => "Cns Code",
+        :cbo_code => "Cbo Code",
         :registry => nil,
         :health_establishment => nil,
         :professional_team => nil,
@@ -13,6 +14,7 @@ RSpec.describe "health_professionals/index", type: :view do
       ),
       HealthProfessional.create!(
         :cns_code => "Cns Code",
+        :cbo_code => "Cbo Code",
         :registry => nil,
         :health_establishment => nil,
         :professional_team => nil,
@@ -25,6 +27,7 @@ RSpec.describe "health_professionals/index", type: :view do
   it "renders a list of health_professionals" do
     render
     assert_select "tr>td", :text => "Cns Code".to_s, :count => 2
+    assert_select "tr>td", :text => "Cbo Code".to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2

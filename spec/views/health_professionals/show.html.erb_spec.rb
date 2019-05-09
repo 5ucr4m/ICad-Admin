@@ -4,6 +4,7 @@ RSpec.describe "health_professionals/show", type: :view do
   before(:each) do
     @health_professional = assign(:health_professional, HealthProfessional.create!(
       :cns_code => "Cns Code",
+      :cbo_code => "Cbo Code",
       :registry => nil,
       :health_establishment => nil,
       :professional_team => nil,
@@ -15,6 +16,7 @@ RSpec.describe "health_professionals/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Cns Code/)
+    expect(rendered).to match(/Cbo Code/)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(//)

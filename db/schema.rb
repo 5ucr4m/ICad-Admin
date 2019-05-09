@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_022841) do
+ActiveRecord::Schema.define(version: 2019_05_09_173700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2019_05_09_022841) do
 
   create_table "health_professionals", force: :cascade do |t|
     t.string "cns_code"
+    t.string "cbo_code"
     t.bigint "registry_id"
     t.bigint "health_establishment_id"
     t.bigint "professional_team_id"

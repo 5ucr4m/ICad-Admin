@@ -3,6 +3,7 @@
 # Table name: health_professionals
 #
 #  id                      :bigint           not null, primary key
+#  cbo_code                :string
 #  cns_code                :string
 #  slug                    :string
 #  created_at              :datetime         not null
@@ -30,6 +31,7 @@
 FactoryBot.define do
   factory :health_professional do
     cns_code { "MyString" }
+    cbo_code { "MyString" }
     registry { nil }
     health_establishment { nil }
     professional_team { nil }
