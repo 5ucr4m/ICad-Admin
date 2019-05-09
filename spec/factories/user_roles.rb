@@ -3,6 +3,7 @@
 # Table name: user_roles
 #
 #  id              :bigint           not null, primary key
+#  slug            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  role_id         :bigint
@@ -23,5 +24,6 @@ FactoryBot.define do
   factory :user_role do
     user_company { nil }
     role { nil }
+    slug { "MyString" }
   end
 end

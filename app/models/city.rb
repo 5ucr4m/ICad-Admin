@@ -24,7 +24,7 @@
 class City < ApplicationRecord
   include Sluggable
 
-  belongs_to :state, optional: true
+  belongs_to :state
 
   ransack_alias :search, :id_to_s
 end

@@ -6,6 +6,7 @@
 #  fancy_name       :string
 #  federal_registry :string
 #  legal_full_name  :string
+#  slug             :string
 #  state_registry   :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -27,5 +28,6 @@ FactoryBot.define do
     fancy_name { "MyString" }
     federal_registry { "MyString" }
     state_registry { "MyString" }
+    slug { "MyString" }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_005536) do
+ActiveRecord::Schema.define(version: 2019_05_09_022841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,25 @@ ActiveRecord::Schema.define(version: 2019_05_03_005536) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "patio"
+    t.string "number"
+    t.string "zip"
+    t.bigint "district_id"
+    t.string "complement"
+    t.string "reference"
+    t.bigint "registry_id"
+    t.string "longitude"
+    t.string "latitude"
+    t.text "geo_json"
+    t.boolean "sus_system"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["district_id"], name: "index_addresses_on_district_id"
+    t.index ["registry_id"], name: "index_addresses_on_registry_id"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -54,6 +73,29 @@ ActiveRecord::Schema.define(version: 2019_05_03_005536) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["registry_id"], name: "index_companies_on_registry_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.bigint "contact_type_id"
+    t.string "contact"
+    t.string "observation"
+    t.bigint "registry_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_type_id"], name: "index_contacts_on_contact_type_id"
+    t.index ["registry_id"], name: "index_contacts_on_registry_id"
+  end
+
+  create_table "districts", force: :cascade do |t|
+    t.string "name"
+    t.bigint "zone_id"
+    t.bigint "city_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_districts_on_city_id"
+    t.index ["zone_id"], name: "index_districts_on_zone_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -80,12 +122,56 @@ ActiveRecord::Schema.define(version: 2019_05_03_005536) do
     t.index ["generic_model_id"], name: "index_generic_models_on_generic_model_id"
   end
 
+  create_table "health_establishments", force: :cascade do |t|
+    t.string "cnes_code"
+    t.string "unit_code"
+    t.bigint "registry_id"
+    t.date "registry_at"
+    t.bigint "manager_id"
+    t.bigint "unit_type_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_health_establishments_on_company_id"
+    t.index ["manager_id"], name: "index_health_establishments_on_manager_id"
+    t.index ["registry_id"], name: "index_health_establishments_on_registry_id"
+    t.index ["unit_type_id"], name: "index_health_establishments_on_unit_type_id"
+  end
+
+  create_table "health_professionals", force: :cascade do |t|
+    t.string "cns_code"
+    t.bigint "registry_id"
+    t.bigint "health_establishment_id"
+    t.bigint "professional_team_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_health_professionals_on_company_id"
+    t.index ["health_establishment_id"], name: "index_health_professionals_on_health_establishment_id"
+    t.index ["professional_team_id"], name: "index_health_professionals_on_professional_team_id"
+    t.index ["registry_id"], name: "index_health_professionals_on_registry_id"
+  end
+
+  create_table "professional_teams", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.boolean "active"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_professional_teams_on_company_id"
+  end
+
   create_table "registries", force: :cascade do |t|
     t.bigint "person_type_id"
     t.string "legal_full_name"
     t.string "fancy_name"
     t.string "federal_registry"
     t.string "state_registry"
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["person_type_id"], name: "index_registries_on_person_type_id"
@@ -127,6 +213,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_005536) do
     t.bigint "user_id"
     t.bigint "company_id"
     t.boolean "current"
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_user_companies_on_company_id"
@@ -136,6 +223,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_005536) do
   create_table "user_roles", force: :cascade do |t|
     t.bigint "user_company_id"
     t.bigint "role_id"
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["role_id"], name: "index_user_roles_on_role_id"
@@ -177,9 +265,24 @@ ActiveRecord::Schema.define(version: 2019_05_03_005536) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "districts"
+  add_foreign_key "addresses", "registries"
   add_foreign_key "cities", "states"
   add_foreign_key "companies", "registries"
+  add_foreign_key "contacts", "generic_models", column: "contact_type_id"
+  add_foreign_key "contacts", "registries"
+  add_foreign_key "districts", "cities"
+  add_foreign_key "districts", "generic_models", column: "zone_id"
   add_foreign_key "generic_models", "generic_models"
+  add_foreign_key "health_establishments", "companies"
+  add_foreign_key "health_establishments", "generic_models", column: "unit_type_id"
+  add_foreign_key "health_establishments", "registries"
+  add_foreign_key "health_establishments", "registries", column: "manager_id"
+  add_foreign_key "health_professionals", "companies"
+  add_foreign_key "health_professionals", "health_establishments"
+  add_foreign_key "health_professionals", "professional_teams"
+  add_foreign_key "health_professionals", "registries"
+  add_foreign_key "professional_teams", "companies"
   add_foreign_key "registries", "generic_models", column: "person_type_id"
   add_foreign_key "roles", "generic_models", column: "app_module_id"
   add_foreign_key "roles", "roles"

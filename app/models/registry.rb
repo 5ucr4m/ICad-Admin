@@ -6,6 +6,7 @@
 #  fancy_name       :string
 #  federal_registry :string
 #  legal_full_name  :string
+#  slug             :string
 #  state_registry   :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -21,8 +22,18 @@
 #
 
 class Registry < ApplicationRecord
+  include Sluggable
 
-  belongs_to :person_type, class_name: 'GenericModel', optional: true
+  belongs_to :person_type, class_name: 'GenericModel'
+
+  has_one :address, dependent: :destroy
+
+  has_many :contacts, dependent: :destroy
 
   ransack_alias :search, :id_to_s
+
+  def build_relationships!
+    build_address
+    contacts.build
+  end
 end

@@ -6,6 +6,7 @@ class CreateRegistries < ActiveRecord::Migration[6.0]
       t.string :fancy_name
       t.string :federal_registry
       t.string :state_registry
+      t.string :slug
 
       t.timestamps
     end

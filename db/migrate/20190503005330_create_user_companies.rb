@@ -4,6 +4,7 @@ class CreateUserCompanies < ActiveRecord::Migration[6.0]
       t.belongs_to :user, foreign_key: true, index: true
       t.belongs_to :company, foreign_key: true, index: true
       t.boolean :current
+      t.string :slug
 
       t.timestamps
     end

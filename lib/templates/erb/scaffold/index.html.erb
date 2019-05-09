@@ -22,23 +22,19 @@
         <% attributes.reject(&:password_digest?).each do |attribute| -%>
           <th><%%= <%= model_resource_name.camelize %>.human_attribute_name :<%= attribute.name %> %></th>
         <% end -%>
-        <%% if can? :manage, <%= model_resource_name.camelize %> %>
-          <th><%%= t('helpers.labels.actions') %></th>
-        <%% end %>
+        <th><%%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <%% @<%= plural_table_name %>.each do |<%= model_resource_name %>| %>
-      <tr>
-        <% attributes.reject(&:password_digest?).each do |attribute| -%>
-          <td><%%= <%= model_resource_name %>.<%= attribute.column_name %> %></td>
-        <% end -%>
-        <%% if can? :manage, <%= model_resource_name.camelize %> %>
-        <td>
-          <%%= render 'application/table_links', f: <%= model_resource_name %> %>
-        </td>
-        <%% end %>
-      </tr>
+        <tr>
+          <% attributes.reject(&:password_digest?).each do |attribute| -%>
+            <td><%%= <%= model_resource_name %>.<%= attribute.column_name %> %></td>
+          <% end -%>
+          <td class="text-center">
+            <%%= render 'application/table_links', f: <%= model_resource_name %> %>
+          </td>
+        </tr>
       <%% end %>
       </tbody>
     </table>

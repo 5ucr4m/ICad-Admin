@@ -3,6 +3,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :health_professionals
+  resources :professional_teams
+  resources :health_establishments
   # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|

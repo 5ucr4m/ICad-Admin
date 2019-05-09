@@ -1,0 +1,35 @@
+<%= form_with(model: @professional_team, id: :professional_team) do |f| %>
+  <% content_for :body do %>
+      <div class="form-group col-md-4">
+        <%= f.label :name, {class: 'form-label'} %>
+        
+          <%= f.text_field :name, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :code, {class: 'form-label'} %>
+        
+          <%= f.text_field :code, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :active, {class: 'form-label'} %>
+        
+          <%= f.check_box :active, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :company_id, {class: 'form-label'} %>
+        
+          <%= f.select :company_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :slug, {class: 'form-label'} %>
+        
+          <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+  <% end %>
+  <%= render template: 'application/form', locals: {form: @professional_team} %>
+<% end %>

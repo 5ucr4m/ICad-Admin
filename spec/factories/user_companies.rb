@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  current    :boolean
+#  slug       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  company_id :bigint
@@ -25,5 +26,6 @@ FactoryBot.define do
     user { nil }
     company { nil }
     current { false }
+    slug { "MyString" }
   end
 end
