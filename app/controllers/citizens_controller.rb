@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CitizensController < ApplicationController
   before_action :set_citizen, only: %i[show edit update destroy]
 
@@ -8,8 +10,7 @@ class CitizensController < ApplicationController
   end
 
   # GET /citizens/1
-  def show
-  end
+  def show; end
 
   # GET /citizens/new
   def new
@@ -17,8 +18,7 @@ class CitizensController < ApplicationController
   end
 
   # GET /citizens/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /citizens
   def create
@@ -47,13 +47,18 @@ class CitizensController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_citizen
-      @citizen = Citizen.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def citizen_params
-      params.require(:citizen).permit(:registry_id, :gender_id, :race_id, :birth_state_id, :nationality_id, :birth_date, :birth_country_id, :mother_name, :sus_card_number, :pis_pasep_number, :unknown_mother_name, :responsible_person_id, :health_condition_id, :company_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_citizen
+    @citizen = Citizen.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def citizen_params
+    params.require(:citizen).permit(:registry_id, :gender_id, :race_id,
+                                    :birth_date, :birth_state_id, :birth_country_id,
+                                    :nationality_id, :sus_card_number, :pis_pasep_number,
+                                    :unknown_mother_name, :responsible_person_id,
+                                    :company_id, :slug)
+  end
 end

@@ -7,8 +7,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :provider, null: false, default: 'email'
       t.string :uid, null: false, default: ''
-      t.string :cns
-      t.string :full_name
+      t.belongs_to :health_professional, foreign_key: true, index: true
 
       ## Database authenticatable
       t.string :encrypted_password, null: false, default: ''

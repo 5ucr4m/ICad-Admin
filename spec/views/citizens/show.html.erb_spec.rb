@@ -7,14 +7,12 @@ RSpec.describe "citizens/show", type: :view do
       :gender => nil,
       :race => nil,
       :birth_state => nil,
-      :nationality => nil,
       :birth_country => nil,
-      :mother_name => "Mother Name",
+      :nationality => nil,
       :sus_card_number => "Sus Card Number",
       :pis_pasep_number => "Pis Pasep Number",
       :unknown_mother_name => false,
       :responsible_person => nil,
-      :health_condition => nil,
       :company => nil,
       :slug => "Slug"
     ))
@@ -28,11 +26,9 @@ RSpec.describe "citizens/show", type: :view do
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
-    expect(rendered).to match(/Mother Name/)
     expect(rendered).to match(/Sus Card Number/)
     expect(rendered).to match(/Pis Pasep Number/)
     expect(rendered).to match(/false/)
-    expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(/Slug/)
