@@ -39,6 +39,8 @@ class HealthEstablishment < ApplicationRecord
   belongs_to :unit_type, class_name: 'GenericModel'
   belongs_to :company
 
+  has_many :health_professionals, dependent: :nullify
+
   accepts_nested_attributes_for :registry, allow_destroy: false
   accepts_nested_attributes_for :manager, allow_destroy: false
 

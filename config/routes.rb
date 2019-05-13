@@ -3,7 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :citizens
+  resources :home_registrations
   resources :health_professionals
   resources :professional_teams
   resources :health_establishments

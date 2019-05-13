@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: health_professionals
@@ -36,7 +38,10 @@ class HealthProfessional < ApplicationRecord
   belongs_to :professional_team
   belongs_to :company
 
+  has_many :home_registrations, dependent: :destroy
+
   accepts_nested_attributes_for :registry, allow_destroy: false
+  accepts_nested_attributes_for :home_registrations, allow_destroy: true
 
   ransack_alias :search, :id_to_s
 end
