@@ -1,0 +1,83 @@
+<%= form_with(model: @individual_registration, id: :individual_registration) do |f| %>
+  <% content_for :body do %>
+      <div class="form-group col-md-4">
+        <%= f.label :health_condition_id, {class: 'form-label'} %>
+        
+          <%= f.select :health_condition_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :in_street_situation_id, {class: 'form-label'} %>
+        
+          <%= f.select :in_street_situation_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :family_member_id, {class: 'form-label'} %>
+        
+          <%= f.select :family_member_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :sociodemographic_info_id, {class: 'form-label'} %>
+        
+          <%= f.select :sociodemographic_info_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :cancel_registration_id, {class: 'form-label'} %>
+        
+          <%= f.select :cancel_registration_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :refuse_registration, {class: 'form-label'} %>
+        
+          <%= f.check_box :refuse_registration, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :form_updated, {class: 'form-label'} %>
+        
+          <%= f.check_box :form_updated, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :uuid, {class: 'form-label'} %>
+        
+          <%= f.text_field :uuid, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :uuid_form_origin, {class: 'form-label'} %>
+        
+          <%= f.text_field :uuid_form_origin, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :uuid_citizen, {class: 'form-label'} %>
+        
+          <%= f.text_field :uuid_citizen, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :tp_cds_origin, {class: 'form-label'} %>
+        
+          <%= f.number_field :tp_cds_origin, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :company_id, {class: 'form-label'} %>
+        
+          <%= f.select :company_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label :slug, {class: 'form-label'} %>
+        
+          <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
+        
+      </div>
+  <% end %>
+  <%= render template: 'application/form', locals: {form: @individual_registration} %>
+<% end %>

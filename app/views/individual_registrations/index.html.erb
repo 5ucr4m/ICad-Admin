@@ -1,0 +1,65 @@
+<%= render 'application/page_header', model: IndividualRegistration %>
+<div class="card">
+  <div class="card-status bg-blue"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+                  <th><%= IndividualRegistration.human_attribute_name :health_condition %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :in_street_situation %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :family_member %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :sociodemographic_info %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :cancel_registration %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :refuse_registration %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :form_updated %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :uuid %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :uuid_form_origin %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :uuid_citizen %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :tp_cds_origin %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :company %></th>
+                  <th><%= IndividualRegistration.human_attribute_name :slug %></th>
+                <th><%= t('helpers.labels.actions') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @individual_registrations.each do |individual_registration| %>
+        <tr>
+                      <td><%= individual_registration.health_condition_id %></td>
+                      <td><%= individual_registration.in_street_situation_id %></td>
+                      <td><%= individual_registration.family_member_id %></td>
+                      <td><%= individual_registration.sociodemographic_info_id %></td>
+                      <td><%= individual_registration.cancel_registration_id %></td>
+                      <td><%= individual_registration.refuse_registration %></td>
+                      <td><%= individual_registration.form_updated %></td>
+                      <td><%= individual_registration.uuid %></td>
+                      <td><%= individual_registration.uuid_form_origin %></td>
+                      <td><%= individual_registration.uuid_citizen %></td>
+                      <td><%= individual_registration.tp_cds_origin %></td>
+                      <td><%= individual_registration.company_id %></td>
+                      <td><%= individual_registration.slug %></td>
+                    <td class="text-center">
+            <%= render 'application/table_links', f: individual_registration %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= render 'application/footer_links', url: new_individual_registration_path, model: IndividualRegistration %>
+  </div>
+</div>
