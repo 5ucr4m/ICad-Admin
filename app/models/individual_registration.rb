@@ -39,10 +39,11 @@
 #
 
 class IndividualRegistration < ApplicationRecord
+  include Sluggable
 
   belongs_to :health_condition, optional: true
   belongs_to :in_street_situation, optional: true
-  belongs_to :family_member, optional: true
+  belongs_to :family_member
   belongs_to :sociodemographic_info, optional: true
   belongs_to :cancel_registration, optional: true
   belongs_to :company, optional: true

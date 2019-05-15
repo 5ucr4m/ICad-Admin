@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: family_members
@@ -53,14 +55,17 @@
 #
 
 class FamilyMember < ApplicationRecord
+  include Sluggable
 
   belongs_to :city, optional: true
-  belongs_to :nationality, optional: true
-  belongs_to :birth_country, optional: true
-  belongs_to :race, optional: true
-  belongs_to :gender, optional: true
-  belongs_to :ethnicity, optional: true
+  belongs_to :nationality, class_name: 'GenericModel', optional: true
+  belongs_to :birth_country, class_name: 'GenericModel', optional: true
+  belongs_to :race, class_name: 'GenericModel', optional: true
+  belongs_to :gender, class_name: 'GenericModel', optional: true
+  belongs_to :ethnicity, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
+
+  has_one :family, dependent: :nullify
 
   ransack_alias :search, :id_to_s
 end
