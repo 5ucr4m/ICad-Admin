@@ -1,4 +1,6 @@
-class IndividualRegistrationsController < ApplicationController
+# frozen_string_literal: true
+
+class IndividualRegistrationsController < WebController
   before_action :set_individual_registration, only: %i[show edit update destroy]
 
   # GET /individual_registrations
@@ -8,8 +10,7 @@ class IndividualRegistrationsController < ApplicationController
   end
 
   # GET /individual_registrations/1
-  def show
-  end
+  def show; end
 
   # GET /individual_registrations/new
   def new
@@ -17,8 +18,7 @@ class IndividualRegistrationsController < ApplicationController
   end
 
   # GET /individual_registrations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /individual_registrations
   def create
@@ -47,13 +47,24 @@ class IndividualRegistrationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_individual_registration
-      @individual_registration = IndividualRegistration.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def individual_registration_params
-      params.require(:individual_registration).permit(:health_condition_id, :in_street_situation_id, :family_member_id, :sociodemographic_info_id, :cancel_registration_id, :refuse_registration, :form_updated, :uuid, :uuid_form_origin, :uuid_citizen, :tp_cds_origin, :company_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_individual_registration
+    @individual_registration = IndividualRegistration.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def individual_registration_params
+    params.require(:individual_registration).permit(:health_condition_id,
+                                                    :in_street_situation_id,
+                                                    :family_member_id,
+                                                    :sociodemographic_info_id,
+                                                    :cancel_registration_id,
+                                                    :refuse_registration,
+                                                    :form_updated, :uuid,
+                                                    :uuid_form_origin,
+                                                    :uuid_citizen,
+                                                    :tp_cds_origin,
+                                                    :company_id, :slug)
+  end
 end

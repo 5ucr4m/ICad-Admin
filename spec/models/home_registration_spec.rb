@@ -4,13 +4,13 @@
 #
 #  id                        :bigint           not null, primary key
 #  finished                  :boolean
+#  form_updated              :boolean
 #  pet_quantity              :integer
 #  refuse_registration       :boolean
-#  registry_updated          :boolean
 #  slug                      :string
 #  tp_cds_origin             :integer
 #  uuid                      :string
-#  uuid_origin               :string
+#  uuid_form_origin          :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  address_id                :bigint

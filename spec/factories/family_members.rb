@@ -9,8 +9,9 @@
 #  cns_responsible   :string
 #  email             :string
 #  father_name       :string
-#  full_name         :string
 #  micro_area        :string
+#  mother_name       :string
+#  name              :string
 #  naturalize_decree :string
 #  naturalized_at    :date
 #  out_area          :boolean
@@ -27,6 +28,7 @@
 #  city_id           :bigint
 #  company_id        :bigint
 #  ethnicity_id      :bigint
+#  family_id         :bigint
 #  gender_id         :bigint
 #  nationality_id    :bigint
 #  race_id           :bigint
@@ -37,6 +39,7 @@
 #  index_family_members_on_city_id           (city_id)
 #  index_family_members_on_company_id        (company_id)
 #  index_family_members_on_ethnicity_id      (ethnicity_id)
+#  index_family_members_on_family_id         (family_id)
 #  index_family_members_on_gender_id         (gender_id)
 #  index_family_members_on_nationality_id    (nationality_id)
 #  index_family_members_on_race_id           (race_id)
@@ -47,6 +50,7 @@
 #  fk_rails_...  (city_id => cities.id)
 #  fk_rails_...  (company_id => companies.id)
 #  fk_rails_...  (ethnicity_id => generic_models.id)
+#  fk_rails_...  (family_id => families.id)
 #  fk_rails_...  (gender_id => generic_models.id)
 #  fk_rails_...  (nationality_id => generic_models.id)
 #  fk_rails_...  (race_id => generic_models.id)
@@ -54,13 +58,15 @@
 
 FactoryBot.define do
   factory :family_member do
+    family { nil }
     social_name { "MyString" }
     city { nil }
-    birth_date { "2019-05-14" }
+    birth_date { "2019-05-15" }
     unknown_mother { false }
+    mother_name { "MyString" }
     email { "MyString" }
     nationality { nil }
-    full_name { "MyString" }
+    name { "MyString" }
     cns_number { "MyString" }
     cns_responsible { "MyString" }
     phone { "MyString" }
@@ -72,9 +78,9 @@ FactoryBot.define do
     ethnicity { nil }
     unknown_father { false }
     father_name { "MyString" }
-    naturalized_at { "2019-05-14" }
+    naturalized_at { "2019-05-15" }
     naturalize_decree { "MyString" }
-    brazil_entry_date { "2019-05-14" }
+    brazil_entry_date { "2019-05-15" }
     micro_area { "MyString" }
     out_area { false }
     company { nil }

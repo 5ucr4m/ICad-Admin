@@ -1,4 +1,6 @@
-class HomeRegistrationsController < ApplicationController
+# frozen_string_literal: true
+
+class HomeRegistrationsController < WebController
   before_action :set_home_registration, only: %i[show edit update destroy]
 
   # GET /home_registrations
@@ -8,8 +10,7 @@ class HomeRegistrationsController < ApplicationController
   end
 
   # GET /home_registrations/1
-  def show
-  end
+  def show; end
 
   # GET /home_registrations/new
   def new
@@ -17,8 +18,7 @@ class HomeRegistrationsController < ApplicationController
   end
 
   # GET /home_registrations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /home_registrations
   def create
@@ -47,13 +47,21 @@ class HomeRegistrationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_home_registration
-      @home_registration = HomeRegistration.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def home_registration_params
-      params.require(:home_registration).permit(:health_professional_id, :living_condition_id, :address_id, :registry_updated, :pet_quantity, :refuse_registration, :tp_cds_origin, :uuid, :uuid_origin, :home_type_id, :permanence_institution_id, :finished, :company_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_home_registration
+    @home_registration = HomeRegistration.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def home_registration_params
+    params.require(:home_registration).permit(:health_professional_id,
+                                              :living_condition_id, :address_id,
+                                              :form_updated, :pet_quantity,
+                                              :refuse_registration, :tp_cds_origin,
+                                              :uuid, :uuid_form_origin,
+                                              :home_type_id,
+                                              :permanence_institution_id,
+                                              :finished, :company_id, :slug)
+  end
 end

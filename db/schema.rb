@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_14_180036) do
+ActiveRecord::Schema.define(version: 2019_05_15_185339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,13 +108,15 @@ ActiveRecord::Schema.define(version: 2019_05_14_180036) do
   end
 
   create_table "family_members", force: :cascade do |t|
+    t.bigint "family_id"
     t.string "social_name"
     t.bigint "city_id"
     t.date "birth_date"
     t.boolean "unknown_mother"
+    t.string "mother_name"
     t.string "email"
     t.bigint "nationality_id"
-    t.string "full_name"
+    t.string "name"
     t.string "cns_number"
     t.string "cns_responsible"
     t.string "phone"
@@ -139,6 +141,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_180036) do
     t.index ["city_id"], name: "index_family_members_on_city_id"
     t.index ["company_id"], name: "index_family_members_on_company_id"
     t.index ["ethnicity_id"], name: "index_family_members_on_ethnicity_id"
+    t.index ["family_id"], name: "index_family_members_on_family_id"
     t.index ["gender_id"], name: "index_family_members_on_gender_id"
     t.index ["nationality_id"], name: "index_family_members_on_nationality_id"
     t.index ["race_id"], name: "index_family_members_on_race_id"
@@ -276,12 +279,12 @@ ActiveRecord::Schema.define(version: 2019_05_14_180036) do
     t.bigint "health_professional_id"
     t.bigint "living_condition_id"
     t.bigint "address_id"
-    t.boolean "registry_updated"
+    t.boolean "form_updated"
     t.integer "pet_quantity"
     t.boolean "refuse_registration"
     t.integer "tp_cds_origin"
     t.string "uuid"
-    t.string "uuid_origin"
+    t.string "uuid_form_origin"
     t.bigint "home_type_id"
     t.bigint "permanence_institution_id"
     t.boolean "finished"
@@ -295,6 +298,56 @@ ActiveRecord::Schema.define(version: 2019_05_14_180036) do
     t.index ["home_type_id"], name: "index_home_registrations_on_home_type_id"
     t.index ["living_condition_id"], name: "index_home_registrations_on_living_condition_id"
     t.index ["permanence_institution_id"], name: "index_home_registrations_on_permanence_institution_id"
+  end
+
+  create_table "home_visit_forms", force: :cascade do |t|
+    t.bigint "home_visit_registration_id"
+    t.bigint "turn_id"
+    t.string "handbook_number"
+    t.string "cns_number"
+    t.date "birth_date"
+    t.bigint "gender_id"
+    t.boolean "other_visit"
+    t.bigint "outcome_id"
+    t.string "micro_area"
+    t.boolean "out_area"
+    t.bigint "home_type_id"
+    t.string "weight_monitoring"
+    t.string "height_monitoring"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_home_visit_forms_on_company_id"
+    t.index ["gender_id"], name: "index_home_visit_forms_on_gender_id"
+    t.index ["home_type_id"], name: "index_home_visit_forms_on_home_type_id"
+    t.index ["home_visit_registration_id"], name: "index_home_visit_forms_on_home_visit_registration_id"
+    t.index ["outcome_id"], name: "index_home_visit_forms_on_outcome_id"
+    t.index ["turn_id"], name: "index_home_visit_forms_on_turn_id"
+  end
+
+  create_table "home_visit_reasons", force: :cascade do |t|
+    t.bigint "home_visit_form_id"
+    t.bigint "reason_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_home_visit_reasons_on_company_id"
+    t.index ["home_visit_form_id"], name: "index_home_visit_reasons_on_home_visit_form_id"
+    t.index ["reason_id"], name: "index_home_visit_reasons_on_reason_id"
+  end
+
+  create_table "home_visit_registrations", force: :cascade do |t|
+    t.bigint "family_member_id"
+    t.string "uuid"
+    t.string "tp_cds_origin"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_home_visit_registrations_on_company_id"
+    t.index ["family_member_id"], name: "index_home_visit_registrations_on_family_member_id"
   end
 
   create_table "in_street_situations", force: :cascade do |t|
@@ -539,6 +592,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_180036) do
   add_foreign_key "families", "home_registrations"
   add_foreign_key "family_members", "cities"
   add_foreign_key "family_members", "companies"
+  add_foreign_key "family_members", "families"
   add_foreign_key "family_members", "generic_models", column: "birth_country_id"
   add_foreign_key "family_members", "generic_models", column: "ethnicity_id"
   add_foreign_key "family_members", "generic_models", column: "gender_id"
@@ -569,6 +623,17 @@ ActiveRecord::Schema.define(version: 2019_05_14_180036) do
   add_foreign_key "home_registrations", "health_professionals"
   add_foreign_key "home_registrations", "living_conditions"
   add_foreign_key "home_registrations", "permanence_institutions"
+  add_foreign_key "home_visit_forms", "companies"
+  add_foreign_key "home_visit_forms", "generic_models", column: "gender_id"
+  add_foreign_key "home_visit_forms", "generic_models", column: "home_type_id"
+  add_foreign_key "home_visit_forms", "generic_models", column: "outcome_id"
+  add_foreign_key "home_visit_forms", "generic_models", column: "turn_id"
+  add_foreign_key "home_visit_forms", "home_visit_registrations"
+  add_foreign_key "home_visit_reasons", "companies"
+  add_foreign_key "home_visit_reasons", "generic_models", column: "reason_id"
+  add_foreign_key "home_visit_reasons", "home_visit_forms"
+  add_foreign_key "home_visit_registrations", "companies"
+  add_foreign_key "home_visit_registrations", "family_members"
   add_foreign_key "in_street_situations", "companies"
   add_foreign_key "in_street_situations", "generic_models", column: "meals_per_day_id"
   add_foreign_key "in_street_situations", "generic_models", column: "street_situation_time_id"

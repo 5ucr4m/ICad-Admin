@@ -24,7 +24,7 @@
 
 class CancelRegistration < ApplicationRecord
 
-  belongs_to :left_reason, optional: true
+  belongs_to :left_reason, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
 
   ransack_alias :search, :id_to_s

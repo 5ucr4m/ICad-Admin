@@ -1,13 +1,15 @@
 class CreateFamilyMembers < ActiveRecord::Migration[6.0]
   def change
     create_table :family_members do |t|
+      t.belongs_to :family, foreign_key: true, index: true
       t.string :social_name
       t.belongs_to :city, foreign_key: true, index: true
       t.date :birth_date
       t.boolean :unknown_mother
+      t.string :mother_name
       t.string :email
       t.belongs_to :nationality, foreign_key: {to_table: :generic_models}, index: true
-      t.string :full_name
+      t.string :name
       t.string :cns_number
       t.string :cns_responsible
       t.string :phone

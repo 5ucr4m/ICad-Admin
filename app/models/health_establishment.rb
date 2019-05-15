@@ -40,6 +40,7 @@ class HealthEstablishment < ApplicationRecord
   belongs_to :company
 
   has_many :health_professionals, dependent: :nullify
+  has_many :home_registrations, through: :health_professionals
 
   accepts_nested_attributes_for :registry, allow_destroy: false
   accepts_nested_attributes_for :manager, allow_destroy: false

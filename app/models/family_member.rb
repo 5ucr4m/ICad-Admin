@@ -11,8 +11,9 @@
 #  cns_responsible   :string
 #  email             :string
 #  father_name       :string
-#  full_name         :string
 #  micro_area        :string
+#  mother_name       :string
+#  name              :string
 #  naturalize_decree :string
 #  naturalized_at    :date
 #  out_area          :boolean
@@ -29,6 +30,7 @@
 #  city_id           :bigint
 #  company_id        :bigint
 #  ethnicity_id      :bigint
+#  family_id         :bigint
 #  gender_id         :bigint
 #  nationality_id    :bigint
 #  race_id           :bigint
@@ -39,6 +41,7 @@
 #  index_family_members_on_city_id           (city_id)
 #  index_family_members_on_company_id        (company_id)
 #  index_family_members_on_ethnicity_id      (ethnicity_id)
+#  index_family_members_on_family_id         (family_id)
 #  index_family_members_on_gender_id         (gender_id)
 #  index_family_members_on_nationality_id    (nationality_id)
 #  index_family_members_on_race_id           (race_id)
@@ -49,14 +52,17 @@
 #  fk_rails_...  (city_id => cities.id)
 #  fk_rails_...  (company_id => companies.id)
 #  fk_rails_...  (ethnicity_id => generic_models.id)
+#  fk_rails_...  (family_id => families.id)
 #  fk_rails_...  (gender_id => generic_models.id)
 #  fk_rails_...  (nationality_id => generic_models.id)
 #  fk_rails_...  (race_id => generic_models.id)
 #
 
+
 class FamilyMember < ApplicationRecord
   include Sluggable
 
+  belongs_to :family, optional: true
   belongs_to :city, optional: true
   belongs_to :nationality, class_name: 'GenericModel', optional: true
   belongs_to :birth_country, class_name: 'GenericModel', optional: true
@@ -65,7 +71,7 @@ class FamilyMember < ApplicationRecord
   belongs_to :ethnicity, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
 
-  has_one :family, dependent: :nullify
+  has_one :individual_registration, dependent: :destroy
 
   ransack_alias :search, :id_to_s
 end

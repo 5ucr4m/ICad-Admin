@@ -7,12 +7,12 @@ RSpec.describe "home_registrations/index", type: :view do
         :health_professional => nil,
         :living_condition => nil,
         :address => nil,
-        :registry_updated => false,
+        :form_updated => false,
         :pet_quantity => 2,
         :refuse_registration => false,
         :tp_cds_origin => 3,
         :uuid => "Uuid",
-        :uuid_origin => "Uuid Origin",
+        :uuid_form_origin => "Uuid Form Origin",
         :home_type => nil,
         :permanence_institution => nil,
         :finished => false,
@@ -23,12 +23,12 @@ RSpec.describe "home_registrations/index", type: :view do
         :health_professional => nil,
         :living_condition => nil,
         :address => nil,
-        :registry_updated => false,
+        :form_updated => false,
         :pet_quantity => 2,
         :refuse_registration => false,
         :tp_cds_origin => 3,
         :uuid => "Uuid",
-        :uuid_origin => "Uuid Origin",
+        :uuid_form_origin => "Uuid Form Origin",
         :home_type => nil,
         :permanence_institution => nil,
         :finished => false,
@@ -48,7 +48,7 @@ RSpec.describe "home_registrations/index", type: :view do
     assert_select "tr>td", :text => false.to_s, :count => 2
     assert_select "tr>td", :text => 3.to_s, :count => 2
     assert_select "tr>td", :text => "Uuid".to_s, :count => 2
-    assert_select "tr>td", :text => "Uuid Origin".to_s, :count => 2
+    assert_select "tr>td", :text => "Uuid Form Origin".to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => false.to_s, :count => 2

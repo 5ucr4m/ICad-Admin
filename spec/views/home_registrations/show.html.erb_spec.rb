@@ -6,12 +6,12 @@ RSpec.describe "home_registrations/show", type: :view do
       :health_professional => nil,
       :living_condition => nil,
       :address => nil,
-      :registry_updated => false,
+      :form_updated => false,
       :pet_quantity => 2,
       :refuse_registration => false,
       :tp_cds_origin => 3,
       :uuid => "Uuid",
-      :uuid_origin => "Uuid Origin",
+      :uuid_form_origin => "Uuid Form Origin",
       :home_type => nil,
       :permanence_institution => nil,
       :finished => false,
@@ -30,7 +30,7 @@ RSpec.describe "home_registrations/show", type: :view do
     expect(rendered).to match(/false/)
     expect(rendered).to match(/3/)
     expect(rendered).to match(/Uuid/)
-    expect(rendered).to match(/Uuid Origin/)
+    expect(rendered).to match(/Uuid Form Origin/)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(/false/)

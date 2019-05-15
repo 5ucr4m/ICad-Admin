@@ -1,0 +1,61 @@
+# == Schema Information
+#
+# Table name: home_visit_forms
+#
+#  id                         :bigint           not null, primary key
+#  birth_date                 :date
+#  cns_number                 :string
+#  handbook_number            :string
+#  height_monitoring          :string
+#  micro_area                 :string
+#  other_visit                :boolean
+#  out_area                   :boolean
+#  slug                       :string
+#  weight_monitoring          :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  company_id                 :bigint
+#  gender_id                  :bigint
+#  home_type_id               :bigint
+#  home_visit_registration_id :bigint
+#  outcome_id                 :bigint
+#  turn_id                    :bigint
+#
+# Indexes
+#
+#  index_home_visit_forms_on_company_id                  (company_id)
+#  index_home_visit_forms_on_gender_id                   (gender_id)
+#  index_home_visit_forms_on_home_type_id                (home_type_id)
+#  index_home_visit_forms_on_home_visit_registration_id  (home_visit_registration_id)
+#  index_home_visit_forms_on_outcome_id                  (outcome_id)
+#  index_home_visit_forms_on_turn_id                     (turn_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (company_id => companies.id)
+#  fk_rails_...  (gender_id => generic_models.id)
+#  fk_rails_...  (home_type_id => generic_models.id)
+#  fk_rails_...  (home_visit_registration_id => home_visit_registrations.id)
+#  fk_rails_...  (outcome_id => generic_models.id)
+#  fk_rails_...  (turn_id => generic_models.id)
+#
+
+FactoryBot.define do
+  factory :home_visit_form do
+    home_visit_registration { nil }
+    turn { nil }
+    handbook_number { "MyString" }
+    cns_number { "MyString" }
+    birth_date { "2019-05-15" }
+    gender { nil }
+    other_visit { false }
+    outcome { nil }
+    micro_area { "MyString" }
+    out_area { false }
+    home_type { nil }
+    weight_monitoring { "MyString" }
+    height_monitoring { "MyString" }
+    company { nil }
+    slug { "MyString" }
+  end
+end

@@ -1,4 +1,6 @@
-class ProfessionalTeamsController < ApplicationController
+# frozen_string_literal: true
+
+class ProfessionalTeamsController < WebController
   before_action :set_professional_team, only: %i[show edit update destroy]
 
   # GET /professional_teams
@@ -8,8 +10,7 @@ class ProfessionalTeamsController < ApplicationController
   end
 
   # GET /professional_teams/1
-  def show
-  end
+  def show; end
 
   # GET /professional_teams/new
   def new
@@ -17,8 +18,7 @@ class ProfessionalTeamsController < ApplicationController
   end
 
   # GET /professional_teams/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /professional_teams
   def create
@@ -47,13 +47,14 @@ class ProfessionalTeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_professional_team
-      @professional_team = ProfessionalTeam.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def professional_team_params
-      params.require(:professional_team).permit(:name, :code, :active, :company_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_professional_team
+    @professional_team = ProfessionalTeam.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def professional_team_params
+    params.require(:professional_team).permit(:name, :code, :active, :company_id, :slug)
+  end
 end

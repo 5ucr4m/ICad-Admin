@@ -4,13 +4,13 @@
 #
 #  id                        :bigint           not null, primary key
 #  finished                  :boolean
+#  form_updated              :boolean
 #  pet_quantity              :integer
 #  refuse_registration       :boolean
-#  registry_updated          :boolean
 #  slug                      :string
 #  tp_cds_origin             :integer
 #  uuid                      :string
-#  uuid_origin               :string
+#  uuid_form_origin          :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  address_id                :bigint
@@ -44,12 +44,12 @@ FactoryBot.define do
     health_professional { nil }
     living_condition { nil }
     address { nil }
-    registry_updated { false }
+    form_updated { false }
     pet_quantity { 1 }
     refuse_registration { false }
     tp_cds_origin { 1 }
     uuid { "MyString" }
-    uuid_origin { "MyString" }
+    uuid_form_origin { "MyString" }
     home_type { nil }
     permanence_institution { nil }
     finished { false }

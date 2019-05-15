@@ -6,12 +6,12 @@ RSpec.describe "home_registrations/new", type: :view do
       :health_professional => nil,
       :living_condition => nil,
       :address => nil,
-      :registry_updated => false,
+      :form_updated => false,
       :pet_quantity => 1,
       :refuse_registration => false,
       :tp_cds_origin => 1,
       :uuid => "MyString",
-      :uuid_origin => "MyString",
+      :uuid_form_origin => "MyString",
       :home_type => nil,
       :permanence_institution => nil,
       :finished => false,
@@ -31,7 +31,7 @@ RSpec.describe "home_registrations/new", type: :view do
 
       assert_select "input[name=?]", "home_registration[address_id]"
 
-      assert_select "input[name=?]", "home_registration[registry_updated]"
+      assert_select "input[name=?]", "home_registration[form_updated]"
 
       assert_select "input[name=?]", "home_registration[pet_quantity]"
 
@@ -41,7 +41,7 @@ RSpec.describe "home_registrations/new", type: :view do
 
       assert_select "input[name=?]", "home_registration[uuid]"
 
-      assert_select "input[name=?]", "home_registration[uuid_origin]"
+      assert_select "input[name=?]", "home_registration[uuid_form_origin]"
 
       assert_select "input[name=?]", "home_registration[home_type_id]"
 

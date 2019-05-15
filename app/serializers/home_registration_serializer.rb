@@ -4,13 +4,13 @@
 #
 #  id                        :bigint           not null, primary key
 #  finished                  :boolean
+#  form_updated              :boolean
 #  pet_quantity              :integer
 #  refuse_registration       :boolean
-#  registry_updated          :boolean
 #  slug                      :string
 #  tp_cds_origin             :integer
 #  uuid                      :string
-#  uuid_origin               :string
+#  uuid_form_origin          :string
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  address_id                :bigint
@@ -40,7 +40,7 @@
 #
 
 class HomeRegistrationSerializer < ActiveModel::Serializer
-  attributes :id, :registry_updated, :pet_quantity, :refuse_registration, :tp_cds_origin, :uuid, :uuid_origin, :finished, :slug
+  attributes :id, :form_updated, :pet_quantity, :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished, :slug
   has_one :health_professional
   has_one :living_condition
   has_one :address

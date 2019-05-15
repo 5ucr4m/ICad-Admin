@@ -47,8 +47,9 @@
 #
 
 class HealthCondition < ApplicationRecord
+  include Sluggable
 
-  belongs_to :weight_situation, optional: true
+  belongs_to :weight_situation, class_name: 'GenericModel'
   belongs_to :company, optional: true
 
   ransack_alias :search, :id_to_s

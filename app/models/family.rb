@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: families
@@ -32,6 +34,8 @@ class Family < ApplicationRecord
 
   belongs_to :home_registration
   belongs_to :company, optional: true
+
+  has_many :family_members, dependent: :nullify
 
   ransack_alias :search, :id_to_s
 end
