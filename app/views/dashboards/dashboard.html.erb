@@ -1,0 +1,30 @@
+<div class="form-row row-cards">
+  <div class="col-lg-3 col-sm-12">
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: 'fas fa-file-alt',
+                        color: 'bg-teal-light',
+                        value: Random.rand(1..10000),
+                        description: Faker::App.name} %>
+  </div>
+  <div class="col-lg-3 col-sm-12">
+    <%= render partial: 'application/dashboard_card',
+               locals: {value: number_to_currency(Random.rand(100.00..10000.00).to_f),
+                        icon: 'fas fa-arrow-down',
+                        color: 'bg-green-light',
+                        description: Faker::App.name} %>
+  </div>
+  <div class="col-lg-3 col-sm-12">
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: 'fas fa-arrow-up',
+                        color: 'bg-red-light',
+                        value: number_to_currency(Random.rand(100.00..10000.00).to_f),
+                        description: Faker::App.name} %>
+  </div>
+  <div class="col-lg-3 col-sm-12">
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: 'fas fa-dollar-sign',
+                        color: 'bg-green',
+                        value: number_to_currency(Random.rand(100.00..10000.00).to_f),
+                        description: Faker::App.name} %>
+  </div>
+</div>

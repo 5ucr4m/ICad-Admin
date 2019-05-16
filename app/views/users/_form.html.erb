@@ -1,5 +1,5 @@
 <%= form_with(model: @user, id: :user) do |f| %>
   <% content_for :body do %>
   <% end %>
-  <%= render template: 'application/form', locals: {form: @user} %>
+  <%= render template: 'application/form_devise', locals: {form: @user} %>
 <% end %>
