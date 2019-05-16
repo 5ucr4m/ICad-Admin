@@ -4,8 +4,8 @@
 #
 #  id                     :bigint           not null, primary key
 #  family_income_cents    :integer
-#  family_members         :integer
 #  handbook_number        :string
+#  members_quantity       :integer
 #  moving                 :boolean
 #  reside_since           :date
 #  responsible_birth_date :date

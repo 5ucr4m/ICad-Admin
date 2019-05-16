@@ -7,7 +7,10 @@ require('popper.js');
 require('bootstrap');
 require('cleave.js');
 require('cleave.js/dist/addons/cleave-phone.br');
+require('select2');
 require("channels");
+
+import $ from 'jquery';
 
 function getZip(e) {
   let zip = e.target.value.replace('-', '').replace('.', '');

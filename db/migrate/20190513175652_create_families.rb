@@ -4,7 +4,7 @@ class CreateFamilies < ActiveRecord::Migration[6.0]
       t.belongs_to :home_registration, foreign_key: true, index: true
       t.date :responsible_birth_date
       t.string :responsible_cns_number
-      t.integer :family_members
+      t.integer :members_quantity
       t.string :handbook_number
       t.integer :family_income_cents
       t.date :reside_since

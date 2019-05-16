@@ -27,15 +27,8 @@
 #  fk_rails_...  (home_registration_id => home_registrations.id)
 #
 
-class Family < ApplicationRecord
-  include Sluggable
-
-  belongs_to :home_registration
-  belongs_to :company, optional: true
-
-  has_many :family_members, dependent: :nullify
-
-  validates :responsible_cns_number, presence: true
-
-  ransack_alias :search, :id_to_s
+class FamilySerializer < ActiveModel::Serializer
+  attributes :id, :responsible_birth_date, :responsible_cns_number, :members_quantity, :handbook_number, :family_income_cents, :reside_since, :moving, :slug
+  has_one :home_registration
+  has_one :company
 end

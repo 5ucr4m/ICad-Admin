@@ -10,6 +10,7 @@
     "cleave.js": "^1.4.10",
     "jquery": "^3.4.0",
     "popper.js": "^1.15.0",
+    "select2": "^4.0.7",
     "superagent": "^5.0.5",
     "turbolinks": "^5.2.0"
   },

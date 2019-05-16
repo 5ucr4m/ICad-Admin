@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2019_05_15_185339) do
     t.bigint "home_registration_id"
     t.date "responsible_birth_date"
     t.string "responsible_cns_number"
-    t.integer "family_members"
+    t.integer "members_quantity"
     t.string "handbook_number"
     t.integer "family_income_cents"
     t.date "reside_since"

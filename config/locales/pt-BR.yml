@@ -10,6 +10,20 @@ pt-BR:
         one: Usuário
         other: Usuários
         icon: fas fa-user-circle
+      health_professional:
+        one: Profissional de Saúde
+        other: Profissionais de Saúde
+      family:
+        one: Familia
+        other: Familias
+        icon: fas fa-users
+      professional_team:
+        one: Equipe
+        other: Equipes
+      health_establishment:
+        one: UBS
+        other: UBS
+
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

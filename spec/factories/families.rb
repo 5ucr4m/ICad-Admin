@@ -4,8 +4,8 @@
 #
 #  id                     :bigint           not null, primary key
 #  family_income_cents    :integer
-#  family_members         :integer
 #  handbook_number        :string
+#  members_quantity       :integer
 #  moving                 :boolean
 #  reside_since           :date
 #  responsible_birth_date :date
@@ -30,12 +30,12 @@
 FactoryBot.define do
   factory :family do
     home_registration { nil }
-    responsible_birth_date { "2019-05-13" }
+    responsible_birth_date { "2019-05-16" }
     responsible_cns_number { "MyString" }
-    family_members { 1 }
+    members_quantity { 1 }
     handbook_number { "MyString" }
     family_income_cents { 1 }
-    reside_since { "2019-05-13" }
+    reside_since { "2019-05-16" }
     moving { false }
     company { nil }
     slug { "MyString" }
