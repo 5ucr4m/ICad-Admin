@@ -1,4 +1,6 @@
 @import url("https://preview.tabler.io/assets/css/dashboard.css");
+@import "select2/dist/css/select2.min";
+@import "@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4";
 
 $color-red: #cd201f;
 $color-validation: #cd201f;
@@ -241,3 +243,34 @@ span.float-right i {
   }
 }
 
+.select2 {
+  width: 100%;
+  display: block;
+}
+
+.select2-container--bootstrap4.select2-container--focus .select2-selection {
+  color: #495057;
+  background-color: #fff;
+  border-color: #1991eb;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25);
+}
+
+.select2-container--bootstrap4.select2-container--focus .select2-selection {
+  color: #495057;
+  background-color: #fff;
+  border-color: #1991eb;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(70, 127, 207, 0.25);
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  padding-left: .7rem;
+}
+
+.select2-container--bootstrap4 .select2-results > .select2-results__options {
+  font-size: 0.9375rem;
+  font-weight: 400;
+}

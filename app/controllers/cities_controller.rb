@@ -27,7 +27,7 @@ class CitiesController < WebController
     @city = City.new(city_params)
 
     if @city.save
-      redirect_to @city, notice: 'City was successfully created.', status: :created
+      redirect_to @city, notice: 'City was successfully created.'
     else
       render :new
     end

@@ -25,7 +25,7 @@ class HealthProfessionalsController < ApplicationController
     @health_professional = HealthProfessional.new(health_professional_params)
 
     if @health_professional.save
-      redirect_to @health_professional, notice: 'Health professional was successfully created.', status: :created
+      redirect_to @health_professional, notice: 'Health professional was successfully created.'
     else
       render :new
     end

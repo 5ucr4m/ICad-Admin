@@ -1,14 +1,7 @@
-<%%= form_with(model: @<%= model_resource_name %>, id: :<%= model_resource_name %>) do |f| %>
+<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
   <%% content_for :body do %>
     <%- attributes.each do |attribute| -%>
-      <div class="form-group col-md-4">
-        <%%= f.label :<%= attribute.column_name %>, {class: 'form-label'} %>
-        <% if attribute.reference? %>
-          <%%= f.select :<%= attribute.column_name %>, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        <% else %>
-          <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %>, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        <% end %>
-      </div>
+      <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%- end -%>
   <%% end %>
   <%%= render template: 'application/form', locals: {form: @<%= singular_table_name %>} %>

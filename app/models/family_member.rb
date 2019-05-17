@@ -73,5 +73,7 @@ class FamilyMember < ApplicationRecord
 
   has_one :individual_registration, dependent: :destroy
 
+  validates :name, :birth_date, :cns_number, presence: true
+
   ransack_alias :search, :id_to_s
 end

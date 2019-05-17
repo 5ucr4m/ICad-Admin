@@ -26,7 +26,7 @@ module Api
       @generic_model = GenericModel.new(generic_model_params)
 
       if @generic_model.save
-        redirect_to @generic_model, notice: 'Generic model was successfully created.', status: :created
+        redirect_to @generic_model, notice: 'Generic model was successfully created.'
       else
         unprocessable_entity @generic_model
       end

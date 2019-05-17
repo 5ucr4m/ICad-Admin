@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: families
@@ -35,7 +37,10 @@ class Family < ApplicationRecord
 
   has_many :family_members, dependent: :nullify
 
-  validates :responsible_cns_number, presence: true
+  accepts_nested_attributes_for :family_members, allow_destroy: true
+
+  validates :responsible_cns_number, :responsible_birth_date, :members_quantity,
+            :handbook_number, :family_income_cents, :reside_since, presence: true
 
   ransack_alias :search, :id_to_s
 end

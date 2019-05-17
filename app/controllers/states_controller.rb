@@ -25,7 +25,7 @@ class StatesController < WebController
     @state = State.new(state_params)
 
     if @state.save
-      redirect_to @state, notice: 'State was successfully created.', status: :created
+      redirect_to @state, notice: 'State was successfully created.'
     else
       render :new
     end

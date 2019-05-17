@@ -25,7 +25,7 @@ class CompaniesController < WebController
     @company = Company.new(company_params)
 
     if @company.save
-      redirect_to @company, notice: 'Company was successfully created.', status: :created
+      redirect_to @company, notice: 'Company was successfully created.'
     else
       render :new
     end

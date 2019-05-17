@@ -25,7 +25,7 @@ class HealthEstablishmentsController < WebController
     @health_establishment = HealthEstablishment.new(health_establishment_params)
 
     if @health_establishment.save
-      redirect_to @health_establishment, notice: 'Health establishment was successfully created.', status: :created
+      redirect_to @health_establishment, notice: 'Health establishment was successfully created.'
     else
       render :new
     end

@@ -1,16 +1,66 @@
 <%= simple_form_for @family do |f| %>
   <% content_for :body do %>
-    <%= f.association :home_registration, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :responsible_birth_date, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :home_registration, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :responsible_birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :responsible_cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :members_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :handbook_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :family_income_cents, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :reside_since, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <div class="custom-controls-stacked">
-      <label class="custom-control custom-checkbox">
-        <%= f.check_box :moving, {class: 'custom-control-input', disabled: show?(f.object.persisted?)} %>
-      </label>
+    <%= f.input :reside_since, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :moving, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="col-12">
+      <div class="card mb-0">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 2) %>
+          </h3>
+        </div>
+        <% if @family.family_members.map(&:persisted?).any? %>
+          <div class="table-responsive">
+            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th><%= FamilyMember.human_attribute_name :name %></th>
+                <th><%= FamilyMember.human_attribute_name :cns_number %></th>
+                <th><%= FamilyMember.human_attribute_name :birth_date %></th>
+                <th><%= FamilyMember.human_attribute_name :responsible %></th>
+                <th>Ações</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @family.family_members.each_with_index do |family_member, index| %>
+                <tr>
+                  <td><%= index = index + 1 %></td>
+                  <td><%= family_member.name %></td>
+                  <td><%= family_member.cns_number %></td>
+                  <td><%= family_member.birth_date.strftime('%d/%m/%Y') %></td>
+                  <td><%= family_member.responsible ? 'SIM' : 'NÃO' %></td>
+                  <td class="text-center">
+                    <%= render 'application/table_links', f: family_member %>
+                  </td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="card-body">
+            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+              <div class="row">
+                <div class="col pt-2 py-auto text-left font-weight-bold">
+                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhum membro incluído
+                </div>
+                <div class="col text-right">
+                  <%= link_to new_family_member_path, class: 'btn btn-primary', role: 'button' do %>
+                    <i class="fas fa-plus mr-2"></i>Adicionar Membro
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
   <%= render template: 'application/form', locals: {form: @family} %>

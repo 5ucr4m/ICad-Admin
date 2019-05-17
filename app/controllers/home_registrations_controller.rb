@@ -25,7 +25,7 @@ class HomeRegistrationsController < WebController
     @home_registration = HomeRegistration.new(home_registration_params)
 
     if @home_registration.save
-      redirect_to @home_registration, notice: 'Home registration was successfully created.', status: :created
+      redirect_to @home_registration, notice: 'Home registration was successfully created.'
     else
       render :new
     end

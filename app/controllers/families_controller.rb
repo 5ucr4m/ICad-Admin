@@ -15,7 +15,7 @@ class FamiliesController < WebController
   # GET /families/new
   def new
     @family = Family.new
-    @family.build_home_registration
+    @family.family_members.build
   end
 
   # GET /families/1/edit
@@ -26,7 +26,7 @@ class FamiliesController < WebController
     @family = Family.new(family_params)
 
     if @family.save
-      redirect_to @family, notice: 'Family was successfully created.', status: :created
+      redirect_to @family, notice: 'Family was successfully created.'
     else
       render :new
     end
@@ -60,10 +60,33 @@ class FamiliesController < WebController
                                    :responsible_cns_number,
                                    :members_quantity, :handbook_number,
                                    :family_income_cents, :reside_since,
-                                   :moving,
-                                   home_registration: %i[
+                                   :moving, :home_registration_id,
+                                   family_members_attributes: %i[
                                      id
-                                     health_professional_id
+                                     name
+                                     social_name
+                                     mother_name
+                                     father_name
+                                     birth_date
+                                     birth_country_id
+                                     city_id
+                                     nationality_id
+                                     naturalized_at
+                                     naturalize_decree
+                                     brazil_entry_date
+                                     email
+                                     cns_number
+                                     cns_responsible
+                                     phone
+                                     pis_pasep_number
+                                     race_id
+                                     gender_id
+                                     ethnicity_id
+                                     micro_area
+                                     unknown_father
+                                     unknown_mother
+                                     responsible
+                                     out_area
                                    ])
   end
 end

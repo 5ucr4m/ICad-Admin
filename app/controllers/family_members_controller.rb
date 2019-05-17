@@ -25,7 +25,7 @@ class FamilyMembersController < WebController
     @family_member = FamilyMember.new(family_member_params)
 
     if @family_member.save
-      redirect_to @family_member, notice: 'Family member was successfully created.', status: :created
+      redirect_to @family_member, notice: 'Family member was successfully created.'
     else
       render :new
     end

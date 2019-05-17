@@ -25,7 +25,7 @@ class RolesController < WebController
     @role = Role.new(role_params)
 
     if @role.save
-      redirect_to @role, notice: 'Role was successfully created.', status: :created
+      redirect_to @role, notice: 'Role was successfully created.'
     else
       render :new
     end

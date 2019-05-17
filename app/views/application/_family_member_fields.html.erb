@@ -1,0 +1,59 @@
+<div class="form-row">
+  <%= f.input :name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :social_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :mother_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :father_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.association :birth_country, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.association :city, collection: City.all.page(1), wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.association :nationality, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :naturalized_at, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :naturalize_decree, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :brazil_entry_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :email, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :cns_responsible, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :phone, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'phone', disabled: show?(@family.persisted?)} %>
+  <%= f.input :pis_pasep_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.association :race, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.association :gender, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.association :ethnicity, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <%= f.input :micro_area, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@family.persisted?)} %>
+  <div class="col-lg-6 col-sm-12">
+    <div class="form-row">
+      <%= f.input :unknown_father, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(@family.persisted?)} %>
+      <%= f.input :unknown_mother, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(@family.persisted?)} %>
+      <%= f.input :responsible, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(@family.persisted?)} %>
+      <%= f.input :out_area, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(@family.persisted?)} %>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="mb-4">
+      <%= button_tag class: 'btn btn-primary btn-submit',
+                     type: 'button',
+                     data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Salvando...'.html_safe} do %>
+        <i class="fas fa-save mr-2"></i>Adicionar
+      <% end %>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+          <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Nome social</th>
+            <th>CNS</th>
+            <th>Pai</th>
+            <th>Mãe</th>
+            <th>Gênero</th>
+            <th>Ações</th>
+          </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

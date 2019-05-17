@@ -25,7 +25,7 @@ class IndividualRegistrationsController < WebController
     @individual_registration = IndividualRegistration.new(individual_registration_params)
 
     if @individual_registration.save
-      redirect_to @individual_registration, notice: 'Individual registration was successfully created.', status: :created
+      redirect_to @individual_registration, notice: 'Individual registration was successfully created.'
     else
       render :new
     end

@@ -30,9 +30,9 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_table_name %> = <%= orm_class.build(class_name, "#{singular_table_name}_params") %>
 
     if @<%= orm_instance.save %>
-      redirect_to <%= redirect_resource_name %>, notice: <%= "'#{human_name} was successfully created.'" %>, status: :created
+      redirect_to <%= redirect_resource_name %>, notice: <%= "'#{human_name} was successfully created.'" %>
     else
-      unprocessable_entity @<%= singular_table_name %>
+      render :new
     end
   end
 
@@ -41,7 +41,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     if @<%= orm_instance.update("#{singular_table_name}_params") %>
       redirect_to <%= redirect_resource_name %>, notice: <%= "'#{human_name} was successfully updated.'" %>
     else
-      unprocessable_entity @<%= singular_table_name %>
+      render :edit
     end
   end
 

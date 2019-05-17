@@ -1,7 +1,5 @@
-<% if can? :read, f.model_name.singular.camelize.constantize %>
-  <%= link_to f, class: 'btn p-1 btn-info mr-1', role: 'button' do %>
-    <i class="fas fa-search p-0"></i>
-  <% end %>
+<%= link_to f, class: 'btn p-1 btn-info mr-1', role: 'button' do %>
+  <i class="far fa-eye p-0"></i>
 <% end %>
 <% if can? :update, f.model_name.singular.camelize.constantize %>
   <%= link_to send("edit_#{f.model_name.singular}_path", f),

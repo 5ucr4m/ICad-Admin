@@ -25,7 +25,7 @@ class ProfessionalTeamsController < WebController
     @professional_team = ProfessionalTeam.new(professional_team_params)
 
     if @professional_team.save
-      redirect_to @professional_team, notice: 'Professional team was successfully created.', status: :created
+      redirect_to @professional_team, notice: 'Professional team was successfully created.'
     else
       render :new
     end

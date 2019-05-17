@@ -17,6 +17,10 @@ pt-BR:
         one: Familia
         other: Familias
         icon: fas fa-users
+      family_member:
+        one: Membro da Família
+        other: Membros da Família
+        icon: fas fa-user
       professional_team:
         one: Equipe
         other: Equipes

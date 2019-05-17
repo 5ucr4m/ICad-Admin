@@ -36,7 +36,6 @@ gem 'seed_migration'
 gem 'sidekiq'
 gem 'simple_form'
 gem 'sinatra', require: false
-gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
 group :development, :test do

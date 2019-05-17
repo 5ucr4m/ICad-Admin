@@ -1,167 +1,34 @@
-<%= form_with(model: @family_member, id: :family_member) do |f| %>
+<%= simple_form_for @family_member do |f| %>
   <% content_for :body do %>
-      <div class="form-group col-md-4">
-        <%= f.label :family_id, {class: 'form-label'} %>
-        
-          <%= f.select :family_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+    <%= f.input :name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :social_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :mother_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :father_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :family, collection: Family.all.page(1), wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :birth_country, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :city, collection: City.all.page(1), wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :nationality, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :naturalized_at, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :naturalize_decree, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :brazil_entry_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :email, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :cns_responsible, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :phone, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'phone', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :pis_pasep_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :race, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :gender, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :ethnicity, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :micro_area, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="col-lg-6 col-sm-12">
+      <div class="form-row">
+        <%= f.input :unknown_father, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :unknown_mother, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :responsible, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :out_area, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(f.object.persisted?)} %>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :social_name, {class: 'form-label'} %>
-        
-          <%= f.text_field :social_name, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :city_id, {class: 'form-label'} %>
-        
-          <%= f.select :city_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :birth_date, {class: 'form-label'} %>
-        
-          <%= f.date_select :birth_date, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :unknown_mother, {class: 'form-label'} %>
-        
-          <%= f.check_box :unknown_mother, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :mother_name, {class: 'form-label'} %>
-        
-          <%= f.text_field :mother_name, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :email, {class: 'form-label'} %>
-        
-          <%= f.text_field :email, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :nationality_id, {class: 'form-label'} %>
-        
-          <%= f.select :nationality_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :name, {class: 'form-label'} %>
-        
-          <%= f.text_field :name, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :cns_number, {class: 'form-label'} %>
-        
-          <%= f.text_field :cns_number, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :cns_responsible, {class: 'form-label'} %>
-        
-          <%= f.text_field :cns_responsible, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :phone, {class: 'form-label'} %>
-        
-          <%= f.text_field :phone, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :pis_pasep_number, {class: 'form-label'} %>
-        
-          <%= f.text_field :pis_pasep_number, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :birth_country_id, {class: 'form-label'} %>
-        
-          <%= f.select :birth_country_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :race_id, {class: 'form-label'} %>
-        
-          <%= f.select :race_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :gender_id, {class: 'form-label'} %>
-        
-          <%= f.select :gender_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :responsible, {class: 'form-label'} %>
-        
-          <%= f.check_box :responsible, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :ethnicity_id, {class: 'form-label'} %>
-        
-          <%= f.select :ethnicity_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :unknown_father, {class: 'form-label'} %>
-        
-          <%= f.check_box :unknown_father, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :father_name, {class: 'form-label'} %>
-        
-          <%= f.text_field :father_name, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :naturalized_at, {class: 'form-label'} %>
-        
-          <%= f.date_select :naturalized_at, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :naturalize_decree, {class: 'form-label'} %>
-        
-          <%= f.text_field :naturalize_decree, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :brazil_entry_date, {class: 'form-label'} %>
-        
-          <%= f.date_select :brazil_entry_date, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :micro_area, {class: 'form-label'} %>
-        
-          <%= f.text_field :micro_area, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :out_area, {class: 'form-label'} %>
-        
-          <%= f.check_box :out_area, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :company_id, {class: 'form-label'} %>
-        
-          <%= f.select :company_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :slug, {class: 'form-label'} %>
-        
-          <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
+    </div>
   <% end %>
   <%= render template: 'application/form', locals: {form: @family_member} %>
 <% end %>

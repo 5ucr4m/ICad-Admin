@@ -25,7 +25,7 @@ class HomeVisitRegistrationsController < WebController
     @home_visit_registration = HomeVisitRegistration.new(home_visit_registration_params)
 
     if @home_visit_registration.save
-      redirect_to @home_visit_registration, notice: 'Home visit registration was successfully created.', status: :created
+      redirect_to @home_visit_registration, notice: 'Home visit registration was successfully created.'
     else
       render :new
     end
