@@ -27,7 +27,7 @@ class UsersController < WebController
     if @user.save
       redirect_to @user, notice: 'User was successfully created.', status: :created
     else
-      unprocessable_entity @user
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class UsersController < WebController
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
-      unprocessable_entity @user
+      render :edit
     end
   end
 

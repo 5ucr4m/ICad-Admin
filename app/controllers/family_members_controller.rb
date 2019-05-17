@@ -27,7 +27,7 @@ class FamilyMembersController < WebController
     if @family_member.save
       redirect_to @family_member, notice: 'Family member was successfully created.', status: :created
     else
-      unprocessable_entity @family_member
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class FamilyMembersController < WebController
     if @family_member.update(family_member_params)
       redirect_to @family_member, notice: 'Family member was successfully updated.'
     else
-      unprocessable_entity @family_member
+      render :edit
     end
   end
 

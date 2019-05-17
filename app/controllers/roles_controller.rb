@@ -27,7 +27,7 @@ class RolesController < WebController
     if @role.save
       redirect_to @role, notice: 'Role was successfully created.', status: :created
     else
-      unprocessable_entity @role
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class RolesController < WebController
     if @role.update(role_params)
       redirect_to @role, notice: 'Role was successfully updated.'
     else
-      unprocessable_entity @role
+      render :edit
     end
   end
 

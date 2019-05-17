@@ -27,7 +27,7 @@ class IndividualRegistrationsController < WebController
     if @individual_registration.save
       redirect_to @individual_registration, notice: 'Individual registration was successfully created.', status: :created
     else
-      unprocessable_entity @individual_registration
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class IndividualRegistrationsController < WebController
     if @individual_registration.update(individual_registration_params)
       redirect_to @individual_registration, notice: 'Individual registration was successfully updated.'
     else
-      unprocessable_entity @individual_registration
+      render :edit
     end
   end
 

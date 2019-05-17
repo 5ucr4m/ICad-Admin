@@ -27,7 +27,7 @@ class HealthProfessionalsController < ApplicationController
     if @health_professional.save
       redirect_to @health_professional, notice: 'Health professional was successfully created.', status: :created
     else
-      unprocessable_entity @health_professional
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class HealthProfessionalsController < ApplicationController
     if @health_professional.update(health_professional_params)
       redirect_to @health_professional, notice: 'Health professional was successfully updated.'
     else
-      unprocessable_entity @health_professional
+      render :edit
     end
   end
 

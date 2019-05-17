@@ -1,42 +1,16 @@
-<%= form_with(model: @family, id: :family) do |f| %>
+<%= simple_form_for @family do |f| %>
   <% content_for :body do %>
-    <div class="form-group col-md-4">
-      <%= f.label :home_registration_id, {class: 'form-label'} %>
-      <%= f.select :home_registration_id, options_from_collection_for_select(GenericModel.all, 'name', 'id'),
-                   {},
-                   {class: 'form-control select2', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :responsible_birth_date, {class: 'form-label'} %>
-      <%= f.date_select :responsible_birth_date, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :responsible_cns_number, {class: 'form-label'} %>
-      <%= f.text_field :responsible_cns_number, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :family_members, {class: 'form-label'} %>
-      <%= f.number_field :family_members, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :handbook_number, {class: 'form-label'} %>
-      <%= f.text_field :handbook_number, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :family_income_cents, {class: 'form-label'} %>
-      <%= f.number_field :family_income_cents, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :reside_since, {class: 'form-label'} %>
-      <%= f.date_select :reside_since, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <div class="custom-controls-stacked">
-        <label class="custom-control custom-checkbox">
-          <%= f.check_box :moving, {class: 'custom-control-input', disabled: show?(f.object.persisted?)} %>
-          <%= f.label :moving, {class: 'custom-control-label form-label'} %>
-        </label>
-      </div>
+    <%= f.association :home_registration, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :responsible_birth_date, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :responsible_cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :members_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :handbook_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :family_income_cents, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :reside_since, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="custom-controls-stacked">
+      <label class="custom-control custom-checkbox">
+        <%= f.check_box :moving, {class: 'custom-control-input', disabled: show?(f.object.persisted?)} %>
+      </label>
     </div>
   <% end %>
   <%= render template: 'application/form', locals: {form: @family} %>

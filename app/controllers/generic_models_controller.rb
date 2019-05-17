@@ -28,7 +28,7 @@ class GenericModelsController < WebController
     if @generic_model.save
       redirect_to @generic_model, notice: 'Generic model was successfully created.', status: :created
     else
-      unprocessable_entity @generic_model
+      render :new
     end
   end
 
@@ -37,7 +37,7 @@ class GenericModelsController < WebController
     if @generic_model.update(generic_model_params)
       redirect_to @generic_model, notice: 'Generic model was successfully updated.'
     else
-      unprocessable_entity @generic_model
+      render :edit
     end
   end
 

@@ -27,7 +27,7 @@ class HomeVisitRegistrationsController < WebController
     if @home_visit_registration.save
       redirect_to @home_visit_registration, notice: 'Home visit registration was successfully created.', status: :created
     else
-      unprocessable_entity @home_visit_registration
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class HomeVisitRegistrationsController < WebController
     if @home_visit_registration.update(home_visit_registration_params)
       redirect_to @home_visit_registration, notice: 'Home visit registration was successfully updated.'
     else
-      unprocessable_entity @home_visit_registration
+      render :edit
     end
   end
 

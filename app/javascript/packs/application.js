@@ -1,16 +1,13 @@
+require('jquery');
 require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
-require('jquery');
 require('superagent');
 require('popper.js');
 require('bootstrap');
 require('cleave.js');
 require('cleave.js/dist/addons/cleave-phone.br');
-require('select2');
 require("channels");
-
-import $ from 'jquery';
 
 function getZip(e) {
   let zip = e.target.value.replace('-', '').replace('.', '');
@@ -95,7 +92,7 @@ function removeInvalidClass(className) {
  */
 function insertElement(input, element) {
   input.classList.add('is-invalid');
-  input.parentNode.insertBefore(element, input.nextSibling);
+  input.nextSibling.after(element);
 }
 
 /**

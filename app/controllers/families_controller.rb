@@ -15,6 +15,7 @@ class FamiliesController < WebController
   # GET /families/new
   def new
     @family = Family.new
+    @family.build_home_registration
   end
 
   # GET /families/1/edit
@@ -27,7 +28,7 @@ class FamiliesController < WebController
     if @family.save
       redirect_to @family, notice: 'Family was successfully created.', status: :created
     else
-      unprocessable_entity @family
+      render :new
     end
   end
 
@@ -36,7 +37,7 @@ class FamiliesController < WebController
     if @family.update(family_params)
       redirect_to @family, notice: 'Family was successfully updated.'
     else
-      unprocessable_entity @family
+      render :edit
     end
   end
 
@@ -55,11 +56,14 @@ class FamiliesController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def family_params
-    params.require(:family).permit(:home_registration_id,
-                                   :responsible_birth_date,
+    params.require(:family).permit(:responsible_birth_date,
                                    :responsible_cns_number,
                                    :members_quantity, :handbook_number,
                                    :family_income_cents, :reside_since,
-                                   :moving, :company_id, :slug)
+                                   :moving,
+                                   home_registration: %i[
+                                     id
+                                     health_professional_id
+                                   ])
   end
 end

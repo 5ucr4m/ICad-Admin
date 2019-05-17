@@ -27,7 +27,7 @@ class StatesController < WebController
     if @state.save
       redirect_to @state, notice: 'State was successfully created.', status: :created
     else
-      unprocessable_entity @state
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class StatesController < WebController
     if @state.update(state_params)
       redirect_to @state, notice: 'State was successfully updated.'
     else
-      unprocessable_entity @state
+      render :edit
     end
   end
 

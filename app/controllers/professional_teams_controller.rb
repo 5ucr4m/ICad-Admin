@@ -27,7 +27,7 @@ class ProfessionalTeamsController < WebController
     if @professional_team.save
       redirect_to @professional_team, notice: 'Professional team was successfully created.', status: :created
     else
-      unprocessable_entity @professional_team
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class ProfessionalTeamsController < WebController
     if @professional_team.update(professional_team_params)
       redirect_to @professional_team, notice: 'Professional team was successfully updated.'
     else
-      unprocessable_entity @professional_team
+      render :edit
     end
   end
 

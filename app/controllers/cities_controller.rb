@@ -29,7 +29,7 @@ class CitiesController < WebController
     if @city.save
       redirect_to @city, notice: 'City was successfully created.', status: :created
     else
-      unprocessable_entity @city
+      render :new
     end
   end
 
@@ -38,7 +38,7 @@ class CitiesController < WebController
     if @city.update(city_params)
       redirect_to @city, notice: 'City was successfully updated.'
     else
-      unprocessable_entity @city
+      render :edit
     end
   end
 

@@ -27,7 +27,7 @@ class CompaniesController < WebController
     if @company.save
       redirect_to @company, notice: 'Company was successfully created.', status: :created
     else
-      unprocessable_entity @company
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class CompaniesController < WebController
     if @company.update(company_params)
       redirect_to @company, notice: 'Company was successfully updated.'
     else
-      unprocessable_entity @company
+      render :edit
     end
   end
 

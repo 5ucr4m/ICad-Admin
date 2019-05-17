@@ -735,6 +735,11 @@
     webpack-cli "^3.2.3"
     webpack-sources "^1.3.0"
 
+"@ttskch/select2-bootstrap4-theme@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@ttskch/select2-bootstrap4-theme/-/select2-bootstrap4-theme-1.2.2.tgz#aa708f3d7d06fa159996b63957b77d81f7c674ad"
+  integrity sha512-BQp6GI820p41ohq6Zmaok/2LUddz2Pnt2N9KMlxzOJstWQAGA08ybezW8I24JH6SdlmUPoXcOFagZSVv5/5Sog==
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"

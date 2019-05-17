@@ -27,7 +27,7 @@ class HealthEstablishmentsController < WebController
     if @health_establishment.save
       redirect_to @health_establishment, notice: 'Health establishment was successfully created.', status: :created
     else
-      unprocessable_entity @health_establishment
+      render :new
     end
   end
 
@@ -36,7 +36,7 @@ class HealthEstablishmentsController < WebController
     if @health_establishment.update(health_establishment_params)
       redirect_to @health_establishment, notice: 'Health establishment was successfully updated.'
     else
-      unprocessable_entity @health_establishment
+      render :edit
     end
   end
 
