@@ -59,7 +59,7 @@ class FamiliesController < WebController
     params.require(:family).permit(:responsible_birth_date,
                                    :responsible_cns_number,
                                    :members_quantity, :handbook_number,
-                                   :family_income_cents, :reside_since,
+                                   :family_income, :reside_since,
                                    :moving, :home_registration_id,
                                    family_members_attributes: %i[
                                      id

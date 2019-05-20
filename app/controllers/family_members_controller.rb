@@ -51,6 +51,7 @@ class FamilyMembersController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_family_member
     @family_member = FamilyMember.friendly.find(params[:id])
+    @city_selected = @family_member.city.presence
   end
 
   # Only allow a trusted parameter "white list" through.
@@ -62,7 +63,6 @@ class FamilyMembersController < WebController
                                           :birth_country_id, :race_id, :gender_id,
                                           :responsible, :ethnicity_id, :unknown_father,
                                           :father_name, :naturalized_at, :naturalize_decree,
-                                          :brazil_entry_date, :micro_area,
-                                          :out_area, :company_id, :slug)
+                                          :brazil_entry_date, :micro_area, :out_area)
   end
 end

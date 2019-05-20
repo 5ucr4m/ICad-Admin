@@ -4,11 +4,15 @@
     <%= f.input :social_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :mother_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :father_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :family, collection: Family.all.page(1), wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :family, collection: Family.all.page(1),
+                      label_method: :family_name, wrapper_html: {class: 'col-lg-6 col-sm-12'},
+                      input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :birth_country, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :city, collection: City.all.page(1), wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :nationality, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :birth_country, collection: GenericModel.countries.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :city, collection: @city_selected ? [@city_selected] : [], wrapper_html: {class: 'col-lg-6 col-sm-12'},
+                      input_html: {value: @city_selected, disabled: show?(f.object.persisted?)} %>
+    <%= f.association :nationality, collection: GenericModel.nationalities.page(1),
+                      wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :naturalized_at, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :naturalize_decree, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :brazil_entry_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
@@ -17,9 +21,9 @@
     <%= f.input :cns_responsible, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :phone, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'phone', disabled: show?(f.object.persisted?)} %>
     <%= f.input :pis_pasep_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :race, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :gender, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :ethnicity, collection: GenericModel.all.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :race, collection: GenericModel.races.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :gender, collection: GenericModel.genders.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :ethnicity, collection: GenericModel.ethnicities.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :micro_area, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-lg-6 col-sm-12">
       <div class="form-row">

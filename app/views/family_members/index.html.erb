@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>
-          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
           <% end %>
         </div>
       </div>
@@ -19,67 +19,67 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-                  <th><%= FamilyMember.human_attribute_name :family %></th>
-                  <th><%= FamilyMember.human_attribute_name :social_name %></th>
-                  <th><%= FamilyMember.human_attribute_name :city %></th>
-                  <th><%= FamilyMember.human_attribute_name :birth_date %></th>
-                  <th><%= FamilyMember.human_attribute_name :unknown_mother %></th>
-                  <th><%= FamilyMember.human_attribute_name :mother_name %></th>
-                  <th><%= FamilyMember.human_attribute_name :email %></th>
-                  <th><%= FamilyMember.human_attribute_name :nationality %></th>
-                  <th><%= FamilyMember.human_attribute_name :name %></th>
-                  <th><%= FamilyMember.human_attribute_name :cns_number %></th>
-                  <th><%= FamilyMember.human_attribute_name :cns_responsible %></th>
-                  <th><%= FamilyMember.human_attribute_name :phone %></th>
-                  <th><%= FamilyMember.human_attribute_name :pis_pasep_number %></th>
-                  <th><%= FamilyMember.human_attribute_name :birth_country %></th>
-                  <th><%= FamilyMember.human_attribute_name :race %></th>
-                  <th><%= FamilyMember.human_attribute_name :gender %></th>
-                  <th><%= FamilyMember.human_attribute_name :responsible %></th>
-                  <th><%= FamilyMember.human_attribute_name :ethnicity %></th>
-                  <th><%= FamilyMember.human_attribute_name :unknown_father %></th>
-                  <th><%= FamilyMember.human_attribute_name :father_name %></th>
-                  <th><%= FamilyMember.human_attribute_name :naturalized_at %></th>
-                  <th><%= FamilyMember.human_attribute_name :naturalize_decree %></th>
-                  <th><%= FamilyMember.human_attribute_name :brazil_entry_date %></th>
-                  <th><%= FamilyMember.human_attribute_name :micro_area %></th>
-                  <th><%= FamilyMember.human_attribute_name :out_area %></th>
-                  <th><%= FamilyMember.human_attribute_name :company %></th>
-                  <th><%= FamilyMember.human_attribute_name :slug %></th>
-                <th><%= t('helpers.labels.actions') %></th>
+        <th><%= FamilyMember.human_attribute_name :family %></th>
+        <th><%= FamilyMember.human_attribute_name :social_name %></th>
+        <th><%= FamilyMember.human_attribute_name :city %></th>
+        <th><%= FamilyMember.human_attribute_name :birth_date %></th>
+        <th><%= FamilyMember.human_attribute_name :unknown_mother %></th>
+        <th><%= FamilyMember.human_attribute_name :mother_name %></th>
+        <th><%= FamilyMember.human_attribute_name :email %></th>
+        <th><%= FamilyMember.human_attribute_name :nationality %></th>
+        <th><%= FamilyMember.human_attribute_name :name %></th>
+        <th><%= FamilyMember.human_attribute_name :cns_number %></th>
+        <th><%= FamilyMember.human_attribute_name :cns_responsible %></th>
+        <th><%= FamilyMember.human_attribute_name :phone %></th>
+        <th><%= FamilyMember.human_attribute_name :pis_pasep_number %></th>
+        <th><%= FamilyMember.human_attribute_name :birth_country %></th>
+        <th><%= FamilyMember.human_attribute_name :race %></th>
+        <th><%= FamilyMember.human_attribute_name :gender %></th>
+        <th><%= FamilyMember.human_attribute_name :responsible %></th>
+        <th><%= FamilyMember.human_attribute_name :ethnicity %></th>
+        <th><%= FamilyMember.human_attribute_name :unknown_father %></th>
+        <th><%= FamilyMember.human_attribute_name :father_name %></th>
+        <th><%= FamilyMember.human_attribute_name :naturalized_at %></th>
+        <th><%= FamilyMember.human_attribute_name :naturalize_decree %></th>
+        <th><%= FamilyMember.human_attribute_name :brazil_entry_date %></th>
+        <th><%= FamilyMember.human_attribute_name :micro_area %></th>
+        <th><%= FamilyMember.human_attribute_name :out_area %></th>
+        <th><%= FamilyMember.human_attribute_name :company %></th>
+        <th><%= FamilyMember.human_attribute_name :slug %></th>
+        <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @family_members.each do |family_member| %>
         <tr>
-                      <td><%= family_member.family_id %></td>
-                      <td><%= family_member.social_name %></td>
-                      <td><%= family_member.city_id %></td>
-                      <td><%= family_member.birth_date %></td>
-                      <td><%= family_member.unknown_mother %></td>
-                      <td><%= family_member.mother_name %></td>
-                      <td><%= family_member.email %></td>
-                      <td><%= family_member.nationality_id %></td>
-                      <td><%= family_member.name %></td>
-                      <td><%= family_member.cns_number %></td>
-                      <td><%= family_member.cns_responsible %></td>
-                      <td><%= family_member.phone %></td>
-                      <td><%= family_member.pis_pasep_number %></td>
-                      <td><%= family_member.birth_country_id %></td>
-                      <td><%= family_member.race_id %></td>
-                      <td><%= family_member.gender_id %></td>
-                      <td><%= family_member.responsible %></td>
-                      <td><%= family_member.ethnicity_id %></td>
-                      <td><%= family_member.unknown_father %></td>
-                      <td><%= family_member.father_name %></td>
-                      <td><%= family_member.naturalized_at %></td>
-                      <td><%= family_member.naturalize_decree %></td>
-                      <td><%= family_member.brazil_entry_date %></td>
-                      <td><%= family_member.micro_area %></td>
-                      <td><%= family_member.out_area %></td>
-                      <td><%= family_member.company_id %></td>
-                      <td><%= family_member.slug %></td>
-                    <td class="text-center">
+          <td><%= family_member.family_id %></td>
+          <td><%= family_member.social_name %></td>
+          <td><%= family_member.city_id %></td>
+          <td><%= family_member.birth_date %></td>
+          <td><%= family_member.unknown_mother %></td>
+          <td><%= family_member.mother_name %></td>
+          <td><%= family_member.email %></td>
+          <td><%= family_member.nationality_id %></td>
+          <td><%= family_member.name %></td>
+          <td><%= family_member.cns_number %></td>
+          <td><%= family_member.cns_responsible %></td>
+          <td><%= family_member.phone %></td>
+          <td><%= family_member.pis_pasep_number %></td>
+          <td><%= family_member.birth_country_id %></td>
+          <td><%= family_member.race_id %></td>
+          <td><%= family_member.gender_id %></td>
+          <td><%= family_member.responsible %></td>
+          <td><%= family_member.ethnicity_id %></td>
+          <td><%= family_member.unknown_father %></td>
+          <td><%= family_member.father_name %></td>
+          <td><%= family_member.naturalized_at %></td>
+          <td><%= family_member.naturalize_decree %></td>
+          <td><%= family_member.brazil_entry_date %></td>
+          <td><%= family_member.micro_area %></td>
+          <td><%= family_member.out_area %></td>
+          <td><%= family_member.company_id %></td>
+          <td><%= family_member.slug %></td>
+          <td class="text-center">
             <%= render 'application/table_links', f: family_member %>
           </td>
         </tr>

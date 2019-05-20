@@ -19,31 +19,26 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-        <th><%= Family.human_attribute_name :responsible_birth_date %></th>
-        <th><%= Family.human_attribute_name :responsible_cns_number %></th>
+        <th>#</th>
         <th><%= Family.human_attribute_name :members_quantity %></th>
         <th><%= Family.human_attribute_name :handbook_number %></th>
         <th><%= Family.human_attribute_name :family_income_cents %></th>
         <th><%= Family.human_attribute_name :reside_since %></th>
         <th><%= Family.human_attribute_name :moving %></th>
-        <th><%= Family.human_attribute_name :company %></th>
-        <th><%= Family.human_attribute_name :slug %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @families.each do |family| %>
         <tr>
-          <td><%= family.home_registration_id %></td>
-          <td><%= family.responsible_birth_date %></td>
-          <td><%= family.responsible_cns_number %></td>
+          <td class="text-muted">
+            <%= family.id.to_s.rjust 8, '0' %>
+          </td>
           <td><%= family.members_quantity %></td>
           <td><%= family.handbook_number %></td>
-          <td><%= family.family_income_cents %></td>
-          <td><%= family.reside_since %></td>
-          <td><%= family.moving %></td>
-          <td><%= family.company_id %></td>
-          <td><%= family.slug %></td>
+          <td><%= number_to_currency family&.family_income&.to_f %></td>
+          <td><%= family.reside_since&.strftime('%d/%m/%Y') %></td>
+          <td><%= family.moving ? 'SIM' : 'NÃO' %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: family %>
           </td>

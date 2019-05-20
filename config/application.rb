@@ -26,6 +26,13 @@ module IcadUbs
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    # Where the I18n library should search for translation files
+    config.i18n.load_path += Dir[Rails.root.join('lib', 'locale', '*.{rb,yml}')]
+    # Whitelist locales available for the application
+    config.i18n.available_locales = %i[en pt-BR]
+    # Set default locale to something other than :en
+    config.i18n.default_locale = :'pt-BR'
+
     # Rack attack
     config.middleware.use Rack::Attack
 

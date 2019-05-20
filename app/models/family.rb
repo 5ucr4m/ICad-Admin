@@ -32,7 +32,7 @@
 class Family < ApplicationRecord
   include Sluggable
 
-  belongs_to :home_registration
+  belongs_to :home_registration, optional: true
   belongs_to :company, optional: true
 
   has_many :family_members, dependent: :nullify
@@ -42,5 +42,11 @@ class Family < ApplicationRecord
   validates :responsible_cns_number, :responsible_birth_date, :members_quantity,
             :handbook_number, :family_income_cents, :reside_since, presence: true
 
+  monetize :family_income_cents
+
   ransack_alias :search, :id_to_s
+
+  def family_name
+    handbook_number
+  end
 end
