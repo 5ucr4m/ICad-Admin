@@ -24,6 +24,6 @@
 <div class="page">
   <%= render devise_controller? ? 'application/devise' : 'application/app' %>
 </div>
-<%= javascript_pack_tag(params[:controller]) %>
+<%= javascript_pack_tag(params[:controller]) if asset_exist?(params[:controller]) %>
 </body>
 </html>

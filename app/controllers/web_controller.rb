@@ -21,7 +21,6 @@ class WebController < ApplicationController
   private
 
   def set_referrer
-    route = Rails.application.routes.recognize_path(request.referer)[:controller]
-    @referrer = "#{route.presence || 'root'}_path"
+    @referrer = "#{request.referer.presence || 'root'}_path"
   end
 end

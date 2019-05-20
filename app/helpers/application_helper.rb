@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pagy/extras/bootstrap'
 
 module ApplicationHelper
@@ -12,11 +14,8 @@ module ApplicationHelper
   end
 
   def asset_exist?(path)
-    if Rails.configuration.assets.compile
-      Rails.application.precompiled_assets.include? path
-    else
-      Rails.application.assets_manifest.assets[path].present?
-    end
+    File.exist?(Rails.application
+      .root.join('app', 'javascript', 'packs', "#{path}.js"))
   end
 
   def flashes

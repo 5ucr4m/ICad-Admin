@@ -2,6 +2,7 @@
 
 class GenericModelsController < WebController
   load_and_authorize_resource
+
   before_action :set_generic_model, only: %i[show edit update destroy]
 
   # GET /generic_models
