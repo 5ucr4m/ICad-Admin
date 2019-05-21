@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_companies
@@ -26,6 +28,6 @@ FactoryBot.define do
     user { nil }
     company { nil }
     current { false }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

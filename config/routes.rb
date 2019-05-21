@@ -3,7 +3,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
+  resources :companies
+  resources :health_professionals
+  resources :health_establishments
   resources :families
   # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'
@@ -15,7 +17,6 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboards#dashboard'
   root to: redirect('/dashboard')
   resources :roles
-  resources :companies
   resources :cities
   resources :states
   resources :generic_models
@@ -23,9 +24,7 @@ Rails.application.routes.draw do
   resources :family_members
   resources :home_registrations
   resources :individual_registrations
-  resources :health_professionals
   resources :professional_teams
-  resources :health_establishments
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',

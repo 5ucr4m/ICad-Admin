@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: permanence_institutions
@@ -25,13 +27,13 @@
 
 FactoryBot.define do
   factory :permanence_institution do
-    name { "MyString" }
+    name { 'MyString' }
     other_linked_professionals { false }
-    responsible_name { "MyString" }
-    responsible_cns { "MyString" }
-    institutional_role { "MyString" }
-    responsible_phone { "MyString" }
+    responsible_name { 'MyString' }
+    responsible_cns { 'MyString' }
+    institutional_role { 'MyString' }
+    responsible_phone { 'MyString' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

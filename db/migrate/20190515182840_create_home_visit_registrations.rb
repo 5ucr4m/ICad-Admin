@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHomeVisitRegistrations < ActiveRecord::Migration[6.0]
   def change
     create_table :home_visit_registrations do |t|

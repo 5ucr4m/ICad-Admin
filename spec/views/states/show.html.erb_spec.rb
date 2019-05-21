@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "states/show", type: :view do
+RSpec.describe 'states/show', type: :view do
   before(:each) do
     @state = assign(:state, State.create!(
-      :name => "Name",
-      :abbreviation => "Abbreviation",
-      :code => "Code",
-      :reference => "Reference",
-      :slug => "Slug"
-    ))
+                              name: 'Name',
+                              abbreviation: 'Abbreviation',
+                              code: 'Code',
+                              reference: 'Reference',
+                              slug: 'Slug'
+                            ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Abbreviation/)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: home_visit_forms
@@ -44,18 +46,18 @@ FactoryBot.define do
   factory :home_visit_form do
     home_visit_registration { nil }
     turn { nil }
-    handbook_number { "MyString" }
-    cns_number { "MyString" }
-    birth_date { "2019-05-15" }
+    handbook_number { 'MyString' }
+    cns_number { 'MyString' }
+    birth_date { '2019-05-15' }
     gender { nil }
     other_visit { false }
     outcome { nil }
-    micro_area { "MyString" }
+    micro_area { 'MyString' }
     out_area { false }
     home_type { nil }
-    weight_monitoring { "MyString" }
-    height_monitoring { "MyString" }
+    weight_monitoring { 'MyString' }
+    height_monitoring { 'MyString' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

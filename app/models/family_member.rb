@@ -58,17 +58,16 @@
 #  fk_rails_...  (race_id => generic_models.id)
 #
 
-
 class FamilyMember < ApplicationRecord
   include Sluggable
 
   belongs_to :family, optional: true
   belongs_to :city, optional: true
-  belongs_to :nationality, class_name: 'GenericModel', optional: true
-  belongs_to :birth_country, class_name: 'GenericModel', optional: true
-  belongs_to :race, class_name: 'GenericModel', optional: true
-  belongs_to :gender, class_name: 'GenericModel', optional: true
-  belongs_to :ethnicity, class_name: 'GenericModel', optional: true
+  belongs_to :nationality, class_name: 'GenericModel'
+  belongs_to :birth_country, class_name: 'GenericModel'
+  belongs_to :race, class_name: 'GenericModel'
+  belongs_to :gender, class_name: 'GenericModel'
+  belongs_to :ethnicity, class_name: 'GenericModel'
   belongs_to :company, optional: true
 
   has_one :individual_registration, dependent: :destroy

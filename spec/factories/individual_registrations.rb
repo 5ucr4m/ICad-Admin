@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: individual_registrations
@@ -47,11 +49,11 @@ FactoryBot.define do
     cancel_registration { nil }
     refuse_registration { false }
     form_updated { false }
-    uuid { "MyString" }
-    uuid_form_origin { "MyString" }
-    uuid_citizen { "MyString" }
+    uuid { 'MyString' }
+    uuid_form_origin { 'MyString' }
+    uuid_citizen { 'MyString' }
     tp_cds_origin { 1 }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

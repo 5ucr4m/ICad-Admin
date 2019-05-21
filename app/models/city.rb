@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cities
@@ -27,4 +29,6 @@ class City < ApplicationRecord
   belongs_to :state
 
   ransack_alias :search, :id_to_s
+
+  validates :name, presence: true
 end

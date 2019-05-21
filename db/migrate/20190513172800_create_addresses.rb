@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CreateAddresses < ActiveRecord::Migration[6.0]
   def change
     create_table :addresses do |t|
-      t.belongs_to :address_type, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :address_type, foreign_key: { to_table: :generic_models }, index: true
       t.string :patio
       t.string :number
       t.string :zip

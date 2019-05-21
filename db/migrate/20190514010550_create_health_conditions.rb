@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHealthConditions < ActiveRecord::Migration[6.0]
   def change
     create_table :health_conditions do |t|
@@ -7,7 +9,7 @@ class CreateHealthConditions < ActiveRecord::Migration[6.0]
       t.text :other_condition_three
       t.text :medicinal_plants_used
       t.string :maternity_reference
-      t.belongs_to :weight_situation, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :weight_situation, foreign_key: { to_table: :generic_models }, index: true
       t.boolean :alcohol_dependent
       t.boolean :other_drugs_dependent
       t.boolean :smoker

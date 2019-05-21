@@ -64,7 +64,7 @@ SimpleForm.setup do |config|
 
   # vertical input for boolean
   config.wrappers :vertical_boolean, tag: 'label', class: 'custom-control custom-checkbox',
-                  error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+                                     error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
     b.use :html5
     b.optional :readonly
     b.wrapper :form_check_wrapper, tag: 'div', class: 'form-check' do |bb|

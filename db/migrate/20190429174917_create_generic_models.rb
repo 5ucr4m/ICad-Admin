@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateGenericModels < ActiveRecord::Migration[6.0]
   def change
     create_table :generic_models do |t|

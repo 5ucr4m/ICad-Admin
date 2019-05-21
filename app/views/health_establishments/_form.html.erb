@@ -1,41 +1,17 @@
-<%= form_with(model: @health_establishment, id: :health_establishment) do |f| %>
+<%= simple_form_for(@health_establishment) do |f| %>
   <% content_for :body do %>
-    <div class="form-group col-md-4">
-      <%= f.label :cnes_code, {class: 'form-label'} %>
-      <%= f.text_field :cnes_code, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :unit_code, {class: 'form-label'} %>
-      <%= f.text_field :unit_code, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :registry_id, {class: 'form-label'} %>
-      <%= f.select :registry_id, options_from_collection_for_select([], :name, :id),
-                   {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :registry_at, {class: 'form-label'} %>
-      <%= f.date_select :registry_at, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :manager_id, {class: 'form-label'} %>
-      <%= f.select :manager_id, options_from_collection_for_select([], :name, :id),
-                   {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :unit_type_id, {class: 'form-label'} %>
-      <%= f.select :unit_type_id, options_from_collection_for_select([], :name, :id),
-                   {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :company_id, {class: 'form-label'} %>
-      <%= f.select :company_id, options_from_collection_for_select([], :name, :id),
-                   {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :slug, {class: 'form-label'} %>
-      <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
+      <%= f.input :cnes_code, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :unit_code, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :legal_full_name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :fancy_name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :federal_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :state_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :manager_full_name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :manager_federal_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :registry_at, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :unit_type, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :company, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :slug, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @health_establishment} %>
 <% end %>

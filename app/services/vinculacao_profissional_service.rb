@@ -79,9 +79,7 @@ module VinculacaoProfissionalService
       fil_node << pag_node = XML::Node.new('Paginacao')
       pag_node << XML::Node.new('pag:registroInicial', obj.pag_inicial)
       pag_node << XML::Node.new('pag:quantidadeRegistros', obj.quantidade)
-      if obj.total
-        pag_node << XML::Node.new('pag:totalRegistros', obj.total)
-      end
+      pag_node << XML::Node.new('pag:totalRegistros', obj.total) if obj.total
       xml.root
     end
 

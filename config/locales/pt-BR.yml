@@ -6,6 +6,10 @@ pt-BR:
         one: Modelo Genérico
         other: Modelos Genéricos
         icon: fas fa-vector-square
+      city:
+        one: Cidade
+        other: Cidades
+        icon: fas fa-location-arrow
       user:
         one: Usuário
         other: Usuários

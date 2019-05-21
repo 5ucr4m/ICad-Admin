@@ -30,7 +30,6 @@ module EstabelecimentoSaudeService
   }.freeze
 
   class << self
-
     def call(operation, obj)
       urls = if Rails.env.development?
                [URL_HOMOLOGACAO, NAMESPACES_HOMOLOGACAO]

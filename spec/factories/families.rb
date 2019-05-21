@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: families
@@ -30,14 +32,14 @@
 FactoryBot.define do
   factory :family do
     home_registration { nil }
-    responsible_birth_date { "2019-05-16" }
-    responsible_cns_number { "MyString" }
+    responsible_birth_date { '2019-05-16' }
+    responsible_cns_number { 'MyString' }
     members_quantity { 1 }
-    handbook_number { "MyString" }
+    handbook_number { 'MyString' }
     family_income_cents { 1 }
-    reside_since { "2019-05-16" }
+    reside_since { '2019-05-16' }
     moving { false }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

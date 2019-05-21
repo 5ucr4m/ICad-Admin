@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: generic_models
@@ -24,12 +26,12 @@
 
 FactoryBot.define do
   factory :generic_model do
-    name { "MyString" }
-    description { "MyString" }
-    reference { "MyString" }
-    generic_field { "MyString" }
-    generic_class { "MyString" }
+    name { 'MyString' }
+    description { 'MyString' }
+    reference { 'MyString' }
+    generic_field { 'MyString' }
+    generic_class { 'MyString' }
     generic_model { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

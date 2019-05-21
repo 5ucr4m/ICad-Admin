@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cancel_registrations
@@ -23,7 +25,6 @@
 #
 
 class CancelRegistration < ApplicationRecord
-
   belongs_to :left_reason, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
 

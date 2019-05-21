@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: in_street_situations
@@ -33,8 +35,8 @@
 
 FactoryBot.define do
   factory :in_street_situation do
-    kinship_degree { "MyString" }
-    other_accompanied { "MyString" }
+    kinship_degree { 'MyString' }
+    other_accompanied { 'MyString' }
     meals_per_day { nil }
     has_other_accompanied { false }
     familiar_reference { false }
@@ -44,6 +46,6 @@ FactoryBot.define do
     family_visit { false }
     street_situation_time { nil }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

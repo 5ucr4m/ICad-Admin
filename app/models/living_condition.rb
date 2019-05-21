@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: living_conditions
@@ -51,7 +53,6 @@
 #
 
 class LivingCondition < ApplicationRecord
-
   belongs_to :water_supply, class_name: 'GenericModel', optional: true
   belongs_to :rural_production_area, class_name: 'GenericModel', optional: true
   belongs_to :garbage_disposal, class_name: 'GenericModel', optional: true

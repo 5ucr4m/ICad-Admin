@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: family_members
@@ -59,31 +61,31 @@
 FactoryBot.define do
   factory :family_member do
     family { nil }
-    social_name { "MyString" }
+    social_name { 'MyString' }
     city { nil }
-    birth_date { "2019-05-15" }
+    birth_date { '2019-05-15' }
     unknown_mother { false }
-    mother_name { "MyString" }
-    email { "MyString" }
+    mother_name { 'MyString' }
+    email { 'MyString' }
     nationality { nil }
-    name { "MyString" }
-    cns_number { "MyString" }
-    cns_responsible { "MyString" }
-    phone { "MyString" }
-    pis_pasep_number { "MyString" }
+    name { 'MyString' }
+    cns_number { 'MyString' }
+    cns_responsible { 'MyString' }
+    phone { 'MyString' }
+    pis_pasep_number { 'MyString' }
     birth_country { nil }
     race { nil }
     gender { nil }
     responsible { false }
     ethnicity { nil }
     unknown_father { false }
-    father_name { "MyString" }
-    naturalized_at { "2019-05-15" }
-    naturalize_decree { "MyString" }
-    brazil_entry_date { "2019-05-15" }
-    micro_area { "MyString" }
+    father_name { 'MyString' }
+    naturalized_at { '2019-05-15' }
+    naturalize_decree { 'MyString' }
+    brazil_entry_date { '2019-05-15' }
+    micro_area { 'MyString' }
     out_area { false }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

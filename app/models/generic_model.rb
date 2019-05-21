@@ -32,9 +32,9 @@ class GenericModel < ApplicationRecord
   ransack_alias :search, :id_to_s
 
   scope :app_modules, -> { where(generic_class: Role.to_s, generic_field: :app_module) }
-  scope :nationalities, -> {where(generic_class: FamilyMember.to_s, generic_field: :nationality)}
-  scope :races, -> {where(generic_class: FamilyMember.to_s, generic_field: :race)}
-  scope :genders, -> {where(generic_class: FamilyMember.to_s, generic_field: :gender)}
-  scope :ethnicities, -> {where(generic_class: FamilyMember.to_s, generic_field: :ethnicity)}
-  scope :countries, -> {where(generic_field: :country)}
+  scope :nationalities, -> { where(generic_class: FamilyMember.to_s, generic_field: :nationality) }
+  scope :races, -> { where(generic_class: FamilyMember.to_s, generic_field: :race) }
+  scope :genders, -> { where(generic_class: FamilyMember.to_s, generic_field: :gender) }
+  scope :ethnicities, -> { where(generic_class: FamilyMember.to_s, generic_field: :ethnicity) }
+  scope :countries, -> { where(generic_field: :country) }
 end

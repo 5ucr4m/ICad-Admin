@@ -45,7 +45,6 @@
 #  fk_rails_...  (health_professional_id => health_professionals.id)
 #
 
-
 class UserSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 

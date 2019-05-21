@@ -1,5 +1,6 @@
-class CreateAppModules < SeedMigration::Migration
+# frozen_string_literal: true
 
+class CreateAppModules < SeedMigration::Migration
   def up
     @app_modules = GenericModel.create! name: 'Modulos do Sistema',
                                         description: 'Módulos Principais do Sistema',
@@ -11,5 +12,4 @@ class CreateAppModules < SeedMigration::Migration
   end
 
   def down; end
-
 end

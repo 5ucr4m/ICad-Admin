@@ -9,6 +9,8 @@ require('cleave.js/dist/addons/cleave-phone.br');
 require('select2');
 require("channels");
 
+window.$ = window.jQuery = require('jquery');
+
 import superagent from 'superagent';
 
 function getZip(e) {
@@ -51,6 +53,12 @@ function formatFederalRegistry(e) {
 }
 
 window.addEventListener('DOMContentLoaded', function (e) {
-
+  $('.select2').each(function(i, el) {
+    $(el).select2({
+      placeholder: 'Selecione',
+      theme: 'bootstrap4',
+      width: '100%'
+    });
+  });
 }, false);
 

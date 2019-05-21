@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cities
@@ -23,11 +25,11 @@
 
 FactoryBot.define do
   factory :city do
-    name { "MyString" }
-    abbreviation { "MyString" }
-    code { "MyString" }
+    name { 'MyString' }
+    abbreviation { 'MyString' }
+    code { 'MyString' }
     state { nil }
-    reference { "MyString" }
-    slug { "MyString" }
+    reference { 'MyString' }
+    slug { 'MyString' }
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: health_conditions
@@ -48,12 +50,12 @@
 
 FactoryBot.define do
   factory :health_condition do
-    hospitalization_cause { "MyText" }
-    other_condition_one { "MyText" }
-    other_condition_two { "MyText" }
-    other_condition_three { "MyText" }
-    medicinal_plants_used { "MyText" }
-    maternity_reference { "MyString" }
+    hospitalization_cause { 'MyText' }
+    other_condition_one { 'MyText' }
+    other_condition_two { 'MyText' }
+    other_condition_three { 'MyText' }
+    medicinal_plants_used { 'MyText' }
+    maternity_reference { 'MyString' }
     weight_situation { nil }
     alcohol_dependent { false }
     other_drugs_dependent { false }
@@ -76,6 +78,6 @@ FactoryBot.define do
     integrative_practices { false }
     medicinal_plants { false }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

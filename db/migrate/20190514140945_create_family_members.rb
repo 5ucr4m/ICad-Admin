@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFamilyMembers < ActiveRecord::Migration[6.0]
   def change
     create_table :family_members do |t|
@@ -8,17 +10,17 @@ class CreateFamilyMembers < ActiveRecord::Migration[6.0]
       t.boolean :unknown_mother
       t.string :mother_name
       t.string :email
-      t.belongs_to :nationality, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :nationality, foreign_key: { to_table: :generic_models }, index: true
       t.string :name
       t.string :cns_number
       t.string :cns_responsible
       t.string :phone
       t.string :pis_pasep_number
-      t.belongs_to :birth_country, foreign_key: {to_table: :generic_models}, index: true
-      t.belongs_to :race, foreign_key: {to_table: :generic_models}, index: true
-      t.belongs_to :gender, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :birth_country, foreign_key: { to_table: :generic_models }, index: true
+      t.belongs_to :race, foreign_key: { to_table: :generic_models }, index: true
+      t.belongs_to :gender, foreign_key: { to_table: :generic_models }, index: true
       t.boolean :responsible
-      t.belongs_to :ethnicity, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :ethnicity, foreign_key: { to_table: :generic_models }, index: true
       t.boolean :unknown_father
       t.string :father_name
       t.date :naturalized_at

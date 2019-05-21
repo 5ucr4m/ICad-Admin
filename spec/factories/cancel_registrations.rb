@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: cancel_registrations
@@ -25,9 +27,9 @@
 FactoryBot.define do
   factory :cancel_registration do
     left_reason { nil }
-    decease_date { "2019-05-14" }
-    decease_number { "2019-05-14" }
+    decease_date { '2019-05-14' }
+    decease_number { '2019-05-14' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

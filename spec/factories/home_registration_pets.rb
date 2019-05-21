@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: home_registration_pets
@@ -28,6 +30,6 @@ FactoryBot.define do
     home_registration { nil }
     pet_type { nil }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

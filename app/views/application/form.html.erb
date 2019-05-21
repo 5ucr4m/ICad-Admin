@@ -1,7 +1,7 @@
 <%= render 'application/page_header', model: form %>
 <div class="card">
   <div class="card-status <%= form.errors.any? ? 'bg-red' : 'bg-blue' %>"></div>
-  <div class="card-body <%= 'pt-0 pb-0' if (tabs ||= nil) %>">
+  <div class="card-body <%= 'pt-0' if (tabs ||= nil) %> pb-2">
     <div class="form-row">
       <%= yield :body %>
     </div>

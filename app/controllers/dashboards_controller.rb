@@ -1,5 +1,5 @@
-class DashboardsController < WebController
+# frozen_string_literal: true
 
-  def dashboard
-  end
+class DashboardsController < WebController
+  def dashboard; end
 end

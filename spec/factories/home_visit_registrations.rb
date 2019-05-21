@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: home_visit_registrations
@@ -25,9 +27,9 @@
 FactoryBot.define do
   factory :home_visit_registration do
     family_member { nil }
-    uuid { "MyString" }
-    tp_cds_origin { "MyString" }
+    uuid { 'MyString' }
+    tp_cds_origin { 'MyString' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

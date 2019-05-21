@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Rack
   class Attack
-
     Rack::Attack.blocklisted_response = lambda do |_env|
       # Using 503 because it may make attacker think that they have successfully
       # DOSed the site. Rack::Attack returns 403 for blocklists by default
@@ -95,6 +96,5 @@ module Rack
     #    {},   # headers
     #    ['']] # body
     # end
-
   end
 end

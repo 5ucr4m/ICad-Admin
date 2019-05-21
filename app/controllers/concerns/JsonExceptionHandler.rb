@@ -19,19 +19,19 @@ module JsonExceptionHandler
   end
 
   def bad_request
-    render json: {error: 'Bad request'}, status: :bad_request
+    render json: { error: 'Bad request' }, status: :bad_request
   end
 
   def forbidden(message = nil)
-    render json: {error: message || 'Forbidden'}, status: :forbidden
+    render json: { error: message || 'Forbidden' }, status: :forbidden
   end
 
   def not_authorized(message = nil)
-    render json: {error: message || 'Not authorized'}, status: :unauthorized
+    render json: { error: message || 'Not authorized' }, status: :unauthorized
   end
 
   def not_found
-    render json: {error: 'Not found'}, status: :not_found
+    render json: { error: 'Not found' }, status: :not_found
   end
 
   def unprocessable_entity(model)

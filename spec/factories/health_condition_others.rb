@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: health_condition_others
@@ -24,8 +26,8 @@
 FactoryBot.define do
   factory :health_condition_other do
     health_condition { nil }
-    description { "MyText" }
+    description { 'MyText' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

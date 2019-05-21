@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: home_registrations
@@ -40,7 +42,6 @@
 #
 
 class HomeRegistration < ApplicationRecord
-
   include Sluggable
 
   belongs_to :health_professional

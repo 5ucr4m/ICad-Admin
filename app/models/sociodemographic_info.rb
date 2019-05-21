@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sociodemographic_infos
@@ -47,7 +49,6 @@
 #
 
 class SociodemographicInfo < ApplicationRecord
-
   belongs_to :education_level, optional: true
   belongs_to :occupation, optional: true
   belongs_to :sexual_orientation, optional: true

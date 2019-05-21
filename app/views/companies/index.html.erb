@@ -19,42 +19,45 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-                  <th><%= Company.human_attribute_name :registry %></th>
+                  <th><%= Company.human_attribute_name :legal_full_name %></th>
+                  <th><%= Company.human_attribute_name :fancy_name %></th>
+                  <th><%= Company.human_attribute_name :federal_registry %></th>
+                  <th><%= Company.human_attribute_name :state_registry %></th>
+                  <th><%= Company.human_attribute_name :patio %></th>
+                  <th><%= Company.human_attribute_name :number %></th>
+                  <th><%= Company.human_attribute_name :zip %></th>
+                  <th><%= Company.human_attribute_name :reference %></th>
+                  <th><%= Company.human_attribute_name :district %></th>
+                  <th><%= Company.human_attribute_name :city %></th>
+                  <th><%= Company.human_attribute_name :complement %></th>
                   <th><%= Company.human_attribute_name :slug %></th>
-                <% if can? :manage, Company %>
-        <th><%= t('helpers.labels.actions') %></th>
-        <% end %>
+                <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @companies.each do |company| %>
-      <tr>
-                  <td><%= company.registry_id %></td>
-                  <td><%= company.slug %></td>
-                <% if can? :manage, Company %>
-        <td>
-          <%= render 'application/table_links', f: company %>
-        </td>
-        <% end %>
-      </tr>
+        <tr>
+                      <td><%= company.legal_full_name %></td>
+                      <td><%= company.fancy_name %></td>
+                      <td><%= company.federal_registry %></td>
+                      <td><%= company.state_registry %></td>
+                      <td><%= company.patio %></td>
+                      <td><%= company.number %></td>
+                      <td><%= company.zip %></td>
+                      <td><%= company.reference %></td>
+                      <td><%= company.district %></td>
+                      <td><%= company.city_id %></td>
+                      <td><%= company.complement %></td>
+                      <td><%= company.slug %></td>
+                    <td class="text-center">
+            <%= render 'application/table_links', f: company %>
+          </td>
+        </tr>
       <% end %>
       </tbody>
     </table>
   </div>
   <div class="card-footer">
-    <div class="col-sm-12 col-lg-12 p-0">
-      <div class="form-row">
-        <div class="col-sm-12 col-lg-6 p-0">
-          <%= link_to new_company_path, class: 'btn btn-primary align-middle mb-md-0 mb-sm-3' do %>
-          <i class="fas fa-plus mr-2"></i>Novo
-          <% end %>
-        </div>
-        <div class="col-sm-12 col-lg-6 p-0">
-          <div class="float-right">
-            <%= pagy_bootstrap_nav(@pagy).html_safe %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'application/footer_links', url: new_company_path, model: Company %>
   </div>
 </div>

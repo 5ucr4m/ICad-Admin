@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HealthProfessionalsController < ApplicationController
+class HealthProfessionalsController < WebController
   before_action :set_health_professional, only: %i[show edit update destroy]
 
   # GET /health_professionals
@@ -55,10 +55,6 @@ class HealthProfessionalsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def health_professional_params
-    params.require(:health_professional).permit(:cns_code, :cbo_code,
-                                                :registry_id,
-                                                :health_establishment_id,
-                                                :professional_team_id,
-                                                :company_id, :slug)
+    params.require(:health_professional).permit(:cns_code, :cbo_code_id, :legal_full_name, :fancy_name, :federal_registry, :state_registry, :health_establishment_id, :professional_team_id, :company_id, :slug)
   end
 end
