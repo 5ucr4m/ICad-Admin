@@ -56,4 +56,10 @@ class HomeRegistration < ApplicationRecord
   accepts_nested_attributes_for :address, allow_destroy: false
 
   ransack_alias :search, :id_to_s
+
+  def build_relationships
+    build_living_condition
+    build_address
+    build_permanence_institution
+  end
 end

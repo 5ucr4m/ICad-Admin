@@ -38,6 +38,7 @@ class Family < ApplicationRecord
   has_many :family_members, dependent: :nullify
 
   accepts_nested_attributes_for :family_members, allow_destroy: true
+  accepts_nested_attributes_for :home_registration, allow_destroy: false
 
   validates :responsible_cns_number, :responsible_birth_date, :members_quantity,
             :handbook_number, :family_income_cents, :reside_since, presence: true
@@ -45,6 +46,10 @@ class Family < ApplicationRecord
   monetize :family_income_cents
 
   ransack_alias :search, :id_to_s
+
+  def build_relationships
+    build_home_registration
+  end
 
   def family_name
     handbook_number

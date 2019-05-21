@@ -16,6 +16,7 @@ class FamiliesController < WebController
   def new
     @family = Family.new
     @family.family_members.build
+    @family.build_relationships.build_relationships
   end
 
   # GET /families/1/edit
@@ -61,6 +62,12 @@ class FamiliesController < WebController
                                    :members_quantity, :handbook_number,
                                    :family_income, :reside_since,
                                    :moving, :home_registration_id,
+                                   :form_updated,
+                                   :pet_quantity,
+                                   :refuse_registration,
+                                   :tp_cds_origin,
+                                   :home_type_id,
+                                   :finished,
                                    family_members_attributes: %i[
                                      id
                                      name
@@ -87,6 +94,50 @@ class FamiliesController < WebController
                                      unknown_mother
                                      responsible
                                      out_area
+                                   ],
+                                   home_registration_attributes: [
+                                     :id,
+                                     :health_professional_id,
+                                     permanence_institution_attributes: %i[
+                                       id
+                                       name
+                                       other_linked_professionals
+                                       responsible_name
+                                       responsible_cns
+                                       institutional_role
+                                       responsible_phone
+                                     ],
+                                     living_condition_attributes: %i[
+                                       id
+                                       water_supply_id
+                                       rural_production_area_id
+                                       garbage_disposal_id
+                                       bathroom_drainage_id
+                                       home_location_id
+                                       home_wall_material_id
+                                       rooms
+                                       residents
+                                       home_situation_id
+                                       electric_power
+                                       home_access_id
+                                       home_type_id
+                                       water_treatment_id
+                                     ],
+                                     address_attributes: %i[
+                                       id
+                                       address_type_id
+                                       patio
+                                       number
+                                       zip
+                                       complement
+                                       district
+                                       city_id
+                                       referential_phone
+                                       home_phone
+                                       reference
+                                       out_area
+                                       micro_area
+                                     ]
                                    ])
   end
 end
