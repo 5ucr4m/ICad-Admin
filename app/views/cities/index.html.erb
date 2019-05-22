@@ -20,7 +20,6 @@
       <thead>
       <tr>
         <th><%= City.human_attribute_name :name %></th>
-        <th><%= City.human_attribute_name :abbreviation %></th>
         <th><%= City.human_attribute_name :code %></th>
         <th><%= City.human_attribute_name :state %></th>
         <th><%= City.human_attribute_name :reference %></th>
@@ -31,11 +30,10 @@
       <% @cities.each do |city| %>
         <tr>
           <td><%= city.name %></td>
-          <td><%= city.abbreviation %></td>
           <td><%= city.code %></td>
           <td><%= city&.state&.name_formatted %></td>
           <td><%= city.reference %></td>
-          <td>
+          <td class="text-center">
             <%= render 'application/table_links', f: city %>
           </td>
         </tr>
@@ -43,7 +41,9 @@
       </tbody>
     </table>
   </div>
-  <div class="card-footer">
-    <%= render 'application/footer_links', url: new_city_path, model: City %>
+  <div class="card-footer text-center">
+    <div class="m-0 mx-auto">
+      <%= render 'application/footer_links', url: new_city_path, model: City %>
+    </div>
   </div>
 </div>

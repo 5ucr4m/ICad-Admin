@@ -16,11 +16,11 @@
     <% end %>
     <%= f.input :reference, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :district, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :city, collection: @city_selected.present? ? [@city_selected.code] : [],
+    <%= f.association :city, collection: @city_selected ? [@city_selected] : [],
                       selected: @city_selected,
+                      label_method: :name_formatted,
                       wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'cities', disabled: show?(f.object.persisted?)} %>
-    <%= f.input :complement, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :slug, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :complement, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @company} %>
 <% end %>

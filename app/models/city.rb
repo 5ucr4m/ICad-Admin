@@ -31,4 +31,8 @@ class City < ApplicationRecord
   ransack_alias :search, :name_or_code_or_state_code_or_state_abbreviation
 
   validates :name, presence: true
+
+  def name_formatted
+    persisted? ? "#{code} - #{name} - #{state.abbreviation}" : name
+  end
 end

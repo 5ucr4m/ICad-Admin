@@ -24,10 +24,10 @@
 #
 
 class CitySerializer < ActiveModel::Serializer
-  attributes :id, :name, :abbreviation, :code, :reference, :slug, :state_code
+  attributes :id, :name, :abbreviation, :code, :reference, :slug, :state
   has_one :state
 
-  def state_code
-    object.state.code
+  def state
+    object.state.abbreviation
   end
 end

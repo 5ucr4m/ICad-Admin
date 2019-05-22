@@ -6,16 +6,19 @@ import superagent from 'superagent';
 
 function getSelectedCity() {
   superagent.get('/cities.json')
-    .query({ q: {search_cont: document.getElementById('company_city_id').value} })
+    .query({q: {search_cont: document.querySelector('select[id$=\'city_id\']').value}})
     .end((err, res) => {
-      if(res.body) {
-        let data = res.body.data.map((city) => { return city.attributes});
+      if (res.body) {
+        let data = res.body.data.map((city) => {
+          return city.attributes
+        });
         data = data[0];
-        const newOption = new Option(`${data.code} - ${data.name}`, data.id, true, true);
-        $('#company_city_id').append(newOption).trigger('change');
+        const newOption = new Option(`${data.code} - ${data.name} - ${data.state}`, data.id, true, true);
+        const cityInput = $('select[id$=\'_city_id\']');
+        $(cityInput).append(newOption).trigger('change');
+        $(cityInput).val(data.id);
       }
-  });
-
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (city) {
                 return {
                   id: city.id,
-                  text: `${city.attributes.code} - ${city.attributes.name}`
+                  text: `${city.attributes.code} - ${city.attributes.name} - ${city.attributes.state}`
                 };
               }
             })

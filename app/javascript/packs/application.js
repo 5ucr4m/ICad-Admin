@@ -1,4 +1,3 @@
-window.$ = window.jQuery = require('jquery');
 require("@rails/ujs").start();
 require("@rails/activestorage").start();
 require('superagent');
@@ -9,6 +8,10 @@ require('cleave.js/dist/addons/cleave-phone.br');
 require('select2');
 require("channels");
 
+import './pagy.js.erb';
+
+window.$ = window.jQuery = require('jquery');
+window.Pagy = Pagy;
 import superagent from 'superagent';
 
 function addLoadingSpin() {
@@ -54,27 +57,36 @@ function removeZipError() {
 }
 
 function getCity(cityCode) {
-
+  superagent.get('/cities.json')
+    .query({ q: {search_cont: cityCode} })
+    .end((err, res) => {
+      if(res.body) {
+        let data = res.body.data.map((city) => { return city.attributes});
+        data = data[0];
+        const newOption = new Option(`${data.code} - ${data.name} - ${data.state}`, data.id, true, true);
+        $('select[id$=\'_city_id\']').append(newOption).trigger('change');
+      }
+    });
 }
 
 function getZip(e) {
-  console.log('test');
   const zipValue = document.querySelector('.zip').value;
-  console.log(zipValue);
   if (zipValue) {
     removeZipError();
     addLoadingSpin();
     const url = 'http://viacep.com.br/ws/' + zipValue.replace(/[^a-zA-Z0-9-. ]/g, '') + '/json';
     superagent.get(url).end(function (error, response) {
       const failed = response.body.erro;
-      if (!failed) {
-        const address = response.body;
-        document.querySelector('input[id$=\'_patio\']').value = address.logradouro.toUpperCase();
-        document.querySelector('input[id$=\'_district\']').value = address.bairro.toUpperCase();
-        document.querySelector('input[id$=\'_complement\']').value = address.complemento.toUpperCase();
-        //document.querySelector('input[id$=\'_city\']').value = address.localidade;
-      }
       setTimeout(() => {
+        if (!failed) {
+          const address = response.body;
+          document.querySelector('input[id$=\'_patio\']').value = address.logradouro.toUpperCase();
+          document.querySelector('input[id$=\'_district\']').value = address.bairro.toUpperCase();
+          document.querySelector('input[id$=\'_complement\']').value = address.complemento.toUpperCase();
+          if(address.ibge) {
+            getCity(address.ibge);
+          }
+        }
         removeLoadingSpin();
         if(failed) {
           addZipError();
@@ -109,6 +121,8 @@ function formatFederalRegistry(e) {
   }
 }
 
+window.addEventListener('load', Pagy.init);
+
 window.addEventListener('DOMContentLoaded', function (e) {
   const zipInput = document.querySelector('.zip');
 
@@ -119,7 +133,9 @@ window.addEventListener('DOMContentLoaded', function (e) {
       delimiterLazyShow: true
     });
   }
-
-  document.querySelector('.btn-zip').addEventListener('click', getZip, {once: false});
+  const btnZip = document.querySelector('.btn-zip');
+  if(btnZip) {
+    btnZip.onclick = getZip;
+  }
 }, false);
 

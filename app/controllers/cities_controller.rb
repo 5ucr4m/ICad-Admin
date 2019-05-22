@@ -8,8 +8,8 @@ class CitiesController < WebController
   def index
     @query = City.ransack(params[:q])
     respond_to do |format|
-      format.html {@pagy, @cities = pagy(@query.result, page: params[:page])}
-      format.json {render_json @query.result.includes(:state)}
+      format.html {@pagy, @cities = pagy(@query.result.includes(:state).order(:name), page: params[:page], items: 10)}
+      format.json {render_json @query.result.includes(:state).order(:name)}
     end
   end
 
@@ -59,6 +59,6 @@ class CitiesController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def city_params
-    params.require(:city).permit(:name, :abbreviation, :code, :state_id, :reference, :slug)
+    params.require(:city).permit(:name, :abbreviation, :code, :state_id, :reference)
   end
 end
