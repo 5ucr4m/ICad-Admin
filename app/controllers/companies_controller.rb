@@ -51,10 +51,14 @@ class CompaniesController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_company
     @company = Company.friendly.find(params[:id])
+    @city_selected = @company.city
   end
 
   # Only allow a trusted parameter "white list" through.
   def company_params
-    params.require(:company).permit(:legal_full_name, :fancy_name, :federal_registry, :state_registry, :patio, :number, :zip, :reference, :district, :city_id, :complement, :slug)
+    params.require(:company).permit(:legal_full_name, :fancy_name,
+                                    :federal_registry, :state_registry,
+                                    :patio, :number, :zip, :reference,
+                                    :district, :city_id, :complement)
   end
 end

@@ -28,7 +28,7 @@ class City < ApplicationRecord
 
   belongs_to :state
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :name_or_code_or_state_code_or_state_abbreviation
 
   validates :name, presence: true
 end

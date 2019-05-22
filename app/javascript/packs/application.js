@@ -53,6 +53,10 @@ function removeZipError() {
   btnZip.classList.add('btn-primary');
 }
 
+function getCity(cityCode) {
+
+}
+
 function getZip(e) {
   console.log('test');
   const zipValue = document.querySelector('.zip').value;
@@ -107,14 +111,6 @@ function formatFederalRegistry(e) {
 
 window.addEventListener('DOMContentLoaded', function (e) {
   const zipInput = document.querySelector('.zip');
-
-  $('.select2').each(function (i, el) {
-    $(el).select2({
-      placeholder: 'Selecione',
-      theme: 'bootstrap4',
-      width: '100%'
-    });
-  });
 
   if (zipInput) {
     new Cleave('.zip', {

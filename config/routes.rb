@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
       sessions: 'api/overrides/sessions'
     }
+    resources :cities, only: %i[index show]
     resources :generic_models
   end
 end

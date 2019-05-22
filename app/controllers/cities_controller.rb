@@ -2,13 +2,15 @@
 
 class CitiesController < WebController
   # load_and_authorize_resource
-
   before_action :set_city, only: %i[show edit update destroy]
 
   # GET /cities
   def index
     @query = City.ransack(params[:q])
-    @pagy, @cities = pagy(@query.result, page: params[:page])
+    respond_to do |format|
+      format.html {@pagy, @cities = pagy(@query.result, page: params[:page])}
+      format.json {render_json @query.result.includes(:state)}
+    end
   end
 
   # GET /cities/1
