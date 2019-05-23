@@ -23,7 +23,7 @@ class CompaniesController < WebController
   # POST /companies
   def create
     @company = Company.new(company_params)
-
+    @city_selected = @company.city.presence
     if @company.save
       redirect_to @company, notice: 'Company was successfully created.'
     else
@@ -51,7 +51,7 @@ class CompaniesController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_company
     @company = Company.friendly.find(params[:id])
-    @city_selected = @company.city
+    @city_selected = @company.city.presence
   end
 
   # Only allow a trusted parameter "white list" through.

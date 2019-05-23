@@ -37,5 +37,7 @@ class Company < ApplicationRecord
   has_many :user_companies, dependent: :destroy
   has_many :users, through: :user_companies
 
+  validates :legal_full_name, :fancy_name, :federal_registry, :patio, :zip, :district, presence: true
+
   ransack_alias :search, :id_to_s
 end
