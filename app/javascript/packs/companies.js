@@ -60,5 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  getSelectedCity();
+  new Cleave('.federal-registry', {
+    numericOnly: true,
+    delimiters: ['.', '.', '/', '-'],
+    blocks: [2, 3, 3, 4, 2],
+    delimiterLazyShow: true
+  });
 }, false);

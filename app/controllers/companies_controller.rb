@@ -6,7 +6,7 @@ class CompaniesController < WebController
   # GET /companies
   def index
     @query = Company.ransack(params[:q])
-    @pagy, @companies = pagy(@query.result, page: params[:page])
+    @pagy, @companies = pagy(@query.result.includes(:city).order(id: :desc), page: params[:page])
   end
 
   # GET /companies/1

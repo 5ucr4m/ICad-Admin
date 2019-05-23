@@ -145,8 +145,8 @@ SimpleForm.setup do |config|
 
     b.wrapper tag: 'div', class: 'input-group' do |ba|
       ba.use :input, class: 'form-control'
-      b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
-      b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+      ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     end
   end
   # horizontal default_wrapper

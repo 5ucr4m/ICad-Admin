@@ -39,5 +39,5 @@ class Company < ApplicationRecord
 
   validates :legal_full_name, :fancy_name, :federal_registry, :patio, :zip, :district, presence: true
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :id_to_s_or_legal_full_name_or_fancy_name_or_federal_registry_or_state_registry
 end

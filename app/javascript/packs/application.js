@@ -63,6 +63,8 @@ function getCity(cityCode) {
       if(res.body) {
         let data = res.body.data.map((city) => { return city.attributes});
         data = data[0];
+        data['id'] = res.body.data[0].id;
+        console.log(data);
         const newOption = new Option(`${data.code} - ${data.name} - ${data.state}`, data.id, true, true);
         $('select[id$=\'_city_id\']').append(newOption).trigger('change');
       }

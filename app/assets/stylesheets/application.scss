@@ -278,3 +278,8 @@ span.float-right i {
 .table td {
   padding: .55rem;
 }
+
+.input-group > .input-group-append:not(:last-child) > .btn {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}

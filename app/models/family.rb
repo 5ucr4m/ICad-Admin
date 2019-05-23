@@ -37,7 +37,6 @@ class Family < ApplicationRecord
 
   has_many :family_members, dependent: :nullify
 
-  accepts_nested_attributes_for :family_members, allow_destroy: true
   accepts_nested_attributes_for :home_registration, allow_destroy: false
 
   validates :responsible_cns_number, :responsible_birth_date, :members_quantity,

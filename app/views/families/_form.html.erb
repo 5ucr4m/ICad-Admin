@@ -1,6 +1,19 @@
 <%= simple_form_for @family do |f| %>
   <% content_for :body do %>
-    <%= f.association :home_registration, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-home mr-2"></i><%= HomeRegistration.model_name.human(count: 2) %>
+          </h3>
+        </div>
+        <div class="card-body">
+          <%= f.simple_fields_for :home_registration do |home_registration| %>
+            <%= render 'application/home_registration_fields', f: home_registration  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
     <%= f.input :responsible_birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :responsible_cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :members_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>

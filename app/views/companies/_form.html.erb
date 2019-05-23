@@ -2,7 +2,8 @@
   <% content_for :body do %>
     <%= f.input :legal_full_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :fancy_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :federal_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :federal_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'},
+                input_html: {class: 'federal-registry', disabled: show?(f.object.persisted?)} %>
     <%= f.input :state_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
