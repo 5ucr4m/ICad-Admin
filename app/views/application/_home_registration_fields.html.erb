@@ -1,4 +1,8 @@
 <div class="form-row">
+  <%= f.association :health_professional, collection: HealthProfessional.all,
+                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :home_type, collection: GenericModel.residence_types,
+                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <div class="col-12">
     <div class="card mb-3">
       <div class="card-header">
@@ -17,12 +21,12 @@
     <div class="card mb-3">
       <div class="card-header">
         <h3 class="card-title">
-          <i class="far fa-file-alt mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>
+          <i class="fas fa-paw mr-2"></i><%= HomeRegistrationPet.model_name.human(count: 2) %>
         </h3>
       </div>
       <div class="card-body">
-        <%= f.simple_fields_for :living_condition do |living_condition| %>
-          <%= render 'application/address_fields', f: living_condition %>
+        <%= f.simple_fields_for :home_registration_pets do |home_registration_pet| %>
+          <%= render 'application/home_registration_pet_fields', f: home_registration_pet %>
         <% end %>
       </div>
     </div>

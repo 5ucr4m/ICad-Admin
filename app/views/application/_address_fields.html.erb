@@ -1,11 +1,23 @@
 <div class="form-row">
-  <%= f.association :address_type, collection: GenericModel.all, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.input :patio, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.association :address_type, collection: GenericModel.address_types,
+                    wrapper_html: {class: 'col-lg-3 col-sm-12'},
+                    input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.input :zip, wrapper: :horizontal_input_group, wrapper_html: {class: 'col-lg-3 col-sm-12'} do %>
+    <%= f.input_field :zip, label_text: 'text', class: 'zip form-control', disabled: show?(f.object.persisted?) %>
+    <div class="input-group-append">
+      <button class="btn btn-icon btn-primary btn-zip px-3" type="button">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  <% end %>
+  <%= f.input :patio, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.input :number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.input :reference, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.input :district, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.input :complement, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.association :city,
+                    collection: @city_selected ? [@city_selected] : [],
+                    selected: @city_selected,
+                    label_method: :name_formatted,
+                    wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'cities', disabled: show?(f.object.persisted?)} %>
 </div>

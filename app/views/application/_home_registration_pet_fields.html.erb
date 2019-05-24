@@ -1,0 +1,4 @@
+<div class="nested-fields form-row">
+  <%= f.association :pet_type, collection: GenericModel.pet_types,
+                    wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+</div>

@@ -25,6 +25,7 @@ class FamiliesController < WebController
   # POST /families
   def create
     @family = Family.new(family_params)
+    @city_selected = @family.home_registration.address.city.presence
 
     if @family.save
       redirect_to @family, notice: 'Family was successfully created.'
