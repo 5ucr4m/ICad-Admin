@@ -23,8 +23,18 @@
         <h3 class="card-title">
           <i class="fas fa-paw mr-2"></i><%= HomeRegistrationPet.model_name.human(count: 2) %>
         </h3>
+        <div class="card-options">
+          <%= link_to_add_association f, :home_registration_pets,
+                                      class: 'btn btn-sm btn-primary', role: 'button',
+                                      data: {
+                                        'association-insertion-node': '#pets',
+                                        'association-insertion-method': 'append'
+                                      } do %>
+            <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+          <% end %>
+        </div>
       </div>
-      <div class="card-body">
+      <div id="pets" class="card-body">
         <%= f.simple_fields_for :home_registration_pets do |home_registration_pet| %>
           <%= render 'application/home_registration_pet_fields', f: home_registration_pet %>
         <% end %>

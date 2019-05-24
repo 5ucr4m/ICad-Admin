@@ -1,10 +1,7 @@
-window.$ = window.jQuery = require('jquery');
-require('select2');
-
 window.addEventListener('DOMContentLoaded', () => {
   const moneyInput = document.querySelector('.money');
 
-  if(moneyInput) {
+  if (moneyInput) {
     new Cleave('.money', {
       numeral: true,
       numeralDecimalMark: ',',
@@ -14,4 +11,15 @@ window.addEventListener('DOMContentLoaded', () => {
       completeDecimalsOnBlur: true
     });
   }
+
+  document.getElementById('pets')
+    .addEventListener('cocoon:before-insert', function (e) {
+    console.log(e);
+    $(e.target).find('.select2').select2({
+      placeholder: 'Selecione',
+      theme: 'bootstrap4',
+      width: '100%',
+      allowClear: true
+    });
+  });
 });

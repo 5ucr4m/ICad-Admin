@@ -35,6 +35,14 @@ pt-BR:
       health_establishment:
         one: UBS
         other: UBS
+      home_registration:
+        one: Cadastro Domicilar
+        other: Cadastro Domiciliar
+        icon: fas fa-home
+      home_registration_pet:
+        one: Animal Doméstico
+        other: Animais Domésticos
+        icon: fas fa-paw
 
     errors:
       messages:

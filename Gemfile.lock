@@ -104,6 +104,7 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
+    cocoon (1.2.12)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
@@ -429,6 +430,7 @@ DEPENDENCIES
   byebug
   cancancan
   capybara
+  cocoon
   database_cleaner
   devise-i18n
   devise_token_auth

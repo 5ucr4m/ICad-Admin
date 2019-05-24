@@ -11,6 +11,7 @@ gem 'active_model_serializers',
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cancancan'
+gem 'cocoon'
 gem 'devise-i18n'
 gem 'devise_token_auth'
 gem 'faraday'
