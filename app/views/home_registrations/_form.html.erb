@@ -1,89 +1,78 @@
-<%= form_with(model: @home_registration, id: :home_registration) do |f| %>
+<%= simple_form_for @home_registration do |f| %>
   <% content_for :body do %>
-      <div class="form-group col-md-4">
-        <%= f.label :health_professional_id, {class: 'form-label'} %>
-        
-          <%= f.select :health_professional_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+    <%= f.simple_fields_for :family do |family| %>
+      <%= render 'application/family_fields', f: family %>
+    <% end %>
+    <%= f.association :health_professional, collection: HealthProfessional.all,
+                      wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :home_type, collection: GenericModel.residence_types,
+                      wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-map-marked-alt mr-2"></i><%= Address.model_name.human(count: 2) %>
+          </h3>
+        </div>
+        <div class="card-body">
+          <%= f.simple_fields_for :address do |address| %>
+            <%= render 'application/address_fields', f: address %>
+          <% end %>
+        </div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :living_condition_id, {class: 'form-label'} %>
-        
-          <%= f.select :living_condition_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+    </div>
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-paw mr-2"></i><%= HomeRegistrationPet.model_name.human(count: 2) %>
+          </h3>
+          <div class="card-options">
+            <%= link_to_add_association f, :home_registration_pets,
+                                        class: 'btn btn-sm btn-primary', role: 'button',
+                                        data: {
+                                          'association-insertion-node': '#pets',
+                                          'association-insertion-method': 'append'
+                                        } do %>
+              <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+            <% end %>
+          </div>
+        </div>
+        <div id="pets" class="card-body">
+          <%= f.simple_fields_for :home_registration_pets do |home_registration_pet| %>
+            <%= render 'application/home_registration_pet_fields', f: home_registration_pet %>
+          <% end %>
+        </div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :address_id, {class: 'form-label'} %>
-        
-          <%= f.select :address_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+    </div>
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-hand-holding mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>
+          </h3>
+        </div>
+        <div class="card-body">
+          <%= f.simple_fields_for :living_condition do |living_condition| %>
+            <%= render 'application/living_condition_fields', f: living_condition %>
+          <% end %>
+        </div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :form_updated, {class: 'form-label'} %>
-        
-          <%= f.check_box :form_updated, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+    </div>
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-life-ring mr-2"></i><%= PermanenceInstitution.model_name.human(count: 2) %>
+          </h3>
+        </div>
+        <div class="card-body">
+          <%= f.simple_fields_for :permanence_institution do |permanence_institution| %>
+            <%= render 'application/permanence_institution_fields', f: permanence_institution %>
+          <% end %>
+        </div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :pet_quantity, {class: 'form-label'} %>
-        
-          <%= f.number_field :pet_quantity, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :refuse_registration, {class: 'form-label'} %>
-        
-          <%= f.check_box :refuse_registration, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :tp_cds_origin, {class: 'form-label'} %>
-        
-          <%= f.number_field :tp_cds_origin, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :uuid, {class: 'form-label'} %>
-        
-          <%= f.text_field :uuid, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :uuid_form_origin, {class: 'form-label'} %>
-        
-          <%= f.text_field :uuid_form_origin, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :home_type_id, {class: 'form-label'} %>
-        
-          <%= f.select :home_type_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :permanence_institution_id, {class: 'form-label'} %>
-        
-          <%= f.select :permanence_institution_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :finished, {class: 'form-label'} %>
-        
-          <%= f.check_box :finished, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :company_id, {class: 'form-label'} %>
-        
-          <%= f.select :company_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :slug, {class: 'form-label'} %>
-        
-          <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
+    </div>
   <% end %>
   <%= render template: 'application/form', locals: {form: @home_registration} %>
 <% end %>

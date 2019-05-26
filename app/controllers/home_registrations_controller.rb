@@ -15,6 +15,8 @@ class HomeRegistrationsController < WebController
   # GET /home_registrations/new
   def new
     @home_registration = HomeRegistration.new
+    @home_registration.build_relationships
+    @home_registration.build_family
   end
 
   # GET /home_registrations/1/edit

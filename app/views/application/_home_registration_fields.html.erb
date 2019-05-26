@@ -45,6 +45,20 @@
     <div class="card mb-3">
       <div class="card-header">
         <h3 class="card-title">
+          <i class="fas fa-life-ring mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>
+        </h3>
+      </div>
+      <div class="card-body">
+        <%= f.simple_fields_for :living_condition do |living_condition| %>
+          <%= render 'application/living_condition_fields', f: living_condition %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card mb-3">
+      <div class="card-header">
+        <h3 class="card-title">
           <i class="fas fa-life-ring mr-2"></i><%= PermanenceInstitution.model_name.human(count: 2) %>
         </h3>
       </div>

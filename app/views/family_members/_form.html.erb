@@ -8,10 +8,10 @@
                       label_method: :family_name, wrapper_html: {class: 'col-lg-6 col-sm-12'},
                       input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :birth_country, collection: GenericModel.countries.page(1), wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :birth_country, collection: GenericModel.countries, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.association :city, collection: @city_selected ? [@city_selected] : [], wrapper_html: {class: 'col-lg-6 col-sm-12'},
                       input_html: {value: @city_selected, disabled: show?(f.object.persisted?)} %>
-    <%= f.association :nationality, collection: GenericModel.nationalities.page(1),
+    <%= f.association :nationality, collection: GenericModel.nationalities,
                       wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :naturalized_at, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :naturalize_decree, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>

@@ -1,6 +1,7 @@
 //= require cocoon
 
 $(document).ready(function() {
+
   $('#pets').on('cocoon:before-insert', function (e, object) {
     console.log(object);
     $(object).find('.select2').select2({
