@@ -23,6 +23,7 @@ class FamilyMembersController < WebController
   # POST /family_members
   def create
     @family_member = FamilyMember.new(family_member_params)
+    @city_selected = @family_member.city.presence
 
     if @family_member.save
       redirect_to @family_member, notice: 'Family member was successfully created.'

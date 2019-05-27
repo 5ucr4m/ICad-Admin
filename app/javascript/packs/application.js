@@ -127,6 +127,7 @@ window.addEventListener('load', Pagy.init);
 
 window.addEventListener('DOMContentLoaded', function (e) {
   const zipInput = document.querySelector('.zip');
+  const federalRegistry = document.querySelector('.federal-registry');
 
   $('.select2').select2({
     placeholder: 'Selecione',
@@ -138,6 +139,14 @@ window.addEventListener('DOMContentLoaded', function (e) {
     new Cleave('.zip', {
       delimiters: ['-'],
       blocks: [5, 3],
+      delimiterLazyShow: true
+    });
+  }
+
+  if(federalRegistry) {
+    new Cleave('.federal-registry', {
+      delimiters: ['.', '.', '/', '-'],
+      blocks: [2, 3, 3, 4, 2],
       delimiterLazyShow: true
     });
   }

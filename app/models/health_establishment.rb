@@ -34,11 +34,13 @@
 class HealthEstablishment < ApplicationRecord
   include Sluggable
 
-  belongs_to :unit_type, class_name: 'GenericModel'
-  belongs_to :company
+  belongs_to :unit_type, class_name: 'GenericModel', optional: true
+  belongs_to :company, optional: true
 
   has_many :health_professionals, dependent: :nullify
   has_many :home_registrations, through: :health_professionals
+
+  validates :legal_full_name, :fancy_name, :federal_registry, :cnes_code, :registry_at, presence: true
 
   ransack_alias :search, :id_to_s
 end

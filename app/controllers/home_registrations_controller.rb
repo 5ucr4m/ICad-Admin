@@ -16,7 +16,6 @@ class HomeRegistrationsController < WebController
   def new
     @home_registration = HomeRegistration.new
     @home_registration.build_relationships
-    @home_registration.build_family
   end
 
   # GET /home_registrations/1/edit
@@ -25,6 +24,7 @@ class HomeRegistrationsController < WebController
   # POST /home_registrations
   def create
     @home_registration = HomeRegistration.new(home_registration_params)
+    @city_selected = @home_registration.address.city.presence
 
     if @home_registration.save
       redirect_to @home_registration, notice: 'Home registration was successfully created.'
@@ -63,7 +63,56 @@ class HomeRegistrationsController < WebController
                                               :refuse_registration, :tp_cds_origin,
                                               :uuid, :uuid_form_origin,
                                               :home_type_id,
-                                              :permanence_institution_id,
-                                              :finished, :company_id, :slug)
+                                              :finished,
+                                              families_attributes: %i[
+                                                id
+                                                responsible_birth_date
+                                                responsible_cns_number
+                                                members_quantity
+                                                handbook_number
+                                                family_income_cents
+                                                reside_since
+                                                moving
+                                              ],
+                                              address_attributes: %i[
+                                                id
+                                                address_type_id
+                                                patio
+                                                number
+                                                zip
+                                                complement
+                                                district
+                                                city_id
+                                                referential_phone
+                                                home_phone
+                                                reference
+                                                out_area
+                                                micro_area
+                                              ],
+                                              permanence_institution_attributes: %i[
+                                                id
+                                                name
+                                                other_linked_professionals
+                                                responsible_name
+                                                responsible_cns
+                                                institutional_role
+                                                responsible_phone
+                                              ],
+                                              living_condition_attributes: %i[
+                                                id
+                                                water_supply_id
+                                                rural_production_area_id
+                                                garbage_disposal_id
+                                                bathroom_drainage_id
+                                                home_location_id
+                                                home_wall_material_id
+                                                rooms
+                                                residents
+                                                home_situation_id
+                                                electric_power
+                                                home_access_id
+                                                home_type_id
+                                                water_treatment_id
+                                              ])
   end
 end

@@ -99,6 +99,7 @@ class FamiliesController < WebController
                                    home_registration_attributes: [
                                      :id,
                                      :health_professional_id,
+                                     :home_type_id,
                                      permanence_institution_attributes: %i[
                                        id
                                        name

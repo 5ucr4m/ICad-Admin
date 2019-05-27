@@ -53,13 +53,13 @@ class HomeRegistration < ApplicationRecord
   belongs_to :company, optional: true
 
   has_many :home_registration_pets, dependent: :destroy
-  has_one :family
+  has_many :families, dependent: :nullify
 
   accepts_nested_attributes_for :address, allow_destroy: false
   accepts_nested_attributes_for :living_condition, allow_destroy: false
   accepts_nested_attributes_for :permanence_institution, allow_destroy: false
   accepts_nested_attributes_for :home_registration_pets, allow_destroy: true
-  accepts_nested_attributes_for :family, allow_destroy: false
+  accepts_nested_attributes_for :families, allow_destroy: false
 
   ransack_alias :search, :id_to_s
 

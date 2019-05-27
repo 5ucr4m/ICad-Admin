@@ -49,4 +49,6 @@ class GenericModel < ApplicationRecord
   scope :residence_types, -> {where(generic_field: :home_type, generic_class: HomeRegistration.to_s)}
   scope :water_treatments, -> {where(generic_field: :water_treatment)}
   scope :pet_types, -> {where(generic_field: :pet_type)}
+  scope :unit_types, ->{where(generic_field: :unit_type)}
+  scope :cbo_codes, ->{where(generic_field: :cbo_code)}
 end

@@ -15,6 +15,7 @@ class HomeVisitRegistrationsController < WebController
   # GET /home_visit_registrations/new
   def new
     @home_visit_registration = HomeVisitRegistration.new
+    @home_visit_registration.build_family_member
   end
 
   # GET /home_visit_registrations/1/edit

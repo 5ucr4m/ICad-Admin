@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>
-          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
           <% end %>
         </div>
       </div>
@@ -19,41 +19,29 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-                  <th><%= HomeRegistration.human_attribute_name :health_professional %></th>
-                  <th><%= HomeRegistration.human_attribute_name :living_condition %></th>
-                  <th><%= HomeRegistration.human_attribute_name :address %></th>
-                  <th><%= HomeRegistration.human_attribute_name :form_updated %></th>
-                  <th><%= HomeRegistration.human_attribute_name :pet_quantity %></th>
-                  <th><%= HomeRegistration.human_attribute_name :refuse_registration %></th>
-                  <th><%= HomeRegistration.human_attribute_name :tp_cds_origin %></th>
-                  <th><%= HomeRegistration.human_attribute_name :uuid %></th>
-                  <th><%= HomeRegistration.human_attribute_name :uuid_form_origin %></th>
-                  <th><%= HomeRegistration.human_attribute_name :home_type %></th>
-                  <th><%= HomeRegistration.human_attribute_name :permanence_institution %></th>
-                  <th><%= HomeRegistration.human_attribute_name :finished %></th>
-                  <th><%= HomeRegistration.human_attribute_name :company %></th>
-                  <th><%= HomeRegistration.human_attribute_name :slug %></th>
-                <th><%= t('helpers.labels.actions') %></th>
+        <th><%= HomeRegistration.human_attribute_name :id %></th>
+        <th><%= HomeRegistration.human_attribute_name :health_professional %></th>
+        <th><%= HomeRegistration.human_attribute_name :pet_quantity %></th>
+        <th><%= HomeRegistration.human_attribute_name :refuse_registration %></th>
+        <th><%= HomeRegistration.human_attribute_name :uuid %></th>
+        <th><%= HomeRegistration.human_attribute_name :uuid_form_origin %></th>
+        <th><%= HomeRegistration.human_attribute_name :home_type %></th>
+        <th><%= HomeRegistration.human_attribute_name :finished %></th>
+        <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @home_registrations.each do |home_registration| %>
         <tr>
-                      <td><%= home_registration.health_professional_id %></td>
-                      <td><%= home_registration.living_condition_id %></td>
-                      <td><%= home_registration.address_id %></td>
-                      <td><%= home_registration.form_updated %></td>
-                      <td><%= home_registration.pet_quantity %></td>
-                      <td><%= home_registration.refuse_registration %></td>
-                      <td><%= home_registration.tp_cds_origin %></td>
-                      <td><%= home_registration.uuid %></td>
-                      <td><%= home_registration.uuid_form_origin %></td>
-                      <td><%= home_registration.home_type_id %></td>
-                      <td><%= home_registration.permanence_institution_id %></td>
-                      <td><%= home_registration.finished %></td>
-                      <td><%= home_registration.company_id %></td>
-                      <td><%= home_registration.slug %></td>
-                    <td class="text-center">
+          <td><%= home_registration.id %></td>
+          <td><%= home_registration.health_professional_id %></td>
+          <td><%= home_registration.pet_quantity %></td>
+          <td><%= home_registration.refuse_registration ? 'SIM' : 'NÃO' %></td>
+          <td><%= home_registration.uuid %></td>
+          <td><%= home_registration.uuid_form_origin %></td>
+          <td><%= home_registration&.home_type&.name %></td>
+          <td><%= home_registration.finished ? 'SIM' : 'NÃO' %></td>
+          <td class="text-center">
             <%= render 'application/table_links', f: home_registration %>
           </td>
         </tr>

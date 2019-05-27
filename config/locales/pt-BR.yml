@@ -21,6 +21,7 @@ pt-BR:
       health_professional:
         one: Profissional de Saúde
         other: Profissionais de Saúde
+        icon: fas fa-user-md
       family:
         one: Familia
         other: Familias
@@ -35,15 +36,19 @@ pt-BR:
       health_establishment:
         one: UBS
         other: UBS
+        icon: fas fa-hospital
       home_registration:
-        one: Cadastro Domicilar
-        other: Cadastro Domiciliar
+        one: Ficha de Cadastro Domicilar
+        other: Fichas de Cadastro Domiciliar
         icon: fas fa-home
       home_registration_pet:
         one: Animal Doméstico
         other: Animais Domésticos
         icon: fas fa-paw
-
+      home_visit_registration:
+        one: Visita Domiciliar
+        other: Visitas Domiciliares
+        icon: fas fa-book-medical
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

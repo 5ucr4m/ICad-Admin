@@ -1,8 +1,37 @@
 <div class="form-row">
+  <%= f.input :pet_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.input :finished, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <%= f.association :health_professional, collection: HealthProfessional.all,
                     wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :home_type, collection: GenericModel.residence_types,
                     wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <% if f.object.persisted? %>
+    <div class="card">
+      <div class="card-body">
+        <% if f.object.families.any? %>
+          <% f.object.families.each do |family| %>
+            <% render 'application/family_fields', f: family %>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+              <div class="row">
+                <div class="col pt-2 py-auto text-left font-weight-bold">
+                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma família incluída
+                </div>
+                <div class="col text-right">
+                  <%= link_to new_family_path, class: 'btn btn-primary', role: 'button' do %>
+                    <i class="fas fa-plus mr-2"></i>Adicionar Família
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <div class="col-12">
     <div class="card mb-3">
       <div class="card-header">
@@ -45,7 +74,7 @@
     <div class="card mb-3">
       <div class="card-header">
         <h3 class="card-title">
-          <i class="fas fa-life-ring mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>
+          <i class="fas fa-hand-holding mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>
         </h3>
       </div>
       <div class="card-body">
