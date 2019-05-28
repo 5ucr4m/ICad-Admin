@@ -193,5 +193,42 @@ window.addEventListener('DOMContentLoaded', function (e) {
       }
     });
   });
+
+  $('.cbo-types').each((i, el) => {
+    $(el).select2({
+      placeholder: 'Selecione',
+      language: 'pt-BR',
+      theme: 'bootstrap4',
+      width: '100%',
+      ajax: {
+        global: true,
+        url: '/generic_models/address_types.json',
+        dataType: 'json',
+        delay: 300,
+        minimumInputLength: 3,
+        data: function (params) {
+          return {
+            q: {
+              search_cont: params.term ? params.term : 'a'
+            },
+            page: 1
+          };
+        },
+        processResults: function (data) {
+          return {
+            results: data.data.map((cboType) => {
+              if (cboType) {
+                return {
+                  id: cboType.id,
+                  text: `${cboType.attributes.reference} - ${cboType.attributes.name}`
+                };
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+  });
 }, false);
 

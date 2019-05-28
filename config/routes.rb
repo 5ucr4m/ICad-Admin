@@ -3,10 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :companies
-  resources :health_professionals
-  resources :health_establishments
-  resources :families
+  resources :states
   # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
@@ -16,15 +13,23 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'dashboards#dashboard'
   root to: redirect('/dashboard')
+
   resources :roles
   resources :cities
-  resources :states
-  resources :generic_models
+  resources :generic_models do
+    collection do
+      get 'address_types'
+    end
+  end
   resources :home_visit_registrations
   resources :family_members
   resources :home_registrations
   resources :individual_registrations
   resources :professional_teams
+  resources :families
+  resources :companies
+  resources :health_professionals
+  resources :health_establishments
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',

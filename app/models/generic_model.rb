@@ -29,7 +29,7 @@ class GenericModel < ApplicationRecord
 
   belongs_to :generic_model, optional: true
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :id_to_s_or_name
 
   scope :app_modules, -> {where(generic_class: Role.to_s, generic_field: :app_module)}
   scope :nationalities, -> {where(generic_class: FamilyMember.to_s, generic_field: :nationality)}
@@ -43,12 +43,21 @@ class GenericModel < ApplicationRecord
   scope :garbage_disposals, -> {where(generic_field: :garbage_disposal)}
   scope :bathroom_drainage, -> {where(generic_field: :bathroom_drainage)}
   scope :home_wall_materials, -> {where(generic_field: :home_wall_material)}
+  scope :home_locations, ->{where(generic_field: :home_location)}
   scope :home_situations, -> {where(generic_field: :home_situation)}
+  scope :hygiene_access, ->{where(generic_field: :hygiene_access)}
   scope :home_accesses, -> {where(generic_field: :home_access)}
   scope :home_types, -> {where(generic_field: :home_type)}
-  scope :residence_types, -> {where(generic_field: :home_type, generic_class: HomeRegistration.to_s)}
+  scope :residence_types, -> {where(generic_field: :residence_type)}
   scope :water_treatments, -> {where(generic_field: :water_treatment)}
   scope :pet_types, -> {where(generic_field: :pet_type)}
   scope :unit_types, ->{where(generic_field: :unit_type)}
   scope :cbo_codes, ->{where(generic_field: :cbo_code)}
+  scope :breastfeeding, ->{where(generic_field: :breastfeeding)}
+
+  def name_formatted
+    return name if reference.blank?
+
+    "#{reference} - #{name}"
+  end
 end

@@ -1,21 +1,30 @@
 <div class="form-row">
   <%= f.association :water_supply, collection: GenericModel.water_supplies,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :rural_production_area, collection: GenericModel.rural_production_areas,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :garbage_disposal, collection: GenericModel.garbage_disposals,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :bathroom_drainage, collection: GenericModel.bathroom_drainage,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :home_wall_material, collection: GenericModel.home_wall_materials,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :home_situation, collection: GenericModel.home_situations,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :home_access, collection: GenericModel.home_accesses,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :home_type, collection: GenericModel.home_types,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :water_treatment, collection: GenericModel.water_treatments,
+                    label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.input :rooms, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <%= f.input :residents, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>

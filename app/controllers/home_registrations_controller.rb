@@ -25,6 +25,7 @@ class HomeRegistrationsController < WebController
   def create
     @home_registration = HomeRegistration.new(home_registration_params)
     @city_selected = @home_registration.address.city.presence
+    @address_type_selected = @home_registration.address.address_type.presence
 
     if @home_registration.save
       redirect_to @home_registration, notice: 'Home registration was successfully created.'

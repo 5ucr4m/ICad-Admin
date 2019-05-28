@@ -522,9 +522,11 @@ ActiveRecord::Schema.define(version: 2019_05_15_185339) do
     t.string "abbreviation"
     t.string "code"
     t.string "reference"
+    t.bigint "country_id"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["country_id"], name: "index_states_on_country_id"
   end
 
   create_table "user_companies", force: :cascade do |t|
@@ -666,6 +668,7 @@ ActiveRecord::Schema.define(version: 2019_05_15_185339) do
   add_foreign_key "sociodemographic_infos", "generic_models", column: "occupation_id"
   add_foreign_key "sociodemographic_infos", "generic_models", column: "parent_relation_id"
   add_foreign_key "sociodemographic_infos", "generic_models", column: "sexual_orientation_id"
+  add_foreign_key "states", "generic_models", column: "country_id"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "users"
   add_foreign_key "user_roles", "roles"

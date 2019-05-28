@@ -1,11 +1,5 @@
 <%= simple_form_for @home_registration do |f| %>
   <% content_for :body do %>
-    <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :finished, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :health_professional, collection: HealthProfessional.all,
-                      wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-    <%= f.association :home_type, collection: GenericModel.residence_types,
-                      wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <% if f.object.persisted? %>
       <div class="card">
         <div class="card-body">
@@ -46,7 +40,14 @@
         </div>
       </div>
     </div>
+    <%= f.association :health_professional, collection: HealthProfessional.all,
+                      wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :home_type, collection: GenericModel.residence_types,
+                      label_method: :name_formatted,
+                      wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.input :pet_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :finished, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
       <div class="card mb-3">
         <div class="card-header">

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GenericModelsController < WebController
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   before_action :set_generic_model, only: %i[show edit update destroy]
 
@@ -9,6 +9,11 @@ class GenericModelsController < WebController
   def index
     @query = GenericModel.ransack(params[:q])
     @pagy, @generic_models = pagy(@query.result, page: params[:page])
+  end
+
+  def address_types
+    @query = GenericModel.ransack(params[:q])
+    render_json @query.result.address_types.includes(:generic_model)
   end
 
   # GET /generic_models/1

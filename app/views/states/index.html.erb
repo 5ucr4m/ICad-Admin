@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>
-            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
           <% end %>
         </div>
       </div>
@@ -19,48 +19,33 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-        <th><%= State.human_attribute_name :name %></th>
-        <th><%= State.human_attribute_name :abbreviation %></th>
-        <th><%= State.human_attribute_name :code %></th>
-        <th><%= State.human_attribute_name :reference %></th>
-        <% if can? :manage, State %>
-          <th><%= t('helpers.labels.actions') %></th>
-        <% end %>
+                  <th><%= State.human_attribute_name :name %></th>
+                  <th><%= State.human_attribute_name :abbreviation %></th>
+                  <th><%= State.human_attribute_name :code %></th>
+                  <th><%= State.human_attribute_name :reference %></th>
+                  <th><%= State.human_attribute_name :country %></th>
+                  <th><%= State.human_attribute_name :slug %></th>
+                <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @states.each do |state| %>
         <tr>
-          <td><%= state.name %></td>
-          <td><%= state.abbreviation %></td>
-          <td><%= state.code %></td>
-          <td><%= state.reference %></td>
-          <% if can? :manage, State %>
-            <td>
-              <%= render 'application/table_links', f: state %>
-            </td>
-          <% end %>
+                      <td><%= state.name %></td>
+                      <td><%= state.abbreviation %></td>
+                      <td><%= state.code %></td>
+                      <td><%= state.reference %></td>
+                      <td><%= state.country_id %></td>
+                      <td><%= state.slug %></td>
+                    <td class="text-center">
+            <%= render 'application/table_links', f: state %>
+          </td>
         </tr>
       <% end %>
       </tbody>
     </table>
   </div>
   <div class="card-footer">
-    <div class="col-sm-12 col-lg-12 p-0">
-      <div class="form-row">
-        <% if can? :create, State %>
-          <div class="col-sm-12 col-lg-6 p-0">
-            <%= link_to new_state_path, class: 'btn btn-primary align-middle mb-md-0 mb-sm-3' do %>
-              <i class="fas fa-plus mr-2"></i>Novo
-            <% end %>
-          </div>
-        <% end %>
-        <div class="col-sm-12 col-lg-6 p-0">
-          <div class="float-right">
-            <%= pagy_bootstrap_nav(@pagy).html_safe %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'application/footer_links', url: new_state_path, model: State %>
   </div>
 </div>
