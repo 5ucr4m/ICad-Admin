@@ -14,22 +14,24 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboards#dashboard'
   root to: redirect('/dashboard')
 
-  resources :roles
-  resources :cities
   resources :generic_models do
     collection do
       get 'address_types'
+      get 'cbo_types'
+      get 'ethnicity_types'
     end
   end
-  resources :home_visit_registrations
-  resources :family_members
-  resources :home_registrations
-  resources :individual_registrations
-  resources :professional_teams
+  resources :roles
+  resources :cities
   resources :families
   resources :companies
+  resources :family_members
+  resources :home_registrations
+  resources :professional_teams
   resources :health_professionals
   resources :health_establishments
+  resources :home_visit_registrations
+  resources :individual_registrations
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',

@@ -23,7 +23,7 @@ class FamilyMembersController < WebController
   # POST /family_members
   def create
     @family_member = FamilyMember.new(family_member_params)
-    @city_selected = @family_member.city.presence
+    set_selected_options
 
     if @family_member.save
       redirect_to @family_member, notice: 'Family member was successfully created.'
@@ -52,7 +52,13 @@ class FamilyMembersController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_family_member
     @family_member = FamilyMember.friendly.find(params[:id])
+    set_selected_options
+  end
+
+  def set_selected_options
     @city_selected = @family_member.city.presence
+    @ethnicity_selected = @family_member.ethnicity.presence
+    @family_selected = @family_member.family.presence
   end
 
   # Only allow a trusted parameter "white list" through.

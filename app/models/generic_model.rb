@@ -31,11 +31,11 @@ class GenericModel < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_name
 
-  scope :app_modules, -> {where(generic_class: Role.to_s, generic_field: :app_module)}
-  scope :nationalities, -> {where(generic_class: FamilyMember.to_s, generic_field: :nationality)}
-  scope :races, -> {where(generic_class: FamilyMember.to_s, generic_field: :race)}
-  scope :genders, -> {where(generic_class: FamilyMember.to_s, generic_field: :gender)}
-  scope :ethnicities, -> {where(generic_class: FamilyMember.to_s, generic_field: :ethnicity)}
+  scope :app_modules, -> {where(generic_field: :app_module)}
+  scope :nationalities, -> {where(generic_field: :nationality)}
+  scope :races, -> {where(generic_field: :race)}
+  scope :genders, -> {where(generic_field: :gender)}
+  scope :ethnicities, -> {where(generic_field: :ethnicity)}
   scope :countries, -> {where(generic_field: :country)}
   scope :address_types, -> {where(generic_field: :address_type)}
   scope :water_supplies, -> {where(generic_field: :water_supply)}
@@ -52,8 +52,14 @@ class GenericModel < ApplicationRecord
   scope :water_treatments, -> {where(generic_field: :water_treatment)}
   scope :pet_types, -> {where(generic_field: :pet_type)}
   scope :unit_types, ->{where(generic_field: :unit_type)}
-  scope :cbo_codes, ->{where(generic_field: :cbo_code)}
+  scope :cbo_types, ->{where(generic_field: :cbo_type)}
   scope :breastfeeding, ->{where(generic_field: :breastfeeding)}
+  scope :weight_situations, ->{where(generic_field: :weight_situation_type)}
+  scope :meals_per_day, ->{where(generic_field: :meals_quantity_type)}
+  scope :street_situation_time, ->{where(generic_field: :street_situation_time)}
+  scope :meals_origin_types, ->{where(generic_model: :meals_origin_type)}
+  scope :respiratory_diseases, -> {where(generic_model: :respiratory_disease)}
+  scope :kidney_problems, -> {where(generic_model: :kidney_problem)}
 
   def name_formatted
     return name if reference.blank?

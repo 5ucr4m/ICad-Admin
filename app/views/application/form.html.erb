@@ -1,7 +1,7 @@
 <%= render 'application/page_header', model: form %>
 <div class="card">
   <div class="card-status <%= form.errors.any? ? 'bg-red' : 'bg-blue' %>"></div>
-  <div class="card-body <%= 'pt-0' if (tabs ||= nil) %>">
+  <div class="card-body pb-3">
     <div class="dimmer">
       <div class="dimmer-content">
         <div class="form-row">

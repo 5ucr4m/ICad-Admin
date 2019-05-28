@@ -23,6 +23,7 @@ class HealthProfessionalsController < WebController
   # POST /health_professionals
   def create
     @health_professional = HealthProfessional.new(health_professional_params)
+    @cbo_selected = @health_professional.cbo_code.presence
 
     if @health_professional.save
       redirect_to @health_professional, notice: 'Health professional was successfully created.'
@@ -51,6 +52,7 @@ class HealthProfessionalsController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_health_professional
     @health_professional = HealthProfessional.friendly.find(params[:id])
+    @cbo_selected = @health_professional.cbo_code.presence if @health_professional
   end
 
   # Only allow a trusted parameter "white list" through.

@@ -1,7 +1,6 @@
 <div class="nested-fields">
   <div class="form-row">
-    <%= f.association :pet_type, collection: GenericModel.pet_types,
-                      label_method: :name_formatted,
+    <%= f.association :disease_type, collection: GenericModel.respiratory_diseases,
                       wrapper_html: {class: 'col-lg-9 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <% unless show?(f.object.persisted?) %>
       <div class="col-lg-1 col-sm-12 text-center btn-remove">

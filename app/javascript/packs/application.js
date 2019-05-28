@@ -1,18 +1,20 @@
+require('jquery');
 require("@rails/ujs").start();
 require("@rails/activestorage").start();
 require('superagent');
 require('popper.js');
-require('bootstrap');
+require('bootstrap/dist/js/bootstrap.bundle');
 require('cleave.js');
 require('cleave.js/dist/addons/cleave-phone.br');
 require('select2');
 require("channels");
 
-import './pagy.js.erb';
-
-window.$ = window.jQuery = require('jquery');
-window.Pagy = Pagy;
+import * as Pagy from './pagy.js.erb';
 import superagent from 'superagent';
+import * as $ from 'jquery';
+
+window.Pagy = Pagy;
+window.$ = window.jQuery = $;
 
 function addLoadingSpin() {
   let divSpin = document.createElement('div');
@@ -45,7 +47,7 @@ function addZipError() {
 
 function removeZipError() {
   let feedback = document.querySelector('.invalid-feedback');
-  if(feedback) {
+  if (feedback) {
     feedback.remove();
   }
   document.querySelector('.zip').classList.remove('is-invalid');
@@ -58,10 +60,12 @@ function removeZipError() {
 
 function getCity(cityCode) {
   superagent.get('/cities.json')
-    .query({ q: {search_cont: cityCode} })
+    .query({q: {search_cont: cityCode}})
     .end((err, res) => {
-      if(res.body) {
-        let data = res.body.data.map((city) => { return city.attributes});
+      if (res.body) {
+        let data = res.body.data.map((city) => {
+          return city.attributes
+        });
         data = data[0];
         data['id'] = res.body.data[0].id;
         console.log(data);
@@ -85,12 +89,12 @@ function getZip(e) {
           document.querySelector('input[id$=\'_patio\']').value = address.logradouro.toUpperCase();
           document.querySelector('input[id$=\'_district\']').value = address.bairro.toUpperCase();
           document.querySelector('input[id$=\'_complement\']').value = address.complemento.toUpperCase();
-          if(address.ibge) {
+          if (address.ibge) {
             getCity(address.ibge);
           }
         }
         removeLoadingSpin();
-        if(failed) {
+        if (failed) {
           addZipError();
         } else {
           removeZipError();
@@ -127,12 +131,30 @@ window.addEventListener('load', Pagy.init);
 
 window.addEventListener('DOMContentLoaded', function (e) {
   const zipInput = document.querySelector('.zip');
-  const federalRegistry = document.querySelector('.federal-registry');
+  const federalRegistryCnpj = document.querySelector('.federal-registry');
+  const federalRegistryCpf = document.querySelector('.cpf');
+
+  if (federalRegistryCpf) {
+    new Cleave('.cpf', {
+      delimiters: ['.', '.', '-'],
+      blocks: [3, 3, 3, 2],
+      delimiterLazyShow: true
+    });
+  }
+
+  $('[data-toggle="card-collapse"]').on('click', function (e) {
+    const card = 'div.card';
+    const $card = $(this).closest(card);
+    $card.toggleClass('card-collapsed');
+    e.preventDefault();
+    return false;
+  });
 
   $('.select2').select2({
     placeholder: 'Selecione',
     theme: 'bootstrap4',
-    width: '100%'
+    width: '100%',
+    allowClear: true
   });
 
   if (zipInput) {
@@ -143,7 +165,7 @@ window.addEventListener('DOMContentLoaded', function (e) {
     });
   }
 
-  if(federalRegistry) {
+  if (federalRegistryCnpj) {
     new Cleave('.federal-registry', {
       delimiters: ['.', '.', '/', '-'],
       blocks: [2, 3, 3, 4, 2],
@@ -153,7 +175,7 @@ window.addEventListener('DOMContentLoaded', function (e) {
 
   const btnZip = document.querySelector('.btn-zip');
 
-  if(btnZip) {
+  if (btnZip) {
     btnZip.onclick = getZip;
   }
 
@@ -163,6 +185,7 @@ window.addEventListener('DOMContentLoaded', function (e) {
       language: 'pt-BR',
       theme: 'bootstrap4',
       width: '100%',
+      allowClear: true,
       ajax: {
         global: true,
         url: '/cities.json',
@@ -194,12 +217,13 @@ window.addEventListener('DOMContentLoaded', function (e) {
     });
   });
 
-  $('.cbo-types').each((i, el) => {
+  $('.address-types').each((i, el) => {
     $(el).select2({
       placeholder: 'Selecione',
       language: 'pt-BR',
       theme: 'bootstrap4',
       width: '100%',
+      allowClear: true,
       ajax: {
         global: true,
         url: '/generic_models/address_types.json',
@@ -221,6 +245,120 @@ window.addEventListener('DOMContentLoaded', function (e) {
                 return {
                   id: cboType.id,
                   text: `${cboType.attributes.reference} - ${cboType.attributes.name}`
+                };
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+  });
+
+  $('.cbo-types').each((i, el) => {
+    $(el).select2({
+      placeholder: 'Selecione',
+      language: 'pt-BR',
+      theme: 'bootstrap4',
+      width: '100%',
+      allowClear: true,
+      ajax: {
+        global: true,
+        url: '/generic_models/cbo_types.json',
+        dataType: 'json',
+        delay: 300,
+        minimumInputLength: 3,
+        data: function (params) {
+          return {
+            q: {
+              search_cont: params.term ? params.term : 'a'
+            },
+            page: 1
+          };
+        },
+        processResults: function (data) {
+          return {
+            results: data.data.map((cboType) => {
+              if (cboType) {
+                return {
+                  id: cboType.id,
+                  text: `${cboType.attributes.reference} - ${cboType.attributes.name}`
+                };
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+  });
+
+  $('.ethnicity-types').each((i, el) => {
+    $(el).select2({
+      placeholder: 'Selecione',
+      language: 'pt-BR',
+      theme: 'bootstrap4',
+      width: '100%',
+      allowClear: true,
+      ajax: {
+        global: true,
+        url: '/generic_models/ethnicity_types.json',
+        dataType: 'json',
+        delay: 300,
+        minimumInputLength: 3,
+        data: function (params) {
+          return {
+            q: {
+              search_cont: params.term ? params.term : 'a'
+            },
+            page: 1
+          };
+        },
+        processResults: function (data) {
+          return {
+            results: data.data.map((cboType) => {
+              if (cboType) {
+                return {
+                  id: cboType.id,
+                  text: `${cboType.attributes.reference} - ${cboType.attributes.name}`
+                };
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+  });
+
+  $('.families').each((i, el) => {
+    $(el).select2({
+      placeholder: 'Selecione',
+      language: 'pt-BR',
+      theme: 'bootstrap4',
+      width: '100%',
+      allowClear: true,
+      ajax: {
+        global: true,
+        url: '/families.json',
+        dataType: 'json',
+        delay: 300,
+        minimumInputLength: 3,
+        data: function (params) {
+          return {
+            q: {
+              search_cont: params.term ? params.term : $(el).text()
+            },
+            page: 1
+          };
+        },
+        processResults: function (response) {
+          return {
+            results: response.data.map((data) => {
+              if (data) {
+                return {
+                  id: data.id,
+                  text: `${data.attributes.handbookNumber}`
                 };
               }
             })

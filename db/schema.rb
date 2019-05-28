@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_15_185339) do
+ActiveRecord::Schema.define(version: 2019_05_28_180311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,18 @@ ActiveRecord::Schema.define(version: 2019_05_15_185339) do
     t.index ["health_condition_id"], name: "index_health_condition_diseases_on_health_condition_id"
   end
 
+  create_table "health_condition_kidneys", force: :cascade do |t|
+    t.bigint "health_condition_id"
+    t.bigint "kidney_problem_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_health_condition_kidneys_on_company_id"
+    t.index ["health_condition_id"], name: "index_health_condition_kidneys_on_health_condition_id"
+    t.index ["kidney_problem_id"], name: "index_health_condition_kidneys_on_kidney_problem_id"
+  end
+
   create_table "health_condition_others", force: :cascade do |t|
     t.bigint "health_condition_id"
     t.text "description"
@@ -363,6 +375,30 @@ ActiveRecord::Schema.define(version: 2019_05_15_185339) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_home_visit_registrations_on_company_id"
     t.index ["family_member_id"], name: "index_home_visit_registrations_on_family_member_id"
+  end
+
+  create_table "in_street_hygiene_accesses", force: :cascade do |t|
+    t.bigint "in_street_situation_id"
+    t.bigint "hygiene_access_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_in_street_hygiene_accesses_on_company_id"
+    t.index ["hygiene_access_id"], name: "index_in_street_hygiene_accesses_on_hygiene_access_id"
+    t.index ["in_street_situation_id"], name: "index_in_street_hygiene_accesses_on_in_street_situation_id"
+  end
+
+  create_table "in_street_situation_meals", force: :cascade do |t|
+    t.bigint "in_street_situation_id"
+    t.bigint "meal_origin_type_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_in_street_situation_meals_on_company_id"
+    t.index ["in_street_situation_id"], name: "index_in_street_situation_meals_on_in_street_situation_id"
+    t.index ["meal_origin_type_id"], name: "index_in_street_situation_meals_on_meal_origin_type_id"
   end
 
   create_table "in_street_situations", force: :cascade do |t|
@@ -606,6 +642,9 @@ ActiveRecord::Schema.define(version: 2019_05_15_185339) do
   add_foreign_key "health_condition_diseases", "companies"
   add_foreign_key "health_condition_diseases", "generic_models", column: "disease_type_id"
   add_foreign_key "health_condition_diseases", "health_conditions"
+  add_foreign_key "health_condition_kidneys", "companies"
+  add_foreign_key "health_condition_kidneys", "generic_models", column: "kidney_problem_id"
+  add_foreign_key "health_condition_kidneys", "health_conditions"
   add_foreign_key "health_condition_others", "companies"
   add_foreign_key "health_condition_others", "health_conditions"
   add_foreign_key "health_conditions", "companies"
@@ -636,6 +675,12 @@ ActiveRecord::Schema.define(version: 2019_05_15_185339) do
   add_foreign_key "home_visit_reasons", "home_visit_forms"
   add_foreign_key "home_visit_registrations", "companies"
   add_foreign_key "home_visit_registrations", "family_members"
+  add_foreign_key "in_street_hygiene_accesses", "companies"
+  add_foreign_key "in_street_hygiene_accesses", "generic_models", column: "hygiene_access_id"
+  add_foreign_key "in_street_hygiene_accesses", "in_street_situations"
+  add_foreign_key "in_street_situation_meals", "companies"
+  add_foreign_key "in_street_situation_meals", "generic_models", column: "meal_origin_type_id"
+  add_foreign_key "in_street_situation_meals", "in_street_situations"
   add_foreign_key "in_street_situations", "companies"
   add_foreign_key "in_street_situations", "generic_models", column: "meals_per_day_id"
   add_foreign_key "in_street_situations", "generic_models", column: "street_situation_time_id"

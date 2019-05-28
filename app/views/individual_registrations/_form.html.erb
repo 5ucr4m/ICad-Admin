@@ -1,83 +1,86 @@
-<%= form_with(model: @individual_registration, id: :individual_registration) do |f| %>
+<%= simple_form_for @individual_registration do |f| %>
   <% content_for :body do %>
-      <div class="form-group col-md-4">
-        <%= f.label :health_condition_id, {class: 'form-label'} %>
-        
-          <%= f.select :health_condition_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+    <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :uuid_form_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :uuid_citizen, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :form_updated, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="col-12">
+      <div class="card card-collapsed mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 1) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+              <i class="fe fe-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body"></div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :in_street_situation_id, {class: 'form-label'} %>
-        
-          <%= f.select :in_street_situation_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+      <div class="card card-collapsed mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-heartbeat mr-2"></i><%= HealthCondition.model_name.human(count: 1) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+              <i class="fe fe-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <%= f.simple_fields_for :health_condition do |health_condition| %>
+            <%= render 'application/health_condition_fields', f: health_condition %>
+          <% end %>
+        </div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :family_member_id, {class: 'form-label'} %>
-        
-          <%= f.select :family_member_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+      <div class="card card-collapsed mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="far fa-sad-tear mr-2"></i><%= InStreetSituation.model_name.human(count: 1) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+              <i class="fe fe-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <%= f.simple_fields_for :in_street_situation do |in_street_situation| %>
+            <%= render 'application/in_street_situation_fields', f: in_street_situation %>
+          <% end %>
+        </div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :sociodemographic_info_id, {class: 'form-label'} %>
-        
-          <%= f.select :sociodemographic_info_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+      <div class="card card-collapsed mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-id-card mr-2"></i><%= SociodemographicInfo.model_name.human(count: 1) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+              <i class="fe fe-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body"></div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :cancel_registration_id, {class: 'form-label'} %>
-        
-          <%= f.select :cancel_registration_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
+      <div class="card card-collapsed mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-user-times mr-2"></i><%= CancelRegistration.model_name.human(count: 1) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+              <i class="fe fe-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body"></div>
       </div>
-      <div class="form-group col-md-4">
-        <%= f.label :refuse_registration, {class: 'form-label'} %>
-        
-          <%= f.check_box :refuse_registration, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :form_updated, {class: 'form-label'} %>
-        
-          <%= f.check_box :form_updated, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :uuid, {class: 'form-label'} %>
-        
-          <%= f.text_field :uuid, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :uuid_form_origin, {class: 'form-label'} %>
-        
-          <%= f.text_field :uuid_form_origin, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :uuid_citizen, {class: 'form-label'} %>
-        
-          <%= f.text_field :uuid_citizen, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :tp_cds_origin, {class: 'form-label'} %>
-        
-          <%= f.number_field :tp_cds_origin, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :company_id, {class: 'form-label'} %>
-        
-          <%= f.select :company_id, options_from_collection_for_select([], :name, :id), {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
-      <div class="form-group col-md-4">
-        <%= f.label :slug, {class: 'form-label'} %>
-        
-          <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-        
-      </div>
+    </div>
   <% end %>
   <%= render template: 'application/form', locals: {form: @individual_registration} %>
 <% end %>

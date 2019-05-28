@@ -43,5 +43,7 @@ class HealthProfessional < ApplicationRecord
 
   has_many :home_registrations, dependent: :destroy
 
+  validates :legal_full_name, :federal_registry, :cns_code, presence: true
+
   ransack_alias :search, :id_to_s
 end

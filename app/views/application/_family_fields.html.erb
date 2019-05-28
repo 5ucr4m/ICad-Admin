@@ -1,8 +1,11 @@
-<div class="card">
+<div class="card card-collapsed">
   <div class="card-header">
     <h3 class="card-title">
       <i class="<%= t(".models.#{Family.model_name}.icon") %> mr-2"></i><%= Family.model_name.human(count: 1) %> <%= f.object.id %>
     </h3>
+    <div class="card-options">
+      <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+    </div>
   </div>
   <div class="card-body">
     <div class="form-row">

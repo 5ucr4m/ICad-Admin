@@ -4,6 +4,7 @@ class GenericModelsController < WebController
   # load_and_authorize_resource
 
   before_action :set_generic_model, only: %i[show edit update destroy]
+  before_action :set_query, except: %i[index new create show edit update destroy]
 
   # GET /generic_models
   def index
@@ -12,8 +13,15 @@ class GenericModelsController < WebController
   end
 
   def address_types
-    @query = GenericModel.ransack(params[:q])
     render_json @query.result.address_types.includes(:generic_model)
+  end
+
+  def cbo_types
+    render_json @query.result.cbo_types.includes(:generic_model)
+  end
+
+  def ethnicity_types
+    render_json @query.result.ethnicities.includes(:generic_model)
   end
 
   # GET /generic_models/1
@@ -54,6 +62,10 @@ class GenericModelsController < WebController
   end
 
   private
+
+  def set_query
+    @query = GenericModel.ransack(params[:q])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_generic_model

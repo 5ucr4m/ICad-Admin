@@ -54,5 +54,11 @@ class HealthCondition < ApplicationRecord
   belongs_to :weight_situation, class_name: 'GenericModel'
   belongs_to :company, optional: true
 
+  has_many :health_condition_kidneys, dependent: :destroy
+  has_many :health_condition_diseases, dependent: :destroy
+
+  accepts_nested_attributes_for :health_condition_kidneys, allow_destroy: true
+  accepts_nested_attributes_for :health_condition_diseases, allow_destroy: true
+
   ransack_alias :search, :id_to_s
 end

@@ -1,0 +1,16 @@
+<div class="form-row">
+  <%= f.input :kinship_degree, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.input :other_accompanied, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.association :meals_per_day, collection: GenericModel.meals_per_day, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :street_situation_time, collection: GenericModel.street_situation_time, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <div class="col-12">
+    <div class="form-row">
+      <%= f.input :has_other_accompanied, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :familiar_reference, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :receive_benefits, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :in_street_situation, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :has_personal_hygiene, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :family_visit, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    </div>
+  </div>
+</div>

@@ -15,6 +15,7 @@ class IndividualRegistrationsController < WebController
   # GET /individual_registrations/new
   def new
     @individual_registration = IndividualRegistration.new
+    @individual_registration.build_relationships
   end
 
   # GET /individual_registrations/1/edit

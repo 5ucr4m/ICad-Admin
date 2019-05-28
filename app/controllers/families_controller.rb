@@ -6,7 +6,10 @@ class FamiliesController < WebController
   # GET /families
   def index
     @query = Family.ransack(params[:q])
-    @pagy, @families = pagy(@query.result, page: params[:page])
+    respond_to do |format|
+      format.html {@pagy, @families = pagy(@query.result, page: params[:q][:page])}
+      format.json{render_json @query.result.includes(:company, :home_registration)}
+    end
   end
 
   # GET /families/1

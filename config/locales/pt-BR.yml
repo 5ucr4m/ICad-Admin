@@ -39,16 +39,20 @@ pt-BR:
         icon: fas fa-hospital
       home_registration:
         one: Ficha de Cadastro Domicilar
-        other: Fichas de Cadastro Domiciliar
+        other: Fichas de Cadastro Domiciliar e Territorial
         icon: fas fa-home
       home_registration_pet:
         one: Animal Doméstico
         other: Animais Domésticos
         icon: fas fa-paw
       home_visit_registration:
-        one: Visita Domiciliar
-        other: Visitas Domiciliares
+        one: Ficha de Visita Domiciliar e Territorial
+        other: Fichas de Visita Domiciliar e Territorial
         icon: fas fa-book-medical
+      individual_registration:
+        one: Ficha de Cadastro Individual
+        other: Fichas de Cadastro Individual
+        icon: fas fa-notes-medical
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

@@ -44,7 +44,7 @@ class Family < ApplicationRecord
 
   monetize :family_income_cents
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :id_to_s_or_handbook_number
 
   def build_relationships
     build_home_registration

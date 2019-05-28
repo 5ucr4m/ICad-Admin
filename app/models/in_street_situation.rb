@@ -40,5 +40,11 @@ class InStreetSituation < ApplicationRecord
   belongs_to :street_situation_time, class_name: 'GenericModel'
   belongs_to :company, optional: true
 
+  has_many :in_street_situation_meals
+  has_many :in_street_hygiene_accesses
+
+  accepts_nested_attributes_for :in_street_situation_meals, allow_destroy: true
+  accepts_nested_attributes_for :in_street_hygiene_accesses, allow_destroy: true
+
   ransack_alias :search, :id_to_s
 end
