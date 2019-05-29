@@ -49,13 +49,13 @@
 #
 
 class SociodemographicInfo < ApplicationRecord
-  belongs_to :education_level, optional: true
-  belongs_to :occupation, optional: true
-  belongs_to :sexual_orientation, optional: true
-  belongs_to :parent_relation, optional: true
-  belongs_to :job_market_situation, optional: true
-  belongs_to :gender_identity, optional: true
-  belongs_to :child_responsible, optional: true
+  belongs_to :education_level, class_name: 'GenericModel', optional: true
+  belongs_to :occupation, class_name: 'GenericModel', optional: true
+  belongs_to :sexual_orientation, class_name: 'GenericModel', optional: true
+  belongs_to :parent_relation, class_name: 'GenericModel', optional: true
+  belongs_to :job_market_situation, class_name: 'GenericModel', optional: true
+  belongs_to :gender_identity, class_name: 'GenericModel', optional: true
+  belongs_to :child_responsible, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
 
   ransack_alias :search, :id_to_s

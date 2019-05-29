@@ -50,6 +50,7 @@ class IndividualRegistration < ApplicationRecord
   belongs_to :cancel_registration, optional: true
   belongs_to :company, optional: true
 
+  accepts_nested_attributes_for :family_member, allow_destroy: false
   accepts_nested_attributes_for :health_condition, allow_destroy: false
   accepts_nested_attributes_for :in_street_situation, allow_destroy: false
   accepts_nested_attributes_for :sociodemographic_info, allow_destroy: false
@@ -59,6 +60,7 @@ class IndividualRegistration < ApplicationRecord
 
   def build_relationships
     build_health_condition
+    build_family_member
     build_in_street_situation
     build_sociodemographic_info
     build_cancel_registration

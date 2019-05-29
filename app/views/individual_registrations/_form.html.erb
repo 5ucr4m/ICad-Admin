@@ -13,12 +13,16 @@
             <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
         </div>
-        <div class="card-body"></div>
+        <div class="card-body pb-2">
+          <%= f.simple_fields_for :family_member do |family_member| %>
+            <%= render 'application/family_member_fields', f: family_member %>
+          <% end %>
+        </div>
       </div>
       <div class="card card-collapsed mb-3">
         <div class="card-header">
@@ -26,12 +30,12 @@
             <i class="fas fa-heartbeat mr-2"></i><%= HealthCondition.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body pb-2">
           <%= f.simple_fields_for :health_condition do |health_condition| %>
             <%= render 'application/health_condition_fields', f: health_condition %>
           <% end %>
@@ -43,12 +47,12 @@
             <i class="far fa-sad-tear mr-2"></i><%= InStreetSituation.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body pb-2">
           <%= f.simple_fields_for :in_street_situation do |in_street_situation| %>
             <%= render 'application/in_street_situation_fields', f: in_street_situation %>
           <% end %>
@@ -60,12 +64,16 @@
             <i class="fas fa-id-card mr-2"></i><%= SociodemographicInfo.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
         </div>
-        <div class="card-body"></div>
+        <div class="card-body pb-2">
+          <%= f.simple_fields_for :sociodemographic_info do |sociodemographic_info| %>
+            <%= render 'application/sociodemographic_info_fields', f: sociodemographic_info %>
+          <% end %>
+        </div>
       </div>
       <div class="card card-collapsed mb-3">
         <div class="card-header">
@@ -73,12 +81,12 @@
             <i class="fas fa-user-times mr-2"></i><%= CancelRegistration.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse font-weight-bold" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
         </div>
-        <div class="card-body"></div>
+        <div class="card-body pb-2"></div>
       </div>
     </div>
   <% end %>

@@ -32,7 +32,7 @@
 class Family < ApplicationRecord
   include Sluggable
 
-  belongs_to :home_registration, optional: true
+  belongs_to :home_registration
   belongs_to :company, optional: true
 
   has_many :family_members, dependent: :nullify

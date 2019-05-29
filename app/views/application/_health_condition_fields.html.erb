@@ -32,11 +32,16 @@
       <%= f.input :maternity_reference, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <div class="col-12">
         <div class="form-row">
-          <div class="card mb-3">
+          <div class="card card-collapsed mb-3">
             <div class="card-header">
               <h3 class="card-title">
-                <i class="fas fa-user mr-2"></i><%= HealthConditionKidney.model_name.human(count: 2) %>
+                <i class="fas fa-notes-medical mr-2"></i><%= HealthConditionKidney.model_name.human(count: 2) %>
               </h3>
+              <div class="card-options">
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
+                  <i class="fe fe-chevron-up"></i>
+                </a>
+              </div>
             </div>
             <div class="card-body py-2">
               <%= link_to_add_association f, :health_condition_kidneys,
@@ -54,13 +59,15 @@
               <% end %>
             </div>
           </div>
-          <div class="card mb-3">
+          <div class="card card-collapsed mb-3">
             <div class="card-header">
               <h3 class="card-title">
-                <i class="fas fa-user mr-2"></i><%= HealthConditionDisease.model_name.human(count: 2) %>
+                <i class="fas fa-notes-medical mr-2"></i><%= HealthConditionDisease.model_name.human(count: 2) %>
               </h3>
               <div class="card-options">
-
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
+                  <i class="fe fe-chevron-up"></i>
+                </a>
               </div>
             </div>
             <div class="card-body py-2">

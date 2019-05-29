@@ -11,6 +11,11 @@
     <div class="col-12">
       <% if f.object.persisted? %>
         <div class="card card-collapsed mb-3">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-users mr-2"></i><%= Family.model_name.human(count: 1) %>
+            </h3>
+          </div>
           <div class="card-body">
             <% if f.object.families.any? %>
               <% f.object.families.each do |family| %>
@@ -39,7 +44,7 @@
             <i class="fas fa-map-marked-alt mr-2"></i><%= Address.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body">
@@ -54,7 +59,7 @@
             <i class="fas fa-paw mr-2"></i><%= HomeRegistrationPet.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body float-right py-2">
@@ -79,7 +84,7 @@
             <i class="fas fa-hand-holding mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body">
@@ -94,7 +99,7 @@
             <i class="fas fa-life-ring mr-2"></i><%= PermanenceInstitution.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body">

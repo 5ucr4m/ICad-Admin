@@ -7,7 +7,7 @@ class FamiliesController < WebController
   def index
     @query = Family.ransack(params[:q])
     respond_to do |format|
-      format.html {@pagy, @families = pagy(@query.result, page: params[:q][:page])}
+      format.html{@pagy, @families = pagy(@query.result, page: params[:page])}
       format.json{render_json @query.result.includes(:company, :home_registration)}
     end
   end
@@ -28,7 +28,7 @@ class FamiliesController < WebController
   # POST /families
   def create
     @family = Family.new(family_params)
-    @city_selected = @family.home_registration.address.city.presence
+    @city_selected = @family&.home_registration&.address&.city.presence
 
     if @family.save
       redirect_to @family, notice: 'Family was successfully created.'

@@ -4,7 +4,9 @@
   <%= f.input :mother_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <%= f.input :father_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.association :birth_country, collection: GenericModel.countries, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :birth_country, collection: GenericModel.countries,
+                    label_method: :name_formatted,
+                    wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :city,
                     collection: @city_selected ? [@city_selected] : [],
                     selected: @city_selected,
@@ -21,8 +23,8 @@
   <%= f.input :pis_pasep_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <%= f.association :race, collection: GenericModel.races, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :gender, collection: GenericModel.genders, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.association :ethnicity, collection: GenericModel.ethnicities, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.input :micro_area, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <%= f.association :ethnicity, collection: GenericModel.ethnicities, label_method: :name_formatted, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.input :micro_area, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <div class="col-lg-6 col-sm-12">
     <div class="form-row">
       <%= f.input :unknown_father, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(f.object.persisted?)} %>

@@ -1,9 +1,8 @@
 <div class="nested-fields">
   <div class="form-row">
-    <%= f.association :kidney_problem, collection: GenericModel.kidney_problems,
-                      wrapper_html: {class: 'col-lg-9 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :description, wrapper_html: {class: 'col-lg-9 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <% unless show?(f.object.persisted?) %>
-      <div class="col-lg-1 col-sm-12 text-center float-center btn-remove">
+      <div class="col-lg-1 col-sm-12 text-center btn-remove">
         <%= link_to_remove_association f, class: 'btn btn-icon btn-danger btn-remove-nested', role: 'button' do %>
           <i class="fas fa-times"></i>
         <% end %>
