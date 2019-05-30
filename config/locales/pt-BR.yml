@@ -49,6 +49,10 @@ pt-BR:
         one: Ficha de Visita Domiciliar e Territorial
         other: Fichas de Visita Domiciliar e Territorial
         icon: fas fa-book-medical
+      home_visit_form:
+        one: Ficha de Visita Domiciliar
+        other: Fichas de Visita Domiciliar
+        icon: fas fa-book-medical
       individual_registration:
         one: Ficha de Cadastro Individual
         other: Fichas de Cadastro Individual

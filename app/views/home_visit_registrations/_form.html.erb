@@ -3,15 +3,62 @@
     <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
-      <div class="card mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_visit_registration.family_member.errors.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 1) %>
           </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+          </div>
         </div>
         <div class="card-body">
           <%= f.simple_fields_for :family_member do |family_member| %>
             <%= render 'application/family_member_fields', f: family_member %>
+          <% end %>
+        </div>
+      </div>
+      <div class="card<%= ' card-collapsed' unless @home_visit_registration.home_visit_forms.map(&:errors).flatten.any? %> mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-book-medical mr-2"></i><%= HomeVisitForm.model_name.human(count: 2) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+          </div>
+        </div>
+        <div class="card-body">
+          <% if @home_visit_registration.home_visit_forms.any? %>
+            <div class="table-responsive">
+              <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th><%= HomeVisitForm.human_attribute_name :turn %></th>
+                  <th><%= HomeVisitForm.human_attribute_name :handbook_number %></th>
+                  <th><%= HomeVisitForm.human_attribute_name :cns_number %></th>
+                  <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @home_visit_registration.home_visit_forms.each_with_index do |home_visit_form, index| %>
+                  <tr>
+                    <td><%= index = index + 1 %></td>
+                    <td><%= home_visit_form.turn.name_formatted %></td>
+                    <td><%= home_visit_form.handbook_number %></td>
+                    <td><%= home_visit_form.cns_number %></td>
+                    <td class="text-center">
+                      <%= render 'application/table_links', f: home_visit_form %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+              <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Ficha de Visita Domiciliar registrada.
+            </div>
           <% end %>
         </div>
       </div>

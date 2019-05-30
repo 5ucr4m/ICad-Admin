@@ -57,9 +57,12 @@ class GenericModel < ApplicationRecord
   scope :weight_situations, ->{where(generic_field: :weight_situation_type)}
   scope :meals_per_day, ->{where(generic_field: :meals_quantity_type)}
   scope :street_situation_time, ->{where(generic_field: :street_situation_time)}
-  scope :meals_origin_types, ->{where(generic_model: :meals_origin_type)}
-  scope :respiratory_diseases, -> {where(generic_model: :respiratory_disease)}
-  scope :kidney_problems, -> {where(generic_model: :kidney_problem)}
+  scope :meals_origin_types, ->{where(generic_field: :meals_origin_type)}
+  scope :respiratory_diseases, -> {where(generic_field: :respiratory_disease)}
+  scope :kidney_problems, -> {where(generic_field: :kidney_problem)}
+  scope :turns, -> {where(generic_field: :turn)}
+  scope :outcomes, ->{where(generic_field: :outcome)}
+  scope :visit_reasons, ->{where(generic_field: :reason)}
 
   def name_formatted
     return name if reference.blank?

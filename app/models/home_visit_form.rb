@@ -52,5 +52,9 @@ class HomeVisitForm < ApplicationRecord
   belongs_to :home_type, class_name: 'GenericModel'
   belongs_to :company, optional: true
 
+  has_many :home_visit_reasons, dependent: :destroy
+
+  accepts_nested_attributes_for :home_visit_reasons, allow_destroy: true
+
   ransack_alias :search, :id_to_s
 end

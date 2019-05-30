@@ -1,0 +1,69 @@
+<%= simple_form_for @home_visit_form do |f| %>
+  <% content_for :body do %>
+    <%= f.input :handbook_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :home_type, collection: GenericModel.residence_types,
+                label_method: :name_formatted,
+                wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :gender, collection: GenericModel.visit_reasons,
+                label_method: :name_formatted,
+                wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :turn, collection: GenericModel.turns,
+                      label_method: :name_formatted,
+                      wrapper_html: {class: 'col-lg-3 col-sm-12'},
+                      input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :outcome, collection: GenericModel.outcomes,
+                label_method: :name_formatted,
+                wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :weight_monitoring, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :height_monitoring, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="col-lg-3 col-sm-12">
+      <div class="form-row">
+        <%= f.input :other_visit, wrapper_html: {class: 'pl-2 col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :out_area, wrapper_html: {class: 'pl-2 col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card<%= ' card-collapsed' unless @home_visit_form.home_visit_reasons.map(&:errors).flatten.any? %> mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-history mr-2"></i><%= HomeVisitReason.model_name.human(count: 2) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+          </div>
+        </div>
+        <div class="card-body">
+          <% if @home_visit_form.home_visit_reasons.any? %>
+            <div class="table-responsive">
+              <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th><%= HomeVisitReason.human_attribute_name :reason %></th>
+                  <th>Data</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @home_visit_form.home_visit_reasons.each_with_index do |home_visit_reason, index| %>
+                  <tr>
+                    <td><%= index = index + 1 %></td>
+                    <td><%= home_visit_reason.reason.name_formatted %></td>
+                    <td><%= home_visit_reason.created_at.strftime('%d/%m/%Y') %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+              <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma motivo de visita registrado.
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= render template: 'application/form', locals: {form: @home_visit_form} %>
+<% end %>

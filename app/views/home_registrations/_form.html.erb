@@ -24,11 +24,11 @@
             <% else %>
               <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
                 <div class="row">
-                  <div class="col pt-2 py-auto text-left font-weight-bold">
+                  <div class="col py-auto text-left font-weight-bold">
                     <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma família incluída
                   </div>
                   <div class="col text-right">
-                    <%= link_to new_family_path, class: 'btn btn-primary', role: 'button' do %>
+                    <%= link_to new_family_path, class: 'btn btn-sm btn-primary', role: 'button' do %>
                       <i class="fas fa-plus mr-2"></i>Adicionar Família
                     <% end %>
                   </div>
@@ -38,13 +38,13 @@
           </div>
         </div>
       <% end %>
-      <div class="card card-collapsed mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration.address.errors.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-map-marked-alt mr-2"></i><%= Address.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body">
@@ -53,18 +53,18 @@
           <% end %>
         </div>
       </div>
-      <div class="card card-collapsed mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration.home_registration_pets.map(&:errors).flatten.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-paw mr-2"></i><%= HomeRegistrationPet.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body float-right py-2">
           <%= link_to_add_association f, :home_registration_pets,
-                                      class: 'btn btn-primary', role: 'button',
+                                      class: 'btn btn-sm btn-primary', role: 'button',
                                       data: {
                                         'association-insertion-node': '#pets',
                                         'association-insertion-method': 'append'
@@ -78,13 +78,13 @@
           <% end %>
         </div>
       </div>
-      <div class="card card-collapsed mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration.living_condition.errors.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-hand-holding mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body">
@@ -93,13 +93,13 @@
           <% end %>
         </div>
       </div>
-      <div class="card card-collapsed mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration.permanence_institution.errors.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-life-ring mr-2"></i><%= PermanenceInstitution.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-4" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body">

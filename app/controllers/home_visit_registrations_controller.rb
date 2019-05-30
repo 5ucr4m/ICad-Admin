@@ -24,6 +24,7 @@ class HomeVisitRegistrationsController < WebController
   # POST /home_visit_registrations
   def create
     @home_visit_registration = HomeVisitRegistration.new(home_visit_registration_params)
+    @city_selected = @home_visit_registration.family_member.city.presence
 
     if @home_visit_registration.save
       redirect_to @home_visit_registration, notice: 'Home visit registration was successfully created.'
@@ -56,6 +57,34 @@ class HomeVisitRegistrationsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def home_visit_registration_params
-    params.require(:home_visit_registration).permit(:family_member_id, :uuid, :tp_cds_origin, :company_id, :slug)
+    params.require(:home_visit_registration).permit(:family_member_id,
+                                                    :uuid, :tp_cds_origin,
+                                                    family_member_attributes: %i[
+                                                      id
+                                                      name
+                                                      social_name
+                                                      mother_name
+                                                      father_name
+                                                      birth_date
+                                                      birth_country_id
+                                                      city_id
+                                                      nationality_id
+                                                      naturalized_at
+                                                      naturalize_decree
+                                                      brazil_entry_date
+                                                      email
+                                                      cns_number
+                                                      cns_responsible
+                                                      phone
+                                                      pis_pasep_number
+                                                      race_id
+                                                      gender_id
+                                                      ethnicity_id
+                                                      micro_area
+                                                      unknown_father
+                                                      unknown_mother
+                                                      responsible
+                                                      out_area
+                                                    ])
   end
 end

@@ -30,7 +30,12 @@ Rails.application.routes.draw do
   resources :professional_teams
   resources :health_professionals
   resources :health_establishments
-  resources :home_visit_registrations
+  resources :home_visit_forms
+  resources :home_visit_registrations do
+    shallow do
+      resources :home_visit_forms
+    end
+  end
   resources :individual_registrations
 
   devise_for :users, path: '', path_names: {
