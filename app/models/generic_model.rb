@@ -29,7 +29,7 @@ class GenericModel < ApplicationRecord
 
   belongs_to :generic_model, optional: true
 
-  ransack_alias :search, :id_to_s_or_name
+  ransack_alias :search, :id_to_s_or_name_or_reference
 
   scope :app_modules, -> {where(generic_field: :app_module)}
   scope :nationalities, -> {where(generic_field: :nationality)}
@@ -63,6 +63,12 @@ class GenericModel < ApplicationRecord
   scope :turns, -> {where(generic_field: :turn)}
   scope :outcomes, ->{where(generic_field: :outcome)}
   scope :visit_reasons, ->{where(generic_field: :reason)}
+  scope :sexual_orientations, ->{where(generic_field: :sexual_orientation)}
+  scope :education_levels, ->{where(generic_field: :education_level)}
+  scope :parent_relations, ->{where(generic_field: :parent_relation)}
+  scope :job_market_situations, ->{where(generic_field: :job_market_situation)}
+  scope :child_responsible, ->{where(generic_field: :child_responsible)}
+  scope :left_reasons, ->{where(generic_field: :left_reason)}
 
   def name_formatted
     return name if reference.blank?

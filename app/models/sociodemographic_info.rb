@@ -10,13 +10,13 @@
 #  community_group            :boolean
 #  desire_gender              :boolean
 #  desire_orientation         :boolean
+#  has_any_disability         :boolean
 #  health_plan                :boolean
 #  slug                       :string
 #  traditional_community      :boolean
 #  traditional_community_name :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
-#  child_responsible_id       :bigint
 #  company_id                 :bigint
 #  education_level_id         :bigint
 #  gender_identity_id         :bigint
@@ -27,7 +27,6 @@
 #
 # Indexes
 #
-#  index_sociodemographic_infos_on_child_responsible_id     (child_responsible_id)
 #  index_sociodemographic_infos_on_company_id               (company_id)
 #  index_sociodemographic_infos_on_education_level_id       (education_level_id)
 #  index_sociodemographic_infos_on_gender_identity_id       (gender_identity_id)
@@ -38,7 +37,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (child_responsible_id => generic_models.id)
 #  fk_rails_...  (company_id => companies.id)
 #  fk_rails_...  (education_level_id => generic_models.id)
 #  fk_rails_...  (gender_identity_id => generic_models.id)
@@ -49,14 +47,19 @@
 #
 
 class SociodemographicInfo < ApplicationRecord
+  include Sluggable
+
   belongs_to :education_level, class_name: 'GenericModel', optional: true
   belongs_to :occupation, class_name: 'GenericModel', optional: true
   belongs_to :sexual_orientation, class_name: 'GenericModel', optional: true
   belongs_to :parent_relation, class_name: 'GenericModel', optional: true
   belongs_to :job_market_situation, class_name: 'GenericModel', optional: true
   belongs_to :gender_identity, class_name: 'GenericModel', optional: true
-  belongs_to :child_responsible, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
+
+  has_many :family_member_disabilities, dependent: :destroy
+
+  accepts_nested_attributes_for :family_member_disabilities, allow_destroy: true
 
   ransack_alias :search, :id_to_s
 end

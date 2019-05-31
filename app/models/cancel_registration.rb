@@ -6,7 +6,7 @@
 #
 #  id             :bigint           not null, primary key
 #  decease_date   :date
-#  decease_number :date
+#  decease_number :string
 #  slug           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

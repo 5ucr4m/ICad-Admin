@@ -16,6 +16,7 @@ class IndividualRegistrationsController < WebController
   def new
     @individual_registration = IndividualRegistration.new
     @individual_registration.build_relationships
+    @occupation_selected = @individual_registration.sociodemographic_info.occupation.presence
   end
 
   # GET /individual_registrations/1/edit
@@ -52,6 +53,7 @@ class IndividualRegistrationsController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_individual_registration
     @individual_registration = IndividualRegistration.friendly.find(params[:id])
+    @occupation_selected = @individual_registration.sociodemographic_info.occupation.presence
   end
 
   # Only allow a trusted parameter "white list" through.
@@ -66,6 +68,100 @@ class IndividualRegistrationsController < WebController
                                                     :uuid_form_origin,
                                                     :uuid_citizen,
                                                     :tp_cds_origin,
-                                                    :company_id, :slug)
+                                                    family_member_attributes: %i[
+                                                      id
+                                                      family_id
+                                                      social_name
+                                                      city_id
+                                                      birth_date
+                                                      unknown_mother
+                                                      mother_name
+                                                      email
+                                                      nationality_id
+                                                      name
+                                                      cns_number
+                                                      cns_responsible
+                                                      phone
+                                                      pis_pasep_number
+                                                      birth_country_id
+                                                      race_id
+                                                      gender_id
+                                                      responsible
+                                                      ethnicity_id
+                                                      unknown_father
+                                                      father_name
+                                                      naturalized_at
+                                                      naturalize_decree
+                                                      brazil_entry_date
+                                                      micro_area
+                                                      out_area
+                                                    ],
+                                                    health_condition_attributes: %i[
+                                                      id
+                                                      hospitalization_cause
+                                                      other_condition_one
+                                                      other_condition_two
+                                                      other_condition_three
+                                                      medicinal_plants_used
+                                                      maternity_reference
+                                                      weight_situation_id
+                                                      alcohol_dependent
+                                                      other_drugs_dependent
+                                                      smoker
+                                                      pregnant
+                                                      bedridden
+                                                      domiciled
+                                                      diabetic
+                                                      respiratory
+                                                      hypertension
+                                                      cancer
+                                                      kidneys
+                                                      leprosy
+                                                      tuberculosis
+                                                      avc_stroke
+                                                      had_heart_attack
+                                                      had_heart_disease
+                                                      recently_hospitalized
+                                                      mental_issue
+                                                      integrative_practices
+                                                      medicinal_plants
+                                                    ],
+                                                    in_street_situation_attributes: %i[
+                                                      id
+                                                      kinship_degree
+                                                      other_accompanied
+                                                      meals_per_day_id
+                                                      has_other_accompanied
+                                                      familiar_reference
+                                                      receive_benefits
+                                                      in_street_situation
+                                                      has_personal_hygiene
+                                                      family_visit
+                                                      street_situation_time_id
+                                                    ],
+                                                    sociodemographic_info_attributes: %i[
+                                                      id
+                                                      education_level_id
+                                                      occupation_id
+                                                      sexual_orientation_id
+                                                      traditional_community_name
+                                                      parent_relation_id
+                                                      job_market_situation_id
+                                                      desire_orientation
+                                                      attend_folk_healer
+                                                      traditional_community
+                                                      attend_school
+                                                      communtity_group
+                                                      health_plan
+                                                      has_any_disability
+                                                      desire_gender
+                                                      gender_identity_id
+                                                    ],
+                                                    cancel_registration_attributes: %i[
+                                                      id
+                                                      left_reason_id
+                                                      decease_date
+                                                      decease_number
+                                                    ])
   end
 end

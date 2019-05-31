@@ -1,12 +1,20 @@
 <div class="form-row">
-  <%= f.association :education_level, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.association :occupation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.association :sexual_orientation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :education_level,
+                    collection: GenericModel.education_levels,
+                    label_method: :name_formatted, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :occupation,
+                    collection: @occupation_selected ? [@occupation_selected] : [],
+                    selected: @occupation_selected,
+                    label_method: :name_formatted,
+                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'cbo-types', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :sexual_orientation, label_method: :name_formatted, collection: GenericModel.sexual_orientations, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.input :traditional_community_name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-  <%= f.association :parent_relation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.association :job_market_situation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.association :gender_identity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.association :child_responsible, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :parent_relation, collection: GenericModel.parent_relations,
+                    label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :gender_identity, collection: GenericModel.genders,
+                    label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.association :job_market_situation, collection: GenericModel.job_market_situations,
+                    label_method: :name_formatted, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <div class="col-12">
     <div class="form-row">
       <%= f.input :desire_orientation, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
@@ -16,6 +24,46 @@
       <%= f.input :community_group, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <%= f.input :health_plan, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <%= f.input :desire_gender, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card card-collapsed mb-3">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-wheelchair mr-2"></i><%= FamilyMemberDisability.model_name.human(count: 2) %>
+        </h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <% if f.object.family_member_disabilities.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th><%= FamilyMemberDisability.human_attribute_name :disability %></th>
+                <th>Data</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% f.object.family_member_disabilities.each_with_index do |family_member_disability, index| %>
+                <tr>
+                  <td><%= index = index + 1 %></td>
+                  <td><%= family_member_disability.disability.name_formatted %></td>
+                  <td><%= family_member_disability.created_at.strftime('%d/%m/%Y') %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+            <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma deficiencia registrada.
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CreateSociodemographicInfos < ActiveRecord::Migration[6.0]
   def change
     create_table :sociodemographic_infos do |t|
@@ -15,9 +13,9 @@ class CreateSociodemographicInfos < ActiveRecord::Migration[6.0]
       t.boolean :attend_school
       t.boolean :community_group
       t.boolean :health_plan
+      t.boolean :has_any_disability
       t.boolean :desire_gender
       t.belongs_to :gender_identity, foreign_key: { to_table: :generic_models }, index: true
-      t.belongs_to :child_responsible, foreign_key: { to_table: :generic_models }, index: true
       t.belongs_to :company, foreign_key: true, index: true
       t.string :slug
 

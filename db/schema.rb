@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_180311) do
+ActiveRecord::Schema.define(version: 2019_05_31_170612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
   create_table "cancel_registrations", force: :cascade do |t|
     t.bigint "left_reason_id"
     t.date "decease_date"
-    t.date "decease_number"
+    t.string "decease_number"
     t.bigint "company_id"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
@@ -115,6 +115,18 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_families_on_company_id"
     t.index ["home_registration_id"], name: "index_families_on_home_registration_id"
+  end
+
+  create_table "family_member_disabilities", force: :cascade do |t|
+    t.bigint "sociodemographic_info_id"
+    t.bigint "disability_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_family_member_disabilities_on_company_id"
+    t.index ["disability_id"], name: "index_family_member_disabilities_on_disability_id"
+    t.index ["sociodemographic_info_id"], name: "index_family_member_disabilities_on_sociodemographic_info_id"
   end
 
   create_table "family_members", force: :cascade do |t|
@@ -203,17 +215,6 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
     t.index ["company_id"], name: "index_health_condition_kidneys_on_company_id"
     t.index ["health_condition_id"], name: "index_health_condition_kidneys_on_health_condition_id"
     t.index ["kidney_problem_id"], name: "index_health_condition_kidneys_on_kidney_problem_id"
-  end
-
-  create_table "health_condition_others", force: :cascade do |t|
-    t.bigint "health_condition_id"
-    t.text "description"
-    t.bigint "company_id"
-    t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_health_condition_others_on_company_id"
-    t.index ["health_condition_id"], name: "index_health_condition_others_on_health_condition_id"
   end
 
   create_table "health_conditions", force: :cascade do |t|
@@ -501,6 +502,16 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
     t.index ["company_id"], name: "index_professional_teams_on_company_id"
   end
 
+  create_table "responsible_children", force: :cascade do |t|
+    t.bigint "responsible_child_type_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_responsible_children_on_company_id"
+    t.index ["responsible_child_type_id"], name: "index_responsible_children_on_responsible_child_type_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -536,14 +547,13 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
     t.boolean "attend_school"
     t.boolean "community_group"
     t.boolean "health_plan"
+    t.boolean "has_any_disability"
     t.boolean "desire_gender"
     t.bigint "gender_identity_id"
-    t.bigint "child_responsible_id"
     t.bigint "company_id"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["child_responsible_id"], name: "index_sociodemographic_infos_on_child_responsible_id"
     t.index ["company_id"], name: "index_sociodemographic_infos_on_company_id"
     t.index ["education_level_id"], name: "index_sociodemographic_infos_on_education_level_id"
     t.index ["gender_identity_id"], name: "index_sociodemographic_infos_on_gender_identity_id"
@@ -630,6 +640,9 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
   add_foreign_key "companies", "cities"
   add_foreign_key "families", "companies"
   add_foreign_key "families", "home_registrations"
+  add_foreign_key "family_member_disabilities", "companies"
+  add_foreign_key "family_member_disabilities", "generic_models", column: "disability_id"
+  add_foreign_key "family_member_disabilities", "sociodemographic_infos"
   add_foreign_key "family_members", "cities"
   add_foreign_key "family_members", "companies"
   add_foreign_key "family_members", "families"
@@ -645,8 +658,6 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
   add_foreign_key "health_condition_kidneys", "companies"
   add_foreign_key "health_condition_kidneys", "generic_models", column: "kidney_problem_id"
   add_foreign_key "health_condition_kidneys", "health_conditions"
-  add_foreign_key "health_condition_others", "companies"
-  add_foreign_key "health_condition_others", "health_conditions"
   add_foreign_key "health_conditions", "companies"
   add_foreign_key "health_conditions", "generic_models", column: "weight_situation_id"
   add_foreign_key "health_establishments", "companies"
@@ -703,10 +714,11 @@ ActiveRecord::Schema.define(version: 2019_05_28_180311) do
   add_foreign_key "living_conditions", "generic_models", column: "water_treatment_id"
   add_foreign_key "permanence_institutions", "companies"
   add_foreign_key "professional_teams", "companies"
+  add_foreign_key "responsible_children", "companies"
+  add_foreign_key "responsible_children", "generic_models", column: "responsible_child_type_id"
   add_foreign_key "roles", "generic_models", column: "app_module_id"
   add_foreign_key "roles", "roles"
   add_foreign_key "sociodemographic_infos", "companies"
-  add_foreign_key "sociodemographic_infos", "generic_models", column: "child_responsible_id"
   add_foreign_key "sociodemographic_infos", "generic_models", column: "education_level_id"
   add_foreign_key "sociodemographic_infos", "generic_models", column: "gender_identity_id"
   add_foreign_key "sociodemographic_infos", "generic_models", column: "job_market_situation_id"

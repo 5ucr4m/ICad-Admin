@@ -86,7 +86,11 @@
             </a>
           </div>
         </div>
-        <div class="card-body pb-2"></div>
+        <div class="card-body pb-2">
+          <%= f.simple_fields_for :cancel_registration do |cancel_registration| %>
+            <%= render 'application/cancel_registration_fields', f: cancel_registration %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
