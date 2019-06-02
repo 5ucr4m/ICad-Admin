@@ -6,7 +6,9 @@ class HealthProfessionalsController < WebController
   # GET /health_professionals
   def index
     @query = HealthProfessional.ransack(params[:q])
-    @pagy, @health_professionals = pagy(@query.result, page: params[:page])
+    @pagy, @health_professionals = pagy(@query.result.includes(:cbo_code,
+                                                               :professional_team,
+                                                               :health_establishment), page: params[:page])
   end
 
   # GET /health_professionals/1

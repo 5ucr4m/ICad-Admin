@@ -62,19 +62,32 @@
             <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
-        <div class="card-body float-right py-2">
-          <%= link_to_add_association f, :home_registration_pets,
-                                      class: 'btn btn-sm btn-primary', role: 'button',
-                                      data: {
-                                        'association-insertion-node': '#pets',
-                                        'association-insertion-method': 'append'
-                                      } do %>
-            <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
-          <% end %>
-        </div>
-        <div id="pets" class="card-body">
-          <%= f.simple_fields_for :home_registration_pets do |home_registration_pet| %>
-            <%= render 'application/home_registration_pet_fields', f: home_registration_pet %>
+        <div class="card-body">
+          <% if @home_registration.home_registration_pets.any? %>
+            <div class="table-responsive">
+              <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th><%= HomeRegistrationPet.human_attribute_name :pet_type %></th>
+                  <th>Data</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @home_registration.home_registration_pets.each_with_index do |home_registration_pet, index| %>
+                  <tr>
+                    <td><%= index = index + 1 %></td>
+                    <td><%= home_registration_pet.pet_type.name_formatted %></td>
+                    <td><%= home_registration_pet.created_at.strftime('%d/%m/%Y') %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+              <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Animal Doméstico registrado.
+            </div>
           <% end %>
         </div>
       </div>

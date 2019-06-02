@@ -39,7 +39,7 @@ class HealthProfessional < ApplicationRecord
   belongs_to :cbo_code, class_name: 'GenericModel'
   belongs_to :health_establishment
   belongs_to :professional_team
-  belongs_to :company
+  belongs_to :company, optional: true
 
   has_many :home_registrations, dependent: :destroy
 
