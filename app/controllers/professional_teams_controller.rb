@@ -55,6 +55,6 @@ class ProfessionalTeamsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def professional_team_params
-    params.require(:professional_team).permit(:name, :code, :active, :company_id, :slug)
+    params.require(:professional_team).permit(:name, :code, :active)
   end
 end

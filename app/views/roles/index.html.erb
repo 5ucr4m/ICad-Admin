@@ -35,8 +35,8 @@
           <td><%= role.description %></td>
           <td><i class="<%= role.icon %> fa-2x"></i></td>
           <td><%= role.reference %></td>
-          <td><%= role.role_id %></td>
-          <td><%= role.app_module_id %></td>
+          <td><%= role&.role&.name %></td>
+          <td><%= role&.app_module&.name_formatted %></td>
           <td>
             <%= render 'application/table_links', f: role %>
           </td>

@@ -55,6 +55,10 @@ class HealthEstablishmentsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def health_establishment_params
-    params.require(:health_establishment).permit(:cnes_code, :unit_code, :legal_full_name, :fancy_name, :federal_registry, :state_registry, :manager_full_name, :manager_federal_registry, :registry_at, :unit_type_id, :company_id, :slug)
+    params.require(:health_establishment).permit(:cnes_code, :unit_code,
+                                                 :legal_full_name, :fancy_name,
+                                                 :federal_registry, :state_registry,
+                                                 :manager_full_name, :manager_federal_registry,
+                                                 :registry_at, :unit_type_id)
   end
 end

@@ -1,4 +1,6 @@
-class StatesController < ApplicationController
+# frozen_string_literal: true
+
+class StatesController < WebController
   before_action :set_state, only: %i[show edit update destroy]
 
   # GET /states
@@ -8,8 +10,7 @@ class StatesController < ApplicationController
   end
 
   # GET /states/1
-  def show
-  end
+  def show; end
 
   # GET /states/new
   def new
@@ -17,8 +18,7 @@ class StatesController < ApplicationController
   end
 
   # GET /states/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /states
   def create
@@ -47,13 +47,14 @@ class StatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_state
-      @state = State.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def state_params
-      params.require(:state).permit(:name, :abbreviation, :code, :reference, :country_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_state
+    @state = State.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def state_params
+    params.require(:state).permit(:name, :abbreviation, :code, :reference, :country_id)
+  end
 end

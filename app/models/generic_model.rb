@@ -71,8 +71,8 @@ class GenericModel < ApplicationRecord
   scope :left_reasons, ->{where(generic_field: :left_reason)}
 
   def name_formatted
-    return name if reference.blank?
+    return name.mb_chars.upcase if reference.blank?
 
-    "#{reference} - #{name}"
+    "#{reference} - #{name.mb_chars.upcase}"
   end
 end

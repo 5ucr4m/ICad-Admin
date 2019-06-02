@@ -1,35 +1,11 @@
-<%= form_with(model: @role, id: :role) do |f| %>
+<%= simple_form_for @role do |f| %>
   <% content_for :body do %>
-    <div class="form-group col-md-4">
-      <%= f.label :name, {class: 'form-label'} %>
-      <%= f.text_field :name, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :description, {class: 'form-label'} %>
-      <%= f.text_field :description, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :icon, {class: 'form-label'} %>
-      <%= f.text_field :icon, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :reference, {class: 'form-label'} %>
-      <%= f.text_field :reference, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :role_id, {class: 'form-label'} %>
-      <%= f.select :role_id, options_from_collection_for_select(Role.all, 'name', 'id'),
-                   {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :app_module_id, {class: 'form-label'} %>
-      <%= f.select :app_module_id, options_from_collection_for_select(GenericModel.app_modules, 'id', 'name', @role&.app_module_id),
-                   {include_blank: 'Selecione'}, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
-    <div class="form-group col-md-4">
-      <%= f.label :slug, {class: 'form-label'} %>
-      <%= f.text_field :slug, {class: 'form-control', disabled: show?(f.object.persisted?)} %>
-    </div>
+      <%= f.input :name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :description, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :icon, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :reference, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :role, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+      <%= f.association :app_module, collection: GenericModel.app_modules, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @role} %>
 <% end %>

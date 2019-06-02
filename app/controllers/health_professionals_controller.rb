@@ -59,6 +59,10 @@ class HealthProfessionalsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def health_professional_params
-    params.require(:health_professional).permit(:cns_code, :cbo_code_id, :legal_full_name, :fancy_name, :federal_registry, :state_registry, :health_establishment_id, :professional_team_id, :company_id, :slug)
+    params.require(:health_professional).permit(:cns_code,
+                                                :cbo_code_id,
+                                                :legal_full_name, :fancy_name,
+                                                :federal_registry, :state_registry,
+                                                :health_establishment_id, :professional_team_id)
   end
 end
