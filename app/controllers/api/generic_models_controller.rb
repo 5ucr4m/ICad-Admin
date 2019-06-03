@@ -2,12 +2,23 @@
 
 module Api
   class GenericModelsController < Api::ApiController
-    include Pagy::Backend
     before_action :set_generic_model, only: %i[show edit update destroy]
 
     # GET /generic_models
     def index
       render_json GenericModel.ransack(params[:q]).result
+    end
+
+    def address_types
+      render_json @query.result.address_types.includes(:generic_model)
+    end
+
+    def cbo_types
+      render_json @query.result.cbo_types.includes(:generic_model)
+    end
+
+    def ethnicity_types
+      render_json @query.result.ethnicities.includes(:generic_model)
     end
 
     # GET /generic_models/1

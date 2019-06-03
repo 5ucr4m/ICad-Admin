@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>
-          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
           <% end %>
         </div>
       </div>
@@ -19,23 +19,21 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-                  <th><%= ProfessionalTeam.human_attribute_name :name %></th>
-                  <th><%= ProfessionalTeam.human_attribute_name :code %></th>
-                  <th><%= ProfessionalTeam.human_attribute_name :active %></th>
-                  <th><%= ProfessionalTeam.human_attribute_name :company %></th>
-                  <th><%= ProfessionalTeam.human_attribute_name :slug %></th>
-                <th><%= t('helpers.labels.actions') %></th>
+        <th>#</th>
+        <th><%= ProfessionalTeam.human_attribute_name :name %></th>
+        <th><%= ProfessionalTeam.human_attribute_name :code %></th>
+        <th><%= ProfessionalTeam.human_attribute_name :active %></th>
+        <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @professional_teams.each do |professional_team| %>
         <tr>
-                      <td><%= professional_team.name %></td>
-                      <td><%= professional_team.code %></td>
-                      <td><%= professional_team.active %></td>
-                      <td><%= professional_team.company_id %></td>
-                      <td><%= professional_team.slug %></td>
-                    <td class="text-center">
+          <td><%= professional_team.id %></td>
+          <td><%= professional_team.name %></td>
+          <td><%= professional_team.code %></td>
+          <td><%= professional_team.active ? 'SIM' : 'NÃO' %></td>
+          <td class="text-center">
             <%= render 'application/table_links', f: professional_team %>
           </td>
         </tr>

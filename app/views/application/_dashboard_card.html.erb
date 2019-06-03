@@ -1,15 +1,9 @@
-<div class="card mb-3">
+<div class="card h-100 mb-3">
   <div class="card-body p-4">
     <div class="row">
-      <div class="col-5 h-50">
-        <div class="dashboard-card-icon <%= color %> py-2">
-          <div class="dashboard-card-content">
-            <i class="<%= icon ||= 'fas fa-cube' %> fa-3x p-4 py-auto align-middle"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-7 text-right align-content-center align-middle">
-        <div class="h3 font-weight-bold"><%= description %></div>
+      <i class="<%= icon ||= 'fas fa-cube' %> fa-2x p-4 py-auto align-middle col-4"></i>
+      <div class="col-8 text-right align-content-center align-middle">
+        <div class="h4 font-weight-bold"><%= description %></div>
         <div class="h3 m-0 text-muted-dark"><%= value ||= 0 %></div>
       </div>
     </div>

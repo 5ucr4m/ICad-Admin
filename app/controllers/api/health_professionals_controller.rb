@@ -7,9 +7,13 @@ module Api
     # GET /health_professionals
     def index
       @query = HealthProfessional.ransack(params[:q])
-      @pagy, @health_professionals = pagy(@query.result.includes(:cbo_code,
-                                                                 :professional_team,
-                                                                 :health_establishment), page: params[:page])
+      @health_professionals = @query.result
+      if params[:professional_team_id]
+        @health_professionals = @health_professionals.where(professional_team_id: params[:professional_team_id])
+      end
+      render_json @health_professionals.includes(:cbo_code,
+                                                 :professional_team,
+                                                 :health_establishment)
     end
 
     # GET /health_professionals/1
@@ -29,25 +33,24 @@ module Api
       @cbo_selected = @health_professional.cbo_code.presence
 
       if @health_professional.save
-        redirect_to @health_professional, notice: 'Health professional was successfully created.'
+        render_json @health_professional, :created
       else
-        render :new
+        unprocessable_entity @health_professional
       end
     end
 
     # PATCH/PUT /health_professionals/1
     def update
       if @health_professional.update(health_professional_params)
-        redirect_to @health_professional, notice: 'Health professional was successfully updated.'
+        render_json @health_professional, :ok, true
       else
-        render :edit
+        unprocessable_entity @health_professional
       end
     end
 
     # DELETE /health_professionals/1
     def destroy
       @health_professional.destroy
-      redirect_to health_professionals_url, notice: 'Health professional was successfully destroyed.'
     end
 
     private

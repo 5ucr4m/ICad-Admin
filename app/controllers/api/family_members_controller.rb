@@ -7,45 +7,37 @@ module Api
     # GET /family_members
     def index
       @query = FamilyMember.ransack(params[:q])
-      @pagy, @family_members = pagy(@query.result, page: params[:page])
+      @family_members = @query.result.includes(:family)
+      @family_members = @family_members.where(family_id: params[:family_id]) if params[:family_id]
+      render_json @family_members
     end
 
     # GET /family_members/1
     def show; end
 
-    # GET /family_members/new
-    def new
-      @family_member = FamilyMember.new
-    end
-
-    # GET /family_members/1/edit
-    def edit; end
-
     # POST /family_members
     def create
       @family_member = FamilyMember.new(family_member_params)
-      set_selected_options
 
       if @family_member.save
-        redirect_to @family_member, notice: 'Family member was successfully created.'
+        render_json @family_member, :created
       else
-        render :new
+        unprocessable_entity @family_member
       end
     end
 
     # PATCH/PUT /family_members/1
     def update
       if @family_member.update(family_member_params)
-        redirect_to @family_member, notice: 'Family member was successfully updated.'
+        render_json @family_member, :ok, true
       else
-        render :edit
+        unprocessable_entity @family_member
       end
     end
 
     # DELETE /family_members/1
     def destroy
       @family_member.destroy
-      redirect_to family_members_url, notice: 'Family member was successfully destroyed.'
     end
 
     private
@@ -53,13 +45,6 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_family_member
       @family_member = FamilyMember.friendly.find(params[:id])
-      set_selected_options
-    end
-
-    def set_selected_options
-      @city_selected = @family_member.city.presence
-      @ethnicity_selected = @family_member.ethnicity.presence
-      @family_selected = @family_member.family.presence
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -74,5 +59,4 @@ module Api
                                             :brazil_entry_date, :micro_area, :out_area)
     end
   end
-
 end

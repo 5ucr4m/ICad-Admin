@@ -11,7 +11,8 @@ module Api
     end
 
     # GET /home_visit_registrations/1
-    def show; end
+    def show;
+    end
 
     # GET /home_visit_registrations/new
     def new
@@ -20,7 +21,8 @@ module Api
     end
 
     # GET /home_visit_registrations/1/edit
-    def edit; end
+    def edit;
+    end
 
     # POST /home_visit_registrations
     def create
@@ -28,25 +30,24 @@ module Api
       @city_selected = @home_visit_registration.family_member.city.presence
 
       if @home_visit_registration.save
-        redirect_to @home_visit_registration, notice: 'Home visit registration was successfully created.'
+        render_json @home_visit_registration, :created
       else
-        render :new
+        unprocessable_entity @home_visit_registration
       end
     end
 
     # PATCH/PUT /home_visit_registrations/1
     def update
       if @home_visit_registration.update(home_visit_registration_params)
-        redirect_to @home_visit_registration, notice: 'Home visit registration was successfully updated.'
+        render_json @home_visit_registration, :created
       else
-        render :edit
+        unprocessable_entity @home_visit_registration
       end
     end
 
     # DELETE /home_visit_registrations/1
     def destroy
       @home_visit_registration.destroy
-      redirect_to home_visit_registrations_url, notice: 'Home visit registration was successfully destroyed.'
     end
 
     private
@@ -61,31 +62,31 @@ module Api
       params.require(:home_visit_registration).permit(:family_member_id,
                                                       :uuid, :tp_cds_origin,
                                                       family_member_attributes: %i[
-                                                      id
-                                                      name
-                                                      social_name
-                                                      mother_name
-                                                      father_name
-                                                      birth_date
-                                                      birth_country_id
-                                                      city_id
-                                                      nationality_id
-                                                      naturalized_at
-                                                      naturalize_decree
-                                                      brazil_entry_date
-                                                      email
-                                                      cns_number
-                                                      cns_responsible
-                                                      phone
-                                                      pis_pasep_number
-                                                      race_id
-                                                      gender_id
-                                                      ethnicity_id
-                                                      micro_area
-                                                      unknown_father
-                                                      unknown_mother
-                                                      responsible
-                                                      out_area
+                                                        id
+                                                        name
+                                                        social_name
+                                                        mother_name
+                                                        father_name
+                                                        birth_date
+                                                        birth_country_id
+                                                        city_id
+                                                        nationality_id
+                                                        naturalized_at
+                                                        naturalize_decree
+                                                        brazil_entry_date
+                                                        email
+                                                        cns_number
+                                                        cns_responsible
+                                                        phone
+                                                        pis_pasep_number
+                                                        race_id
+                                                        gender_id
+                                                        ethnicity_id
+                                                        micro_area
+                                                        unknown_father
+                                                        unknown_mother
+                                                        responsible
+                                                        out_area
                                                     ])
     end
   end

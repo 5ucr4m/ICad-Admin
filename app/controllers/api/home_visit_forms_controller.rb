@@ -7,19 +7,15 @@ module Api
     # GET /home_visit_forms
     def index
       @query = HomeVisitForm.ransack(params[:q])
-      @pagy, @home_visit_forms = pagy(@query.result, page: params[:page])
+      @home_visit_forms = @query.result.includes(:company, :home_registration)
+      if params[:home_visit_registration_id]
+        @home_visit_forms = @home_visit_forms.where(home_visit_registration_id: params[:home_visit_registration_id])
+      end
+      render_json @home_visit_forms
     end
 
     # GET /home_visit_forms/1
     def show; end
-
-    # GET /home_visit_forms/new
-    def new
-      @home_visit_form = HomeVisitForm.new
-    end
-
-    # GET /home_visit_forms/1/edit
-    def edit; end
 
     # POST /home_visit_forms
     def create

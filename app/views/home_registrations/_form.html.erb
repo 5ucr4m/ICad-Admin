@@ -9,47 +9,32 @@
     <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-2 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :finished, wrapper_html: {class: 'pl-2 col-lg-2 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
-      <% if f.object.persisted? %>
-        <div class="card card-collapsed mb-3">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i class="fas fa-users mr-2"></i><%= Family.model_name.human(count: 1) %>
-            </h3>
-          </div>
-          <div class="card-body">
-            <% if f.object.families.any? %>
-              <% f.object.families.each do |family| %>
-                <% render 'application/family_fields', f: family %>
-              <% end %>
-            <% else %>
-              <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
-                <div class="row">
-                  <div class="col py-auto text-left font-weight-bold">
-                    <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma família incluída
-                  </div>
-                  <div class="col text-right">
-                    <%= link_to new_family_path, class: 'btn btn-sm btn-primary', role: 'button' do %>
-                      <i class="fas fa-plus mr-2"></i>Adicionar Família
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <div class="card<%= ' card-collapsed' unless @home_registration.address.errors.any? %> mb-3">
+      <div class="card card-collapsed mb-3">
         <div class="card-header">
           <h3 class="card-title">
-            <i class="fas fa-map-marked-alt mr-2"></i><%= Address.model_name.human(count: 2) %>
+            <i class="fas fa-users mr-2"></i><%= Family.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
             <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
         <div class="card-body">
-          <%= f.simple_fields_for :address do |address| %>
-            <%= render 'application/address_fields', f: address %>
+          <% if f.object.families.any? %>
+            <div class="row">
+              <div class="col-12">
+                <% f.object.families.each do |family| %>
+                  <% render 'application/family_fields', f: family %>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+              <div class="row">
+                <div class="col py-auto text-center font-weight-bold">
+                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Família registrada.
+                </div>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>
@@ -85,9 +70,24 @@
               </table>
             </div>
           <% else %>
-            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+            <div class="alert alert-warning alert-dismissible p-4 text-center font-weight-bold" role="alert">
               <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Animal Doméstico registrado.
             </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="card<%= ' card-collapsed' unless @home_registration.address.errors.any? %> mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-map-marked-alt mr-2"></i><%= Address.model_name.human(count: 2) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+          </div>
+        </div>
+        <div class="card-body">
+          <%= f.simple_fields_for :address do |address| %>
+            <%= render 'application/address_fields', f: address %>
           <% end %>
         </div>
       </div>

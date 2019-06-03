@@ -56,7 +56,9 @@ class IndividualRegistration < ApplicationRecord
   accepts_nested_attributes_for :sociodemographic_info, allow_destroy: false
   accepts_nested_attributes_for :cancel_registration, allow_destroy: false
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :id_to_s_or_family_member_legal_full_name_or_family_member_federal_registry
+
+  before_create :generate_uuid
 
   def build_relationships
     build_health_condition
@@ -64,5 +66,13 @@ class IndividualRegistration < ApplicationRecord
     build_in_street_situation
     build_sociodemographic_info
     build_cancel_registration
+  end
+
+  private
+
+  def generate_uuid
+    return if uuid.present?
+
+    self.uuid = SecureRandom.uuid
   end
 end

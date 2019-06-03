@@ -25,8 +25,10 @@
 class ProfessionalTeam < ApplicationRecord
   include Sluggable
 
-  belongs_to :company
+  belongs_to :company, optional: true
   has_many :health_professionals, dependent: :nullify
 
-  ransack_alias :search, :id_to_s
+  validates :name, :code, presence: true
+
+  ransack_alias :search, :id_to_s_or_name_or_code
 end

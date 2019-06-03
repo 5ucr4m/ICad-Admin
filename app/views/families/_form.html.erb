@@ -2,13 +2,13 @@
   <% content_for :body do %>
     <%= f.input :responsible_birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :responsible_cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :members_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :handbook_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :members_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :family_income, as: :string, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'money', disabled: show?(f.object.persisted?)} %>
     <%= f.input :reside_since, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :moving, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
-      <div class="card mb-3">
+      <div class="card card-collapsed mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 2) %>
@@ -50,13 +50,8 @@
           <div class="card-body">
             <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
               <div class="row">
-                <div class="col pt-2 py-auto text-left font-weight-bold">
-                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhum membro incluído
-                </div>
-                <div class="col text-right">
-                  <%= link_to new_family_member_path, class: 'btn btn-primary', role: 'button' do %>
-                    <i class="fas fa-plus mr-2"></i>Adicionar Membro
-                  <% end %>
+                <div class="col pt-2 py-auto font-weight-bold">
+                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhum Membro Familiar incluído.
                 </div>
               </div>
             </div>

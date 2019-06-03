@@ -7,7 +7,7 @@ module Api
     # GET /health_establishments
     def index
       @query = HealthEstablishment.ransack(params[:q])
-      @pagy, @health_establishments = pagy(@query.result, page: params[:page])
+      render_json @query.result.page(params[:page])
     end
 
     # GET /health_establishments/1
@@ -26,25 +26,24 @@ module Api
       @health_establishment = HealthEstablishment.new(health_establishment_params)
 
       if @health_establishment.save
-        redirect_to @health_establishment, notice: 'Health establishment was successfully created.'
+        render_json @health_establishment, :created
       else
-        render :new
+        unprocessable_entity @health_establishment
       end
     end
 
     # PATCH/PUT /health_establishments/1
     def update
       if @health_establishment.update(health_establishment_params)
-        redirect_to @health_establishment, notice: 'Health establishment was successfully updated.'
+        render_json @health_establishment, :ok, true
       else
-        render :edit
+        unprocessable_entity @health_establishment
       end
     end
 
     # DELETE /health_establishments/1
     def destroy
       @health_establishment.destroy
-      redirect_to health_establishments_url, notice: 'Health establishment was successfully destroyed.'
     end
 
     private

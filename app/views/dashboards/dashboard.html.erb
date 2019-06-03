@@ -1,33 +1,37 @@
 <div class="form-row row-cards">
-  <div class="col-lg-3 col-sm-12">
+  <div class="col-lg col-md-4 col-sm">
     <%= render partial: 'application/dashboard_card',
                locals: {icon: 'fas fa-file-alt',
-                        color: 'bg-teal-light',
+                        color: 'teal-light',
                         value: Random.rand(1..10000),
                         description: HealthProfessional.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg-3 col-sm-12">
+  <div class="col-lg col-md-4 col-sm">
     <%= render partial: 'application/dashboard_card',
                locals: {value: Random.rand(1..10000),
                         icon: 'fas fa-arrow-down',
-                        color: 'bg-green-light',
+                        color: 'green-light',
                         description: ProfessionalTeam.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg-3 col-sm-12">
+  <div class="col-lg col-md-4 col-sm">
     <%= render partial: 'application/dashboard_card',
                locals: {icon: 'fas fa-arrow-up',
-                        color: 'bg-red-light',
+                        color: 'red-light',
                         value: Random.rand(1..10000),
                         description: HealthEstablishment.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg-3 col-sm-12">
+  <div class="col-lg col-md-4 col-sm">
     <%= render partial: 'application/dashboard_card',
                locals: {icon: 'fas fa-dollar-sign',
-                        color: 'bg-yellow',
+                        color: 'yellow',
                         value: Random.rand(1..10000),
-                        description: Faker::App.name} %>
+                        description: Family.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg-12 col-sm-12">
-
+  <div class="col-lg col-md-4 col-sm">
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: 'fas fa-dollar-sign',
+                        color: 'yellow',
+                        value: Random.rand(1..10000),
+                        description: FamilyMember.model_name.human(count: 2)} %>
   </div>
 </div>

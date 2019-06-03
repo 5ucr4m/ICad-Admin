@@ -7,21 +7,13 @@ module Api
     # GET /home_registrations
     def index
       @query = HomeRegistration.ransack(params[:q])
-      @pagy, @home_registrations = pagy(@query.result, page: params[:page])
+      @home_registrations = @query.result.includes(:company, :home_registration)
+      @home_registrations = @home_registrations.where(health_professional_id: params[:health_professional_id]) if params[:health_professional_id]
+      render_json @home_registrations
     end
 
     # GET /home_registrations/1
     def show;
-    end
-
-    # GET /home_registrations/new
-    def new
-      @home_registration = HomeRegistration.new
-      @home_registration.build_relationships
-    end
-
-    # GET /home_registrations/1/edit
-    def edit;
     end
 
     # POST /home_registrations
@@ -31,25 +23,24 @@ module Api
       @address_type_selected = @home_registration.address.address_type.presence
 
       if @home_registration.save
-        redirect_to @home_registration, notice: 'Home registration was successfully created.'
+        render_json @home_registration, :created
       else
-        render :new
+        unprocessable_entity @home_registration
       end
     end
 
     # PATCH/PUT /home_registrations/1
     def update
       if @home_registration.update(home_registration_params)
-        redirect_to @home_registration, notice: 'Home registration was successfully updated.'
+        render_json @home_registration, :ok, true
       else
-        render :edit
+        unprocessable_entity @home_registration
       end
     end
 
     # DELETE /home_registrations/1
     def destroy
       @home_registration.destroy
-      redirect_to home_registrations_url, notice: 'Home registration was successfully destroyed.'
     end
 
     private
@@ -69,59 +60,59 @@ module Api
                                                 :home_type_id,
                                                 :finished,
                                                 families_attributes: %i[
-                                                id
-                                                responsible_birth_date
-                                                responsible_cns_number
-                                                members_quantity
-                                                handbook_number
-                                                family_income_cents
-                                                reside_since
-                                                moving
+                                                  id
+                                                  responsible_birth_date
+                                                  responsible_cns_number
+                                                  members_quantity
+                                                  handbook_number
+                                                  family_income_cents
+                                                  reside_since
+                                                  moving
                                               ],
                                                 address_attributes: %i[
-                                                id
-                                                address_type_id
-                                                patio
-                                                number
-                                                zip
-                                                complement
-                                                district
-                                                city_id
-                                                referential_phone
-                                                home_phone
-                                                reference
-                                                out_area
-                                                micro_area
+                                                  id
+                                                  address_type_id
+                                                  patio
+                                                  number
+                                                  zip
+                                                  complement
+                                                  district
+                                                  city_id
+                                                  referential_phone
+                                                  home_phone
+                                                  reference
+                                                  out_area
+                                                  micro_area
                                               ],
                                                 permanence_institution_attributes: %i[
-                                                id
-                                                name
-                                                other_linked_professionals
-                                                responsible_name
-                                                responsible_cns
-                                                institutional_role
-                                                responsible_phone
+                                                  id
+                                                  name
+                                                  other_linked_professionals
+                                                  responsible_name
+                                                  responsible_cns
+                                                  institutional_role
+                                                  responsible_phone
                                               ],
                                                 living_condition_attributes: %i[
-                                                id
-                                                water_supply_id
-                                                rural_production_area_id
-                                                garbage_disposal_id
-                                                bathroom_drainage_id
-                                                home_location_id
-                                                home_wall_material_id
-                                                rooms
-                                                residents
-                                                home_situation_id
-                                                electric_power
-                                                home_access_id
-                                                home_type_id
-                                                water_treatment_id
+                                                  id
+                                                  water_supply_id
+                                                  rural_production_area_id
+                                                  garbage_disposal_id
+                                                  bathroom_drainage_id
+                                                  home_location_id
+                                                  home_wall_material_id
+                                                  rooms
+                                                  residents
+                                                  home_situation_id
+                                                  electric_power
+                                                  home_access_id
+                                                  home_type_id
+                                                  water_treatment_id
                                               ],
                                                 home_registration_pets_attributes: %i[
-                                                id
-                                                pet_type_id
-                                                _destroy
+                                                  id
+                                                  pet_type_id
+                                                  _destroy
                                               ])
     end
   end
