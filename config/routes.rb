@@ -3,7 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  #Sidekiq web config
+  # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
     [user, password] == [ENV['SIDEKIQ_USERNAME'], ENV['SIDEKIQ_PASSWORD']]
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
 
   get 'dashboard', to: 'dashboards#dashboard'
-  root to: redirect('/dashboard')
+  root to: 'dashboards#dashboard'
 
   resources :generic_models do
     collection do
