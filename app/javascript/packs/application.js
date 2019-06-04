@@ -80,7 +80,7 @@ function getZip(e) {
   if (zipValue) {
     removeZipError();
     addLoadingSpin();
-    const url = 'http://viacep.com.br/ws/' + zipValue.replace(/[^a-zA-Z0-9-. ]/g, '') + '/json';
+    const url = 'https://viacep.com.br/ws/' + zipValue.replace(/[^a-zA-Z0-9-. ]/g, '') + '/json';
     superagent.get(url).end(function (error, response) {
       const failed = response.body.erro;
       setTimeout(() => {
