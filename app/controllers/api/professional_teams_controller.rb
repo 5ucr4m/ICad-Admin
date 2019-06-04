@@ -11,7 +11,9 @@ module Api
     end
 
     # GET /professional_teams/1
-    def show; end
+    def show
+      render_json @professional_team
+    end
 
     # GET /professional_teams/new
     def new

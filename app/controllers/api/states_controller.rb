@@ -2,7 +2,7 @@
 
 module Api
   class StatesController < Api::ApiController
-    before_action :set_state, only: %i[show edit update destroy]
+    before_action :set_state, only: %i[show]
 
     # GET /states
     def index
@@ -11,7 +11,9 @@ module Api
     end
 
     # GET /states/1
-    def show; end
+    def show
+      render_json @state
+    end
 
     private
 

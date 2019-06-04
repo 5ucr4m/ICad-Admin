@@ -11,7 +11,9 @@ module Api
     end
 
     # GET /individual_registrations/1
-    def show; end
+    def show
+      render_json @individual_registration
+    end
 
     # GET /individual_registrations/new
     def new

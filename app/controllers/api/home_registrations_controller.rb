@@ -13,7 +13,9 @@ module Api
     end
 
     # GET /home_registrations/1
-    def show; end
+    def show
+      render_json @home_registration
+    end
 
     # POST /home_registrations
     def create

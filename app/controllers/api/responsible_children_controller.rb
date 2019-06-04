@@ -5,7 +5,8 @@ module Api
     before_action :set_responsible_child, only: %i[show update destroy]
 
     # GET /responsible_children/1
-    def show;
+    def show
+      render_json @responsible_child
     end
 
     # POST /responsible_children

@@ -3,11 +3,7 @@
 module Api
   class GenericModelsController < Api::ApiController
     before_action :set_generic_model, only: %i[show edit update destroy]
-
-    # GET /generic_models
-    def index
-      render_json GenericModel.ransack(params[:q]).result
-    end
+    before_action :set_query, except: %i[index new create show edit update destroy]
 
     def address_types
       render_json @query.result.address_types.includes(:generic_model)
@@ -58,6 +54,10 @@ module Api
     end
 
     private
+
+    def set_query
+      @query = GenericModel.ransack(params[:q])
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_generic_model

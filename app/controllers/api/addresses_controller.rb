@@ -5,7 +5,9 @@ module Api
     before_action :set_address, only: %i[show update destroy]
 
     # GET /addresses/1
-    def show; end
+    def show
+      render_json @address
+    end
 
     # POST /addresses
     def create

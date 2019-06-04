@@ -5,7 +5,9 @@ module Api
     before_action :set_living_condition, only: %i[show update destroy]
 
     # GET /living_conditions/1
-    def show; end
+    def show
+      render_json @living_condition
+    end
 
     # POST /living_conditions
     def create

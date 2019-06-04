@@ -5,7 +5,8 @@ module Api
     before_action :set_sociodemographic_info, only: %i[show update destroy]
 
     # GET /sociodemographic_infos/1
-    def show;
+    def show
+      render_json @sociodemographic_info
     end
 
     # POST /sociodemographic_infos

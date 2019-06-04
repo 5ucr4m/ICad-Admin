@@ -13,7 +13,9 @@ module Api
     end
 
     # GET /families/1
-    def show; end
+    def show
+      render_json @family
+    end
 
     # POST /families
     def create

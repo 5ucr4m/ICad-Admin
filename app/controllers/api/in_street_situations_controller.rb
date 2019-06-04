@@ -5,7 +5,8 @@ module Api
     before_action :set_in_street_situation, only: %i[show update destroy]
 
     # GET /in_street_situations/1
-    def show;
+    def show
+      render_json @in_street_situation
     end
 
     # POST /in_street_situations

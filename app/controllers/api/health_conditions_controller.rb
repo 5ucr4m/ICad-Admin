@@ -5,7 +5,9 @@ module Api
     before_action :set_health_condition, only: %i[show update destroy]
 
     # GET /health_conditions/1
-    def show; end
+    def show
+      render_json @health_condition
+    end
 
     # POST /health_conditions
     def create

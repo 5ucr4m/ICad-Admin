@@ -23,16 +23,17 @@ pt-BR:
         other: Profissionais de Saúde
         icon: fas fa-user-md
       family:
-        one: Familia
-        other: Familias
+        one: Família
+        other: Famílias
         icon: fas fa-users
       family_member:
-        one: Membro da Família
-        other: Membros da Família
+        one: Membro Familiar
+        other: Membros Familiares
         icon: fas fa-user
       professional_team:
         one: Equipe
         other: Equipes
+        icon: fas fa-users-cog
       health_establishment:
         one: UBS
         other: UBS

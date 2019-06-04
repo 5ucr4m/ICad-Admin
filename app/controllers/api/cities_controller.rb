@@ -12,7 +12,9 @@ module Api
     end
 
     # GET /cities/1
-    def show; end
+    def show
+      render_json @city
+    end
 
     private
 

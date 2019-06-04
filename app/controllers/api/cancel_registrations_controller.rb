@@ -5,7 +5,9 @@ module Api
     before_action :set_cancel_registration, only: %i[show update destroy]
 
     # GET /cancel_registrations/1
-    def show; end
+    def show
+      render_json @cancel_registration
+    end
 
     # POST /cancel_registrations
     def create

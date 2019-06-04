@@ -20,7 +20,9 @@ module Api
     end
 
     # GET /health_professionals/1
-    def show; end
+    def show
+      render_json @health_professional
+    end
 
     # GET /health_professionals/new
     def new

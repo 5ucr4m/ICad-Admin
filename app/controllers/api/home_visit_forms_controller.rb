@@ -15,7 +15,9 @@ module Api
     end
 
     # GET /home_visit_forms/1
-    def show; end
+    def show
+      render_json @home_visit_form
+    end
 
     # POST /home_visit_forms
     def create

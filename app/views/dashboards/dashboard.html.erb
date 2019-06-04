@@ -1,37 +1,80 @@
 <div class="form-row row-cards">
-  <div class="col-lg col-md-4 col-sm">
+  <div class="col-lg col-md-4 col-sm-6">
     <%= render partial: 'application/dashboard_card',
-               locals: {icon: 'fas fa-file-alt',
+               locals: {icon: 'fas fa-user-md',
                         color: 'teal-light',
                         value: Random.rand(1..10000),
+                        action: health_professionals_path,
                         description: HealthProfessional.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg col-md-4 col-sm">
+  <div class="col-lg col-md-4 col-sm-6">
     <%= render partial: 'application/dashboard_card',
                locals: {value: Random.rand(1..10000),
-                        icon: 'fas fa-arrow-down',
+                        icon: 'fas fa-users-cog',
                         color: 'green-light',
+                        action: professional_teams_path,
                         description: ProfessionalTeam.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg col-md-4 col-sm">
+  <div class="col-lg col-md-4 col-sm-6">
     <%= render partial: 'application/dashboard_card',
-               locals: {icon: 'fas fa-arrow-up',
+               locals: {icon: 'fas fa-hospital',
                         color: 'red-light',
                         value: Random.rand(1..10000),
+                        action: health_establishments_path,
                         description: HealthEstablishment.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg col-md-4 col-sm">
+  <div class="col-lg col-md-4 col-sm-6">
     <%= render partial: 'application/dashboard_card',
-               locals: {icon: 'fas fa-dollar-sign',
+               locals: {icon: 'fas fa-address-book',
                         color: 'yellow',
                         value: Random.rand(1..10000),
+                        action: families_path,
                         description: Family.model_name.human(count: 2)} %>
   </div>
-  <div class="col-lg col-md-4 col-sm">
+  <div class="col-lg col-md-4 col-sm-6">
     <%= render partial: 'application/dashboard_card',
-               locals: {icon: 'fas fa-dollar-sign',
+               locals: {icon: 'fas fa-user',
                         color: 'yellow',
                         value: Random.rand(1..10000),
+                        action: family_members_path,
                         description: FamilyMember.model_name.human(count: 2)} %>
+  </div>
+</div>
+<div class="form-row row-cards">
+  <div class="col-lg-4 col-sm-12">
+    <div class="card mb-3">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title font-weight-bold">
+          <%= Family.model_name.human(count: 2) %>
+        </h3>
+      </div>
+      <div class="card-body">
+        <%= column_chart Family.group_by_day(:created_at, format: '%d/%m/%Y', last: 5).count, ytitle: 'Quantidade' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-12">
+    <div class="card card-chart mb-3">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title font-weight-bold">
+          <%= FamilyMember.model_name.human(count: 2) %>
+        </h3>
+      </div>
+      <div class="card-body">
+        <%= column_chart(FamilyMember.group_by_day(:created_at, format: '%d/%m/%Y', last: 5).count, ytitle: 'Quantidade', colors: ["#05386b"]) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-sm-12">
+    <div class="card mb-3">
+      <div class="card-header border-bottom-0">
+        <h3 class="card-title font-weight-bold">
+          <%= HomeVisitRegistration.model_name.human(count: 2) %>
+        </h3>
+      </div>
+      <div class="card-body">
+        <%= column_chart HomeVisitRegistration.group_by_day(:created_at, format: '%d/%m/%Y', last: 5).count, ytitle: 'Quantidade' %>
+      </div>
+    </div>
   </div>
 </div>

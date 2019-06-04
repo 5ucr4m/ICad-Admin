@@ -8,6 +8,8 @@
     "@rails/webpacker": "^4.0.2",
     "@ttskch/select2-bootstrap4-theme": "^1.2.2",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.8.0",
+    "chartkick": "^3.1.0",
     "cleave.js": "^1.4.10",
     "jquery": "^3.4.0",
     "popper.js": "^1.15.0",

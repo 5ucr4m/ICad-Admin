@@ -27,7 +27,6 @@
         <th><%= FamilyMember.human_attribute_name :city %></th>
         <th><%= FamilyMember.human_attribute_name :race %></th>
         <th><%= FamilyMember.human_attribute_name :gender %></th>
-        <th><%= FamilyMember.human_attribute_name :ethnicity %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
@@ -42,7 +41,6 @@
           <td><%= family_member&.city&.name %></td>
           <td><%= family_member&.race&.name %></td>
           <td><%= family_member&.gender&.name %></td>
-          <td><%= family_member&.ethnicity&.name %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: family_member %>
           </td>
