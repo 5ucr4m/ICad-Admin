@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_31_170612) do
+ActiveRecord::Schema.define(version: 2019_06_04_114012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -503,12 +503,14 @@ ActiveRecord::Schema.define(version: 2019_05_31_170612) do
   end
 
   create_table "responsible_children", force: :cascade do |t|
+    t.bigint "individual_registration_id"
     t.bigint "responsible_child_type_id"
     t.bigint "company_id"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_responsible_children_on_company_id"
+    t.index ["individual_registration_id"], name: "index_responsible_children_on_individual_registration_id"
     t.index ["responsible_child_type_id"], name: "index_responsible_children_on_responsible_child_type_id"
   end
 
@@ -716,6 +718,7 @@ ActiveRecord::Schema.define(version: 2019_05_31_170612) do
   add_foreign_key "professional_teams", "companies"
   add_foreign_key "responsible_children", "companies"
   add_foreign_key "responsible_children", "generic_models", column: "responsible_child_type_id"
+  add_foreign_key "responsible_children", "individual_registrations"
   add_foreign_key "roles", "generic_models", column: "app_module_id"
   add_foreign_key "roles", "roles"
   add_foreign_key "sociodemographic_infos", "companies"

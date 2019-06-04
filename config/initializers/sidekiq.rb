@@ -2,7 +2,7 @@
 
 require 'sidekiq/api'
 
-sidekiq_config = { url: ENV['ACTIVE_JOB_URL'] }
+sidekiq_config = { url: ENV['REDIS_URL'] }
 Sidekiq.configure_server do |config|
   config.redis = sidekiq_config
 end
