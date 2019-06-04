@@ -2,7 +2,7 @@
 
 module Api
   class HomeRegistrationsController < Api::ApiController
-    before_action :set_home_registration, only: %i[show edit update destroy]
+    before_action :set_home_registration, only: %i[show update destroy]
 
     # GET /home_registrations
     def index
@@ -13,8 +13,7 @@ module Api
     end
 
     # GET /home_registrations/1
-    def show;
-    end
+    def show; end
 
     # POST /home_registrations
     def create
@@ -68,7 +67,7 @@ module Api
                                                   family_income_cents
                                                   reside_since
                                                   moving
-                                              ],
+                                                ],
                                                 address_attributes: %i[
                                                   id
                                                   address_type_id
@@ -83,7 +82,7 @@ module Api
                                                   reference
                                                   out_area
                                                   micro_area
-                                              ],
+                                                ],
                                                 permanence_institution_attributes: %i[
                                                   id
                                                   name
@@ -92,7 +91,7 @@ module Api
                                                   responsible_cns
                                                   institutional_role
                                                   responsible_phone
-                                              ],
+                                                ],
                                                 living_condition_attributes: %i[
                                                   id
                                                   water_supply_id
@@ -108,13 +107,12 @@ module Api
                                                   home_access_id
                                                   home_type_id
                                                   water_treatment_id
-                                              ],
+                                                ],
                                                 home_registration_pets_attributes: %i[
                                                   id
                                                   pet_type_id
                                                   _destroy
-                                              ])
+                                                ])
     end
   end
-
 end

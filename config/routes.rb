@@ -52,61 +52,73 @@ Rails.application.routes.draw do
   # end
 
   namespace :api do
-    # mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-    #   sessions: 'api/overrides/sessions'
-    # }
+    mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+      sessions: 'api/overrides/sessions'
+    }
 
-    # # States & Cities
-    # resources :states, except: %i[new edit] do
-    #   shallow do
-    #     resources :cities, except: %i[new edit]
-    #   end
-    # end
-    #
-    # # Home Registrations
-    # resources :home_registrations, except: %i[new edit] do
-    #   shallow do
-    #     resources :families, except: %i[new edit] do
-    #       shallow do
-    #         resources :family_members, except: %i[new edit]
-    #       end
-    #     end
-    #   end
-    # end
-    # # Professional Teams
-    # resources :professional_teams, except: %i[new edit] do
-    #   shallow do
-    #     resources :health_professionals, except: %i[new edit] do
-    #       shallow do
-    #         resources :home_registrations, only: %i[index]
-    #       end
-    #     end
-    #   end
-    # end
-    # # Home Visit Registrations
-    # resources :home_visit_registrations, except: %i[index new edit] do
-    #   shallow do
-    #     resources :home_visit_forms, except: %i[index new edit]
-    #   end
-    # end
+    # Home Registrations
+    resources :home_registrations, except: %i[new edit] do
+      shallow do
+        resources :families, except: %i[new edit] do
+          shallow do
+            resources :family_members, except: %i[new edit]
+          end
+        end
+        resources :living_condtions, except: %i[index new edit]
+        resources :addresses, except: %i[index new edit]
+      end
+    end
+
+    # Professional Teams
+    resources :professional_teams, except: %i[new edit] do
+      shallow do
+        resources :health_professionals, except: %i[new edit] do
+          shallow do
+            resources :home_registrations, only: %i[index]
+          end
+        end
+      end
+    end
+
+    # Home Visit Registrations
+    resources :home_visit_registrations, except: %i[index new edit] do
+      shallow do
+        resources :home_visit_forms, except: %i[index new edit]
+      end
+    end
+
+    # States & Cities
+    resources :states, only: %i[index show] do
+      shallow do
+        resources :cities, only: %i[index show]
+      end
+    end
+
     # Individual Registrations
     resources :individual_registrations, except: %i[new edit] do
       shallow do
-        resources :family_members, except: %i[new edit]
-        resources :health_conditions, except: %i[new edit]
-        resources :in_street_situations, except: %i[new edit]
-        resources :sociodemographic_infos, except: %i[new edit]
-        resources :cancel_registrations, except: %i[new edit]
+        resources :family_members, except: %i[index new edit]
+        resources :health_conditions, except: %i[index new edit]
+        resources :in_street_situations, except: %i[index new edit]
+        resources :sociodemographic_infos, except: %i[index new edit]
+        resources :cancel_registrations, except: %i[index new edit]
       end
     end
-    # resources :health_establishments, except: %i[index new edit]
-    # resources :cities, only: %i[index show]
-    # resources :generic_models, except: %i[index new create show edit update destroy] do
-    #   collection do
-    #     get 'address_types'
-    #     get 'cbo_types'
-    #     get 'ethnicity_types'
-    #   end
-    # end
+
+    # Health Establishments
+    resources :health_establishments, except: %i[index new edit] do
+      shallow do
+        resources :health_professionals, only: %i[index show]
+      end
+    end
+
+    # Generic Models
+    resources :generic_models, except: %i[index new create show edit update destroy] do
+      collection do
+        get 'address_types'
+        get 'cbo_types'
+        get 'ethnicity_types'
+      end
+    end
   end
 end

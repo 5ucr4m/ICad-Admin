@@ -5,8 +5,7 @@ module Api
     before_action :set_health_condition, only: %i[show update destroy]
 
     # GET /health_conditions/1
-    def show;
-    end
+    def show; end
 
     # POST /health_conditions
     def create
@@ -73,7 +72,17 @@ module Api
                                                :recently_hospitalized,
                                                :mental_issue,
                                                :integrative_practices,
-                                               :medicinal_plants)
+                                               :medicinal_plants,
+                                               health_condition_diseases_attributes: %i[
+                                                 id
+                                                 disease_type_id
+                                                 _destroy
+                                               ],
+                                               health_condition_kidneys: %i[
+                                                 id
+                                                 kidney_problem_id
+                                                 _destroy
+                                               ])
     end
   end
 end

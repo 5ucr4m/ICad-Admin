@@ -28,18 +28,18 @@ module Api
       @individual_registration = IndividualRegistration.new(individual_registration_params)
 
       if @individual_registration.save
-        redirect_to @individual_registration, notice: 'Individual registration was successfully created.'
+        render_json @individual_registration, :created
       else
-        render :new
+        unprocessable_entity @individual_registration
       end
     end
 
     # PATCH/PUT /individual_registrations/1
     def update
       if @individual_registration.update(individual_registration_params)
-        redirect_to @individual_registration, notice: 'Individual registration was successfully updated.'
+        render_json @individual_registration, :ok, true
       else
-        render :edit
+        unprocessable_entity @individual_registration
       end
     end
 

@@ -2,7 +2,7 @@
 
 module Api
   class FamilyMembersController < Api::ApiController
-    before_action :set_family_member, only: %i[show edit update destroy]
+    before_action :set_family_member, only: %i[show update destroy]
 
     # GET /family_members
     def index

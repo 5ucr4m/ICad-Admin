@@ -11,6 +11,9 @@ module Api
       if params[:professional_team_id]
         @health_professionals = @health_professionals.where(professional_team_id: params[:professional_team_id])
       end
+      if params[:health_establishment_id]
+        @health_professionals = @health_professionals.where(health_establishment_id: params[:health_establishment_id])
+      end
       render_json @health_professionals.includes(:cbo_code,
                                                  :professional_team,
                                                  :health_establishment)

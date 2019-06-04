@@ -55,7 +55,6 @@ module Api
     # DELETE /generic_models/1
     def destroy
       @generic_model.destroy
-      redirect_to generic_models_url, notice: 'Generic model was successfully destroyed.'
     end
 
     private

@@ -26,18 +26,18 @@ module Api
       @professional_team = ProfessionalTeam.new(professional_team_params)
 
       if @professional_team.save
-        redirect_to @professional_team, notice: 'Professional team was successfully created.'
+        render_json @professional_team, :created
       else
-        render :new
+        unprocessable_entity @professional_team
       end
     end
 
     # PATCH/PUT /professional_teams/1
     def update
       if @professional_team.update(professional_team_params)
-        redirect_to @professional_team, notice: 'Professional team was successfully updated.'
+        render_json @professional_team, :ok, true
       else
-        render :edit
+        unprocessable_entity @professional_team
       end
     end
 
