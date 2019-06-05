@@ -24,9 +24,17 @@ Rails.application.routes.draw do
   resources :roles
   resources :states
   resources :cities
-  resources :families
+  resources :families do
+    collection do
+      get 'chart_by_day'
+    end
+  end
   resources :companies
-  resources :family_members
+  resources :family_members do
+    collection do
+      get 'chart_by_day'
+    end
+  end
   resources :home_visit_forms
   resources :home_registrations
   resources :professional_teams

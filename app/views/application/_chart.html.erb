@@ -1,0 +1,21 @@
+<div class="card mb-3">
+  <div class="card-header border-bottom-0">
+    <h3 class="card-title font-weight-bold">
+      <%= title %>
+    </h3>
+    <div class="card-options">
+      <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="dimmer">
+      <div id="loader_<%= id %>" class="loader"></div>
+      <div class="dimmer-content text-center">
+        <div id="<%= id %>"></div>
+        <div id="chart-alert" class="card-alert alert alert-warning mb-0 font-weight-bold">
+          Nenhum gráfico disponível.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

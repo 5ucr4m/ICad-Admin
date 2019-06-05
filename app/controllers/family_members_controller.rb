@@ -3,6 +3,12 @@
 class FamilyMembersController < WebController
   before_action :set_family_member, only: %i[show edit update destroy]
 
+  def chart_by_day
+    render_json FamilyMember.group_by_period(:day,
+                                             :created_at,
+                                             format: '%d/%m/%Y', last: 5).count
+  end
+
   # GET /family_members
   def index
     @query = FamilyMember.ransack(params[:q])

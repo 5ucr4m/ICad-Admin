@@ -7,8 +7,7 @@ require('bootstrap/dist/js/bootstrap.bundle');
 require('cleave.js');
 require('cleave.js/dist/addons/cleave-phone.br');
 require('select2');
-require('chartkick');
-require('chart.js');
+require("chartkick").use(require("highcharts"));
 require("channels");
 
 import * as Pagy from './pagy.js.erb';
