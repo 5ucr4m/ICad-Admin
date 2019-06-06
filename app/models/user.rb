@@ -50,6 +50,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  belongs_to :health_professional, optional: true
+
   devise :database_authenticatable, #:registerable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
 
@@ -65,7 +67,7 @@ class User < ApplicationRecord
 
   attr_accessor :company
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
   def current_company
     user_companies.find(&:current) || user_companies.first
