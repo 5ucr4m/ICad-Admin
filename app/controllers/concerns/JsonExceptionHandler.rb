@@ -35,6 +35,6 @@ module JsonExceptionHandler
   end
 
   def unprocessable_entity(model)
-    render json: model.errors, status: :unprocessable_entity
+    render json: model&.errors, status: :unprocessable_entity
   end
 end

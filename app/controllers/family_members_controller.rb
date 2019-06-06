@@ -12,7 +12,7 @@ class FamilyMembersController < WebController
   # GET /family_members
   def index
     @query = FamilyMember.ransack(params[:q])
-    @pagy, @family_members = pagy(@query.result, page: params[:page])
+    @pagy, @family_members = pagy(@query.result.includes(:city, :race, :gender), page: params[:page])
   end
 
   # GET /family_members/1

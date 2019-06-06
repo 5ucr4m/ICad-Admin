@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   belongs_to :health_professional, optional: true
 
-  devise :database_authenticatable, #:registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
 
   include DeviseTokenAuth::Concerns::User
@@ -65,9 +65,13 @@ class User < ApplicationRecord
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")
   end
 
-  attr_accessor :company
+  attr_accessor :company, :cns_code, :cnes_code
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
+
+  validates :cns_code, :cnes_code, presence: true
+
+  before_create :define_health_professional
 
   def current_company
     user_companies.find(&:current) || user_companies.first
@@ -76,5 +80,24 @@ class User < ApplicationRecord
   def send_confirmation_notification?
     skip_confirmation!
     false
+  end
+
+  private
+
+  def check_health_establishment
+    health_establishment = HealthEstablishment.find_by(cnes_code: cnes_code)
+    if health_establishment.present?
+      errors.add(:cns_code, 'Não pode ficar em branco.') && return if cns_code.blank?
+      HealthProfessional.create!(cns_code: cns_code,
+                                 health_establishment: health_establishment)
+    else
+      errors.add(:cnes_code, "#{HealthEstablishment.model_name.human(count: 1)} não encontrada.")
+    end
+  end
+
+  def define_health_professional
+    return if health_professional.present?
+
+    check_health_establishment
   end
 end

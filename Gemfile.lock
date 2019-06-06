@@ -76,6 +76,8 @@ GEM
     annotate (2.7.5)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 13.0)
+    apipie-rails (0.5.16)
+      rails (>= 4.1)
     ast (2.4.0)
     bcrypt (3.1.12)
     better_errors (2.5.1)
@@ -424,6 +426,7 @@ DEPENDENCIES
   active_model_serializers!
   active_record_query_trace
   annotate
+  apipie-rails
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller

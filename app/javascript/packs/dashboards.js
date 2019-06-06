@@ -4,7 +4,6 @@ import Highcharts from 'highcharts';
 
 function columnChart(options) {
   const superagent = require('superagent');
-  const nocache = require('superagent-no-cache');
 
   let dimmer = document.getElementById(`dimmer_${options.id}`);
   let loader = document.getElementById(`loader_${options.id}`);
@@ -17,8 +16,7 @@ function columnChart(options) {
   }
 
   setTimeout(function () {
-    superagent.get(options.url)
-      .use(nocache).end((err, res) => {
+    superagent.get(options.url).end((err, res) => {
       console.log(err);
       if (res.body) {
         dimmer.classList.remove('active');
@@ -45,8 +43,6 @@ function columnChart(options) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  const data = {"01/06/2019": 2, "02/06/2019": 0, "03/06/2019": 1, "04/06/2019": 2, "05/06/2019": 0};
-
   columnChart({id: 'families', url: '/families/chart_by_day', name: 'Famílias'});
   columnChart({id: 'family-members', url: '/family_members/chart_by_day', name: 'Membros Famíliares'});
   columnChart({

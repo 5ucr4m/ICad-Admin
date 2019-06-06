@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  apipie
   # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
@@ -36,7 +37,7 @@ Rails.application.routes.draw do
       get 'chart_by_day'
     end
   end
-  resources :home_visit_forms
+
   resources :home_registrations
   resources :professional_teams
   resources :health_professionals
@@ -44,6 +45,9 @@ Rails.application.routes.draw do
   resources :home_visit_registrations do
     collection do
       get 'chart_by_day'
+    end
+    shallow do
+      resources :home_visit_forms
     end
   end
   resources :individual_registrations
@@ -63,7 +67,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-      sessions: 'api/overrides/sessions'
+      sessions: 'api/overrides/sessions',
+      registrations: 'api/overrides/registrations'
     }
 
     # Home Registrations

@@ -48,9 +48,13 @@
 class UserSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :email
+  attributes :id, :email, :cns_code
 
   def avatar_url
     rails_blob_url(object.avatar) if object.avatar.present?
+  end
+
+  def cns_code
+    object&.health_professional&.cns_code if object&.health_professional&.present?
   end
 end

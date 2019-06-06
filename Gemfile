@@ -41,6 +41,7 @@ gem 'sidekiq'
 gem 'simple_form'
 gem 'sinatra', require: false
 gem 'webpacker', '~> 4.0'
+gem 'apipie-rails'
 
 group :development, :test do
   gem 'better_errors'

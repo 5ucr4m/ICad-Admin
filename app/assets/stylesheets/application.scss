@@ -276,7 +276,11 @@ span.float-right i {
   margin-top: 1.6rem;
 }
 
-a.card-options-collapse badge bg-blue-deep text-white {
+a.card-options-collapse .badge .bg-blue-deep .text-white {
   cursor: pointer;
+}
+
+.card-dashboard {
+  margin-bottom: 0;
 }
 
