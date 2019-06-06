@@ -40,7 +40,11 @@ Rails.application.routes.draw do
   resources :professional_teams
   resources :health_professionals
   resources :health_establishments
-  resources :home_visit_registrations
+  resources :home_visit_registrations do
+    collection do
+      get 'chart_by_day'
+    end
+  end
   resources :individual_registrations
 
   devise_for :users, path: '', path_names: {

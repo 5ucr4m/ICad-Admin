@@ -3,6 +3,11 @@
 class HomeVisitRegistrationsController < WebController
   before_action :set_home_visit_registration, only: %i[show edit update destroy]
 
+  def chart_by_day
+    render_json HomeVisitRegistration.group_by_period(:day, :updated_at,
+                                                      format: '%d/%m/%Y', last: 5).count
+  end
+
   # GET /home_visit_registrations
   def index
     @query = HomeVisitRegistration.ransack(params[:q])
