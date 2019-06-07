@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   belongs_to :health_professional, optional: true
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, #:registerable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
 
   include DeviseTokenAuth::Concerns::User
@@ -60,6 +60,16 @@ class User < ApplicationRecord
   has_many :user_companies, dependent: :destroy
   has_many :companies, through: :user_companies
   has_many :roles, through: :user_companies
+
+  validates :email,
+            format: {with: URI::MailTo::EMAIL_REGEXP},
+            presence: true,
+            uniqueness: {case_sensitive: false}
+
+  validates :password, confirmation: true
+
+
+  accepts_nested_attributes_for :health_professional, allow_destroy: true
 
   ransacker :id_to_s do
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")

@@ -15,6 +15,7 @@ class UsersController < WebController
   # GET /users/new
   def new
     @user = User.new
+    @user.build_health_professional
   end
 
   # GET /users/1/edit
@@ -23,6 +24,7 @@ class UsersController < WebController
   # POST /users
   def create
     @user = User.new(user_params)
+    @cbo_selected = @user.health_professional.cbo_code.presence
 
     if @user.save
       redirect_to @user, notice: 'User was successfully created.'
@@ -51,10 +53,22 @@ class UsersController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.friendly.find(current_user.id)
+    @cbo_selected = @user.health_professional.cbo_code.presence
   end
 
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :cns_code)
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 health_professional_attributes: %i[
+                                   id
+                                   cns_code
+                                   cbo_code_id
+                                   legal_full_name
+                                   fancy_name
+                                   federal_registry
+                                   state_registry
+                                   health_establishment_id
+                                   professional_team_id
+                                 ])
   end
 end
