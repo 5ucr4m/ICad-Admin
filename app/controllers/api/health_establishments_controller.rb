@@ -5,25 +5,20 @@ module Api
     before_action :set_health_establishment, only: %i[show edit update destroy]
 
     # GET /health_establishments
+    api :GET, '/health_establishments', 'GET Health Establishments List'
     def index
       @query = HealthEstablishment.ransack(params[:q])
       render_json @query.result.page(params[:page])
     end
 
     # GET /health_establishments/1
+    api :GET, '/health_establishments/:id', 'GET Health Establishment'
     def show
       render_json @health_establishment
     end
 
-    # GET /health_establishments/new
-    def new
-      @health_establishment = HealthEstablishment.new
-    end
-
-    # GET /health_establishments/1/edit
-    def edit; end
-
     # POST /health_establishments
+    api :POST, '/health_establishments', 'POST Health Establishment'
     def create
       @health_establishment = HealthEstablishment.new(health_establishment_params)
 
@@ -35,6 +30,8 @@ module Api
     end
 
     # PATCH/PUT /health_establishments/1
+    api :PATCH, '/health_establishments/:id', 'PATCH Health Establishment'
+    api :PUT, '/health_establishments/:id', 'PUT Health Establishment'
     def update
       if @health_establishment.update(health_establishment_params)
         render_json @health_establishment, :ok, true
@@ -44,6 +41,7 @@ module Api
     end
 
     # DELETE /health_establishments/1
+    api :DELETE, '/health_establishments/:id', 'DELETE Health Establishment'
     def destroy
       @health_establishment.destroy
     end

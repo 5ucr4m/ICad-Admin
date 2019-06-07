@@ -5,6 +5,7 @@ module Api
     before_action :set_family_member, only: %i[show update destroy]
 
     # GET /family_members
+    api :GET, '/family_members', 'GET Family Members List'
     def index
       @query = FamilyMember.ransack(params[:q])
       @family_members = @query.result.includes(:family)
@@ -13,11 +14,13 @@ module Api
     end
 
     # GET /family_members/1
+    api :GET, '/family_members/:id', 'GET Family Member'
     def show
       render_json @family_member
     end
 
     # POST /family_members
+    api :POST, '/family_members', 'POST Family Member'
     def create
       @family_member = FamilyMember.new(family_member_params)
 
@@ -29,6 +32,8 @@ module Api
     end
 
     # PATCH/PUT /family_members/1
+    api :PATCH, '/family_members/:id', 'PATCH Family Member'
+    api :PUT, '/family_members/:id', 'PUT Family Member'
     def update
       if @family_member.update(family_member_params)
         render_json @family_member, :ok, true
@@ -38,6 +43,7 @@ module Api
     end
 
     # DELETE /family_members/1
+    api :DELETE, '/family_members/:id', 'DELETE Family Member'
     def destroy
       @family_member.destroy
     end

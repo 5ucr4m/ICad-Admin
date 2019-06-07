@@ -5,6 +5,7 @@ module Api
     before_action :set_home_registration, only: %i[show update destroy]
 
     # GET /home_registrations
+    api :GET, '/home_registrations', 'GET Home Registrations List'
     def index
       @query = HomeRegistration.ransack(params[:q])
       @home_registrations = @query.result.includes(:company, :home_registration)
@@ -13,11 +14,13 @@ module Api
     end
 
     # GET /home_registrations/1
+    api :GET, '/home_registrations/:id', 'GET Home Registration'
     def show
       render_json @home_registration
     end
 
     # POST /home_registrations
+    api :POST, '/home_registrations', 'GET Home Registrations List'
     def create
       @home_registration = HomeRegistration.new(home_registration_params)
       @city_selected = @home_registration.address.city.presence
@@ -31,6 +34,8 @@ module Api
     end
 
     # PATCH/PUT /home_registrations/1
+    api :PATCH, '/home_registrations/:id', 'PATCH Home Registration'
+    api :PUT, '/home_registrations/:id', 'PUT Home Registration'
     def update
       if @home_registration.update(home_registration_params)
         render_json @home_registration, :ok, true
@@ -40,6 +45,7 @@ module Api
     end
 
     # DELETE /home_registrations/1
+    api :DELETE, '/home_registrations/:id', 'DELETE Home Registration'
     def destroy
       @home_registration.destroy
     end

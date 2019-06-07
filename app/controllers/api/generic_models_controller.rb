@@ -2,55 +2,21 @@
 
 module Api
   class GenericModelsController < Api::ApiController
-    before_action :set_generic_model, only: %i[show edit update destroy]
-    before_action :set_query, except: %i[index new create show edit update destroy]
+    before_action :set_query, except: %i[address_types cbo_types ethnicity_types]
 
+    api :GET, '/generic_models/address_types', 'GET Address Types List'
     def address_types
       render_json @query.result.address_types.includes(:generic_model)
     end
 
+    api :GET, '/generic_models/cbo_types', 'GET CBO Types List'
     def cbo_types
       render_json @query.result.cbo_types.includes(:generic_model)
     end
 
+    api :GET, '/generic_models/ethnicity_types', 'GET Ethnicity Types List'
     def ethnicity_types
       render_json @query.result.ethnicities.includes(:generic_model)
-    end
-
-    # GET /generic_models/1
-    def show; end
-
-    # GET /generic_models/new
-    def new
-      @generic_model = GenericModel.new
-    end
-
-    # GET /generic_models/1/edit
-    def edit; end
-
-    # POST /generic_models
-    def create
-      @generic_model = GenericModel.new(generic_model_params)
-
-      if @generic_model.save
-        redirect_to @generic_model, notice: 'Generic model was successfully created.'
-      else
-        unprocessable_entity @generic_model
-      end
-    end
-
-    # PATCH/PUT /generic_models/1
-    def update
-      if @generic_model.update(generic_model_params)
-        redirect_to @generic_model, notice: 'Generic model was successfully updated.'
-      else
-        unprocessable_entity @generic_model
-      end
-    end
-
-    # DELETE /generic_models/1
-    def destroy
-      @generic_model.destroy
     end
 
     private
