@@ -35,7 +35,7 @@
         <tr>
           <td class="text-muted"><%= health_professional.id %></td>
           <td><%= health_professional.cns_code %></td>
-          <td><%= health_professional.cbo_code.reference %></td>
+          <td><%= health_professional&.cbo_code&.reference %></td>
           <td><%= health_professional.legal_full_name %></td>
           <td><%= health_professional.fancy_name %></td>
           <td><%= health_professional.federal_registry %></td>

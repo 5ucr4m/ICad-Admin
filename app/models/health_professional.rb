@@ -41,9 +41,11 @@ class HealthProfessional < ApplicationRecord
   belongs_to :professional_team
   belongs_to :company, optional: true
 
+  has_one :user, dependent: :destroy
+
   has_many :home_registrations, dependent: :destroy
 
   validates :legal_full_name, :federal_registry, :cns_code, presence: true
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :id_to_s_or_legal_full_name_or_federal_registry_or_cns_code
 end

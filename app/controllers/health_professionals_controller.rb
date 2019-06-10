@@ -37,6 +37,7 @@ class HealthProfessionalsController < WebController
   # PATCH/PUT /health_professionals/1
   def update
     if @health_professional.update(health_professional_params)
+      @cbo_selected = @health_professional.cbo_code.presence
       redirect_to @health_professional, notice: 'Health professional was successfully updated.'
     else
       render :edit
@@ -54,7 +55,7 @@ class HealthProfessionalsController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_health_professional
     @health_professional = HealthProfessional.friendly.find(params[:id])
-    @cbo_selected = @health_professional.cbo_code.presence if @health_professional
+    @cbo_selected = @health_professional.cbo_code.presence
   end
 
   # Only allow a trusted parameter "white list" through.

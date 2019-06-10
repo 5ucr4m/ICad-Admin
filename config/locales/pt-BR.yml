@@ -202,6 +202,7 @@ pt-BR:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros'
   helpers:
+    enter: Entrar
     search: Pesquisar
     select:
       prompt: Por favor selecione
