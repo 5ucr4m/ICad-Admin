@@ -25,7 +25,7 @@ class ProfessionalTeamsController < WebController
     @professional_team = ProfessionalTeam.new(professional_team_params)
 
     if @professional_team.save
-      redirect_to @professional_team, notice: 'Professional team was successfully created.'
+      redirect_to @professional_team, notice: t('helpers.messages.success.create', model: ProfessionalTeam.model_name.human)
     else
       render :new
     end
@@ -34,7 +34,7 @@ class ProfessionalTeamsController < WebController
   # PATCH/PUT /professional_teams/1
   def update
     if @professional_team.update(professional_team_params)
-      redirect_to @professional_team, notice: 'Professional team was successfully updated.'
+      redirect_to @professional_team, notice: t('helpers.messages.success.update', model: ProfessionalTeam.model_name.human)
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class ProfessionalTeamsController < WebController
   # DELETE /professional_teams/1
   def destroy
     @professional_team.destroy
-    redirect_to professional_teams_url, notice: 'Professional team was successfully destroyed.'
+    redirect_to professional_teams_url, notice: t('helpers.messages.success.delete', model: ProfessionalTeam.model_name.human)
   end
 
   private

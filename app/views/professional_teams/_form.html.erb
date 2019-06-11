@@ -2,7 +2,7 @@
   <% content_for :body do %>
     <%= f.input :name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :code, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :active, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :active, wrapper_html: {class: 'pl-2 col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @professional_team} %>
 <% end %>

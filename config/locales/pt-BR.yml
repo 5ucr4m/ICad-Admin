@@ -202,15 +202,22 @@ pt-BR:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros'
   helpers:
+    messages:
+      success:
+        create: 'Registro de %{model} inserido com sucesso!'
+        update: 'Registro de %{model} atualizado com sucesso!'
+        delete: 'Registro de %{model} inserido com sucesso.'
     enter: Entrar
     search: Pesquisar
     select:
       prompt: Por favor selecione
     submit:
       new: Novo
+      edit: Editar
       create: Criar
       submit: Salvar
       update: Atualizar
+      cancel: Cancelar
   number:
     currency:
       format:
