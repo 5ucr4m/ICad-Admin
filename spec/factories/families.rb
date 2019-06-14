@@ -5,7 +5,7 @@
 # Table name: families
 #
 #  id                     :bigint           not null, primary key
-#  family_income_cents    :integer
+#  family_income_id    :integer
 #  handbook_number        :string
 #  members_quantity       :integer
 #  moving                 :boolean
@@ -36,7 +36,7 @@ FactoryBot.define do
     responsible_cns_number { 'MyString' }
     members_quantity { 1 }
     handbook_number { 'MyString' }
-    family_income_cents { 1 }
+    family_income { nil }
     reside_since { '2019-05-16' }
     moving { false }
     company { nil }

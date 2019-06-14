@@ -5,7 +5,7 @@
 # Table name: families
 #
 #  id                     :bigint           not null, primary key
-#  family_income_cents    :integer
+#  family_income_id    :integer
 #  handbook_number        :string
 #  members_quantity       :integer
 #  moving                 :boolean
@@ -40,9 +40,7 @@ class Family < ApplicationRecord
   accepts_nested_attributes_for :home_registration, allow_destroy: false
 
   validates :responsible_cns_number, :responsible_birth_date, :members_quantity,
-            :handbook_number, :family_income_cents, :reside_since, presence: true
-
-  monetize :family_income_cents
+            :handbook_number, :family_income_id, :reside_since, presence: true
 
   ransack_alias :search, :id_to_s_or_handbook_number
 

@@ -10,7 +10,7 @@ RSpec.describe 'families/index', type: :view do
                responsible_cns_number: 'Responsible Cns Number',
                members_quantity: 2,
                handbook_number: 'Handbook Number',
-               family_income_cents: 3,
+               family_income_id: 3,
                moving: false,
                company: nil,
                slug: 'Slug'
@@ -20,7 +20,7 @@ RSpec.describe 'families/index', type: :view do
                responsible_cns_number: 'Responsible Cns Number',
                members_quantity: 2,
                handbook_number: 'Handbook Number',
-               family_income_cents: 3,
+               family_income_id: 3,
                moving: false,
                company: nil,
                slug: 'Slug'

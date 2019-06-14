@@ -5,7 +5,7 @@
 # Table name: families
 #
 #  id                     :bigint           not null, primary key
-#  family_income_cents    :integer
+#  family_income_id    :integer
 #  handbook_number        :string
 #  members_quantity       :integer
 #  moving                 :boolean

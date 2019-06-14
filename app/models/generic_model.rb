@@ -69,6 +69,7 @@ class GenericModel < ApplicationRecord
   scope :job_market_situations, ->{where(generic_field: :job_market_situation)}
   scope :child_responsible, ->{where(generic_field: :child_responsible)}
   scope :left_reasons, ->{where(generic_field: :left_reason)}
+  scope :family_incomes, ->{where(generic_field: :family_income)}
 
   def name_formatted
     return name.mb_chars.upcase if reference.blank?

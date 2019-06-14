@@ -5,7 +5,7 @@
 # Table name: families
 #
 #  id                     :bigint           not null, primary key
-#  family_income_cents    :integer
+#  family_income_id    :integer
 #  handbook_number        :string
 #  members_quantity       :integer
 #  moving                 :boolean
@@ -30,7 +30,7 @@
 #
 
 class FamilySerializer < ActiveModel::Serializer
-  attributes :id, :responsible_birth_date, :responsible_cns_number, :members_quantity, :handbook_number, :family_income_cents, :reside_since, :moving, :slug
+  attributes :id, :responsible_birth_date, :responsible_cns_number, :members_quantity, :handbook_number, :family_income_id, :reside_since, :moving, :slug
   has_one :home_registration
   has_one :company
 end

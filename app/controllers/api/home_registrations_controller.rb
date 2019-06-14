@@ -72,7 +72,7 @@ module Api
                                                   responsible_cns_number
                                                   members_quantity
                                                   handbook_number
-                                                  family_income_cents
+                                                  family_income_id
                                                   reside_since
                                                   moving
                                                 ],

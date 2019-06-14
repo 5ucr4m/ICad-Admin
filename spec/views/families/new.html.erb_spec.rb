@@ -9,7 +9,7 @@ RSpec.describe 'families/new', type: :view do
                       responsible_cns_number: 'MyString',
                       members_quantity: 1,
                       handbook_number: 'MyString',
-                      family_income_cents: 1,
+                      family_income_id: 1,
                       moving: false,
                       company: nil,
                       slug: 'MyString'
@@ -28,7 +28,7 @@ RSpec.describe 'families/new', type: :view do
 
       assert_select 'input[name=?]', 'family[handbook_number]'
 
-      assert_select 'input[name=?]', 'family[family_income_cents]'
+      assert_select 'select[name=?]', 'family[family_income_id]'
 
       assert_select 'input[name=?]', 'family[moving]'
 

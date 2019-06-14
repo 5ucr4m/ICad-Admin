@@ -50,6 +50,8 @@ class IndividualRegistration < ApplicationRecord
   belongs_to :cancel_registration, optional: true
   belongs_to :company, optional: true
 
+  has_one :period_item, as: :registrable, dependent: :destroy
+
   accepts_nested_attributes_for :family_member, allow_destroy: false
   accepts_nested_attributes_for :health_condition, allow_destroy: false
   accepts_nested_attributes_for :in_street_situation, allow_destroy: false

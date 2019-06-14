@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :periods
   apipie
   # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'

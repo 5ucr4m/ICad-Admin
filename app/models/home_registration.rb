@@ -55,6 +55,8 @@ class HomeRegistration < ApplicationRecord
   has_many :home_registration_pets, dependent: :destroy
   has_many :families, dependent: :nullify
 
+  has_one :period_item, as: :registrable, dependent: :destroy
+
   accepts_nested_attributes_for :address, allow_destroy: false
   accepts_nested_attributes_for :living_condition, allow_destroy: false
   accepts_nested_attributes_for :permanence_institution, allow_destroy: false

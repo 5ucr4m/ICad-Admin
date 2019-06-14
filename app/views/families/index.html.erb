@@ -22,7 +22,7 @@
         <th>#</th>
         <th><%= Family.human_attribute_name :members_quantity %></th>
         <th><%= Family.human_attribute_name :handbook_number %></th>
-        <th><%= Family.human_attribute_name :family_income_cents %></th>
+        <th><%= Family.human_attribute_name :family_income %></th>
         <th><%= Family.human_attribute_name :reside_since %></th>
         <th><%= Family.human_attribute_name :moving %></th>
         <th><%= t('helpers.labels.actions') %></th>
@@ -36,7 +36,7 @@
           </td>
           <td><%= family.members_quantity %></td>
           <td><%= family.handbook_number %></td>
-          <td><%= number_to_currency family&.family_income&.to_f %></td>
+          <td><%= family&.family_income.reference %></td>
           <td><%= family.reside_since&.strftime('%d/%m/%Y') %></td>
           <td><%= family.moving ? 'SIM' : 'NÃO' %></td>
           <td class="text-center">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_114012) do
+ActiveRecord::Schema.define(version: 2019_06_14_155713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -477,6 +477,64 @@ ActiveRecord::Schema.define(version: 2019_06_04_114012) do
     t.index ["water_treatment_id"], name: "index_living_conditions_on_water_treatment_id"
   end
 
+  create_table "period_items", force: :cascade do |t|
+    t.string "serialized_uuid"
+    t.bigint "serialized_type_id"
+    t.string "serialized_cnes"
+    t.string "ibge_code"
+    t.string "serialized_ine"
+    t.string "lot_number"
+    t.string "sender_counter_key"
+    t.string "sender_installation_uuid"
+    t.string "sender_federal_registry"
+    t.string "sender_legal_name"
+    t.string "sender_phone"
+    t.string "sender_email"
+    t.string "sender_software_version"
+    t.string "sender_database_name"
+    t.string "origin_counter_key"
+    t.string "origin_installation_uuid"
+    t.string "origin_federal_registry"
+    t.string "origin_legal_name"
+    t.string "origin_phone"
+    t.string "origin_email"
+    t.string "origin_software_version"
+    t.string "origin_database_name"
+    t.string "app_version"
+    t.bigint "period_registration_id"
+    t.string "registrable_type"
+    t.bigint "registrable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["period_registration_id"], name: "index_period_items_on_period_registration_id"
+    t.index ["registrable_type", "registrable_id"], name: "index_period_items_on_registrable_type_and_registrable_id"
+    t.index ["serialized_type_id"], name: "index_period_items_on_serialized_type_id"
+  end
+
+  create_table "period_registrations", force: :cascade do |t|
+    t.date "competence"
+    t.date "start_date"
+    t.date "end_date"
+    t.date "deadline"
+    t.bigint "company_id", null: false
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_period_registrations_on_company_id"
+  end
+
+  create_table "periods", force: :cascade do |t|
+    t.date "competence"
+    t.date "start_date"
+    t.date "end_date"
+    t.date "deadline"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_periods_on_company_id"
+  end
+
   create_table "permanence_institutions", force: :cascade do |t|
     t.string "name"
     t.boolean "other_linked_professionals"
@@ -714,6 +772,10 @@ ActiveRecord::Schema.define(version: 2019_06_04_114012) do
   add_foreign_key "living_conditions", "generic_models", column: "rural_production_area_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_supply_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_treatment_id"
+  add_foreign_key "period_items", "generic_models", column: "serialized_type_id"
+  add_foreign_key "period_items", "period_registrations"
+  add_foreign_key "period_registrations", "companies"
+  add_foreign_key "periods", "companies"
   add_foreign_key "permanence_institutions", "companies"
   add_foreign_key "professional_teams", "companies"
   add_foreign_key "responsible_children", "companies"
