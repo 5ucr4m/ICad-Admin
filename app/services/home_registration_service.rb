@@ -95,7 +95,7 @@ module HomeRegistrationService
       xml << XML::Node.new('quantosAnimaisNoDomicilio', home_registration.pet_quantity)
       xml << XML::Node.new('stAnimaisNoDomicilio', home_registration.pet_quantity.positive? ? true : false)
       xml << XML::Node.new('statusTermoRecusa', home_registration.refuse_registration)
-      xml << XML::Node.new('tpCdsOrigem', home_registration.tp_cds_origin)
+      xml << XML::Node.new('tpCdsOrigem', 3)
       xml << XML::Node.new('uuid', home_registration.uuid)
       xml << XML::Node.new('uuidFichaOriginadora', home_registration.uuid_form_origin)
       xml << XML::Node.new('tipoDeImovel', home_registration&.home_type&.reference)
@@ -109,6 +109,16 @@ module HomeRegistrationService
         per << XML::Node.new('cargoInstituicao', pi.institutional_role) if pi.institutional_role
         per << XML::Node.new('telefoneResponsavelTecnico', pi.responsible_phone)
       end
+
+      hr << ht = XML::Node.new('headerTransport')
+      ht << XML::Node.new('profissionalCNS', data.health_professional.cns_code)
+      ht << XML::Node.new('cboCodigo_2002', data.health_professional.cbo_code.reference)
+      ht << XML::Node.new('cnes', data.health_professional.health_establishment.cnes_code)
+      ht << XML::Node.new('ine', data.health_professional.professional_team.code)
+      ht << XML::Node.new('dataAtendimento', data.created_at)
+      ht << XML::Node.new('codigoIbgeMunicipio', data.address.city.ibge_code)
+
+      xml
     end
   end
 end
