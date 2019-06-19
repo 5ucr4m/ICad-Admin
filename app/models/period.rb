@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: periods
@@ -22,8 +24,9 @@
 #
 
 class Period < ApplicationRecord
-
   belongs_to :company, optional: true
+
+  has_many :period_items, dependent: :destroy
 
   ransack_alias :search, :id_to_s
 end

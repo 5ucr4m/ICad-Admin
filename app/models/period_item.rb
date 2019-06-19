@@ -46,8 +46,8 @@
 
 class PeriodItem < ApplicationRecord
 
-  belongs_to :serialized_type, optional: true
-  belongs_to :period_registration, optional: true
+  belongs_to :serialized_type, class_name: 'GenericModel', optional: true
+  belongs_to :period, optional: true
   belongs_to :registrable, polymorphic: true, optional: true
 
   ransack_alias :search, :id_to_s
