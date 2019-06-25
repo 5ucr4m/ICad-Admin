@@ -114,24 +114,55 @@ module IndividualRegistrationService
 
       sociodemographic_info = individual_registration.sociodemographic_info
 
-      ci << is = XML::Node.new('informacoesSocioDemograficas')
-      sociodemographic_info.family_member_disabilities.each do |fmd|
-        is << XML::Node.new('deficienciasCidadao', fmd.disability.reference)
+      if sociodemographic_info
+        ci << is = XML::Node.new('informacoesSocioDemograficas')
+        sociodemographic_info.family_member_disabilities.each do |fmd|
+          is << XML::Node.new('deficienciasCidadao', fmd.disability.reference)
+        end
+        is << XML::Node.new('grauInstrucaoCidadao', sociodemographic_info.education_level.reference)
+        is << XML::Node.new('ocupacaoCodigoCbo2002', sociodemographic_info.occupation.reference)
+        is << XML::Node.new('orientacaoSexualCidadao', sociodemographic_info.sexual_orientation.reference)
+        is << XML::Node.new('povoComunidadeTradicional', sociodemographic_info.traditional_community_name)
+        is << XML::Node.new('situacaoMercadoTrabalhoCidadao', sociodemographic_info.job_market_situation.reference)
+        is << XML::Node.new('statusDesejaInformarOrientacaoSexual', sociodemographic_info.desire_orientation)
+        is << XML::Node.new('statusFrequentaBenzedeira', sociodemographic_info.attend_folk_healer)
+        is << XML::Node.new('statusFrequentaEscola', sociodemographic_info.attend_school)
+        is << XML::Node.new('statusMembroPovoComunidadeTradicional', sociodemographic_info.traditional_communitity)
+        is << XML::Node.new('statusParticipaGrupoComunitario', sociodemographic_info.community_group)
+        is << XML::Node.new('statusPossuiPlanoSaudePrivado', sociodemographic_info.health_plan)
+        is << XML::Node.new('statusTemAlgumaDeficiencia', sociodemographic_info.has_any_disability)
+        is << XML::Node.new('identidadeGeneroCidadao', sociodemographic_info.gender_identity.reference)
+        is << XML::Node.new('statusDesejaInformarIdentidadeGenero', sociodemographic_info.desire_gender)
       end
-      is << XML::Node.new('grauInstrucaoCidadao', sociodemographic_info.education_level.reference)
-      is << XML::Node.new('ocupacaoCodigoCbo2002', sociodemographic_info.occupation.reference)
-      is << XML::Node.new('orientacaoSexualCidadao', sociodemographic_info.sexual_orientation.reference)
-      is << XML::Node.new('povoComunidadeTradicional', sociodemographic_info.traditional_community_name)
-      is << XML::Node.new('situacaoMercadoTrabalhoCidadao', sociodemographic_info.job_market_situation.reference)
-      is << XML::Node.new('statusDesejaInformarOrientacaoSexual', sociodemographic_info.desire_orientation)
-      is << XML::Node.new('statusFrequentaBenzedeira', sociodemographic_info.attend_folk_healer)
-      is << XML::Node.new('statusFrequentaEscola', sociodemographic_info.attend_school)
-      is << XML::Node.new('statusMembroPovoComunidadeTradicional', sociodemographic_info.traditional_communitity)
-      is << XML::Node.new('statusParticipaGrupoComunitario', sociodemographic_info.community_group)
-      is << XML::Node.new('statusPossuiPlanoSaudePrivado', sociodemographic_info.health_plan)
-      is << XML::Node.new('statusTemAlgumaDeficiencia', sociodemographic_info.has_any_disability)
-      is << XML::Node.new('identidadeGeneroCidadao', sociodemographic_info.gender_identity.reference)
-      is << XML::Node.new('statusDesejaInformarIdentidadeGenero', sociodemographic_info.desire_gender)
+
+      cancel_registration = individual_registration.cancel_registration
+
+      if cancel_registration
+        ci << sc = XML::Node.new('saidaCidadaoCadastro')
+        sc << XML::Node.new('motivoSaidaCidadao', cancel_registration.left_reason.reference)
+        if cancel_registration.left_reason.reference.to_i == 135
+          decease_date = cancel_registration.decease_date
+          birth_date = individual_registration.family_member.birth_date
+          naturalized_at = individual_registration.family_member.naturalized_at
+          created_at = individual_registration.created_at
+          if (birth_date < decease_date) && (birth_date < naturalized_at) && (birth_date < created_at)
+            sc << XML::Node.new('dataObito', decease_date.to_datetime.strftime('%Q'))
+            sc << XML::Node.new('numeroDO', cancel_registration.decease_number)
+          end
+        end
+      end
+
+      ci << XML::Node.new('statusTermoRecusaCadastroIndividualAtencaoBasica', individual_registration.refuse_registration)
+      ci << XML::Node.new('tpCdsOrigem', 3)
+      ci << XML::Node.new('uuid', individual_registration.uuid)
+      ci << XML::Node.new('uuidFichaOriginadora', individual_registration.uuid_form_origin)
+
+      hr << ht = XML::Node.new('headerTransport')
+      ht << XML::Node.new('profissionalCNS', data.health_professional.cns_code)
+      ht << XML::Node.new('cboCodigo_2002', data.health_professional.cbo_code.reference)
+      ht << XML::Node.new('cnes', data.health_professional.health_establishment.cnes_code)
+      ht << XML::Node.new('dataAtendimento', data.created_at)
+      ht << XML::Node.new('codigoIbgeMunicipio', data.ibge_code)
     end
   end
 end

@@ -8,6 +8,7 @@ ruby '2.6.3'
 gem 'active_model_serializers',
     git: 'https://github.com/rails-api/active_model_serializers.git',
     branch: '0-10-stable'
+gem 'apipie-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cancancan'
@@ -41,7 +42,6 @@ gem 'sidekiq'
 gem 'simple_form'
 gem 'sinatra', require: false
 gem 'webpacker', '~> 4.0'
-gem 'apipie-rails'
 
 group :development, :test do
   gem 'better_errors'
