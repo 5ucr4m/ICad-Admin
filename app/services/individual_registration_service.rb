@@ -8,23 +8,21 @@ module IndividualRegistrationService
       xml = XML::Node.new('ns3:dadoTransporteTransportXml')
       xml << XML::Node.new('uuidDadoSerializado', data.serialized_uuid)
       xml << XML::Node.new('tipoDadoSerializado', data.serialized_type.reference)
-      xml << XML::Node.new('codIbge', data.family_member.city.ibge_code)
+      xml << XML::Node.new('codIbge', data.ibge_code)
       xml << XML::Node.new('cnesDadoSerializado', data.serialized_cnes)
       xml << XML::Node.new('numLote', data.lot_number)
 
       xml << ci = XML::Node.new('ns4:cadastroIndividualTransport')
       ci << cs = XML::Node.new('condicoesDeSaude')
-      cs << XML::Node.new('descricaoCausaInternacaoEm12Meses', individual_registration.hospitalization_cause)
-      cs << XML::Node.new('descricaoOutraCondicao1', individual_registration.other_condition_one)
-      cs << XML::Node.new('descricaoOutraCondicao2', individual_registration.other_condition_two)
-      cs << XML::Node.new('descricaoOutraCondicao3', individual_registration.other_condition_three)
-      cs << XML::Node.new('descricaoPlantasMedicinaisUsadas', individual_registration.medicinal_plants_used)
 
-      individual_registration.health_condition.health_condition_diseases.each do |disease|
-        cs << XML::Node.new('doencaCardiaca', disease.disease_type.reference)
-      end
+      health_condition = individual_registration.health_condition
+      cs << XML::Node.new('descricaoCausaInternacaoEm12Meses', health_condition.hospitalization_cause)
+      cs << XML::Node.new('descricaoOutraCondicao1', health_condition.other_condition_one)
+      cs << XML::Node.new('descricaoOutraCondicao2', health_condition.other_condition_two)
+      cs << XML::Node.new('descricaoOutraCondicao3', health_condition.other_condition_three)
+      cs << XML::Node.new('descricaoPlantasMedicinaisUsadas', health_condition.medicinal_plants_used)
 
-      individual_registration.health_condition.health_condition_diseases.each do |disease|
+      health_condition.health_condition_diseases.each do |disease|
         case disease.disease_type.reference.to_i
         when 24 || 25 || 26
           cs << XML::Node.new('doencaCardiaca', disease.disease_type.reference)
@@ -35,7 +33,6 @@ module IndividualRegistrationService
         end
       end
 
-      health_condition = individual_registration.health_condition
       cs << XML::Node.new('maternidadeDeReferencia', health_condition.maternity_reference)
       cs << XML::Node.new('situacaoPeso', health_condition.weight_situation.reference)
       cs << XML::Node.new('statusEhDependenteAlcool', health_condition.alcohol_dependent)
@@ -82,7 +79,7 @@ module IndividualRegistrationService
       sr << XML::Node.new('statusVisitaFamiliarFrequentemente', in_street_situation.family_visit)
       sr << XML::Node.new('tempoSituacaoRua', in_street_situation.street_situation_time.reference)
 
-      xml << XML::Node.new('fichaAtualizada', individual_registration.form_updated)
+      ci << XML::Node.new('fichaAtualizada', individual_registration.form_updated)
 
       family_member = individual_registration.family_member
 
@@ -96,21 +93,21 @@ module IndividualRegistrationService
       iu << XML::Node.new('nomeCidadao', family_member.name)
       iu << XML::Node.new('nomeMaeCidadao', family_member.mother_name)
       iu << XML::Node.new('cnsCidadao', family_member.cns_number)
-      iu << XML::Node.new('cnsResponsavelFamiliar', family_member.cns_responsible)
       iu << XML::Node.new('telefoneCelular', family_member.phone)
-      iu << XML::Node.new('numeroNisPisPasep', family_member.pis_pasep_number)
       iu << XML::Node.new('paisNascimento', family_member.birth_country.reference)
       iu << XML::Node.new('racaCorCidadao', family_member.race.reference)
       iu << XML::Node.new('sexoCidadao', family_member.gender.reference)
+      iu << XML::Node.new('cnsResponsavelFamiliar', family_member.cns_responsible)
       iu << XML::Node.new('statusEhResponsavel', family_member.responsible)
       iu << XML::Node.new('etnia', family_member.ethnicity.reference)
       iu << XML::Node.new('nomePaiCidadao', family_member.father_name)
       iu << XML::Node.new('desconheceNomePai', family_member.unknown_father)
+      iu << XML::Node.new('microArea', family_member.micro_area)
+      iu << XML::Node.new('stForaArea', family_member.out_area)
+      iu << XML::Node.new('numeroNisPisPasep', family_member.pis_pasep_number)
       iu << XML::Node.new('dtNaturalizacao', family_member.naturalized_at.to_datetime.strftime('%Q'))
       iu << XML::Node.new('portariaNaturalizacao', family_member.naturalize_decree)
       iu << XML::Node.new('dtEntradaBrasil', family_member.brazil_entry_date.to_datetime.strftime('%Q'))
-      iu << XML::Node.new('microArea', family_member.micro_area)
-      iu << XML::Node.new('stForaArea', family_member.out_area)
 
       sociodemographic_info = individual_registration.sociodemographic_info
 
@@ -160,9 +157,37 @@ module IndividualRegistrationService
       hr << ht = XML::Node.new('headerTransport')
       ht << XML::Node.new('profissionalCNS', data.health_professional.cns_code)
       ht << XML::Node.new('cboCodigo_2002', data.health_professional.cbo_code.reference)
-      ht << XML::Node.new('cnes', data.health_professional.health_establishment.cnes_code)
-      ht << XML::Node.new('dataAtendimento', data.created_at)
+      ht << XML::Node.new('cnes', data.serialized_cnes)
+      ht << XML::Node.new('dataAtendimento', data.created_at.to_datetime.strftime('%Q'))
       ht << XML::Node.new('codigoIbgeMunicipio', data.ibge_code)
+
+      xml << sender = XML::Node.new('ns2:remetente')
+      sender << XML::Node.new('contraChave', data.sender_counter_key)
+      sender << XML::Node.new('uuidInstalacao', data.sender_installation_uuid)
+      sender << XML::Node.new('cpfOuCnpj', data.sender_federal_registry)
+      sender << XML::Node.new('nomeOuRazaoSocial', data.sender_legal_name)
+      sender << XML::Node.new('fone', data.sender_phone)
+      sender << XML::Node.new('email', data.sender_email)
+      sender << XML::Node.new('versaoSistema', data.sender_software_version)
+      sender << XML::Node.new('nomeBancoDados', data.sender_database_name)
+
+      xml << origin = XML::Node.new('ns2:originadora')
+      origin << XML::Node.new('contraChave', data.origin_counter_key)
+      origin << XML::Node.new('uuidInstalacao', data.origin_installation_uuid)
+      origin << XML::Node.new('cpfOuCnpj', data.origin_federal_registry)
+      origin << XML::Node.new('nomeOuRazaoSocial', data.origin_legal_name)
+      origin << XML::Node.new('fone', data.origin_phone)
+      origin << XML::Node.new('email', data.origin_email)
+      origin << XML::Node.new('versaoSistema', data.origin_software_version)
+      origin << XML::Node.new('nomeBancoDados', data.origin_database_name)
+
+      version = XML::Node.new('versao')
+      XML::Attr.new(version, 'major', 3)
+      XML::Attr.new(version, 'minor', 0)
+      XML::Attr.new(version, 'revision', 0)
+
+      xml << version
+      xml
     end
   end
 end

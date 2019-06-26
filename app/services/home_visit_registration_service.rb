@@ -25,11 +25,12 @@ module HomeVisitRegistrationService
       vd << XML::Node.new('tpCdsOrigem', 3)
 
       vd << ht = XML::Node.new('headerTransport')
-      ht << XML::Node.new('profissionalCNS', data.family_member.family.home_registration.health_professional.cns_code)
+      ht << XML::Node.new('profissionalCNS', home_visit_registration.family_member.family
+                                               .home_registration.health_professional.cns_code)
       ht << XML::Node.new('cboCodigo_2002', data.lot_number)
-      ht << XML::Node.new('cnes', data.lot_number)
-      ht << XML::Node.new('dataAtendimento', data.lot_number)
-      ht << XML::Node.new('codigoIbgeMunicipio', data.lot_number)
+      ht << XML::Node.new('cnes', data.serialized_cnes)
+      ht << XML::Node.new('dataAtendimento', home_visit_registration.created_at)
+      ht << XML::Node.new('codigoIbgeMunicipio', data.ibge_code)
 
       home_visit_registration.home_visit_forms.each do |hvf|
         vd << form = XML::Node.new('visitasDomiciliares')
@@ -74,7 +75,7 @@ module HomeVisitRegistrationService
       version = XML::Node.new('versao')
       XML::Attr.new(version, 'major', 3)
       XML::Attr.new(version, 'minor', 0)
-      XML::Attr.new(version, 'revision', 3)
+      XML::Attr.new(version, 'revision', 0)
 
       xml << version
       xml
