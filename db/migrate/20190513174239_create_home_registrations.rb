@@ -3,6 +3,8 @@
 class CreateHomeRegistrations < ActiveRecord::Migration[6.0]
   def change
     create_table :home_registrations do |t|
+      t.string :location_x
+      t.string :location_y
       t.belongs_to :health_professional, foreign_key: true, index: true
       t.belongs_to :living_condition, foreign_key: true, index: true
       t.belongs_to :address, foreign_key: true, index: true

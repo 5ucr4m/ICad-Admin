@@ -28,19 +28,19 @@
 #  serialized_uuid          :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  period_registration_id   :bigint
+#  period_id                :bigint
 #  registrable_id           :bigint
 #  serialized_type_id       :bigint
 #
 # Indexes
 #
-#  index_period_items_on_period_registration_id               (period_registration_id)
+#  index_period_items_on_period_id                            (period_id)
 #  index_period_items_on_registrable_type_and_registrable_id  (registrable_type,registrable_id)
 #  index_period_items_on_serialized_type_id                   (serialized_type_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (period_registration_id => period_registrations.id)
+#  fk_rails_...  (period_id => periods.id)
 #  fk_rails_...  (serialized_type_id => generic_models.id)
 #
 
@@ -69,7 +69,7 @@ FactoryBot.define do
     origin_software_version { "MyString" }
     origin_database_name { "MyString" }
     app_version { "MyString" }
-    period_registration { nil }
+    period { nil }
     registrable { nil }
   end
 end

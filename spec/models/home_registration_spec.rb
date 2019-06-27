@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: home_registrations
@@ -7,6 +5,8 @@
 #  id                        :bigint           not null, primary key
 #  finished                  :boolean
 #  form_updated              :boolean
+#  location_x                :string
+#  location_y                :string
 #  pet_quantity              :integer
 #  refuse_registration       :boolean
 #  slug                      :string

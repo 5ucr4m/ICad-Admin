@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
     t.string "responsible_cns_number"
     t.integer "members_quantity"
     t.string "handbook_number"
-    t.integer "family_income_cents"
+    t.bigint "family_income_id"
     t.date "reside_since"
     t.boolean "moving"
     t.bigint "company_id"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_families_on_company_id"
+    t.index ["family_income_id"], name: "index_families_on_family_income_id"
     t.index ["home_registration_id"], name: "index_families_on_home_registration_id"
   end
 
@@ -304,6 +305,8 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
   end
 
   create_table "home_registrations", force: :cascade do |t|
+    t.string "location_x"
+    t.string "location_y"
     t.bigint "health_professional_id"
     t.bigint "living_condition_id"
     t.bigint "address_id"
@@ -501,26 +504,14 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
     t.string "origin_software_version"
     t.string "origin_database_name"
     t.string "app_version"
-    t.bigint "period_registration_id"
+    t.bigint "period_id"
     t.string "registrable_type"
     t.bigint "registrable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["period_registration_id"], name: "index_period_items_on_period_registration_id"
+    t.index ["period_id"], name: "index_period_items_on_period_id"
     t.index ["registrable_type", "registrable_id"], name: "index_period_items_on_registrable_type_and_registrable_id"
     t.index ["serialized_type_id"], name: "index_period_items_on_serialized_type_id"
-  end
-
-  create_table "period_registrations", force: :cascade do |t|
-    t.date "competence"
-    t.date "start_date"
-    t.date "end_date"
-    t.date "deadline"
-    t.bigint "company_id", null: false
-    t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_period_registrations_on_company_id"
   end
 
   create_table "periods", force: :cascade do |t|
@@ -699,6 +690,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
   add_foreign_key "cities", "states"
   add_foreign_key "companies", "cities"
   add_foreign_key "families", "companies"
+  add_foreign_key "families", "generic_models", column: "family_income_id"
   add_foreign_key "families", "home_registrations"
   add_foreign_key "family_member_disabilities", "companies"
   add_foreign_key "family_member_disabilities", "generic_models", column: "disability_id"
@@ -773,8 +765,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
   add_foreign_key "living_conditions", "generic_models", column: "water_supply_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_treatment_id"
   add_foreign_key "period_items", "generic_models", column: "serialized_type_id"
-  add_foreign_key "period_items", "period_registrations"
-  add_foreign_key "period_registrations", "companies"
+  add_foreign_key "period_items", "periods"
   add_foreign_key "periods", "companies"
   add_foreign_key "permanence_institutions", "companies"
   add_foreign_key "professional_teams", "companies"

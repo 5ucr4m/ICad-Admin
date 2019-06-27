@@ -24,7 +24,7 @@ class CreatePeriodItems < ActiveRecord::Migration[6.0]
       t.string :origin_software_version
       t.string :origin_database_name
       t.string :app_version
-      t.belongs_to :period_registration, foreign_key: true, index: true
+      t.belongs_to :period, foreign_key: true, index: true
       t.references :registrable, polymorphic: true
 
       t.timestamps

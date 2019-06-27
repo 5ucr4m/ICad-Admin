@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   belongs_to :health_professional, optional: true
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, #:registerable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
 
   include DeviseTokenAuth::Concerns::User

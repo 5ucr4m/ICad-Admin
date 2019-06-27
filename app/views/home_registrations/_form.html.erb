@@ -6,8 +6,10 @@
                       label_method: :name_formatted,
                       wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.input :pet_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :location_x, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :location_y, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-2 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :finished, wrapper_html: {class: 'pl-2 col-lg-2 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :finished, wrapper_html: {class: 'pl-2 col-lg-1 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
       <div class="card card-collapsed mb-3">
         <div class="card-header">

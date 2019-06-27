@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: home_registrations
@@ -7,6 +5,8 @@
 #  id                        :bigint           not null, primary key
 #  finished                  :boolean
 #  form_updated              :boolean
+#  location_x                :string
+#  location_y                :string
 #  pet_quantity              :integer
 #  refuse_registration       :boolean
 #  slug                      :string
@@ -42,7 +42,7 @@
 #
 
 class HomeRegistrationSerializer < ActiveModel::Serializer
-  attributes :id, :form_updated, :pet_quantity, :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished, :slug
+  attributes :id, :location_x, :location_y, :form_updated, :pet_quantity, :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished, :slug
   has_one :health_professional
   has_one :living_condition
   has_one :address

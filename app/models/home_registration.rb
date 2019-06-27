@@ -7,6 +7,8 @@
 #  id                        :bigint           not null, primary key
 #  finished                  :boolean
 #  form_updated              :boolean
+#  location_x                :string
+#  location_y                :string
 #  pet_quantity              :integer
 #  refuse_registration       :boolean
 #  slug                      :string
@@ -40,6 +42,7 @@
 #  fk_rails_...  (living_condition_id => living_conditions.id)
 #  fk_rails_...  (permanence_institution_id => permanence_institutions.id)
 #
+
 
 class HomeRegistration < ApplicationRecord
   include Sluggable
