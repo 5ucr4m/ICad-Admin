@@ -24,7 +24,7 @@ class UsersController < WebController
   # POST /users
   def create
     @user = User.new(user_params)
-    @cbo_selected = @user.health_professional.cbo_code.presence
+    @cbo_selected = @user&.health_professional&.cbo_code&.presence
 
     if @user.save
       redirect_to @user, notice: 'User was successfully created.'
@@ -53,7 +53,7 @@ class UsersController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.friendly.find(current_user.id)
-    @cbo_selected = @user.health_professional.cbo_code.presence
+    @cbo_selected = @user&.health_professional&.cbo_code&.presence
   end
 
   # Only allow a trusted parameter "white list" through.

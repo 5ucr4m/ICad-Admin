@@ -3,6 +3,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :vaccinations
+  resources :vaccines
   resources :periods
   apipie
   # Sidekiq web config
