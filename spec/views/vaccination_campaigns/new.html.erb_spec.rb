@@ -8,6 +8,8 @@ RSpec.describe "vaccination_campaigns/new", type: :view do
       :vaccine => nil,
       :child => false,
       :woman => false,
+      :age_initial => 1,
+      :age_end => 1,
       :company => nil,
       :slug => "MyString"
     ))
@@ -27,6 +29,10 @@ RSpec.describe "vaccination_campaigns/new", type: :view do
       assert_select "input[name=?]", "vaccination_campaign[child]"
 
       assert_select "input[name=?]", "vaccination_campaign[woman]"
+
+      assert_select "input[name=?]", "vaccination_campaign[age_initial]"
+
+      assert_select "input[name=?]", "vaccination_campaign[age_end]"
 
       assert_select "input[name=?]", "vaccination_campaign[company_id]"
 

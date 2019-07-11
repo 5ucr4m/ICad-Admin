@@ -8,6 +8,8 @@ RSpec.describe "vaccination_campaigns/show", type: :view do
       :vaccine => nil,
       :child => false,
       :woman => false,
+      :age_initial => 2,
+      :age_end => 3,
       :company => nil,
       :slug => "Slug"
     ))
@@ -20,6 +22,8 @@ RSpec.describe "vaccination_campaigns/show", type: :view do
     expect(rendered).to match(//)
     expect(rendered).to match(/false/)
     expect(rendered).to match(/false/)
+    expect(rendered).to match(/2/)
+    expect(rendered).to match(/3/)
     expect(rendered).to match(//)
     expect(rendered).to match(/Slug/)
   end

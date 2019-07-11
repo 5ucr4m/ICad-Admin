@@ -9,6 +9,8 @@ RSpec.describe "vaccination_campaigns/index", type: :view do
         :vaccine => nil,
         :child => false,
         :woman => false,
+        :age_initial => 2,
+        :age_end => 3,
         :company => nil,
         :slug => "Slug"
       ),
@@ -18,6 +20,8 @@ RSpec.describe "vaccination_campaigns/index", type: :view do
         :vaccine => nil,
         :child => false,
         :woman => false,
+        :age_initial => 2,
+        :age_end => 3,
         :company => nil,
         :slug => "Slug"
       )
@@ -31,6 +35,8 @@ RSpec.describe "vaccination_campaigns/index", type: :view do
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => false.to_s, :count => 2
     assert_select "tr>td", :text => false.to_s, :count => 2
+    assert_select "tr>td", :text => 2.to_s, :count => 2
+    assert_select "tr>td", :text => 3.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => "Slug".to_s, :count => 2
   end

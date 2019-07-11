@@ -69,7 +69,12 @@
   <div class="col-lg-12">
     <div class="card mb-0">
       <div class="card-header">
-        <h3 class="card-title font-weight-bold"><%= VaccinationCampaign.model_name.human(count: 1) %></h3>
+        <%= link_to vaccination_campaigns_path do %>
+          <div class="h3 card-title font-weight-bold text-blue-deep">
+            <%= VaccinationCampaign.model_name.human(count: 1) %>
+          </div>
+        <% end %>
+        &nbsp;<small class="pl-1 text-muted">(<%= VaccinationCampaign.last.title %>)</small>
         <div class="card-options">
           <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse">
             <i class="fe fe-chevron-up"></i>
@@ -78,7 +83,7 @@
       </div>
       <div class="card-body"></div>
       <div class="card-body p-0">
-        <div id="map" class="card-map rounded" style="min-height: 25rem;"></div>
+        <div id="map" class="card-map rounded" style="min-height: 32rem;"></div>
       </div>
     </div>
   </div>

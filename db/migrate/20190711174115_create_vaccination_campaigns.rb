@@ -8,6 +8,8 @@ class CreateVaccinationCampaigns < ActiveRecord::Migration[6.0]
       t.boolean :woman
       t.date :period_start
       t.date :period_end
+      t.integer :age_initial
+      t.integer :age_end
       t.belongs_to :company, foreign_key: true, index: true
       t.string :slug
 

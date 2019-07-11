@@ -3,6 +3,8 @@
 # Table name: vaccination_campaigns
 #
 #  id           :bigint           not null, primary key
+#  age_end      :integer
+#  age_initial  :integer
 #  child        :boolean
 #  description  :text
 #  period_end   :date
@@ -35,6 +37,8 @@ FactoryBot.define do
     woman { false }
     period_start { "2019-07-11" }
     period_end { "2019-07-11" }
+    age_initial { 1 }
+    age_end { 1 }
     company { nil }
     slug { "MyString" }
   end

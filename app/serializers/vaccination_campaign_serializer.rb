@@ -3,6 +3,8 @@
 # Table name: vaccination_campaigns
 #
 #  id           :bigint           not null, primary key
+#  age_end      :integer
+#  age_initial  :integer
 #  child        :boolean
 #  description  :text
 #  period_end   :date
@@ -27,7 +29,7 @@
 #
 
 class VaccinationCampaignSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :child, :woman, :period_start, :period_end, :slug
+  attributes :id, :title, :description, :child, :woman, :period_start, :period_end, :age_initial, :age_end, :slug
   has_one :vaccine
   has_one :company
 end

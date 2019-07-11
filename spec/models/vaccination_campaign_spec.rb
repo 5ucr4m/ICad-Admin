@@ -3,6 +3,8 @@
 # Table name: vaccination_campaigns
 #
 #  id           :bigint           not null, primary key
+#  age_end      :integer
+#  age_initial  :integer
 #  child        :boolean
 #  description  :text
 #  period_end   :date
