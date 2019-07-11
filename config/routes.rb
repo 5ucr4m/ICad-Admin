@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :vaccination_campaigns
   resources :vaccinations
   resources :vaccines
   resources :periods

@@ -1,6 +1,9 @@
 require('highcharts');
+require('mapbox-gl');
 
 import Highcharts from 'highcharts';
+
+const mapboxgl = require('mapbox-gl/dist/mapbox-gl');
 
 function columnChart(options) {
   const superagent = require('superagent');
@@ -50,5 +53,4 @@ document.addEventListener('DOMContentLoaded', function () {
     url: '/home_visit_registrations/chart_by_day',
     name: 'Visitas Famíliares'
   });
-
 }, false);

@@ -1,0 +1,53 @@
+<%= render 'application/page_header', model: VaccinationCampaign %>
+<div class="card">
+  <div class="card-status bg-blue"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+        <th><%= VaccinationCampaign.human_attribute_name :title %></th>
+        <th><%= VaccinationCampaign.human_attribute_name :description %></th>
+        <th><%= VaccinationCampaign.human_attribute_name :vaccine %></th>
+        <th><%= VaccinationCampaign.human_attribute_name :child %></th>
+        <th><%= VaccinationCampaign.human_attribute_name :woman %></th>
+        <th><%= VaccinationCampaign.human_attribute_name :period_start %></th>
+        <th><%= VaccinationCampaign.human_attribute_name :period_end %></th>
+        <th><%= t('helpers.labels.actions') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @vaccination_campaigns.each do |vaccination_campaign| %>
+        <tr>
+          <td><%= vaccination_campaign.title %></td>
+          <td><%= "#{vaccination_campaign.description[0..23]}..." %></td>
+          <td><%= vaccination_campaign.vaccine_id %></td>
+          <td><%= vaccination_campaign.child %></td>
+          <td><%= vaccination_campaign.woman %></td>
+          <td><%= vaccination_campaign.period_start.strftime('%d/%m/%Y') %></td>
+          <td><%= vaccination_campaign.period_end.strftime('%d/%m/%Y') %></td>
+          <td class="text-center">
+            <%= render 'application/table_links', f: vaccination_campaign %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= render 'application/footer_links', url: new_vaccination_campaign_path, model: VaccinationCampaign %>
+  </div>
+</div>

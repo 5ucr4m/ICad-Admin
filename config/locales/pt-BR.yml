@@ -58,6 +58,10 @@ pt-BR:
         one: Ficha de Cadastro Individual
         other: Fichas de Cadastro Individual
         icon: fas fa-notes-medical
+      vaccination_campaign:
+        one: Campanha de Vacinação
+        other: Campanhas de Vacinação
+        icon: fas fa-medkit
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

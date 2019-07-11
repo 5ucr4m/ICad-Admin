@@ -1,6 +1,7 @@
 @import url("https://preview.tabler.io/assets/css/dashboard.css");
 @import "select2/dist/css/select2.min";
 @import "@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4";
+@import "mapbox-gl";
 
 $color-red: #cd201f;
 $color-validation: #cd201f;
@@ -282,5 +283,10 @@ a.card-options-collapse .badge .bg-blue-deep .text-white {
 
 .card-dashboard {
   margin-bottom: 0;
+}
+
+.mapboxgl-popup {
+  min-width: 200px;
+  font-size: 14px;
 }
 

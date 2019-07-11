@@ -1,0 +1,37 @@
+require 'rails_helper'
+
+RSpec.describe "vaccination_campaigns/index", type: :view do
+  before(:each) do
+    assign(:vaccination_campaigns, [
+      VaccinationCampaign.create!(
+        :title => "Title",
+        :description => "MyText",
+        :vaccine => nil,
+        :child => false,
+        :woman => false,
+        :company => nil,
+        :slug => "Slug"
+      ),
+      VaccinationCampaign.create!(
+        :title => "Title",
+        :description => "MyText",
+        :vaccine => nil,
+        :child => false,
+        :woman => false,
+        :company => nil,
+        :slug => "Slug"
+      )
+    ])
+  end
+
+  it "renders a list of vaccination_campaigns" do
+    render
+    assert_select "tr>td", :text => "Title".to_s, :count => 2
+    assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => false.to_s, :count => 2
+    assert_select "tr>td", :text => false.to_s, :count => 2
+    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => "Slug".to_s, :count => 2
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_155713) do
+ActiveRecord::Schema.define(version: 2019_07_11_141524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -681,6 +681,78 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "vaccination_campaigns", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "vaccine_id"
+    t.boolean "child"
+    t.boolean "woman"
+    t.date "period_start"
+    t.date "period_end"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_vaccination_campaigns_on_company_id"
+    t.index ["vaccine_id"], name: "index_vaccination_campaigns_on_vaccine_id"
+  end
+
+  create_table "vaccination_item_vaccines", force: :cascade do |t|
+    t.bigint "vaccination_item_id"
+    t.bigint "vaccine_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_vaccination_item_vaccines_on_company_id"
+    t.index ["vaccination_item_id"], name: "index_vaccination_item_vaccines_on_vaccination_item_id"
+    t.index ["vaccine_id"], name: "index_vaccination_item_vaccines_on_vaccine_id"
+  end
+
+  create_table "vaccination_items", force: :cascade do |t|
+    t.string "turn"
+    t.bigint "family_member_id"
+    t.bigint "local_service_id"
+    t.boolean "traveller"
+    t.boolean "leprosy_communicant"
+    t.boolean "pregnant"
+    t.boolean "puerperal"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_vaccination_items_on_company_id"
+    t.index ["family_member_id"], name: "index_vaccination_items_on_family_member_id"
+    t.index ["local_service_id"], name: "index_vaccination_items_on_local_service_id"
+  end
+
+  create_table "vaccinations", force: :cascade do |t|
+    t.string "uuid"
+    t.integer "tp_cds_origin"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_vaccinations_on_company_id"
+  end
+
+  create_table "vaccines", force: :cascade do |t|
+    t.string "description"
+    t.bigint "immunobiological_id"
+    t.bigint "vaccination_strategy_id"
+    t.bigint "dose_id"
+    t.string "lot_number"
+    t.string "manufacturer"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_vaccines_on_company_id"
+    t.index ["dose_id"], name: "index_vaccines_on_dose_id"
+    t.index ["immunobiological_id"], name: "index_vaccines_on_immunobiological_id"
+    t.index ["vaccination_strategy_id"], name: "index_vaccines_on_vaccination_strategy_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "cities"
   add_foreign_key "addresses", "companies"
@@ -787,4 +859,17 @@ ActiveRecord::Schema.define(version: 2019_06_14_155713) do
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "user_companies"
   add_foreign_key "users", "health_professionals"
+  add_foreign_key "vaccination_campaigns", "companies"
+  add_foreign_key "vaccination_campaigns", "vaccines"
+  add_foreign_key "vaccination_item_vaccines", "companies"
+  add_foreign_key "vaccination_item_vaccines", "vaccination_items"
+  add_foreign_key "vaccination_item_vaccines", "vaccines"
+  add_foreign_key "vaccination_items", "companies"
+  add_foreign_key "vaccination_items", "family_members"
+  add_foreign_key "vaccination_items", "generic_models", column: "local_service_id"
+  add_foreign_key "vaccinations", "companies"
+  add_foreign_key "vaccines", "companies"
+  add_foreign_key "vaccines", "generic_models", column: "dose_id"
+  add_foreign_key "vaccines", "generic_models", column: "immunobiological_id"
+  add_foreign_key "vaccines", "generic_models", column: "vaccination_strategy_id"
 end

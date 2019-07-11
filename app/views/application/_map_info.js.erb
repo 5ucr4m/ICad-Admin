@@ -1,0 +1,29 @@
+navigator.geolocation.getCurrentPosition(function (position) {
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGlhZ29jYXNzaW8iLCJhIjoiY2p4dW1wbWs4MTZxczNjcW0xN2d2NmFjMiJ9.DmiiFFq3jPkdaDsoyjRDYw';
+
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v10',
+    center: [position.coords.longitude, position.coords.latitude],
+    zoom: 15
+  });
+
+  <% data.each do |d| %>
+  const popup = new mapboxgl.Popup({offset: 25}).setText('');
+
+  let div = document.createElement('div');
+  let icon = document.createElement('i');
+
+  icon.classList.add('fas');
+  icon.classList.add('fa-male');
+  icon.classList.add('fa-4x');
+  icon.classList.add('text-green');
+  div.append(icon);
+
+  new mapboxgl.Marker(div)
+    .setLngLat([position.coords.longitude, position.coords.latitude])
+    .setPopup(popup).addTo(map);
+  <% end %>
+
+  map.addControl(new mapboxgl.NavigationControl());
+});
