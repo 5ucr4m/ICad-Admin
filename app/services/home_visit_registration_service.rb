@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'xml'
+
 module HomeVisitRegistrationService
   include XML
 
