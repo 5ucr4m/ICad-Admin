@@ -20,6 +20,16 @@ $color-green-smoke: #379683;
 $color-green-leaf: #8ee4af;
 $color-sand: #edf5e1;
 $color-muted: #6c757d;
+$color-gradient-green: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+$color-gradient-blue: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+$color-gradient-purple: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+$color-gradient-orange: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
+$color-gradient-smoke: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+$text-gradient-green: #38f9d7;
+$text-gradient-blue: #00f2fe;
+$text-gradient-purple: #b721ff;
+$text-gradient-orange: #ff4e50;
+$text-gradient-smoke: #93a5cf;
 
 body {
   font-size: 1rem;
@@ -120,6 +130,26 @@ body {
 
 .text-sand {
   color: $color-sand;
+}
+
+.text-gradient-green {
+  color: $text-gradient-green;
+}
+
+.text-gradient-blue {
+  color: $text-gradient-blue;
+}
+
+.text-gradient-purple {
+  color: $text-gradient-purple;
+}
+
+.text-gradient-orange {
+  color: $text-gradient-orange;
+}
+
+.text-gradient-smoke {
+  color: $text-gradient-smoke;
 }
 
 .bg-green {
@@ -324,29 +354,29 @@ a.card-options-collapse .badge .bg-blue-deep .text-white {
 .card.card-stats-green {
   color: #fff;
   border: 0 transparent;
-  background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+  background-image: $color-gradient-green;
 }
 
 .card.card-stats-blue {
   color: #fff;
   border: 0 transparent;
-  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  background-image: $color-gradient-blue;
 }
 
 .card.card-stats-purple {
   color: #fff;
   border: 0 transparent;
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  background-image: $color-gradient-purple;
 }
 
 .card.card-stats-orange {
   color: #fff;
   border: 0 transparent;
-  background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
+  background-image: $color-gradient-orange;
 }
 
 .card.card-stats-smoke {
   color: #fff;
   border: 0 transparent;
-  background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);
+  background-image: $color-gradient-smoke;
 }
