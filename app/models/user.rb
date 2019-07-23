@@ -50,9 +50,9 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  belongs_to :health_professional, optional: true
+  belongs_to :health_professional
 
-  devise :database_authenticatable, #:registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
 
   include DeviseTokenAuth::Concerns::User
@@ -62,11 +62,13 @@ class User < ApplicationRecord
   has_many :roles, through: :user_companies
 
   validates :email,
-            format: {with: URI::MailTo::EMAIL_REGEXP},
+            format: { with: URI::MailTo::EMAIL_REGEXP },
             presence: true,
-            uniqueness: {case_sensitive: false}
-
+            uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
+  validates :cns_code, :cnes_code, presence: true
+
+  before_validation :create_professional
 
   accepts_nested_attributes_for :health_professional, allow_destroy: true
 
@@ -74,11 +76,9 @@ class User < ApplicationRecord
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")
   end
 
-  attr_accessor :company, :cns_code, :cnes_code
+  attr_accessor :company, :cns_code, :cnes_code, :cbo_code
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
-
-  validates :cns_code, :cnes_code, presence: true
 
   def current_company
     user_companies.find(&:current) || user_companies.first
@@ -87,5 +87,21 @@ class User < ApplicationRecord
   def send_confirmation_notification?
     skip_confirmation!
     false
+  end
+
+  private
+
+  def create_professional
+    return if cnes_code.blank? || cns_code.blank? || cbo_code.blank?
+
+    build_health_professional(
+      legal_full_name: Faker::Name.name_with_middle,
+      federal_registry: CPF.generate(true),
+      cns_code: cns_code,
+      professional_team: ProfessionalTeam.first,
+      cbo_code: GenericModel.find_by(reference: cbo_code,
+                                     generic_field: :cbo_type),
+      health_establishment: HealthEstablishment.find_by(cnes_code: cnes_code)
+    )
   end
 end

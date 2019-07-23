@@ -14,6 +14,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cancancan'
 gem 'chartkick'
 gem 'cocoon'
+gem 'cpf_cnpj'
 gem 'devise-i18n'
 gem 'devise_token_auth'
 gem 'faraday'

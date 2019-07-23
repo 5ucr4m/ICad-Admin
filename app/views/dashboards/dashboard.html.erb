@@ -44,7 +44,7 @@
             <%= VaccinationCampaign.model_name.human(count: 1) %>
           </div>
         <% end %>
-        &nbsp;<small class="pl-1 text-muted">(<%= VaccinationCampaign.last.title %>)</small>
+        &nbsp;<small class="pl-1 text-muted">(<%= VaccinationCampaign&.last&.title || 'Nenhuma' %>)</small>
         <div class="card-options">
           <a href="#" class="card-options-collapse badge bg-blue-deep text-white px-2" data-toggle="card-collapse">
             <i class="fe fe-chevron-up"></i>
@@ -53,7 +53,7 @@
       </div>
       <div class="card-body"></div>
       <div class="card-body p-0">
-        <div id="map" class="card-map rounded" style="min-height: 31rem;"></div>
+        <div id="map" class="card-map rounded" style="min-height: 29.3rem;"></div>
       </div>
     </div>
   </div>
