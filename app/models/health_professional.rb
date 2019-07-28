@@ -50,7 +50,7 @@ class HealthProfessional < ApplicationRecord
   before_validation :set_cbo_code, :set_health_establishment
   before_create :find_health_professional
 
-  validates :cns_code, presence: true
+  validates :cns_code, :cnes_number, :cbo_number, presence: true
 
   ransack_alias :search, :id_to_s_or_legal_full_name_or_federal_registry_or_cns_code
 
