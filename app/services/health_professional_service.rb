@@ -9,7 +9,7 @@ class HealthProfessionalService
       params = OpenStruct.new(cnes: obj.cnes_number)
       hp = ProfissionalSaudeService.call('consultar_profissionais_saude', params)
 
-      return if hp['Fault']
+      return if hp.blank? || hp['Fault']
 
       list = hp['responseConsultarProfissionaisSaude']['ProfissionalSaude']
       list.select{|p| p['CNS']['numeroCNS'] == obj.cns_code}.first

@@ -7,11 +7,11 @@ class HealthEstablishmentService
 
     def get_health_establishment(obj)
       params = OpenStruct.new(cnes: obj.cnes_number)
-      hp = EstabelecimentoSaudeService.call('consultar_estabelecimento_saude', params)
+      he = EstabelecimentoSaudeService.call('consultar_estabelecimento_saude', params)
 
-      return if hp['Fault']
+      return if he.blank? || he['Fault']
 
-      hp['responseConsultarEstabelecimentoSaude']['DadosGeraisEstabelecimentoSaude']
+      he['responseConsultarEstabelecimentoSaude']['DadosGeraisEstabelecimentoSaude']
     end
   end
 end
