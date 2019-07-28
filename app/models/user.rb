@@ -66,17 +66,14 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
-  validates :cns_code, :cnes_code, presence: true
 
-  before_validation :create_professional
-
-  accepts_nested_attributes_for :health_professional, allow_destroy: true
+  accepts_nested_attributes_for :health_professional, allow_destroy: false
 
   ransacker :id_to_s do
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")
   end
 
-  attr_accessor :company, :cns_code, :cnes_code, :cbo_code
+  attr_accessor :company
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
@@ -89,19 +86,31 @@ class User < ApplicationRecord
     false
   end
 
+  def cns_code
+    professional&.cns_code
+  end
+
+  def full_name
+    professional&.legal_full_name
+  end
+
+  def cnes_code
+    professional&.health_establishment&.cnes_code
+  end
+
+  def ine_code
+    professional&.professional_team&.code
+  end
+
+  def federal_registry
+    professional&.federal_registry
+  end
+
   private
 
-  def create_professional
-    return if cnes_code.blank? || cns_code.blank? || cbo_code.blank?
+  def professional
+    return if health_professional&.blank?
 
-    build_health_professional(
-      legal_full_name: Faker::Name.name_with_middle,
-      federal_registry: CPF.generate(true),
-      cns_code: cns_code,
-      professional_team: ProfessionalTeam.first,
-      cbo_code: GenericModel.find_by(reference: cbo_code,
-                                     generic_field: :cbo_type),
-      health_establishment: HealthEstablishment.find_by(cnes_code: cnes_code)
-    )
+    health_professional
   end
 end

@@ -20,11 +20,24 @@ module Api
       end
 
       def account_update_params
-        params.permit(:email)
+        attribute_params
       end
 
       def sign_up_params
-        params.permit(:email, :password, :password_confirmation, :cns_code, :cnes_code, :cbo_code)
+        attribute_params
+      end
+
+      def attribute_params
+        params.permit(:email, :password, :password_confirmation,
+                      health_professional_attributes: %i[
+                        cns_code
+                        cbo_number
+                        cnes_number
+                        federal_registry
+                        state_registry
+                        legal_full_name
+                        fancy_name
+                      ])
       end
     end
   end

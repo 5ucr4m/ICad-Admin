@@ -38,6 +38,7 @@ module SoapService
         req.body = soap_envelope.root.to_s.to_s.delete("\n")
                                 .delete("\r").gsub(/\n\t/, ' ').gsub(/>\s*</, '><')
       end
+
       xml = response.body
 
       if xml.present?

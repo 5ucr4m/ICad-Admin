@@ -37,15 +37,66 @@ class HealthProfessional < ApplicationRecord
   include Sluggable
 
   belongs_to :cbo_code, class_name: 'GenericModel'
-  belongs_to :health_establishment
-  belongs_to :professional_team
+  belongs_to :health_establishment, optional: true
+  belongs_to :professional_team, optional: true
   belongs_to :company, optional: true
 
   has_one :user, dependent: :destroy
 
   has_many :home_registrations, dependent: :destroy
 
-  validates :legal_full_name, :federal_registry, :cns_code, presence: true
+  attr_accessor :cnes_number, :cbo_number
+
+  before_validation :set_cbo_code, :set_health_establishment
+  before_create :find_health_professional
+
+  validates :cns_code, presence: true
 
   ransack_alias :search, :id_to_s_or_legal_full_name_or_federal_registry_or_cns_code
+
+  private
+
+  def set_cbo_code
+    return if cbo_number.blank?
+
+    self.cbo_code = GenericModel.find_by(generic_field: :cbo_type,
+                                         reference: cbo_number)
+  end
+
+  def set_health_establishment
+    return if cnes_number.blank?
+
+    he = HealthEstablishmentService.get_health_establishment(self)
+
+    return if he.blank?
+
+    he_saved = HealthEstablishment.find_by(cnes_code: he['CodigoCNES']['codigo'])
+
+    if he_saved
+      self.health_establishment = he_saved
+    else
+      self.health_establishment = HealthEstablishment.create!(
+        unit_code: he['CodigoUnidade']['codigo'],
+        fancy_name: he['nomeFantasia']['Nome'],
+        legal_full_name: he['nomeEmpresarial']['Nome'],
+        federal_registry: he['CNPJ']['numeroCNPJ'],
+        cnes_code: he['CodigoCNES']['codigo'],
+        registry_at: he['dataAtualizacao']
+      )
+    end
+
+    self.health_establishment = HealthEstablishment
+                                  .find_by(cnes_code: cnes_number)
+  end
+
+  def find_health_professional
+    hp = HealthProfessionalService.get_health_professional(self)
+
+    return if hp.blank?
+
+    self.legal_full_name = hp['Nome']['Nome']
+    self.federal_registry = hp['CPF']['numeroCPF']
+    self.cns_code = hp['CNS']['numeroCNS']
+    health_establishment
+  end
 end

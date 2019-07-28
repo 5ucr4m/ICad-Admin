@@ -48,33 +48,9 @@
 class UserSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :email, :cns_code, :full_name, :cnes_code, :ine_code
+  attributes :id, :email, :cns_code, :full_name, :cnes_code, :ine_code, :federal_registry
 
   def avatar_url
     rails_blob_url(object.avatar) if object.avatar.present?
-  end
-
-  def cns_code
-    return if object&.health_professional&.blank?
-
-    object&.health_professional&.cns_code
-  end
-
-  def full_name
-    return if object&.health_professional&.blank?
-
-    object.health_professional.legal_full_name
-  end
-
-  def cnes_code
-    return if object&.health_professional&.blank?
-
-    object.health_professional.health_establishment.cnes_code
-  end
-
-  def ine_code
-    return if object&.health_professional&.blank?
-
-    object.health_professional.professional_team.code
   end
 end
