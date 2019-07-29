@@ -85,8 +85,7 @@ class HealthProfessional < ApplicationRecord
       )
     end
 
-    self.health_establishment = HealthEstablishment
-                                  .find_by(cnes_code: cnes_number)
+    self.health_establishment = HealthEstablishment.find_by(cnes_code: cnes_number)
   end
 
   def find_health_professional
@@ -97,6 +96,5 @@ class HealthProfessional < ApplicationRecord
     self.legal_full_name = hp['Nome']['Nome']
     self.federal_registry = hp['CPF']['numeroCPF']
     self.cns_code = hp['CNS']['numeroCNS']
-    health_establishment
   end
 end
