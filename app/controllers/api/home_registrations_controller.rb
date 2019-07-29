@@ -27,7 +27,7 @@ module Api
       @address_type_selected = @home_registration.address.address_type.presence
 
       if @home_registration.save
-        render_json @home_registration, :created
+        render_json @home_registration, :created, true
       else
         unprocessable_entity @home_registration
       end
@@ -38,7 +38,7 @@ module Api
     api :PUT, '/home_registrations/:id', 'PUT Home Registration'
     def update
       if @home_registration.update(home_registration_params)
-        render_json @home_registration, :ok, true
+        render_json @home_registration, :ok
       else
         unprocessable_entity @home_registration
       end
@@ -60,10 +60,12 @@ module Api
     # Only allow a trusted parameter "white list" through.
     def home_registration_params
       params.require(:home_registration).permit(:health_professional_id,
-                                                :living_condition_id, :address_id,
-                                                :form_updated, :pet_quantity,
-                                                :refuse_registration, :tp_cds_origin,
-                                                :uuid, :uuid_form_origin,
+                                                :form_updated,
+                                                :pet_quantity,
+                                                :refuse_registration,
+                                                :tp_cds_origin,
+                                                :uuid,
+                                                :uuid_form_origin,
                                                 :home_type_id,
                                                 :finished,
                                                 families_attributes: %i[

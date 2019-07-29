@@ -19,6 +19,11 @@ module Api
       render_json @query.result.ethnicities.includes(:generic_model)
     end
 
+    api :GET, '/generic_models/home_types', 'GET Home Types List'
+    def home_types
+      render_json @query.result.home_types.includes(:generic_model)
+    end
+
     private
 
     def set_query

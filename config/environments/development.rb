@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -76,4 +78,6 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = { address: 'http://localhost', port: 1025 }
 
   ActiveRecordQueryTrace.enabled = true
+
+  config.hosts << '1b2ef01b.ngrok.io'
 end

@@ -381,3 +381,7 @@ a.card-options-collapse .badge .bg-blue-deep .text-white {
   border: 0 transparent;
   background-image: $color-gradient-smoke;
 }
+
+.card-options-collapse {
+  border-radius: 50% !important;
+}
