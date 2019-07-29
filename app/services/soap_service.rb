@@ -31,12 +31,12 @@ module SoapService
 
       puts soap_envelope
 
-      client = Faraday.new(url: request.url)
+      client = Faraday.new(url: request.url, ssl: {verify: false})
 
       response = client.post do |req|
         req.headers['Content-Type'] = 'text/xml'
         req.body = soap_envelope.root.to_s.to_s.delete("\n")
-                                .delete("\r").gsub(/\n\t/, ' ').gsub(/>\s*</, '><')
+                     .delete("\r").gsub(/\n\t/, ' ').gsub(/>\s*</, '><')
       end
 
       xml = response.body
@@ -45,7 +45,7 @@ module SoapService
         nori = Nori.new
         xml = Nokogiri::XML(xml).remove_namespaces!
         xml = xml.root.to_s.delete("\n")
-                 .delete("\r").gsub(/\n\t/, ' ').gsub(/>\s*</, '><')
+                .delete("\r").gsub(/\n\t/, ' ').gsub(/>\s*</, '><')
         xml = nori.parse(xml)
       end
       xml['Envelope']['Body'] if xml['Envelope']
