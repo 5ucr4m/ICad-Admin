@@ -75,6 +75,9 @@ Rails.application.routes.draw do
       registrations: 'api/overrides/registrations'
     }
 
+    resources :states
+    resources :cities
+
     resources :generic_models do
       collection do
         get 'types'

@@ -8,8 +8,10 @@ module Api
     # GET /cities
     api :GET, '/cities', 'Cities List'
     def index
-      @query = City.ransack(params[:q])
-      render_json @query.result.includes(:state).order(:name)
+      cities = Rails.cache.fetch('cities') do
+        City.all
+      end
+      render json: cities, adapter: false
     end
 
     # GET /cities/1

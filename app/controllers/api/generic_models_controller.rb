@@ -6,9 +6,12 @@ module Api
 
     api :GET, '/generic_models', 'GET Type List'
     def types
-      render json: GenericModel.all
-                               .select(:id, :name, :reference, :generic_field)
-                               .group_by(&:generic_field)
+      generic_models = Rails.cache.fetch('generic_models') do
+        GenericModel.all
+          .select(:id, :name, :reference, :generic_field)
+          .group_by(&:generic_field)
+      end
+      render json: generic_models, adapter: false
     end
 
     private

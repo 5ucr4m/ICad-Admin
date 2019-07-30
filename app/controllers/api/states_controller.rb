@@ -6,8 +6,10 @@ module Api
 
     # GET /states
     def index
-      @query = State.ransack(params[:q])
-      render_json @query.result.page(params[:page])
+      states = Rails.cache.fetch('states') do
+        State.all
+      end
+      render json: states, adapter: false
     end
 
     # GET /states/1
