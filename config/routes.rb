@@ -75,6 +75,12 @@ Rails.application.routes.draw do
       registrations: 'api/overrides/registrations'
     }
 
+    resources :generic_models do
+      collection do
+        get 'types'
+      end
+    end
+
     # Home Registrations
     resources :home_registrations, except: %i[new edit] do
       shallow do
