@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: icadx
-  username: <%= ENV['ICADX_DATABASE_USERNAME'] %>
-  password: <%= ENV['ICADX_DATABASE_PASSWORD'] %>
