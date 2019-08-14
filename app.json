@@ -4,7 +4,7 @@
   "keywords": ["icadx"],
   "scripts": {
     "dokku": {
-      "postdeploy": "bundle exec rake db:migrate"
+      "postdeploy": "rails db:migrate"
     }
   }
 }
