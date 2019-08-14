@@ -1,0 +1,10 @@
+{
+  "name": "icadx",
+  "description": "ICADX - SOFTWARE DE GESTÃO DE UBS",
+  "keywords": ["icadx"],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate"
+    }
+  }
+}
