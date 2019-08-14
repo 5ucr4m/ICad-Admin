@@ -21,6 +21,7 @@ gem 'faraday'
 gem 'friendly_id'
 gem 'geocoder'
 gem 'groupdate'
+gem 'hiredis'
 gem 'image_processing', '~> 1.2'
 gem 'kaminari'
 gem 'libxml-ruby'
@@ -42,6 +43,7 @@ gem 'sass-rails', '~> 5'
 gem 'savon'
 gem 'seed_migration'
 gem 'sidekiq'
+gem 'sidekiq-cron'
 gem 'simple_form'
 gem 'sinatra', require: false
 gem 'webpacker', '~> 4.0'
@@ -81,4 +83,8 @@ group :test do
   gem 'simplecov', require: false
   gem 'vcr'
   gem 'webmock'
+end
+
+group :production do
+  gem 'rails_12factor'
 end

@@ -40,7 +40,7 @@ module IcadX
     config.logger = ActiveSupport::TaggedLogging.new(logger)
 
     # Cache config
-    config.cache_store = :redis_cache_store, { url: "#{ENV['REDIS_URL']}/#{ENV['REDIS_CACHE_PATH']}" }
+    config.cache_store = :redis_cache_store, { driver: :hiredis, url: "#{ENV['REDIS_URL']}/#{ENV['REDIS_CACHE_PATH']}" }
 
     # ActiveJob with Sidekiq
     config.active_job.queue_adapter = :sidekiq

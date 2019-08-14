@@ -17,9 +17,9 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  pool: <%= Integer(ENV.fetch("RAILS_MAX_THREADS") { 5 }) * Integer(ENV.fetch("WEB_CONCURRENCY") { 2 }) %>
+  reaping_frequency: <%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
 
 development:
   <<: *default
