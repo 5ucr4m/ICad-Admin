@@ -59,12 +59,7 @@ module Api
 
     # Only allow a trusted parameter "white list" through.
     def individual_registration_params
-      params.require(:individual_registration).permit(:health_condition_id,
-                                                      :in_street_situation_id,
-                                                      :family_member_id,
-                                                      :sociodemographic_info_id,
-                                                      :cancel_registration_id,
-                                                      :refuse_registration,
+      params.require(:individual_registration).permit(:refuse_registration,
                                                       :form_updated, :uuid,
                                                       :uuid_form_origin,
                                                       :uuid_citizen,

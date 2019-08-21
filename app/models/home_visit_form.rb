@@ -55,6 +55,7 @@ class HomeVisitForm < ApplicationRecord
   has_many :home_visit_reasons, dependent: :destroy
 
   accepts_nested_attributes_for :home_visit_reasons, allow_destroy: true
+  accepts_nested_attributes_for :home_visit_registration, allow_destroy: false
 
   ransack_alias :search, :id_to_s
 end
