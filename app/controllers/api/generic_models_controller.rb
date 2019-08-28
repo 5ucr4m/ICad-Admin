@@ -2,6 +2,7 @@
 
 module Api
   class GenericModelsController < Api::ApiController
+    skip_before_action :authenticate_user!
     before_action :set_query, except: %i[cbo_types ethnicity_types]
 
     api :GET, '/generic_models', 'GET Type List'

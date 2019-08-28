@@ -1,7 +1,7 @@
 class CreateVaccinationItems < ActiveRecord::Migration[6.0]
   def change
     create_table :vaccination_items do |t|
-      t.string :turn
+      t.belongs_to :turn, foreign_key: {to_table: :generic_models}, index: true
       t.belongs_to :family_member, foreign_key: true, index: true
       t.belongs_to :local_service, foreign_key: {to_table: :generic_models}, index: true
       t.boolean :traveller

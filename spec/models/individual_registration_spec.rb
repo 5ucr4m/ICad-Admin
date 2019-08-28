@@ -5,7 +5,9 @@
 # Table name: individual_registrations
 #
 #  id                       :bigint           not null, primary key
+#  final_date_hour          :datetime
 #  form_updated             :boolean
+#  initial_date_hour        :datetime
 #  refuse_registration      :boolean
 #  slug                     :string
 #  tp_cds_origin            :integer

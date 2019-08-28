@@ -46,10 +46,10 @@ function columnChart(options) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  columnChart({id: 'families', url: '/families/chart_by_day', name: 'Famílias'});
-  columnChart({id: 'family-members', url: '/family_members/chart_by_day', name: 'Membros Famíliares'});
+  columnChart({id: 'chart-families', url: '/families/chart_by_day', name: 'Famílias'});
+  columnChart({id: 'chart-family-members', url: '/family_members/chart_by_day', name: 'Membros Famíliares'});
   columnChart({
-    id: 'home-visit-registrations',
+    id: 'chart-home-visit-registrations',
     url: '/home_visit_registrations/chart_by_day',
     name: 'Visitas Famíliares'
   });

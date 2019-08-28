@@ -5,6 +5,7 @@ RSpec.describe "vaccinations/edit", type: :view do
     @vaccination = assign(:vaccination, Vaccination.create!(
       :uuid => "MyString",
       :tp_cds_origin => 1,
+      :vaccination_campaign => nil,
       :company => nil,
       :slug => "MyString"
     ))
@@ -18,6 +19,8 @@ RSpec.describe "vaccinations/edit", type: :view do
       assert_select "input[name=?]", "vaccination[uuid]"
 
       assert_select "input[name=?]", "vaccination[tp_cds_origin]"
+
+      assert_select "input[name=?]", "vaccination[vaccination_campaign_id]"
 
       assert_select "input[name=?]", "vaccination[company_id]"
 

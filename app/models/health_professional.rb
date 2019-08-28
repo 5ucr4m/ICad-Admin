@@ -45,12 +45,12 @@ class HealthProfessional < ApplicationRecord
 
   has_many :home_registrations, dependent: :destroy
 
-  attr_accessor :cnes_number, :cbo_number
-
-  before_validation :set_cbo_code, :set_health_establishment
+  before_validation :set_health_establishment
   before_create :find_health_professional
 
-  validates :cns_code, :cnes_number, :cbo_number, presence: true
+  attr_accessor :cnes_code
+
+  validates :cns_code, :cnes_code, presence: true
 
   ransack_alias :search, :id_to_s_or_legal_full_name_or_federal_registry_or_cns_code
 
@@ -60,17 +60,10 @@ class HealthProfessional < ApplicationRecord
 
   private
 
-  def set_cbo_code
-    return if cbo_number.blank?
-
-    self.cbo_code = GenericModel.find_by(generic_field: :cbo_type,
-                                         reference: cbo_number)
-  end
-
   def set_health_establishment
-    return if cnes_number.blank?
+    return if cnes_code.blank?
 
-    he = HealthEstablishmentService.get_health_establishment(self)
+    he = HealthEstablishmentService.get_health_establishment(cnes_code)
 
     return if he.blank?
 
@@ -89,11 +82,11 @@ class HealthProfessional < ApplicationRecord
       )
     end
 
-    self.health_establishment = HealthEstablishment.find_by(cnes_code: cnes_number)
+    self.health_establishment = HealthEstablishment.find_by(cnes_code: cnes_code)
   end
 
   def find_health_professional
-    hp = HealthProfessionalService.get_health_professional(self)
+    hp = HealthProfessionalService.get_health_professional(cnes_code)
 
     return if hp.blank?
 

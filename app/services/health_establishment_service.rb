@@ -5,8 +5,8 @@ class HealthEstablishmentService
 
   class << self
 
-    def get_health_establishment(obj)
-      params = OpenStruct.new(cnes: obj.cnes_number)
+    def get_health_establishment(cnes_code)
+      params = OpenStruct.new(cnes: cnes_code)
       he = EstabelecimentoSaudeService.call('consultar_estabelecimento_saude', params)
 
       return if he.blank? || he['Fault']

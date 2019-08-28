@@ -70,6 +70,10 @@ class GenericModel < ApplicationRecord
   scope :child_responsible, ->{where(generic_field: :child_responsible)}
   scope :left_reasons, ->{where(generic_field: :left_reason)}
   scope :family_incomes, ->{where(generic_field: :family_income)}
+  scope :local_services, ->{where(generic_field: :local_service)}
+  scope :immunobiological, ->{where(generic_field: :immunobiological)}
+  scope :vaccination_strategies, ->{where(generic_field: :vaccination_strategy)}
+  scope :doses, ->{where(generic_field: :dose)}
 
   def name_formatted
     return name.mb_chars.upcase if reference.blank?

@@ -58,10 +58,18 @@ pt-BR:
         one: Ficha de Cadastro Individual
         other: Fichas de Cadastro Individual
         icon: fas fa-notes-medical
+      vaccine:
+        one: Vacina
+        other: Vacinas
+        icon: fas fa-syringe
       vaccination_campaign:
         one: Campanha de Vacinação
         other: Campanhas de Vacinação
         icon: fas fa-medkit
+      vaccination:
+        one: Vacinação
+        other: Vacinações
+        icon: fas fa-syringe
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

@@ -385,3 +385,17 @@ a.card-options-collapse .badge .bg-blue-deep .text-white {
 .card-options-collapse {
   border-radius: 50% !important;
 }
+
+.tab-pane.fade {
+  display: block;
+  visibility: hidden;
+  width: 100%;
+  height: 0;
+}
+
+.tab-pane.fade.active {
+  width: 100%;
+  height: 100%;
+  display: block;
+  visibility: visible;
+}

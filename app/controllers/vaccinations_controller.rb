@@ -1,5 +1,6 @@
-class VaccinationsController < ApplicationController
+class VaccinationsController < WebController
   before_action :set_vaccination, only: %i[show edit update destroy]
+  before_action :set_vaccination_campaigns, only: %i[new show edit update]
 
   # GET /vaccinations
   def index
@@ -47,13 +48,19 @@ class VaccinationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_vaccination
-      @vaccination = Vaccination.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def vaccination_params
-      params.require(:vaccination).permit(:uuid, :tp_cds_origin, :company_id, :slug)
-    end
+  def set_vaccination_campaigns
+    @vaccination_campaigns = VaccinationCampaign.where(period_start: Date.today.beginning_of_year,
+                                                       period_end: Date.today.end_of_year)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_vaccination
+    @vaccination = Vaccination.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def vaccination_params
+    params.require(:vaccination).permit(:uuid, :tp_cds_origin, :vaccination_campaign_id)
+  end
 end

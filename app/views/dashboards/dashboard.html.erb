@@ -31,59 +31,44 @@
                       description: FamilyMember.model_name.human(count: 2)} %>
 </div>
 <div class="row row-cards">
-  <%= render 'application/chart', title: Family.model_name.human(count: 2), id: 'families' %>
-  <%= render 'application/chart', title: FamilyMember.model_name.human(count: 2), id: 'family-members' %>
-  <%= render 'application/chart', title: HomeVisitRegistration.model_name.human(count: 2), id: 'home-visit-registrations' %>
-</div>
-<div class="row row-cards">
-  <div class="col-lg-12">
-    <div class="card mb-0">
-      <div class="card-header">
-        <%= link_to vaccination_campaigns_path do %>
-          <div class="h3 card-title font-weight-bold text-blue-deep">
-            <%= VaccinationCampaign.model_name.human(count: 1) %>
+  <div class="col-lg-6 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="tabs-content">
+          <div class="tab-pane fade" id="family-members" role="tabpanel" aria-labelledby="family-members-tab">
+            <%= render 'application/chart', title: FamilyMember.model_name.human(count: 2), id: 'chart-family-members' %>
           </div>
-        <% end %>
-        &nbsp;<small class="pl-1 text-muted">(<%= VaccinationCampaign&.last&.title || 'Nenhuma' %>)</small>
-        <div class="card-options">
-          <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
-            <i class="fe fe-chevron-up"></i>
-          </a>
+          <div class="tab-pane fade show active" id="families" role="tabpanel" aria-labelledby="families-tab">
+            <%= render 'application/chart', title: Family.model_name.human(count: 2), id: 'chart-families' %>
+          </div>
+          <div class="tab-pane fade" id="home-visit-registrations" role="tabpanel" aria-labelledby="home-visit-registrations-tab">
+            <%= render 'application/chart', title: HomeVisitRegistration.model_name.human(count: 2), id: 'chart-home-visit-registrations' %>
+          </div>
         </div>
       </div>
-      <div class="card-body"></div>
-      <div class="card-body p-0">
-        <div id="map" class="card-map rounded" style="min-height: 29.3rem;"></div>
+      <div class="nav card-tabs card-tabs-bottom" role="tablist">
+        <div id="family-members-tab" class="card-tabs-item text-center nav-link"
+             data-toggle="tab" data-target="#family-members" role="tab" aria-controls="family-member" aria-selected="false">
+          <h4>
+            <i class="<%= t('activerecord.models.family_member.icon') %> mr-2"></i><%= FamilyMember.model_name.human(count: 2) %>
+          </h4>
+        </div>
+        <div id="families-tab" class="card-tabs-item text-center nav-link active"
+             data-toggle="tab" data-target="#families" role="tab" aria-controls="families" aria-selected="true">
+          <h4>
+            <i class="<%= t('activerecord.models.family.icon') %> mr-2"></i><%= Family.model_name.human(count: 2) %>
+          </h4>
+        </div>
+        <div id="home-visit-registrations-tab" class="card-tabs-item text-center nav-link"
+             data-toggle="tab" data-target="#home-visit-registrations" role="tab" aria-controls="home-visit-registrations" aria-selected="false">
+          <h4>
+            <i class="<%= t('activerecord.models.home_registration.icon') %> mr-2"></i><%= HomeVisitRegistration.model_name.human(count: 2) %>
+          </h4>
+        </div>
       </div>
     </div>
   </div>
+  <div class="col-lg-6 col-sm-12">
+    <%= render 'application/vaccination_campaigns', vaccination_campaigns: VaccinationCampaign.all %>
+  </div>
 </div>
-<script type="text/javascript">
-  navigator.geolocation.getCurrentPosition(function (position) {
-    mapboxgl.accessToken = 'pk.eyJ1IjoidGlhZ29jYXNzaW8iLCJhIjoiY2p4dW1wbWs4MTZxczNjcW0xN2d2NmFjMiJ9.DmiiFFq3jPkdaDsoyjRDYw';
-
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/light-v10',
-      center: [position.coords.longitude, position.coords.latitude],
-      zoom: 15
-    });
-
-    const popup = new mapboxgl.Popup({offset: 25}).setText('');
-
-    let div = document.createElement('div');
-    let icon = document.createElement('i');
-
-    icon.classList.add('fas');
-    icon.classList.add('fa-male');
-    icon.classList.add('fa-4x');
-    icon.classList.add('text-green');
-    div.append(icon);
-
-    new mapboxgl.Marker(div)
-      .setLngLat([position.coords.longitude, position.coords.latitude])
-      .setPopup(popup).addTo(map);
-
-    map.addControl(new mapboxgl.NavigationControl());
-  });
-</script>

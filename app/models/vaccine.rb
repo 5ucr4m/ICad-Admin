@@ -30,10 +30,11 @@
 #
 
 class Vaccine < ApplicationRecord
+  include Sluggable
 
-  belongs_to :immunobiologicaly, class_name: 'GenericModel'
+  belongs_to :immunobiological, class_name: 'GenericModel'
   belongs_to :vaccination_strategy, class_name: 'GenericModel'
-  belongs_to :dose, class_name: 'GenericModel', optional: true
+  belongs_to :dose, class_name: 'GenericModel'
   belongs_to :company, optional: true
 
   ransack_alias :search, :id_to_s

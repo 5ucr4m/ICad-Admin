@@ -9,20 +9,20 @@ navigator.geolocation.getCurrentPosition(function (position) {
   });
 
   <% data.each do |d| %>
-  const popup = new mapboxgl.Popup({offset: 25}).setText('');
+    const popup = new mapboxgl.Popup({offset: 25}).setText('');
 
-  let div = document.createElement('div');
-  let icon = document.createElement('i');
+    let div = document.createElement('div');
+    let icon = document.createElement('i');
 
-  icon.classList.add('fas');
-  icon.classList.add('fa-male');
-  icon.classList.add('fa-4x');
-  icon.classList.add('text-green');
-  div.append(icon);
+    icon.classList.add('fas');
+    icon.classList.add('fa-male');
+    icon.classList.add('fa-4x');
+    icon.classList.add('text-green');
+    div.append(icon);
 
-  new mapboxgl.Marker(div)
-    .setLngLat([position.coords.longitude, position.coords.latitude])
-    .setPopup(popup).addTo(map);
+    new mapboxgl.Marker(div)
+      .setLngLat([position.coords.longitude, position.coords.latitude])
+      .setPopup(popup).addTo(map);
   <% end %>
 
   map.addControl(new mapboxgl.NavigationControl());

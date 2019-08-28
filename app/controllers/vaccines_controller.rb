@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class VaccinesController < ApplicationController
+class VaccinesController < WebController
   before_action :set_vaccine, only: %i[show edit update destroy]
 
   # GET /vaccines
@@ -57,6 +57,6 @@ class VaccinesController < ApplicationController
   def vaccine_params
     params.require(:vaccine).permit(:description, :immunobiological_id,
                                     :vaccination_strategy_id, :dose_id,
-                                    :lot_number, :manufacturer, :company_id, :slug)
+                                    :lot_number, :manufacturer)
   end
 end

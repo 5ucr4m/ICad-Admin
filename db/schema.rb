@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_11_174115) do
+ActiveRecord::Schema.define(version: 2019_08_25_212817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -441,6 +441,8 @@ ActiveRecord::Schema.define(version: 2019_07_11_174115) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "initial_date_hour"
+    t.datetime "final_date_hour"
     t.index ["cancel_registration_id"], name: "index_individual_registrations_on_cancel_registration_id"
     t.index ["company_id"], name: "index_individual_registrations_on_company_id"
     t.index ["family_member_id"], name: "index_individual_registrations_on_family_member_id"
@@ -699,20 +701,8 @@ ActiveRecord::Schema.define(version: 2019_07_11_174115) do
     t.index ["vaccine_id"], name: "index_vaccination_campaigns_on_vaccine_id"
   end
 
-  create_table "vaccination_item_vaccines", force: :cascade do |t|
-    t.bigint "vaccination_item_id"
-    t.bigint "vaccine_id"
-    t.bigint "company_id"
-    t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_vaccination_item_vaccines_on_company_id"
-    t.index ["vaccination_item_id"], name: "index_vaccination_item_vaccines_on_vaccination_item_id"
-    t.index ["vaccine_id"], name: "index_vaccination_item_vaccines_on_vaccine_id"
-  end
-
   create_table "vaccination_items", force: :cascade do |t|
-    t.string "turn"
+    t.bigint "turn_id"
     t.bigint "family_member_id"
     t.bigint "local_service_id"
     t.boolean "traveller"
@@ -723,19 +713,24 @@ ActiveRecord::Schema.define(version: 2019_07_11_174115) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "initial_date_hour"
+    t.datetime "final_date_hour"
     t.index ["company_id"], name: "index_vaccination_items_on_company_id"
     t.index ["family_member_id"], name: "index_vaccination_items_on_family_member_id"
     t.index ["local_service_id"], name: "index_vaccination_items_on_local_service_id"
+    t.index ["turn_id"], name: "index_vaccination_items_on_turn_id"
   end
 
   create_table "vaccinations", force: :cascade do |t|
     t.string "uuid"
     t.integer "tp_cds_origin"
+    t.bigint "vaccination_campaign_id"
     t.bigint "company_id"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_vaccinations_on_company_id"
+    t.index ["vaccination_campaign_id"], name: "index_vaccinations_on_vaccination_campaign_id"
   end
 
   create_table "vaccines", force: :cascade do |t|
@@ -863,13 +858,12 @@ ActiveRecord::Schema.define(version: 2019_07_11_174115) do
   add_foreign_key "users", "health_professionals"
   add_foreign_key "vaccination_campaigns", "companies"
   add_foreign_key "vaccination_campaigns", "vaccines"
-  add_foreign_key "vaccination_item_vaccines", "companies"
-  add_foreign_key "vaccination_item_vaccines", "vaccination_items"
-  add_foreign_key "vaccination_item_vaccines", "vaccines"
   add_foreign_key "vaccination_items", "companies"
   add_foreign_key "vaccination_items", "family_members"
   add_foreign_key "vaccination_items", "generic_models", column: "local_service_id"
+  add_foreign_key "vaccination_items", "generic_models", column: "turn_id"
   add_foreign_key "vaccinations", "companies"
+  add_foreign_key "vaccinations", "vaccination_campaigns"
   add_foreign_key "vaccines", "companies"
   add_foreign_key "vaccines", "generic_models", column: "dose_id"
   add_foreign_key "vaccines", "generic_models", column: "immunobiological_id"
