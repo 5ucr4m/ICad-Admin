@@ -50,6 +50,8 @@ class UserSerializer < ActiveModel::Serializer
 
   attributes :id, :email, :cns_code, :full_name, :cnes_code, :ine_code, :federal_registry
 
+  belongs_to :health_professional
+
   def avatar_url
     rails_blob_url(object.avatar) if object.avatar.present?
   end
