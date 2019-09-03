@@ -78,12 +78,6 @@ Rails.application.routes.draw do
     resources :states
     resources :cities
 
-    resources :generic_models do
-      collection do
-        get 'types'
-      end
-    end
-
     # Home Registrations
     resources :home_registrations, except: %i[new edit] do
       shallow do
@@ -142,11 +136,9 @@ Rails.application.routes.draw do
     end
 
     # Generic Models
-    resources :generic_models, except: %i[index new create show edit update destroy] do
+    resources :generic_models, only: :types do
       collection do
-        get 'address_types'
-        get 'cbo_types'
-        get 'ethnicity_types'
+        get 'types'
       end
     end
   end

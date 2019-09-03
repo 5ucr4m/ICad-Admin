@@ -23,8 +23,6 @@ module Api
     api :POST, '/home_registrations', 'GET Home Registrations List'
     def create
       @home_registration = HomeRegistration.new(home_registration_params)
-      @city_selected = @home_registration.address.city.presence
-      @address_type_selected = @home_registration.address.address_type.presence
 
       if @home_registration.save
         render_json @home_registration, :created, true

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception, if: :verify_api
+  protect_from_forgery prepend: true, if: :verify_api
+  # protect_from_forgery with: :exception, if: :verify_api
 
   protected
 
