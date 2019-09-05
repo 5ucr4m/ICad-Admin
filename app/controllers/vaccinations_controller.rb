@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VaccinationsController < WebController
   before_action :set_vaccination, only: %i[show edit update destroy]
   before_action :set_vaccination_campaigns, only: %i[new show edit update]
@@ -9,8 +11,7 @@ class VaccinationsController < WebController
   end
 
   # GET /vaccinations/1
-  def show
-  end
+  def show; end
 
   # GET /vaccinations/new
   def new
@@ -18,8 +19,7 @@ class VaccinationsController < WebController
   end
 
   # GET /vaccinations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /vaccinations
   def create

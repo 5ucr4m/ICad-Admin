@@ -3,8 +3,7 @@
 class DashboardsController < WebController
   before_action :tabs
 
-  def dashboard;
-  end
+  def dashboard; end
 
   private
 

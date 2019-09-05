@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateResponsibleChildTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Adulto responsável'.mb_chars.upcase, reference: 1, generic_field: :responsible_child, generic_class: SociodemographicInfo.model_name.name)
@@ -8,7 +10,5 @@ class CreateResponsibleChildTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outro'.mb_chars.upcase, reference: 4, generic_field: :responsible_child, generic_class: SociodemographicInfo.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

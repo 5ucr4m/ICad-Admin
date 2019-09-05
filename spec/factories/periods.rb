@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: periods
@@ -23,11 +25,11 @@
 
 FactoryBot.define do
   factory :period do
-    competence { "2019-06-14" }
-    start_date { "2019-06-14" }
-    end_date { "2019-06-14" }
-    deadline { "2019-06-14" }
+    competence { '2019-06-14' }
+    start_date { '2019-06-14' }
+    end_date { '2019-06-14' }
+    deadline { '2019-06-14' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

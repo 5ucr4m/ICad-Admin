@@ -67,10 +67,10 @@ class HomeVisitFormsController < WebController
                                             :home_type_id,
                                             :weight_monitoring,
                                             :height_monitoring,
-                                            home_visit_registration_attributes: [
-                                              :family_member_id,
-                                              :uuid,
-                                              :tp_cds_origin
+                                            home_visit_registration_attributes: %i[
+                                              family_member_id
+                                              uuid
+                                              tp_cds_origin
                                             ])
   end
 end

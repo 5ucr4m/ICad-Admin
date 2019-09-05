@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateImmunobiologicalTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Imunoglobulina anti tetânica'.mb_chars.upcase, reference: 1, generic_field: :immunobiological, generic_class: Vaccine.model_name.name)
@@ -52,7 +54,5 @@ class CreateImmunobiologicalTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Febre Amarela - Dose fracionada (0,1 ml)'.mb_chars.upcase, reference: 84, generic_field: :immunobiological, generic_class: Vaccine.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

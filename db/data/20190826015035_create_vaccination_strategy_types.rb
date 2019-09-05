@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateVaccinationStrategyTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Rotina'.mb_chars.upcase, reference: 1, generic_field: :vaccination_strategy, generic_class: Vaccine.model_name.name)
@@ -9,7 +11,5 @@ class CreateVaccinationStrategyTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Multivacinação'.mb_chars.upcase, reference: 10, generic_field: :vaccination_strategy, generic_class: Vaccine.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

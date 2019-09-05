@@ -22,8 +22,7 @@ module Api
     end
 
     # GET /home_visit_registrations/1/edit
-    def edit;
-    end
+    def edit; end
 
     # POST /home_visit_registrations
     def create
@@ -88,7 +87,7 @@ module Api
                                                         unknown_mother
                                                         responsible
                                                         out_area
-                                                    ])
+                                                      ])
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDoseTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: '1ª Dose'.mb_chars.upcase, reference: 1, generic_field: :dose, generic_class: Vaccine.model_name.name)
@@ -40,7 +42,5 @@ class CreateDoseTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Reforço'.mb_chars.upcase, reference: 38, generic_field: :dose, generic_class: Vaccine.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

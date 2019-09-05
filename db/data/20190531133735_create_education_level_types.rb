@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEducationLevelTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Creche'.mb_chars.upcase, reference: 51, generic_field: :education_level, generic_class: SociodemographicInfo.model_name.name)
@@ -15,10 +17,7 @@ class CreateEducationLevelTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Superior, aperfeiçoamento, especialização, mestrado, doutorado'.mb_chars.upcase, reference: 63, generic_field: :education_level, generic_class: SociodemographicInfo.model_name.name)
     GenericModel.create!(name: 'Alfabetização para adultos (Mobral, etc)'.mb_chars.upcase, reference: 64, generic_field: :education_level, generic_class: SociodemographicInfo.model_name.name)
     GenericModel.create!(name: 'Nenhum'.mb_chars.upcase, reference: 65, generic_field: :education_level, generic_class: SociodemographicInfo.model_name.name)
-
   end
 
-  def down
-
-  end
+  def down; end
 end

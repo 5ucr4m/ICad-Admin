@@ -62,5 +62,4 @@ module Api
                                                    :registry_at, :unit_type_id)
     end
   end
-
 end

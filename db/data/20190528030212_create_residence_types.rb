@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateResidenceTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Domicílio'.mb_chars.upcase, reference: 1, generic_field: :residence_type, generic_class: HomeRegistration.model_name.name)
@@ -15,7 +17,5 @@ class CreateResidenceTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outros'.mb_chars.upcase, reference: 99, generic_field: :residence_type, generic_class: HomeRegistration.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

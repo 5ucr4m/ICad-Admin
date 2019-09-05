@@ -91,7 +91,7 @@ module Api
                                                         brazil_entry_date
                                                         micro_area
                                                         out_area
-                                                    ],
+                                                      ],
                                                       health_condition_attributes: %i[
                                                         id
                                                         hospitalization_cause
@@ -121,7 +121,7 @@ module Api
                                                         mental_issue
                                                         integrative_practices
                                                         medicinal_plants
-                                                    ],
+                                                      ],
                                                       in_street_situation_attributes: %i[
                                                         id
                                                         kinship_degree
@@ -134,7 +134,7 @@ module Api
                                                         has_personal_hygiene
                                                         family_visit
                                                         street_situation_time_id
-                                                    ],
+                                                      ],
                                                       sociodemographic_info_attributes: %i[
                                                         id
                                                         education_level_id
@@ -152,13 +152,13 @@ module Api
                                                         has_any_disability
                                                         desire_gender
                                                         gender_identity_id
-                                                    ],
+                                                      ],
                                                       cancel_registration_attributes: %i[
                                                         id
                                                         left_reason_id
                                                         decease_date
                                                         decease_number
-                                                    ])
+                                                      ])
     end
   end
 end

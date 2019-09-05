@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: vaccination_campaigns
@@ -30,16 +32,16 @@
 
 FactoryBot.define do
   factory :vaccination_campaign do
-    title { "MyString" }
-    description { "MyText" }
+    title { 'MyString' }
+    description { 'MyText' }
     vaccine { nil }
     child { false }
     woman { false }
-    period_start { "2019-07-11" }
-    period_end { "2019-07-11" }
+    period_start { '2019-07-11' }
+    period_end { '2019-07-11' }
     age_initial { 1 }
     age_end { 1 }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

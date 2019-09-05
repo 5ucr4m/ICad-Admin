@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHomeWallMaterialTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Alvenaria com revestimento'.mb_chars.upcase, reference: 109, generic_field: :home_wall_material, generic_class: LivingCondition.model_name.name)
@@ -10,7 +12,5 @@ class CreateHomeWallMaterialTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outro material'.mb_chars.upcase, reference: 116, generic_field: :home_wall_material, generic_class: LivingCondition.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

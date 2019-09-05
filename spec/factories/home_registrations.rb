@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: home_registrations
@@ -43,8 +45,8 @@
 
 FactoryBot.define do
   factory :home_registration do
-    location_x { "MyString" }
-    location_y { "MyString" }
+    location_x { 'MyString' }
+    location_y { 'MyString' }
     health_professional { nil }
     living_condition { nil }
     address { nil }
@@ -52,12 +54,12 @@ FactoryBot.define do
     pet_quantity { 1 }
     refuse_registration { false }
     tp_cds_origin { 1 }
-    uuid { "MyString" }
-    uuid_form_origin { "MyString" }
+    uuid { 'MyString' }
+    uuid_form_origin { 'MyString' }
     home_type { nil }
     permanence_institution { nil }
     finished { false }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateVaccinationCampaigns < SeedMigration::Migration
   def up
     VaccinationCampaign.create! title: 'Vacinação contra rubéula',
@@ -11,7 +13,5 @@ class CreateVaccinationCampaigns < SeedMigration::Migration
                                 description: 'Vacinação', age_initial: 0, age_end: 69
   end
 
-  def down
-
-  end
+  def down; end
 end

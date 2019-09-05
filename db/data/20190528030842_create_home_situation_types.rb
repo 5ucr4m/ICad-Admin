@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHomeSituationTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Próprio'.mb_chars.upcase, reference: 75, generic_field: :home_situation, generic_class: LivingCondition.model_name.name)
@@ -10,7 +12,5 @@ class CreateHomeSituationTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outra'.mb_chars.upcase, reference: 82, generic_field: :home_situation, generic_class: LivingCondition.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

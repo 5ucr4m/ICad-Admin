@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class GenericModelsController < WebController
-
   before_action :set_generic_model, only: %i[show edit update destroy]
   before_action :set_query, except: %i[index new create show edit update destroy]
 

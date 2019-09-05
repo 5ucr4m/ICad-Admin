@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: responsible_children
@@ -28,6 +30,6 @@ FactoryBot.define do
     individual_registration { nil }
     responsible_child_type { nil }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

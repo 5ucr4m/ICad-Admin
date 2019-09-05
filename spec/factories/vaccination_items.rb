@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: vaccination_items
@@ -42,6 +44,6 @@ FactoryBot.define do
     pregnant { false }
     puerperal { false }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

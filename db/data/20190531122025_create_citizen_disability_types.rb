@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCitizenDisabilityTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Auditiva'.mb_chars.upcase, reference: 12, generic_field: :citizen_disability, generic_class: SociodemographicInfo.model_name.name)
@@ -7,7 +9,5 @@ class CreateCitizenDisabilityTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outra'.mb_chars.upcase, reference: 16, generic_field: :citizen_disability, generic_class: SociodemographicInfo.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

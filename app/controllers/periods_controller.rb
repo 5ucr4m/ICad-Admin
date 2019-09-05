@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PeriodsController < ApplicationController
   before_action :set_period, only: %i[show edit update destroy]
 
@@ -8,8 +10,7 @@ class PeriodsController < ApplicationController
   end
 
   # GET /periods/1
-  def show
-  end
+  def show; end
 
   # GET /periods/new
   def new
@@ -17,8 +18,7 @@ class PeriodsController < ApplicationController
   end
 
   # GET /periods/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /periods
   def create
@@ -47,13 +47,14 @@ class PeriodsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_period
-      @period = Period.friendly.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def period_params
-      params.require(:period).permit(:competence, :start_date, :end_date, :deadline, :company_id, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_period
+    @period = Period.friendly.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def period_params
+    params.require(:period).permit(:competence, :start_date, :end_date, :deadline, :company_id, :slug)
+  end
 end

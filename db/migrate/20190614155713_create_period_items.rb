@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class CreatePeriodItems < ActiveRecord::Migration[6.0]
   def change
     create_table :period_items do |t|
       t.string :serialized_uuid
-      t.belongs_to :serialized_type, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :serialized_type, foreign_key: { to_table: :generic_models }, index: true
       t.string :serialized_cnes
       t.string :ibge_code
       t.string :serialized_ine

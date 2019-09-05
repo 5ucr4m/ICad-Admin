@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHygieneAccessTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Banho'.mb_chars.upcase, reference: 42, generic_field: :hygiene_access, generic_class: LivingCondition.model_name.name)
@@ -6,7 +8,5 @@ class CreateHygieneAccessTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outros'.mb_chars.upcase, reference: 45, generic_field: :hygiene_access, generic_class: LivingCondition.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

@@ -1,9 +1,7 @@
+# frozen_string_literal: true
+
 class CreateRespiratoryDiseasesTypes < SeedMigration::Migration
-  def up
+  def up; end
 
-  end
-
-  def down
-
-  end
+  def down; end
 end

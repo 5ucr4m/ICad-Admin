@@ -29,5 +29,4 @@ module Api
       params.require(:state).permit(:id)
     end
   end
-
 end

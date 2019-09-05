@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: health_condition_kidneys
@@ -24,7 +26,6 @@
 #
 
 class HealthConditionKidney < ApplicationRecord
-
   belongs_to :health_condition, optional: true
   belongs_to :kidney_problem, class_name: 'GenericModel'
   belongs_to :company, optional: true

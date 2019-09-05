@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWaterTreatmentTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Filtrada'.mb_chars.upcase, reference: 97, generic_field: :water_treatment, generic_class: LivingCondition.model_name.name)
@@ -7,7 +9,5 @@ class CreateWaterTreatmentTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Sem tratamento'.mb_chars.upcase, reference: 100, generic_field: :water_treatment, generic_class: LivingCondition.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

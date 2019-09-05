@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateJobMarketSituationTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Empregador'.mb_chars.upcase, reference: 66, generic_field: :job_market_situation, generic_class: SociodemographicInfo.model_name.name)
@@ -12,7 +14,5 @@ class CreateJobMarketSituationTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outro'.mb_chars.upcase, reference: 74, generic_field: :job_market_situation, generic_class: SociodemographicInfo.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

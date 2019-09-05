@@ -10,8 +10,7 @@ class HomeRegistrationsController < WebController
   end
 
   # GET /home_registrations/1
-  def show;
-  end
+  def show; end
 
   # GET /home_registrations/new
   def new
@@ -20,8 +19,7 @@ class HomeRegistrationsController < WebController
   end
 
   # GET /home_registrations/1/edit
-  def edit;
-  end
+  def edit; end
 
   # POST /home_registrations
   def create

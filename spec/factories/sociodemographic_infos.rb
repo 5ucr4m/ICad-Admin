@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: sociodemographic_infos
@@ -49,7 +51,7 @@ FactoryBot.define do
     education_level { nil }
     occupation { nil }
     sexual_orientation { nil }
-    traditional_community_name { "MyString" }
+    traditional_community_name { 'MyString' }
     parent_relation { nil }
     job_market_situation { nil }
     desire_orientation { false }
@@ -62,6 +64,6 @@ FactoryBot.define do
     desire_gender { false }
     gender_identity { nil }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

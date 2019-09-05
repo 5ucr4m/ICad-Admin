@@ -61,5 +61,4 @@ module Api
       params.require(:professional_team).permit(:name, :code, :active)
     end
   end
-
 end

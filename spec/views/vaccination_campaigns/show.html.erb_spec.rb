@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "vaccination_campaigns/show", type: :view do
+RSpec.describe 'vaccination_campaigns/show', type: :view do
   before(:each) do
     @vaccination_campaign = assign(:vaccination_campaign, VaccinationCampaign.create!(
-      :title => "Title",
-      :description => "MyText",
-      :vaccine => nil,
-      :child => false,
-      :woman => false,
-      :age_initial => 2,
-      :age_end => 3,
-      :company => nil,
-      :slug => "Slug"
-    ))
+                                                            title: 'Title',
+                                                            description: 'MyText',
+                                                            vaccine: nil,
+                                                            child: false,
+                                                            woman: false,
+                                                            age_initial: 2,
+                                                            age_end: 3,
+                                                            company: nil,
+                                                            slug: 'Slug'
+                                                          ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Title/)
     expect(rendered).to match(/MyText/)

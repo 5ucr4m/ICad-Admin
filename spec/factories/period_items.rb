@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: period_items
@@ -46,29 +48,29 @@
 
 FactoryBot.define do
   factory :period_item do
-    serialized_uuid { "MyString" }
+    serialized_uuid { 'MyString' }
     serialized_type { nil }
-    serialized_cnes { "MyString" }
-    ibge_code { "MyString" }
-    serialized_ine { "MyString" }
-    lot_number { "MyString" }
-    sender_counter_key { "MyString" }
-    sender_installation_uuid { "MyString" }
-    sender_federal_registry { "MyString" }
-    sender_legal_name { "MyString" }
-    sender_phone { "MyString" }
-    sender_email { "MyString" }
-    sender_software_version { "MyString" }
-    sender_database_name { "MyString" }
-    origin_counter_key { "MyString" }
-    origin_installation_uuid { "MyString" }
-    origin_federal_registry { "MyString" }
-    origin_legal_name { "MyString" }
-    origin_phone { "MyString" }
-    origin_email { "MyString" }
-    origin_software_version { "MyString" }
-    origin_database_name { "MyString" }
-    app_version { "MyString" }
+    serialized_cnes { 'MyString' }
+    ibge_code { 'MyString' }
+    serialized_ine { 'MyString' }
+    lot_number { 'MyString' }
+    sender_counter_key { 'MyString' }
+    sender_installation_uuid { 'MyString' }
+    sender_federal_registry { 'MyString' }
+    sender_legal_name { 'MyString' }
+    sender_phone { 'MyString' }
+    sender_email { 'MyString' }
+    sender_software_version { 'MyString' }
+    sender_database_name { 'MyString' }
+    origin_counter_key { 'MyString' }
+    origin_installation_uuid { 'MyString' }
+    origin_federal_registry { 'MyString' }
+    origin_legal_name { 'MyString' }
+    origin_phone { 'MyString' }
+    origin_email { 'MyString' }
+    origin_software_version { 'MyString' }
+    origin_database_name { 'MyString' }
+    app_version { 'MyString' }
     period { nil }
     registrable { nil }
   end

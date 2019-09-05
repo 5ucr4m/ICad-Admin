@@ -1,5 +1,4 @@
 //= require cocoon
-//= require mapbox-gl
 
 $(document).ready(function() {
 

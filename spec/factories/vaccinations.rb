@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: vaccinations
@@ -24,10 +26,10 @@
 
 FactoryBot.define do
   factory :vaccination do
-    uuid { "MyString" }
+    uuid { 'MyString' }
     tp_cds_origin { 1 }
     vaccination_campaign { nil }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

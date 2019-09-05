@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHomeVisitReasonTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Cadastramento / Atualização'.mb_chars.upcase, reference: 1, generic_field: :reason, generic_class: HomeVisitReason.model_name.name)
@@ -36,10 +38,7 @@ class CreateHomeVisitReasonTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Convite para atividades coletivas / campanha de saúde'.mb_chars.upcase, reference: 27, generic_field: :reason, generic_class: HomeVisitReason.model_name.name)
     GenericModel.create!(name: 'Orientação / Prevenção'.mb_chars.upcase, reference: 31, generic_field: :reason, generic_class: HomeVisitReason.model_name.name)
     GenericModel.create!(name: 'Outros'.mb_chars.upcase, reference: 28, generic_field: :reason, generic_class: HomeVisitReason.model_name.name)
-
   end
 
-  def down
-
-  end
+  def down; end
 end

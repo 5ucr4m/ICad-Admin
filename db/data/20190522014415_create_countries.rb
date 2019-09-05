@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCountries < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'AFEGANISTÃO', reference: 1, generic_field: :country, generic_class: GenericModel.model_name.name)
@@ -245,7 +247,5 @@ class CreateCountries < SeedMigration::Migration
     GenericModel.create!(name: 'SÉRVIA', reference: 243, generic_field: :country, generic_class: GenericModel.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

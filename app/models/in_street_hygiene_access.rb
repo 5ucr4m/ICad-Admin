@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: in_street_hygiene_accesses
@@ -24,7 +26,6 @@
 #
 
 class InStreetHygieneAccess < ApplicationRecord
-
   belongs_to :in_street_situation
   belongs_to :hygiene_access, class_name: 'GenericModel', optional: true
   belongs_to :company

@@ -39,7 +39,7 @@ class VaccinationCampaign < ApplicationRecord
   validates :title, :description, :period_start,
             :period_end, :age_initial, :age_end, presence: true
 
-  validates :age_initial, :age_end, numericality: {greater_than_or_equal_to: 0.0}
+  validates :age_initial, :age_end, numericality: { greater_than_or_equal_to: 0.0 }
 
   ransacker :period_start_to_s do
     Arel.sql("DATE(#{table_name}.period_start)")

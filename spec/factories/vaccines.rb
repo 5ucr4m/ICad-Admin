@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: vaccines
@@ -31,13 +33,13 @@
 
 FactoryBot.define do
   factory :vaccine do
-    description { "MyString" }
+    description { 'MyString' }
     immunobiological { nil }
     vaccination_strategy { nil }
     dose { nil }
-    lot_number { "MyString" }
-    manufacturer { "MyString" }
+    lot_number { 'MyString' }
+    manufacturer { 'MyString' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

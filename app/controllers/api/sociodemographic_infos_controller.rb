@@ -61,8 +61,7 @@ module Api
                                                     :health_plan,
                                                     :has_any_disability,
                                                     :desire_gender,
-                                                    :gender_identity_id,
-      )
+                                                    :gender_identity_id)
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateGarbageDisposalTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Coletado'.mb_chars.upcase, reference: 93, generic_field: :garbage_disposal, generic_class: LivingCondition.model_name.name)
@@ -6,7 +8,5 @@ class CreateGarbageDisposalTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outro'.mb_chars.upcase, reference: 96, generic_field: :garbage_disposal, generic_class: LivingCondition.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

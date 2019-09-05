@@ -43,7 +43,6 @@
 #  fk_rails_...  (permanence_institution_id => permanence_institutions.id)
 #
 
-
 class HomeRegistration < ApplicationRecord
   include Sluggable
 

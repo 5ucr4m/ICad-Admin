@@ -2,9 +2,7 @@
 
 # app/services/health_professional_service.rb
 class HealthEstablishmentService
-
   class << self
-
     def get_health_establishment(cnes_code)
       params = OpenStruct.new(cnes: cnes_code)
       he = EstabelecimentoSaudeService.call('consultar_estabelecimento_saude', params)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWaterSupplyTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Rede encanada até o domicílio'.mb_chars.upcase, reference: 117, generic_field: :water_supply, generic_class: LivingCondition.model_name.name)
@@ -7,7 +9,5 @@ class CreateWaterSupplyTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outro'.mb_chars.upcase, reference: 121, generic_field: :water_supply, generic_class: LivingCondition.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

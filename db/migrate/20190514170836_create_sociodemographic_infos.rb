@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSociodemographicInfos < ActiveRecord::Migration[6.0]
   def change
     create_table :sociodemographic_infos do |t|

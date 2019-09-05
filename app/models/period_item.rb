@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: period_items
@@ -45,7 +47,6 @@
 #
 
 class PeriodItem < ApplicationRecord
-
   belongs_to :serialized_type, class_name: 'GenericModel', optional: true
   belongs_to :period, optional: true
   belongs_to :registrable, polymorphic: true, optional: true

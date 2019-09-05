@@ -5,9 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'active_model_serializers',
-    git: 'https://github.com/rails-api/active_model_serializers.git',
-    branch: '0-10-stable'
+gem 'active_model_serializers'
 gem 'apipie-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -27,7 +25,6 @@ gem 'kaminari'
 gem 'libxml-ruby'
 gem 'lograge'
 gem 'logstash-event'
-gem 'mapbox-gl-rails'
 gem 'money-rails'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -35,8 +32,8 @@ gem 'puma', '~> 3.11'
 gem 'rack-attack'
 gem 'rack-cors'
 gem 'rack-timeout'
-gem 'rails', '~> 6.0.0.rc2'
-gem 'rails-i18n', '~> 6.0.0.beta1'
+gem 'rails', '~> 6.0.0'
+gem 'rails-i18n', '~> 6.0.0'
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'master'
 gem 'redis', '~> 4.0'
 gem 'sass-rails', '~> 5'

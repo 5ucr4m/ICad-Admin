@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateParentRelationTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Cônjuge / Companheiro(a)'.mb_chars.upcase, reference: 137, generic_field: :parent_relation, generic_class: SociodemographicInfo.model_name.name)
@@ -12,7 +14,5 @@ class CreateParentRelationTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Não parente'.mb_chars.upcase, reference: 146, generic_field: :parent_relation, generic_class: SociodemographicInfo.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

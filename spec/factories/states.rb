@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: states
@@ -23,11 +25,11 @@
 
 FactoryBot.define do
   factory :state do
-    name { "MyString" }
-    abbreviation { "MyString" }
-    code { "MyString" }
-    reference { "MyString" }
+    name { 'MyString' }
+    abbreviation { 'MyString' }
+    code { 'MyString' }
+    reference { 'MyString' }
     country { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

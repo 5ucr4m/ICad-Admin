@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateVaccinationCampaigns < ActiveRecord::Migration[6.0]
   def change
     create_table :vaccination_campaigns do |t|

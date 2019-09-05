@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePetTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Gato'.mb_chars.upcase, reference: 128, generic_field: :pet_type, generic_class: HomeRegistrationPet.model_name.name)
@@ -6,7 +8,5 @@ class CreatePetTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Outros'.mb_chars.upcase, reference: 132, generic_field: :pet_type, generic_class: HomeRegistrationPet.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

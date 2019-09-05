@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddInitialDateHourToModels < ActiveRecord::Migration[6.0]
   def change
     add_column :individual_registrations, :initial_date_hour, :datetime

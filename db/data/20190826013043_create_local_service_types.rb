@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLocalServiceTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'UBS'.mb_chars.upcase, reference: 1, generic_field: :local_service, generic_class: VaccinationItem.model_name.name)
@@ -15,7 +17,5 @@ class CreateLocalServiceTypes < SeedMigration::Migration
     GenericModel.create!(name: 'CACON / UNACON'.mb_chars.upcase, reference: 13, generic_field: :local_service, generic_class: VaccinationItem.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end
