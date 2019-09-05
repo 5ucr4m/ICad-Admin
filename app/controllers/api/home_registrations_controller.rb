@@ -5,7 +5,6 @@ module Api
     before_action :set_home_registration, only: %i[show update destroy]
 
     # GET /home_registrations
-    api :GET, '/home_registrations', 'GET Home Registrations List'
     def index
       @query = HomeRegistration.ransack(params[:q])
       @home_registrations = @query.result.includes(:company, :home_registration)

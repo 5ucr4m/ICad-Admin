@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/activerecord-hackery/ransack.git
   revision: ef067a4dca088eeea70aecd1a236187487a76027
+  branch: master
   specs:
     polyamorous (2.3.0)
       activerecord (>= 5.0)
@@ -435,7 +436,7 @@ GEM
       activemodel (>= 6.0.0.a)
       bindex (>= 0.4.0)
       railties (>= 6.0.0.a)
-    webmock (3.7.1)
+    webmock (3.7.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)

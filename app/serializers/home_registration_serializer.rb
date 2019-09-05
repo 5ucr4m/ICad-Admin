@@ -42,11 +42,15 @@
 #
 
 class HomeRegistrationSerializer < ActiveModel::Serializer
-  attributes :id, :location_x, :location_y, :form_updated, :pet_quantity, :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished, :slug
+  attributes :id, :location_x, :location_y, :form_updated, :pet_quantity,
+             :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished, :slug
+
   has_one :health_professional
   has_one :living_condition
   has_one :address
   has_one :home_type
   has_one :permanence_institution
   has_one :company
+  has_many :families
+  has_many :home_registration_pets
 end

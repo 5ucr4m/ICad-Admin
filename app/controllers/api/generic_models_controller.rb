@@ -5,7 +5,6 @@ module Api
     skip_before_action :authenticate_user!
     before_action :set_query, except: %i[types cbo_types ethnicity_types]
 
-    api :GET, '/generic_models', 'GET Type List'
     def types
       generic_models = Rails.cache.fetch('generic_models') do
         GenericModel.all
