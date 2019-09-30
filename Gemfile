@@ -41,7 +41,7 @@ gem 'savon'
 gem 'seed_migration'
 gem 'sidekiq'
 gem 'sidekiq-cron'
-gem 'simple_form'
+gem 'simple_form', github: 'plataformatec/simple_form', branch: 'master'
 gem 'sinatra', require: false
 gem 'webpacker', '~> 4.0'
 

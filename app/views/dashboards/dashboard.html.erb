@@ -49,19 +49,19 @@
       <div class="nav card-tabs card-tabs-bottom" role="tablist">
         <div id="family-members-tab" class="card-tabs-item text-center nav-link"
              data-toggle="tab" data-target="#family-members" role="tab" aria-controls="family-member" aria-selected="false">
-          <h4>
+          <h4 class="py-2 mb-0">
             <i class="<%= t('activerecord.models.family_member.icon') %> mr-2"></i><%= FamilyMember.model_name.human(count: 2) %>
           </h4>
         </div>
         <div id="families-tab" class="card-tabs-item text-center nav-link active"
              data-toggle="tab" data-target="#families" role="tab" aria-controls="families" aria-selected="true">
-          <h4>
+          <h4 class="py-2 mb-0">
             <i class="<%= t('activerecord.models.family.icon') %> mr-2"></i><%= Family.model_name.human(count: 2) %>
           </h4>
         </div>
         <div id="home-visit-registrations-tab" class="card-tabs-item text-center nav-link"
              data-toggle="tab" data-target="#home-visit-registrations" role="tab" aria-controls="home-visit-registrations" aria-selected="false">
-          <h4>
+          <h4 class="py-2 mb-0">
             <i class="<%= t('activerecord.models.home_registration.icon') %> mr-2"></i><%= HomeVisitRegistration.model_name.human(count: 2) %>
           </h4>
         </div>

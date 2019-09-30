@@ -12,8 +12,8 @@ class FamiliesController < WebController
   def index
     @query = Family.ransack(params[:q])
     respond_to do |format|
-      format.html { @pagy, @families = pagy(@query.result, page: params[:page]) }
-      format.json { render_json @query.result.includes(:company, :home_registration) }
+      format.html { @pagy, @families = pagy(@query.result.includes(:family_income), page: params[:page]) }
+      format.json { render_json @query.result.includes(:company, :home_registration, :family_income) }
     end
   end
 

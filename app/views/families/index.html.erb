@@ -36,7 +36,7 @@
           </td>
           <td><%= family.members_quantity %></td>
           <td><%= family.handbook_number %></td>
-          <td><%= family&.family_income.reference %></td>
+          <td><%= family&.family_income&.name_formatted %></td>
           <td><%= family.reside_since&.strftime('%d/%m/%Y') %></td>
           <td><%= family.moving ? 'SIM' : 'NÃO' %></td>
           <td class="text-center">

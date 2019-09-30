@@ -12,10 +12,10 @@
     <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-2 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :finished, wrapper_html: {class: 'pl-2 col-lg-1 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
-      <div class="card card-collapsed mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration.families.map(&:errors).flatten.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
-            <i class="fas fa-users mr-2"></i><%= Family.model_name.human(count: 2) %>
+            <i class="<%= t("activerecord.models.#{Family.model_name.singular}.icon") %> mr-2"></i><%= Family.model_name.human(count: 2) %>
           </h3>
           <div class="card-options">
             <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
@@ -25,8 +25,8 @@
           <% if f.object.families.any? %>
             <div class="row">
               <div class="col-12">
-                <% f.object.families.each do |family| %>
-                  <% render 'application/family_fields', f: family %>
+                <%= f.simple_fields_for :families do |family| %>
+                  <%= render 'application/family_fields', f: family %>
                 <% end %>
               </div>
             </div>
@@ -50,34 +50,34 @@
             <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
           </div>
         </div>
-        <div class="card-body">
-          <% if @home_registration.home_registration_pets.any? %>
-            <div class="table-responsive">
-              <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
-                <thead>
+        <% if @home_registration.home_registration_pets.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th><%= HomeRegistrationPet.human_attribute_name :pet_type %></th>
+                <th>Data</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @home_registration.home_registration_pets.each_with_index do |home_registration_pet, index| %>
                 <tr>
-                  <th>#</th>
-                  <th><%= HomeRegistrationPet.human_attribute_name :pet_type %></th>
-                  <th>Data</th>
+                  <td><%= index = index + 1 %></td>
+                  <td><%= home_registration_pet.pet_type.name_formatted %></td>
+                  <td><%= home_registration_pet.created_at.strftime('%d/%m/%Y') %></td>
                 </tr>
-                </thead>
-                <tbody>
-                <% @home_registration.home_registration_pets.each_with_index do |home_registration_pet, index| %>
-                  <tr>
-                    <td><%= index = index + 1 %></td>
-                    <td><%= home_registration_pet.pet_type.name_formatted %></td>
-                    <td><%= home_registration_pet.created_at.strftime('%d/%m/%Y') %></td>
-                  </tr>
-                <% end %>
-                </tbody>
-              </table>
-            </div>
-          <% else %>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="card-body">
             <div class="alert alert-warning alert-dismissible p-4 text-center font-weight-bold" role="alert">
               <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Animal Doméstico registrado.
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
       <div class="card<%= ' card-collapsed' unless @home_registration.address.errors.any? %> mb-3">
         <div class="card-header">
@@ -109,7 +109,7 @@
           <% end %>
         </div>
       </div>
-      <div class="card<%= ' card-collapsed' unless @home_registration.permanence_institution.errors.any? %> mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration&.permanence_institution&.errors&.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-life-ring mr-2"></i><%= PermanenceInstitution.model_name.human(count: 2) %>

@@ -63,7 +63,7 @@ class HomeRegistration < ApplicationRecord
   accepts_nested_attributes_for :living_condition, allow_destroy: false
   accepts_nested_attributes_for :permanence_institution, allow_destroy: false
   accepts_nested_attributes_for :home_registration_pets, allow_destroy: true
-  accepts_nested_attributes_for :families, allow_destroy: false
+  accepts_nested_attributes_for :families, allow_destroy: true
 
   ransack_alias :search, :id_to_s
 
