@@ -26,11 +26,12 @@ module VaccinationCampaignService
       vd << XML::Node.new('uuidFicha', data.uuid)
       vd << XML::Node.new('tpCdsOrigem', 3)
 
+      he = vaccination.family_member.family
+             .home_registration.health_professional
       vd << ht = XML::Node.new('headerTransport')
-      ht << XML::Node.new('profissionalCNS', vaccination.family_member.family
-                                               .home_registration.health_professional.cns_code)
-      ht << XML::Node.new('cboCodigo_2002', data.lot_number)
-      ht << XML::Node.new('cnes', data.serialized_cnes)
+      ht << XML::Node.new('profissionalCNS', he.cns_code)
+      ht << XML::Node.new('cboCodigo_2002', he.cbo_code.reference)
+      ht << XML::Node.new('cnes', he.health_establishment.cnes_code)
       ht << XML::Node.new('dataAtendimento', vaccination.created_at)
       ht << XML::Node.new('codigoIbgeMunicipio', data.ibge_code)
 

@@ -1,11 +1,9 @@
-# frozen_string_literal: true
-
 class CreateVaccinationCampaigns < ActiveRecord::Migration[6.0]
   def change
     create_table :vaccination_campaigns do |t|
       t.string :title
       t.text :description
-      t.belongs_to :vaccine, foreign_key: true, index: true
+      t.boolean :newborn
       t.boolean :child
       t.boolean :woman
       t.date :period_start

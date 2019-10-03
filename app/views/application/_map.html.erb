@@ -1,66 +1,103 @@
-<div class="row row-cards">
-  <div class="col-xl-12 col-lg-12">
-    <div class="card mb-0">
-      <div class="card-header">
-        <%= link_to vaccination_campaigns_path do %>
-          <div class="h3 card-title font-weight-bold text-blue-deep">
-            <%= VaccinationCampaign.model_name.human(count: 1) %>
-          </div>
-        <% end %>
-        &nbsp;<small class="pl-1 text-muted">(<%= VaccinationCampaign&.last&.title || 'Nenhuma' %>)</small>
-        <div class="card-options">
-          <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
-            <i class="fe fe-chevron-up"></i>
-          </a>
-        </div>
-      </div>
-      <div class="card-body p-3">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="form-group mb-0">
-              <label for="member-type" class="form-label"><%= FamilyMember.model_name.human %></label>
-              <select id="member-type" class="form-control">
-                <option value="all">Todos</option>
-                <option value="men">Homem</option>
-                <option value="woman">Mulher</option>
-                <option value="child">Criança</option>
-                <option value="born">Recem-nascido</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-body p-0">
-        <div id="map" class="card-map rounded" style="min-height: 29.3rem;"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="map" class="card-map rounded" style="min-height: 30rem;"></div>
 <script type="text/javascript">
+    function maleMarker() {
+        let divMale = document.createElement('div');
+        let iconMale = document.createElement('i');
+        iconMale.classList.add('fas');
+        iconMale.classList.add('fa-child');
+        iconMale.classList.add('fa-3x');
+        iconMale.classList.add('text-green');
+        divMale.append(iconMale);
+
+        return divMale;
+    }
+
+    function femaleMarker() {
+        let divFemale = document.createElement('div');
+        let iconFemale = document.createElement('i');
+        iconFemale.classList.add('fas');
+        iconFemale.classList.add('fa-female');
+        iconFemale.classList.add('fa-4x');
+        iconFemale.classList.add('text-green');
+        divFemale.append(iconFemale);
+
+        return divFemale;
+    }
+
+    function teenageMarker() {
+        let divTeenage = document.createElement('div');
+        let iconTeenage = document.createElement('i');
+        iconTeenage.classList.add('fas');
+        iconTeenage.classList.add('fa-male');
+        iconTeenage.classList.add('fa-4x');
+        iconTeenage.classList.add('text-danger');
+        divTeenage.append(iconTeenage);
+
+        return divTeenage;
+    }
+
+    function childMarker() {
+        let divChild = document.createElement('div');
+        let iconChild = document.createElement('i');
+        iconChild.classList.add('fas');
+        iconChild.classList.add('fa-child');
+        iconChild.classList.add('fa-3x');
+        iconChild.classList.add('text-danger');
+        divChild.append(iconChild);
+
+        return divChild;
+    }
+
+    function newbornMarker() {
+        let divNewborn = document.createElement('div');
+        let iconNewborn = document.createElement('i');
+        iconNewborn.classList.add('fas');
+        iconNewborn.classList.add('fa-baby');
+        iconNewborn.classList.add('fa-3x');
+        iconNewborn.classList.add('text-danger');
+        divNewborn.append(iconNewborn);
+
+        return divNewborn;
+    }
+
+    // TODO Treat marker colors
+    function marker(index) {
+        switch (index) {
+            case 0:
+                return maleMarker();
+            case 1:
+                return femaleMarker();
+            case 2:
+                return teenageMarker();
+            case 3:
+                return childMarker();
+            case 4:
+                return newbornMarker();
+            default:
+                return maleMarker();
+        }
+    }
+
     navigator.geolocation.getCurrentPosition(function (position) {
         mapboxgl.accessToken = 'pk.eyJ1IjoidGlhZ29jYXNzaW8iLCJhIjoiY2p4dW1wbWs4MTZxczNjcW0xN2d2NmFjMiJ9.DmiiFFq3jPkdaDsoyjRDYw';
 
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
-            center: [position.coords.longitude, position.coords.latitude],
-            zoom: 15
+            center: [-42.7377622, -5.184854],
+            zoom: 16
         });
 
-        const popup = new mapboxgl.Popup({offset: 25}).setHTML('<h1>Title</h1>');
-
-        let div = document.createElement('div');
-        let icon = document.createElement('i');
-
-        icon.classList.add('fas');
-        icon.classList.add('fa-male');
-        icon.classList.add('fa-4x');
-        icon.classList.add('text-green');
-        div.append(icon);
-
-        new mapboxgl.Marker(div)
-            .setLngLat([position.coords.longitude, position.coords.latitude])
-            .setPopup(popup).addTo(map);
+        <% [%w(-5.184854 -42.7377622), %w(-5.1843955 -42.7363455),
+        %w(-5.1859767 -42.7356047), %w(5.1870877 -42.7387587), %w(-5.1852497 -42.7410977)].each_with_index do |time, index| %>
+        console.log(<%= index.to_s %>);
+        new mapboxgl.Marker(marker(<%= index.to_s %>))
+            .setLngLat([<%= time[1] %>, <%= time[0] %>])
+            .setPopup(new mapboxgl.Popup({offset: 15})
+                // TODO Set marker information here
+                .setHTML('<h4 class="text-center font-weight-normal"><%= VaccinationItem.model_name.name %></h4>'))
+            .addTo(map);
+        <% end %>
 
         map.addControl(new mapboxgl.NavigationControl());
     });

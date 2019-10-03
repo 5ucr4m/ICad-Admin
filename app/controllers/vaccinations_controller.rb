@@ -61,6 +61,9 @@ class VaccinationsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def vaccination_params
-    params.require(:vaccination).permit(:uuid, :tp_cds_origin, :vaccination_campaign_id)
+    params.require(:vaccination).permit(:uuid, :tp_cds_origin,
+                                        :header_transport_id,
+                                        :vaccination_campaign_id,
+                                        :company_id, :slug)
   end
 end

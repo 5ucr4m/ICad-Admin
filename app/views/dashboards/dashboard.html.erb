@@ -2,11 +2,11 @@
   <%= render partial: 'application/dashboard_card',
              locals: {icon: 'fas fa-user-md',
                       color: 'purple',
-                      value: Random.rand(1..10000),
+                      value: HealthProfessional.count,
                       action: health_professionals_path,
                       description: HealthProfessional.model_name.human(count: 2)} %>
   <%= render partial: 'application/dashboard_card',
-             locals: {value: Random.rand(1..10000),
+             locals: {value: ProfessionalTeam.count,
                       icon: 'fas fa-users-cog',
                       color: 'orange',
                       action: professional_teams_path,
@@ -14,19 +14,19 @@
   <%= render partial: 'application/dashboard_card',
              locals: {icon: 'fas fa-hospital',
                       color: 'green',
-                      value: Random.rand(1..10000),
+                      value: HealthEstablishment.count,
                       action: health_establishments_path,
                       description: HealthEstablishment.model_name.human(count: 2)} %>
   <%= render partial: 'application/dashboard_card',
              locals: {icon: 'fas fa-address-book',
                       color: 'blue',
-                      value: Random.rand(1..10000),
+                      value: Family.count,
                       action: families_path,
                       description: Family.model_name.human(count: 2)} %>
   <%= render partial: 'application/dashboard_card',
              locals: {icon: 'fas fa-user',
                       color: 'smoke',
-                      value: Random.rand(1..10000),
+                      value: FamilyMember.count,
                       action: family_members_path,
                       description: FamilyMember.model_name.human(count: 2)} %>
 </div>

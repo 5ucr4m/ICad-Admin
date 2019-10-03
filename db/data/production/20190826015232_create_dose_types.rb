@@ -1,0 +1,46 @@
+# frozen_string_literal: true
+
+class CreateDoseTypes < SeedMigration::Migration
+  def up
+    GenericModel.create!(name: '1ª Dose'.mb_chars.upcase, reference: 1, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '2ª Dose'.mb_chars.upcase, reference: 2, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '3ª Dose'.mb_chars.upcase, reference: 3, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '4ª Dose'.mb_chars.upcase, reference: 4, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '5ª Dose'.mb_chars.upcase, reference: 5, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '1º Reforço'.mb_chars.upcase, reference: 6, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '2º Reforço'.mb_chars.upcase, reference: 7, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Dose'.mb_chars.upcase, reference: 8, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Única'.mb_chars.upcase, reference: 9, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Revacinação'.mb_chars.upcase, reference: 10, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com uma dose'.mb_chars.upcase, reference: 11, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com duas doses'.mb_chars.upcase, reference: 12, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com três doses'.mb_chars.upcase, reference: 13, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com quatro doses'.mb_chars.upcase, reference: 14, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com cinco doses'.mb_chars.upcase, reference: 15, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com seis doses'.mb_chars.upcase, reference: 16, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com sete doses'.mb_chars.upcase, reference: 17, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com oito doses'.mb_chars.upcase, reference: 18, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com nove doses'.mb_chars.upcase, reference: 19, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com dez doses'.mb_chars.upcase, reference: 20, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com onze doses'.mb_chars.upcase, reference: 21, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com doze doses'.mb_chars.upcase, reference: 22, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com treze doses'.mb_chars.upcase, reference: 23, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com quatorze doses'.mb_chars.upcase, reference: 24, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com quinze doses'.mb_chars.upcase, reference: 25, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com dezesseis doses'.mb_chars.upcase, reference: 26, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com dezessete doses'.mb_chars.upcase, reference: 27, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com dezoito doses'.mb_chars.upcase, reference: 28, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com dezenove doses'.mb_chars.upcase, reference: 29, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com vinte doses'.mb_chars.upcase, reference: 30, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Tratamento com vinte quatro doses'.mb_chars.upcase, reference: 31, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '1ª Dose Revacinação'.mb_chars.upcase, reference: 32, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '2ª Dose Revacinação'.mb_chars.upcase, reference: 33, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '3ª Dose Revacinação'.mb_chars.upcase, reference: 34, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: '4ª Dose Revacinação'.mb_chars.upcase, reference: 35, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Dose Inicial'.mb_chars.upcase, reference: 36, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Dose Adicional'.mb_chars.upcase, reference: 37, generic_field: :dose, generic_class: Vaccine.model_name.name)
+    GenericModel.create!(name: 'Reforço'.mb_chars.upcase, reference: 38, generic_field: :dose, generic_class: Vaccine.model_name.name)
+  end
+
+  def down; end
+end

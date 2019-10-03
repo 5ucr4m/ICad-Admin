@@ -6,7 +6,7 @@
   <%= f.input :zip, wrapper: :horizontal_input_group, wrapper_html: {class: 'col-lg-3 col-sm-12'} do %>
     <%= f.input_field :zip, label_text: 'text', class: 'zip form-control', disabled: show?(f.object.persisted?) %>
     <div class="input-group-append">
-      <button class="btn btn-icon btn-primary btn-zip px-3" type="button">
+      <button class="btn btn-icon btn-primary btn-zip px-3" type="button" disabled="<%= show?(f.object.persisted?) %>">
         <i class="fas fa-search"></i>
       </button>
     </div>

@@ -55,8 +55,9 @@ class VaccinationCampaignsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def vaccination_campaign_params
-    params.require(:vaccination_campaign).permit(:title, :description, :vaccine_id,
-                                                 :child, :woman, :period_start, :period_end,
-                                                 :age_initial, :age_end, :company_id, :slug)
+    params.require(:vaccination_campaign).permit(:title, :description, :newborn,
+                                                 :child, :woman, :period_start,
+                                                 :period_end, :age_initial,
+                                                 :age_end, :company_id, :slug)
   end
 end

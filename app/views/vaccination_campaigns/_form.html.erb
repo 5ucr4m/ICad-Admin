@@ -1,14 +1,37 @@
 <%= simple_form_for(@vaccination_campaign) do |f| %>
   <% content_for :body do %>
-    <%= f.input :title, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :vaccine, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :title, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :description, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {rows: 2, disabled: show?(f.object.persisted?)} %>
     <%= f.input :period_start, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :period_end, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :age_initial, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :age_end, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :newborn, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :child, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :woman, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :description, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <% unless @vaccination_campaign.vaccinations.any? %>
+      <div class="col-lg-12">
+        <hr/>
+      </div>
+      <div class="card">
+        <div class="card-header p-4">
+          <h3 class="mb-0">
+            <i class="fas fa-map mr-2"></i>Mapa de Localização
+          </h3>
+          <div class="card-options">
+            <div class="h5 text-blue-deep pr-3 mb-0">
+              <i class="fas fa-circle text-success mr-2"></i>Vacinados
+            </div>
+            <div class="h5 text-blue-deep pr-3 mb-0">
+              <i class="fas fa-circle text-danger mr-2"></i>Não vacinados
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <%= render 'application/map' %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @vaccination_campaign} %>
 <% end %>

@@ -14,6 +14,8 @@ class CreateIndividualRegistrations < ActiveRecord::Migration[6.0]
       t.string :uuid_form_origin
       t.string :uuid_citizen
       t.integer :tp_cds_origin
+      t.datetime :initial_date_hour
+      t.datetime :final_date_hour
       t.belongs_to :company, foreign_key: true, index: true
       t.string :slug
 
