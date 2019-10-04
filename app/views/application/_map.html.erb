@@ -90,7 +90,6 @@
 
         <% [%w(-5.184854 -42.7377622), %w(-5.1843955 -42.7363455),
         %w(-5.1859767 -42.7356047), %w(5.1870877 -42.7387587), %w(-5.1852497 -42.7410977)].each_with_index do |time, index| %>
-        console.log(<%= index.to_s %>);
         new mapboxgl.Marker(marker(<%= index.to_s %>))
             .setLngLat([<%= time[1] %>, <%= time[0] %>])
             .setPopup(new mapboxgl.Popup({offset: 15})

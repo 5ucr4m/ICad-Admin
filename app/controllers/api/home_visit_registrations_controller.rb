@@ -59,10 +59,10 @@ module Api
 
     # Only allow a trusted parameter "white list" through.
     def home_visit_registration_params
-      params.require(:home_visit_registration).permit(:family_member_id,
-                                                      :uuid, :tp_cds_origin,
+      params.require(:home_visit_registration).permit(:uuid, :tp_cds_origin,
                                                       family_member_attributes: %i[
                                                         id
+                                                        family_id
                                                         name
                                                         social_name
                                                         mother_name
@@ -87,6 +87,27 @@ module Api
                                                         unknown_mother
                                                         responsible
                                                         out_area
+                                                      ],
+                                                      home_visit_forms_attributes: [
+                                                        :id,
+                                                        :turn_id,
+                                                        :handbook_number,
+                                                        :cns_number,
+                                                        :birth_date,
+                                                        :gender_id,
+                                                        :other_visit,
+                                                        :outcome_id,
+                                                        :micro_area,
+                                                        :out_area,
+                                                        :home_type_id,
+                                                        :weight_monitoring,
+                                                        :height_monitoring,
+                                                        :_destroy,
+                                                        home_visit_reasons_attributes: %i[
+                                                          id
+                                                          reason_id
+                                                          _destroy
+                                                        ]
                                                       ])
     end
   end
