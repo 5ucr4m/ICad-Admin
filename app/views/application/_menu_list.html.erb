@@ -1,0 +1,75 @@
+<% current_user.roles.registries.includes(:app_module).each do |role| %>
+  <% if role.reference == 'manage' || role.reference == 'index' %>
+    <li class="nav-item dropdown">
+      <a href="javascript:void(0)" class="nav-link link <%= "#{active_action? role.name.pluralize.camelize.underscore}" %> py-4" data-toggle="dropdown" aria-expanded="false">
+        <%= role.app_module.name.html_safe %>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+        <%= link_to send("#{role.url}"), class: 'dropdown-item' do %>
+          <i class="<%= role.icon %> dropdown-icon"></i><%= role.name.singularize.constantize.model_name.human(count: 2) %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+<% end %>
+<% current_user.roles.includes(:app_module).where(app_modules: {reference: 2}).each do |role| %>
+  <% if role.reference == 'manage' || role.reference == 'index' %>
+    <li class="nav-item dropdown">
+      <a href="javascript:void(0)" class="nav-link link <%= "#{active_action? role.name.pluralize.camelize.underscore}" %> py-4" data-toggle="dropdown" aria-expanded="false">
+        <%= role.app_module.name.html_safe %>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+        <%= link_to send("#{role.url}"), class: 'dropdown-item' do %>
+          <i class="<%= role.icon %> dropdown-icon"></i><%= role.name.singularize.constantize.model_name.human(count: 2) %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+<% end %>
+<% current_user.roles.includes(:app_module).where(app_modules: {reference: 3}).each do |role| %>
+  <% if role.reference == 'manage' || role.reference == 'index' %>
+    <li class="nav-item dropdown">
+      <a href="javascript:void(0)" class="nav-link link <%= "#{active_action? role.name.pluralize.camelize.underscore}" %> py-4" data-toggle="dropdown" aria-expanded="false">
+        <%= role.app_module.name.html_safe %>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+        <%= link_to send("#{role.url}"), class: 'dropdown-item' do %>
+          <i class="<%= role.icon %> dropdown-icon"></i><%= role.name.singularize.constantize.model_name.human(count: 2) %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+<% end %>
+<% current_user.roles.includes(:app_module).where(app_modules: {reference: 4}).each do |role| %>
+  <% if role.reference == 'manage' || role.reference == 'index' %>
+    <li class="nav-item dropdown">
+      <a href="javascript:void(0)" class="nav-link link <%= "#{active_action? role.name.pluralize.camelize.underscore}" %> py-4" data-toggle="dropdown" aria-expanded="false">
+        <%= role.app_module.name.html_safe %>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+        <%= link_to send("#{role.url}"), class: 'dropdown-item' do %>
+          <i class="<%= role.icon %> dropdown-icon"></i><%= role.name.singularize.constantize.model_name.human(count: 2) %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+<% end %>
+<% current_user.roles.includes(:app_module).where(app_modules: {reference: 5}).each do |role| %>
+  <% if role.reference == 'manage' || role.reference == 'index' %>
+    <li class="nav-item dropdown">
+      <a href="javascript:void(0)" class="nav-link link <%= "#{active_action? role.name.pluralize.camelize.underscore}" %> py-4" data-toggle="dropdown" aria-expanded="false">
+        <%= role.app_module.name.html_safe %>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+        <%= link_to send("#{role.url}"), class: 'dropdown-item' do %>
+          <i class="<%= role.icon %> dropdown-icon"></i><%= role.name.singularize.constantize.model_name.human(count: 2) %>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+<% end %>
