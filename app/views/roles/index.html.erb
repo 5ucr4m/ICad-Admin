@@ -23,6 +23,7 @@
         <th><%= Role.human_attribute_name :description %></th>
         <th><%= Role.human_attribute_name :icon %></th>
         <th><%= Role.human_attribute_name :reference %></th>
+        <th><%= Role.human_attribute_name :url %></th>
         <th><%= Role.human_attribute_name :role %></th>
         <th><%= Role.human_attribute_name :app_module %></th>
         <th><%= t('helpers.labels.actions') %></th>
@@ -35,6 +36,7 @@
           <td><%= role.description %></td>
           <td><i class="<%= role.icon %> fa-2x"></i></td>
           <td><%= role.reference %></td>
+          <td><%= role.url %></td>
           <td><%= role&.role&.name %></td>
           <td><%= role&.app_module&.name_formatted %></td>
           <td>

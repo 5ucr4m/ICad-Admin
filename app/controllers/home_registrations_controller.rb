@@ -5,8 +5,10 @@ class HomeRegistrationsController < WebController
 
   # GET /home_registrations
   def index
-    @query = HomeRegistration.ransack(params[:q])
-    @pagy, @home_registrations = pagy(@query.result, page: params[:page])
+    @query = HomeRegistration.by_company(current_user.company).ransack(params[:q])
+    @pagy, @home_registrations = pagy(@query.result
+                                        .includes(:home_type, :health_professional),
+                                      page: params[:page], items: 10)
   end
 
   # GET /home_registrations/1
@@ -53,7 +55,9 @@ class HomeRegistrationsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_home_registration
-    @home_registration = HomeRegistration.friendly.find(params[:id])
+    @home_registration = HomeRegistration.by_company(current_user.company).friendly.find(params[:id])
+    @city_selected = @home_registration.address.city.presence
+    @address_type_selected = @home_registration.address.address_type.presence
   end
 
   # Only allow a trusted parameter "white list" through.
@@ -119,6 +123,6 @@ class HomeRegistrationsController < WebController
                                                 id
                                                 pet_type_id
                                                 _destroy
-                                              ])
+                                              ]).merge(company: current_user.company)
   end
 end

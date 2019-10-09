@@ -5,14 +5,13 @@ class WebController < ApplicationController
   include Pagy::Backend
   include JsonExceptionHandler
 
-  before_action :authenticate_user!
-  before_action :set_referrer
+  before_action :set_referrer, :authenticate_user!
 
   rescue_from CanCan::AccessDenied do |_exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'application/json' }
       format.html do
-        redirect_to send(@referrer), flash: { error: t('errors.forbidden') }
+        redirect_to send(@referrer), flash: { error: t('errors.messages.forbidden') }
       end
       format.js { head :forbidden, content_type: 'text/html' }
     end

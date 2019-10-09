@@ -2,13 +2,14 @@
 
 class HealthProfessionalsController < WebController
   before_action :set_health_professional, only: %i[show edit update destroy]
+  before_action :set_relationships, except: %i[index destroy]
 
   # GET /health_professionals
   def index
-    @query = HealthProfessional.ransack(params[:q])
+    @query = HealthProfessional.by_company(current_user.company).ransack(params[:q])
     @pagy, @health_professionals = pagy(@query.result.includes(:cbo_code,
                                                                :professional_team,
-                                                               :health_establishment), page: params[:page])
+                                                               :health_establishment), page: params[:page], items: 10)
   end
 
   # GET /health_professionals/1
@@ -54,8 +55,13 @@ class HealthProfessionalsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_health_professional
-    @health_professional = HealthProfessional.friendly.find(params[:id])
+    @health_professional = HealthProfessional.by_company(current_user.company).friendly.find(params[:id])
     @cbo_selected = @health_professional.cbo_code.presence
+  end
+
+  def set_relationships
+    @professional_teams = ProfessionalTeam.by_company(current_user.company)
+    @health_establishments = HealthEstablishment.by_company(current_user.company)
   end
 
   # Only allow a trusted parameter "white list" through.

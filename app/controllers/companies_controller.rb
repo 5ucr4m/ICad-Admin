@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class CompaniesController < WebController
+  load_and_authorize_resource
   before_action :set_company, only: %i[show edit update destroy]
 
   # GET /companies
   def index
     @query = Company.ransack(params[:q])
     @pagy, @companies = pagy(@query.result.includes(:city)
-                               .order(id: :desc), page: params[:page])
+                               .order(id: :desc), page: params[:page], items: 10)
   end
 
   # GET /companies/1
@@ -51,7 +52,7 @@ class CompaniesController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_company
-    @company = Company.friendly.find(params[:id])
+    @company = Company.by_company(current_user.company).friendly.find(params[:id])
     @city_selected = @company.city.presence
   end
 

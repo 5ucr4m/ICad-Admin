@@ -6,7 +6,7 @@ module Api
 
     # GET /home_visit_forms
     def index
-      @query = HomeVisitForm.ransack(params[:q])
+      @query = HomeVisitForm.by_company(current_user.company).ransack(params[:q])
       @home_visit_forms = @query.result.includes(:company, :home_registration)
       if params[:home_visit_registration_id]
         @home_visit_forms = @home_visit_forms.where(home_visit_registration_id: params[:home_visit_registration_id])
@@ -49,9 +49,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_home_visit_form
       @home_visit_form = if params[:home_visit_registration_id]
-                           HomeVisitForm.find_by(home_visit_registration_id: params[:home_visit_registration_id])
+                           HomeVisitForm.by_company(current_user.company)
+                                        .find_by(home_visit_registration_id: params[:home_visit_registration_id])
                          else
-                           HomeVisitForm.friendly.find(params[:id])
+                           HomeVisitForm.by_company(current_user.company).friendly.find(params[:id])
                          end
     end
 

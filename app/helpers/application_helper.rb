@@ -10,6 +10,8 @@ module ApplicationHelper
   end
 
   def active_action?(controller)
+    return if controller_name == 'dashboards'
+
     'active font-weight-bold' if controller.remove('/') == controller_name
   end
 

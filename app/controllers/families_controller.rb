@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
 class FamiliesController < WebController
+  load_and_authorize_resource
   before_action :set_family, only: %i[show edit update destroy]
 
   def chart_by_day
-    render_json Family.group_by_period(:day, :created_at,
+    render_json Family.by_company(current_user.company)
+                      .group_by_period(:day, :created_at,
                                        format: '%d/%m/%Y', last: 5).count
   end
 
   # GET /families
   def index
-    @query = Family.ransack(params[:q])
+    @query = Family.by_company(current_user.company).ransack(params[:q])
     respond_to do |format|
-      format.html { @pagy, @families = pagy(@query.result.includes(:family_income), page: params[:page]) }
+      format.html { @pagy, @families = pagy(@query.result.includes(:family_income), page: params[:page], items: 10) }
       format.json { render_json @query.result.includes(:company, :home_registration, :family_income) }
     end
   end
@@ -61,7 +63,7 @@ class FamiliesController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_family
-    @family = Family.friendly.find(params[:id])
+    @family = Family.by_company(current_user.company).friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

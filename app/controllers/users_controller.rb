@@ -5,8 +5,8 @@ class UsersController < WebController
 
   # GET /users
   def index
-    @query = User.ransack(params[:q])
-    @pagy, @users = pagy(@query.result, page: params[:page])
+    @query = User.by_company(current_user.company).ransack(params[:q])
+    @pagy, @users = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /users/1

@@ -31,4 +31,8 @@ class ProfessionalTeam < ApplicationRecord
   validates :name, :code, presence: true
 
   ransack_alias :search, :id_to_s_or_name_or_code
+
+  def name_formatted
+    "#{code} - #{name}"
+  end
 end

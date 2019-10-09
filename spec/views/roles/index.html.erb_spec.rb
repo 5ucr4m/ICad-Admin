@@ -1,39 +1,40 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
-RSpec.describe 'roles/index', type: :view do
+RSpec.describe "roles/index", type: :view do
   before(:each) do
     assign(:roles, [
-             Role.create!(
-               name: 'Name',
-               description: 'Description',
-               icon: 'Icon',
-               reference: 'Reference',
-               role: nil,
-               app_module: nil,
-               slug: 'Slug'
-             ),
-             Role.create!(
-               name: 'Name',
-               description: 'Description',
-               icon: 'Icon',
-               reference: 'Reference',
-               role: nil,
-               app_module: nil,
-               slug: 'Slug'
-             )
-           ])
+      Role.create!(
+        :name => "Name",
+        :description => "Description",
+        :icon => "Icon",
+        :reference => "Reference",
+        :url => "Url",
+        :role => nil,
+        :app_module => nil,
+        :slug => "Slug"
+      ),
+      Role.create!(
+        :name => "Name",
+        :description => "Description",
+        :icon => "Icon",
+        :reference => "Reference",
+        :url => "Url",
+        :role => nil,
+        :app_module => nil,
+        :slug => "Slug"
+      )
+    ])
   end
 
-  it 'renders a list of roles' do
+  it "renders a list of roles" do
     render
-    assert_select 'tr>td', text: 'Name'.to_s, count: 2
-    assert_select 'tr>td', text: 'Description'.to_s, count: 2
-    assert_select 'tr>td', text: 'Icon'.to_s, count: 2
-    assert_select 'tr>td', text: 'Reference'.to_s, count: 2
-    assert_select 'tr>td', text: nil.to_s, count: 2
-    assert_select 'tr>td', text: nil.to_s, count: 2
-    assert_select 'tr>td', text: 'Slug'.to_s, count: 2
+    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select "tr>td", :text => "Description".to_s, :count => 2
+    assert_select "tr>td", :text => "Icon".to_s, :count => 2
+    assert_select "tr>td", :text => "Reference".to_s, :count => 2
+    assert_select "tr>td", :text => "Url".to_s, :count => 2
+    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => "Slug".to_s, :count => 2
   end
 end

@@ -8,8 +8,8 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   # GET <%= route_url %>
   def index
-    @query = <%= "#{singular_table_name.camelize}.ransack(params[:q])" %>
-    @pagy, @<%= plural_table_name %> = pagy(@query.result, page: params[:page])
+    @query = <%= "#{singular_table_name.camelize}.by_company(current_user.company).ransack(params[:q])" %>
+    @pagy, @<%= plural_table_name %> = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET <%= route_url %>/1
@@ -54,7 +54,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_<%= singular_table_name %>
-      @<%= singular_table_name %> = <%= singular_table_name.camelize %>.friendly.find(params[:id])
+      @<%= singular_table_name %> = <%= singular_table_name.camelize %>.by_company(current_user.company).friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

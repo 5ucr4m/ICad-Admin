@@ -39,9 +39,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_living_condition
       @living_condition = if params[:home_registration_id]
-                            LivingCondition.find_by(home_registration_id: params[:home_registration_id])
+                            LivingCondition.by_company(current_user.company)
+                                           .find_by(home_registration_id: params[:home_registration_id])
                           else
-                            LivingCondition.friendly.find(params[:id])
+                            LivingCondition.by_company(current_user.company).friendly.find(params[:id])
                           end
     end
 

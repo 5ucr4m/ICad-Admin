@@ -12,15 +12,15 @@ class DashboardsController < WebController
       OpenStruct.new(id: 'families',
                      name: Family.model_name.human(count: 2),
                      active: true,
-                     value: Family.count),
+                     value: Family.by_company(current_user.company).count),
       OpenStruct.new(id: 'family-member',
                      name: FamilyMember.model_name.human(count: 2),
                      active: false,
-                     value: FamilyMember.count),
+                     value: FamilyMember.by_company(current_user.company).count),
       OpenStruct.new(id: 'home-visit-registrations',
                      name: HomeVisitRegistration.model_name.human(count: 2),
                      active: false,
-                     value: HomeVisitRegistration.count)
+                     value: HomeVisitRegistration.by_company(current_user.company).count)
     ]
   end
 end

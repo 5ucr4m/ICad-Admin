@@ -9,8 +9,7 @@ class Ability
     return if @user&.current_company.blank?
 
     @user.current_company.roles.find_each do |role|
-      role_action = role.name.split('_')
-      can role_action[1].to_sym, role_action[0].camelize.constantize
+      can role.reference, role.name.camelize.constantize
     end
   end
 end

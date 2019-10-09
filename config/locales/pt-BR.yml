@@ -178,6 +178,7 @@ pt-BR:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      forbidden: Você não está autorizado a acessar esta página/recurso.
       accepted: deve ser aceito
       blank: não pode ficar em branco
       confirmation: não é igual a %{attribute}

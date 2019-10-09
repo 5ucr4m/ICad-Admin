@@ -1,7 +1,9 @@
 <div class="card">
   <div class="card-header">
     <h3 class="font-weight-bold py-4 mb-0">
-      <i class="<%= t('activerecord.models.vaccination_campaign.icon') %> mr-2"></i><%= VaccinationCampaign.model_name.human(count: 2) %>
+      <%= link_to vaccination_campaigns_path do %>
+        <i class="<%= t('activerecord.models.vaccination_campaign.icon') %> mr-2"></i><%= VaccinationCampaign.model_name.human(count: 2) %>
+      <% end %>
     </h3>
   </div>
   <table class="table card-table">

@@ -5,8 +5,8 @@ class ProfessionalTeamsController < WebController
 
   # GET /professional_teams
   def index
-    @query = ProfessionalTeam.ransack(params[:q])
-    @pagy, @professional_teams = pagy(@query.result, page: params[:page])
+    @query = ProfessionalTeam.by_company(current_user.company).ransack(params[:q])
+    @pagy, @professional_teams = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /professional_teams/1
@@ -50,7 +50,7 @@ class ProfessionalTeamsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_professional_team
-    @professional_team = ProfessionalTeam.friendly.find(params[:id])
+    @professional_team = ProfessionalTeam.by_company(current_user.company).friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

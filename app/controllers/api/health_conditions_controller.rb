@@ -44,9 +44,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_health_condition
       @health_condition = if params[:individual_registration_id]
-                            HealthCondition.find_by(individual_registration_id: params[:individual_registration_id])
+                            HealthCondition.by_company(current_user.company)
+                                           .find_by(individual_registration_id: params[:individual_registration_id])
                           else
-                            HealthCondition.friendly.find(params[:id])
+                            HealthCondition.by_company(current_user.company).friendly.find(params[:id])
                           end
     end
 

@@ -21,11 +21,9 @@
       <tr>
         <th><%= HomeRegistration.human_attribute_name :id %></th>
         <th><%= HomeRegistration.human_attribute_name :health_professional %></th>
+        <th><%= HomeRegistration.human_attribute_name :home_type %></th>
         <th><%= HomeRegistration.human_attribute_name :pet_quantity %></th>
         <th><%= HomeRegistration.human_attribute_name :refuse_registration %></th>
-        <th><%= HomeRegistration.human_attribute_name :uuid %></th>
-        <th><%= HomeRegistration.human_attribute_name :uuid_form_origin %></th>
-        <th><%= HomeRegistration.human_attribute_name :home_type %></th>
         <th><%= HomeRegistration.human_attribute_name :finished %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
@@ -34,12 +32,10 @@
       <% @home_registrations.each do |home_registration| %>
         <tr>
           <td><%= home_registration.id %></td>
-          <td><%= home_registration.health_professional_id %></td>
+          <td><%= home_registration.health_professional.name_formatted %></td>
+          <td><%= home_registration&.home_type&.name %></td>
           <td><%= home_registration.pet_quantity %></td>
           <td><%= home_registration.refuse_registration ? 'SIM' : 'NÃO' %></td>
-          <td><%= home_registration.uuid %></td>
-          <td><%= home_registration.uuid_form_origin %></td>
-          <td><%= home_registration&.home_type&.name %></td>
           <td><%= home_registration.finished ? 'SIM' : 'NÃO' %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: home_registration %>

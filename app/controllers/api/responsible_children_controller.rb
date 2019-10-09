@@ -39,9 +39,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_responsible_child
       @responsible_child = if params[:individual_registration_id]
-                             ResponsibleChild.find_by(individual_registration_id: params[:individual_registration_id])
+                             ResponsibleChild.by_company(current_user.company)
+                                             .find_by(individual_registration_id: params[:individual_registration_id])
                            else
-                             ResponsibleChild.friendly.find(params[:id])
+                             ResponsibleChild.by_company(current_user.company).friendly.find(params[:id])
                            end
     end
 

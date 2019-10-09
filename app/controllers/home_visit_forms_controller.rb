@@ -5,8 +5,8 @@ class HomeVisitFormsController < WebController
 
   # GET /home_visit_forms
   def index
-    @query = HomeVisitForm.ransack(params[:q])
-    @pagy, @home_visit_forms = pagy(@query.result, page: params[:page])
+    @query = HomeVisitForm.by_company(current_user.company).ransack(params[:q])
+    @pagy, @home_visit_forms = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /home_visit_forms/1
@@ -50,7 +50,7 @@ class HomeVisitFormsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_home_visit_form
-    @home_visit_form = HomeVisitForm.friendly.find(params[:id])
+    @home_visit_form = HomeVisitForm.by_company(current_user.company).friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
@@ -71,6 +71,6 @@ class HomeVisitFormsController < WebController
                                               family_member_id
                                               uuid
                                               tp_cds_origin
-                                            ])
+                                            ]).merge(company: current_user.company)
   end
 end

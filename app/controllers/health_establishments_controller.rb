@@ -5,8 +5,8 @@ class HealthEstablishmentsController < WebController
 
   # GET /health_establishments
   def index
-    @query = HealthEstablishment.ransack(params[:q])
-    @pagy, @health_establishments = pagy(@query.result, page: params[:page])
+    @query = HealthEstablishment.by_company(current_user.current_company.company).ransack(params[:q])
+    @pagy, @health_establishments = pagy(@query.result.includes(:unit_type), page: params[:page], items: 10)
   end
 
   # GET /health_establishments/1
@@ -50,7 +50,7 @@ class HealthEstablishmentsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_health_establishment
-    @health_establishment = HealthEstablishment.friendly.find(params[:id])
+    @health_establishment = HealthEstablishment.by_company(current_user.company).friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

@@ -39,9 +39,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_cancel_registration
       @cancel_registration = if params[:individual_registration_id]
-                               CancelRegistration.find_by(individual_registration_id: params[:individual_registration_id])
+                               CancelRegistration.by_company(current_user.company)
+                                                 .find_by(individual_registration_id: params[:individual_registration_id])
                              else
-                               CancelRegistration.friendly.find(params[:id])
+                               CancelRegistration.by_company(current_user.company).friendly.find(params[:id])
                              end
     end
 

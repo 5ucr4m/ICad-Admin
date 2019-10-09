@@ -56,6 +56,6 @@ class RolesController < WebController
   # Only allow a trusted parameter "white list" through.
   def role_params
     params.require(:role).permit(:name, :description, :icon,
-                                 :reference, :role_id, :app_module_id)
+                                 :url, :reference, :role_id, :app_module_id)
   end
 end

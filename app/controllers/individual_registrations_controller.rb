@@ -5,8 +5,8 @@ class IndividualRegistrationsController < WebController
 
   # GET /individual_registrations
   def index
-    @query = IndividualRegistration.ransack(params[:q])
-    @pagy, @individual_registrations = pagy(@query.result, page: params[:page])
+    @query = IndividualRegistration.by_company(current_user.company).ransack(params[:q])
+    @pagy, @individual_registrations = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /individual_registrations/1
@@ -52,7 +52,7 @@ class IndividualRegistrationsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_individual_registration
-    @individual_registration = IndividualRegistration.friendly.find(params[:id])
+    @individual_registration = IndividualRegistration.by_company(current_user.company).friendly.find(params[:id])
     @occupation_selected = @individual_registration.sociodemographic_info.occupation.presence
   end
 
@@ -162,6 +162,6 @@ class IndividualRegistrationsController < WebController
                                                       left_reason_id
                                                       decease_date
                                                       decease_number
-                                                    ])
+                                                    ]).merge(company: current_user.company)
   end
 end

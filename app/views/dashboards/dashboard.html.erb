@@ -31,15 +31,15 @@
                       description: FamilyMember.model_name.human(count: 2)} %>
 </div>
 <div class="row row-cards">
-  <div class="col-lg-6 col-sm-12 col-xs-12">
+  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
       <div class="card-body">
         <div class="tabs-content">
-          <div class="tab-pane fade" id="family-members" role="tabpanel" aria-labelledby="family-members-tab">
-            <%= render 'application/chart', title: FamilyMember.model_name.human(count: 2), id: 'chart-family-members' %>
-          </div>
           <div class="tab-pane fade show active" id="families" role="tabpanel" aria-labelledby="families-tab">
             <%= render 'application/chart', title: Family.model_name.human(count: 2), id: 'chart-families' %>
+          </div>
+          <div class="tab-pane fade" id="family-members" role="tabpanel" aria-labelledby="family-members-tab">
+            <%= render 'application/chart', title: FamilyMember.model_name.human(count: 2), id: 'chart-family-members' %>
           </div>
           <div class="tab-pane fade" id="home-visit-registrations" role="tabpanel" aria-labelledby="home-visit-registrations-tab">
             <%= render 'application/chart', title: HomeVisitRegistration.model_name.human(count: 2), id: 'chart-home-visit-registrations' %>
@@ -47,16 +47,16 @@
         </div>
       </div>
       <div class="nav card-tabs card-tabs-bottom" role="tablist">
-        <div id="family-members-tab" class="card-tabs-item text-center nav-link"
-             data-toggle="tab" data-target="#family-members" role="tab" aria-controls="family-member" aria-selected="false">
-          <h4 class="py-2 mb-0">
-            <i class="<%= t('activerecord.models.family_member.icon') %> mr-2"></i><%= FamilyMember.model_name.human(count: 2) %>
-          </h4>
-        </div>
         <div id="families-tab" class="card-tabs-item text-center nav-link active"
              data-toggle="tab" data-target="#families" role="tab" aria-controls="families" aria-selected="true">
           <h4 class="py-2 mb-0">
             <i class="<%= t('activerecord.models.family.icon') %> mr-2"></i><%= Family.model_name.human(count: 2) %>
+          </h4>
+        </div>
+        <div id="family-members-tab" class="card-tabs-item text-center nav-link"
+             data-toggle="tab" data-target="#family-members" role="tab" aria-controls="family-member" aria-selected="false">
+          <h4 class="py-2 mb-0">
+            <i class="<%= t('activerecord.models.family_member.icon') %> mr-2"></i><%= FamilyMember.model_name.human(count: 2) %>
           </h4>
         </div>
         <div id="home-visit-registrations-tab" class="card-tabs-item text-center nav-link"

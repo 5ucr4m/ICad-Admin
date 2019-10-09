@@ -45,12 +45,12 @@ class HealthProfessional < ApplicationRecord
 
   has_many :home_registrations, dependent: :destroy
 
-  before_validation :set_health_establishment
-  before_create :find_health_professional
+  # before_validation :set_health_establishment
+  # before_create :find_health_professional
 
   attr_accessor :cnes_code
 
-  validates :cns_code, :cnes_code, presence: true
+  validates :cns_code, presence: true
 
   ransack_alias :search, :id_to_s_or_legal_full_name_or_federal_registry_or_cns_code
 

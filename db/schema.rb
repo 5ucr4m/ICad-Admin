@@ -587,6 +587,7 @@ ActiveRecord::Schema.define(version: 2019_10_03_010541) do
     t.string "description"
     t.string "icon"
     t.string "reference"
+    t.string "url"
     t.bigint "role_id"
     t.bigint "app_module_id"
     t.string "slug"

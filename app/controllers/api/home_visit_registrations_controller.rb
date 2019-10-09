@@ -6,8 +6,8 @@ module Api
 
     # GET /home_visit_registrations
     def index
-      @query = HomeVisitRegistration.ransack(params[:q])
-      @pagy, @home_visit_registrations = pagy(@query.result, page: params[:page])
+      @query = HomeVisitRegistration.by_company(current_user.company).ransack(params[:q])
+      @pagy, @home_visit_registrations = pagy(@query.result, page: params[:page], items: 10)
     end
 
     # GET /home_visit_registrations/1
@@ -54,7 +54,8 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_home_visit_registration
-      @home_visit_registration = HomeVisitRegistration.friendly.find(params[:id])
+      @home_visit_registration = HomeVisitRegistration.by_company(current_user.company)
+                                                      .friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

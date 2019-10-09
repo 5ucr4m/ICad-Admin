@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class VaccinationCampaignsController < WebController
+  load_and_authorize_resource
   before_action :set_vaccination_campaign, only: %i[show edit update destroy]
 
   # GET /vaccination_campaigns
   def index
-    @query = VaccinationCampaign.ransack(params[:q])
-    @pagy, @vaccination_campaigns = pagy(@query.result, page: params[:page])
+    @query = VaccinationCampaign.by_company(current_user.company).ransack(params[:q])
+    @pagy, @vaccination_campaigns = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /vaccination_campaigns/1
@@ -50,7 +51,7 @@ class VaccinationCampaignsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_vaccination_campaign
-    @vaccination_campaign = VaccinationCampaign.friendly.find(params[:id])
+    @vaccination_campaign = VaccinationCampaign.by_company(current_user.company).friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

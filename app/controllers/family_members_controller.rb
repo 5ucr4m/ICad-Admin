@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class FamilyMembersController < WebController
+  load_and_authorize_resource
   before_action :set_family_member, only: %i[show edit update destroy]
 
   def chart_by_day
@@ -11,8 +12,8 @@ class FamilyMembersController < WebController
 
   # GET /family_members
   def index
-    @query = FamilyMember.ransack(params[:q])
-    @pagy, @family_members = pagy(@query.result.includes(:city, :race, :gender), page: params[:page])
+    @query = FamilyMember.by_company(current_user.company).ransack(params[:q])
+    @pagy, @family_members = pagy(@query.result.includes(:city, :race, :gender), page: params[:page], items: 10)
   end
 
   # GET /family_members/1
@@ -57,7 +58,7 @@ class FamilyMembersController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_family_member
-    @family_member = FamilyMember.friendly.find(params[:id])
+    @family_member = FamilyMember.by_company(current_user.company).friendly.find(params[:id])
     set_selected_options
   end
 

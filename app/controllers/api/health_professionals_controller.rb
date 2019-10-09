@@ -7,7 +7,7 @@ module Api
     # GET /health_professionals
     api :GET, '/health_professionals', 'GET Health Professionals List'
     def index
-      @query = HealthProfessional.ransack(params[:q])
+      @query = HealthProfessional.by_company(current_user.company).ransack(params[:q])
       @health_professionals = @query.result
       if params[:professional_team_id]
         @health_professionals = @health_professionals.where(professional_team_id: params[:professional_team_id])
@@ -60,8 +60,11 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_health_professional
-      @health_professional = HealthProfessional.friendly.find(params[:id])
-      @cbo_selected = @health_professional.cbo_code.presence if @health_professional
+      @health_professional = HealthProfessional.by_company(current_user.company)
+                                               .friendly.find(params[:id])
+      if @health_professional
+        @cbo_selected = @health_professional.cbo_code.presence
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

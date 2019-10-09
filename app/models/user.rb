@@ -50,7 +50,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  belongs_to :health_professional
+  belongs_to :health_professional, optional: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
@@ -73,12 +73,15 @@ class User < ApplicationRecord
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")
   end
 
-  attr_accessor :company
-
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
   def current_company
-    user_companies.find(&:current) || user_companies.first
+    user_companies.find(&:current) || user_companies.first ||
+      user_companies.create!(company: Company.order('RANDOM()').first, current: true)
+  end
+
+  def company
+    current_company.company
   end
 
   def send_confirmation_notification?

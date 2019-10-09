@@ -4,14 +4,15 @@ class HomeVisitRegistrationsController < WebController
   before_action :set_home_visit_registration, only: %i[show edit update destroy]
 
   def chart_by_day
-    render_json HomeVisitRegistration.group_by_period(:day, :updated_at,
+    render_json HomeVisitRegistration.by_company(current_user.company)
+                                     .group_by_period(:day, :updated_at,
                                                       format: '%d/%m/%Y', last: 5).count
   end
 
   # GET /home_visit_registrations
   def index
-    @query = HomeVisitRegistration.ransack(params[:q])
-    @pagy, @home_visit_registrations = pagy(@query.result, page: params[:page])
+    @query = HomeVisitRegistration.by_company(current_user.company).ransack(params[:q])
+    @pagy, @home_visit_registrations = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /home_visit_registrations/1
@@ -57,7 +58,7 @@ class HomeVisitRegistrationsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_home_visit_registration
-    @home_visit_registration = HomeVisitRegistration.friendly.find(params[:id])
+    @home_visit_registration = HomeVisitRegistration.by_company(current_user.company).friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
@@ -90,6 +91,6 @@ class HomeVisitRegistrationsController < WebController
                                                       unknown_mother
                                                       responsible
                                                       out_area
-                                                    ])
+                                                    ]).merge(company: current_user.company)
   end
 end
