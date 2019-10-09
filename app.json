@@ -4,7 +4,7 @@
   "keywords": ["icadx"],
   "scripts": {
     "dokku": {
-      "postdeploy": "rails db:{reset,migrate} && rails seed:migrate"
+      "postdeploy": "DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:{reset,migrate} && rails seed:migrate"
     }
   }
 }
