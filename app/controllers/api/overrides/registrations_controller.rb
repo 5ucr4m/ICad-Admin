@@ -31,8 +31,8 @@ module Api
         params.permit(:email, :password, :password_confirmation,
                       health_professional_attributes: %i[
                         cns_code
-                        cbo_number
-                        cnes_number
+                        cbo_code_id
+                        cnes_code
                         federal_registry
                         state_registry
                         legal_full_name

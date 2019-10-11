@@ -47,11 +47,10 @@ class HealthProfessional < ApplicationRecord
 
   # before_validation :set_health_establishment
   # before_create :find_health_professional
-  before_validation :set_cbo_code
 
-  attr_accessor :cnes_code, :cbo_number
+  attr_accessor :cnes_code
 
-  validates :cns_code, :cnes_code, :cbo_number, presence: true
+  validates :cns_code, :cnes_code, presence: true
 
   ransack_alias :search, :id_to_s_or_legal_full_name_or_federal_registry_or_cns_code
 
@@ -60,12 +59,6 @@ class HealthProfessional < ApplicationRecord
   end
 
   private
-
-  def set_cbo_code
-    return if cbo_number.blank?
-
-    self.cbo_code = GenericModel.find_by(generic_field: :cbo_type, reference: cbo_number)
-  end
 
   def set_health_establishment
     return if cnes_code.blank?
