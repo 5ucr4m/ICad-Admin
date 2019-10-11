@@ -4,12 +4,6 @@ class FamiliesController < WebController
   load_and_authorize_resource
   before_action :set_family, only: %i[show edit update destroy]
 
-  def chart_by_day
-    render_json Family.by_company(current_user.company)
-                      .group_by_period(:day, :created_at,
-                                       format: '%d/%m/%Y', last: 5).count
-  end
-
   # GET /families
   def index
     @query = Family.by_company(current_user.company).ransack(params[:q])
