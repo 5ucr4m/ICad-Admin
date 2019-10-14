@@ -60,5 +60,6 @@ class VaccinationCampaignsController < WebController
                                                  :child, :woman, :period_start,
                                                  :period_end, :age_initial,
                                                  :age_end, :company_id, :slug)
+      .merge(company: current_user.company)
   end
 end

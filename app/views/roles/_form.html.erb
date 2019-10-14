@@ -1,12 +1,15 @@
-<%= simple_form_for @role do |f| %>
+
+<%= simple_form_for(@role) do |f| %>
   <% content_for :body do %>
-      <%= f.input :name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :description, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :description, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <%= f.input :icon, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :reference, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :url, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.association :role, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-      <%= f.association :app_module, collection: GenericModel.app_modules, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+      <%= f.input :model_reference, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :action_reference, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :url_reference, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :role, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :app_module, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :slug, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @role} %>
 <% end %>

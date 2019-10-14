@@ -27,6 +27,7 @@
 
 class HomeRegistrationPet < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :home_registration
   belongs_to :pet_type, class_name: 'GenericModel'

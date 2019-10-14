@@ -27,7 +27,7 @@ module VaccinationCampaignService
       vd << XML::Node.new('tpCdsOrigem', 3)
 
       he = vaccination.family_member.family
-             .home_registration.health_professional
+                      .home_registration.health_professional
       vd << ht = XML::Node.new('headerTransport')
       ht << XML::Node.new('profissionalCNS', he.cns_code)
       ht << XML::Node.new('cboCodigo_2002', he.cbo_code.reference)

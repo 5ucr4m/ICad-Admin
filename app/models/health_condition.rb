@@ -50,6 +50,7 @@
 
 class HealthCondition < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :weight_situation, class_name: 'GenericModel'
   belongs_to :company, optional: true

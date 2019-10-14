@@ -2,7 +2,8 @@
 
 class CreateHealthEstablishments < SeedMigration::Migration
   def up
-    State.find_by(abbreviation: 'PI').cities.each do
+    Company.all.each do |company|
+      RailsMultitenant::GlobalContextRegistry[:company_id] = company.id
       5.times do
         HealthEstablishment.create!(cnes_code: Faker::Number.positive(100_000_000, 999_999_999),
                                     unit_code: Faker::Number.positive(100_000, 999_999),
@@ -13,7 +14,7 @@ class CreateHealthEstablishments < SeedMigration::Migration
                                     manager_full_name: Faker::Name.name_with_middle,
                                     manager_federal_registry: Faker::IDNumber.brazilian_citizen_number(formatted: true),
                                     registry_at: Faker::Date.backward,
-                                    company: Company.order('RANDOM()').first)
+                                    company: company)
       end
     end
   end

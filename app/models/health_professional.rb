@@ -35,6 +35,7 @@
 
 class HealthProfessional < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :cbo_code, class_name: 'GenericModel'
   belongs_to :health_establishment, optional: true

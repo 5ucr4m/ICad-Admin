@@ -27,6 +27,7 @@
 
 class HealthConditionDisease < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :health_condition, optional: true
   belongs_to :disease_type, class_name: 'GenericModel'

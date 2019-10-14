@@ -136,23 +136,28 @@ module Api
                                                         family_visit
                                                         street_situation_time_id
                                                       ],
-                                                      sociodemographic_info_attributes: %i[
-                                                        id
-                                                        education_level_id
-                                                        occupation_id
-                                                        sexual_orientation_id
-                                                        traditional_community_name
-                                                        parent_relation_id
-                                                        job_market_situation_id
-                                                        desire_orientation
-                                                        attend_folk_healer
-                                                        traditional_community
-                                                        attend_school
-                                                        community_group
-                                                        health_plan
-                                                        has_any_disability
-                                                        desire_gender
-                                                        gender_identity_id
+                                                      sociodemographic_info_attributes: [
+                                                        :id,
+                                                        :education_level_id,
+                                                        :occupation_id,
+                                                        :sexual_orientation_id,
+                                                        :traditional_community_name,
+                                                        :parent_relation_id,
+                                                        :job_market_situation_id,
+                                                        :desire_orientation,
+                                                        :attend_folk_healer,
+                                                        :traditional_community,
+                                                        :attend_school,
+                                                        :community_group,
+                                                        :health_plan,
+                                                        :has_any_disability,
+                                                        :desire_gender,
+                                                        :gender_identity_id,
+                                                        family_member_disabilities_attributes: %i[
+                                                          id
+                                                          disability_id
+                                                          _destroy
+                                                        ]
                                                       ],
                                                       cancel_registration_attributes: %i[
                                                         id

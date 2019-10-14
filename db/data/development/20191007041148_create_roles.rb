@@ -56,7 +56,9 @@ class CreateRoles < SeedMigration::Migration
 
   def create_by_app_module(role, reference)
     @manage = Role.create! name: role.to_s,
-                           reference: 'manage',
+                           model_reference: role.to_s,
+                           action_reference: 'manage',
+                           url_reference: 'manage',
                            description: role.to_s.pluralize,
                            app_module: GenericModel.find_by(generic_field: :app_module,
                                                             reference: reference)
@@ -64,8 +66,9 @@ class CreateRoles < SeedMigration::Migration
       Role.create! name: role.to_s,
                    description: "#{action} #{role}",
                    role: @manage,
-                   url: define_route_path(role, action),
-                   reference: action,
+                   model_reference: role,
+                   url_reference: define_route_path(role, action),
+                   action_reference: action,
                    app_module: GenericModel.find_by(generic_field: :app_module, reference: reference)
     end
   end
@@ -82,7 +85,7 @@ class CreateRoles < SeedMigration::Migration
       "#{role.to_s.camelize.underscore}_path"
     when 'update'
       "#{role.to_s.camelize.underscore}_path"
-    when 'delete'
+    when 'destroy'
       "#{role.to_s.camelize.underscore}_path"
     when 'edit'
       "edit_#{role.to_s.camelize.underscore}_path"

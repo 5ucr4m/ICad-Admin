@@ -74,7 +74,9 @@ module EstabelecimentoSaudeService
         fil_node << pag_node = XML::Node.new('pag:Paginacao')
         pag_node << XML::Node.new('pag:posicaoRegistroInicio', obj.pag_inicial)
         pag_node << XML::Node.new('pag:quantidadeRegistrosPorPagina', obj.pag_pagina)
-        pag_node << XML::Node.new('pag:quantidadeRegistros', obj.total) if obj.total
+        if obj.total
+          pag_node << XML::Node.new('pag:quantidadeRegistros', obj.total)
+        end
       end
       xml
     end

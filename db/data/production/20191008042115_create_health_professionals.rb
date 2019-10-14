@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHealthProfessionals < SeedMigration::Migration
   def up
     User.all.each do |user|
@@ -15,7 +17,5 @@ class CreateHealthProfessionals < SeedMigration::Migration
     end
   end
 
-  def down
-
-  end
+  def down; end
 end

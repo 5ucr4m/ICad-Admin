@@ -64,6 +64,6 @@ class VaccinationsController < WebController
     params.require(:vaccination).permit(:uuid, :tp_cds_origin,
                                         :header_transport_id,
                                         :vaccination_campaign_id, :slug)
-      .merge(company: current_user.company)
+          .merge(company: current_user.company)
   end
 end

@@ -2,7 +2,7 @@
 
 class CreateCompanies < SeedMigration::Migration
   def up
-    (10..100).to_a.sample.times do
+    (10..30).to_a.sample.times do
       Company.create!(legal_full_name: Faker::Company.name,
                       fancy_name: Faker::Company.buzzword,
                       federal_registry: Faker::Company.brazilian_company_number(formatted: true),

@@ -21,8 +21,8 @@ class DashboardsController < WebController
 
   def home_visit_registrations
     render_json HomeVisitRegistration.by_company(current_user.company)
-                  .group_by_period(:day, :updated_at,
-                                   format: '%d/%m/%Y', last: 5).count
+                                     .group_by_period(:day, :updated_at,
+                                                      format: '%d/%m/%Y', last: 5).count
   end
 
   private

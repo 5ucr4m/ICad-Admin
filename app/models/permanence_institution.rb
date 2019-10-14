@@ -26,6 +26,9 @@
 #
 
 class PermanenceInstitution < ApplicationRecord
+  include Sluggable
+  include Tenantable
+
   belongs_to :company, optional: true
 
   ransack_alias :search, :id_to_s

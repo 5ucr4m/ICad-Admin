@@ -1,0 +1,28 @@
+<div class="nested-fields">
+  <div class="col-12">
+    <div class="card mb-3">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-building mr-2"></i><%= f.object&.company&.legal_full_name || 'Nova Empresa' %>
+        </h3>
+        <div class="card-options">
+          <% unless show?(f.object.persisted?) %>
+            <%= link_to_remove_association f, class: 'btn btn-sm btn-icon btn-danger', role: 'button' do %>
+              <i class="fas fa-times"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <%= f.association :company, collection: Company.all,
+                            label_method: :name_formatted,
+                            wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+        </div>
+        <%= f.simple_fields_for :user_roles do |user_role| %>
+          <%= render 'application/user_role_fields', f: user_role %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

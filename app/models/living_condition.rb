@@ -53,6 +53,9 @@
 #
 
 class LivingCondition < ApplicationRecord
+  include Sluggable
+  include Tenantable
+
   belongs_to :water_supply, class_name: 'GenericModel', optional: true
   belongs_to :rural_production_area, class_name: 'GenericModel', optional: true
   belongs_to :garbage_disposal, class_name: 'GenericModel', optional: true

@@ -24,6 +24,7 @@
 
 class ProfessionalTeam < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :company, optional: true
   has_many :health_professionals, dependent: :nullify

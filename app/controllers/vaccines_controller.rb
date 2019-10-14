@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class VaccinesController < WebController
+  load_and_authorize_resource
   before_action :set_vaccine, only: %i[show edit update destroy]
 
   # GET /vaccines

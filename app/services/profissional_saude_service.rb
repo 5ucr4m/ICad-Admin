@@ -67,10 +67,16 @@ class ProfissionalSaudeService
       if obj.cns
         fil_node << cns_node = XML::Node.new('cns:CNS')
         cns_node << XML::Node.new('cns:numeroCNS', obj.cns)
-        cns_node << XML::Node.new('cns:dataAtribuicao', obj.data_atribuicao) if obj.data_atribuicao
-        cns_node << XML::Node.new('cns:tipoCartao', obj.tipo_cartao) if obj.tipo_cartao
+        if obj.data_atribuicao
+          cns_node << XML::Node.new('cns:dataAtribuicao', obj.data_atribuicao)
+        end
+        if obj.tipo_cartao
+          cns_node << XML::Node.new('cns:tipoCartao', obj.tipo_cartao)
+        end
         cns_node << XML::Node.new('cns:manual', obj.manual) if obj.manual
-        cns_node << XML::Node.new('cns:justificativaManual', obj.justificativa) if obj.justificativa
+        if obj.justificativa
+          cns_node << XML::Node.new('cns:justificativaManual', obj.justificativa)
+        end
       end
       if obj.cpf
         fil_node << cpf_node = XML::Node.new('cpf:CPF')

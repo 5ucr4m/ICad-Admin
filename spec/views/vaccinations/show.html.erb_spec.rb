@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "vaccinations/show", type: :view do
+RSpec.describe 'vaccinations/show', type: :view do
   before(:each) do
     @vaccination = assign(:vaccination, Vaccination.create!(
-      :uuid => "Uuid",
-      :tp_cds_origin => "Tp Cds Origin",
-      :header_transport => nil,
-      :vaccination_campaign => nil,
-      :company => nil,
-      :slug => "Slug"
-    ))
+                                          uuid: 'Uuid',
+                                          tp_cds_origin: 'Tp Cds Origin',
+                                          header_transport: nil,
+                                          vaccination_campaign: nil,
+                                          company: nil,
+                                          slug: 'Slug'
+                                        ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Uuid/)
     expect(rendered).to match(/Tp Cds Origin/)

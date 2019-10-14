@@ -61,6 +61,8 @@ class User < ApplicationRecord
   has_many :companies, through: :user_companies
   has_many :roles, through: :user_companies
 
+  accepts_nested_attributes_for :user_companies, allow_destroy: true
+
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },
             presence: true,
@@ -68,6 +70,9 @@ class User < ApplicationRecord
   validates :password, confirmation: true
 
   accepts_nested_attributes_for :health_professional, allow_destroy: false
+  accepts_nested_attributes_for :user_companies, allow_destroy: true
+
+  scope :by_company, ->(company) { includes(:user_companies).where(user_companies: {company: company}) }
 
   ransacker :id_to_s do
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")

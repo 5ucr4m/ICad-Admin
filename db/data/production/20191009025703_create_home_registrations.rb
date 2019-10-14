@@ -281,12 +281,11 @@ class CreateHomeRegistrations < SeedMigration::Migration
         refuse_registration: [0, 1].sample,
         uuid: "#{he.cns_code}-#{SecureRandom.uuid}",
         home_type: GenericModel.home_types.order('RANDOM()').first,
-        finished: [0,1].sample,
+        finished: [0, 1].sample,
         company: he.company
       )
     end
   end
 
-  def down;
-  end
+  def down; end
 end

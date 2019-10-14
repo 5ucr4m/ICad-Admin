@@ -3,8 +3,9 @@ FactoryBot.define do
     name { "MyString" }
     description { "MyString" }
     icon { "MyString" }
-    reference { "MyString" }
-    url { "MyString" }
+    model_reference { "MyString" }
+    action_reference { "MyString" }
+    url_reference { "MyString" }
     role { nil }
     app_module { nil }
     slug { "MyString" }

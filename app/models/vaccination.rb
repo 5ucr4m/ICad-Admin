@@ -2,6 +2,7 @@
 
 class Vaccination < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :header_transport
   belongs_to :vaccination_campaign

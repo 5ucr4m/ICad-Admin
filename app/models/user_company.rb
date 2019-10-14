@@ -32,5 +32,7 @@ class UserCompany < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
 
+  accepts_nested_attributes_for :user_roles, allow_destroy: true
+
   ransack_alias :search, :id_to_s
 end

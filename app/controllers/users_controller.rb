@@ -69,6 +69,19 @@ class UsersController < WebController
                                    state_registry
                                    health_establishment_id
                                    professional_team_id
+                                 ],
+                                 user_companies_attributes: [
+                                   :id,
+                                   :user_id,
+                                   :company_id,
+                                   :current,
+                                   :_destroy,
+                                   user_roles_attributes: %i[
+                                     id
+                                     user_company_id
+                                     role_id
+                                     _destroy
+                                   ]
                                  ])
   end
 end

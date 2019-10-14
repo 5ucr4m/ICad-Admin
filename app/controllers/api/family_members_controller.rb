@@ -9,7 +9,9 @@ module Api
     def index
       @query = FamilyMember.by_company(current_user.company).ransack(params[:q])
       @family_members = @query.result.includes(:family)
-      @family_members = @family_members.where(family_id: params[:family_id]) if params[:family_id]
+      if params[:family_id]
+        @family_members = @family_members.where(family_id: params[:family_id])
+      end
       render_json @family_members
     end
 

@@ -27,6 +27,7 @@
 
 class InStreetSituationMeal < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :in_street_situation, optional: true
   belongs_to :meal_origin_type, class_name: 'GenericModel'

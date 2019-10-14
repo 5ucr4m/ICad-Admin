@@ -48,6 +48,7 @@
 
 class SociodemographicInfo < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :education_level, class_name: 'GenericModel', optional: true
   belongs_to :occupation, class_name: 'GenericModel', optional: true

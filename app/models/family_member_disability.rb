@@ -27,6 +27,7 @@
 
 class FamilyMemberDisability < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :sociodemographic_info, optional: true
   belongs_to :disability, class_name: 'GenericModel'

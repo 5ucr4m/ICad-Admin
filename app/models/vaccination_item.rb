@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class VaccinationItem < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :vaccination
   belongs_to :turn, class_name: 'GenericModel'

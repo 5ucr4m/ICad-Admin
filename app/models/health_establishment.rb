@@ -33,6 +33,7 @@
 
 class HealthEstablishment < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :unit_type, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true

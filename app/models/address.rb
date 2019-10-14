@@ -37,6 +37,7 @@
 
 class Address < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :address_type, class_name: 'GenericModel'
   belongs_to :city

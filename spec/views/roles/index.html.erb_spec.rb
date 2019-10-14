@@ -7,8 +7,9 @@ RSpec.describe "roles/index", type: :view do
         :name => "Name",
         :description => "Description",
         :icon => "Icon",
-        :reference => "Reference",
-        :url => "Url",
+        :model_reference => "Model Reference",
+        :action_reference => "Action Reference",
+        :url_reference => "Url Reference",
         :role => nil,
         :app_module => nil,
         :slug => "Slug"
@@ -17,8 +18,9 @@ RSpec.describe "roles/index", type: :view do
         :name => "Name",
         :description => "Description",
         :icon => "Icon",
-        :reference => "Reference",
-        :url => "Url",
+        :model_reference => "Model Reference",
+        :action_reference => "Action Reference",
+        :url_reference => "Url Reference",
         :role => nil,
         :app_module => nil,
         :slug => "Slug"
@@ -31,8 +33,9 @@ RSpec.describe "roles/index", type: :view do
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => "Description".to_s, :count => 2
     assert_select "tr>td", :text => "Icon".to_s, :count => 2
-    assert_select "tr>td", :text => "Reference".to_s, :count => 2
-    assert_select "tr>td", :text => "Url".to_s, :count => 2
+    assert_select "tr>td", :text => "Model Reference".to_s, :count => 2
+    assert_select "tr>td", :text => "Action Reference".to_s, :count => 2
+    assert_select "tr>td", :text => "Url Reference".to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => "Slug".to_s, :count => 2

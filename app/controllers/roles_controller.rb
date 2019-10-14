@@ -6,7 +6,7 @@ class RolesController < WebController
   # GET /roles
   def index
     @query = Role.ransack(params[:q])
-    @pagy, @roles = pagy(@query.result, page: params[:page])
+    @pagy, @roles = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /roles/1
@@ -56,6 +56,7 @@ class RolesController < WebController
   # Only allow a trusted parameter "white list" through.
   def role_params
     params.require(:role).permit(:name, :description, :icon,
-                                 :url, :reference, :role_id, :app_module_id)
+                                 :model_reference, :action_reference,
+                                 :url_reference, :role_id, :app_module_id, :slug)
   end
 end

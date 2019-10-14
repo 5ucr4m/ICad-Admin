@@ -44,6 +44,7 @@
 
 class IndividualRegistration < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :health_condition, optional: true
   belongs_to :in_street_situation, optional: true

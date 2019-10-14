@@ -47,6 +47,9 @@
 #
 
 class PeriodItem < ApplicationRecord
+  include Sluggable
+  include Tenantable
+
   belongs_to :serialized_type, class_name: 'GenericModel', optional: true
   belongs_to :period, optional: true
   belongs_to :registrable, polymorphic: true, optional: true

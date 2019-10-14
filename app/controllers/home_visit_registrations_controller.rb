@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class HomeVisitRegistrationsController < WebController
+  load_and_authorize_resource
   before_action :set_home_visit_registration, only: %i[show edit update destroy]
 
   # GET /home_visit_registrations

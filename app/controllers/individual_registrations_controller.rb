@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class IndividualRegistrationsController < WebController
+  load_and_authorize_resource
   before_action :set_individual_registration, only: %i[show edit update destroy]
 
   # GET /individual_registrations

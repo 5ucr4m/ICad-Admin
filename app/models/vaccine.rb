@@ -33,6 +33,7 @@
 
 class Vaccine < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :immunobiological, class_name: 'GenericModel'
   belongs_to :vaccination_strategy, class_name: 'GenericModel'

@@ -44,6 +44,7 @@
 
 class HomeVisitForm < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :home_visit_registration
   belongs_to :turn, class_name: 'GenericModel'

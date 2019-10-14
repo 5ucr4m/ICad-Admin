@@ -19,6 +19,13 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboards#dashboard'
   root to: 'dashboards#dashboard'
 
+  # Dashboard charts
+  scope :charts do
+    get 'families', to: 'dashboards#families'
+    get 'family_members', to: 'dashboards#family_members'
+    get 'home_visit_registrations', to: 'dashboards#home_visit_registrations'
+  end
+
   resources :generic_models do
     collection do
       get 'address_types'
@@ -30,26 +37,15 @@ Rails.application.routes.draw do
   resources :users
   resources :states
   resources :cities
-  resources :families do
-    collection do
-      get 'chart_by_day'
-    end
-  end
+  resources :families
   resources :companies
-  resources :family_members do
-    collection do
-      get 'chart_by_day'
-    end
-  end
+  resources :family_members
 
   resources :home_registrations
   resources :professional_teams
   resources :health_professionals
   resources :health_establishments
   resources :home_visit_registrations do
-    collection do
-      get 'chart_by_day'
-    end
     shallow do
       resources :home_visit_forms
     end

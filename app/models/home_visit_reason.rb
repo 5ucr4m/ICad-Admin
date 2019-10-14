@@ -27,6 +27,7 @@
 
 class HomeVisitReason < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :home_visit_form
   belongs_to :reason, class_name: 'GenericModel', optional: true

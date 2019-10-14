@@ -26,6 +26,9 @@
 #
 
 class HealthConditionKidney < ApplicationRecord
+  include Sluggable
+  include Tenantable
+
   belongs_to :health_condition, optional: true
   belongs_to :kidney_problem, class_name: 'GenericModel'
   belongs_to :company, optional: true

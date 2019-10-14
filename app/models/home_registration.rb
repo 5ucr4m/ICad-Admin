@@ -45,6 +45,7 @@
 
 class HomeRegistration < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :health_professional
   belongs_to :home_type, class_name: 'GenericModel'

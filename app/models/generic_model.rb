@@ -71,7 +71,6 @@ class GenericModel < ApplicationRecord
   scope :left_reasons, -> { where(generic_field: :left_reason) }
   scope :family_incomes, -> { where(generic_field: :family_income) }
   scope :local_services, -> { where(generic_field: :local_service) }
-  scope :turns, -> { where(generic_field: :turn) }
   scope :immunobiological, -> { where(generic_field: :immunobiological) }
   scope :vaccination_strategies, -> { where(generic_field: :vaccination_strategy) }
   scope :doses, -> { where(generic_field: :dose) }

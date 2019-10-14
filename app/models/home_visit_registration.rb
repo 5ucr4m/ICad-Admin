@@ -26,6 +26,7 @@
 
 class HomeVisitRegistration < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :family_member
   belongs_to :company, optional: true

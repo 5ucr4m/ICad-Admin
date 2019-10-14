@@ -25,6 +25,9 @@
 #
 
 class CancelRegistration < ApplicationRecord
+  include Sluggable
+  include Tenantable
+
   belongs_to :left_reason, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
 

@@ -18,6 +18,10 @@ pt-BR:
         one: Usuário
         other: Usuários
         icon: fas fa-user-circle
+      role:
+        one: Permissão
+        other: Permissões
+        icon: fas fa-check
       health_professional:
         one: Profissional de Saúde
         other: Profissionais de Saúde

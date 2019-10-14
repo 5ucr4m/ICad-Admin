@@ -6,8 +6,9 @@ RSpec.describe "roles/show", type: :view do
       :name => "Name",
       :description => "Description",
       :icon => "Icon",
-      :reference => "Reference",
-      :url => "Url",
+      :model_reference => "Model Reference",
+      :action_reference => "Action Reference",
+      :url_reference => "Url Reference",
       :role => nil,
       :app_module => nil,
       :slug => "Slug"
@@ -19,8 +20,9 @@ RSpec.describe "roles/show", type: :view do
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Description/)
     expect(rendered).to match(/Icon/)
-    expect(rendered).to match(/Reference/)
-    expect(rendered).to match(/Url/)
+    expect(rendered).to match(/Model Reference/)
+    expect(rendered).to match(/Action Reference/)
+    expect(rendered).to match(/Url Reference/)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(/Slug/)

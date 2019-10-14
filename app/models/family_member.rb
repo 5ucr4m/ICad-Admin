@@ -60,6 +60,7 @@
 
 class FamilyMember < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :family, optional: true
   belongs_to :city

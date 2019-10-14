@@ -27,6 +27,7 @@
 
 class ResponsibleChild < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :individual_registration, optional: true
   belongs_to :responsible_child_type, class_name: 'GenericModel', optional: true

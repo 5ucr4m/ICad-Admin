@@ -24,6 +24,9 @@
 #
 
 class Period < ApplicationRecord
+  include Sluggable
+  include Tenantable
+
   belongs_to :company, optional: true
 
   has_many :period_items, dependent: :destroy

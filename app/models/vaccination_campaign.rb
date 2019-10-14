@@ -2,6 +2,7 @@
 
 class VaccinationCampaign < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :company, optional: true
 

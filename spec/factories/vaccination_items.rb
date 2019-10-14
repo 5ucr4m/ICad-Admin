@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :vaccination_item do
     vaccination { nil }
@@ -9,6 +11,6 @@ FactoryBot.define do
     pregnant { false }
     puerperal { false }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

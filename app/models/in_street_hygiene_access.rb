@@ -26,6 +26,9 @@
 #
 
 class InStreetHygieneAccess < ApplicationRecord
+  include Sluggable
+  include Tenantable
+
   belongs_to :in_street_situation
   belongs_to :hygiene_access, class_name: 'GenericModel', optional: true
   belongs_to :company

@@ -35,11 +35,15 @@ module HomeRegistrationService
       if home_type || !data.refuse_registration
         home_registration&.living_condition do |hc|
           hr << lc = XML::Node.new('condicaoMoradia', hrp.reference)
-          lc << XML::Node.new('abastecimentoAgua', hc.water_supply.reference) if hc&.water_supply.present?
+          if hc&.water_supply.present?
+            lc << XML::Node.new('abastecimentoAgua', hc.water_supply.reference)
+          end
           if hc&.rural_production_area.present?
             lc << XML::Node.new('areaProducaoRural', hc.rural_production_area.reference)
           end
-          lc << XML::Node.new('destinoLixo', hc.garbage_disposal.reference) if hc&.garbage_disposal.present?
+          if hc&.garbage_disposal.present?
+            lc << XML::Node.new('destinoLixo', hc.garbage_disposal.reference)
+          end
           if hc&.bathroom_drainage.present?
             lc << XML::Node.new('formaEscoamentoBanheiro', hc.bathroom_drainage.reference)
           end
@@ -48,12 +52,24 @@ module HomeRegistrationService
             lc << XML::Node.new('materialPredominanteParedesExtDomicilio', hc.home_wall_material.reference)
           end
           lc << XML::Node.new('nuComodos', hc.rooms) if hc&.rooms.present?
-          lc << XML::Node.new('nuMoradores', hc.residents) if hc&.residents.present?
-          lc << XML::Node.new('situacaoMoradiaPosseTerra', hc.home_situation.reference) if hc&.home_situation.present?
-          lc << XML::Node.new('stDisponibilidadeEnergiaEletrica', hc.electric_power) if hc&.electric_power.present?
-          lc << XML::Node.new('tipoAcessoDomicilio', hc.home_access.reference) if hc&.home_access.present?
-          lc << XML::Node.new('tipoDomicilio', hc.home_type.reference) if hc&.home_type.present?
-          lc << XML::Node.new('aguaConsumoDomicilio', hc.water_treatment.reference) if hc&.water_treatment.present?
+          if hc&.residents.present?
+            lc << XML::Node.new('nuMoradores', hc.residents)
+          end
+          if hc&.home_situation.present?
+            lc << XML::Node.new('situacaoMoradiaPosseTerra', hc.home_situation.reference)
+          end
+          if hc&.electric_power.present?
+            lc << XML::Node.new('stDisponibilidadeEnergiaEletrica', hc.electric_power)
+          end
+          if hc&.home_access.present?
+            lc << XML::Node.new('tipoAcessoDomicilio', hc.home_access.reference)
+          end
+          if hc&.home_type.present?
+            lc << XML::Node.new('tipoDomicilio', hc.home_type.reference)
+          end
+          if hc&.water_treatment.present?
+            lc << XML::Node.new('aguaConsumoDomicilio', hc.water_treatment.reference)
+          end
         end
       end
 
@@ -63,28 +79,50 @@ module HomeRegistrationService
           addr << XML::Node.new('bairro', address.district)
           addr << XML::Node.new('cep', address.zip.delete('-'))
           addr << XML::Node.new('codigoIbgeMunicipio', address.city.code)
-          addr << XML::Node.new('complemento', address.complement) if address.complement.present?
+          if address.complement.present?
+            addr << XML::Node.new('complemento', address.complement)
+          end
           addr << XML::Node.new('nomeLogradouro', address.patio)
           addr << XML::Node.new('numero', address.number)
           addr << XML::Node.new('numeroDneUf', address.city.state.reference)
-          addr << XML::Node.new('telefoneContato', address.referential_phone) if address.referential_phone.present?
-          addr << XML::Node.new('telelefoneResidencia', address.home_phone) if address.home_phone.present?
+          if address.referential_phone.present?
+            addr << XML::Node.new('telefoneContato', address.referential_phone)
+          end
+          if address.home_phone.present?
+            addr << XML::Node.new('telelefoneResidencia', address.home_phone)
+          end
           addr << XML::Node.new('tipoLogradouroNumeroDne', address.address_type.reference)
           addr << XML::Node.new('stSemNumero', address.number.present?)
-          addr << XML::Node.new('pontoReferencia', address.reference) if address.reference.present?
-          addr << XML::Node.new('microarea', address.micro_area) if address.out_area.blank?
-          addr << XML::Node.new('stForaArea', address.out_area) if address.out_area.present?
+          if address.reference.present?
+            addr << XML::Node.new('pontoReferencia', address.reference)
+          end
+          if address.out_area.blank?
+            addr << XML::Node.new('microarea', address.micro_area)
+          end
+          if address.out_area.present?
+            addr << XML::Node.new('stForaArea', address.out_area)
+          end
         end
       end
 
       home_registration&.families do |family|
         hr << fam = XML::Node.new('familias')
-        fam << XML::Node.new('dataNascimentoResponsavel', family.responsible_birth_date) if family.responsible_birth_date.present?
+        if family.responsible_birth_date.present?
+          fam << XML::Node.new('dataNascimentoResponsavel', family.responsible_birth_date)
+        end
         fam << XML::Node.new('numeroCnsResponsavel', family.responsible_cns_number)
-        fam << XML::Node.new('numeroMembrosFamilia', family.members_quantity) if family.members_quantity.present?
-        fam << XML::Node.new('numeroProntuario', family.handbook_number) if family.handbook_number.present?
-        fam << XML::Node.new('rendaFamiliar', family.family_income.reference) if family&.family_income.present?
-        fam << XML::Node.new('resideDesde', family.reside_since) if family.reside_since.present?
+        if family.members_quantity.present?
+          fam << XML::Node.new('numeroMembrosFamilia', family.members_quantity)
+        end
+        if family.handbook_number.present?
+          fam << XML::Node.new('numeroProntuario', family.handbook_number)
+        end
+        if family&.family_income.present?
+          fam << XML::Node.new('rendaFamiliar', family.family_income.reference)
+        end
+        if family.reside_since.present?
+          fam << XML::Node.new('resideDesde', family.reside_since)
+        end
 
         if data&.home_type&.reference.to_i == 1
           fam << XML::Node.new('stMudanca', family.moving)
@@ -103,10 +141,16 @@ module HomeRegistrationService
       home_registration&.permanence_institution do |pi|
         hr << per = XML::Node.new('instituicaoPermanencia')
         per << XML::Node.new('nomeInstituicaoPermanencia', pi.name) if pi.name
-        per << XML::Node.new('stOutrosProfissionaisVinculados', pi.other_linked_professionals) if pi.other_linked_professionals
+        if pi.other_linked_professionals
+          per << XML::Node.new('stOutrosProfissionaisVinculados', pi.other_linked_professionals)
+        end
         per << XML::Node.new('nomeResponsavelTecnico', pi.responsible_name)
-        per << XML::Node.new('cnsResponsavelTecnico', pi.responsible_cns) if pi.responsible_cns
-        per << XML::Node.new('cargoInstituicao', pi.institutional_role) if pi.institutional_role
+        if pi.responsible_cns
+          per << XML::Node.new('cnsResponsavelTecnico', pi.responsible_cns)
+        end
+        if pi.institutional_role
+          per << XML::Node.new('cargoInstituicao', pi.institutional_role)
+        end
         per << XML::Node.new('telefoneResponsavelTecnico', pi.responsible_phone)
       end
 

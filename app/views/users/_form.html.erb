@@ -4,13 +4,14 @@
     <%= f.input :password, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :password_confirmation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
-      <div class="card<%= ' card-collapsed' unless @user&.health_professional&.errors&.any? %> mb-3">
+      <hr class="divider"/>
+      <div class="card mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-user mr-2"></i><%= HealthProfessional.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-2" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
@@ -18,6 +19,37 @@
         <div class="card-body pb-2">
           <%= f.simple_fields_for :health_professional do |health_professional| %>
             <%= render 'application/health_professional_fields', f: health_professional %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-check mr-2"></i><%= Role.model_name.human(count: 2) %>
+          </h3>
+          <div class="card-options">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+              <i class="fe fe-chevron-up"></i>
+            </a>
+          </div>
+        </div>
+        <% unless show?(f.object.persisted?) %>
+          <div class="card-body py-2">
+            <%= link_to_add_association f, :user_companies,
+                                        class: 'btn btn-sm btn-primary', role: 'button',
+                                        data: {
+                                          'association-insertion-node': '#user_companies',
+                                          'association-insertion-method': 'append'
+                                        } do %>
+              <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+            <% end %>
+          </div>
+        <% end %>
+        <div id="user_companies" class="card-body px-3">
+          <%= f.simple_fields_for :user_companies do |user_company| %>
+            <%= render 'application/user_company_fields', f: user_company %>
           <% end %>
         </div>
       </div>

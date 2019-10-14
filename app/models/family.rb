@@ -33,6 +33,7 @@
 
 class Family < ApplicationRecord
   include Sluggable
+  include Tenantable
 
   belongs_to :home_registration, optional: true
   belongs_to :company, optional: true
