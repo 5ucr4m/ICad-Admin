@@ -241,7 +241,8 @@ class CreateHomeRegistrations < SeedMigration::Migration
 
   def up
     coordinates.each do |coordinate|
-      he = HealthProfessional.where.not(company: nil).order('RANDOM()').first
+      he = HealthProfessional.order('RANDOM()').first
+      RailsMultitenant::GlobalContextRegistry[:company_id] = he.company.id
       HomeRegistration.create!(
         location_x: coordinate[1],
         location_y: coordinate[0],
