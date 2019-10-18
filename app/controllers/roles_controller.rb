@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class RolesController < WebController
+class RolesController < ApplicationController
   before_action :set_role, only: %i[show edit update destroy]
 
   # GET /roles
   def index
-    @query = Role.ransack(params[:q])
+    @query = Role.by_company(current_user.company).ransack(params[:q])
     @pagy, @roles = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -50,13 +50,11 @@ class RolesController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_role
-    @role = Role.friendly.find(params[:id])
+    @role = Role.by_company(current_user.company).friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def role_params
-    params.require(:role).permit(:name, :description, :icon,
-                                 :model_reference, :action_reference,
-                                 :url_reference, :role_id, :app_module_id, :slug)
+    params.require(:role).permit(:name, :description, :role_type, :admin, :slug)
   end
 end

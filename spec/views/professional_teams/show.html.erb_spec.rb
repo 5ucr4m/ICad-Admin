@@ -8,8 +8,9 @@ RSpec.describe 'professional_teams/show', type: :view do
                                                       name: 'Name',
                                                       code: 'Code',
                                                       active: false,
-                                                      company: nil,
-                                                      slug: 'Slug'
+                                                      health_establishment: nil,
+                                                      slug: 'Slug',
+                                                      company: nil
                                                     ))
   end
 
@@ -20,5 +21,6 @@ RSpec.describe 'professional_teams/show', type: :view do
     expect(rendered).to match(/false/)
     expect(rendered).to match(//)
     expect(rendered).to match(/Slug/)
+    expect(rendered).to match(//)
   end
 end

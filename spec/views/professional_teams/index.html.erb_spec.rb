@@ -9,15 +9,17 @@ RSpec.describe 'professional_teams/index', type: :view do
                name: 'Name',
                code: 'Code',
                active: false,
-               company: nil,
-               slug: 'Slug'
+               health_establishment: nil,
+               slug: 'Slug',
+               company: nil
              ),
              ProfessionalTeam.create!(
                name: 'Name',
                code: 'Code',
                active: false,
-               company: nil,
-               slug: 'Slug'
+               health_establishment: nil,
+               slug: 'Slug',
+               company: nil
              )
            ])
   end
@@ -29,5 +31,6 @@ RSpec.describe 'professional_teams/index', type: :view do
     assert_select 'tr>td', text: false.to_s, count: 2
     assert_select 'tr>td', text: nil.to_s, count: 2
     assert_select 'tr>td', text: 'Slug'.to_s, count: 2
+    assert_select 'tr>td', text: nil.to_s, count: 2
   end
 end

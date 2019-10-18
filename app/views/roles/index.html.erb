@@ -21,12 +21,8 @@
       <tr>
                   <th><%= Role.human_attribute_name :name %></th>
                   <th><%= Role.human_attribute_name :description %></th>
-                  <th><%= Role.human_attribute_name :icon %></th>
-                  <th><%= Role.human_attribute_name :model_reference %></th>
-                  <th><%= Role.human_attribute_name :action_reference %></th>
-                  <th><%= Role.human_attribute_name :url_reference %></th>
-                  <th><%= Role.human_attribute_name :role %></th>
-                  <th><%= Role.human_attribute_name :app_module %></th>
+                  <th><%= Role.human_attribute_name :role_type %></th>
+                  <th><%= Role.human_attribute_name :admin %></th>
                   <th><%= Role.human_attribute_name :slug %></th>
                 <th><%= t('helpers.labels.actions') %></th>
       </tr>
@@ -36,12 +32,8 @@
         <tr>
                       <td><%= role.name %></td>
                       <td><%= role.description %></td>
-                      <td><%= role.icon %></td>
-                      <td><%= role.model_reference %></td>
-                      <td><%= role.action_reference %></td>
-                      <td><%= role.url_reference %></td>
-                      <td><%= role.role_id %></td>
-                      <td><%= role.app_module_id %></td>
+                      <td><%= role.role_type %></td>
+                      <td><%= role.admin %></td>
                       <td><%= role.slug %></td>
                     <td class="text-center">
             <%= render 'application/table_links', f: role %>

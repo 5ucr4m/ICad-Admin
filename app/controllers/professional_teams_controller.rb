@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-class ProfessionalTeamsController < WebController
-  load_and_authorize_resource
+class ProfessionalTeamsController < ApplicationController
   before_action :set_professional_team, only: %i[show edit update destroy]
 
   # GET /professional_teams
@@ -26,7 +25,7 @@ class ProfessionalTeamsController < WebController
     @professional_team = ProfessionalTeam.new(professional_team_params)
 
     if @professional_team.save
-      redirect_to @professional_team, notice: t('helpers.messages.success.create', model: ProfessionalTeam.model_name.human)
+      redirect_to @professional_team, notice: 'Professional team was successfully created.'
     else
       render :new
     end
@@ -35,7 +34,7 @@ class ProfessionalTeamsController < WebController
   # PATCH/PUT /professional_teams/1
   def update
     if @professional_team.update(professional_team_params)
-      redirect_to @professional_team, notice: t('helpers.messages.success.update', model: ProfessionalTeam.model_name.human)
+      redirect_to @professional_team, notice: 'Professional team was successfully updated.'
     else
       render :edit
     end
@@ -44,7 +43,7 @@ class ProfessionalTeamsController < WebController
   # DELETE /professional_teams/1
   def destroy
     @professional_team.destroy
-    redirect_to professional_teams_url, notice: t('helpers.messages.success.delete', model: ProfessionalTeam.model_name.human)
+    redirect_to professional_teams_url, notice: 'Professional team was successfully destroyed.'
   end
 
   private
@@ -56,6 +55,6 @@ class ProfessionalTeamsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def professional_team_params
-    params.require(:professional_team).permit(:name, :code, :active)
+    params.require(:professional_team).permit(:name, :code, :active, :health_establishment_id, :slug, :company_id)
   end
 end

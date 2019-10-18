@@ -5,7 +5,7 @@
 # Table name: periods
 #
 #  id         :bigint           not null, primary key
-#  competence :date
+#  competence :string
 #  deadline   :date
 #  end_date   :date
 #  slug       :string
@@ -25,7 +25,7 @@
 
 FactoryBot.define do
   factory :period do
-    competence { '2019-06-14' }
+    competence { '01/2019' }
     start_date { '2019-06-14' }
     end_date { '2019-06-14' }
     deadline { '2019-06-14' }

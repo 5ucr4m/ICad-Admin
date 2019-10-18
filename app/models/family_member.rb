@@ -72,8 +72,10 @@ class FamilyMember < ApplicationRecord
   belongs_to :company, optional: true
 
   has_one :individual_registration, dependent: :destroy
+  has_many :vaccination_items
+  has_many :vaccinations, through: :vaccination_items
 
   validates :name, :birth_date, :cns_number, presence: true
 
-  ransack_alias :search, :id_to_s
+  ransack_alias :search, :id_to_s_or_name_or_social_name_or_federal_registry_or_state_registry_or_cns_number
 end

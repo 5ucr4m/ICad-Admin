@@ -1,0 +1,62 @@
+<%= render 'application/page_header', model: HomeVisitForm %>
+<div class="card">
+  <div class="card-status bg-transparent"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th><%= HomeVisitForm.human_attribute_name :turn %></th>
+        <th><%= HomeVisitForm.human_attribute_name :handbook_number %></th>
+        <th><%= HomeVisitForm.human_attribute_name :cns_number %></th>
+        <th><%= HomeVisitForm.human_attribute_name :birth_date %></th>
+        <th><%= HomeVisitForm.human_attribute_name :other_visit %></th>
+        <th><%= HomeVisitForm.human_attribute_name :outcome %></th>
+        <th><%= HomeVisitForm.human_attribute_name :micro_area %></th>
+        <th><%= HomeVisitForm.human_attribute_name :out_area %></th>
+        <th><%= HomeVisitForm.human_attribute_name :weight_monitoring %></th>
+        <th><%= HomeVisitForm.human_attribute_name :height_monitoring %></th>
+        <th><%= t('helpers.labels.actions') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @home_visit_forms.each do |home_visit_form| %>
+        <tr>
+          <td><%= home_visit_form.id %></td>
+          <td><%= home_visit_form&.turn&.name_formatted %></td>
+          <td><%= home_visit_form.handbook_number %></td>
+          <td><%= home_visit_form.cns_number %></td>
+          <td><%= home_visit_form&.birth_date&.strftime('%d/%m/%Y') %></td>
+          <td><%= home_visit_form&.gender&.name_formatted %></td>
+          <td><%= home_visit_form.other_visit ? 'SIM' : 'NÃO' %></td>
+          <td><%= home_visit_form&.outcome&.name_formatted  %></td>
+          <td><%= home_visit_form.micro_area %></td>
+          <td><%= home_visit_form.out_area %></td>
+          <td><%= home_visit_form.weight_monitoring %></td>
+          <td><%= home_visit_form.height_monitoring %></td>
+          <td class="text-center">
+            <%= render 'application/table_links', f: home_visit_form %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= render 'application/footer_links', url: new_home_visit_form_path, model: HomeVisitForm %>
+  </div>
+</div>

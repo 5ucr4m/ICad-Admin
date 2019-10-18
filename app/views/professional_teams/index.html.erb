@@ -23,6 +23,7 @@
         <th><%= ProfessionalTeam.human_attribute_name :name %></th>
         <th><%= ProfessionalTeam.human_attribute_name :code %></th>
         <th><%= ProfessionalTeam.human_attribute_name :active %></th>
+        <th><%= ProfessionalTeam.human_attribute_name :health_establishment %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
@@ -33,6 +34,7 @@
           <td><%= professional_team.name %></td>
           <td><%= professional_team.code %></td>
           <td><%= professional_team.active ? 'SIM' : 'NÃO' %></td>
+          <td><%= professional_team.health_establishment.name_formatted %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: professional_team %>
           </td>

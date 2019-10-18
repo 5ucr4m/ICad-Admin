@@ -10,8 +10,6 @@
                       wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'cbo-types', disabled: show?(f.object.persisted?)} %>
     <%= f.association :professional_team, collection: @professional_teams,
                       label_method: :name_formatted, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-    <%= f.association :health_establishment, collection: @health_establishments,
-                      label_method: :name_formatted, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @health_professional} %>
 <% end %>

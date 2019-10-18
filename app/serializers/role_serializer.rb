@@ -1,5 +1,5 @@
+# frozen_string_literal: true
+
 class RoleSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :icon, :model_reference, :action_reference, :url_reference, :slug
-  has_one :role
-  has_one :app_module
+  attributes :id, :name, :description, :role_type, :admin, :slug
 end

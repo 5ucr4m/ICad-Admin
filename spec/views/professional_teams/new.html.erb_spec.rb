@@ -8,8 +8,9 @@ RSpec.describe 'professional_teams/new', type: :view do
                                  name: 'MyString',
                                  code: 'MyString',
                                  active: false,
-                                 company: nil,
-                                 slug: 'MyString'
+                                 health_establishment: nil,
+                                 slug: 'MyString',
+                                 company: nil
                                ))
   end
 
@@ -23,9 +24,11 @@ RSpec.describe 'professional_teams/new', type: :view do
 
       assert_select 'input[name=?]', 'professional_team[active]'
 
-      assert_select 'input[name=?]', 'professional_team[company_id]'
+      assert_select 'input[name=?]', 'professional_team[health_establishment_id]'
 
       assert_select 'input[name=?]', 'professional_team[slug]'
+
+      assert_select 'input[name=?]', 'professional_team[company_id]'
     end
   end
 end

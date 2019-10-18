@@ -7,11 +7,9 @@ RSpec.describe 'health_professionals/show', type: :view do
     @health_professional = assign(:health_professional, HealthProfessional.create!(
                                                           cns_code: 'Cns Code',
                                                           cbo_code: nil,
-                                                          legal_full_name: 'Legal Full Name',
-                                                          fancy_name: 'Fancy Name',
+                                                          full_name: 'Full Name',
                                                           federal_registry: 'Federal Registry',
                                                           state_registry: 'State Registry',
-                                                          health_establishment: nil,
                                                           professional_team: nil,
                                                           company: nil,
                                                           slug: 'Slug'
@@ -22,11 +20,9 @@ RSpec.describe 'health_professionals/show', type: :view do
     render
     expect(rendered).to match(/Cns Code/)
     expect(rendered).to match(//)
-    expect(rendered).to match(/Legal Full Name/)
-    expect(rendered).to match(/Fancy Name/)
+    expect(rendered).to match(/Full Name/)
     expect(rendered).to match(/Federal Registry/)
     expect(rendered).to match(/State Registry/)
-    expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(/Slug/)

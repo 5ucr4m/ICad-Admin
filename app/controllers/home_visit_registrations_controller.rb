@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class HomeVisitRegistrationsController < WebController
-  load_and_authorize_resource
   before_action :set_home_visit_registration, only: %i[show edit update destroy]
 
   # GET /home_visit_registrations
@@ -60,32 +59,6 @@ class HomeVisitRegistrationsController < WebController
   def home_visit_registration_params
     params.require(:home_visit_registration).permit(:family_member_id,
                                                     :uuid, :tp_cds_origin,
-                                                    family_member_attributes: %i[
-                                                      id
-                                                      name
-                                                      social_name
-                                                      mother_name
-                                                      father_name
-                                                      birth_date
-                                                      birth_country_id
-                                                      city_id
-                                                      nationality_id
-                                                      naturalized_at
-                                                      naturalize_decree
-                                                      brazil_entry_date
-                                                      email
-                                                      cns_number
-                                                      cns_responsible
-                                                      phone
-                                                      pis_pasep_number
-                                                      race_id
-                                                      gender_id
-                                                      ethnicity_id
-                                                      micro_area
-                                                      unknown_father
-                                                      unknown_mother
-                                                      responsible
-                                                      out_area
-                                                    ]).merge(company: current_user.company)
+                                                    :family_member_id).merge(company: current_user.company)
   end
 end

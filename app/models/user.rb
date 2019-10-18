@@ -59,7 +59,7 @@ class User < ApplicationRecord
 
   has_many :user_companies, dependent: :destroy
   has_many :companies, through: :user_companies
-  has_many :roles, through: :user_companies
+  has_many :user_roles, through: :user_companies
 
   accepts_nested_attributes_for :user_companies, allow_destroy: true
 
@@ -72,7 +72,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :health_professional, allow_destroy: false
   accepts_nested_attributes_for :user_companies, allow_destroy: true
 
-  scope :by_company, ->(company) { includes(:user_companies).where(user_companies: {company: company}) }
+  scope :by_company, ->(company) { includes(:user_companies).where(user_companies: { company: company }) }
 
   ransacker :id_to_s do
     Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")
@@ -80,13 +80,12 @@ class User < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
-  def current_company
-    user_companies.find(&:current) || user_companies.first ||
-      user_companies.create!(company: Company.order('RANDOM()').first, current: true)
-  end
-
   def company
     current_company.company
+  end
+
+  def role
+    current_role.role
   end
 
   def send_confirmation_notification?
@@ -120,5 +119,13 @@ class User < ApplicationRecord
     return if health_professional&.blank?
 
     health_professional
+  end
+
+  def current_company
+    user_companies.find_by(current: true) || user_companies.first
+  end
+
+  def current_role
+    user_roles.find_by(user_company: current_company) || user_roles.first
   end
 end

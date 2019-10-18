@@ -5,7 +5,7 @@
 # Table name: periods
 #
 #  id         :bigint           not null, primary key
-#  competence :date
+#  competence :string
 #  deadline   :date
 #  end_date   :date
 #  slug       :string

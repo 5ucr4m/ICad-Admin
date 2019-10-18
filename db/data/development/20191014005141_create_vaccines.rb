@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateVaccines < SeedMigration::Migration
   def up
     (10..15).to_a.sample.times do
@@ -15,7 +17,5 @@ class CreateVaccines < SeedMigration::Migration
     end
   end
 
-  def down
-
-  end
+  def down; end
 end

@@ -71,10 +71,14 @@ module Api
                                               :weight_monitoring,
                                               :height_monitoring,
                                               :home_visit_registration_id,
-                                              home_visit_reasons: %i[
-                                                home_visit_form_id
+                                              home_visit_reasons_attributes: %i[
+                                                id
                                                 reason_id
                                                 _destroy
+                                              ],
+                                              home_visit_registration_attributes: %i[
+                                                id
+                                                family_member_id
                                               ])
     end
   end

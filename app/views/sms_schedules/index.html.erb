@@ -1,0 +1,51 @@
+<%= render 'application/page_header', model: SmsSchedule %>
+<div class="card">
+  <div class="card-status bg-transparent"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+                  <th><%= SmsSchedule.human_attribute_name :scheduled_date %></th>
+                  <th><%= SmsSchedule.human_attribute_name :message %></th>
+                  <th><%= SmsSchedule.human_attribute_name :group %></th>
+                  <th><%= SmsSchedule.human_attribute_name :status %></th>
+                  <th><%= SmsSchedule.human_attribute_name :slug %></th>
+                  <th><%= SmsSchedule.human_attribute_name :company %></th>
+                <th><%= t('helpers.labels.actions') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @sms_schedules.each do |sms_schedule| %>
+        <tr>
+                      <td><%= sms_schedule.scheduled_date %></td>
+                      <td><%= sms_schedule.message %></td>
+                      <td><%= sms_schedule.group %></td>
+                      <td><%= sms_schedule.status %></td>
+                      <td><%= sms_schedule.slug %></td>
+                      <td><%= sms_schedule.company_id %></td>
+                    <td class="text-center">
+            <%= render 'application/table_links', f: sms_schedule %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= render 'application/footer_links', url: new_sms_schedule_path, model: SmsSchedule %>
+  </div>
+</div>

@@ -1,42 +1,31 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "roles/edit", type: :view do
+RSpec.describe 'roles/edit', type: :view do
   before(:each) do
     @role = assign(:role, Role.create!(
-      :name => "MyString",
-      :description => "MyString",
-      :icon => "MyString",
-      :model_reference => "MyString",
-      :action_reference => "MyString",
-      :url_reference => "MyString",
-      :role => nil,
-      :app_module => nil,
-      :slug => "MyString"
-    ))
+                            name: 'MyString',
+                            description: 'MyText',
+                            role_type: 1,
+                            admin: false,
+                            slug: 'MyString'
+                          ))
   end
 
-  it "renders the edit role form" do
+  it 'renders the edit role form' do
     render
 
-    assert_select "form[action=?][method=?]", role_path(@role), "post" do
+    assert_select 'form[action=?][method=?]', role_path(@role), 'post' do
+      assert_select 'input[name=?]', 'role[name]'
 
-      assert_select "input[name=?]", "role[name]"
+      assert_select 'textarea[name=?]', 'role[description]'
 
-      assert_select "input[name=?]", "role[description]"
+      assert_select 'input[name=?]', 'role[role_type]'
 
-      assert_select "input[name=?]", "role[icon]"
+      assert_select 'input[name=?]', 'role[admin]'
 
-      assert_select "input[name=?]", "role[model_reference]"
-
-      assert_select "input[name=?]", "role[action_reference]"
-
-      assert_select "input[name=?]", "role[url_reference]"
-
-      assert_select "input[name=?]", "role[role_id]"
-
-      assert_select "input[name=?]", "role[app_module_id]"
-
-      assert_select "input[name=?]", "role[slug]"
+      assert_select 'input[name=?]', 'role[slug]'
     end
   end
 end

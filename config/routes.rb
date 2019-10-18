@@ -4,6 +4,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :roles
+  resources :sms_messages
+  resources :sms_schedules
   resources :vaccinations
   resources :vaccination_campaigns
   resources :vaccines
@@ -20,10 +22,12 @@ Rails.application.routes.draw do
   root to: 'dashboards#dashboard'
 
   # Dashboard charts
-  scope :charts do
-    get 'families', to: 'dashboards#families'
-    get 'family_members', to: 'dashboards#family_members'
-    get 'home_visit_registrations', to: 'dashboards#home_visit_registrations'
+  resources :charts do
+    collection do
+      get 'chart_families'
+      get 'chart_family_members'
+      get 'chart_home_visit_registrations'
+    end
   end
 
   resources :generic_models do
@@ -45,9 +49,9 @@ Rails.application.routes.draw do
   resources :professional_teams
   resources :health_professionals
   resources :health_establishments
-  resources :home_visit_registrations do
+  resources :home_visit_forms do
     shallow do
-      resources :home_visit_forms
+      resources :home_visit_registrations
     end
   end
   resources :individual_registrations

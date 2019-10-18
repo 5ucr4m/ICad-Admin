@@ -22,10 +22,9 @@
         <th><%= HealthProfessional.human_attribute_name :id %></th>
         <th><%= HealthProfessional.human_attribute_name :cns_code %></th>
         <th><%= HealthProfessional.human_attribute_name :cbo_code %></th>
-        <th><%= HealthProfessional.human_attribute_name :legal_full_name %></th>
-        <th><%= HealthProfessional.human_attribute_name :fancy_name %></th>
+        <th><%= HealthProfessional.human_attribute_name :full_name %></th>
         <th><%= HealthProfessional.human_attribute_name :federal_registry %></th>
-        <th><%= HealthProfessional.human_attribute_name :health_establishment %></th>
+        <th><%= HealthProfessional.human_attribute_name :state_registry %></th>
         <th><%= HealthProfessional.human_attribute_name :professional_team %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
@@ -36,10 +35,9 @@
           <td class="text-muted"><%= health_professional.id %></td>
           <td><%= health_professional.cns_code %></td>
           <td><%= health_professional&.cbo_code&.reference %></td>
-          <td><%= health_professional.legal_full_name %></td>
-          <td><%= health_professional.fancy_name %></td>
+          <td><%= health_professional.full_name %></td>
           <td><%= health_professional.federal_registry %></td>
-          <td><%= health_professional&.health_establishment&.legal_full_name %></td>
+          <td><%= health_professional.state_registry %></td>
           <td><%= health_professional&.professional_team&.name %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: health_professional %>

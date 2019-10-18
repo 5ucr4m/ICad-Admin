@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class VaccinationCampaignsController < WebController
-  load_and_authorize_resource
   before_action :set_vaccination_campaign, only: %i[show edit update destroy]
 
   # GET /vaccination_campaigns
@@ -60,6 +59,6 @@ class VaccinationCampaignsController < WebController
                                                  :child, :woman, :period_start,
                                                  :period_end, :age_initial,
                                                  :age_end, :company_id, :slug)
-      .merge(company: current_user.company)
+          .merge(company: current_user.company)
   end
 end

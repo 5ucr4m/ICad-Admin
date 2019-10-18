@@ -46,11 +46,11 @@ function columnChart(options) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  columnChart({id: 'chart-families', url: '/charts/families', name: 'Famílias'});
-  columnChart({id: 'chart-family-members', url: '/charts/family_members', name: 'Membros Famíliares'});
+  columnChart({id: 'chart-families', url: '/charts/chart_families', name: 'Famílias'});
+  columnChart({id: 'chart-family-members', url: '/charts/chart_family_members', name: 'Membros Famíliares'});
   columnChart({
     id: 'chart-home-visit-registrations',
-    url: '/charts/home_visit_registrations',
+    url: '/charts/chart_home_visit_registrations',
     name: 'Visitas Famíliares'
   });
 }, false);

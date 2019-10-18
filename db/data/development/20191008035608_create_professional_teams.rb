@@ -7,6 +7,7 @@ class CreateProfessionalTeams < SeedMigration::Migration
       5.times do
         ProfessionalTeam.create!(name: Faker::Team.name,
                                  code: Faker::IDNumber.valid,
+                                 health_establishment: he,
                                  company: he.company, active: [0, 1].sample)
       end
     end

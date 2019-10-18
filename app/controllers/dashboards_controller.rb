@@ -7,24 +7,6 @@ class DashboardsController < WebController
     @vaccination_campaigns = VaccinationCampaign.by_company(current_user.company).last(5)
   end
 
-  def families
-    render_json Family.by_company(current_user.company)
-                      .group_by_period(:day, :created_at,
-                                       format: '%d/%m/%Y', last: 5).count
-  end
-
-  def family_members
-    render_json FamilyMember.group_by_period(:day,
-                                             :created_at,
-                                             format: '%d/%m/%Y', last: 5).count
-  end
-
-  def home_visit_registrations
-    render_json HomeVisitRegistration.by_company(current_user.company)
-                                     .group_by_period(:day, :updated_at,
-                                                      format: '%d/%m/%Y', last: 5).count
-  end
-
   private
 
   def tabs

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class FamiliesController < WebController
-  load_and_authorize_resource
   before_action :set_family, only: %i[show edit update destroy]
 
   # GET /families

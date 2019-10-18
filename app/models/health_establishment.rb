@@ -47,6 +47,6 @@ class HealthEstablishment < ApplicationRecord
   ransack_alias :search, :id_to_s_or_legal_full_name_or_fancy_name_or_federal_registry_or_cnes_code_or_manager_full_name_or_manager_federal_registry
 
   def name_formatted
-    "#{federal_registry} - #{legal_full_name}"
+    "#{cnes_code} - #{federal_registry} - #{legal_full_name}"
   end
 end

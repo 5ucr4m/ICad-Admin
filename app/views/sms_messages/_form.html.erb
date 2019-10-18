@@ -1,0 +1,12 @@
+
+<%= simple_form_for(@sms_message) do |f| %>
+  <% content_for :body do %>
+      <%= f.input :date_sent, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :status, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :sms_schedule, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :slug, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :company, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+  <% end %>
+  <%= render template: 'application/form', locals: {form: @sms_message} %>
+<% end %>

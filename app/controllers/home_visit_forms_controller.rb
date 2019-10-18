@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class HomeVisitFormsController < WebController
-  load_and_authorize_resource
   before_action :set_home_visit_form, only: %i[show edit update destroy]
 
   # GET /home_visit_forms
   def index
-    @query = HomeVisitForm.by_company(current_user.company).ransack(params[:q])
+    @query = HomeVisitForm.ransack(params[:q])
     @pagy, @home_visit_forms = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -70,8 +69,7 @@ class HomeVisitFormsController < WebController
                                             :height_monitoring,
                                             home_visit_registration_attributes: %i[
                                               family_member_id
-                                              uuid
-                                              tp_cds_origin
-                                            ]).merge(company: current_user.company)
+                                              _destroy
+                                            ])
   end
 end

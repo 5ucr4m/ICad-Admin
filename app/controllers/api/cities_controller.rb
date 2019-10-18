@@ -2,7 +2,6 @@
 
 module Api
   class CitiesController < Api::ApiController
-    # load_and_authorize_resource
     before_action :set_city, only: %i[show]
 
     # GET /cities
