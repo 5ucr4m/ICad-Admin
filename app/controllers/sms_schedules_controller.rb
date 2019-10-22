@@ -5,7 +5,7 @@ class SmsSchedulesController < ApplicationController
 
   # GET /sms_schedules
   def index
-    @query = SmsSchedule.by_company(current_user.company).ransack(params[:q])
+    @query = SmsSchedule.ransack(params[:q])
     @pagy, @sms_schedules = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -50,11 +50,11 @@ class SmsSchedulesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_sms_schedule
-    @sms_schedule = SmsSchedule.by_company(current_user.company).friendly.find(params[:id])
+    @sms_schedule = SmsSchedule.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def sms_schedule_params
-    params.require(:sms_schedule).permit(:scheduled_date, :message, :group, :status, :slug, :company_id)
+    params.require(:sms_schedule).permit(:scheduled_date, :message, :group, :status)
   end
 end

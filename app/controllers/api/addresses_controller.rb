@@ -39,10 +39,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_address
       @address = if params[:home_registration_id]
-                   Addresses.by_company(current_user.company)
+                   Addresses
                             .find_by(home_registration_id: params[:home_registration_id])
                  else
-                   Addresses.by_company(current_user.company).friendly.find(params[:id])
+                   Addresses.friendly.find(params[:id])
                  end
     end
 

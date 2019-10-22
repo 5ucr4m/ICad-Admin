@@ -2,10 +2,20 @@
   <% content_for :body do %>
     <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :vaccination_campaign, collection: VaccinationCampaign.all,
-                      label_method: :title, wrapper_html: {class: 'col-lg-6 col-sm-12'},
-                      input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :patient_type, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :vaccination_campaign, label_method: :title,
+                      wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :turn, collection: GenericModel.turns, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :family_member, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :local_service, collection: GenericModel.local_services, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :initial_date_hour, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :final_date_hour, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :traveller, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :leprosy_communicant, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :pregnant, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :puerperal, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-lg-12">
+      <br/>
       <div class="card<%= ' card-collapsed' unless @vaccination.vaccination_vaccines.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
@@ -17,48 +27,21 @@
             </a>
           </div>
         </div>
-        <div class="card-body py-2">
-          <%= link_to_add_association f, :vaccination_vaccines,
-                                      class: 'btn btn-sm btn-primary', role: 'button',
-                                      data: {
-                                        'association-insertion-node': '#vaccination_vaccines',
-                                        'association-insertion-method': 'append'
-                                      } do %>
-            <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
-          <% end %>
-        </div>
+        <% unless show?(f.object.persisted?) %>
+          <div class="card-body py-2">
+            <%= link_to_add_association f, :vaccination_vaccines,
+                                        class: 'btn btn-sm btn-primary', role: 'button',
+                                        data: {
+                                          'association-insertion-node': '#vaccination_vaccines',
+                                          'association-insertion-method': 'append'
+                                        } do %>
+              <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+            <% end %>
+          </div>
+        <% end %>
         <div id="vaccination_vaccines" class="card-body pb-2">
           <%= f.simple_fields_for :vaccination_vaccines do |vaccination_vaccine| %>
             <%= render 'application/vaccination_vaccine_fields', f: vaccination_vaccine %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-12">
-      <div class="card<%= ' card-collapsed' unless @vaccination.vaccination_items.any? %> mb-3">
-        <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-user mr-1"></i><i class="fas fa-syringe mr-2"></i><%= VaccinationItem.model_name.human(count: 2) %>
-          </h3>
-          <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
-              <i class="fe fe-chevron-up"></i>
-            </a>
-          </div>
-        </div>
-        <div class="card-body py-2">
-          <%= link_to_add_association f, :vaccination_items,
-                                      class: 'btn btn-sm btn-primary', role: 'button',
-                                      data: {
-                                        'association-insertion-node': '#vaccination_items',
-                                        'association-insertion-method': 'append'
-                                      } do %>
-            <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
-          <% end %>
-        </div>
-        <div id="vaccination_items" class="card-body pb-2">
-          <%= f.simple_fields_for :vaccination_items do |vaccination_item| %>
-            <%= render 'application/vaccination_item_fields', f: vaccination_item %>
           <% end %>
         </div>
       </div>

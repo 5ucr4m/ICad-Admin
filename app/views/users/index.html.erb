@@ -30,7 +30,7 @@
       </tr>
       </thead>
       <tbody>
-      <% @users.each do |user| %>
+      <% @users.includes(:health_professional).each do |user| %>
         <tr>
           <td class="text-muted"><%= user.id %></td>
           <td><%= user.email %></td>

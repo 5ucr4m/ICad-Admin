@@ -1,13 +1,8 @@
-# frozen_string_literal: true
-
 class CreateVaccinationCampaigns < ActiveRecord::Migration[6.0]
   def change
     create_table :vaccination_campaigns do |t|
       t.string :title
-      t.text :description
-      t.boolean :newborn
-      t.boolean :child
-      t.boolean :woman
+      t.string :description
       t.date :period_start
       t.date :period_end
       t.integer :age_initial

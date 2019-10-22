@@ -5,7 +5,7 @@ class StatesController < WebController
 
   # GET /states
   def index
-    @query = State.by_company(current_user.company).ransack(params[:q])
+    @query = State.ransack(params[:q])
     @pagy, @states = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -50,7 +50,7 @@ class StatesController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_state
-    @state = State.by_company(current_user.company).friendly.find(params[:id])
+    @state = State.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

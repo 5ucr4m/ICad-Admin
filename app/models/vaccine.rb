@@ -40,5 +40,8 @@ class Vaccine < ApplicationRecord
   belongs_to :dose, class_name: 'GenericModel'
   belongs_to :company, optional: true
 
+  has_many :vaccination_vaccines
+  has_many :vaccinations, through: :vaccination_vaccines
+
   ransack_alias :search, :id_to_s
 end

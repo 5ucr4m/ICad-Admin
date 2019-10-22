@@ -1,10 +1,8 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :vaccination_vaccine do
     vaccination { nil }
     vaccine { nil }
     company { nil }
-    slug { 'MyString' }
+    slug { "MyString" }
   end
 end

@@ -21,9 +21,6 @@
       <tr>
         <th><%= VaccinationCampaign.human_attribute_name :title %></th>
         <th><%= VaccinationCampaign.human_attribute_name :description %></th>
-        <th><%= VaccinationCampaign.human_attribute_name :newborn %></th>
-        <th><%= VaccinationCampaign.human_attribute_name :child %></th>
-        <th><%= VaccinationCampaign.human_attribute_name :woman %></th>
         <th><%= VaccinationCampaign.human_attribute_name :period_start %></th>
         <th><%= VaccinationCampaign.human_attribute_name :period_end %></th>
         <th><%= VaccinationCampaign.human_attribute_name :age_initial %></th>
@@ -36,9 +33,6 @@
         <tr>
           <td><%= vaccination_campaign.title %></td>
           <td><%= vaccination_campaign.description %></td>
-          <td><%= vaccination_campaign.newborn ? 'SIM' : 'NÃO' %></td>
-          <td><%= vaccination_campaign.child ? 'SIM' : 'NÃO' %></td>
-          <td><%= vaccination_campaign.woman ? 'SIM' : 'NÃO' %></td>
           <td><%= vaccination_campaign.period_start.strftime('%d/%m/%Y') %></td>
           <td><%= vaccination_campaign.period_end.strftime('%d/%m/%Y') %></td>
           <td><%= vaccination_campaign.age_initial %></td>

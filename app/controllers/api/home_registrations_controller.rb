@@ -6,7 +6,7 @@ module Api
 
     # GET /home_registrations
     def index
-      @query = HomeRegistration.by_company(current_user.company).ransack(params[:q])
+      @query = HomeRegistration.ransack(params[:q])
       @home_registrations = @query.result.includes(:company, :home_registration)
       unless params[:health_professional_id].blank?
         @home_registrations = @home_registrations.where(health_professional_id:
@@ -54,7 +54,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_home_registration
-      @home_registration = HomeRegistration.by_company(current_user.company)
+      @home_registration = HomeRegistration
                                            .friendly.find(params[:id])
     end
 

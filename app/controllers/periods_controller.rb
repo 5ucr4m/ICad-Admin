@@ -5,7 +5,7 @@ class PeriodsController < ApplicationController
 
   # GET /periods
   def index
-    @query = Period.by_company(current_user.company).ransack(params[:q])
+    @query = Period.ransack(params[:q])
     @pagy, @periods = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -50,7 +50,7 @@ class PeriodsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_period
-    @period = Period.by_company(current_user.company).friendly.find(params[:id])
+    @period = Period.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

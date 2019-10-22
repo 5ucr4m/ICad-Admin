@@ -3,11 +3,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :vaccinations
+  resources :vaccination_campaigns
   resources :roles
   resources :sms_messages
   resources :sms_schedules
-  resources :vaccinations
-  resources :vaccination_campaigns
   resources :vaccines
   resources :periods
   apipie

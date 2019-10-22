@@ -7,7 +7,7 @@ module Api
     # GET /family_members
     api :GET, '/family_members', 'GET Family Members List'
     def index
-      @query = FamilyMember.by_company(current_user.company).ransack(params[:q])
+      @query = FamilyMember.ransack(params[:q])
       @family_members = @query.result.includes(:family)
       if params[:family_id]
         @family_members = @family_members.where(family_id: params[:family_id])
@@ -54,7 +54,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_family_member
-      @family_member = FamilyMember.by_company(current_user.company).friendly.find(params[:id])
+      @family_member = FamilyMember.friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

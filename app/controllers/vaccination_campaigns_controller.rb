@@ -5,7 +5,7 @@ class VaccinationCampaignsController < WebController
 
   # GET /vaccination_campaigns
   def index
-    @query = VaccinationCampaign.by_company(current_user.company).ransack(params[:q])
+    @query = VaccinationCampaign.ransack(params[:q])
     @pagy, @vaccination_campaigns = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -50,15 +50,13 @@ class VaccinationCampaignsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_vaccination_campaign
-    @vaccination_campaign = VaccinationCampaign.by_company(current_user.company).friendly.find(params[:id])
+    @vaccination_campaign = VaccinationCampaign.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def vaccination_campaign_params
-    params.require(:vaccination_campaign).permit(:title, :description, :newborn,
-                                                 :child, :woman, :period_start,
-                                                 :period_end, :age_initial,
-                                                 :age_end, :company_id, :slug)
-          .merge(company: current_user.company)
+    params.require(:vaccination_campaign).permit(:title, :description,
+                                                 :period_start, :period_end,
+                                                 :age_initial, :age_end)
   end
 end

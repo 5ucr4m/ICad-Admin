@@ -17,6 +17,10 @@ class WebController < ApplicationController
     end
   end
 
+  def user
+    current_user
+  end
+
   private
 
   def set_referrer

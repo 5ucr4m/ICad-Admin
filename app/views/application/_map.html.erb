@@ -1,60 +1,72 @@
 <div id="map" class="card-map rounded" style="min-height: 30rem;"></div>
 <script type="text/javascript">
-    function maleMarker() {
+    function menMarker(color) {
         let divMale = document.createElement('div');
         let iconMale = document.createElement('i');
         iconMale.classList.add('fas');
-        iconMale.classList.add('fa-child');
-        iconMale.classList.add('fa-3x');
-        iconMale.classList.add('text-green');
+        iconMale.classList.add('fa-male');
+        iconMale.classList.add('fa-4x');
+        iconMale.classList.add('text-' + color);
         divMale.append(iconMale);
 
         return divMale;
     }
 
-    function femaleMarker() {
+    function womanMarker(color) {
         let divFemale = document.createElement('div');
         let iconFemale = document.createElement('i');
         iconFemale.classList.add('fas');
         iconFemale.classList.add('fa-female');
         iconFemale.classList.add('fa-4x');
-        iconFemale.classList.add('text-green');
+        iconFemale.classList.add('text-' + color);
         divFemale.append(iconFemale);
 
         return divFemale;
     }
 
-    function teenageMarker() {
+    function teenageMarker(color) {
         let divTeenage = document.createElement('div');
         let iconTeenage = document.createElement('i');
         iconTeenage.classList.add('fas');
         iconTeenage.classList.add('fa-male');
-        iconTeenage.classList.add('fa-4x');
-        iconTeenage.classList.add('text-danger');
+        iconTeenage.classList.add('fa-3x');
+        iconTeenage.classList.add('text-' + color);
         divTeenage.append(iconTeenage);
 
         return divTeenage;
     }
 
-    function childMarker() {
+    function childMarker(color) {
         let divChild = document.createElement('div');
         let iconChild = document.createElement('i');
         iconChild.classList.add('fas');
         iconChild.classList.add('fa-child');
         iconChild.classList.add('fa-3x');
-        iconChild.classList.add('text-danger');
+        iconChild.classList.add('text-' + color);
         divChild.append(iconChild);
 
         return divChild;
     }
 
-    function newbornMarker() {
+    function newbornMarker(color) {
         let divNewborn = document.createElement('div');
         let iconNewborn = document.createElement('i');
         iconNewborn.classList.add('fas');
         iconNewborn.classList.add('fa-baby');
         iconNewborn.classList.add('fa-3x');
-        iconNewborn.classList.add('text-danger');
+        iconNewborn.classList.add('text-' + color);
+        divNewborn.append(iconNewborn);
+
+        return divNewborn;
+    }
+
+    function elderlyMarker(color) {
+        let divNewborn = document.createElement('div');
+        let iconNewborn = document.createElement('i');
+        iconNewborn.classList.add('fas');
+        iconNewborn.classList.add('fa-blind');
+        iconNewborn.classList.add('fa-4x');
+        iconNewborn.classList.add('text-' + color);
         divNewborn.append(iconNewborn);
 
         return divNewborn;
@@ -62,19 +74,21 @@
 
     // TODO Treat marker colors
     function marker(index, color) {
-        switch (index) {
+        switch (parseInt(index)) {
             case 0:
-                return maleMarker();
+                return menMarker(color);
             case 1:
-                return femaleMarker();
+                return womanMarker(color);
             case 2:
-                return teenageMarker();
+                return teenageMarker(color);
             case 3:
-                return childMarker();
+                return childMarker(color);
             case 4:
-                return newbornMarker();
+                return newbornMarker(color);
+            case 5:
+                return elderlyMarker(color);
             default:
-                return maleMarker();
+                return menMarker(color);
         }
     }
 
@@ -84,16 +98,18 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
-            center: [-42.7377622, -5.184854],
+            center: [position.coords.longitude, position.coords.latitude],
             zoom: 16
         });
 
         <% vaccinations.each do |vaccination| %>
-        new mapboxgl.Marker(marker(<%= index.to_s %>))
-            .setLngLat([<%= time[1] %>, <%= time[0] %>])
+        var lng = "<%= vaccination.family_member.location_x %>";
+        var lat = "<%= vaccination.family_member.location_y %>";
+        new mapboxgl.Marker(marker("<%= Vaccination.patient_types[vaccination.patient_type] %>", "<%= %w(success danger).sample %>"))
+            .setLngLat([lng, lat])
             .setPopup(new mapboxgl.Popup({offset: 15})
-                // TODO Set marker information here
-                .setHTML('<h4 class="text-center font-weight-normal"><%= VaccinationItem.model_name.name %></h4>'))
+            // TODO Set marker information here
+                .setHTML('<p class="text-center font-weight-bold"><%= link_to vaccination.family_member.name, vaccination.family_member %></p><p>Gênero: <%= vaccination.family_member.gender.name_formatted %></p><p>Idade: <%= vaccination.family_member.age %></p>'))
             .addTo(map);
         <% end %>
 

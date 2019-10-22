@@ -72,10 +72,30 @@ class FamilyMember < ApplicationRecord
   belongs_to :company, optional: true
 
   has_one :individual_registration, dependent: :destroy
-  has_many :vaccination_items
-  has_many :vaccinations, through: :vaccination_items
+  has_many :vaccinations
+  has_many :vaccines, through: :vaccinations
 
   validates :name, :birth_date, :cns_number, presence: true
 
   ransack_alias :search, :id_to_s_or_name_or_social_name_or_federal_registry_or_state_registry_or_cns_number
+
+  def location_x
+    family.home_registration.location_x
+  end
+
+  def location_y
+    family.home_registration.location_y
+  end
+
+  def age
+    return if birth_date.blank?
+
+    if birth_date.year == Time.current.year
+      months = Time.current.month - birth_date.month
+      "#{months} #{months > 1 ? 'meses' : 'mês'}"
+    else
+      age = birth_date.year.years.until(Time.current).year
+      "#{age} #{age > 1 ? 'anos' : 'ano'}"
+    end
+  end
 end

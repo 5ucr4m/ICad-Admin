@@ -6,7 +6,7 @@ module Api
 
     # GET /home_visit_registrations
     def index
-      @query = HomeVisitRegistration.by_company(current_user.company).ransack(params[:q])
+      @query = HomeVisitRegistration.ransack(params[:q])
       @pagy, @home_visit_registrations = pagy(@query.result, page: params[:page], items: 10)
     end
 
@@ -54,7 +54,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_home_visit_registration
-      @home_visit_registration = HomeVisitRegistration.by_company(current_user.company)
+      @home_visit_registration = HomeVisitRegistration
                                                       .friendly.find(params[:id])
     end
 

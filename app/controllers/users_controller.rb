@@ -5,7 +5,7 @@ class UsersController < WebController
 
   # GET /users
   def index
-    @query = User.by_company(current_user.company).ransack(params[:q])
+    @query = User.ransack(params[:q])
     @pagy, @users = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -78,9 +78,7 @@ class UsersController < WebController
                                    :_destroy,
                                    user_roles_attributes: %i[
                                      id
-                                     user_company_id
                                      role_id
-                                     _destroy
                                    ]
                                  ])
   end

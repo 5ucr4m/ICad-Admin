@@ -6,7 +6,7 @@ module Api
 
     # GET /individual_registrations
     def index
-      @query = IndividualRegistration.by_company(current_user.company).ransack(params[:q])
+      @query = IndividualRegistration.ransack(params[:q])
       @pagy, @individual_registrations = pagy(@query.result, page: params[:page], items: 10)
     end
 
@@ -54,7 +54,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_individual_registration
-      @individual_registration = IndividualRegistration.by_company(current_user.company)
+      @individual_registration = IndividualRegistration
                                                        .friendly.find(params[:id])
     end
 

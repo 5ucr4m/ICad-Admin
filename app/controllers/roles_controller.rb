@@ -5,7 +5,7 @@ class RolesController < ApplicationController
 
   # GET /roles
   def index
-    @query = Role.by_company(current_user.company).ransack(params[:q])
+    @query = Role.ransack(params[:q])
     @pagy, @roles = pagy(@query.result, page: params[:page], items: 10)
   end
 
@@ -50,7 +50,7 @@ class RolesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_role
-    @role = Role.by_company(current_user.company).friendly.find(params[:id])
+    @role = Role.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

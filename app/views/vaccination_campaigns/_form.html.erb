@@ -6,10 +6,7 @@
     <%= f.input :period_end, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :age_initial, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :age_end, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :newborn, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :child, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :woman, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <% unless @vaccination_campaign.vaccinations.any? %>
+    <% if @vaccination_campaign.vaccinations.any? %>
       <div class="col-lg-12">
         <hr/>
       </div>
@@ -28,7 +25,8 @@
           </div>
         </div>
         <div class="card-body p-0">
-          <%= render 'application/map', vaccinations: @vaccination_campaign.vaccinations %>
+          <%= render 'application/map', vaccinations: @vaccination_campaign.vaccinations
+            .includes(family_member: [:gender, family: [:home_registration]]) %>
         </div>
       </div>
     <% end %>

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class VaccinationVaccine < ApplicationRecord
   include Sluggable
   include Tenantable

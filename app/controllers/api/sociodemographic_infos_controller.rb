@@ -39,10 +39,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_sociodemographic_info
       @sociodemographic_info = if params[:individual_registration_id]
-                                 SociodemographicInfo.by_company(current_user.company)
+                                 SociodemographicInfo
                                                      .find_by(individual_registration_id: params[:individual_registration_id])
                                else
-                                 SociodemographicInfo.by_company(current_user.company).friendly.find(params[:id])
+                                 SociodemographicInfo.friendly.find(params[:id])
                                end
     end
 

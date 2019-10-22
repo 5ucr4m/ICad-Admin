@@ -39,10 +39,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_in_street_situation
       @in_street_situation = if params[:individual_registration_id]
-                               InStreetSituation.by_company(current_user.company)
+                               InStreetSituation
                                                 .find_by(individual_registration_id: params[:individual_registration_id])
                              else
-                               InStreetSituation.by_company(current_user.company).friendly.find(params[:id])
+                               InStreetSituation.friendly.find(params[:id])
                              end
     end
 

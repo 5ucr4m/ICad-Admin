@@ -5,7 +5,7 @@ class FamiliesController < WebController
 
   # GET /families
   def index
-    @query = Family.by_company(current_user.company).ransack(params[:q])
+    @query = Family.ransack(params[:q])
     respond_to do |format|
       format.html { @pagy, @families = pagy(@query.result.includes(:family_income), page: params[:page], items: 10) }
       format.json { render_json @query.result.includes(:company, :home_registration, :family_income) }
@@ -56,7 +56,7 @@ class FamiliesController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_family
-    @family = Family.by_company(current_user.company).friendly.find(params[:id])
+    @family = Family.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

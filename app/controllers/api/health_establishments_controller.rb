@@ -7,7 +7,7 @@ module Api
     # GET /health_establishments
     api :GET, '/health_establishments', 'GET Health Establishments List'
     def index
-      @query = HealthEstablishment.by_company(current_user.company).ransack(params[:q])
+      @query = HealthEstablishment.ransack(params[:q])
       render_json @query.result.page(params[:page])
     end
 
@@ -50,7 +50,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_health_establishment
-      @health_establishment = HealthEstablishment.by_company(current_user.company)
+      @health_establishment = HealthEstablishment
                                                  .friendly.find(params[:id])
     end
 

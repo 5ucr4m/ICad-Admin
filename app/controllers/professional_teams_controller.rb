@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class ProfessionalTeamsController < ApplicationController
+class ProfessionalTeamsController < WebController
   before_action :set_professional_team, only: %i[show edit update destroy]
 
   # GET /professional_teams
   def index
-    @query = ProfessionalTeam.by_company(current_user.company).ransack(params[:q])
-    @pagy, @professional_teams = pagy(@query.result, page: params[:page], items: 10)
+    @query = ProfessionalTeam.ransack(params[:q])
+    @pagy, @professional_teams = pagy(@query.result.includes(:health_establishment), page: params[:page], items: 10)
   end
 
   # GET /professional_teams/1
@@ -50,11 +50,11 @@ class ProfessionalTeamsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_professional_team
-    @professional_team = ProfessionalTeam.by_company(current_user.company).friendly.find(params[:id])
+    @professional_team = ProfessionalTeam.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def professional_team_params
-    params.require(:professional_team).permit(:name, :code, :active, :health_establishment_id, :slug, :company_id)
+    params.require(:professional_team).permit(:name, :code, :active, :health_establishment_id)
   end
 end

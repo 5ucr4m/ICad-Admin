@@ -19,18 +19,20 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-        <th><%= Vaccination.human_attribute_name :uuid %></th>
-        <th><%= Vaccination.human_attribute_name :tp_cds_origin %></th>
+        <th><%= Vaccination.human_attribute_name :id %></th>
+        <th><%= Vaccination.human_attribute_name :patient_type %></th>
         <th><%= Vaccination.human_attribute_name :vaccination_campaign %></th>
+        <th><%= Vaccination.human_attribute_name :family_member %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @vaccinations.each do |vaccination| %>
         <tr>
-          <td><%= vaccination.uuid %></td>
-          <td><%= vaccination.tp_cds_origin %></td>
-          <td><%= vaccination.vaccination_campaign_id %></td>
+          <td><%= vaccination.id %></td>
+          <td><%= vaccination.patient_type %></td>
+          <td><%= vaccination.vaccination_campaign.title %></td>
+          <td><%= vaccination.family_member.name %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: vaccination %>
           </td>

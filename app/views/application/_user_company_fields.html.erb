@@ -18,10 +18,10 @@
           <%= f.association :company, collection: Company.all,
                             label_method: :name_formatted,
                             wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+          <%= f.simple_fields_for :user_roles do |user_role| %>
+            <%= render 'application/user_role_fields', f: user_role %>
+          <% end %>
         </div>
-        <%= f.simple_fields_for :user_roles do |user_role| %>
-          <%= render 'application/user_role_fields', f: user_role %>
-        <% end %>
       </div>
     </div>
   </div>

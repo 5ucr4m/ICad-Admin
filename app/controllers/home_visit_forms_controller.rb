@@ -50,7 +50,7 @@ class HomeVisitFormsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_home_visit_form
-    @home_visit_form = HomeVisitForm.by_company(current_user.company).friendly.find(params[:id])
+    @home_visit_form = HomeVisitForm.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

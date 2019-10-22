@@ -14,7 +14,7 @@ class CreateVaccinations < SeedMigration::Migration
         company: company
       )
       pregnant = [0, 1].sample
-      VaccinationItem.create!(
+      Vaccination.create!(
         vaccination: vaccination,
         turn_id: GenericModel.turns.order('RANDOM()').first,
         family_member: fm,

@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
-class HealthProfessionalsController < ApplicationController
+class HealthProfessionalsController < WebController
   before_action :set_health_professional, only: %i[show edit update destroy]
 
   # GET /health_professionals
   def index
-    @query = HealthProfessional.by_company(current_user.company).ransack(params[:q])
-    @pagy, @health_professionals = pagy(@query.result, page: params[:page], items: 10)
+    @query = HealthProfessional.ransack(params[:q])
+    @pagy, @health_professionals = pagy(@query.result
+                                          .includes(:cbo_code, :professional_team),
+                                        page: params[:page], items: 10)
   end
 
   # GET /health_professionals/1
@@ -50,11 +52,13 @@ class HealthProfessionalsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_health_professional
-    @health_professional = HealthProfessional.by_company(current_user.company).friendly.find(params[:id])
+    @health_professional = HealthProfessional.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def health_professional_params
-    params.require(:health_professional).permit(:cns_code, :cbo_code_id, :full_name, :federal_registry, :state_registry, :professional_team_id, :company_id, :slug)
+    params.require(:health_professional).permit(:cns_code, :cbo_code_id, :full_name,
+                                                :federal_registry, :state_registry,
+                                                :professional_team_id)
   end
 end

@@ -4,7 +4,6 @@
     <%= f.input :password, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :password_confirmation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
-      <hr class="divider"/>
       <div class="card mb-3">
         <div class="card-header">
           <h3 class="card-title">
@@ -42,7 +41,8 @@
                                         data: {
                                           'association-insertion-node': '#user_companies',
                                           'association-insertion-method': 'append'
-                                        } do %>
+                                        },
+                                        wrap_object: Proc.new { |user_company| user_company.user_roles.build unless user_company.persisted?; user_company } do %>
               <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
             <% end %>
           </div>

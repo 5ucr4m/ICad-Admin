@@ -52,7 +52,7 @@ class HomeRegistration < ApplicationRecord
 
   belongs_to :address
   belongs_to :living_condition
-  belongs_to :permanence_institution, optional: true
+  belongs_to :permanence_institution
   belongs_to :company, optional: true
 
   has_many :home_registration_pets, dependent: :destroy
@@ -62,7 +62,7 @@ class HomeRegistration < ApplicationRecord
 
   accepts_nested_attributes_for :address, allow_destroy: false
   accepts_nested_attributes_for :living_condition, allow_destroy: false
-  accepts_nested_attributes_for :permanence_institution, allow_destroy: false
+  accepts_nested_attributes_for :permanence_institution
   accepts_nested_attributes_for :home_registration_pets, allow_destroy: true
   accepts_nested_attributes_for :families, allow_destroy: true
 

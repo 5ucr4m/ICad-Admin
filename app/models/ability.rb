@@ -4,12 +4,40 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    @user = user
-
-    return if @user&.current_company.blank?
-
-    @user.current_company.roles.find_each do |role|
-      can role.action_reference.to_sym, role.model_reference.camelize.constantize
+    if user&.company.blank?
+      assign_roles 'guest'
+    else
+      assign_roles user.role.role_type
     end
+  end
+
+  protected
+
+  def assign_roles(role)
+    send("#{role}_roles")
+  end
+
+  def admin_roles
+    can :manage, :all
+  end
+
+  def mayor_roles; end
+
+  def secretary_roles; end
+
+  def doctor_roles; end
+
+  def nurse_roles; end
+
+  def nurse_aux_roles; end
+
+  def agent_roles; end
+
+  def dentist_roles; end
+
+  def dentist_aux_roles; end
+
+  def guest_roles
+    cannot :read, :all
   end
 end

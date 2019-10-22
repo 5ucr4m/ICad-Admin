@@ -2,12 +2,12 @@
 
 class VaccinationsController < WebController
   before_action :set_vaccination, only: %i[show edit update destroy]
-  before_action :set_vaccination_campaigns, only: %i[new show edit update]
 
   # GET /vaccinations
   def index
-    @query = Vaccination.by_company(current_user.company).ransack(params[:q])
-    @pagy, @vaccinations = pagy(@query.result, page: params[:page], items: 10)
+    @query = Vaccination.ransack(params[:q])
+    @pagy, @vaccinations = pagy(@query.result.includes(:vaccination_campaign, :family_member),
+                                page: params[:page], items: 10)
   end
 
   # GET /vaccinations/1
@@ -49,21 +49,17 @@ class VaccinationsController < WebController
 
   private
 
-  def set_vaccination_campaigns
-    @vaccination_campaigns = VaccinationCampaign.where(period_start: Date.today.beginning_of_year,
-                                                       period_end: Date.today.end_of_year)
-  end
-
   # Use callbacks to share common setup or constraints between actions.
   def set_vaccination
-    @vaccination = Vaccination.by_company(current_user.company).friendly.find(params[:id])
+    @vaccination = Vaccination.friendly.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def vaccination_params
-    params.require(:vaccination).permit(:uuid, :tp_cds_origin,
-                                        :header_transport_id,
-                                        :vaccination_campaign_id, :slug)
-          .merge(company: current_user.company)
+    params.require(:vaccination).permit(:uuid, :tp_cds_origin, :patient_type,
+                                        :header_transport_id, :vaccination_campaign_id,
+                                        :turn_id, :family_member_id, :local_service_id,
+                                        :traveller, :leprosy_communicant, :pregnant,
+                                        :puerperal, :initial_date_hour, :final_date_hour)
   end
 end

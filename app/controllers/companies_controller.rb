@@ -51,7 +51,7 @@ class CompaniesController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_company
-    @company = Company.by_company(current_user.company).friendly.find(params[:id])
+    @company = Company.friendly.find(params[:id])
     @city_selected = @company.city.presence
   end
 

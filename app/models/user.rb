@@ -113,6 +113,42 @@ class User < ApplicationRecord
     professional&.federal_registry
   end
 
+  def admin?
+    role.admin?
+  end
+
+  def mayor?
+    role.mayor?
+  end
+
+  def secretary?
+    role.secretary?
+  end
+
+  def doctor?
+    role.doctor?
+  end
+
+  def nurse?
+    role.nurse?
+  end
+
+  def nurse_aux?
+    role.nurse_aux?
+  end
+
+  def agent?
+    role.agent?
+  end
+
+  def dentist?
+    role.dentist?
+  end
+
+  def dentist_aux?
+    role.dentist_aux?
+  end
+
   private
 
   def professional

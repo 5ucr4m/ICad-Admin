@@ -5,7 +5,7 @@ class FamilyMembersController < WebController
 
   # GET /family_members
   def index
-    @query = FamilyMember.by_company(current_user.company).ransack(params[:q])
+    @query = FamilyMember.ransack(params[:q])
     @pagy, @family_members = pagy(@query.result.includes(:city, :race, :gender), page: params[:page], items: 10)
   end
 
@@ -51,7 +51,7 @@ class FamilyMembersController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_family_member
-    @family_member = FamilyMember.by_company(current_user.company).friendly.find(params[:id])
+    @family_member = FamilyMember.friendly.find(params[:id])
     set_selected_options
   end
 
