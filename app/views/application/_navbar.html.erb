@@ -10,7 +10,9 @@
             <span class="avatar" style="background-image: url(<%= image_path('logo.png') %>)"></span>
             <span class="ml-2 d-none d-lg-block">
               <span class="text-blue-deep font-weight-bold"><%= current_user.email %></span>
-              <small class="text-muted d-block mt-1">Administrator</small>
+                <small class="text-muted font-weight-bold d-block mt-1">
+                  <%= current_user.role.name.mb_chars.upcase %>
+                </small>
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">

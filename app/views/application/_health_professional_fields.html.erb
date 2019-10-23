@@ -1,6 +1,6 @@
 <div class="nested-fields">
   <div class="form-row">
-    <%= f.input :legal_full_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :full_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :federal_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'cpf', disabled: show?(f.object.persisted?)} %>
     <%= f.input :cns_code, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.association :cbo_code,
@@ -8,8 +8,7 @@
                       selected: @cbo_selected,
                       label_method: :name_formatted,
                       wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'cbo-types', disabled: show?(f.object.persisted?)} %>
-    <%= f.association :professional_team, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-    <%= f.association :health_establishment, collection: HealthEstablishment.all,
-                      label_method: :legal_full_name, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :professional_team, collection: ProfessionalTeam.all,
+                      label_method: :name_formatted, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   </div>
 </div>

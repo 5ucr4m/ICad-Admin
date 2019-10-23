@@ -5,13 +5,15 @@
         <h3 class="card-title">
           <i class="fas fa-building mr-2"></i><%= f.object&.company&.legal_full_name || 'Nova Empresa' %>
         </h3>
-        <div class="card-options">
-          <% unless show?(f.object.persisted?) %>
-            <%= link_to_remove_association f, class: 'btn btn-sm btn-icon btn-danger', role: 'button' do %>
-              <i class="fas fa-times"></i>
+        <% if can? :manage, @user %>
+          <div class="card-options">
+            <% unless show?(f.object.persisted?) %>
+              <%= link_to_remove_association f, class: 'btn btn-sm btn-icon btn-danger', role: 'button' do %>
+                <i class="fas fa-times"></i>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
       <div class="card-body">
         <div class="form-row">

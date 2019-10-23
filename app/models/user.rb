@@ -60,6 +60,8 @@ class User < ApplicationRecord
   has_many :user_companies, dependent: :destroy
   has_many :companies, through: :user_companies
   has_many :user_roles, through: :user_companies
+  has_many :roles, through: :user_roles
+  has_many :permissions, through: :roles
 
   accepts_nested_attributes_for :user_companies, allow_destroy: true
 

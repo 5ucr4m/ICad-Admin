@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_19_005841) do
+ActiveRecord::Schema.define(version: 2019_10_22_043356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -556,6 +556,16 @@ ActiveRecord::Schema.define(version: 2019_10_19_005841) do
     t.index ["company_id"], name: "index_permanence_institutions_on_company_id"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "model_reference"
+    t.string "action_reference"
+    t.bigint "app_module_id"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["app_module_id"], name: "index_permissions_on_app_module_id"
+  end
+
   create_table "professional_teams", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -579,6 +589,18 @@ ActiveRecord::Schema.define(version: 2019_10_19_005841) do
     t.index ["company_id"], name: "index_responsible_children_on_company_id"
     t.index ["individual_registration_id"], name: "index_responsible_children_on_individual_registration_id"
     t.index ["responsible_child_type_id"], name: "index_responsible_children_on_responsible_child_type_id"
+  end
+
+  create_table "role_permissions", force: :cascade do |t|
+    t.bigint "role_id"
+    t.bigint "permission_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_role_permissions_on_company_id"
+    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -881,11 +903,15 @@ ActiveRecord::Schema.define(version: 2019_10_19_005841) do
   add_foreign_key "period_items", "periods"
   add_foreign_key "periods", "companies"
   add_foreign_key "permanence_institutions", "companies"
+  add_foreign_key "permissions", "generic_models", column: "app_module_id"
   add_foreign_key "professional_teams", "companies"
   add_foreign_key "professional_teams", "health_establishments"
   add_foreign_key "responsible_children", "companies"
   add_foreign_key "responsible_children", "generic_models", column: "responsible_child_type_id"
   add_foreign_key "responsible_children", "individual_registrations"
+  add_foreign_key "role_permissions", "companies"
+  add_foreign_key "role_permissions", "permissions"
+  add_foreign_key "role_permissions", "roles"
   add_foreign_key "sms_messages", "companies"
   add_foreign_key "sms_messages", "sms_schedules"
   add_foreign_key "sms_schedules", "companies"

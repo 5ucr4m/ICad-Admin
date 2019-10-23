@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PeriodsController < ApplicationController
+class PeriodsController < WebController
   before_action :set_period, only: %i[show edit update destroy]
 
   # GET /periods
@@ -56,7 +56,7 @@ class PeriodsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def period_params
     params.require(:period).permit(:competence, :start_date,
-                                   :end_date, :deadline, :slug)
+                                   :end_date, :deadline)
           .merge(company: current_user.company)
   end
 end

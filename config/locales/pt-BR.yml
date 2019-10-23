@@ -43,7 +43,7 @@ pt-BR:
         other: UBS
         icon: fas fa-hospital
       home_registration:
-        one: Ficha de Cadastro Domicilar
+        one: Ficha de Cadastro Domicilar e Territorial
         other: Fichas de Cadastro Domiciliar e Territorial
         icon: fas fa-home
       home_registration_pet:
@@ -71,8 +71,8 @@ pt-BR:
         other: Campanhas de Vacinação
         icon: fas fa-medkit
       vaccination:
-        one: Vacinação
-        other: Vacinações
+        one: Ficha de Vacinação
+        other: Fichas de Vacinação
         icon: fas fa-syringe
     errors:
       messages:

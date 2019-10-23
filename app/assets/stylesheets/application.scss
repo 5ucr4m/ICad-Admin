@@ -352,30 +352,35 @@ a.card-options-collapse .badge .bg-blue-deep .text-white {
 }
 
 .card.card-stats-green {
+  min-height: 7rem;
   color: #fff;
   border: 0 transparent;
   background-image: $color-gradient-green;
 }
 
 .card.card-stats-blue {
+  min-height: 7rem;
   color: #fff;
   border: 0 transparent;
   background-image: $color-gradient-blue;
 }
 
 .card.card-stats-purple {
+  min-height: 7rem;
   color: #fff;
   border: 0 transparent;
   background-image: $color-gradient-purple;
 }
 
 .card.card-stats-orange {
+  min-height: 7rem;
   color: #fff;
   border: 0 transparent;
   background-image: $color-gradient-orange;
 }
 
 .card.card-stats-smoke {
+  min-height: 7rem;
   color: #fff;
   border: 0 transparent;
   background-image: $color-gradient-smoke;
