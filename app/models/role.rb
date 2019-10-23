@@ -59,6 +59,4 @@ class Role < ApplicationRecord
   def name_formatted
     name.upcase
   end
-
-  protected
 end

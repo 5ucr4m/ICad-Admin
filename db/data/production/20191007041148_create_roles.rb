@@ -2,93 +2,15 @@
 
 class CreateRoles < SeedMigration::Migration
   def up
-    registries = [
-      Family,
-      FamilyMember,
-      HealthEstablishment,
-      HealthProfessional,
-      Period,
-      ProfessionalTeam,
-      VaccinationCampaign,
-      Vaccine
-    ]
-    forms = [
-      HomeRegistration,
-      HomeVisitForm,
-      HomeVisitRegistration,
-      IndividualRegistration,
-      Vaccination
-    ]
-    reports = [
-      Family,
-      FamilyMember,
-      HealthEstablishment,
-      HealthProfessional,
-      HomeRegistration,
-      HomeVisitRegistration,
-      IndividualRegistration,
-      Period,
-      ProfessionalTeam,
-      VaccinationCampaign,
-      Vaccination,
-      Vaccine
-    ]
-    configuration = [
-      User,
-      Company
-    ]
-    admin = [
-      City,
-      Company,
-      Role,
-      State
-    ]
-
-    [registries, forms, reports, configuration, admin]
-      .freeze.each_with_index do |m, i|
-      m.each do |role|
-        create_by_app_module(role, i + 1)
-      end
-    end
+    Role.create! name: 'Administrador', description: 'Administrador do Sistema', role_type: 'admin'
+    Role.create! name: 'Prefeito', description: 'Prefeito', role_type: 'mayor'
+    Role.create! name: 'Médico', description: 'Médico', role_type: 'doctor'
+    Role.create! name: 'Enfermeira', description: 'Enfermeira', role_type: 'nurse'
+    Role.create! name: 'Auxiliar de Enfermagem', description: 'Auxiliar de Enfermagem', role_type: 'nurse_aux'
+    Role.create! name: 'Agente de Saúde', description: 'Agente de Saúde', role_type: 'agent'
+    Role.create! name: 'Dentista', description: 'Dentista', role_type: 'dentist'
+    Role.create! name: 'Auxiliar de Consultório Dentário', description: 'Auxiliar de Consultório Dentário', role_type: 'dentist_aux'
   end
 
   def down; end
-
-  def create_by_app_module(role, reference)
-    @manage = Role.create! name: role.to_s,
-                           model_reference: role.to_s,
-                           action_reference: 'manage',
-                           url_reference: 'manage',
-                           description: role.to_s.pluralize,
-                           app_module: GenericModel.find_by(generic_field: :app_module,
-                                                            reference: reference)
-    %w[index new create show edit update destroy].each do |action|
-      Role.create! name: role.to_s,
-                   description: "#{action} #{role}",
-                   role: @manage,
-                   model_reference: role,
-                   url_reference: define_route_path(role, action),
-                   action_reference: action,
-                   app_module: GenericModel.find_by(generic_field: :app_module, reference: reference)
-    end
-  end
-
-  def define_route_path(role, action)
-    case action
-    when 'new'
-      "new_#{role.to_s.camelize.underscore}_path"
-    when 'index'
-      "#{role.to_s.pluralize.camelize.underscore}_path"
-    when 'create'
-      "#{role.to_s.pluralize.camelize.underscore}_path"
-    when 'show'
-      "#{role.to_s.camelize.underscore}_path"
-    when 'update'
-      "#{role.to_s.camelize.underscore}_path"
-    when 'destroy'
-      "#{role.to_s.camelize.underscore}_path"
-    when 'edit'
-      "edit_#{role.to_s.camelize.underscore}_path"
-    end
-  end
 end
