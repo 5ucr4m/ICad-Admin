@@ -52,7 +52,7 @@ class HomeRegistration < ApplicationRecord
 
   belongs_to :address
   belongs_to :living_condition
-  belongs_to :permanence_institution
+  belongs_to :permanence_institution, optional: true
   belongs_to :company, optional: true
 
   has_many :home_registration_pets, dependent: :destroy
