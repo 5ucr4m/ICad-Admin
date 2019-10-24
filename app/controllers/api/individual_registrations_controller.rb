@@ -55,44 +55,18 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_individual_registration
       @individual_registration = IndividualRegistration
-                                                       .friendly.find(params[:id])
+                                 .friendly.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def individual_registration_params
       params.require(:individual_registration).permit(:refuse_registration,
-                                                      :form_updated, :uuid,
+                                                      :form_updated,
+                                                      :uuid,
                                                       :uuid_form_origin,
                                                       :uuid_citizen,
                                                       :tp_cds_origin,
-                                                      family_member_attributes: %i[
-                                                        id
-                                                        family_id
-                                                        social_name
-                                                        city_id
-                                                        birth_date
-                                                        unknown_mother
-                                                        mother_name
-                                                        email
-                                                        nationality_id
-                                                        name
-                                                        cns_number
-                                                        cns_responsible
-                                                        phone
-                                                        pis_pasep_number
-                                                        birth_country_id
-                                                        race_id
-                                                        gender_id
-                                                        responsible
-                                                        ethnicity_id
-                                                        unknown_father
-                                                        father_name
-                                                        naturalized_at
-                                                        naturalize_decree
-                                                        brazil_entry_date
-                                                        micro_area
-                                                        out_area
-                                                      ],
+                                                      :family_member_id,
                                                       health_condition_attributes: %i[
                                                         id
                                                         hospitalization_cause

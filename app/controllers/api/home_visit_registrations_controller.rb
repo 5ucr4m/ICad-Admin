@@ -61,34 +61,7 @@ module Api
     # Only allow a trusted parameter "white list" through.
     def home_visit_registration_params
       params.require(:home_visit_registration).permit(:uuid, :tp_cds_origin,
-                                                      family_member_attributes: %i[
-                                                        id
-                                                        family_id
-                                                        name
-                                                        social_name
-                                                        mother_name
-                                                        father_name
-                                                        birth_date
-                                                        birth_country_id
-                                                        city_id
-                                                        nationality_id
-                                                        naturalized_at
-                                                        naturalize_decree
-                                                        brazil_entry_date
-                                                        email
-                                                        cns_number
-                                                        cns_responsible
-                                                        phone
-                                                        pis_pasep_number
-                                                        race_id
-                                                        gender_id
-                                                        ethnicity_id
-                                                        micro_area
-                                                        unknown_father
-                                                        unknown_mother
-                                                        responsible
-                                                        out_area
-                                                      ],
+                                                      :family_member_id,
                                                       home_visit_forms_attributes: [
                                                         :id,
                                                         :turn_id,
