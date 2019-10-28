@@ -3,13 +3,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :vaccinations
-  resources :vaccination_campaigns
-  resources :roles
-  resources :sms_messages
-  resources :sms_schedules
-  resources :vaccines
-  resources :periods
   apipie
   # Sidekiq web config
   mount Sidekiq::Web => '/sidekiq'
@@ -55,6 +48,17 @@ Rails.application.routes.draw do
     end
   end
   resources :individual_registrations
+  resources :vaccinations
+  resources :vaccination_campaigns do
+    member do
+      get 'update_map'
+    end
+  end
+  resources :roles
+  resources :sms_messages
+  resources :sms_schedules
+  resources :vaccines
+  resources :periods
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',

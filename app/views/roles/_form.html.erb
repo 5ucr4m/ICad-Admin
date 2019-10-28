@@ -1,11 +1,26 @@
-
 <%= simple_form_for(@role) do |f| %>
   <% content_for :body do %>
-      <%= f.input :name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :description, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :role_type, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :admin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :slug, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :role_type, collection: Role.role_types, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :admin, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :description, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="card<%= ' card-collapsed' unless @role.permissions.map(&:errors).any? %> mb-3">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-check mr-2"></i><%= Permission.model_name.human(count: 2) %>
+        </h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+            <i class="fe fe-chevron-up"></i>
+          </a>
+        </div>
+      </div>
+      <div class="card-body pb-2">
+        <%= f.simple_fields_for :permissions do |permission| %>
+          <%= render 'application/permission_fields', f: permission %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
   <%= render template: 'application/form', locals: {form: @role} %>
 <% end %>

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class VaccinationCampaignsController < WebController
-  before_action :set_vaccination_campaign, only: %i[show edit update destroy]
+  skip_before_action :verify_authenticity_token, only: :update_map
+  before_action :set_vaccination_campaign, only: %i[show edit update update_map destroy]
 
   # GET /vaccination_campaigns
   def index
@@ -44,6 +45,12 @@ class VaccinationCampaignsController < WebController
   def destroy
     @vaccination_campaign.destroy
     redirect_to vaccination_campaigns_url, notice: 'Vaccination campaign was successfully destroyed.'
+  end
+
+  def update_map
+    render_json @vaccination_campaign.vaccinations
+                                     .includes(:company, :local_service, :turn)
+                                     .where(patient_type: params[:filter_by])
   end
 
   private

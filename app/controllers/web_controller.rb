@@ -7,6 +7,8 @@ class WebController < ApplicationController
 
   before_action :set_referrer, :authenticate_user!
 
+  breadcrumb 'Dashboard', :root_path
+
   rescue_from CanCan::AccessDenied do |_exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'application/json' }

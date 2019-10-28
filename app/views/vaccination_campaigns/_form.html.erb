@@ -24,12 +24,44 @@
             </div>
           </div>
         </div>
-        <div class="card-body p-0">
-          <%= render 'application/map', vaccinations: @vaccination_campaign.vaccinations
-            .includes(family_member: [:gender, family: [:home_registration]]) %>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group mb-0">
+                <%= label_tag 'Filtrar por', nil, class: 'form-label' %>
+                <%= select_tag 'filter_by', options_for_select(Vaccination.patient_types.collect { |v, k| [t("activerecord.attributes.vaccination.patient_types.#{v}"), k] }),
+                               include_blank: true, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group mb-0">
+                <%= label_tag 'Idade de', nil, class: 'form-label' %>
+                <%= number_field 'age_from', nil, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group mb-0">
+                <%= label_tag 'Idade até', nil, class: 'form-label' %>
+                <%= number_field 'age_to', nil, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group mb-0">
+                <%= label_tag 'Status', nil, class: 'form-label' %>
+                <%= select_tag 'vaccinated', options_for_select([true, false].collect {
+                  |v, k| [v ? 'Vacinado' : 'Não vacinado', v] }), include_blank: true, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="vaccination_campaign_map" class="card-body p-0">
+          <div id="map" class="card-map rounded" style="min-height: 30rem;"></div>
         </div>
       </div>
     <% end %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @vaccination_campaign} %>
+  <script type="text/javascript">
+
+  </script>
 <% end %>

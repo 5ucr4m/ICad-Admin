@@ -16,4 +16,8 @@ class ChartsController < WebController
     render_json HomeVisitRegistration.group_by_period(:day, :updated_at,
                                                       format: '%d/%m/%Y', last: 5).count
   end
+
+  def vaccinations_map
+
+  end
 end

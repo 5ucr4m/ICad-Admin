@@ -1,0 +1,9 @@
+<div class="ml-auto">
+  <ol class="breadcrumb bg-transparent font-weight-bold py-1 m-0 text-blue-deep" aria-label="breadcrumbs">
+    <% breadcrumb_trail do |crumb| %>
+      <li class="breadcrumb-item <%= crumb.current? ? 'active' : '' %>">
+        <%= link_to crumb.name, crumb.url, crumb.current? ? {'aria-current': 'page', class: 'text-blue-deep'} : {class: 'text-blue-deep'} %>
+      </li>
+    <% end %>
+  </ol>
+</div>

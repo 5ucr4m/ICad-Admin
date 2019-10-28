@@ -3,6 +3,8 @@
 class UsersController < WebController
   before_action :set_user, only: %i[show edit update destroy]
 
+  breadcrumb User.model_name.human(count: 2), :users_path
+
   # GET /users
   def index
     @query = User.ransack(params[:q])
@@ -10,16 +12,21 @@ class UsersController < WebController
   end
 
   # GET /users/1
-  def show; end
+  def show
+    breadcrumb @user.slug, user_path(@user)
+  end
 
   # GET /users/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{User.model_name.human}", new_user_path
     @user = User.new
     @user.build_health_professional
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+    breadcrumb @user.slug, user_path(@user)
+  end
 
   # POST /users
   def create

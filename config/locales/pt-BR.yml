@@ -19,6 +19,10 @@ pt-BR:
         other: Usuários
         icon: fas fa-user-circle
       role:
+        one: Função
+        other: Funções
+        icon: fas fa-user-shield
+      permission:
         one: Permissão
         other: Permissões
         icon: fas fa-check
@@ -74,6 +78,15 @@ pt-BR:
         one: Ficha de Vacinação
         other: Fichas de Vacinação
         icon: fas fa-syringe
+    attributes:
+      vaccination:
+        patient_types:
+          men: Homem
+          woman: Mulher
+          teenage: Jovem
+          child: Criança
+          newborn: 'Rescém nascido'
+          elderly: Idoso
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
@@ -229,12 +242,13 @@ pt-BR:
     select:
       prompt: Por favor selecione
     submit:
-      new: Novo
+      new: Novo(a)
       edit: Editar
       create: Criar
       submit: Salvar
       update: Atualizar
       cancel: Cancelar
+      back: Voltar
   number:
     currency:
       format:

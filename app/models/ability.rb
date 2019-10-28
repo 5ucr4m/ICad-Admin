@@ -6,8 +6,13 @@ class Ability
   def initialize(user)
     return if user&.company.blank?
 
-    user.role.permissions.each do |permission|
-      can :manage, permission.model_reference.singularize.constantize
+    if user.admin?
+      can :manage, :all
+    else
+      can :manage, user, slug: user.slug
+      user.role.permissions.each do |permission|
+        can :manage, permission.model_reference.singularize.constantize
+      end
     end
   end
 end

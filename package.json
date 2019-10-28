@@ -16,6 +16,7 @@
     "popper.js": "^1.15.0",
     "rails-erb-loader": "^5.5.2",
     "select2": "^4.0.7",
+    "selectize": "^0.12.6",
     "superagent": "^5.0.5",
     "superagent-no-cache": "^0.1.1"
   },

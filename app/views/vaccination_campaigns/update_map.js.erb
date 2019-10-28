@@ -1,0 +1,2 @@
+$('#vaccination_campaign_map').html("<%= j(render 'application/map', vaccinations: @vaccination_campaign.vaccinations.includes(family_member: [:gender, family: [:home_registration]])) %>");
+console.log('request feito');

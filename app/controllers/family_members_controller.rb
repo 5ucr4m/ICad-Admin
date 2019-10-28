@@ -3,6 +3,8 @@
 class FamilyMembersController < WebController
   before_action :set_family_member, only: %i[show edit update destroy]
 
+  breadcrumb FamilyMember.model_name.human(count: 2), :family_members_path
+
   # GET /family_members
   def index
     @query = FamilyMember.ransack(params[:q])
@@ -10,18 +12,24 @@ class FamilyMembersController < WebController
   end
 
   # GET /family_members/1
-  def show; end
+  def show
+    breadcrumb @family_member.slug, family_member_path(@family_member)
+  end
 
   # GET /family_members/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path
     @family_member = FamilyMember.new
   end
 
   # GET /family_members/1/edit
-  def edit; end
+  def edit
+    breadcrumb @family_member.slug, family_member_path(@family_member)
+  end
 
   # POST /family_members
   def create
+    breadcrumb "#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path
     @family_member = FamilyMember.new(family_member_params)
     set_selected_options
 
@@ -34,6 +42,7 @@ class FamilyMembersController < WebController
 
   # PATCH/PUT /family_members/1
   def update
+    breadcrumb @family_member.slug, family_member_path(@family_member)
     if @family_member.update(family_member_params)
       redirect_to @family_member, notice: 'Family member was successfully updated.'
     else
