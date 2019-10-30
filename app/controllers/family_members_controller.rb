@@ -8,7 +8,14 @@ class FamilyMembersController < WebController
   # GET /family_members
   def index
     @query = FamilyMember.ransack(params[:q])
-    @pagy, @family_members = pagy(@query.result.includes(:city, :race, :gender), page: params[:page], items: 10)
+
+    respond_to do |format|
+      format.html do
+        @pagy, @family_members = pagy(@query.result.includes(:city, :race, :gender),
+                                      page: params[:page], items: 10)
+      end
+      format.json { render_json @query.result.order(:name) }
+    end
   end
 
   # GET /family_members/1

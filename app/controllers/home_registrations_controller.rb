@@ -3,6 +3,8 @@
 class HomeRegistrationsController < WebController
   before_action :set_home_registration, only: %i[show edit update destroy]
 
+  breadcrumb HomeRegistration.model_name.human(count: 2), :home_registrations_path
+
   # GET /home_registrations
   def index
     @query = HomeRegistration.ransack(params[:q])
@@ -12,19 +14,25 @@ class HomeRegistrationsController < WebController
   end
 
   # GET /home_registrations/1
-  def show; end
+  def show
+    breadcrumb @home_registration.slug, home_registration_path(@home_registration)
+  end
 
   # GET /home_registrations/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{HomeRegistration.model_name.human}", new_home_registration_path
     @home_registration = HomeRegistration.new
     @home_registration.build_relationships
   end
 
   # GET /home_registrations/1/edit
-  def edit; end
+  def edit
+    breadcrumb @home_registration.slug, home_registration_path(@home_registration)
+  end
 
   # POST /home_registrations
   def create
+    breadcrumb "#{t('helpers.submit.new')} #{HomeRegistration.model_name.human}", new_home_registration_path
     @home_registration = HomeRegistration.new(home_registration_params)
     @city_selected = @home_registration.address.city.presence
     @address_type_selected = @home_registration.address.address_type.presence
@@ -38,6 +46,7 @@ class HomeRegistrationsController < WebController
 
   # PATCH/PUT /home_registrations/1
   def update
+    breadcrumb @home_registration.slug, home_registration_path(@home_registration)
     if @home_registration.update(home_registration_params)
       redirect_to @home_registration, notice: 'Home registration was successfully updated.'
     else

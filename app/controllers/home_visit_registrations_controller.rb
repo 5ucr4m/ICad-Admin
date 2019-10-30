@@ -3,6 +3,8 @@
 class HomeVisitRegistrationsController < WebController
   before_action :set_home_visit_registration, only: %i[show edit update destroy]
 
+  breadcrumb HomeVisitRegistration.model_name.human(count: 2), :home_visit_registrations_path
+
   # GET /home_visit_registrations
   def index
     @query = HomeVisitRegistration.ransack(params[:q])
@@ -10,19 +12,25 @@ class HomeVisitRegistrationsController < WebController
   end
 
   # GET /home_visit_registrations/1
-  def show; end
+  def show
+    breadcrumb @home_visit_registration.slug, home_visit_registration_path(@home_visit_registration)
+  end
 
   # GET /home_visit_registrations/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{HomeVisitRegistration.model_name.human}", new_home_visit_registration_path
     @home_visit_registration = HomeVisitRegistration.new
-    @home_visit_registration.build_family_member
+    @home_visit_registration.build_relation_ships
   end
 
   # GET /home_visit_registrations/1/edit
-  def edit; end
+  def edit
+    breadcrumb @home_visit_registration.slug, home_visit_registration_path(@home_visit_registration)
+  end
 
   # POST /home_visit_registrations
   def create
+    breadcrumb "#{t('helpers.submit.new')} #{HomeVisitRegistration.model_name.human}", new_home_visit_registration_path
     @home_visit_registration = HomeVisitRegistration.new(home_visit_registration_params)
     @city_selected = @home_visit_registration.family_member.city.presence
 
@@ -35,6 +43,7 @@ class HomeVisitRegistrationsController < WebController
 
   # PATCH/PUT /home_visit_registrations/1
   def update
+    breadcrumb @home_visit_registration.slug, home_visit_registration_path(@home_visit_registration)
     if @home_visit_registration.update(home_visit_registration_params)
       redirect_to @home_visit_registration, notice: 'Home visit registration was successfully updated.'
     else
@@ -59,6 +68,27 @@ class HomeVisitRegistrationsController < WebController
   def home_visit_registration_params
     params.require(:home_visit_registration).permit(:family_member_id,
                                                     :uuid, :tp_cds_origin,
-                                                    :family_member_id).merge(company: current_user.company)
+                                                    :family_member_id,
+                                                    home_visit_forms_attributes: [
+                                                      :id,
+                                                      :turn_id,
+                                                      :handbook_number,
+                                                      :cns_number,
+                                                      :birth_date,
+                                                      :gender_id,
+                                                      :other_visit,
+                                                      :outcome_id,
+                                                      :micro_area,
+                                                      :out_area,
+                                                      :home_type_id,
+                                                      :weight_monitoring,
+                                                      :height_monitoring,
+                                                      :_destroy,
+                                                      home_visit_reasons_attributes: %i[
+                                                        id
+                                                        reason_id
+                                                        _destroy
+                                                      ]
+                                                    ]).merge(company: current_user.company)
   end
 end

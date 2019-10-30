@@ -3,6 +3,8 @@
 class HealthProfessionalsController < WebController
   before_action :set_health_professional, only: %i[show edit update destroy]
 
+  breadcrumb HealthProfessional.model_name.human(count: 2), :health_professionals_path
+
   # GET /health_professionals
   def index
     @query = HealthProfessional.ransack(params[:q])
@@ -12,18 +14,24 @@ class HealthProfessionalsController < WebController
   end
 
   # GET /health_professionals/1
-  def show; end
+  def show
+    breadcrumb @health_professional.slug, health_professional_path(@health_professional)
+  end
 
   # GET /health_professionals/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{HealthProfessional.model_name.human}", new_health_professional_path
     @health_professional = HealthProfessional.new
   end
 
   # GET /health_professionals/1/edit
-  def edit; end
+  def edit
+    breadcrumb @health_professional.slug, health_professional_path(@health_professional)
+  end
 
   # POST /health_professionals
   def create
+    breadcrumb "#{t('helpers.submit.new')} #{HealthProfessional.model_name.human}", new_health_professional_path
     @health_professional = HealthProfessional.new(health_professional_params)
 
     if @health_professional.save
@@ -35,6 +43,7 @@ class HealthProfessionalsController < WebController
 
   # PATCH/PUT /health_professionals/1
   def update
+    breadcrumb @health_professional.slug, health_professional_path(@health_professional)
     if @health_professional.update(health_professional_params)
       redirect_to @health_professional, notice: 'Health professional was successfully updated.'
     else

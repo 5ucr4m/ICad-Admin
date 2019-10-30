@@ -129,34 +129,6 @@ function formatFederalRegistry(e) {
   }
 }
 
-function getVaccination(query) {
-  if(false) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      mapboxgl.accessToken = 'pk.eyJ1IjoidGlhZ29jYXNzaW8iLCJhIjoiY2p4dW1wbWs4MTZxczNjcW0xN2d2NmFjMiJ9.DmiiFFq3jPkdaDsoyjRDYw';
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/light-v10',
-        center: [position.coords.longitude, position.coords.latitude],
-        zoom: 16
-      });
-      vaccinations.map((vaccination) => {
-        let lng = vaccination.familyMember.locationX;
-        let lat = vaccination.familyMember.locationY;
-        let patientType = vaccination.patientType;
-        let vaccinated = vaccination.vaccinated ? 'success' : 'danger';
-        new mapboxgl.Marker(marker(patientType, vaccinated))
-          .setLngLat([lng, lat])
-          .setPopup(new mapboxgl.Popup({offset: 15})
-            .setHTML('<p class="text-center font-weight-bold"><a href=" ' + vaccination.familyMember.url +
-              '"></a></p><p>Gênero:' + vaccionation.familyMember.genderName + '</p><p>Idade:' +
-              vaccionation.familyMember.age + '</p>'))
-          .addTo(map);
-      });
-      map.addControl(new mapboxgl.NavigationControl());
-    });
-  }
-}
-
 window.addEventListener('load', Pagy.init);
 
 window.addEventListener('DOMContentLoaded', function (e) {
@@ -391,6 +363,44 @@ window.addEventListener('DOMContentLoaded', function (e) {
                 return {
                   id: data.id,
                   text: `${data.attributes.handbookNumber}`
+                };
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+  });
+
+  $('.family-members').each((i, el) => {
+    $(el).select2({
+      placeholder: 'Selecione',
+      language: 'pt-BR',
+      theme: 'bootstrap4',
+      width: '100%',
+      allowClear: true,
+      ajax: {
+        global: true,
+        url: '/family_members.json',
+        dataType: 'json',
+        delay: 300,
+        minimumInputLength: 3,
+        data: function (params) {
+          return {
+            q: {
+              search_cont: params.term ? params.term : document.querySelector('.select2-selection__rendered').innerHTML.split(' - ')[1]
+            },
+            page: 1
+          };
+        },
+        processResults: function (data) {
+          return {
+            results: data.data.map((fm) => {
+              if (fm) {
+                return {
+                  id: fm.id,
+                  text: `${fm.attributes.cnsNumber} - ${fm.attributes.name}`
                 };
               }
             })

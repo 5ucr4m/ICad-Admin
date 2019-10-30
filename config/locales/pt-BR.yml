@@ -62,6 +62,10 @@ pt-BR:
         one: Ficha de Visita Domiciliar
         other: Fichas de Visita Domiciliar
         icon: fas fa-book-medical
+      home_visit_reason:
+        one: Motivo de Visita
+        other: Motivos de Visita
+        icon: far fa-copy
       individual_registration:
         one: Ficha de Cadastro Individual
         other: Fichas de Cadastro Individual

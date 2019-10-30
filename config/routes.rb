@@ -42,11 +42,8 @@ Rails.application.routes.draw do
   resources :professional_teams
   resources :health_professionals
   resources :health_establishments
-  resources :home_visit_forms do
-    shallow do
-      resources :home_visit_registrations
-    end
-  end
+  resources :home_visit_forms
+  resources :home_visit_registrations
   resources :individual_registrations
   resources :vaccinations
   resources :vaccination_campaigns do

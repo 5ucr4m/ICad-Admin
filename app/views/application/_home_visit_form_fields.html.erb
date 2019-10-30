@@ -1,34 +1,69 @@
 <div class="nested-fields">
-  <div class="card card-collapsed mb-3">
-    <div class="card-body">
-      <div class="form-row">
+  <div class="card mb-3">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa<%= t('activerecord.models.home_visit_form.icon') %> mr-2"></i><%= f.object.persisted? ? "Visita ##{f.object.id} em #{f.object.created_at.strftime('%d/%m/%Y')}" : "Nova #{HomeVisitForm.model_name.human}" %>
+      </h3>
+      <div class="card-options">
         <% unless show?(f.object.persisted?) %>
           <div class="col-lg-12 col-sm-12 text-right">
-            <%= link_to_remove_association f, class: 'btn btn-icon btn-danger', role: 'button' do %>
-              <i class="fas fa-times mr-2"></i><%= t('helpers.submit.submit') %>
+            <%= link_to_remove_association f, class: 'btn btn-sm btn-icon btn-danger', role: 'button' do %>
+              <i class="fas fa-times"></i>
             <% end %>
           </div>
         <% end %>
-        <%= f.input :handbook_number, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-        <%= f.input :cns_number, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-        <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <%= f.input :handbook_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :birth_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :gender, collection: GenericModel.genders,
                     label_method: :name_formatted,
-                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+                    wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
         <%= f.association :turn, collection: GenericModel.turns,
                           label_method: :name_formatted,
                           wrapper_html: {class: 'col-lg-3 col-sm-12'},
                           input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-        <%= f.input :other_visit, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :outcome, collection: GenericModel.outcomes,
                     label_method: :name_formatted,
-                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+                    wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
         <%= f.input :home_type, collection: GenericModel.home_types,
                     label_method: :name_formatted,
-                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-        <%= f.input :out_area, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
         <%= f.input :weight_monitoring, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :height_monitoring, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :other_visit, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :out_area, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <div class="col-lg-12">
+          <div class="card mb-3">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas <%= t('activerecord.models.home_visit_reason.icon') %> mr-2"></i><%= HomeVisitReason.model_name.human(count: 2) %>
+              </h3>
+            </div>
+            <% if can? :manage, HomeVisitRegistration %>
+              <% unless show?(f.object.persisted?) %>
+                <div class="card-body py-2">
+                  <%= link_to_add_association f, :home_visit_reasons,
+                                              class: 'btn btn-sm btn-primary', role: 'button',
+                                              data: {
+                                                'association-insertion-node': '#home_visit_reasons',
+                                                'association-insertion-method': 'append'
+                                              } do %>
+                    <i class="fas fa-plus mr-2" aria-hidden="true"></i><%= t('helpers.submit.new') %>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+            <div id="home_visit_reasons" class="card-body">
+              <%= f.simple_fields_for :home_visit_reasons do |home_visit_reason| %>
+                <%= render 'application/home_visit_reason_fields', f: home_visit_reason %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -3,6 +3,8 @@
 class HealthEstablishmentsController < WebController
   before_action :set_health_establishment, only: %i[show edit update destroy]
 
+  breadcrumb HealthEstablishment.model_name.human(count: 2), :health_establishments_path
+
   # GET /health_establishments
   def index
     @query = HealthEstablishment.ransack(params[:q])
@@ -10,18 +12,24 @@ class HealthEstablishmentsController < WebController
   end
 
   # GET /health_establishments/1
-  def show; end
+  def show
+    breadcrumb @health_establishment.slug, health_establishment_path(@health_establishment)
+  end
 
   # GET /health_establishments/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{HealthEstablishment.model_name.human}", new_health_establishment_path
     @health_establishment = HealthEstablishment.new
   end
 
   # GET /health_establishments/1/edit
-  def edit; end
+  def edit
+    breadcrumb @health_establishment.slug, health_establishment_path(@health_establishment)
+  end
 
   # POST /health_establishments
   def create
+    breadcrumb "#{t('helpers.submit.new')} #{HealthEstablishment.model_name.human}", new_health_establishment_path
     @health_establishment = HealthEstablishment.new(health_establishment_params)
 
     if @health_establishment.save
@@ -33,6 +41,7 @@ class HealthEstablishmentsController < WebController
 
   # PATCH/PUT /health_establishments/1
   def update
+    breadcrumb @health_establishment.slug, health_establishment_path(@health_establishment)
     if @health_establishment.update(health_establishment_params)
       redirect_to @health_establishment, notice: 'Health establishment was successfully updated.'
     else

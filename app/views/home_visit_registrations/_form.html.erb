@@ -2,67 +2,59 @@
   <% content_for :body do %>
     <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <div class="col-12">
-      <div class="card<%= ' card-collapsed' unless @home_visit_registration.family_member.errors.any? %> mb-3">
-        <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 1) %>
-          </h3>
-          <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+    <% if f.object.persisted? %>
+      <div id="family_member_fields" class="col-12">
+        <div class="card<%= ' card-collapsed' unless @home_visit_registration&.family_member&.errors&.any? %> mb-3">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 1) %>
+            </h3>
+            <div class="card-options">
+              <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            </div>
           </div>
-        </div>
-        <div class="card-body">
-          <%= f.simple_fields_for :family_member do |family_member| %>
-            <%= render 'application/family_member_fields', f: family_member %>
-          <% end %>
+          <div class="card-body">
+            <%= f.simple_fields_for :family_member do |family_member| %>
+              <%= render 'application/family_member_fields', f: family_member %>
+            <% end %>
+          </div>
         </div>
       </div>
-      <div class="card<%= ' card-collapsed' unless @home_visit_registration.home_visit_forms.map(&:errors).flatten.any? %> mb-3">
-        <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-book-medical mr-2"></i><%= HomeVisitForm.model_name.human(count: 2) %>
-          </h3>
-          <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+      <div class="col-lg-12">
+        <div class="card<%= ' card-collapsed' unless @home_visit_registration.home_visit_forms.map(&:errors).flatten.any? %> mb-3">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-book-medical mr-2"></i><%= HomeVisitForm.model_name.human(count: 2) %>
+            </h3>
+            <div class="card-options">
+              <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+            </div>
           </div>
-        </div>
-        <div class="card-body">
-          <% if @home_visit_registration.home_visit_forms.any? %>
-            <div class="table-responsive">
-              <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th><%= HomeVisitForm.human_attribute_name :turn %></th>
-                  <th><%= HomeVisitForm.human_attribute_name :handbook_number %></th>
-                  <th><%= HomeVisitForm.human_attribute_name :cns_number %></th>
-                  <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% @home_visit_registration.home_visit_forms.each_with_index do |home_visit_form, index| %>
-                  <tr>
-                    <td><%= index = index + 1 %></td>
-                    <td><%= home_visit_form.turn.name_formatted %></td>
-                    <td><%= home_visit_form.handbook_number %></td>
-                    <td><%= home_visit_form.cns_number %></td>
-                    <td class="text-center">
-                      <%= render 'application/table_links', f: home_visit_form %>
-                    </td>
-                  </tr>
+          <% if can? :manage, HomeVisitRegistration %>
+            <% unless show?(f.object.persisted?) %>
+              <div class="card-body py-2">
+                <%= link_to_add_association f, :home_visit_forms,
+                                            class: 'btn btn-sm btn-primary', role: 'button',
+                                            data: {
+                                              'association-insertion-node': '#home_visit_forms',
+                                              'association-insertion-method': 'append'
+                                            } do %>
+                  <i class="fas fa-plus mr-2" aria-hidden="true"></i><%= t('helpers.submit.new') %>
                 <% end %>
-                </tbody>
-              </table>
-            </div>
-          <% else %>
-            <div class="alert alert-warning alert-dismissible p-4 text-center font-weight-bold" role="alert">
-              <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Ficha de Visita Domiciliar registrada.
-            </div>
+              </div>
+            <% end %>
           <% end %>
+          <div id="home_visit_forms" class="card-body">
+            <%= f.simple_fields_for :home_visit_forms do |home_visit_form| %>
+              <%= render 'application/home_visit_form_fields', f: home_visit_form %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% else %>
+      <%= f.association :family_member, collection: @home_visit_registration.family_member.present? ? [@home_visit_registration.family_member] : [],
+                        wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'family-members', disabled: show?(f.object.persisted?)} %>
+    <% end %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @home_visit_registration} %>
 <% end %>

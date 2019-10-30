@@ -7,7 +7,7 @@
       <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
         <% current_user.permissions.by_app_module(app_module).each do |permission| %>
           <%= link_to send("#{permission.model_reference.camelcase.underscore.pluralize}_path"), class: 'dropdown-item' do %>
-            <i class="<%= t("activerecord.models.#{permission.model_reference.camelcase.underscore}.icon") %> dropdown-icon"></i><%= permission.model_reference.constantize.model_name.human(count: 1) %>
+            <i class="<%= t("activerecord.models.#{permission.model_reference.camelcase.underscore}.icon") %> dropdown-icon"></i><%= permission.model_reference.constantize.model_name.human(count: 2) %>
           <% end %>
         <% end %>
       </div>

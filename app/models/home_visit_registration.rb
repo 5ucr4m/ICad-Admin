@@ -39,4 +39,8 @@ class HomeVisitRegistration < ApplicationRecord
   accepts_nested_attributes_for :home_visit_forms, allow_destroy: true
 
   ransack_alias :search, :id_to_s
+
+  def build_relation_ships
+    build_family_member
+  end
 end
