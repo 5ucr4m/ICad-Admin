@@ -7,13 +7,14 @@
     <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :form_updated, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
+      <br/>
       <div class="card<%= ' card-collapsed' unless @individual_registration.family_member.errors.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-user mr-2"></i><%= FamilyMember.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-2" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
@@ -30,7 +31,7 @@
             <i class="fas fa-heartbeat mr-2"></i><%= HealthCondition.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-2" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
@@ -47,7 +48,7 @@
             <i class="far fa-sad-tear mr-2"></i><%= InStreetSituation.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-2" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
@@ -64,7 +65,7 @@
             <i class="fas fa-id-card mr-2"></i><%= SociodemographicInfo.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-2" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>
@@ -81,7 +82,7 @@
             <i class="fas fa-user-times mr-2"></i><%= CancelRegistration.model_name.human(count: 1) %>
           </h3>
           <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-2" data-toggle="card-collapse">
+            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
               <i class="fe fe-chevron-up"></i>
             </a>
           </div>

@@ -3,6 +3,8 @@
 class IndividualRegistrationsController < WebController
   before_action :set_individual_registration, only: %i[show edit update destroy]
 
+  breadcrumb IndividualRegistration.model_name.human(count: 2), :individual_registrations_path
+
   # GET /individual_registrations
   def index
     @query = IndividualRegistration.ransack(params[:q])
@@ -10,20 +12,26 @@ class IndividualRegistrationsController < WebController
   end
 
   # GET /individual_registrations/1
-  def show; end
+  def show
+    breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
+  end
 
   # GET /individual_registrations/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{IndividualRegistration.model_name.human}", new_individual_registration_path
     @individual_registration = IndividualRegistration.new
     @individual_registration.build_relationships
     @occupation_selected = @individual_registration.sociodemographic_info.occupation.presence
   end
 
   # GET /individual_registrations/1/edit
-  def edit; end
+  def edit
+    breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
+  end
 
   # POST /individual_registrations
   def create
+    breadcrumb "#{t('helpers.submit.new')} #{IndividualRegistration.model_name.human}", new_individual_registration_path
     @individual_registration = IndividualRegistration.new(individual_registration_params)
 
     if @individual_registration.save
@@ -35,6 +43,7 @@ class IndividualRegistrationsController < WebController
 
   # PATCH/PUT /individual_registrations/1
   def update
+    breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
     if @individual_registration.update(individual_registration_params)
       redirect_to @individual_registration, notice: 'Individual registration was successfully updated.'
     else
@@ -126,36 +135,46 @@ class IndividualRegistrationsController < WebController
                                                       integrative_practices
                                                       medicinal_plants
                                                     ],
-                                                    in_street_situation_attributes: %i[
-                                                      id
-                                                      kinship_degree
-                                                      other_accompanied
-                                                      meals_per_day_id
-                                                      has_other_accompanied
-                                                      familiar_reference
-                                                      receive_benefits
-                                                      in_street_situation
-                                                      has_personal_hygiene
-                                                      family_visit
-                                                      street_situation_time_id
+                                                    in_street_situation_attributes: [
+                                                      :id,
+                                                      :kinship_degree,
+                                                      :other_accompanied,
+                                                      :meals_per_day_id,
+                                                      :has_other_accompanied,
+                                                      :familiar_reference,
+                                                      :receive_benefits,
+                                                      :in_street_situation,
+                                                      :has_personal_hygiene,
+                                                      :family_visit,
+                                                      :street_situation_time_id,
+                                                      in_street_hygiene_accesses_attributes: %i[
+                                                        id
+                                                        hygiene_access_id
+                                                        _destroy
+                                                      ]
                                                     ],
-                                                    sociodemographic_info_attributes: %i[
-                                                      id
-                                                      education_level_id
-                                                      occupation_id
-                                                      sexual_orientation_id
-                                                      traditional_community_name
-                                                      parent_relation_id
-                                                      job_market_situation_id
-                                                      desire_orientation
-                                                      attend_folk_healer
-                                                      traditional_community
-                                                      attend_school
-                                                      communtity_group
-                                                      health_plan
-                                                      has_any_disability
-                                                      desire_gender
-                                                      gender_identity_id
+                                                    sociodemographic_info_attributes: [
+                                                      :id,
+                                                      :education_level_id,
+                                                      :occupation_id,
+                                                      :sexual_orientation_id,
+                                                      :traditional_community_name,
+                                                      :parent_relation_id,
+                                                      :job_market_situation_id,
+                                                      :desire_orientation,
+                                                      :attend_folk_healer,
+                                                      :traditional_community,
+                                                      :attend_school,
+                                                      :community_group,
+                                                      :health_plan,
+                                                      :has_any_disability,
+                                                      :desire_gender,
+                                                      :gender_identity_id,
+                                                      family_member_disabilities_attributes: %i[
+                                                        id
+                                                        disability_id
+                                                        _destroy
+                                                      ]
                                                     ],
                                                     cancel_registration_attributes: %i[
                                                       id

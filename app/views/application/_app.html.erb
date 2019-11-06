@@ -1,10 +1,21 @@
 <div class="flex-fill">
   <%= render 'application/navbar' %>
   <%= render 'application/menu' %>
-  <div class="my-5 my-md-5">
+  <div class="mt-4 mt-md-4">
     <div class="container-fluid">
       <%= render 'application/flashes' %>
-      <%= yield :page_header %>
+      <% if controller_name == 'dashboards' %>
+        <div class="page-header my-3">
+          <h1 class="page-title font-weight-bold">
+            <i class="fas fa-chart-line mr-2"></i>Dashboard
+          </h1>
+          <div class="page-options d-none d-md-block ml-auto">
+            <h4 class="m-0"><%= treatment_title current_user.role.role_type %> <span class="text-blue-night"><%= current_user&.health_professional&.full_name || current_user.email %></span>. Bem-vindo a sua página!</h4>
+          </div>
+        </div>
+      <% else %>
+        <%= yield :page_header %>
+      <% end %>
       <%= yield %>
     </div>
   </div>

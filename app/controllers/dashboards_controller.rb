@@ -5,6 +5,7 @@ class DashboardsController < WebController
 
   def dashboard
     @vaccination_campaigns = VaccinationCampaign.last(5)
+    @periods = Period.order(:end_date).last(3)
   end
 
   private
@@ -22,7 +23,10 @@ class DashboardsController < WebController
       OpenStruct.new(id: 'home-visit-registrations',
                      name: HomeVisitRegistration.model_name.human(count: 2),
                      active: false,
-                     value: HomeVisitRegistration.count)
+                     value: HomeVisitRegistration.count),
+      OpenStruct.new(id: 'periods',
+                     name: Period.model_name.human(count: 2),
+                     active: false, value: Period.count)
     ]
   end
 end

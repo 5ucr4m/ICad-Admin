@@ -2,61 +2,62 @@
 
 require 'xml'
 
-module HomeVisitRegistrationService
+module VaccinationService
   include XML
 
   NAMESPACES = {
     'xmlns:ns2': 'http://esus.ufsc.br/dadoinstalacao',
     'xmlns:ns3': 'http://esus.ufsc.br/dadotransporte',
-    'xmlns:ns4': 'http://esus.ufsc.br/fichavisitadomiciliarmaster'
+    'xmlns:ns4': 'http://esus.ufsc.br/fichavacinacaomaster'
   }.freeze
 
   class << self
     def export(data)
-      home_visit_registration = data.registrable
+      vaccination = data.registrable
 
-      xml = XML::Node.new('ns3:dadoTransporteTransportXml') # valid
+      xml = XML::Node.new('ns3:dadoTransporteTransportXml')
       xml << XML::Node.new('uuidDadoSerializado', data.serialized_uuid) # valid
       xml << XML::Node.new('tipoDadoSerializado', data.serialized_type.reference) # valid
       xml << XML::Node.new('codIbge', data.family_member.city.ibge_code) # valid
       xml << XML::Node.new('cnesDadoSerializado', data.serialized_cnes) # valid
       xml << XML::Node.new('ineDadoSerializado', data.serialized_ine) # valid
-      xml << XML::Node.new('numLote', data.lot_number) # valid
+      xml << XML::Node.new('numLote', data.lot_number)
 
-      xml << vd = XML::Node.new('ns4:fichaVisitaDomiciliarMasterTransport') # valid
+      xml << vd = XML::Node.new('ns4:fichaVacinacaoMasterTransport') # valid
       vd << XML::Node.new('uuidFicha', data.uuid) # valid
       vd << XML::Node.new('tpCdsOrigem', 3) # valid
 
-      health_professional = home_visit_registration.family_member.family
-                                                   .home_registration.health_professional
-      health_establishment = health_professional.professional_team.health_establishment
-
+      health_professional = vaccination.family_member.family
+                              .home_registration.health_professional
       vd << ht = XML::Node.new('headerTransport') # valid
       ht << XML::Node.new('profissionalCNS', health_professional.cns_code) # valid
       ht << XML::Node.new('cboCodigo_2002', health_professional.cbo_code.reference) # valid
-      ht << XML::Node.new('cnes', health_establishment.cnes_code) # valid
-      ht << XML::Node.new('dataAtendimento', home_visit_registration.created_at) # valid
+      ht << XML::Node.new('cnes', health_professional.professional_team.health_establishment.cnes_code) # valid
+      ht << XML::Node.new('dataAtendimento', vaccination.created_at) # valid
       ht << XML::Node.new('codigoIbgeMunicipio', data.ibge_code) # valid
 
-      home_visit_registration.home_visit_forms.each do |hvf|
-        family_member = home_visit_registration.family_member
-        vd << form = XML::Node.new('visitasDomiciliares') # valid
-        form << XML::Node.new('turno', hvf.turn.reference) # valid
-        form << XML::Node.new('numProntuario', hvf.handbook_number) # valid
-        form << XML::Node.new('cnsCidadao', family_member.cns_number) # valid
-        form << XML::Node.new('dtNascimento', family_member.birth_date) # valid
-        form << XML::Node.new('sexo', family_member.gender.reference) # valid
-        form << XML::Node.new('statusVisitaCompartilhadaOutroProfissional', hvf.other_visit) # valid
-
-        hvf.home_visit_reasons.each do |hvr|
-          form << XML::Node.new('motivosVisita', hvr.reason.reference) # valid
+      vd << form = XML::Node.new('vacinacoes') # valid
+      vaccination.family_member.vaccinations.each do |vc|
+        form << XML::Node.new('turno', vc.turn.reference) # valid
+        form << XML::Node.new('numProntuario', vc.family_member.handbook_number) # valid
+        form << XML::Node.new('cnsCidadao', vc.family_member.cns_number) # valid
+        form << XML::Node.new('dtNascimento', vc.family_member.birth_date.to_datetime.strftime('%Q')) # valid
+        form << XML::Node.new('sexo', vc.family_member.gender.reference) # valid
+        form << XML::Node.new('localAtendimento', vc.local_service.reference) # valid
+        form << XML::Node.new('viajante', vc.traveller) # valid
+        form << XML::Node.new('comunicanteHanseniase', vc.leprosy_communicant) # valid
+        form << XML::Node.new('gestante', vc.pregnant) # valid
+        form << XML::Node.new('puerpera', vc.puerperal) # valid
+        vc.vaccines.each do |va|
+          form << vcc = XML::Node.new('vacinas') # valid
+          vcc << XML::Node.new('imunobiologico', va.immunobiological.reference) # valid
+          vcc << XML::Node.new('estrategiaVacinacao', va.vaccination_strategy.reference) # valid
+          vcc << XML::Node.new('dose', va.dose.reference) # valid
+          vcc << XML::Node.new('lote', va.lot_number) # valid
+          vcc << XML::Node.new('fabricante', va.manufacturer) # valid
         end
-        form << XML::Node.new('desfecho', hvf.outcome.reference) # valid
-        form << XML::Node.new('microArea', hvf.micro_area) # valid
-        form << XML::Node.new('stForaArea', hvf.out_area) # valid
-        form << XML::Node.new('tipoDeImovel', hvf.home_type.reference) # valid
-        form << XML::Node.new('pesoAcompanhamentoNutricional', hvf.weight_monitoring) # valid
-        form << XML::Node.new('alturaAcompanhamentoNutricional', hvf.height_monitoring) # valid
+        form << XML::Node.new('dataHoraInicialAtendimento', vc.initial_date_hour.to_datetime.strftime('%Q')) # valid
+        form << XML::Node.new('dataHoraFinalAtendimento', vc.initial_date_hour.to_datetime.strftime('%Q')) # valid
       end
 
       xml << sender = XML::Node.new('ns2:remetente') # valid

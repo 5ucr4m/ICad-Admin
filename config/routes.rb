@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get 'chart_families'
       get 'chart_family_members'
       get 'chart_home_visit_registrations'
+      get 'chart_periods'
+      get 'chart_vaccinations'
     end
   end
 
@@ -35,7 +37,11 @@ Rails.application.routes.draw do
   resources :states
   resources :cities
   resources :families
-  resources :companies
+  resources :companies do
+    collection do
+      post 'change_company'
+    end
+  end
   resources :family_members
 
   resources :home_registrations
@@ -55,7 +61,13 @@ Rails.application.routes.draw do
   resources :sms_messages
   resources :sms_schedules
   resources :vaccines
-  resources :periods
+  resources :periods do
+    member do
+      get 'export'
+      get 'period_items'
+      post 'export'
+    end
+  end
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',

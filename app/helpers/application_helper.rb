@@ -51,4 +51,20 @@ module ApplicationHelper
       'fas fa-exclamation-circle'
     end
   end
+
+  def treatment_title(role_type)
+    case role_type
+    when 'mayor'
+      'Vossa Excelência'
+    end
+  end
+
+  def period_months
+    current_year = (Time.current.month..Time.current.to_date.end_of_year.month)
+    next_year = (Time.current.next_year.to_date.beginning_of_year.month..Time.current.next_year.to_date.end_of_year.month)
+
+    current_year = current_year.to_a.map { |month| [month, Time.current.year] }
+    next_year = next_year.to_a.map { |month| [month, Time.current.next_year.year] }
+    (current_year + next_year).freeze
+  end
 end

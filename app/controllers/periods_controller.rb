@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class PeriodsController < WebController
-  before_action :set_period, only: %i[show edit update destroy]
+  before_action :set_period, only: %i[show edit update destroy export export_xml]
+
+  breadcrumb Period.model_name.human(count: 2), :periods_path
 
   # GET /periods
   def index
@@ -10,18 +12,24 @@ class PeriodsController < WebController
   end
 
   # GET /periods/1
-  def show; end
+  def show
+    breadcrumb @period.slug, period_path(@period)
+  end
 
   # GET /periods/new
   def new
+    breadcrumb "#{t('helpers.submit.new')} #{Period.model_name.human}", new_period_path
     @period = Period.new
   end
 
   # GET /periods/1/edit
-  def edit; end
+  def edit
+    breadcrumb @period.slug, period_path(@period)
+  end
 
   # POST /periods
   def create
+    breadcrumb "#{t('helpers.submit.new')} #{Period.model_name.human}", new_period_path
     @period = Period.new(period_params)
 
     if @period.save
@@ -33,6 +41,7 @@ class PeriodsController < WebController
 
   # PATCH/PUT /periods/1
   def update
+    breadcrumb @period.slug, period_path(@period)
     if @period.update(period_params)
       redirect_to @period, notice: 'Period was successfully updated.'
     else
@@ -46,6 +55,14 @@ class PeriodsController < WebController
     redirect_to periods_url, notice: 'Period was successfully destroyed.'
   end
 
+  def export
+    redirect_to @period if request.post?
+  end
+
+  def period_items
+    @period_items = @period.period_items
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -55,8 +72,6 @@ class PeriodsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def period_params
-    params.require(:period).permit(:competence, :start_date,
-                                   :end_date, :deadline)
-          .merge(company: current_user.company)
+    params.require(:period).permit(:competence, :start_date, :end_date, :deadline)
   end
 end

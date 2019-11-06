@@ -1,7 +1,6 @@
 <%= simple_form_for(@period) do |f| %>
   <% content_for :body do %>
-    <%= f.input :competence, collection: (Time.current.month..Time.current.to_date.end_of_year.month).
-      to_a.append((Time.current.next_year(1).to_date.end_of_year.month)).freeze.collect {|m| %W(#{m}/#{Time.current.year} #{m}/#{Time.current.year})},
+    <%= f.input :competence, collection: period_months.collect {|m| %W(#{m[0]}/#{m[1]} #{m[0]}/#{m[1]})},
                 wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.input :start_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :end_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>

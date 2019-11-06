@@ -82,6 +82,10 @@ pt-BR:
         one: Ficha de Vacinação
         other: Fichas de Vacinação
         icon: fas fa-syringe
+      period:
+        one: Período
+        other: Períodos
+        icon: far fa-calendar-alt
     attributes:
       vaccination:
         patient_types:

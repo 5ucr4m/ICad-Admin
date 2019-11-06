@@ -27,6 +27,7 @@
     </div>
   </div>
   <div class="col-12">
+    <br/>
     <div class="card card-collapsed mb-3">
       <div class="card-header">
         <h3 class="card-title">
@@ -36,32 +37,19 @@
           <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
         </div>
       </div>
-      <div class="card-body">
-        <% if f.object.family_member_disabilities.any? %>
-          <div class="table-responsive">
-            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
-              <thead>
-              <tr>
-                <th>#</th>
-                <th><%= FamilyMemberDisability.human_attribute_name :disability %></th>
-                <th>Data</th>
-              </tr>
-              </thead>
-              <tbody>
-              <% f.object.family_member_disabilities.each_with_index do |family_member_disability, index| %>
-                <tr>
-                  <td><%= index = index + 1 %></td>
-                  <td><%= family_member_disability.disability.name_formatted %></td>
-                  <td><%= family_member_disability.created_at.strftime('%d/%m/%Y') %></td>
-                </tr>
-              <% end %>
-              </tbody>
-            </table>
-          </div>
-        <% else %>
-          <div class="alert alert-warning alert-dismissible p-4 text-center font-weight-bold" role="alert">
-            <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma deficiencia registrada.
-          </div>
+      <div class="card-body py-2">
+        <%= link_to_add_association f, :family_member_disabilities,
+                                    class: 'btn btn-sm btn-primary', role: 'button',
+                                    data: {
+                                      'association-insertion-node': '#family_member_disabilities',
+                                      'association-insertion-method': 'append'
+                                    } do %>
+          <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+        <% end %>
+      </div>
+      <div id="family_member_disabilities" class="card-body">
+        <%= f.simple_fields_for :family_member_disabilities do |family_member_disability| %>
+          <%= render 'application/family_member_disability_fields', f: family_member_disability %>
         <% end %>
       </div>
     </div>

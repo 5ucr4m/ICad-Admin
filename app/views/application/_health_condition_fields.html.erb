@@ -2,6 +2,7 @@
   <%= f.association :weight_situation, collection: GenericModel.weight_situations,
                     label_method: :name_formatted,
                     wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+  <%= f.input :maternity_reference, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <div class="col-12">
     <div class="form-row">
       <%= f.input :alcohol_dependent, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
@@ -29,7 +30,6 @@
       <%= f.input :other_condition_two, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {rows: 3, disabled: show?(f.object.persisted?)} %>
       <%= f.input :other_condition_three, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {rows: 3, disabled: show?(f.object.persisted?)} %>
       <%= f.input :medicinal_plants_used, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {rows: 3, disabled: show?(f.object.persisted?)} %>
-      <%= f.input :maternity_reference, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <div class="col-12">
         <div class="form-row">
           <div class="card card-collapsed mb-3">
@@ -38,7 +38,7 @@
                 <i class="fas fa-notes-medical mr-2"></i><%= HealthConditionKidney.model_name.human(count: 2) %>
               </h3>
               <div class="card-options">
-                <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
                   <i class="fe fe-chevron-up"></i>
                 </a>
               </div>
@@ -65,7 +65,7 @@
                 <i class="fas fa-notes-medical mr-2"></i><%= HealthConditionDisease.model_name.human(count: 2) %>
               </h3>
               <div class="card-options">
-                <a href="#" class="card-options-collapse badge bg-blue-deep text-white font-weight-bold px-1" data-toggle="card-collapse">
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
                   <i class="fe fe-chevron-up"></i>
                 </a>
               </div>

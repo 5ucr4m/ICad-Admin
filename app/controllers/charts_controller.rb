@@ -17,7 +17,13 @@ class ChartsController < WebController
                                                       format: '%d/%m/%Y', last: 5).count
   end
 
-  def vaccinations_map
+  def chart_periods
+    render_json Period.group_by_period(:month, :created_at,
+                                                      format: '%d/%m/%Y', last: 5).count
+  end
 
+  def chart_vaccinations
+    render_json Vaccination.group_by_period(:day, :created_at,
+                                 format: '%d/%m/%Y', last: 5).count
   end
 end
