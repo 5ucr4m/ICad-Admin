@@ -5,7 +5,7 @@
     <div class="col-sm-12 col-lg-12">
       <div class="form-row">
         <div class="col-sm-12 col-lg-6 p-0">
-          <%= render 'application/pagy_count', list: @pagy %>
+          <%= render 'application/pagy_count', list: @pagy, model: Vaccination, url: new_vaccination_path %>
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>

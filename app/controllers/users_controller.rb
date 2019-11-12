@@ -31,10 +31,11 @@ class UsersController < WebController
   # POST /users
   def create
     @user = User.new(user_params)
+    @user.avatar.attach(params[:avatar])
     @cbo_selected = @user&.health_professional&.cbo_code&.presence
 
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to user_path(@user), notice: 'User was successfully created.'
     else
       render :new
     end
@@ -43,8 +44,10 @@ class UsersController < WebController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      @user.avatar.attach(params[:avatar]) unless @user.avatar.attached?
+      redirect_to user_path(@user), notice: 'User was successfully updated.'
     else
+      @cbo_selected = @user&.health_professional&.cbo_code&.presence
       render :edit
     end
   end
@@ -61,16 +64,18 @@ class UsersController < WebController
   def set_user
     @user = User.friendly.find(current_user.id)
     @cbo_selected = @user&.health_professional&.cbo_code&.presence
+    @user.build_health_professional unless @user&.health_professional&.persisted?
   end
 
   # Only allow a trusted parameter "white list" through.
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :avatar,
                                  health_professional_attributes: %i[
                                    id
                                    cns_code
                                    cbo_code_id
-                                   legal_full_name
+                                   full_name
                                    fancy_name
                                    federal_registry
                                    state_registry

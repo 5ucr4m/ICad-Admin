@@ -8,7 +8,9 @@ class IndividualRegistrationsController < WebController
   # GET /individual_registrations
   def index
     @query = IndividualRegistration.ransack(params[:q])
-    @pagy, @individual_registrations = pagy(@query.result, page: params[:page], items: 10)
+    @result = @query.result
+    @result = @result.where(user: current_user) if current_user.agent?
+    @pagy, @individual_registrations = pagy(@result, page: params[:page], items: 10)
   end
 
   # GET /individual_registrations/1

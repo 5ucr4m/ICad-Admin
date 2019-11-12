@@ -12,6 +12,7 @@ class Vaccination < ApplicationRecord
   belongs_to :family_member
   belongs_to :local_service, class_name: 'GenericModel'
   belongs_to :company, optional: true
+  belongs_to :user
 
   has_many :vaccination_vaccines
   has_many :vaccines, through: :vaccination_vaccines

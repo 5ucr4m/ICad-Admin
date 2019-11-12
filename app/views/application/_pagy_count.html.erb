@@ -1,11 +1,23 @@
-<% if list.present? %>
-  <h1 class="pt-2 card-title mb-2">
-    <% if list.count.zero? %>
-      Nenhum registro encontrado
-    <% elsif list.count > 1 %>
-      <strong class="mr-1"><%= list.count %></strong>registros encontrados
-    <% else %>
-      <strong class="mr-1"><%= list.count %></strong>registro encontrado
+<div class="row">
+  <div class="col-lg-9">
+    <% if list.present? %>
+      <h1 class="pt-2 card-title mb-2">
+        <% if list.count.zero? %>
+          Nenhum registro encontrado
+        <% elsif list.count > 1 %>
+          <strong class="mr-1"><%= list.count %></strong>registros encontrados
+        <% else %>
+          <strong class="mr-1"><%= list.count %></strong>registro encontrado
+        <% end %>
+      </h1>
     <% end %>
-  </h1>
-<% end %>
+  </div>
+  <div class="col-lg-3">
+    <% if can? :manage, model %>
+      <%= link_to url, class: 'btn btn-primary align-middle mb-md-0 mb-sm-3' do %>
+        <i class="fas fa-plus mr-2"></i>Novo
+      <% end %>
+    <% end %>
+  </div>
+</div>
+

@@ -20,14 +20,9 @@ class CreateAppModules < SeedMigration::Migration
                          reference: 3, generic_field: :app_module,
                          generic_class: 'Role', generic_model: @app_modules
 
-    GenericModel.create! name: '<i class="fas fa-cogs mr-2"></i>Configuração',
-                         description: 'Módulo de Configuração',
-                         reference: 4, generic_field: :app_module,
-                         generic_class: 'Role', generic_model: @app_modules
-
     GenericModel.create! name: '<i class="fas fa-lock mr-2"></i>Administração',
                          description: 'Módulo de Administração',
-                         reference: 5, generic_field: :app_module,
+                         reference: 4, generic_field: :app_module,
                          generic_class: 'Role', generic_model: @app_modules
   end
 

@@ -38,6 +38,7 @@ class Family < ApplicationRecord
   belongs_to :home_registration, optional: true
   belongs_to :company, optional: true
   belongs_to :family_income, class_name: 'GenericModel'
+  belongs_to :user
 
   has_many :family_members, dependent: :nullify
 

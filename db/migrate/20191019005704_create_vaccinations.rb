@@ -17,6 +17,7 @@ class CreateVaccinations < ActiveRecord::Migration[6.0]
       t.datetime :final_date_hour
       t.belongs_to :company, foreign_key: true, index: true
       t.string :slug
+      t.belongs_to :user
 
       t.timestamps
     end

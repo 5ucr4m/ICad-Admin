@@ -4,22 +4,25 @@ class Role < ApplicationRecord
   include Sluggable
 
   REGISTRIES = [
-    Family,
-    FamilyMember,
     HealthEstablishment,
     HealthProfessional,
-    Period,
     ProfessionalTeam,
     VaccinationCampaign,
     Vaccine
   ].freeze
-  FORMS = [
+
+  AGENT_FORMS = [
+    Family,
+    FamilyMember,
     HomeRegistration,
-    HomeVisitForm,
     HomeVisitRegistration,
-    IndividualRegistration,
+    IndividualRegistration
+  ].freeze
+
+  OTHER_FORMS = [
     Vaccination
   ].freeze
+
   REPORTS = [
     Family,
     FamilyMember,
@@ -34,15 +37,17 @@ class Role < ApplicationRecord
     Vaccination,
     Vaccine
   ].freeze
-  CONFIGURATION = [
+
+  ADMIN_CONFIGURATION = [
     User,
-    Company
-  ].freeze
-  ADMIN = [
-    City,
     Company,
+    City,
     Role,
     State
+  ].freeze
+
+  USER_CONFIGURATION = [
+    User
   ].freeze
 
   has_many :user_roles
@@ -52,7 +57,7 @@ class Role < ApplicationRecord
   has_many :role_permissions
   has_many :permissions, through: :role_permissions
 
-  enum role_type: %i[admin mayor secretary doctor nurse nurse_aux agent dentist dentist_aux]
+  enum role_type: %i[admin mayor secretary doctor nurse nurse_aux agent dentist dentist_aux support]
 
   ransack_alias :search, :id_to_s
 

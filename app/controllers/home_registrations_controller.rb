@@ -8,9 +8,9 @@ class HomeRegistrationsController < WebController
   # GET /home_registrations
   def index
     @query = HomeRegistration.ransack(params[:q])
-    @result = @query.result.includes(:home_type, :health_professional)
-    @result = @result.where(user: user) if user.agent?
-    @pagy, @home_registrations = pagy(@result, page: params[:page], items: 10)
+    @result = @query.result
+    @result = @result.where(user: current_user) if current_user.agent?
+    @pagy, @home_registrations = pagy(@result.includes(:home_type, :health_professional), page: params[:page], items: 10)
   end
 
   # GET /home_registrations/1

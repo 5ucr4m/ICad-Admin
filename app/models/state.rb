@@ -32,6 +32,12 @@ class State < ApplicationRecord
 
   has_many :cities, dependent: :nullify
 
+  validates :name, :abbreviation, :reference, :code, presence: true
+  validates :name, uniqueness: true
+  validates :abbreviation, uniqueness: true
+  validates :code, uniqueness: true
+  validates :reference, uniqueness: true
+
   def name_formatted
     "#{name} - #{abbreviation}"
   end

@@ -8,14 +8,10 @@ class FamilyMembersController < WebController
   # GET /family_members
   def index
     @query = FamilyMember.ransack(params[:q])
-
-    respond_to do |format|
-      format.html do
-        @pagy, @family_members = pagy(@query.result.includes(:city, :race, :gender),
-                                      page: params[:page], items: 10)
-      end
-      format.json { render_json @query.result.order(:name) }
-    end
+    @result = @query.result
+    @result = @result.where(user: current_user) if current_user.agent?
+    @pagy, @family_members = pagy(@result.includes(:city, :race, :gender),
+                                  page: params[:page], items: 10)
   end
 
   # GET /family_members/1
@@ -37,7 +33,7 @@ class FamilyMembersController < WebController
   # POST /family_members
   def create
     breadcrumb "#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path
-    @family_member = FamilyMember.new(family_member_params)
+    @family_member = current_user.family_members.new(family_member_params)
     set_selected_options
 
     if @family_member.save

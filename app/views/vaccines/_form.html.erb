@@ -1,13 +1,14 @@
 <%= simple_form_for(@vaccine) do |f| %>
   <% content_for :body do %>
-      <%= f.input :description, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.association :immunobiological, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.association :vaccination_strategy, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.association :dose, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.input :description, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <%= f.association :immunobiological, collection: GenericModel.immunobiological, label_method: :name_formatted,
+                        wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+      <%= f.association :vaccination_strategy, collection: GenericModel.vaccination_strategies, label_method: :name_formatted,
+                        wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+      <%= f.association :dose, collection: GenericModel.doses, label_method: :name_formatted,
+                        wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
       <%= f.input :lot_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <%= f.input :manufacturer, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.association :company, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :slug, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @vaccine} %>
 <% end %>

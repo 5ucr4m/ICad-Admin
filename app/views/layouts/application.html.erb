@@ -12,7 +12,7 @@
   <meta name="mobile-web-app-capable" content="yes"/>
   <meta name="HandheldFriendly" content="True"/>
   <meta name="MobileOptimized" content="320"/>
-  <title>IcadUbs</title>
+  <title><%= title(subtitle: controller_name == 'dashboards' ? 'Dashboard' : t("activerecord.models.#{controller_name.singularize}.other")) %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>

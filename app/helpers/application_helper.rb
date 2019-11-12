@@ -41,7 +41,7 @@ module ApplicationHelper
 
   def alert_icon(flash_type)
     case flash_type
-    when 'alert' || 'error'
+    when 'alert', 'error'
       'fas fa-exclamation-triangle'
     when 'notice'
       'fas fa-check'
@@ -56,6 +56,8 @@ module ApplicationHelper
     case role_type
     when 'mayor'
       'Vossa Excelência'
+    else
+      'Olá'
     end
   end
 

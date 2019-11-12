@@ -1,50 +1,75 @@
-<div class="row row-cards mb-2">
-  <%= render partial: 'application/dashboard_card',
-             locals: {icon: 'fas fa-hospital',
-                      color: 'green',
-                      value: HealthEstablishment.count,
-                      action: health_establishments_path,
-                      description: HealthEstablishment.model_name.human(count: 2)} %>
-  <%= render partial: 'application/dashboard_card',
-             locals: {value: ProfessionalTeam.count,
-                      icon: 'fas fa-users-cog',
-                      color: 'orange',
-                      action: professional_teams_path,
-                      description: ProfessionalTeam.model_name.human(count: 2)} %>
-  <%= render partial: 'application/dashboard_card',
-             locals: {icon: 'fas fa-user-md',
-                      color: 'purple',
-                      value: HealthProfessional.count,
-                      action: health_professionals_path,
-                      description: HealthProfessional.model_name.human(count: 2)} %>
-  <%= render partial: 'application/dashboard_card',
-             locals: {icon: 'fas fa-address-book',
-                      color: 'blue',
-                      value: Family.count,
-                      action: families_path,
-                      description: Family.model_name.human(count: 2)} %>
-  <%= render partial: 'application/dashboard_card',
-             locals: {icon: 'fas fa-user',
-                      color: 'smoke',
-                      value: FamilyMember.count,
-                      action: family_members_path,
-                      description: FamilyMember.model_name.human(count: 2)} %>
+<div class="row row-cards mb-0">
+  <% if current_user.admin? || current_user.mayor? || current_user.nurse? || current_user.support? %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: t('activerecord.models.health_establishment.icon'),
+                        color: 'green',
+                        value: HealthEstablishment.count,
+                        action: health_establishments_path,
+                        description: HealthEstablishment.model_name.human(count: 2)} %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {value: ProfessionalTeam.count,
+                        icon: t('activerecord.models.professional_team.icon'),
+                        color: 'orange',
+                        action: professional_teams_path,
+                        description: ProfessionalTeam.model_name.human(count: 2)} %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: t('activerecord.models.health_professional.icon'),
+                        color: 'purple',
+                        value: HealthProfessional.count,
+                        action: health_professionals_path,
+                        description: HealthProfessional.model_name.human(count: 2)} %>
+  <% end %>
+  <% if current_user.admin? || current_user.agent? || current_user.secretary? || current_user.mayor? %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: t('activerecord.models.family.icon'),
+                        color: 'blue',
+                        value: @families,
+                        action: families_path,
+                        description: Family.model_name.human(count: 2)} %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: t('activerecord.models.family_member.icon'),
+                        color: 'smoke',
+                        value: @family_members,
+                        action: family_members_path,
+                        description: FamilyMember.model_name.human(count: 2)} %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: t('activerecord.models.individual_registration.icon'),
+                        value: @individual_registrations,
+                        action: individual_registrations_path,
+                        description: IndividualRegistration.model_name.human(count: 2)[10..-1]} %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: t('activerecord.models.home_registration.icon'),
+                        value: @home_registrations,
+                        action: home_registrations_path,
+                        description: HomeRegistration.model_name.human(count: 2)[10..-1][0..19]} %>
+    <%= render partial: 'application/dashboard_card',
+               locals: {icon: t('activerecord.models.home_visit_registration.icon'),
+                        value: @home_visit_registrations,
+                        action: home_visit_registrations_path,
+                        description: HomeVisitForm.model_name.human(count: 2)[10..-1]} %>
+  <% end %>
 </div>
 <div class="row row-cards">
   <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-    <div class="card">
+    <div class="card mb-3">
       <div class="card-header">
         <h3 class="font-weight-bold py-4 mb-0">
           <i class="far fa-chart-bar mr-2"></i>Gráficos
         </h3>
       </div>
-      <div class="card-body">
+      <div class="card-body p-4">
         <div class="tabs-content">
           <div class="tab-pane fade show active" id="families" role="tabpanel" aria-labelledby="families-tab">
             <%= render 'application/chart', title: Family.model_name.human(count: 2), id: 'chart-families' %>
           </div>
           <div class="tab-pane fade" id="family-members" role="tabpanel" aria-labelledby="family-members-tab">
             <%= render 'application/chart', title: FamilyMember.model_name.human(count: 2), id: 'chart-family-members' %>
+          </div>
+          <div class="tab-pane fade" id="individual-registrations" role="tabpanel" aria-labelledby="individual-registrations-tab">
+            <%= render 'application/chart', title: HomeRegistration.model_name.human(count: 2), id: 'chart-individual-registrations' %>
+          </div>
+          <div class="tab-pane fade" id="home-registrations" role="tabpanel" aria-labelledby="home-registrations-tab">
+            <%= render 'application/chart', title: HomeRegistration.model_name.human(count: 2), id: 'chart-home-registrations' %>
           </div>
           <div class="tab-pane fade" id="home-visit-registrations" role="tabpanel" aria-labelledby="home-visit-registrations-tab">
             <%= render 'application/chart', title: HomeVisitRegistration.model_name.human(count: 2), id: 'chart-home-visit-registrations' %>
@@ -53,22 +78,34 @@
       </div>
       <div class="nav card-tabs card-tabs-bottom" role="tablist">
         <div id="families-tab" class="card-tabs-item text-center nav-link active"
-             data-toggle="tab" data-target="#families" role="tab" aria-controls="families" aria-selected="true">
-          <h4 class="py-2 mb-0">
-            <i class="<%= t('activerecord.models.family.icon') %> mr-2"></i><%= Family.model_name.human(count: 2) %>
-          </h4>
+             data-toggle="tab" data-target="#families" role="tab" aria-controls="families" aria-selected="true" title="<%= Family.model_name.human(count: 2) %>">
+          <h5 class="py-0 mb-0">
+            <i class="<%= t('activerecord.models.family.icon') %>"></i>
+          </h5>
         </div>
         <div id="family-members-tab" class="card-tabs-item text-center nav-link"
-             data-toggle="tab" data-target="#family-members" role="tab" aria-controls="family-member" aria-selected="false">
-          <h4 class="py-2 mb-0">
-            <i class="<%= t('activerecord.models.family_member.icon') %> mr-2"></i><%= FamilyMember.model_name.human(count: 2) %>
-          </h4>
+             data-toggle="tab" data-target="#family-members" role="tab" aria-controls="family-member" aria-selected="false" title="<%= FamilyMember.model_name.human(count: 2) %>">
+          <h5 class="py-0 mb-0">
+            <i class="<%= t('activerecord.models.family_member.icon') %>"></i>
+          </h5>
+        </div>
+        <div id="individual-registrations-tab" class="card-tabs-item text-center nav-link"
+             data-toggle="tab" data-target="#individual-registrations" role="tab" aria-controls="individual-registrations" aria-selected="false" title="<%= IndividualRegistration.model_name.human(count: 2) %>">
+          <h5 class="py-0 mb-0">
+            <i class="<%= t('activerecord.models.individual_registration.icon') %>"></i>
+          </h5>
+        </div>
+        <div id="home-registrations-tab" class="card-tabs-item text-center nav-link"
+             data-toggle="tab" data-target="#home-registrations" role="tab" aria-controls="home-registrations" aria-selected="false" title="<%= HomeRegistration.model_name.human(count: 2) %>">
+          <h5 class="py-0 mb-0">
+            <i class="<%= t('activerecord.models.home_registration.icon') %>"></i>
+          </h5>
         </div>
         <div id="home-visit-registrations-tab" class="card-tabs-item text-center nav-link"
-             data-toggle="tab" data-target="#home-visit-registrations" role="tab" aria-controls="home-visit-registrations" aria-selected="false">
-          <h4 class="py-2 mb-0">
-            <i class="<%= t('activerecord.models.home_registration.icon') %> mr-2"></i><%= HomeVisitRegistration.model_name.human(count: 2) %>
-          </h4>
+             data-toggle="tab" data-target="#home-visit-registrations" role="tab" aria-controls="home-visit-registrations" aria-selected="false" title="<%= HomeVisitRegistration.model_name.human(count: 2) %>">
+          <h5 class="py-0 mb-0">
+            <i class="<%= t('activerecord.models.home_visit_registration.icon') %>"></i>
+          </h5>
         </div>
       </div>
     </div>

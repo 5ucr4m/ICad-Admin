@@ -3,6 +3,8 @@
 class RolesController < WebController
   before_action :set_role, only: %i[show edit update destroy]
 
+  breadcrumb Role.model_name.human(count: 2), :roles_path
+
   # GET /roles
   def index
     @query = Role.ransack(params[:q])

@@ -52,6 +52,7 @@ class IndividualRegistration < ApplicationRecord
   belongs_to :sociodemographic_info, optional: true
   belongs_to :cancel_registration, optional: true
   belongs_to :company, optional: true
+  belongs_to :user
 
   has_one :period_item, as: :registrable, dependent: :destroy
 

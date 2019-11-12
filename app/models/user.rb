@@ -62,8 +62,15 @@ class User < ApplicationRecord
   has_many :user_roles, through: :user_companies
   has_many :roles, through: :user_roles
   has_many :permissions, through: :roles
+  has_many :home_visit_registrations
+  has_many :home_registrations
+  has_many :individual_registrations
+  has_many :vaccinations
+  has_many :families
+  has_many :family_members
 
   accepts_nested_attributes_for :user_companies, allow_destroy: true
+  accepts_nested_attributes_for :health_professional, allow_destroy: false
 
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },
@@ -82,8 +89,12 @@ class User < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
+  def active_for_authentication?
+    super && company.present?
+  end
+
   def company
-    current_company.company
+    current_company&.company
   end
 
   def role
@@ -121,6 +132,10 @@ class User < ApplicationRecord
 
   def mayor?
     role.mayor?
+  end
+
+  def support?
+    role.support?
   end
 
   def secretary?

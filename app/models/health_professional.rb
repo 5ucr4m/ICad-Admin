@@ -5,7 +5,7 @@ class HealthProfessional < ApplicationRecord
   include Tenantable
 
   belongs_to :cbo_code, class_name: 'GenericModel'
-  belongs_to :professional_team
+  belongs_to :professional_team, optional: true
   belongs_to :company, optional: true
 
   has_one :user, dependent: :destroy

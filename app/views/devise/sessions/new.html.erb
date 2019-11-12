@@ -1,6 +1,6 @@
 <div class="card mb-3">
   <div class="card-body p-5">
-    <div class="card-title font-weight-bold">Login</div>
+    <div class="card-title font-weight-bold">Identifique-se</div>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), class: 'card') do |f| %>
       <%= render 'application/flashes' %>
       <%= f.input :email, required: false, autofocus: true do %>
@@ -28,5 +28,3 @@
     <% end %>
   </div>
 </div>
-
-<%= render "devise/shared/links" %>

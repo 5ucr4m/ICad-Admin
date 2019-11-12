@@ -1,32 +1,14 @@
 # frozen_string_literal: true
 
 class DashboardsController < WebController
-  before_action :tabs
 
   def dashboard
     @vaccination_campaigns = VaccinationCampaign.last(5)
-    @periods = Period.order(:end_date).last(3)
-  end
-
-  private
-
-  def tabs
-    @tabs = [
-      OpenStruct.new(id: 'families',
-                     name: Family.model_name.human(count: 2),
-                     active: true,
-                     value: Family.count),
-      OpenStruct.new(id: 'family-member',
-                     name: FamilyMember.model_name.human(count: 2),
-                     active: false,
-                     value: FamilyMember.count),
-      OpenStruct.new(id: 'home-visit-registrations',
-                     name: HomeVisitRegistration.model_name.human(count: 2),
-                     active: false,
-                     value: HomeVisitRegistration.count),
-      OpenStruct.new(id: 'periods',
-                     name: Period.model_name.human(count: 2),
-                     active: false, value: Period.count)
-    ]
+    @periods = Period.order(end_date: :desc).last(3)
+    @families = user.agent? ? Family.where(user: user).count : Family.count
+    @family_members = user.agent? ? FamilyMember.where(user: user).count : FamilyMember.count
+    @home_registrations = user.agent? ? HomeRegistration.where(user: user).count : HomeRegistration.count
+    @home_visit_registrations = user.agent? ? HomeVisitRegistration.where(user: user).count : HomeVisitRegistration.count
+    @individual_registrations = user.agent? ? IndividualRegistration.where(user: user).count : IndividualRegistration.count
   end
 end

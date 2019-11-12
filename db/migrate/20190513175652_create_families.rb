@@ -13,6 +13,7 @@ class CreateFamilies < ActiveRecord::Migration[6.0]
       t.boolean :moving
       t.belongs_to :company, foreign_key: true, index: true
       t.string :slug
+      t.belongs_to :user
 
       t.timestamps
     end

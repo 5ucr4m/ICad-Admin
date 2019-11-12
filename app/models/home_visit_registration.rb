@@ -30,6 +30,7 @@ class HomeVisitRegistration < ApplicationRecord
 
   belongs_to :family_member
   belongs_to :company, optional: true
+  belongs_to :user
 
   has_many :home_visit_forms, dependent: :destroy
 

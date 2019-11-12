@@ -6,7 +6,11 @@ module Api
     include JsonExceptionHandler
     include DeviseTokenAuth::Concerns::SetUserByToken
 
-    before_action :authenticate_user!
+    before_action :authenticate_user!, :set_paper_trail_whodunnit
+
+    def info_for_paper_trail
+      { ip: request.remote_ip, user_agent: request.user_agent }
+    end
 
     respond_to :json
 

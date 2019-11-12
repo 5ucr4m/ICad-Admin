@@ -3,6 +3,8 @@
 class CitiesController < WebController
   before_action :set_city, only: %i[show edit update destroy]
 
+  breadcrumb City.model_name.human(count: 2), :cities_path
+
   # GET /cities
   def index
     @query = City.ransack(params[:q])

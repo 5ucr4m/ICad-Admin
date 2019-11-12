@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get 'chart_families'
       get 'chart_family_members'
       get 'chart_home_visit_registrations'
+      get 'chart_home_registrations'
+      get 'chart_individual_registrations'
       get 'chart_periods'
       get 'chart_vaccinations'
     end
@@ -71,21 +73,14 @@ Rails.application.routes.draw do
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
-    sign_out: 'logout',
-    password: 'password',
-    confirmation: 'verification',
-    registration: 'register',
-    edit: 'user/profile'
+    sign_out: 'logout'
+  }, controllers: {
+    registrations: 'registrations'
   }
-
-  devise_scope :user do
-    resources :users, path: 'profile', only: %i[index edit update destroy]
-  end
 
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-      sessions: 'api/overrides/sessions',
-      registrations: 'api/overrides/registrations'
+      sessions: 'api/overrides/sessions'
     }
 
     resources :states

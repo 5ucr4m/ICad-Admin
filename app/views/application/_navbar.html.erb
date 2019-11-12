@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex">
       <%= link_to root_path, class: 'header-brand text-blue-deep' do %>
-        <%= image_tag 'logo.png', class: 'header-brand-img mr-2', alt: 'image' %><%= app_name ||= 'AppName' %>
+        <%= image_tag 'logo.png', class: 'header-brand-img mr-2', alt: 'image' %><%= ENV['APP_NAME'] ||= 'AppName' %>
       <% end %>
       <div class="d-flex order-lg-2 ml-auto">
         <div class="dropdown">
@@ -11,12 +11,12 @@
             <span class="ml-2 d-none d-lg-block">
               <span class="text-blue-deep font-weight-bold"><%= current_user.email %></span>
                 <small class="text-muted font-weight-bold d-block mt-1">
-                  <%= current_user.role.name.mb_chars.upcase %>
+                  <%= current_user.role.name.mb_chars %>
                 </small>
             </span>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-            <%= link_to edit_user_path(current_user.slug), class: 'dropdown-item' do %>
+            <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
               <i class="fas fa-user-edit dropdown-icon"></i> Profile
             <% end %>
             <%= link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do %>

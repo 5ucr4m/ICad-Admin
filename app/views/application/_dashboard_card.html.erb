@@ -1,21 +1,21 @@
-<div class="col-xl col-lg-6 col-md-6 col-sm-12">
-  <div class="card card-stats-<%= color %> mb-4">
-    <div class="card-body p-3">
-      <div class="row">
-        <div class="col">
-          <div class="h4 card-title font-weight-bold mb-0">
-            <%= link_to action do %>
+<div class="col-lg-3">
+  <%= link_to action, class: 'text-decoration-none' do %>
+    <div class="card card-stats bg-blue-deep mb-4">
+      <div class="card-body p-3">
+        <div class="row">
+          <div class="col">
+            <div class="h4 card-title font-weight-bold mb-0">
               <%= description %>
-            <% end %>
+            </div>
+            <span class="h1 font-weight-bold mb-0"><%= value ||= 0 %></span>
           </div>
-          <span class="h1 font-weight-bold mb-0"><%= value ||= 0 %></span>
-        </div>
-        <div class="col-auto">
-          <div class="bg-white card-icon rounded-circle shadow">
-            <i class="fas fa-<%= icon ||= 'fas fa-cube' %> text-gradient-<%= color %>"></i>
+          <div class="col-auto">
+            <div class="bg-white card-icon rounded-circle shadow">
+              <i class="fas fa-<%= icon ||= 'fas fa-cube' %> text-blue-deep"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

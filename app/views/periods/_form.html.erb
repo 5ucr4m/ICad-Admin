@@ -1,6 +1,6 @@
 <%= simple_form_for(@period) do |f| %>
   <% content_for :body do %>
-    <%= f.input :competence, collection: period_months.collect {|m| %W(#{m[0]}/#{m[1]} #{m[0]}/#{m[1]})},
+    <%= f.input :competence, collection: period_months.collect {|m| %W(#{t('date.month_names')[m[0]]}/#{m[1]} #{m[0]}/#{m[1]})},
                 wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.input :start_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :end_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>

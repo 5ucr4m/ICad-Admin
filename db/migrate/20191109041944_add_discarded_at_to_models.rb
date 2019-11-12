@@ -1,0 +1,143 @@
+class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
+  def change
+    add_column :addresses, :discarded_at, :datetime
+    add_column :cancel_registrations, :discarded_at, :datetime
+    add_column :families, :discarded_at, :datetime
+    add_column :family_members, :discarded_at, :datetime
+    add_column :family_member_disabilities, :discarded_at, :datetime
+    add_column :header_transports, :discarded_at, :datetime
+    add_column :health_conditions, :discarded_at, :datetime
+    add_column :health_condition_diseases, :discarded_at, :datetime
+    add_column :health_condition_kidneys, :discarded_at, :datetime
+    add_column :health_establishments, :discarded_at, :datetime
+    add_column :health_professionals, :discarded_at, :datetime
+    add_column :home_registrations, :discarded_at, :datetime
+    add_column :home_registration_pets, :discarded_at, :datetime
+    add_column :home_visit_forms, :discarded_at, :datetime
+    add_column :home_visit_reasons, :discarded_at, :datetime
+    add_column :home_visit_registrations, :discarded_at, :datetime
+    add_column :in_street_hygiene_accesses, :discarded_at, :datetime
+    add_column :in_street_situations, :discarded_at, :datetime
+    add_column :in_street_situation_meals, :discarded_at, :datetime
+    add_column :individual_registrations, :discarded_at, :datetime
+    add_column :living_conditions, :discarded_at, :datetime
+    add_column :periods, :discarded_at, :datetime
+    add_column :period_items, :discarded_at, :datetime
+    add_column :permanence_institutions, :discarded_at, :datetime
+    add_column :professional_teams, :discarded_at, :datetime
+    add_column :responsible_children, :discarded_at, :datetime
+    add_column :sms_messages, :discarded_at, :datetime
+    add_column :sms_schedules, :discarded_at, :datetime
+    add_column :sociodemographic_infos, :discarded_at, :datetime
+    add_column :vaccinations, :discarded_at, :datetime
+    add_column :vaccination_campaigns, :discarded_at, :datetime
+    add_column :vaccination_vaccines, :discarded_at, :datetime
+    add_column :vaccines, :discarded_at, :datetime
+    add_column :role_permissions, :discarded_at, :datetime
+
+    add_column :addresses, :ip, :datetime
+    add_column :cancel_registrations, :ip, :datetime
+    add_column :families, :ip, :datetime
+    add_column :family_members, :ip, :datetime
+    add_column :family_member_disabilities, :ip, :datetime
+    add_column :header_transports, :ip, :datetime
+    add_column :health_conditions, :ip, :datetime
+    add_column :health_condition_diseases, :ip, :datetime
+    add_column :health_condition_kidneys, :ip, :datetime
+    add_column :health_establishments, :ip, :datetime
+    add_column :health_professionals, :ip, :datetime
+    add_column :home_registrations, :ip, :datetime
+    add_column :home_registration_pets, :ip, :datetime
+    add_column :home_visit_forms, :ip, :datetime
+    add_column :home_visit_reasons, :ip, :datetime
+    add_column :home_visit_registrations, :ip, :datetime
+    add_column :in_street_hygiene_accesses, :ip, :datetime
+    add_column :in_street_situations, :ip, :datetime
+    add_column :in_street_situation_meals, :ip, :datetime
+    add_column :individual_registrations, :ip, :datetime
+    add_column :living_conditions, :ip, :datetime
+    add_column :periods, :ip, :datetime
+    add_column :period_items, :ip, :datetime
+    add_column :permanence_institutions, :ip, :datetime
+    add_column :professional_teams, :ip, :datetime
+    add_column :responsible_children, :ip, :datetime
+    add_column :sms_messages, :ip, :datetime
+    add_column :sms_schedules, :ip, :datetime
+    add_column :sociodemographic_infos, :ip, :datetime
+    add_column :vaccinations, :ip, :datetime
+    add_column :vaccination_campaigns, :ip, :datetime
+    add_column :vaccination_vaccines, :ip, :datetime
+    add_column :vaccines, :ip, :datetime
+    add_column :role_permissions, :ip, :datetime
+
+    add_index :addresses, :discarded_at
+    add_index :cancel_registrations, :discarded_at
+    add_index :families, :discarded_at
+    add_index :family_members, :discarded_at
+    add_index :family_member_disabilities, :discarded_at
+    add_index :header_transports, :discarded_at
+    add_index :health_conditions, :discarded_at
+    add_index :health_condition_diseases, :discarded_at
+    add_index :health_condition_kidneys, :discarded_at
+    add_index :health_establishments, :discarded_at
+    add_index :health_professionals, :discarded_at
+    add_index :home_registrations, :discarded_at
+    add_index :home_registration_pets, :discarded_at
+    add_index :home_visit_forms, :discarded_at
+    add_index :home_visit_reasons, :discarded_at
+    add_index :home_visit_registrations, :discarded_at
+    add_index :in_street_hygiene_accesses, :discarded_at
+    add_index :in_street_situations, :discarded_at
+    add_index :in_street_situation_meals, :discarded_at
+    add_index :individual_registrations, :discarded_at
+    add_index :living_conditions, :discarded_at
+    add_index :periods, :discarded_at
+    add_index :period_items, :discarded_at
+    add_index :permanence_institutions, :discarded_at
+    add_index :professional_teams, :discarded_at
+    add_index :responsible_children, :discarded_at
+    add_index :sms_messages, :discarded_at
+    add_index :sms_schedules, :discarded_at
+    add_index :sociodemographic_infos, :discarded_at
+    add_index :vaccinations, :discarded_at
+    add_index :vaccination_campaigns, :discarded_at
+    add_index :vaccination_vaccines, :discarded_at
+    add_index :vaccines, :discarded_at
+    add_index :role_permissions, :discarded_at
+
+    add_index :addresses, :ip
+    add_index :cancel_registrations, :ip
+    add_index :families, :ip
+    add_index :family_members, :ip
+    add_index :family_member_disabilities, :ip
+    add_index :header_transports, :ip
+    add_index :health_conditions, :ip
+    add_index :health_condition_diseases, :ip
+    add_index :health_condition_kidneys, :ip
+    add_index :health_establishments, :ip
+    add_index :health_professionals, :ip
+    add_index :home_registrations, :ip
+    add_index :home_registration_pets, :ip
+    add_index :home_visit_forms, :ip
+    add_index :home_visit_reasons, :ip
+    add_index :home_visit_registrations, :ip
+    add_index :in_street_hygiene_accesses, :ip
+    add_index :in_street_situations, :ip
+    add_index :in_street_situation_meals, :ip
+    add_index :individual_registrations, :ip
+    add_index :living_conditions, :ip
+    add_index :periods, :ip
+    add_index :period_items, :ip
+    add_index :permanence_institutions, :ip
+    add_index :professional_teams, :ip
+    add_index :responsible_children, :ip
+    add_index :sms_messages, :ip
+    add_index :sms_schedules, :ip
+    add_index :sociodemographic_infos, :ip
+    add_index :vaccinations, :ip
+    add_index :vaccination_campaigns, :ip
+    add_index :vaccination_vaccines, :ip
+    add_index :vaccines, :ip
+    add_index :role_permissions, :ip
+  end
+end

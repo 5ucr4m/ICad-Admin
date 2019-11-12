@@ -3,6 +3,8 @@
 class StatesController < WebController
   before_action :set_state, only: %i[show edit update destroy]
 
+  breadcrumb State.model_name.human(count: 2), :states_path
+
   # GET /states
   def index
     @query = State.ransack(params[:q])

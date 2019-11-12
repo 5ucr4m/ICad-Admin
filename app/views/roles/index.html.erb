@@ -5,11 +5,11 @@
     <div class="col-sm-12 col-lg-12">
       <div class="form-row">
         <div class="col-sm-12 col-lg-6 p-0">
-          <%= render 'application/pagy_count', list: @pagy %>
+          <%= render 'application/pagy_count', list: @pagy, model: Role, url: new_role_path %>
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>
-          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
           <% end %>
         </div>
       </div>
@@ -19,23 +19,21 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-                  <th><%= Role.human_attribute_name :name %></th>
-                  <th><%= Role.human_attribute_name :description %></th>
-                  <th><%= Role.human_attribute_name :role_type %></th>
-                  <th><%= Role.human_attribute_name :admin %></th>
-                  <th><%= Role.human_attribute_name :slug %></th>
-                <th><%= t('helpers.labels.actions') %></th>
+        <th><%= Role.human_attribute_name :name %></th>
+        <th><%= Role.human_attribute_name :description %></th>
+        <th><%= Role.human_attribute_name :role_type %></th>
+        <th><%= Role.human_attribute_name :admin %></th>
+        <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @roles.each do |role| %>
         <tr>
-                      <td><%= role.name %></td>
-                      <td><%= role.description %></td>
-                      <td><%= role.role_type %></td>
-                      <td><%= role.admin %></td>
-                      <td><%= role.slug %></td>
-                    <td class="text-center">
+          <td><%= role.name %></td>
+          <td><%= role.description %></td>
+          <td><%= role.role_type %></td>
+          <td><%= role.admin ? 'SIM' : 'NÃO' %></td>
+          <td class="text-center">
             <%= render 'application/table_links', f: role %>
           </td>
         </tr>

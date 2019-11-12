@@ -5,7 +5,7 @@
     <div class="col-sm-12 col-lg-12">
       <div class="form-row">
         <div class="col-sm-12 col-lg-6 p-0">
-          <%= render 'application/pagy_count', list: @pagy %>
+          <%= render 'application/pagy_count', list: @pagy, model: Vaccine, url: new_vaccine_path %>
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>
@@ -25,8 +25,6 @@
         <th><%= Vaccine.human_attribute_name :dose %></th>
         <th><%= Vaccine.human_attribute_name :lot_number %></th>
         <th><%= Vaccine.human_attribute_name :manufacturer %></th>
-        <th><%= Vaccine.human_attribute_name :company %></th>
-        <th><%= Vaccine.human_attribute_name :slug %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
@@ -34,13 +32,11 @@
       <% @vaccines.each do |vaccine| %>
         <tr>
           <td><%= vaccine.description %></td>
-          <td><%= vaccine.immunobiological_id %></td>
-          <td><%= vaccine.vaccination_strategy_id %></td>
-          <td><%= vaccine.dose_id %></td>
+          <td><%= vaccine.immunobiological.name_formatted %></td>
+          <td><%= vaccine.vaccination_strategy.name_formatted %></td>
+          <td><%= vaccine.dose.name_formatted %></td>
           <td><%= vaccine.lot_number %></td>
           <td><%= vaccine.manufacturer %></td>
-          <td><%= vaccine.company_id %></td>
-          <td><%= vaccine.slug %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: vaccine %>
           </td>

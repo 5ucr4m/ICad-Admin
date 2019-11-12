@@ -3,6 +3,8 @@
 class VaccinesController < WebController
   before_action :set_vaccine, only: %i[show edit update destroy]
 
+  breadcrumb Vaccine.model_name.human(count: 2), :vaccines_path
+
   # GET /vaccines
   def index
     @query = Vaccine.ransack(params[:q])

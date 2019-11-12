@@ -1,0 +1,16 @@
+<% if model.errors.any? %>
+  <div class="card text-white bg-danger mb-4">
+    <div class="card-body">
+      <h4 class="card-title font-weight-bold">
+        <%= I18n.t("errors.messages.not_saved",
+                   count: model&.errors&.count,
+                   resource: model&.class&.model_name&.human) %>
+      </h4>
+      <ul class="card-text">
+        <% model.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

@@ -1,8 +1,36 @@
 <%= simple_form_for @user do |f| %>
   <% content_for :body do %>
-    <%= f.input :email, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :password, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :password_confirmation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <% if f.object.avatar.attached? %>
+                  <%= image_tag url_for(f.object.avatar) %>
+                <% else %>
+                  <%= image_tag '//via.placeholder.com/200' %>
+                <% end %>
+                <% unless show?(f.object.persisted?) %>
+                  <div class="card-footer">
+                    <%= f.file_field :avatar, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-10">
+          <div class="row">
+            <%= f.input :email, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+            <% unless f.object.persisted? %>
+              <%= f.input :password, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+              <%= f.input :password_confirmation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-12">
       <div class="card mb-3">
         <div class="card-header">
@@ -22,19 +50,19 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
-      <div class="card mb-3">
-        <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-check mr-2"></i><%= Role.model_name.human(count: 2) %>
-          </h3>
-          <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
-              <i class="fe fe-chevron-up"></i>
-            </a>
+    <% if can? :manage, User %>
+      <div class="col-12">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-check mr-2"></i><%= Role.model_name.human(count: 2) %>
+            </h3>
+            <div class="card-options">
+              <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+                <i class="fe fe-chevron-up"></i>
+              </a>
+            </div>
           </div>
-        </div>
-        <% if can? :manage, User %>
           <% unless show?(f.object.persisted?) %>
             <div class="card-body py-2">
               <%= link_to_add_association f, :user_companies,
@@ -48,14 +76,14 @@
               <% end %>
             </div>
           <% end %>
-        <% end %>
-        <div id="user_companies" class="card-body px-3">
-          <%= f.simple_fields_for :user_companies do |user_company| %>
-            <%= render 'application/user_company_fields', f: user_company %>
-          <% end %>
+          <div id="user_companies" class="card-body px-3">
+            <%= f.simple_fields_for :user_companies do |user_company| %>
+              <%= render 'application/user_company_fields', f: user_company %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @user} %>
 <% end %>

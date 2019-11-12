@@ -4,14 +4,16 @@ class CreateUsers < SeedMigration::Migration
   def up
     company = Company.first
     RailsMultitenant::GlobalContextRegistry[:company_id] = company.id
-    (10..30).to_a.sample.times do
-      user = User.create! email: Faker::Internet.free_email,
-                          password: '123456', password_confirmation: '123456'
-
-      user_company = UserCompany.create(user: user, company: company, current: true)
-      role = Role.order('RANDOM()')&.first
-      UserRole.create! user_company: user_company, role: role
-    end
+    admin = User.create! email: 'administrador@icadx.com.br',
+                        password: '4dmin112@@@', password_confirmation: '4dmin112@@@'
+    support = User.create! email: 'suporte@icadx.com.br',
+                        password: '5upport112@@@', password_confirmation: '5upport112@@@'
+    admin_company = UserCompany.create(user: admin, company: company, current: true)
+    support_company = UserCompany.create(user: support, company: company, current: true)
+    admin_role = Role.find_by(role_type: 0)
+    support_role = Role.find_by(role_type: 8)
+    UserRole.create! user_company: admin_company, role: admin_role
+    UserRole.create! user_company: support_company, role: support_role
   end
 
   def down; end

@@ -70,6 +70,7 @@ class FamilyMember < ApplicationRecord
   belongs_to :gender, class_name: 'GenericModel'
   belongs_to :ethnicity, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
+  belongs_to :user
 
   has_one :individual_registration, dependent: :destroy
   has_many :vaccinations

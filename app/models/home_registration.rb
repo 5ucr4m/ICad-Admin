@@ -54,6 +54,7 @@ class HomeRegistration < ApplicationRecord
   belongs_to :living_condition
   belongs_to :permanence_institution, optional: true
   belongs_to :company, optional: true
+  belongs_to :user
 
   has_many :home_registration_pets, dependent: :destroy
   has_many :families, dependent: :nullify

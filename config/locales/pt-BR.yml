@@ -1,7 +1,13 @@
 ---
 pt-BR:
+  titles:
+    application: ICADX - Sistema de Gestão de UBS - %{subtitle}
   activerecord:
     models:
+      session:
+        other: Login
+      registration:
+        other: Profile
       company:
         one: Prefeitura
         other: Prefeituras
@@ -14,6 +20,10 @@ pt-BR:
         one: Cidade
         other: Cidades
         icon: fas fa-location-arrow
+      state:
+        one: Estado
+        other: Estados
+        icon: fas fa-thumbtack
       user:
         one: Usuário
         other: Usuários
@@ -240,6 +250,14 @@ pt-BR:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros'
   helpers:
+    actions:
+      index: Listagem
+      new: Novo(a)
+      show: Visualizar
+      edit: Atualizar
+      create: Novo(a)
+      update: Atualizar
+      destroy: Remover
     messages:
       success:
         create: 'Registro de %{model} inserido com sucesso!'

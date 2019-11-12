@@ -6,14 +6,17 @@ class Ability
   def initialize(user)
     return if user&.company.blank?
 
-    if user.email == 'maryellen.kaulke@yahoo.com'
-      can :manage, :all
-    elsif user.admin?
+    if user.role.admin?
       can :manage, :all
     else
       can :manage, user, slug: user.slug
       user.role.permissions.each do |permission|
-        can :manage, permission.model_reference.singularize.constantize
+        model = permission.model_reference.singularize.constantize
+        if user.role.agent? && Role::FORMS.include?(model)
+          can :manage, model, user_id: user.id
+        else
+          can :manage, model
+        end
       end
     end
   end

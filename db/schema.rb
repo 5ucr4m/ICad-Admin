@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_043356) do
+ActiveRecord::Schema.define(version: 2019_11_09_041944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,9 +53,13 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["address_type_id"], name: "index_addresses_on_address_type_id"
     t.index ["city_id"], name: "index_addresses_on_city_id"
     t.index ["company_id"], name: "index_addresses_on_company_id"
+    t.index ["discarded_at"], name: "index_addresses_on_discarded_at"
+    t.index ["ip"], name: "index_addresses_on_ip"
   end
 
   create_table "cancel_registrations", force: :cascade do |t|
@@ -66,7 +70,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_cancel_registrations_on_company_id"
+    t.index ["discarded_at"], name: "index_cancel_registrations_on_discarded_at"
+    t.index ["ip"], name: "index_cancel_registrations_on_ip"
     t.index ["left_reason_id"], name: "index_cancel_registrations_on_left_reason_id"
   end
 
@@ -111,11 +119,17 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.boolean "moving"
     t.bigint "company_id"
     t.string "slug"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_families_on_company_id"
+    t.index ["discarded_at"], name: "index_families_on_discarded_at"
     t.index ["family_income_id"], name: "index_families_on_family_income_id"
     t.index ["home_registration_id"], name: "index_families_on_home_registration_id"
+    t.index ["ip"], name: "index_families_on_ip"
+    t.index ["user_id"], name: "index_families_on_user_id"
   end
 
   create_table "family_member_disabilities", force: :cascade do |t|
@@ -125,8 +139,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_family_member_disabilities_on_company_id"
     t.index ["disability_id"], name: "index_family_member_disabilities_on_disability_id"
+    t.index ["discarded_at"], name: "index_family_member_disabilities_on_discarded_at"
+    t.index ["ip"], name: "index_family_member_disabilities_on_ip"
     t.index ["sociodemographic_info_id"], name: "index_family_member_disabilities_on_sociodemographic_info_id"
   end
 
@@ -158,16 +176,22 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.boolean "out_area"
     t.bigint "company_id"
     t.string "slug"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["birth_country_id"], name: "index_family_members_on_birth_country_id"
     t.index ["city_id"], name: "index_family_members_on_city_id"
     t.index ["company_id"], name: "index_family_members_on_company_id"
+    t.index ["discarded_at"], name: "index_family_members_on_discarded_at"
     t.index ["ethnicity_id"], name: "index_family_members_on_ethnicity_id"
     t.index ["family_id"], name: "index_family_members_on_family_id"
     t.index ["gender_id"], name: "index_family_members_on_gender_id"
+    t.index ["ip"], name: "index_family_members_on_ip"
     t.index ["nationality_id"], name: "index_family_members_on_nationality_id"
     t.index ["race_id"], name: "index_family_members_on_race_id"
+    t.index ["user_id"], name: "index_family_members_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -204,9 +228,13 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["city_id"], name: "index_header_transports_on_city_id"
     t.index ["company_id"], name: "index_header_transports_on_company_id"
+    t.index ["discarded_at"], name: "index_header_transports_on_discarded_at"
     t.index ["health_professional_id"], name: "index_header_transports_on_health_professional_id"
+    t.index ["ip"], name: "index_header_transports_on_ip"
     t.index ["main_lot_form_id"], name: "index_header_transports_on_main_lot_form_id"
     t.index ["shared_lot_form_id"], name: "index_header_transports_on_shared_lot_form_id"
   end
@@ -218,9 +246,13 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_health_condition_diseases_on_company_id"
+    t.index ["discarded_at"], name: "index_health_condition_diseases_on_discarded_at"
     t.index ["disease_type_id"], name: "index_health_condition_diseases_on_disease_type_id"
     t.index ["health_condition_id"], name: "index_health_condition_diseases_on_health_condition_id"
+    t.index ["ip"], name: "index_health_condition_diseases_on_ip"
   end
 
   create_table "health_condition_kidneys", force: :cascade do |t|
@@ -230,8 +262,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_health_condition_kidneys_on_company_id"
+    t.index ["discarded_at"], name: "index_health_condition_kidneys_on_discarded_at"
     t.index ["health_condition_id"], name: "index_health_condition_kidneys_on_health_condition_id"
+    t.index ["ip"], name: "index_health_condition_kidneys_on_ip"
     t.index ["kidney_problem_id"], name: "index_health_condition_kidneys_on_kidney_problem_id"
   end
 
@@ -267,7 +303,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_health_conditions_on_company_id"
+    t.index ["discarded_at"], name: "index_health_conditions_on_discarded_at"
+    t.index ["ip"], name: "index_health_conditions_on_ip"
     t.index ["weight_situation_id"], name: "index_health_conditions_on_weight_situation_id"
   end
 
@@ -286,7 +326,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_health_establishments_on_company_id"
+    t.index ["discarded_at"], name: "index_health_establishments_on_discarded_at"
+    t.index ["ip"], name: "index_health_establishments_on_ip"
     t.index ["unit_type_id"], name: "index_health_establishments_on_unit_type_id"
   end
 
@@ -301,8 +345,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["cbo_code_id"], name: "index_health_professionals_on_cbo_code_id"
     t.index ["company_id"], name: "index_health_professionals_on_company_id"
+    t.index ["discarded_at"], name: "index_health_professionals_on_discarded_at"
+    t.index ["ip"], name: "index_health_professionals_on_ip"
     t.index ["professional_team_id"], name: "index_health_professionals_on_professional_team_id"
   end
 
@@ -313,8 +361,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_home_registration_pets_on_company_id"
+    t.index ["discarded_at"], name: "index_home_registration_pets_on_discarded_at"
     t.index ["home_registration_id"], name: "index_home_registration_pets_on_home_registration_id"
+    t.index ["ip"], name: "index_home_registration_pets_on_ip"
     t.index ["pet_type_id"], name: "index_home_registration_pets_on_pet_type_id"
   end
 
@@ -335,14 +387,20 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.boolean "finished"
     t.bigint "company_id"
     t.string "slug"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["address_id"], name: "index_home_registrations_on_address_id"
     t.index ["company_id"], name: "index_home_registrations_on_company_id"
+    t.index ["discarded_at"], name: "index_home_registrations_on_discarded_at"
     t.index ["health_professional_id"], name: "index_home_registrations_on_health_professional_id"
     t.index ["home_type_id"], name: "index_home_registrations_on_home_type_id"
+    t.index ["ip"], name: "index_home_registrations_on_ip"
     t.index ["living_condition_id"], name: "index_home_registrations_on_living_condition_id"
     t.index ["permanence_institution_id"], name: "index_home_registrations_on_permanence_institution_id"
+    t.index ["user_id"], name: "index_home_registrations_on_user_id"
   end
 
   create_table "home_visit_forms", force: :cascade do |t|
@@ -363,10 +421,14 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_home_visit_forms_on_company_id"
+    t.index ["discarded_at"], name: "index_home_visit_forms_on_discarded_at"
     t.index ["gender_id"], name: "index_home_visit_forms_on_gender_id"
     t.index ["home_type_id"], name: "index_home_visit_forms_on_home_type_id"
     t.index ["home_visit_registration_id"], name: "index_home_visit_forms_on_home_visit_registration_id"
+    t.index ["ip"], name: "index_home_visit_forms_on_ip"
     t.index ["outcome_id"], name: "index_home_visit_forms_on_outcome_id"
     t.index ["turn_id"], name: "index_home_visit_forms_on_turn_id"
   end
@@ -378,8 +440,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_home_visit_reasons_on_company_id"
+    t.index ["discarded_at"], name: "index_home_visit_reasons_on_discarded_at"
     t.index ["home_visit_form_id"], name: "index_home_visit_reasons_on_home_visit_form_id"
+    t.index ["ip"], name: "index_home_visit_reasons_on_ip"
     t.index ["reason_id"], name: "index_home_visit_reasons_on_reason_id"
   end
 
@@ -389,10 +455,16 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "tp_cds_origin"
     t.bigint "company_id"
     t.string "slug"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_home_visit_registrations_on_company_id"
+    t.index ["discarded_at"], name: "index_home_visit_registrations_on_discarded_at"
     t.index ["family_member_id"], name: "index_home_visit_registrations_on_family_member_id"
+    t.index ["ip"], name: "index_home_visit_registrations_on_ip"
+    t.index ["user_id"], name: "index_home_visit_registrations_on_user_id"
   end
 
   create_table "in_street_hygiene_accesses", force: :cascade do |t|
@@ -402,9 +474,13 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_in_street_hygiene_accesses_on_company_id"
+    t.index ["discarded_at"], name: "index_in_street_hygiene_accesses_on_discarded_at"
     t.index ["hygiene_access_id"], name: "index_in_street_hygiene_accesses_on_hygiene_access_id"
     t.index ["in_street_situation_id"], name: "index_in_street_hygiene_accesses_on_in_street_situation_id"
+    t.index ["ip"], name: "index_in_street_hygiene_accesses_on_ip"
   end
 
   create_table "in_street_situation_meals", force: :cascade do |t|
@@ -414,8 +490,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_in_street_situation_meals_on_company_id"
+    t.index ["discarded_at"], name: "index_in_street_situation_meals_on_discarded_at"
     t.index ["in_street_situation_id"], name: "index_in_street_situation_meals_on_in_street_situation_id"
+    t.index ["ip"], name: "index_in_street_situation_meals_on_ip"
     t.index ["meal_origin_type_id"], name: "index_in_street_situation_meals_on_meal_origin_type_id"
   end
 
@@ -434,7 +514,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_in_street_situations_on_company_id"
+    t.index ["discarded_at"], name: "index_in_street_situations_on_discarded_at"
+    t.index ["ip"], name: "index_in_street_situations_on_ip"
     t.index ["meals_per_day_id"], name: "index_in_street_situations_on_meals_per_day_id"
     t.index ["street_situation_time_id"], name: "index_in_street_situations_on_street_situation_time_id"
   end
@@ -455,14 +539,20 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.datetime "final_date_hour"
     t.bigint "company_id"
     t.string "slug"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["cancel_registration_id"], name: "index_individual_registrations_on_cancel_registration_id"
     t.index ["company_id"], name: "index_individual_registrations_on_company_id"
+    t.index ["discarded_at"], name: "index_individual_registrations_on_discarded_at"
     t.index ["family_member_id"], name: "index_individual_registrations_on_family_member_id"
     t.index ["health_condition_id"], name: "index_individual_registrations_on_health_condition_id"
     t.index ["in_street_situation_id"], name: "index_individual_registrations_on_in_street_situation_id"
+    t.index ["ip"], name: "index_individual_registrations_on_ip"
     t.index ["sociodemographic_info_id"], name: "index_individual_registrations_on_sociodemographic_info_id"
+    t.index ["user_id"], name: "index_individual_registrations_on_user_id"
   end
 
   create_table "living_conditions", force: :cascade do |t|
@@ -483,14 +573,18 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["bathroom_drainage_id"], name: "index_living_conditions_on_bathroom_drainage_id"
     t.index ["company_id"], name: "index_living_conditions_on_company_id"
+    t.index ["discarded_at"], name: "index_living_conditions_on_discarded_at"
     t.index ["garbage_disposal_id"], name: "index_living_conditions_on_garbage_disposal_id"
     t.index ["home_access_id"], name: "index_living_conditions_on_home_access_id"
     t.index ["home_location_id"], name: "index_living_conditions_on_home_location_id"
     t.index ["home_situation_id"], name: "index_living_conditions_on_home_situation_id"
     t.index ["home_type_id"], name: "index_living_conditions_on_home_type_id"
     t.index ["home_wall_material_id"], name: "index_living_conditions_on_home_wall_material_id"
+    t.index ["ip"], name: "index_living_conditions_on_ip"
     t.index ["rural_production_area_id"], name: "index_living_conditions_on_rural_production_area_id"
     t.index ["water_supply_id"], name: "index_living_conditions_on_water_supply_id"
     t.index ["water_treatment_id"], name: "index_living_conditions_on_water_treatment_id"
@@ -525,6 +619,10 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.bigint "registrable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
+    t.index ["discarded_at"], name: "index_period_items_on_discarded_at"
+    t.index ["ip"], name: "index_period_items_on_ip"
     t.index ["period_id"], name: "index_period_items_on_period_id"
     t.index ["registrable_type", "registrable_id"], name: "index_period_items_on_registrable_type_and_registrable_id"
     t.index ["serialized_type_id"], name: "index_period_items_on_serialized_type_id"
@@ -539,7 +637,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_periods_on_company_id"
+    t.index ["discarded_at"], name: "index_periods_on_discarded_at"
+    t.index ["ip"], name: "index_periods_on_ip"
   end
 
   create_table "permanence_institutions", force: :cascade do |t|
@@ -553,7 +655,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_permanence_institutions_on_company_id"
+    t.index ["discarded_at"], name: "index_permanence_institutions_on_discarded_at"
+    t.index ["ip"], name: "index_permanence_institutions_on_ip"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -575,8 +681,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_professional_teams_on_company_id"
+    t.index ["discarded_at"], name: "index_professional_teams_on_discarded_at"
     t.index ["health_establishment_id"], name: "index_professional_teams_on_health_establishment_id"
+    t.index ["ip"], name: "index_professional_teams_on_ip"
   end
 
   create_table "responsible_children", force: :cascade do |t|
@@ -586,8 +696,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_responsible_children_on_company_id"
+    t.index ["discarded_at"], name: "index_responsible_children_on_discarded_at"
     t.index ["individual_registration_id"], name: "index_responsible_children_on_individual_registration_id"
+    t.index ["ip"], name: "index_responsible_children_on_ip"
     t.index ["responsible_child_type_id"], name: "index_responsible_children_on_responsible_child_type_id"
   end
 
@@ -595,10 +709,12 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.bigint "role_id"
     t.bigint "permission_id"
     t.string "slug"
-    t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_role_permissions_on_company_id"
+    t.datetime "discarded_at"
+    t.datetime "ip"
+    t.index ["discarded_at"], name: "index_role_permissions_on_discarded_at"
+    t.index ["ip"], name: "index_role_permissions_on_ip"
     t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
     t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
@@ -630,7 +746,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_sms_messages_on_company_id"
+    t.index ["discarded_at"], name: "index_sms_messages_on_discarded_at"
+    t.index ["ip"], name: "index_sms_messages_on_ip"
     t.index ["sms_schedule_id"], name: "index_sms_messages_on_sms_schedule_id"
   end
 
@@ -643,7 +763,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.bigint "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_sms_schedules_on_company_id"
+    t.index ["discarded_at"], name: "index_sms_schedules_on_discarded_at"
+    t.index ["ip"], name: "index_sms_schedules_on_ip"
   end
 
   create_table "sociodemographic_infos", force: :cascade do |t|
@@ -666,9 +790,13 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_sociodemographic_infos_on_company_id"
+    t.index ["discarded_at"], name: "index_sociodemographic_infos_on_discarded_at"
     t.index ["education_level_id"], name: "index_sociodemographic_infos_on_education_level_id"
     t.index ["gender_identity_id"], name: "index_sociodemographic_infos_on_gender_identity_id"
+    t.index ["ip"], name: "index_sociodemographic_infos_on_ip"
     t.index ["job_market_situation_id"], name: "index_sociodemographic_infos_on_job_market_situation_id"
     t.index ["occupation_id"], name: "index_sociodemographic_infos_on_occupation_id"
     t.index ["parent_relation_id"], name: "index_sociodemographic_infos_on_parent_relation_id"
@@ -753,7 +881,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_vaccination_campaigns_on_company_id"
+    t.index ["discarded_at"], name: "index_vaccination_campaigns_on_discarded_at"
+    t.index ["ip"], name: "index_vaccination_campaigns_on_ip"
   end
 
   create_table "vaccination_vaccines", force: :cascade do |t|
@@ -763,7 +895,11 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_vaccination_vaccines_on_company_id"
+    t.index ["discarded_at"], name: "index_vaccination_vaccines_on_discarded_at"
+    t.index ["ip"], name: "index_vaccination_vaccines_on_ip"
     t.index ["vaccination_id"], name: "index_vaccination_vaccines_on_vaccination_id"
     t.index ["vaccine_id"], name: "index_vaccination_vaccines_on_vaccine_id"
   end
@@ -785,13 +921,19 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.datetime "final_date_hour"
     t.bigint "company_id"
     t.string "slug"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_vaccinations_on_company_id"
+    t.index ["discarded_at"], name: "index_vaccinations_on_discarded_at"
     t.index ["family_member_id"], name: "index_vaccinations_on_family_member_id"
     t.index ["header_transport_id"], name: "index_vaccinations_on_header_transport_id"
+    t.index ["ip"], name: "index_vaccinations_on_ip"
     t.index ["local_service_id"], name: "index_vaccinations_on_local_service_id"
     t.index ["turn_id"], name: "index_vaccinations_on_turn_id"
+    t.index ["user_id"], name: "index_vaccinations_on_user_id"
     t.index ["vaccination_campaign_id"], name: "index_vaccinations_on_vaccination_campaign_id"
   end
 
@@ -806,10 +948,27 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.datetime "ip"
     t.index ["company_id"], name: "index_vaccines_on_company_id"
+    t.index ["discarded_at"], name: "index_vaccines_on_discarded_at"
     t.index ["dose_id"], name: "index_vaccines_on_dose_id"
     t.index ["immunobiological_id"], name: "index_vaccines_on_immunobiological_id"
+    t.index ["ip"], name: "index_vaccines_on_ip"
     t.index ["vaccination_strategy_id"], name: "index_vaccines_on_vaccination_strategy_id"
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object"
+    t.string "ip"
+    t.string "user_agent"
+    t.string "company_id"
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -909,7 +1068,6 @@ ActiveRecord::Schema.define(version: 2019_10_22_043356) do
   add_foreign_key "responsible_children", "companies"
   add_foreign_key "responsible_children", "generic_models", column: "responsible_child_type_id"
   add_foreign_key "responsible_children", "individual_registrations"
-  add_foreign_key "role_permissions", "companies"
   add_foreign_key "role_permissions", "permissions"
   add_foreign_key "role_permissions", "roles"
   add_foreign_key "sms_messages", "companies"

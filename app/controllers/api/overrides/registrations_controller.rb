@@ -29,6 +29,7 @@ module Api
 
       def attribute_params
         params.permit(:email, :password, :password_confirmation,
+                      :avatar,
                       health_professional_attributes: %i[
                         cns_code
                         cbo_code_id

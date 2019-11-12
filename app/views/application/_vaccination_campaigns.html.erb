@@ -1,7 +1,11 @@
 <div class="card">
   <div class="card-header">
-    <h3 class="font-weight-bold py-4 mb-0">
-      <%= link_to vaccination_campaigns_path do %>
+    <h3 class="font-weight-bold py-3 mb-0">
+      <% if current_user.admin? || current_user.nurse? || current_user.support? %>
+        <%= link_to vaccination_campaigns_path do %>
+          <i class="<%= t('activerecord.models.vaccination_campaign.icon') %> mr-2"></i><%= VaccinationCampaign.model_name.human(count: 2) %>
+        <% end %>
+      <% else %>
         <i class="<%= t('activerecord.models.vaccination_campaign.icon') %> mr-2"></i><%= VaccinationCampaign.model_name.human(count: 2) %>
       <% end %>
     </h3>
@@ -18,7 +22,13 @@
     <% vaccination_campaigns.each do |vc| %>
       <tr>
         <td class="align-middle py-5">
-          <%= link_to vaccination_campaign_path(vc) do %>
+          <% if current_user.admin? || current_user.nurse? || current_user.support? %>
+            <%= link_to vaccination_campaign_path(vc) do %>
+              <div class="h4 text-blue-deep mb-0">
+                <%= vc.title %>
+              </div>
+            <% end %>
+          <% else %>
             <div class="h4 text-blue-deep mb-0">
               <%= vc.title %>
             </div>
@@ -30,8 +40,8 @@
           </div>
         </td>
         <td class="text-center align-middle">
-          <div class="badge badge-<%= %w(warning success danger).sample %> d-block badge-radius">
-            <h4 class="mb-0 p-3"><%= (1..100).to_a.sample %>%</h4>
+          <div class="badge bg-blue-deep d-block badge-radius">
+            <h5 class="mb-0 p-2"><%= (1..100).to_a.sample %>%</h5>
           </div>
         </td>
       </tr>
