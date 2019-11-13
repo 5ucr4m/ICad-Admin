@@ -8,7 +8,8 @@ class Role < ApplicationRecord
     HealthProfessional,
     ProfessionalTeam,
     VaccinationCampaign,
-    Vaccine
+    Vaccine,
+    Period
   ].freeze
 
   AGENT_FORMS = [
