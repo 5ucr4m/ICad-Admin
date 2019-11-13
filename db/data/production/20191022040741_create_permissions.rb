@@ -25,22 +25,22 @@ class CreatePermissions < SeedMigration::Migration
       assign_permissions(Role.nurse_aux, create_permission(model, 2)) # Aux enfermeira
     end
     Role::REPORTS.each do |model| # Relatórios
-      assign_permissions(Role.admin, create_permission(model, 3))
-      assign_permissions(Role.secretary, create_permission(model, 3))
-      assign_permissions(Role.mayor, create_permission(model, 3))
-      assign_permissions(Role.agent, create_permission(model, 3))
-      assign_permissions(Role.support, create_permission(model, 3))
-      assign_permissions(Role.nurse, create_permission(model, 3))
-      assign_permissions(Role.doctor, create_permission(model, 3))
-      assign_permissions(Role.nurse_aux, create_permission(model, 3))
-      assign_permissions(Role.dentist, create_permission(model, 3))
-      assign_permissions(Role.dentist_aux, create_permission(model, 3))
+      # assign_permissions(Role.admin, create_permission(model, 3))
+      # assign_permissions(Role.secretary, create_permission(model, 3))
+      # assign_permissions(Role.mayor, create_permission(model, 3))
+      # assign_permissions(Role.agent, create_permission(model, 3))
+      # assign_permissions(Role.support, create_permission(model, 3))
+      # assign_permissions(Role.nurse, create_permission(model, 3))
+      # assign_permissions(Role.doctor, create_permission(model, 3))
+      # assign_permissions(Role.nurse_aux, create_permission(model, 3))
+      # assign_permissions(Role.dentist, create_permission(model, 3))
+      # assign_permissions(Role.dentist_aux, create_permission(model, 3))
     end
-    Role::ADMIN_CONFIGURATION.each do |model| # Configuração
-      assign_permissions(Role.admin, create_permission(model, 4)) # Admin
+    Role::ADMIN_CONFIGURATION.each do |model|
+      assign_permissions(Role.admin, create_permission(model, 4))
     end
-    Role::USER_CONFIGURATION.each do |model| # Configuração usuário
-      assign_permissions(Role.support, create_permission(model, 4)) # TI
+    Role::USER_CONFIGURATION.each do |model|
+      assign_permissions(Role.support, create_permission(model, 4))
     end
   end
 
@@ -56,8 +56,8 @@ class CreatePermissions < SeedMigration::Migration
   end
 
   def assign_permissions(role, permission)
-    return if role.permissions.include?(permission)
+    return if role.first.permissions.include?(permission)
 
-    role.role_permissions.build(permission)
+    role.first.permissions << permission
   end
 end

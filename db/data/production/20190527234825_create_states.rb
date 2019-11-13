@@ -18,7 +18,7 @@ class CreateStates < SeedMigration::Migration
     State.create!(name: 'PARÁ', reference: 15, abbreviation: 'PA', code: 15)
     State.create!(name: 'PARAÍBA', reference: 16, abbreviation: 'PB', code: 16)
     State.create!(name: 'PARANÁ', reference: 17, abbreviation: 'PR', code: 17)
-    State.create!(name: 'PERNAMBUCO', reference: 18, abbreviation: 'PB', code: 18)
+    State.create!(name: 'PERNAMBUCO', reference: 18, abbreviation: 'PE', code: 18)
     State.create!(name: 'PIAUÍ', reference: 19, abbreviation: 'PI', code: 19)
     State.create!(name: 'RIO DE JANEIRO', reference: 20, abbreviation: 'RJ', code: 20)
     State.create!(name: 'RIO GRANDE DO NORTE', reference: 21, abbreviation: 'RN', code: 21)
