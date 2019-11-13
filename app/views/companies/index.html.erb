@@ -39,8 +39,8 @@
           <td><%= company.fancy_name %></td>
           <td><%= company.federal_registry %></td>
           <td><%= company.state_registry %></td>
-          <td><%= company.city.name %></td>
-          <td><%= company.city.state.name_formatted %></td>
+          <td><%= company&.city&.name %></td>
+          <td><%= company&.city&.state&.name_formatted %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: company %>
           </td>
