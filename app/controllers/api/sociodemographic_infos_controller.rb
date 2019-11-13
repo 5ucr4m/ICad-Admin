@@ -2,6 +2,7 @@
 
 module Api
   class SociodemographicInfosController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_sociodemographic_info, only: %i[show update destroy]
 
     # GET /sociodemographic_infos/1

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class VaccinesController < WebController
+  load_and_authorize_resource
   before_action :set_vaccine, only: %i[show edit update destroy]
 
   breadcrumb Vaccine.model_name.human(count: 2), :vaccines_path

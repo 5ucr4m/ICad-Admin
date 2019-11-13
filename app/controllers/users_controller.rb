@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < WebController
+  load_and_authorize_resource
   before_action :set_user, only: %i[show edit update destroy]
 
   breadcrumb User.model_name.human(count: 2), :users_path

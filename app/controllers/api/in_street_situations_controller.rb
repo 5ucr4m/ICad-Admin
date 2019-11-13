@@ -2,6 +2,7 @@
 
 module Api
   class InStreetSituationsController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_in_street_situation, only: %i[show update destroy]
 
     # GET /in_street_situations/1

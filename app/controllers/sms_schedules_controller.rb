@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SmsSchedulesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_sms_schedule, only: %i[show edit update destroy]
 
   # GET /sms_schedules

@@ -2,6 +2,7 @@
 
 module Api
   class LivingConditionsController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_living_condition, only: %i[show update destroy]
 
     # GET /living_conditions/1

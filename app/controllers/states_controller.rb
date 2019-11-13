@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class StatesController < WebController
+  load_and_authorize_resource
   before_action :set_state, only: %i[show edit update destroy]
 
   breadcrumb State.model_name.human(count: 2), :states_path

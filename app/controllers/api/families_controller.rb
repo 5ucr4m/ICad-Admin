@@ -2,6 +2,7 @@
 
 module Api
   class FamiliesController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_family, only: %i[show update destroy]
 
     # GET /families

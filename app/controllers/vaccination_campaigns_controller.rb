@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class VaccinationCampaignsController < WebController
+  load_and_authorize_resource
   skip_before_action :verify_authenticity_token, only: :update_map
   before_action :set_vaccination_campaign, only: %i[show edit update update_map destroy]
 

@@ -2,6 +2,7 @@
 
 module Api
   class ResponsibleChildrenController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_responsible_child, only: %i[show update destroy]
 
     # GET /responsible_children/1

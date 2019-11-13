@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class HomeRegistrationsController < WebController
+  load_and_authorize_resource
   before_action :set_home_registration, only: %i[show edit update destroy]
 
   breadcrumb HomeRegistration.model_name.human(count: 2), :home_registrations_path

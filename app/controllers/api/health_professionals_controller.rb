@@ -2,6 +2,7 @@
 
 module Api
   class HealthProfessionalsController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_health_professional, only: %i[show edit update destroy]
 
     # GET /health_professionals

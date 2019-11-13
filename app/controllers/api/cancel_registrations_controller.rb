@@ -2,6 +2,7 @@
 
 module Api
   class CancelRegistrationsController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_cancel_registration, only: %i[show update destroy]
 
     # GET /cancel_registrations/1

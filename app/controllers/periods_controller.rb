@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PeriodsController < WebController
+  load_and_authorize_resource
   before_action :set_period, only: %i[show edit update destroy export export_xml]
 
   breadcrumb Period.model_name.human(count: 2), :periods_path

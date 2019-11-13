@@ -2,6 +2,7 @@
 
 module Api
   class HomeVisitRegistrationsController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_home_visit_registration, only: %i[show edit update destroy]
 
     # GET /home_visit_registrations

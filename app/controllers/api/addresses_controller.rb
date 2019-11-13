@@ -2,6 +2,7 @@
 
 module Api
   class AddressesController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_address, only: %i[show update destroy]
 
     # GET /addresses/1

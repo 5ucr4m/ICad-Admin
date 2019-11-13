@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RolesController < WebController
+  load_and_authorize_resource
   before_action :set_role, only: %i[show edit update destroy]
 
   breadcrumb Role.model_name.human(count: 2), :roles_path

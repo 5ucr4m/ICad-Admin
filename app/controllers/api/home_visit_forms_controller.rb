@@ -2,6 +2,7 @@
 
 module Api
   class HomeVisitFormsController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_home_visit_form, only: %i[show update destroy]
 
     # GET /home_visit_forms

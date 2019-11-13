@@ -2,6 +2,7 @@
 
 module Api
   class HealthConditionsController < Api::ApiController
+    load_and_authorize_resource
     before_action :set_health_condition, only: %i[show update destroy]
 
     # GET /health_conditions/1
