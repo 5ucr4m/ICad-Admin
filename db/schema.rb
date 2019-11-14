@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_050930) do
+ActiveRecord::Schema.define(version: 2019_11_09_041944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -618,12 +618,12 @@ ActiveRecord::Schema.define(version: 2019_11_14_050930) do
     t.string "registrable_type"
     t.bigint "registrable_id"
     t.bigint "company_id"
+    t.bigint "user_id"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
-    t.bigint "user_id"
     t.index ["company_id"], name: "index_period_items_on_company_id"
     t.index ["discarded_at"], name: "index_period_items_on_discarded_at"
     t.index ["ip"], name: "index_period_items_on_ip"
@@ -987,6 +987,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_050930) do
   add_foreign_key "families", "companies"
   add_foreign_key "families", "generic_models", column: "family_income_id"
   add_foreign_key "families", "home_registrations"
+  add_foreign_key "families", "users"
   add_foreign_key "family_member_disabilities", "companies"
   add_foreign_key "family_member_disabilities", "generic_models", column: "disability_id"
   add_foreign_key "family_member_disabilities", "sociodemographic_infos"
@@ -998,6 +999,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_050930) do
   add_foreign_key "family_members", "generic_models", column: "gender_id"
   add_foreign_key "family_members", "generic_models", column: "nationality_id"
   add_foreign_key "family_members", "generic_models", column: "race_id"
+  add_foreign_key "family_members", "users"
   add_foreign_key "generic_models", "generic_models"
   add_foreign_key "header_transports", "cities"
   add_foreign_key "header_transports", "companies"
@@ -1026,6 +1028,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_050930) do
   add_foreign_key "home_registrations", "health_professionals"
   add_foreign_key "home_registrations", "living_conditions"
   add_foreign_key "home_registrations", "permanence_institutions"
+  add_foreign_key "home_registrations", "users"
   add_foreign_key "home_visit_forms", "companies"
   add_foreign_key "home_visit_forms", "generic_models", column: "gender_id"
   add_foreign_key "home_visit_forms", "generic_models", column: "home_type_id"
@@ -1037,6 +1040,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_050930) do
   add_foreign_key "home_visit_reasons", "home_visit_forms"
   add_foreign_key "home_visit_registrations", "companies"
   add_foreign_key "home_visit_registrations", "family_members"
+  add_foreign_key "home_visit_registrations", "users"
   add_foreign_key "in_street_hygiene_accesses", "companies"
   add_foreign_key "in_street_hygiene_accesses", "generic_models", column: "hygiene_access_id"
   add_foreign_key "in_street_hygiene_accesses", "in_street_situations"
@@ -1052,6 +1056,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_050930) do
   add_foreign_key "individual_registrations", "health_conditions"
   add_foreign_key "individual_registrations", "in_street_situations"
   add_foreign_key "individual_registrations", "sociodemographic_infos"
+  add_foreign_key "individual_registrations", "users"
   add_foreign_key "living_conditions", "companies"
   add_foreign_key "living_conditions", "generic_models", column: "bathroom_drainage_id"
   add_foreign_key "living_conditions", "generic_models", column: "garbage_disposal_id"
@@ -1102,6 +1107,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_050930) do
   add_foreign_key "vaccinations", "generic_models", column: "local_service_id"
   add_foreign_key "vaccinations", "generic_models", column: "turn_id"
   add_foreign_key "vaccinations", "header_transports"
+  add_foreign_key "vaccinations", "users"
   add_foreign_key "vaccinations", "vaccination_campaigns"
   add_foreign_key "vaccines", "companies"
   add_foreign_key "vaccines", "generic_models", column: "dose_id"

@@ -68,6 +68,7 @@ class User < ApplicationRecord
   has_many :vaccinations
   has_many :families
   has_many :family_members
+  has_many :period_items
 
   accepts_nested_attributes_for :user_companies, allow_destroy: true
   accepts_nested_attributes_for :health_professional, allow_destroy: false
