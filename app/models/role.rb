@@ -9,8 +9,7 @@ class Role < ApplicationRecord
     ProfessionalTeam,
     VaccinationCampaign,
     Vaccine,
-    Period,
-    PeriodItem
+    Period
   ].freeze
 
   AGENT_FORMS = [
@@ -26,18 +25,11 @@ class Role < ApplicationRecord
   ].freeze
 
   REPORTS = [
-    Family,
-    FamilyMember,
-    HealthEstablishment,
-    HealthProfessional,
-    HomeRegistration,
-    HomeVisitRegistration,
-    IndividualRegistration,
-    Period,
-    ProfessionalTeam,
-    VaccinationCampaign,
-    Vaccination,
-    Vaccine
+    PeriodItem
+  ].freeze
+
+  AGENT_REPORTS = [
+    PeriodItem
   ].freeze
 
   ADMIN_CONFIGURATION = [

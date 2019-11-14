@@ -36,7 +36,7 @@
                   <td><%= link_to period_item.registrable_type.constantize.model_name.human, period_item %></td>
                   <td><%= period_item.registrable_id %></td>
                   <td><%= period_item.created_at.strftime('%d/%m/%Y') %></td>
-                  <td><%= period_item.created_at.strftime('%d/%m/%Y') %></td>
+                  <td><%= period_item.discarded_at&.strftime('%d/%m/%Y') %></td>
                 </tr>
               <% end %>
               </tbody>

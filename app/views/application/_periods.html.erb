@@ -25,7 +25,7 @@
           <% month = pd.competence.split('/')[0].to_i %>
           <% year = pd.competence.split('/')[1].to_i %>
           <% if current_user.admin? || current_user.nurse? || current_user.support? || current_user.agent? %>
-            <%= link_to period_path(pd) do %>
+            <%= link_to current_user.agent? ? period_items_path : period_path(pd) do %>
               <div class="h4 text-blue-deep mb-0">
                 <% if month == Time.current.month && year == Time.current.year %>
                   <%= "#{t('date.abbr_month_names')[month].upcase}/#{year}" %> (Atual)
@@ -47,7 +47,7 @@
         </td>
         <td class="text-center align-middle">
           <div class="badge bg-blue-deep d-block badge-radius">
-            <h5 class="mb-0 p-2"><%= current_user.agent? ? pd.period_items.where(user: current_user).count : pd.period_items %></h5>
+            <h5 class="mb-0 p-2"><%= current_user.agent? ? pd.period_items.where(user: current_user).count : pd.period_items.count %></h5>
           </div>
         </td>
       </tr>

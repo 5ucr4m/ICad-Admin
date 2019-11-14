@@ -97,8 +97,8 @@ pt-BR:
         other: Períodos
         icon: far fa-calendar-alt
       period_item:
-        one: Ficha
-        other: Fichas
+        one: Ficha de Exportação
+        other: Fichas de Exportação
         icon: fas fa-file-import
     attributes:
       vaccination:

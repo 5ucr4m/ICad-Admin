@@ -64,11 +64,8 @@ Rails.application.routes.draw do
   resources :sms_messages
   resources :sms_schedules
   resources :vaccines
-  resources :periods do
-    member do
-      resources :period_items
-    end
-  end
+  resources :periods
+  resources :period_items, only: %i[index show]
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',

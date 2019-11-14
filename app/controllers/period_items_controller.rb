@@ -4,6 +4,18 @@ class PeriodItemsController < WebController
   load_and_authorize_resource find_by: :slug
   before_action :set_period_item, only: %i[show]
 
+  breadcrumb PeriodItem.model_name.human(count: 2), :period_items_path
+
+  # GET /period_items
+  def index
+    @period = Period.find_by(competence: "#{Time.current.month}/#{Time.current.year}")
+    @query = @period.period_items.ransack(params[:q])
+    @result = @query.result
+    @result = @result.includes(:period)
+                     .where(user: current_user)
+    @pagy, @period_items = pagy(@result, page: params[:page], items: 10)
+  end
+
   # GET /period_items/1
   def show
     breadcrumb @period_item.slug, period_item_path(@period_item)

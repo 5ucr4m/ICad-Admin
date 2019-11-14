@@ -1,0 +1,77 @@
+<%= render 'application/page_header', model: PeriodItem %>
+<div class="card">
+  <div class="card-status bg-transparent"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <div class="row">
+            <div class="col-lg-9">
+              <% if @period_items.present? %>
+                <h1 class="pt-2 card-title mb-2">
+                  <% if @period_items.count > 1 %>
+                    <strong class="mr-1"><%= @period_items.count %></strong>registros encontrados
+                  <% else %>
+                    <strong class="mr-1"><%= @period_items.count %></strong>registro encontrado
+                  <% end %>
+                </h1>
+              <% else %>
+                <h1 class="pt-2 card-title mb-2">
+                  Nenhum registro encontrado
+                </h1>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+        <th><%= Period.human_attribute_name :competence %></th>
+        <th><%= Period.human_attribute_name :start_date %></th>
+        <th><%= Period.human_attribute_name :end_date %></th>
+        <th><%= Period.human_attribute_name :deadline %></th>
+        <th><%= PeriodItem.human_attribute_name :registrable_type %></th>
+        <th><%= PeriodItem.human_attribute_name :registrable_id %></th>
+        <th><%= PeriodItem.human_attribute_name :created_at %></th>
+        <th><%= t('helpers.labels.actions') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @period_items.each do |period_item| %>
+        <tr>
+          <td><%= period_item.period.competence %></td>
+          <td><%= period_item.period.start_date.strftime('%d/%m/%Y') %></td>
+          <td><%= period_item.period.end_date.strftime('%d/%m/%Y') %></td>
+          <td><%= period_item.period.deadline.strftime('%d/%m/%Y') %></td>
+          <td><%= link_to period_item.registrable_type.constantize.model_name.human, period_item.registrable_type.constantize.find(period_item.registrable_id) %></td>
+          <td><%= period_item.registrable_id %></td>
+          <td><%= period_item.created_at.strftime('%d/%m/%Y') %></td>
+          <td class="text-center">
+            <%= link_to period_item, class: 'btn p-1 btn-info mr-1', role: 'button' do %>
+              <i class="far fa-eye p-0"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <% if @pagy.count > 1 %>
+      <div class="col-sm-12 col-lg-<%= can?(:create, model) ? '6' : '12' %>">
+        <div class="float-right">
+          <%= pagy_bootstrap_combo_nav_js(@pagy).html_safe %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
