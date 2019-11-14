@@ -38,7 +38,7 @@
           <td><%= family_member.social_name %></td>
           <td><%= family_member.birth_date.strftime('%d/%m/%Y') %></td>
           <td><%= family_member.phone %></td>
-          <td><%= family_member&.city&.name %></td>
+          <td><%= "#{family_member&.city&.name} - #{family_member&.city&.state.abbreviation}" %></td>
           <td><%= family_member&.race&.name %></td>
           <td><%= family_member&.gender&.name %></td>
           <td class="text-center">

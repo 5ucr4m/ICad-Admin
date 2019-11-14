@@ -2,7 +2,7 @@
 
 module Api
   class LivingConditionsController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_living_condition, only: %i[show update destroy]
 
     # GET /living_conditions/1
@@ -41,7 +41,7 @@ module Api
     def set_living_condition
       @living_condition = if params[:home_registration_id]
                             LivingCondition
-                                           .find_by(home_registration_id: params[:home_registration_id])
+                              .find_by(home_registration_id: params[:home_registration_id])
                           else
                             LivingCondition.friendly.find(params[:id])
                           end

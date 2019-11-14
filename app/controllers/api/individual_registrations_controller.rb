@@ -2,7 +2,7 @@
 
 module Api
   class IndividualRegistrationsController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_individual_registration, only: %i[show edit update destroy]
 
     # GET /individual_registrations

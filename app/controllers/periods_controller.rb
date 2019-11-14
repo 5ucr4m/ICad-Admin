@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PeriodsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_period, only: %i[show edit update destroy export export_xml]
 
   breadcrumb Period.model_name.human(count: 2), :periods_path
@@ -19,7 +19,7 @@ class PeriodsController < WebController
 
   # GET /periods/new
   def new
-    breadcrumb "#{t('helpers.submit.new')} #{Period.model_name.human}", new_period_path
+    breadcrumb "#{t('helpers.submit.new')}", new_period_path
     @period = Period.new
   end
 
@@ -30,7 +30,7 @@ class PeriodsController < WebController
 
   # POST /periods
   def create
-    breadcrumb "#{t('helpers.submit.new')} #{Period.model_name.human}", new_period_path
+    breadcrumb "#{t('helpers.submit.new')}", new_period_path
     @period = Period.new(period_params)
 
     if @period.save
@@ -69,6 +69,7 @@ class PeriodsController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_period
     @period = Period.friendly.find(params[:id])
+    @pagy, @period_items = pagy(@period.period_items, page: params[:page], items: 10)
   end
 
   # Only allow a trusted parameter "white list" through.

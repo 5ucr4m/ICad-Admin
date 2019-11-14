@@ -1,10 +1,63 @@
 <%= simple_form_for(@period) do |f| %>
   <% content_for :body do %>
-    <%= f.input :competence, collection: period_months.collect {|m| %W(#{t('date.month_names')[m[0]]}/#{m[1]} #{m[0]}/#{m[1]})},
+    <%= f.input :competence, collection: period_months.collect { |m| %W(#{t('date.month_names')[m[0]]}/#{m[1]} #{m[0]}/#{m[1]}) },
                 wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.input :start_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :end_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :deadline, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas <%= t('activerecord.models.period_item.icon') %> mr-2"></i><%= PeriodItem.model_name.human(count: 2) %>
+          </h3>
+          <div class="card-options">
+            <h3 class="card-title text-blue-deep">
+              Total de fichas: <span class="font-weight-bold"><%= @pagy.count %></span>
+            </h3>
+          </div>
+        </div>
+        <% if @period_items.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th><%= PeriodItem.human_attribute_name :registrable_type %></th>
+                <th><%= PeriodItem.human_attribute_name :registrable_id %></th>
+                <th><%= PeriodItem.human_attribute_name :created_at %></th>
+                <th><%= PeriodItem.human_attribute_name :discarded_at %></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @period.period_items.each_with_index do |period_item, index| %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= link_to period_item.registrable_type.constantize.model_name.human, period_item %></td>
+                  <td><%= period_item.registrable_id %></td>
+                  <td><%= period_item.created_at.strftime('%d/%m/%Y') %></td>
+                  <td><%= period_item.created_at.strftime('%d/%m/%Y') %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer float-right">
+            <%= pagy_bootstrap_combo_nav_js(@pagy).html_safe %>
+          </div>
+        <% else %>
+          <div class="card-body">
+            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
+              <div class="row">
+                <div class="col pt-2 py-auto font-weight-bold">
+                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Ficha inserida.
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
   <%= render template: 'application/form', locals: {form: @period} %>
 <% end %>

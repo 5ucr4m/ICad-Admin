@@ -12,8 +12,8 @@ class Ability
       can :manage, user, slug: user.slug
       user.role.permissions.each do |permission|
         model = permission.model_reference.singularize.constantize
-        if user.role.agent? && Role::FORMS.include?(model)
-          can :manage, model, user_id: user.id
+        if user.role.agent? && Role::AGENT_FORMS.include?(model)
+          can :manage, model, user_id: user.id, company_id: user.company.id
         else
           can :manage, model
         end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VaccinationCampaign < ApplicationRecord
   include Sluggable
   include Tenantable
@@ -28,4 +30,6 @@ class VaccinationCampaign < ApplicationRecord
   end
 
   ransack_alias :search, :id_to_s_or_title_or_description
+
+  scope :active_campaigns, -> {where('period_end <= ?', Time.current)}
 end

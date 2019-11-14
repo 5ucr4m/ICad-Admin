@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomeRegistrationsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_home_registration, only: %i[show edit update destroy]
 
   breadcrumb HomeRegistration.model_name.human(count: 2), :home_registrations_path
@@ -21,7 +21,7 @@ class HomeRegistrationsController < WebController
 
   # GET /home_registrations/new
   def new
-    breadcrumb "#{t('helpers.submit.new')} #{HomeRegistration.model_name.human}", new_home_registration_path
+    breadcrumb "#{t('helpers.submit.new')}", new_home_registration_path
     @home_registration = HomeRegistration.new
     @home_registration.build_relationships
   end
@@ -33,8 +33,8 @@ class HomeRegistrationsController < WebController
 
   # POST /home_registrations
   def create
-    breadcrumb "#{t('helpers.submit.new')} #{HomeRegistration.model_name.human}", new_home_registration_path
-    @home_registration = HomeRegistration.new(home_registration_params)
+    breadcrumb "#{t('helpers.submit.new')}", new_home_registration_path
+    @home_registration = current_user.home_registrations.new(home_registration_params)
     @city_selected = @home_registration.address.city.presence
     @address_type_selected = @home_registration.address.address_type.presence
 

@@ -2,7 +2,7 @@
 
 module Api
   class SociodemographicInfosController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_sociodemographic_info, only: %i[show update destroy]
 
     # GET /sociodemographic_infos/1
@@ -41,7 +41,7 @@ module Api
     def set_sociodemographic_info
       @sociodemographic_info = if params[:individual_registration_id]
                                  SociodemographicInfo
-                                                     .find_by(individual_registration_id: params[:individual_registration_id])
+                                   .find_by(individual_registration_id: params[:individual_registration_id])
                                else
                                  SociodemographicInfo.friendly.find(params[:id])
                                end

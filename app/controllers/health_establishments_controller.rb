@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HealthEstablishmentsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_health_establishment, only: %i[show edit update destroy]
 
   breadcrumb HealthEstablishment.model_name.human(count: 2), :health_establishments_path
@@ -19,7 +19,7 @@ class HealthEstablishmentsController < WebController
 
   # GET /health_establishments/new
   def new
-    breadcrumb "#{t('helpers.submit.new')} #{HealthEstablishment.model_name.human}", new_health_establishment_path
+    breadcrumb "#{t('helpers.submit.new')}", new_health_establishment_path
     @health_establishment = HealthEstablishment.new
   end
 
@@ -30,7 +30,7 @@ class HealthEstablishmentsController < WebController
 
   # POST /health_establishments
   def create
-    breadcrumb "#{t('helpers.submit.new')} #{HealthEstablishment.model_name.human}", new_health_establishment_path
+    breadcrumb "#{t('helpers.submit.new')}", new_health_establishment_path
     @health_establishment = HealthEstablishment.new(health_establishment_params)
 
     if @health_establishment.save

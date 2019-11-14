@@ -2,7 +2,7 @@
 
 module Api
   class HomeRegistrationsController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_home_registration, only: %i[show update destroy]
 
     # GET /home_registrations

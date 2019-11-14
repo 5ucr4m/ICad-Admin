@@ -2,7 +2,7 @@
 
 module Api
   class FamilyMembersController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_family_member, only: %i[show update destroy]
 
     # GET /family_members

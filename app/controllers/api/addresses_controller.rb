@@ -2,7 +2,7 @@
 
 module Api
   class AddressesController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_address, only: %i[show update destroy]
 
     # GET /addresses/1
@@ -41,7 +41,7 @@ module Api
     def set_address
       @address = if params[:home_registration_id]
                    Addresses
-                            .find_by(home_registration_id: params[:home_registration_id])
+                     .find_by(home_registration_id: params[:home_registration_id])
                  else
                    Addresses.friendly.find(params[:id])
                  end

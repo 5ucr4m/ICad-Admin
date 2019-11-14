@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FamiliesController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_family, only: %i[show edit update destroy]
 
   breadcrumb Family.model_name.human(count: 2), :families_path
@@ -10,8 +10,6 @@ class FamiliesController < WebController
   def index
     @query = Family.ransack(params[:q])
     @result = @query.result
-    @result = @result.where(user: current_user) if current_user.agent?
-
     respond_to do |format|
       format.html { @pagy, @families = pagy(@result.includes(:family_income), page: params[:page], items: 10) }
       format.json { render_json @result.includes(:company, :home_registration, :family_income) }

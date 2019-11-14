@@ -96,6 +96,10 @@ pt-BR:
         one: Período
         other: Períodos
         icon: far fa-calendar-alt
+      period_item:
+        one: Ficha
+        other: Fichas
+        icon: fas fa-file-import
     attributes:
       vaccination:
         patient_types:

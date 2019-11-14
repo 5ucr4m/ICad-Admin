@@ -2,7 +2,7 @@
 
 module Api
   class HealthProfessionalsController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_health_professional, only: %i[show edit update destroy]
 
     # GET /health_professionals
@@ -62,7 +62,7 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_health_professional
       @health_professional = HealthProfessional
-                                               .friendly.find(params[:id])
+                             .friendly.find(params[:id])
       if @health_professional
         @cbo_selected = @health_professional.cbo_code.presence
       end

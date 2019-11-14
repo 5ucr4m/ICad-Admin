@@ -2,6 +2,7 @@
 
 module Api
   class StatesController < Api::ApiController
+    load_and_authorize_resource find_by: :slug
     before_action :set_state, only: %i[show]
 
     # GET /states

@@ -2,7 +2,7 @@
 
 module Api
   class HomeVisitFormsController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_home_visit_form, only: %i[show update destroy]
 
     # GET /home_visit_forms
@@ -51,7 +51,7 @@ module Api
     def set_home_visit_form
       @home_visit_form = if params[:home_visit_registration_id]
                            HomeVisitForm
-                                        .find_by(home_visit_registration_id: params[:home_visit_registration_id])
+                             .find_by(home_visit_registration_id: params[:home_visit_registration_id])
                          else
                            HomeVisitForm.friendly.find(params[:id])
                          end

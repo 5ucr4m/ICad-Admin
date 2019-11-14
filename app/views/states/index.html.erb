@@ -34,7 +34,7 @@
           <td><%= state.abbreviation %></td>
           <td><%= state.code %></td>
           <td><%= state.reference %></td>
-          <td><%= state.country.name_formatted %></td>
+          <td><%= state&.country&.name_formatted %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: state %>
           </td>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomeVisitFormsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_home_visit_form, only: %i[show edit update destroy]
 
   # GET /home_visit_forms

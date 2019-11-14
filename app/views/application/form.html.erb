@@ -10,11 +10,13 @@
       </div>
     </div>
   </div>
-  <div class="card-footer">
-    <div class="row">
-      <div class="col btn-list">
-        <%= render 'application/form_buttons', f: form %>
+  <% unless disable_footer ||= false %>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col btn-list">
+          <%= render 'application/form_buttons', f: form %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>

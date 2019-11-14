@@ -2,7 +2,7 @@
 
 module Api
   class ResponsibleChildrenController < Api::ApiController
-    load_and_authorize_resource
+    load_and_authorize_resource find_by: :slug
     before_action :set_responsible_child, only: %i[show update destroy]
 
     # GET /responsible_children/1
@@ -41,7 +41,7 @@ module Api
     def set_responsible_child
       @responsible_child = if params[:individual_registration_id]
                              ResponsibleChild
-                                             .find_by(individual_registration_id: params[:individual_registration_id])
+                               .find_by(individual_registration_id: params[:individual_registration_id])
                            else
                              ResponsibleChild.friendly.find(params[:id])
                            end

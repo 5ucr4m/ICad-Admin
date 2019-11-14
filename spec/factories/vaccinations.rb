@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :vaccination do
-    uuid { "MyString" }
-    tp_cds_origin { "MyString" }
+    uuid { 'MyString' }
+    tp_cds_origin { 'MyString' }
     patient_type { 1 }
     header_transport { nil }
     vaccination_campaign { nil }
@@ -12,9 +14,9 @@ FactoryBot.define do
     leprosy_communicant { false }
     pregnant { false }
     puerperal { false }
-    initial_date_hour { "2019-10-18 21:57:04" }
-    final_date_hour { "2019-10-18 21:57:04" }
+    initial_date_hour { '2019-10-18 21:57:04' }
+    final_date_hour { '2019-10-18 21:57:04' }
     company { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

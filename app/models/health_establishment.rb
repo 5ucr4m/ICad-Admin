@@ -44,9 +44,19 @@ class HealthEstablishment < ApplicationRecord
   validates :legal_full_name, :fancy_name, :federal_registry, :cnes_code,
             :registry_at, :manager_full_name, :manager_federal_registry, presence: true
 
+  validate :check_federal_registry
+
   ransack_alias :search, :id_to_s_or_legal_full_name_or_fancy_name_or_federal_registry_or_cnes_code_or_manager_full_name_or_manager_federal_registry
 
   def name_formatted
     "#{cnes_code} - #{federal_registry} - #{legal_full_name}"
+  end
+
+  protected
+
+  def check_federal_registry
+    return if federal_registry.blank?
+
+    CNPJ.valid? federal_registry
   end
 end

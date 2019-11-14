@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class VaccinationCampaignsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   skip_before_action :verify_authenticity_token, only: :update_map
   before_action :set_vaccination_campaign, only: %i[show edit update update_map destroy]
 
@@ -20,7 +20,7 @@ class VaccinationCampaignsController < WebController
 
   # GET /vaccination_campaigns/new
   def new
-    breadcrumb "#{t('helpers.submit.new')} #{VaccinationCampaign.model_name.human}", new_vaccination_campaign_path
+    breadcrumb "#{t('helpers.submit.new')}", new_vaccination_campaign_path
     @vaccination_campaign = VaccinationCampaign.new
   end
 
@@ -31,7 +31,7 @@ class VaccinationCampaignsController < WebController
 
   # POST /vaccination_campaigns
   def create
-    breadcrumb "#{t('helpers.submit.new')} #{VaccinationCampaign.model_name.human}", new_vaccination_campaign_path
+    breadcrumb "#{t('helpers.submit.new')}", new_vaccination_campaign_path
     @vaccination_campaign = VaccinationCampaign.new(vaccination_campaign_params)
 
     if @vaccination_campaign.save
@@ -43,6 +43,7 @@ class VaccinationCampaignsController < WebController
 
   # PATCH/PUT /vaccination_campaigns/1
   def update
+    breadcrumb @vaccination_campaign.slug, vaccination_campaign_path(@vaccination_campaign)
     if @vaccination_campaign.update(vaccination_campaign_params)
       redirect_to @vaccination_campaign, notice: 'Vaccination campaign was successfully updated.'
     else

@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   belongs_to :health_professional, optional: true
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
 
   include DeviseTokenAuth::Concerns::User
@@ -80,12 +80,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :health_professional, allow_destroy: false
   accepts_nested_attributes_for :user_companies, allow_destroy: true
-
-  scope :by_company, ->(company) { includes(:user_companies).where(user_companies: { company: company }) }
-
-  ransacker :id_to_s do
-    Arel.sql("regexp_replace(to_char(\"#{table_name}\".\"id\", '9999999'), ' ', '', 'g')")
-  end
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 

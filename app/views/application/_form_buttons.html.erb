@@ -1,7 +1,7 @@
-<% if controller_name == 'registrations' %>
+<% if controller_name == 'users' && !current_user.role.admin? %>
   <% if action_name == 'show' %>
     <% if can? :update, f %>
-      <%= link_to edit_user_registration_path, class: 'btn btn-sm-block btn-primary', role: 'button' do %>
+      <%= link_to edit_user_path(current_user), class: 'btn btn-sm-block btn-primary', role: 'button' do %>
         <i class="fas fa-edit mr-2"></i><span class="btn-title"><%= t 'helpers.submit.edit' %></span>
       <% end %>
     <% end %>
@@ -15,26 +15,23 @@
   <% end %>
 <% else %>
   <% if action_name == 'show' %>
-    <% if can? :update, f %>
-      <%= link_to send("edit_#{f.model_name.singular}_path"), class: 'btn btn-sm-block btn-primary', role: 'button' do %>
-        <i class="fas fa-edit mr-2"></i><span class="btn-title"><%= t 'helpers.submit.edit' %></span>
-      <% end %>
+    <%= link_to send("edit_#{f.model_name.singular}_path"), class: 'btn btn-sm-block btn-primary', role: 'button' do %>
+      <i class="fas fa-edit mr-2"></i><span class="btn-title"><%= t 'helpers.submit.edit' %></span>
     <% end %>
-    <% if can? :create, f %>
-      <%= link_to send("new_#{f.model_name.singular}_path"), class: 'btn btn-sm-block btn-info btn-info', role: 'button' do %>
-        <i class="fas fa-plus mr-2"></i><span class="btn-title"><%= t 'helpers.submit.new' %></span>
-      <% end %>
+    <%= link_to send("new_#{f.model_name.singular}_path"), class: 'btn btn-sm-block btn-info btn-info', role: 'button' do %>
+      <i class="fas fa-plus mr-2"></i><span class="btn-title"><%= t 'helpers.submit.new' %></span>
     <% end %>
   <% else %>
-    <% if can? :manage, f %>
-      <%= button_tag class: 'btn btn-sm-block btn-primary btn-submit',
-                     data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Salvando...'.html_safe} do %>
-        <i class="fas fa-save mr-2"></i><span class="btn-title"><%= t("helpers.submit.submit") %></span>
-      <% end %>
+    <%= button_tag class: 'btn btn-sm-block btn-primary btn-submit',
+                   data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Salvando...'.html_safe} do %>
+      <i class="fas fa-save mr-2"></i><span class="btn-title"><%= t("helpers.submit.submit") %></span>
     <% end %>
   <% end %>
-  <%= link_to send("#{f.model_name.plural}_path"),
-              class: 'btn btn-sm-block btn-danger btn-cancel', role: 'button' do %>
-    <i class="fa fa-undo mr-2"></i><span class="btn-title"><%= t can?(:create, f.model_name.singular.camelcase.constantize) || can?(:create, f) ? 'helpers.submit.cancel' : 'helpers.submit.back' %></span>
+  <% if controller_name != 'users' %>
+    <%= link_to send("#{f.model_name.plural}_path"),
+                class: 'btn btn-sm-block btn-danger btn-cancel', role: 'button' do %>
+      <i class="fa fa-undo mr-2"></i>
+      <span class="btn-title"><%= t can?(:create, f.model_name.singular.camelcase.constantize) || can?(:create, f) ? 'helpers.submit.cancel' : 'helpers.submit.back' %></span>
+    <% end %>
   <% end %>
 <% end %>

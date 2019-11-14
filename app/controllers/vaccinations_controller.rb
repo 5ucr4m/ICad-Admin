@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class VaccinationsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_vaccination, only: %i[show edit update destroy]
+
+  breadcrumb Vaccination.model_name.human(count: 2), :vaccinations_path
 
   # GET /vaccinations
   def index
@@ -12,18 +14,24 @@ class VaccinationsController < WebController
   end
 
   # GET /vaccinations/1
-  def show; end
+  def show
+    breadcrumb @vaccination.slug, vaccinations_path(@vaccinations)
+  end
 
   # GET /vaccinations/new
   def new
+    breadcrumb "#{t('helpers.submit.new')}", new_vaccination_path
     @vaccination = Vaccination.new
   end
 
   # GET /vaccinations/1/edit
-  def edit; end
+  def edit
+    breadcrumb @vaccination.slug, vaccination_path(@vaccination)
+  end
 
   # POST /vaccinations
   def create
+    breadcrumb "#{t('helpers.submit.new')}", new_vaccination_path
     @vaccination = Vaccination.new(vaccination_params)
 
     if @vaccination.save
@@ -35,6 +43,7 @@ class VaccinationsController < WebController
 
   # PATCH/PUT /vaccinations/1
   def update
+    breadcrumb @vaccination.slug, vaccination_path(@vaccination)
     if @vaccination.update(vaccination_params)
       redirect_to @vaccination, notice: 'Vaccination was successfully updated.'
     else

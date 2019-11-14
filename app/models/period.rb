@@ -34,8 +34,13 @@ class Period < ApplicationRecord
   accepts_nested_attributes_for :period_items, allow_destroy: true
 
   validates :competence, :start_date, :end_date, :deadline, presence: true
+  before_update :check_period_items
 
   ransack_alias :search, :id_to_s
+
+  def name_formatted
+    "#{competence} - Período de #{start_date.strftime('%d/%m/%Y')} até #{deadline.strftime('%d/%m/%Y')}"
+  end
 
   private
 
@@ -65,5 +70,11 @@ class Period < ApplicationRecord
         errors.add(:start_date, 'Não pode ser maior que a data limite final')
       end
     end
+  end
+
+  def check_period_items
+    return if period_items.empty?
+
+    errors.add(:base, 'Não é permitido editar Períodos com fichas inserídas.')
   end
 end

@@ -617,10 +617,13 @@ ActiveRecord::Schema.define(version: 2019_11_09_041944) do
     t.bigint "period_id"
     t.string "registrable_type"
     t.bigint "registrable_id"
+    t.bigint "company_id"
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.index ["company_id"], name: "index_period_items_on_company_id"
     t.index ["discarded_at"], name: "index_period_items_on_discarded_at"
     t.index ["ip"], name: "index_period_items_on_ip"
     t.index ["period_id"], name: "index_period_items_on_period_id"
@@ -1058,6 +1061,7 @@ ActiveRecord::Schema.define(version: 2019_11_09_041944) do
   add_foreign_key "living_conditions", "generic_models", column: "rural_production_area_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_supply_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_treatment_id"
+  add_foreign_key "period_items", "companies"
   add_foreign_key "period_items", "generic_models", column: "serialized_type_id"
   add_foreign_key "period_items", "periods"
   add_foreign_key "periods", "companies"

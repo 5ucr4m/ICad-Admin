@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class IndividualRegistrationsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_individual_registration, only: %i[show edit update destroy]
 
   breadcrumb IndividualRegistration.model_name.human(count: 2), :individual_registrations_path
@@ -21,7 +21,7 @@ class IndividualRegistrationsController < WebController
 
   # GET /individual_registrations/new
   def new
-    breadcrumb "#{t('helpers.submit.new')} #{IndividualRegistration.model_name.human}", new_individual_registration_path
+    breadcrumb "#{t('helpers.submit.new')}", new_individual_registration_path
     @individual_registration = IndividualRegistration.new
     @individual_registration.build_relationships
     @occupation_selected = @individual_registration.sociodemographic_info.occupation.presence
@@ -34,7 +34,7 @@ class IndividualRegistrationsController < WebController
 
   # POST /individual_registrations
   def create
-    breadcrumb "#{t('helpers.submit.new')} #{IndividualRegistration.model_name.human}", new_individual_registration_path
+    breadcrumb "#{t('helpers.submit.new')}", new_individual_registration_path
     @individual_registration = IndividualRegistration.new(individual_registration_params)
 
     if @individual_registration.save

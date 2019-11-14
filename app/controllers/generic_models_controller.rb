@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GenericModelsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   skip_authorize_resource only: %i[address_types cbo_types ethnicity_types]
   before_action :set_generic_model, only: %i[show edit update destroy]
   before_action :set_query, except: %i[index new create show edit update destroy]

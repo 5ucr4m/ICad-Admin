@@ -5,9 +5,9 @@ class CreateUsers < SeedMigration::Migration
     company = Company.first
     RailsMultitenant::GlobalContextRegistry[:company_id] = company.id
     admin = User.create! email: 'administrador@icadx.com.br',
-                        password: '4dmin112@@@', password_confirmation: '4dmin112@@@'
+                         password: '4dmin112@@@', password_confirmation: '4dmin112@@@'
     support = User.create! email: 'suporte@icadx.com.br',
-                        password: '5upport112@@@', password_confirmation: '5upport112@@@'
+                           password: '5upport112@@@', password_confirmation: '5upport112@@@'
     admin_company = UserCompany.create(user: admin, company: company, current: true)
     support_company = UserCompany.create(user: support, company: company, current: true)
     admin_role = Role.find_by(role_type: 0)

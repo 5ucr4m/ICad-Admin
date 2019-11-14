@@ -37,7 +37,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
   resources :states
   resources :cities
   resources :families
@@ -67,9 +66,7 @@ Rails.application.routes.draw do
   resources :vaccines
   resources :periods do
     member do
-      get 'export'
-      get 'period_items'
-      post 'export'
+      resources :period_items
     end
   end
 
@@ -79,6 +76,10 @@ Rails.application.routes.draw do
   }, controllers: {
     registrations: 'registrations'
   }
+
+  devise_scope :user do
+    resources :users
+  end
 
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {

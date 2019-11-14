@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HealthProfessionalsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_health_professional, only: %i[show edit update destroy]
 
   breadcrumb HealthProfessional.model_name.human(count: 2), :health_professionals_path

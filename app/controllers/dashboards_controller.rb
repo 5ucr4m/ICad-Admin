@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class DashboardsController < WebController
-
   def dashboard
     @vaccination_campaigns = VaccinationCampaign.last(5)
     @periods = Period.order(end_date: :desc).last(3)

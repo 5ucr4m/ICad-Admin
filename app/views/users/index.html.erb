@@ -34,9 +34,9 @@
         <tr>
           <td class="text-muted"><%= user.id %></td>
           <td><%= user.email %></td>
-          <td><%= user&.health_professional&.legal_full_name %></td>
+          <td><%= user&.health_professional&.full_name %></td>
           <td><%= user&.health_professional&.cns_code %></td>
-          <td><%= user&.health_professional&.health_establishment&.cnes_code %></td>
+          <td><%= user&.health_professional&.professional_team&.health_establishment&.cnes_code %></td>
           <% if can? :manage, User %>
             <td>
               <%= render 'application/table_links', f: user %>

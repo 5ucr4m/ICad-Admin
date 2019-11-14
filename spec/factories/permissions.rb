@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :permission do
-    model_reference { "MyString" }
-    action_reference { "MyString" }
+    model_reference { 'MyString' }
+    action_reference { 'MyString' }
     app_module { nil }
-    slug { "MyString" }
+    slug { 'MyString' }
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateVaccinations < ActiveRecord::Migration[6.0]
   def change
     create_table :vaccinations do |t|
@@ -6,9 +8,9 @@ class CreateVaccinations < ActiveRecord::Migration[6.0]
       t.integer :patient_type
       t.belongs_to :header_transport, foreign_key: true, index: true
       t.belongs_to :vaccination_campaign, foreign_key: true, index: true
-      t.belongs_to :turn, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :turn, foreign_key: { to_table: :generic_models }, index: true
       t.belongs_to :family_member, foreign_key: true, index: true
-      t.belongs_to :local_service, foreign_key: {to_table: :generic_models}, index: true
+      t.belongs_to :local_service, foreign_key: { to_table: :generic_models }, index: true
       t.boolean :traveller
       t.boolean :leprosy_communicant
       t.boolean :pregnant

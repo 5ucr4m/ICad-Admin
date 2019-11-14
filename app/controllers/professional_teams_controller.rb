@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProfessionalTeamsController < WebController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :slug
   before_action :set_professional_team, only: %i[show edit update destroy]
 
   # GET /professional_teams
