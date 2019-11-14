@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_09_041944) do
+ActiveRecord::Schema.define(version: 2019_11_14_050930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -623,12 +623,14 @@ ActiveRecord::Schema.define(version: 2019_11_09_041944) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.bigint "user_id"
     t.index ["company_id"], name: "index_period_items_on_company_id"
     t.index ["discarded_at"], name: "index_period_items_on_discarded_at"
     t.index ["ip"], name: "index_period_items_on_ip"
     t.index ["period_id"], name: "index_period_items_on_period_id"
     t.index ["registrable_type", "registrable_id"], name: "index_period_items_on_registrable_type_and_registrable_id"
     t.index ["serialized_type_id"], name: "index_period_items_on_serialized_type_id"
+    t.index ["user_id"], name: "index_period_items_on_user_id"
   end
 
   create_table "periods", force: :cascade do |t|
@@ -1064,6 +1066,7 @@ ActiveRecord::Schema.define(version: 2019_11_09_041944) do
   add_foreign_key "period_items", "companies"
   add_foreign_key "period_items", "generic_models", column: "serialized_type_id"
   add_foreign_key "period_items", "periods"
+  add_foreign_key "period_items", "users"
   add_foreign_key "periods", "companies"
   add_foreign_key "permanence_institutions", "companies"
   add_foreign_key "permissions", "generic_models", column: "app_module_id"

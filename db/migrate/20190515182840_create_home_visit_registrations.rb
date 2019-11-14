@@ -8,7 +8,7 @@ class CreateHomeVisitRegistrations < ActiveRecord::Migration[6.0]
       t.string :tp_cds_origin
       t.belongs_to :company, foreign_key: true, index: true
       t.string :slug
-      t.belongs_to :user
+      t.belongs_to :user, foreign_key: true, index: true
 
       t.timestamps
     end

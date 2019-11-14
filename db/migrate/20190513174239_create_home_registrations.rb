@@ -19,7 +19,7 @@ class CreateHomeRegistrations < ActiveRecord::Migration[6.0]
       t.boolean :finished
       t.belongs_to :company, foreign_key: true, index: true
       t.string :slug
-      t.belongs_to :user
+      t.belongs_to :user, foreign_key: true, index: true
 
       t.timestamps
     end
