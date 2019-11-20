@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 require('jquery');
 require("@rails/ujs").start();
 require("@rails/activestorage").start();
@@ -11,6 +14,7 @@ require('select2');
 require("chartkick").use(require("highcharts"));
 require("channels");
 
+import '../stylesheets/application';
 import * as Pagy from './pagy.js.erb';
 import superagent from 'superagent';
 import * as $ from 'jquery';

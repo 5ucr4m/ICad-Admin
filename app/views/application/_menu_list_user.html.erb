@@ -1,4 +1,4 @@
-<% GenericModel.app_modules.order(:reference).each do |app_module| %>
+<% GenericModel.app_modules.order(:reference).where.not(reference: 3).each do |app_module| %>
   <% if current_user.permissions.by_app_module(app_module).any? %>
     <li class="nav-item dropdown">
       <a href="javascript:void(0)" class="nav-link <%= "active" if controller_name != 'dashboards' && Permission.where(app_module: app_module).map(&:model_reference).include?(controller_name.singularize.camelcase) %> py-4" data-toggle="dropdown" aria-expanded="false">

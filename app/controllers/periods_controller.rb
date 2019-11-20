@@ -19,7 +19,7 @@ class PeriodsController < WebController
 
   # GET /periods/new
   def new
-    breadcrumb "#{t('helpers.submit.new')}", new_period_path
+    breadcrumb t('helpers.submit.new'), new_period_path
     @period = Period.new
   end
 
@@ -30,7 +30,7 @@ class PeriodsController < WebController
 
   # POST /periods
   def create
-    breadcrumb "#{t('helpers.submit.new')}", new_period_path
+    breadcrumb t('helpers.submit.new'), new_period_path
     @period = Period.new(period_params)
 
     if @period.save

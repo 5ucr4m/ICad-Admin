@@ -19,7 +19,7 @@ class UsersController < WebController
 
   # GET /users/new
   def new
-    breadcrumb "#{t('helpers.submit.new')}", new_user_path
+    breadcrumb t('helpers.submit.new'), new_user_path
     @user = User.new
     @user.build_health_professional
   end

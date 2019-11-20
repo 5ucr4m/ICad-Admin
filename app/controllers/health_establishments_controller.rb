@@ -19,7 +19,7 @@ class HealthEstablishmentsController < WebController
 
   # GET /health_establishments/new
   def new
-    breadcrumb "#{t('helpers.submit.new')}", new_health_establishment_path
+    breadcrumb t('helpers.submit.new'), new_health_establishment_path
     @health_establishment = HealthEstablishment.new
   end
 
@@ -30,7 +30,7 @@ class HealthEstablishmentsController < WebController
 
   # POST /health_establishments
   def create
-    breadcrumb "#{t('helpers.submit.new')}", new_health_establishment_path
+    breadcrumb t('helpers.submit.new'), new_health_establishment_path
     @health_establishment = HealthEstablishment.new(health_establishment_params)
 
     if @health_establishment.save

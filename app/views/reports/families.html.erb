@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <%= search_form_for @query do |f| %>
+          <div class="row">
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group">
+                <%= f.search_field :responsible_birth_date_eq, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group">
+                <%= f.search_field :handbook_number_cont, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group">
+                <%= f.search_field :responsible_cns_number_eq, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group">
+                <%= f.search_field :members_quantity_eq, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group">
+                <%= f.search_field :reside_since_eq, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group">
+                <%= f.select :family_income_id_eq, options_from_collection_for_select(GenericModel.family_incomes, :id, :name_formatted), {include_blank: true}, {class: 'select2'} %>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+              <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                  <%= f.check_box :moving_eq, class: 'custom-control-input' %>
+                  <span class="custom-control-label form-label"><%= Family.human_attribute_name :moving %></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <%= content_for :table_header do %>
+      <thead>
+      <tr>
+        <% @search_params.each do |search_param| %>
+          <th><%= Family.human_attribute_name search_param.to_sym %></th>
+        <% end %>
+      </tr>
+      </thead>
+    <% end %>
+    <%= content_for :table_body do %>
+    <% end %>
+    <%= render template: 'reports/table', locals: {model: Family} %>
+  </div>
+</div>
+

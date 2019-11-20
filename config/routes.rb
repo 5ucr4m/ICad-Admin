@@ -66,6 +66,17 @@ Rails.application.routes.draw do
   resources :vaccines
   resources :periods
   resources :period_items, only: %i[index show]
+  resources :reports, only: [] do
+    collection do
+      get 'vaccinations'
+      get 'home_registrations'
+      get 'home_visit_registrations'
+      get 'families'
+      get 'family_members'
+      get 'vaccination_campaigns'
+      get 'individual_registrations'
+    end
+  end
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',

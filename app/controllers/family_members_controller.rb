@@ -10,12 +10,13 @@ class FamilyMembersController < WebController
   def index
     @query = FamilyMember.ransack(params[:q])
     @result = @query.result
+    @result = @result.where(user: current_user) if current_user.agent?
     respond_to do |format|
-      format.html {
+      format.html do
         @pagy, @family_members = pagy(@result.includes(:city, :race, :gender),
                                       page: params[:page], items: 10)
-      }
-      format.json {render_json @result.includes(:city, :race, :gender)}
+      end
+      format.json { render_json @result.includes(:city, :race, :gender) }
     end
   end
 

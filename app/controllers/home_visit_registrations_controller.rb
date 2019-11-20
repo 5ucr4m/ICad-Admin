@@ -21,7 +21,7 @@ class HomeVisitRegistrationsController < WebController
 
   # GET /home_visit_registrations/new
   def new
-    breadcrumb "#{t('helpers.submit.new')}", new_home_visit_registration_path
+    breadcrumb t('helpers.submit.new'), new_home_visit_registration_path
     @home_visit_registration = HomeVisitRegistration.new
     @home_visit_registration.build_relation_ships
   end
@@ -33,7 +33,7 @@ class HomeVisitRegistrationsController < WebController
 
   # POST /home_visit_registrations
   def create
-    breadcrumb "#{t('helpers.submit.new')}", new_home_visit_registration_path
+    breadcrumb t('helpers.submit.new'), new_home_visit_registration_path
     @home_visit_registration = current_user.home_visit_registrations.new(home_visit_registration_params)
     @city_selected = @home_visit_registration&.family_member&.city&.presence
 

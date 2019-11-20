@@ -1,0 +1,12 @@
+<%= content_for :table_header do %>
+  <thead>
+  <tr>
+    <% @search_params.each do |search_param| %>
+      <th><%= FamilyMember.human_attribute_name search_param.to_sym %></th>
+    <% end %>
+  </tr>
+  </thead>
+<% end %>
+<%= content_for :table_body do %>
+<% end %>
+<%= render template: 'reports/table', locals: {model: FamilyMember} %>

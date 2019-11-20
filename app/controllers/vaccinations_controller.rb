@@ -20,7 +20,7 @@ class VaccinationsController < WebController
 
   # GET /vaccinations/new
   def new
-    breadcrumb "#{t('helpers.submit.new')}", new_vaccination_path
+    breadcrumb t('helpers.submit.new'), new_vaccination_path
     @vaccination = Vaccination.new
   end
 
@@ -31,7 +31,7 @@ class VaccinationsController < WebController
 
   # POST /vaccinations
   def create
-    breadcrumb "#{t('helpers.submit.new')}", new_vaccination_path
+    breadcrumb t('helpers.submit.new'), new_vaccination_path
     @vaccination = Vaccination.new(vaccination_params)
 
     if @vaccination.save
