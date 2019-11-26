@@ -1,12 +1,147 @@
-<%= content_for :table_header do %>
-  <thead>
-  <tr>
-    <% @search_params.each do |search_param| %>
-      <th><%= IndividualRegistration.human_attribute_name search_param.to_sym %></th>
-    <% end %>
-  </tr>
-  </thead>
-<% end %>
-<%= content_for :table_body do %>
-<% end %>
-<%= render template: 'reports/table', locals: {model: IndividualRegistration} %>
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card mb-0">
+      <%= search_form_for @query, url: individual_registrations_reports_path do |f| %>
+        <div class="card-header">
+          <h3 class="card-title font-weight-bold">Filtro de <%= IndividualRegistration.model_name.human(count: 2)[10..-1][0..19] %></h3>
+        </div>
+        <div class="card-body p-2 o-auto" style="height: 35rem;">
+          <%= f.input :refuse_registration_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <div class="card-text col-lg-12">
+            <h4 class="mb-0"><%= HealthCondition.model_name.human %></h4>
+            <hr class="my-2"/>
+          </div>
+          <%= f.input :health_condition_weight_situation_id_in, as: :select, collection: GenericModel.weight_situations, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :health_condition_alcohol_dependent_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_other_drugs_dependent_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_smoker_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_pregnant_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_bedridden_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_domiciled_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_diabetic_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_respiratory_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_hypertension_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_cancer_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_kidneys_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_leprosy_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_tuberculosis_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_avc_stroke_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_had_heart_attack_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_had_heart_disease_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_recently_hospitalized_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_mental_issue_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_integrative_practices_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :health_condition_medicinal_plants_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <div class="card-text col-lg-12">
+            <h4 class="mb-0"><%= InStreetSituation.model_name.human %></h4>
+            <hr class="my-2"/>
+          </div>
+          <%= f.input :in_street_situation_meals_per_day_id_in, as: :select, collection: GenericModel.meals_per_day, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :in_street_situation_street_situation_time_id_in, as: :select, collection: GenericModel.street_situation_time, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :in_street_situation_has_other_accompanied_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :in_street_situation_familiar_reference_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :in_street_situation_receive_benefits_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :in_street_situation_in_street_situation_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :in_street_situation_has_personal_hygiene_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :in_street_situation_family_visit_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <div class="card-text col-lg-12">
+            <h4 class="mb-0"><%= SociodemographicInfo.model_name.human %></h4>
+            <hr class="my-2"/>
+          </div>
+          <%= f.input :sociodemographic_info_education_level_id_in, as: :select, collection: GenericModel.education_levels, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :sociodemographic_info_occupation_id_in, as: :select, collection: GenericModel.cbo_types, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :sociodemographic_info_sexual_orientation_id_in, as: :select, collection: GenericModel.sexual_orientations, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :sociodemographic_info_parent_relation_id_in, as: :select, collection: GenericModel.parent_relations, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :sociodemographic_info_job_market_situation_id_in, as: :select, collection: GenericModel.job_market_situations, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :sociodemographic_info_gender_identity_id_in, as: :select, collection: GenericModel.genders, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :sociodemographic_info_desire_orientation_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :sociodemographic_info_attend_school_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :sociodemographic_info_community_group_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :sociodemographic_info_health_plan_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :sociodemographic_info_has_any_disability_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :sociodemographic_info_desire_gender_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <div class="card-text col-lg-12">
+            <h4 class="mb-0"><%= CancelRegistration.model_name.human %></h4>
+            <hr class="my-2"/>
+          </div>
+          <%= f.input :cancel_registration_left_reason_id_in, as: :select, collection: GenericModel.left_reasons, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <div class="col-lg-12">
+            <div class="row">
+              <%= f.input :cancel_registration_decease_date_gteq, as: :date, html5: true, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+              <%= f.input :cancel_registration_decease_date_lteq, as: :date, label: 'Até', html5: true, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <%= link_to individual_registrations_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
+            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.submit.clear") %></span>
+          <% end %>
+          <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
+                         data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
+            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.submit.search") %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="row">
+      <div class="col-lg-12">
+        <% content_for :table_header do %>
+          <thead>
+          <thead>
+          <tr>
+            <th><%= IndividualRegistration.human_attribute_name :family_member %></th>
+            <th><%= SociodemographicInfo.human_attribute_name :gender_identity %></th>
+            <th><%= SociodemographicInfo.human_attribute_name :occupation %></th>
+            <th><%= SociodemographicInfo.human_attribute_name :parent_relation %></th>
+            <th><%= SociodemographicInfo.human_attribute_name :job_market_situation %></th>
+          </tr>
+          </thead>
+          </thead>
+        <% end %>
+        <% content_for :table_body do %>
+          <tbody>
+          <% cache('individual_registration_report_list') do %>
+            <% @list.each do |individual_registration| %>
+              <tr>
+                <td><%= individual_registration.family_member.full_name %></td>
+                <td><%= individual_registration.sociodemographic_info.gender_identity.name_formatted %></td>
+                <td><%= individual_registration.sociodemographic_info.occupation.name_formatted %></td>
+                <td><%= individual_registration.sociodemographic_info.parent_relation.name_formatted %></td>
+                <td><%= individual_registration.sociodemographic_info.job_market_situation.name_formatted %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        <% end %>
+        <%= render template: 'reports/table', locals: {model: IndividualRegistration} %>
+      </div>
+      <% if @list.any? %>
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header p-4">
+              <h3 class="mb-0">
+                <i class="fas fa-map mr-2"></i>Mapa de Localização
+              </h3>
+            </div>
+            <div id="individual_registration_map" class="card-body p-0">
+              <%= render 'application/map', family_members: @list.map(&:family_member) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

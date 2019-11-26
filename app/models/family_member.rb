@@ -72,6 +72,7 @@ class FamilyMember < ApplicationRecord
   belongs_to :company, optional: true
   belongs_to :user
 
+  has_one :home_registration, through: :family
   has_one :individual_registration, dependent: :destroy
   has_many :vaccinations
   has_many :vaccines, through: :vaccinations
@@ -81,11 +82,15 @@ class FamilyMember < ApplicationRecord
   ransack_alias :search, :id_to_s_or_name_or_social_name_or_federal_registry_or_state_registry_or_cns_number
 
   def location_x
-    family.home_registration.location_x
+    return if home_registration.blank?
+
+    family&.home_registration&.location_x
   end
 
   def location_y
-    family.home_registration.location_y
+    return if home_registration.blank?
+
+    family & home_registration&.location_y
   end
 
   def age

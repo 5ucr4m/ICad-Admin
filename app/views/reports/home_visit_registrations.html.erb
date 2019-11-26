@@ -1,12 +1,96 @@
-<%= content_for :table_header do %>
-  <thead>
-  <tr>
-    <% @search_params.each do |search_param| %>
-      <th><%= HomeVisitRegistration.human_attribute_name search_param.to_sym %></th>
-    <% end %>
-  </tr>
-  </thead>
-<% end %>
-<%= content_for :table_body do %>
-<% end %>
-<%= render template: 'reports/table', locals: {model: HomeVisitRegistration} %>
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card mb-0">
+      <%= search_form_for @query, url: home_visit_registrations_reports_path do |f| %>
+        <div class="card-header">
+          <h3 class="card-title font-weight-bold">Filtro de <%= HomeVisitRegistration.model_name.human(count: 2)[10..-1][0..16] %></h3>
+        </div>
+        <div class="card-body p-2 o-auto" style="height: 35rem;">
+          <%= f.input :handbook_number_eq, as: :integer, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <div class="col-lg-12">
+            <div class="row">
+              <%= f.input :birth_date_gteq, as: :date, html5: true, required: false, label: "#{HomeVisitForm.human_attribute_name :birth_date} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+              <%= f.input :birth_date_lteq, as: :date, html5: true, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+            </div>
+          </div>
+          <%= f.input :gender_id_in, as: :select, collection: GenericModel.genders, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :home_type_id_in, as: :select, collection: GenericModel.home_types, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <div class="col-lg-12">
+            <div class="row">
+              <%= f.input :weight_monitoring_gteq, as: :integer, required: false, label: "#{HomeVisitForm.human_attribute_name :weight_monitoring} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+              <%= f.input :weight_monitoring_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="row">
+              <%= f.input :height_monitoring_gteq, as: :integer, required: false, label: "#{HomeVisitForm.human_attribute_name :height_monitoring} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+              <%= f.input :height_monitoring_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+            </div>
+          </div>
+          <%= f.input :out_area_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-3 mb-3'} %>
+        </div>
+        <div class="card-footer text-center">
+          <%= link_to home_visit_registrations_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
+            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.submit.clear") %></span>
+          <% end %>
+          <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
+                         data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
+            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.submit.search") %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="row">
+      <div class="col-lg-12">
+        <% content_for :table_header do %>
+          <thead>
+          <tr>
+            <th><%= FamilyMember.human_attribute_name :name %></th>
+            <th><%= FamilyMember.human_attribute_name :social_name %></th>
+            <th><%= FamilyMember.human_attribute_name :cns_number %></th>
+            <th><%= FamilyMember.human_attribute_name :birth_date %></th>
+            <th><%= FamilyMember.human_attribute_name :city %></th>
+            <th><%= FamilyMember.human_attribute_name :handbook_number %></th>
+          </tr>
+          </thead>
+        <% end %>
+        <% content_for :table_body do %>
+          <tbody>
+          <% cache('home_visit_registration_report_list') do %>
+            <% @list.each do |home_visit_registration| %>
+              <tr>
+                <td><%= home_visit_registration.family_member.name %></td>
+                <td><%= home_visit_registration.family_member.social_name %></td>
+                <td><%= home_visit_registration.family_member.cns_number %></td>
+                <td><%= home_visit_registration.family_member.birth_date.strftime('%d/%m/%Y') %></td>
+                <td><%= home_visit_registration.family_member.city.name %></td>
+                <td><%= home_visit_registration.family_member&.family&.handbook_number %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        <% end %>
+        <%= render template: 'reports/table', locals: {model: HomeVisitRegistration} %>
+      </div>
+      <% if @list.any? %>
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header p-4">
+              <h3 class="mb-0">
+                <i class="fas fa-map mr-2"></i>Mapa de Localização
+              </h3>
+            </div>
+            <div id="family_member_map" class="card-body p-0">
+              <%= render 'application/map', family_members: @list.map(&:family_member) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

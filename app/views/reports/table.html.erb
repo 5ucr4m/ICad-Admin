@@ -13,7 +13,7 @@
     </div>
   </div>
 <% end %>
-<div class="card">
+<div class="card mb-3">
   <div class="card-status bg-transparent"></div>
   <div class="card-header p-4">
     <div class="col-sm-12 col-lg-12">
@@ -21,34 +21,33 @@
         <div class="col-sm-12 col-lg-6 p-0">
           <div class="row">
             <div class="col-lg-9">
-              <% if @list.present? %>
+              <% if @list.any? %>
                 <h1 class="pt-2 card-title mb-2">
                   <% if @list.count.zero? %>
                     Nenhum registro encontrado
                   <% elsif @list.count > 1 %>
-                    <strong class="mr-1"><%= list.count %></strong>registros encontrados
+                    <strong class="mr-1"><%= @list.count %></strong>registros encontrados
                   <% else %>
-                    <strong class="mr-1"><%= list.count %></strong>registro encontrado
+                    <strong class="mr-1"><%= @list.count %></strong>registro encontrado
                   <% end %>
                 </h1>
               <% end %>
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-lg-6 p-0">
-          <%= search_form_for @query do |f| %>
-            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>
-  <div class="card-body table-responsive p-0 m-0">
-    <table class="table card-table table-vcenter text-nowrap table-hover">
-      <%= yield :table_header %>
-      <%= yield :table_body %>
-    </table>
-  </div>
+  <% if @list.empty? %>
+  <div class="card-alert alert alert-warning mb-0 text-center font-weight-bold"><i class="fas fa-exclamation-triangle mr-2"></i>Nenhum registro encontrado.</div>
+  <% else %>
+    <div class="card-body table-responsive p-0 m-0">
+      <table class="table card-table table-vcenter text-nowrap table-hover">
+        <%= yield :table_header %>
+        <%= yield :table_body %>
+      </table>
+    </div>
+  <% end %>
   <div class="card-footer">
     <% if @pagy.count > 1 %>
       <div class="col-sm-12 col-lg-<%= can?(:create, model) ? '6' : '12' %>">

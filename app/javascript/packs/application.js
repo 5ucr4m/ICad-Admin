@@ -163,6 +163,12 @@ window.addEventListener('DOMContentLoaded', function (e) {
     allowClear: true
   });
 
+  $('.select2-multiple').select2({
+    theme: 'bootstrap4',
+    width: '100%',
+    multiple: true
+  });
+
   $('.selectize').selectize();
 
   if (zipInput) {

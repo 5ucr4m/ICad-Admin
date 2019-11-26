@@ -1,12 +1,114 @@
-<%= content_for :table_header do %>
-  <thead>
-  <tr>
-    <% @search_params.each do |search_param| %>
-      <th><%= FamilyMember.human_attribute_name search_param.to_sym %></th>
-    <% end %>
-  </tr>
-  </thead>
-<% end %>
-<%= content_for :table_body do %>
-<% end %>
-<%= render template: 'reports/table', locals: {model: FamilyMember} %>
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card mb-0">
+      <%= search_form_for @query, url: family_members_reports_path do |f| %>
+        <div class="card-header">
+          <h3 class="card-title font-weight-bold">Filtro de <%= FamilyMember.model_name.human(count: 2) %></h3>
+        </div>
+        <div class="card-body p-2 o-auto" style="height: 35rem;">
+          <div class="col-lg-12">
+            <div class="row">
+              <%= f.input :birth_date_gteq, required: false, label: "#{FamilyMember.human_attribute_name :birth_date} de",
+                          as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+              <%= f.input :birth_date_lteq, label: 'até', required: false,
+                          as: :date, html5: true, wrapper_html: {class: 'btn-remove col-lg-6 col-sm-12'} %>
+            </div>
+          </div>
+          <%= f.input :cns_number_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <%= f.input :family_handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label"><%= FamilyMember.human_attribute_name :race %> em</label>
+              <%= select_tag :race_id_in,
+                             options_from_collection_for_select(GenericModel.races,
+                                                                :id, :name_formatted, params[:race_id_in]),
+                             {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label"><%= FamilyMember.human_attribute_name :gender %> em</label>
+              <%= select_tag :gender_id_in,
+                             options_from_collection_for_select(GenericModel.genders,
+                                                                :id, :name_formatted, params[:gender_id_in]),
+                             {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-label"><%= FamilyMember.human_attribute_name :ethnicities %> em</label>
+              <%= select_tag :ethnicity_id_in,
+                             options_from_collection_for_select(GenericModel.ethnicities,
+                                                                :id, :name_formatted, params[:ethnicity_id_in]),
+                             {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
+            </div>
+          </div>
+          <%= f.input :family_family_income_id_in, as: :select, collection: GenericModel.family_incomes, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :out_area_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-3 mb-3'} %>
+        </div>
+        <div class="card-footer text-center">
+          <%= link_to family_members_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
+            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.submit.clear") %></span>
+          <% end %>
+          <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
+                         data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
+            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.submit.search") %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="row">
+      <div class="col-lg-12">
+        <% content_for :table_header do %>
+          <thead>
+          <tr>
+            <th><%= FamilyMember.human_attribute_name :name %></th>
+            <th><%= FamilyMember.human_attribute_name :social_name %></th>
+            <th><%= FamilyMember.human_attribute_name :cns_number %></th>
+            <th><%= FamilyMember.human_attribute_name :birth_date %></th>
+            <th><%= FamilyMember.human_attribute_name :city %></th>
+            <th><%= FamilyMember.human_attribute_name :gender %></th>
+            <th><%= FamilyMember.human_attribute_name :family %></th>
+          </tr>
+          </thead>
+        <% end %>
+        <% content_for :table_body do %>
+          <tbody>
+          <% cache('family_member_report_list') do %>
+            <% @list.each do |family_member| %>
+              <tr>
+                <td><%= family_member.name %></td>
+                <td><%= family_member.social_name %></td>
+                <td><%= family_member.cns_number %></td>
+                <td><%= family_member.birth_date %></td>
+                <td><%= family_member.city.name %></td>
+                <td><%= family_member.gender.name_formatted %></td>
+                <td><%= family_member&.family&.handbook_number %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        <% end %>
+        <%= render template: 'reports/table', locals: {model: FamilyMember} %>
+      </div>
+      <% if @list.any? %>
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header p-4">
+              <h3 class="mb-0">
+                <i class="fas fa-map mr-2"></i>Mapa de Localização
+              </h3>
+            </div>
+            <div id="family_member_map" class="card-body p-0">
+              <%= render 'application/map', family_members: @list %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

@@ -58,6 +58,7 @@ class HomeRegistration < ApplicationRecord
 
   has_many :home_registration_pets, dependent: :destroy
   has_many :families, dependent: :nullify
+  has_many :family_members, through: :families
 
   has_one :period_item, as: :registrable, dependent: :destroy
 

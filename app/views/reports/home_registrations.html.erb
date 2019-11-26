@@ -1,12 +1,110 @@
-<%= content_for :table_header do %>
-  <thead>
-  <tr>
-    <% @search_params.each do |search_param| %>
-      <th><%= HomeRegistration.human_attribute_name search_param.to_sym %></th>
-    <% end %>
-  </tr>
-  </thead>
-<% end %>
-<%= content_for :table_body do %>
-<% end %>
-<%= render template: 'reports/table', locals: {model: HomeRegistration} %>
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card mb-0">
+      <%= search_form_for @query, url: home_registrations_reports_path do |f| %>
+        <div class="card-header">
+          <h3 class="card-title font-weight-bold">Filtro de <%= HomeRegistration.model_name.human(count: 2)[10..-1][0..19] %></h3>
+        </div>
+        <div class="card-body p-2 o-auto" style="height: 35rem;">
+          <%= f.input :health_professional_id_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <%= f.input :living_condition_rooms_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <div class="col-lg-12">
+            <div class="row">
+              <%= f.input :pet_quantity_gteq, as: :integer, required: false, label: "#{HomeRegistration.human_attribute_name :pet_quantity} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+              <%= f.input :pet_quantity_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+            </div>
+          </div>
+          <%= f.input :home_type_id_in, as: :select, collection: GenericModel.residence_types, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <div class="col-lg-12">
+            <div class="row">
+              <%= f.input :living_condition_residents_gteq, as: :integer, required: false, label: "#{LivingCondition.human_attribute_name :residents} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+              <%= f.input :living_condition_residents_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+            </div>
+          </div>
+          <%= f.input :living_condition_water_supply_id_in, as: :select, collection: GenericModel.water_supplies, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_garbage_disposal_id_in, as: :select, collection: GenericModel.garbage_disposals, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_bathroom_drainage_id_in, as: :select, collection: GenericModel.bathroom_drainage, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_home_location_id_in, as: :select, collection: GenericModel.home_locations, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_home_situation_id_in, as: :select, collection: GenericModel.home_situations, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_home_wall_material_id_in, as: :select, collection: GenericModel.home_wall_materials, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_home_type_id_in, as: :select, collection: GenericModel.home_types, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_water_treatment_id_in, as: :select, collection: GenericModel.water_treatments, required: false,
+                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+          <%= f.input :living_condition_electric_power_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+          <%= f.input :refuse_registration_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+        </div>
+        <div class="card-footer text-center">
+          <%= link_to home_registrations_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
+            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.submit.clear") %></span>
+          <% end %>
+          <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
+                         data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
+            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.submit.search") %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="row">
+      <div class="col-lg-12">
+        <% content_for :table_header do %>
+          <thead>
+          <tr>
+            <th><%= HomeRegistration.human_attribute_name :health_professional %></th>
+            <th><%= HomeRegistration.human_attribute_name :pet_quantity %></th>
+            <th><%= HomeRegistration.human_attribute_name :refuse_registration %></th>
+            <th><%= LivingCondition.human_attribute_name :water_supply %></th>
+            <th><%= LivingCondition.human_attribute_name :rural_production_area %></th>
+            <th><%= LivingCondition.human_attribute_name :garbage_disposal %></th>
+            <th><%= LivingCondition.human_attribute_name :bathroom_drainage %></th>
+            <th><%= LivingCondition.human_attribute_name :home_location %></th>
+          </tr>
+          </thead>
+        <% end %>
+        <% content_for :table_body do %>
+          <tbody>
+          <% cache('home_registration_report_list') do %>
+            <% @list.each do |home_registration| %>
+              <tr>
+                <td><%= home_registration.home_registration.full_name %></td>
+                <td><%= home_registration.pet_quantity %></td>
+                <td><%= home_registration.refuse_registration ? 'SIM' : 'NÃO' %></td>
+                <td><%= home_registration.living_condition.water_supply.name_formatted %></td>
+                <td><%= home_registration.living_condition.rural_production_area.name_formatted %></td>
+                <td><%= home_registration.living_condition.garbage_disposal.name_formatted %></td>
+                <td><%= home_registration.living_condition.bathroom_drainage.name_formatted %></td>
+                <td><%= home_registration.living_condition.home_location.name_formatted %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        <% end %>
+        <%= render template: 'reports/table', locals: {model: HomeRegistration} %>
+      </div>
+      <% if @list.any? %>
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header p-4">
+              <h3 class="mb-0">
+                <i class="fas fa-map mr-2"></i>Mapa de Localização
+              </h3>
+            </div>
+            <div id="home_registration_map" class="card-body p-0">
+              <%= render 'application/map', family_members: @list.family_members %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

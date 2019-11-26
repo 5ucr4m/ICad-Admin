@@ -35,5 +35,8 @@
     <%= link_to home_visit_registrations_reports_path, class: 'dropdown-item' do %>
       <i class="<%= t("activerecord.models.home_visit_registration.icon") %> dropdown-icon"></i>Relatório de <%= HomeVisitRegistration.model_name.human(count: 2) %>
     <% end %>
+    <%= link_to vaccinations_reports_path, class: 'dropdown-item' do %>
+      <i class="<%= t("activerecord.models.vaccination.icon") %> dropdown-icon"></i>Relatório de <%= Vaccination.model_name.human(count: 2) %>
+    <% end %>
   </div>
 </li>

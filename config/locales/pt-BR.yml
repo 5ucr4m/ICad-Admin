@@ -4,6 +4,8 @@ pt-BR:
     application: ICADX - Sistema de Gestão de UBS - %{subtitle}
   activerecord:
     models:
+      report:
+        other: Relatórios
       session:
         other: Login
       registration:

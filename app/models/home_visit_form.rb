@@ -54,6 +54,7 @@ class HomeVisitForm < ApplicationRecord
   belongs_to :company, optional: true
 
   has_many :home_visit_reasons, dependent: :destroy
+  has_one :family_member, through: :home_visit_registration
 
   accepts_nested_attributes_for :home_visit_reasons, allow_destroy: true
   accepts_nested_attributes_for :home_visit_registration, allow_destroy: false

@@ -74,22 +74,7 @@
 
     // TODO Treat marker colors
     function marker(index, color) {
-        switch (parseInt(index)) {
-            case 0:
-                return menMarker(color);
-            case 1:
-                return womanMarker(color);
-            case 2:
-                return teenageMarker(color);
-            case 3:
-                return childMarker(color);
-            case 4:
-                return newbornMarker(color);
-            case 5:
-                return elderlyMarker(color);
-            default:
-                return menMarker(color);
-        }
+        return menMarker(color);
     }
 
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -102,14 +87,14 @@
             zoom: 16
         });
 
-        <% vaccinations.each do |vaccination| %>
-        var lng = "<%= vaccination.family_member.location_x %>";
-        var lat = "<%= vaccination.family_member.location_y %>";
-        new mapboxgl.Marker(marker("<%= Vaccination.patient_types[vaccination.patient_type] %>", "<%= %w(success danger).sample %>"))
+        <% family_members.each do |family_member| %>
+        var lng = "<%= family_member.location_x %>";
+        var lat = "<%= family_member.location_y %>";
+        new mapboxgl.Marker(marker("<%= %w(success).sample %>"))
             .setLngLat([lng, lat])
             .setPopup(new mapboxgl.Popup({offset: 15})
             // TODO Set marker information here
-                .setHTML('<p class="text-center font-weight-bold"><%= link_to vaccination.family_member.name, vaccination.family_member %></p><p>Gênero: <%= vaccination.family_member.gender.name_formatted %></p><p>Idade: <%= vaccination.family_member.age %></p>'))
+                .setHTML('<p class="text-center font-weight-bold"><%= link_to family_member.name, family_member %></p><p>Gênero: <%= family_member.gender.name_formatted %></p><p>Idade: <%= family_member.age %></p>'))
             .addTo(map);
         <% end %>
 

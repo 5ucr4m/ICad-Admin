@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.5'
 
 gem 'active_model_serializers'
 gem 'apipie-rails'
@@ -58,7 +58,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'pry-doc'
