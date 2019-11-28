@@ -90,20 +90,18 @@
         <% end %>
         <%= render template: 'reports/table', locals: {model: HomeRegistration} %>
       </div>
-      <% if @list.any? %>
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-header p-4">
-              <h3 class="mb-0">
-                <i class="fas fa-map mr-2"></i>Mapa de Localização
-              </h3>
-            </div>
-            <div id="home_registration_map" class="card-body p-0">
-              <%= render 'application/map' %>
-            </div>
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header p-4">
+            <h3 class="mb-0">
+              <i class="fas fa-map mr-2"></i>Mapa de Localização
+            </h3>
+          </div>
+          <div id="home_registration_map" class="card-body p-0">
+            <%= render 'application/map' %>
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
