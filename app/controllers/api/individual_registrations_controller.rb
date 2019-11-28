@@ -28,7 +28,7 @@ module Api
 
     # POST /individual_registrations
     def create
-      @individual_registration = IndividualRegistration.new(individual_registration_params)
+      @individual_registration = current_user.individual_registrations.build(individual_registration_params)
 
       if @individual_registration.save
         render_json @individual_registration, :created

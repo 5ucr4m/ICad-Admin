@@ -25,7 +25,7 @@ module Api
     # POST /home_registrations
     api :POST, '/home_registrations', 'GET Home Registrations List'
     def create
-      @home_registration = HomeRegistration.new(home_registration_params)
+      @home_registration = current_user.home_registrations.build(home_registration_params)
 
       if @home_registration.save
         render_json @home_registration, :created, true
