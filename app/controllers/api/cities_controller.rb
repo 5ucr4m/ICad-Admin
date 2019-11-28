@@ -2,7 +2,8 @@
 
 module Api
   class CitiesController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    #load_and_authorize_resource find_by: :slug
+    skip_before_action :authenticate_user!
     before_action :set_city, only: %i[show]
 
     # GET /cities
