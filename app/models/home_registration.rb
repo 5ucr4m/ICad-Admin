@@ -62,6 +62,8 @@ class HomeRegistration < ApplicationRecord
 
   has_one :period_item, as: :registrable, dependent: :destroy
 
+  before_validation :set_user_to_families
+
   accepts_nested_attributes_for :address, allow_destroy: false
   accepts_nested_attributes_for :living_condition, allow_destroy: false
   accepts_nested_attributes_for :permanence_institution
@@ -74,5 +76,14 @@ class HomeRegistration < ApplicationRecord
     build_living_condition
     build_address
     build_permanence_institution
+  end
+
+  private
+
+  def set_user_to_families
+    return if user.blank?
+    return if families.blank?
+
+    families.each { |f| f.user = user }
   end
 end

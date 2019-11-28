@@ -10,12 +10,11 @@ class FamiliesController < WebController
   def index
     @query = Family.ransack(params[:q])
     @result = @query.result
-    @result = @result.where(user: current_user) if current_user.agent?
     respond_to do |format|
       format.html do
         @pagy, @families = pagy(@result.includes(:family_income), page: params[:page], items: 10)
       end
-      format.json { render_json @result.where(user: current_user).includes(:company, :home_registration, :family_income) }
+      format.json { render_json @result.includes(:company, :home_registration, :family_income) }
     end
   end
 
@@ -40,7 +39,7 @@ class FamiliesController < WebController
   # POST /families
   def create
     breadcrumb t('helpers.submit.new'), new_family_path
-    @family = current_user.families.new(family_params)
+    @family = Family.new(family_params)
     @city_selected = @family&.home_registration&.address&.city.presence
 
     if @family.save

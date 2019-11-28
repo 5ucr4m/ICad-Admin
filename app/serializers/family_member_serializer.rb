@@ -59,7 +59,13 @@
 #
 
 class FamilyMemberSerializer < ActiveModel::Serializer
-  attributes :id, :social_name, :birth_date, :unknown_mother, :mother_name, :email, :name, :cns_number, :cns_responsible, :phone, :pis_pasep_number, :responsible, :unknown_father, :father_name, :naturalized_at, :naturalize_decree, :brazil_entry_date, :micro_area, :out_area, :slug
+  include Rails.application.routes.url_helpers
+  include ActionView::Helpers::DateHelper
+  attributes :id, :social_name, :birth_date, :unknown_mother,
+             :mother_name, :email, :name, :cns_number, :cns_responsible,
+             :phone, :pis_pasep_number, :responsible, :unknown_father,
+             :father_name, :naturalized_at, :naturalize_decree,
+             :brazil_entry_date, :micro_area, :out_area, :slug, :lat, :lng, :age, :gender, :url
   has_one :family
   has_one :city
   has_one :nationality
@@ -68,4 +74,24 @@ class FamilyMemberSerializer < ActiveModel::Serializer
   has_one :gender
   has_one :ethnicity
   has_one :company
+
+  def lat
+    object.location_x
+  end
+
+  def lng
+    object.location_y
+  end
+
+  def gender
+    object.gender.name_formatted
+  end
+
+  def age
+    distance_of_time_in_words object.birth_date, Time.current.to_date, only: :months
+  end
+
+  def url
+    family_member_url(object, only_path: true)
+  end
 end

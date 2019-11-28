@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_023744) do
+ActiveRecord::Schema.define(version: 2019_11_27_180326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,7 +119,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
     t.boolean "moving"
     t.bigint "company_id"
     t.string "slug"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
@@ -129,7 +128,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
     t.index ["family_income_id"], name: "index_families_on_family_income_id"
     t.index ["home_registration_id"], name: "index_families_on_home_registration_id"
     t.index ["ip"], name: "index_families_on_ip"
-    t.index ["user_id"], name: "index_families_on_user_id"
   end
 
   create_table "family_member_disabilities", force: :cascade do |t|
@@ -176,7 +174,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
     t.boolean "out_area"
     t.bigint "company_id"
     t.string "slug"
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
@@ -191,7 +188,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
     t.index ["ip"], name: "index_family_members_on_ip"
     t.index ["nationality_id"], name: "index_family_members_on_nationality_id"
     t.index ["race_id"], name: "index_family_members_on_race_id"
-    t.index ["user_id"], name: "index_family_members_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -762,7 +758,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
   create_table "sms_schedules", force: :cascade do |t|
     t.datetime "scheduled_date"
     t.text "message"
-    t.integer "group"
+    t.string "role_groups"
     t.integer "status"
     t.string "slug"
     t.bigint "company_id"
@@ -770,6 +766,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.string "name"
     t.index ["company_id"], name: "index_sms_schedules_on_company_id"
     t.index ["discarded_at"], name: "index_sms_schedules_on_discarded_at"
     t.index ["ip"], name: "index_sms_schedules_on_ip"
@@ -818,6 +815,33 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["country_id"], name: "index_states_on_country_id"
+  end
+
+  create_table "taggings", id: :serial, force: :cascade do |t|
+    t.integer "tag_id"
+    t.string "taggable_type"
+    t.integer "taggable_id"
+    t.string "tagger_type"
+    t.integer "tagger_id"
+    t.string "context", limit: 128
+    t.datetime "created_at"
+    t.index ["context"], name: "index_taggings_on_context"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+  end
+
+  create_table "tags", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "user_companies", force: :cascade do |t|
@@ -987,7 +1011,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
   add_foreign_key "families", "companies"
   add_foreign_key "families", "generic_models", column: "family_income_id"
   add_foreign_key "families", "home_registrations"
-  add_foreign_key "families", "users"
   add_foreign_key "family_member_disabilities", "companies"
   add_foreign_key "family_member_disabilities", "generic_models", column: "disability_id"
   add_foreign_key "family_member_disabilities", "sociodemographic_infos"
@@ -999,7 +1022,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
   add_foreign_key "family_members", "generic_models", column: "gender_id"
   add_foreign_key "family_members", "generic_models", column: "nationality_id"
   add_foreign_key "family_members", "generic_models", column: "race_id"
-  add_foreign_key "family_members", "users"
   add_foreign_key "generic_models", "generic_models"
   add_foreign_key "header_transports", "cities"
   add_foreign_key "header_transports", "companies"
@@ -1093,6 +1115,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_023744) do
   add_foreign_key "sociodemographic_infos", "generic_models", column: "parent_relation_id"
   add_foreign_key "sociodemographic_infos", "generic_models", column: "sexual_orientation_id"
   add_foreign_key "states", "generic_models", column: "country_id"
+  add_foreign_key "taggings", "tags"
   add_foreign_key "user_companies", "companies"
   add_foreign_key "user_companies", "users"
   add_foreign_key "user_roles", "roles"

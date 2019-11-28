@@ -166,7 +166,8 @@ window.addEventListener('DOMContentLoaded', function (e) {
   $('.select2-multiple').select2({
     theme: 'bootstrap4',
     width: '100%',
-    multiple: true
+    multiple: true,
+    placeholder: 'Selecione os Grupos'
   });
 
   $('.selectize').selectize();

@@ -1,28 +1,36 @@
 # frozen_string_literal: true
 
-class SmsSchedulesController < ApplicationController
+class SmsSchedulesController < WebController
   load_and_authorize_resource find_by: :slug
   before_action :set_sms_schedule, only: %i[show edit update destroy]
+
+  breadcrumb SmsSchedule.model_name.human(count: 2), :sms_schedules_path
 
   # GET /sms_schedules
   def index
     @query = SmsSchedule.ransack(params[:q])
-    @pagy, @sms_schedules = pagy(@query.result, page: params[:page], items: 10)
+    @pagy, @sms_schedules = pagy(@query.result.includes(:taggings), page: params[:page], items: 10)
   end
 
   # GET /sms_schedules/1
-  def show; end
+  def show
+    breadcrumb @sms_schedule.slug, sms_schedule_path(@sms_schedule)
+  end
 
   # GET /sms_schedules/new
   def new
+    breadcrumb t('helpers.submit.new'), new_sms_schedule_path
     @sms_schedule = SmsSchedule.new
   end
 
   # GET /sms_schedules/1/edit
-  def edit; end
+  def edit
+    breadcrumb @sms_schedule.slug, sms_schedule_path(@sms_schedule)
+  end
 
   # POST /sms_schedules
   def create
+    breadcrumb t('helpers.submit.new'), new_sms_schedule_path
     @sms_schedule = SmsSchedule.new(sms_schedule_params)
 
     if @sms_schedule.save
@@ -34,6 +42,7 @@ class SmsSchedulesController < ApplicationController
 
   # PATCH/PUT /sms_schedules/1
   def update
+    breadcrumb @sms_schedule.slug, sms_schedule_path(@sms_schedule)
     if @sms_schedule.update(sms_schedule_params)
       redirect_to @sms_schedule, notice: 'Sms schedule was successfully updated.'
     else
@@ -56,6 +65,6 @@ class SmsSchedulesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def sms_schedule_params
-    params.require(:sms_schedule).permit(:scheduled_date, :message, :group, :status)
+    params.require(:sms_schedule).permit(:name, :scheduled_date, :message, :status, role_list: [])
   end
 end

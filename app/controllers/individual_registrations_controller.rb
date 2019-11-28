@@ -35,7 +35,7 @@ class IndividualRegistrationsController < WebController
   # POST /individual_registrations
   def create
     breadcrumb t('helpers.submit.new'), new_individual_registration_path
-    @individual_registration = IndividualRegistration.new(individual_registration_params)
+    @individual_registration = current_user.individual_registrations.build(individual_registration_params)
 
     if @individual_registration.save
       redirect_to @individual_registration, notice: 'Individual registration was successfully created.'
@@ -184,6 +184,6 @@ class IndividualRegistrationsController < WebController
                                                       left_reason_id
                                                       decease_date
                                                       decease_number
-                                                    ]).merge(company: current_user.company)
+                                                    ])
   end
 end

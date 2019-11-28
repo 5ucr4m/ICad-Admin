@@ -1,12 +1,11 @@
-
 <%= simple_form_for(@sms_schedule) do |f| %>
   <% content_for :body do %>
-      <%= f.input :scheduled_date, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :message, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :group, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :status, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :slug, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.association :company, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :scheduled_date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :role_list, as: :select, collection: Role.all, wrapper_html: {class: 'col-lg-3 col-sm-12'},
+                input_html: {class: 'select2-multiple', disabled: show?(f.object.persisted?), multiple: true} %>
+    <%= f.input :status, as: :select, collection: SmsSchedule.statuses.collect{|v,k| [t("activerecord.attributes.sms_schedule.statuses.#{v}").upcase,v]}, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :message, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @sms_schedule} %>
 <% end %>

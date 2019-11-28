@@ -8,14 +8,28 @@ class ReportsController < WebController
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
     @family_members = @result.map(&:family_members).flatten
-    @pagy, @list = pagy(@result, page: params[:page], items: 10)
+    respond_to do |format|
+      format.html {
+        @pagy, @list = pagy(@result, page: params[:page], items: 10)
+      }
+      format.json {
+        render_json @result.map(&:family_members).flatten
+      }
+    end
   end
 
   def family_members
     @query = FamilyMember.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @pagy, @list = pagy(@result, page: params[:page], items: 10)
+    respond_to do |format|
+      format.html {
+        @pagy, @list = pagy(@result, page: params[:page], items: 10)
+      }
+      format.json {
+        render_json @result
+      }
+    end
   end
 
   def individual_registrations
@@ -23,27 +37,56 @@ class ReportsController < WebController
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
     @pagy, @list = pagy(@result, page: params[:page], items: 10)
+    respond_to do |format|
+      format.html {
+        @pagy, @list = pagy(@result, page: params[:page], items: 10)
+      }
+      format.json {
+        render_json @result.map(&:family_member).flatten
+      }
+    end
   end
 
   def home_registrations
     @query = HomeRegistration.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @pagy, @list = pagy(@result, page: params[:page], items: 10)
+    respond_to do |format|
+      format.html {
+        @pagy, @list = pagy(@result, page: params[:page], items: 10)
+      }
+      format.json {
+        render_json @result.map(&:family_members).flatten
+      }
+    end
   end
 
   def home_visit_registrations
     @query = HomeVisitForm.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @pagy, @list = pagy(@result, page: params[:page], items: 10)
+    respond_to do |format|
+      format.html {
+        @pagy, @list = pagy(@result, page: params[:page], items: 10)
+      }
+      format.json {
+        render_json @result.map(&:family_member).flatten
+      }
+    end
   end
 
   def vaccinations
     @query = Vaccination.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @pagy, @list = pagy(@result, page: params[:page], items: 10)
+    respond_to do |format|
+      format.html {
+        @pagy, @list = pagy(@result, page: params[:page], items: 10)
+      }
+      format.json {
+        render_json @result.map(&:family_member).flatten
+      }
+    end
   end
 
   private

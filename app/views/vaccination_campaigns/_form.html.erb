@@ -30,19 +30,19 @@
               <div class="form-group mb-0">
                 <%= label_tag 'Filtrar por', nil, class: 'form-label' %>
                 <%= select_tag 'filter_by', options_for_select(Vaccination.patient_types.collect { |v, k| [t("activerecord.attributes.vaccination.patient_types.#{v}"), k] }),
-                               include_blank: true, class: 'form-control' %>
+                               include_blank: true, class: 'form-control select2' %>
               </div>
             </div>
             <div class="col-lg-3 col-sm-12">
               <div class="form-group mb-0">
                 <%= label_tag 'Idade de', nil, class: 'form-label' %>
-                <%= number_field 'age_from', nil, class: 'form-control' %>
+                <%= number_field 'age_from', nil, class: 'form-control select2' %>
               </div>
             </div>
             <div class="col-lg-3 col-sm-12">
               <div class="form-group mb-0">
                 <%= label_tag 'Idade até', nil, class: 'form-label' %>
-                <%= number_field 'age_to', nil, class: 'form-control' %>
+                <%= number_field 'age_to', nil, class: 'form-control select2' %>
               </div>
             </div>
             <div class="col-lg-3 col-sm-12">

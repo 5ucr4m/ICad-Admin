@@ -1,0 +1,29 @@
+{
+  "homeVisitRegistration": {
+    "familyMemberId": 0,
+    "homeVisitFormsAttributes": [
+      {
+        "id": 0,
+        "turnId": 0,
+        "handbookNumber": "text",
+        "cnsNumber": "text",
+        "birthDate": "2019-01-01",
+        "genderId": 0,
+        "otherVisit": true,
+        "outcomeId": 0,
+        "microArea": "text",
+        "homeTypeId": 0,
+        "weightMonitoring": "text",
+        "heightMonitoring": "text",
+        "_destroy":  true,
+        "homeVisitReasonsAttributes": [
+          {
+            "id": 0,
+            "reasonId": 0,
+            "_destroy": true
+          }
+        ]
+      }
+    ]
+  }
+}

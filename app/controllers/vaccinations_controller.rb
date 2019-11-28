@@ -9,7 +9,9 @@ class VaccinationsController < WebController
   # GET /vaccinations
   def index
     @query = Vaccination.ransack(params[:q])
-    @pagy, @vaccinations = pagy(@query.result.includes(:vaccination_campaign, :family_member),
+    @result = @query.result
+    @result = @result.where(user: current_user) if current_user.agent?
+    @pagy, @vaccinations = pagy(@result.includes(:vaccination_campaign, :family_member),
                                 page: params[:page], items: 10)
   end
 
@@ -32,7 +34,7 @@ class VaccinationsController < WebController
   # POST /vaccinations
   def create
     breadcrumb t('helpers.submit.new'), new_vaccination_path
-    @vaccination = Vaccination.new(vaccination_params)
+    @vaccination = current_user.vaccinations.build(vaccination_params)
 
     if @vaccination.save
       redirect_to @vaccination, notice: 'Vaccination was successfully created.'

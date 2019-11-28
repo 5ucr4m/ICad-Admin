@@ -34,7 +34,7 @@ class HomeVisitRegistrationsController < WebController
   # POST /home_visit_registrations
   def create
     breadcrumb t('helpers.submit.new'), new_home_visit_registration_path
-    @home_visit_registration = current_user.home_visit_registrations.new(home_visit_registration_params)
+    @home_visit_registration = current_user.home_visit_registrations.build(home_visit_registration_params)
     @city_selected = @home_visit_registration&.family_member&.city&.presence
 
     if @home_visit_registration.save
@@ -71,7 +71,6 @@ class HomeVisitRegistrationsController < WebController
   def home_visit_registration_params
     params.require(:home_visit_registration).permit(:family_member_id,
                                                     :uuid, :tp_cds_origin,
-                                                    :family_member_id,
                                                     home_visit_forms_attributes: [
                                                       :id,
                                                       :turn_id,
@@ -92,6 +91,6 @@ class HomeVisitRegistrationsController < WebController
                                                         reason_id
                                                         _destroy
                                                       ]
-                                                    ]).merge(company: current_user.company)
+                                                    ])
   end
 end

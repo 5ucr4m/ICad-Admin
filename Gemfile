@@ -52,6 +52,7 @@ gem 'simple_form'
 gem 'sinatra', require: false
 gem 'title'
 gem 'webpacker', '~> 4.0'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'better_errors'

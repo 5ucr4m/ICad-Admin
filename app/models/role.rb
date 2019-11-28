@@ -44,6 +44,11 @@ class Role < ApplicationRecord
     User
   ].freeze
 
+  ADMIN_SUPPORT = [
+    SmsSchedule,
+    SmsMessage
+  ].freeze
+
   has_many :user_roles
   has_many :user_companies, through: :user_roles
   has_many :companies, through: :user_companies

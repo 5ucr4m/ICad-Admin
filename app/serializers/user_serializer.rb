@@ -52,6 +52,10 @@ class UserSerializer < ActiveModel::Serializer
 
   belongs_to :health_professional
 
+  def health_professional
+    HealthProfessional.strip_company_scope.find(object.health_professional_id)
+  end
+
   def avatar_url
     rails_blob_url(object.avatar) if object.avatar.present?
   end

@@ -70,7 +70,7 @@ class FamilyMember < ApplicationRecord
   belongs_to :gender, class_name: 'GenericModel'
   belongs_to :ethnicity, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
-  belongs_to :user
+  has_one :user, through: :family
 
   has_one :home_registration, through: :family
   has_one :individual_registration, dependent: :destroy
@@ -79,18 +79,20 @@ class FamilyMember < ApplicationRecord
 
   validates :name, :birth_date, :cns_number, presence: true
 
+  before_validation :set_user
+
   ransack_alias :search, :id_to_s_or_name_or_social_name_or_federal_registry_or_state_registry_or_cns_number
 
   def location_x
     return if home_registration.blank?
 
-    family&.home_registration&.location_x
+    home_registration.location_x
   end
 
   def location_y
     return if home_registration.blank?
 
-    family & home_registration&.location_y
+    home_registration.location_y
   end
 
   def age
@@ -103,5 +105,13 @@ class FamilyMember < ApplicationRecord
       age = birth_date.year.years.until(Time.current).year
       "#{age} #{age > 1 ? 'anos' : 'ano'}"
     end
+  end
+
+  private
+
+  def set_user
+    return if family.blank? || family.user.blank?
+
+    self.user = family.user
   end
 end

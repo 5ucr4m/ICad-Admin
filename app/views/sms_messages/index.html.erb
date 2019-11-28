@@ -29,10 +29,10 @@
       <tbody>
       <% @sms_messages.each do |sms_message| %>
         <tr>
-          <td><%= sms_message.date_sent %></td>
+          <td><%= sms_message&.date_sent&.strftime('%d/%m/%Y %H:%M') %></td>
           <td><%= sms_message.number %></td>
-          <td><%= sms_message.status %></td>
-          <td><%= sms_message.sms_schedule_id %></td>
+          <td><%= t("activerecord.attributes.sms_schedule.statuses.#{sms_message.status}").upcase %></td>
+          <td><%= sms_message.sms_schedule.name_formatted %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: sms_message %>
           </td>

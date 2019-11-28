@@ -34,7 +34,7 @@ class HomeRegistrationsController < WebController
   # POST /home_registrations
   def create
     breadcrumb t('helpers.submit.new'), new_home_registration_path
-    @home_registration = current_user.home_registrations.new(home_registration_params)
+    @home_registration = current_user.home_registrations.build(home_registration_params)
     @city_selected = @home_registration.address.city.presence
     @address_type_selected = @home_registration.address.address_type.presence
 
@@ -78,6 +78,8 @@ class HomeRegistrationsController < WebController
                                               :refuse_registration, :tp_cds_origin,
                                               :uuid, :uuid_form_origin,
                                               :home_type_id,
+                                              :location_x,
+                                              :location_y,
                                               :finished,
                                               families_attributes: %i[
                                                 id
@@ -133,6 +135,6 @@ class HomeRegistrationsController < WebController
                                                 id
                                                 pet_type_id
                                                 _destroy
-                                              ]).merge(company: current_user.company)
+                                              ])
   end
 end

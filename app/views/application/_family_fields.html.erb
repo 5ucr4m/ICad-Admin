@@ -15,7 +15,7 @@
       <%= f.input :responsible_cns_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <%= f.input :members_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <%= f.input :handbook_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <%= f.input :family_income, as: :string, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'money', disabled: show?(f.object.persisted?)} %>
+      <%= f.association :family_income, label_method: :name_formatted, collection: GenericModel.family_incomes, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
       <%= f.input :reside_since, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <%= f.input :moving, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'}, input_html: {disabled: show?(f.object.persisted?)} %>
       <div class="col-12">

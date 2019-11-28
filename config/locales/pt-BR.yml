@@ -102,6 +102,14 @@ pt-BR:
         one: Ficha de Exportação
         other: Fichas de Exportação
         icon: fas fa-file-import
+      sms_schedule:
+        one: Agendamento SMS
+        other: Agendamentos SMS
+        icon: far fa-clock
+      sms_message:
+        one: Mensagem SMS
+        other: Mensagens SMS
+        icon: fas fa-sms
     attributes:
       vaccination:
         patient_types:
@@ -111,6 +119,11 @@ pt-BR:
           child: Criança
           newborn: 'Rescém nascido'
           elderly: Idoso
+      sms_schedule:
+        statuses:
+          standby: Espera
+          sent: Enviado
+          blocked: Bloqueado
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
