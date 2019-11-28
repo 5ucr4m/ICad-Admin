@@ -64,7 +64,7 @@ class ReportsController < WebController
   def home_visit_registrations
     @query = HomeVisitForm.ransack(permitted_params)
     @result = @query.result
-    @result = @result.where(user: current_user) if current_user.agent?
+    @result = @result.includes(:user).where(user: current_user)
     respond_to do |format|
       format.html {
         @pagy, @list = pagy(@result, page: params[:page], items: 10)
