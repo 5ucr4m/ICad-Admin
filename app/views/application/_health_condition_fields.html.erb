@@ -43,16 +43,18 @@
                 </a>
               </div>
             </div>
-            <div class="card-body py-2">
-              <%= link_to_add_association f, :health_condition_kidneys,
-                                          class: 'btn btn-sm btn-primary', role: 'button',
-                                          data: {
-                                            'association-insertion-node': '#kidneys',
-                                            'association-insertion-method': 'append'
-                                          } do %>
-                <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
-              <% end %>
-            </div>
+            <% unless show?(f.object.persisted?) %>
+              <div class="card-body py-2">
+                <%= link_to_add_association f, :health_condition_kidneys,
+                                            class: 'btn btn-sm btn-primary', role: 'button',
+                                            data: {
+                                              'association-insertion-node': '#kidneys',
+                                              'association-insertion-method': 'append'
+                                            } do %>
+                  <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                <% end %>
+              </div>
+            <% end %>
             <div id="kidneys" class="card-body">
               <%= f.simple_fields_for :health_condition_kidneys do |health_condition_kidney| %>
                 <%= render 'application/health_condition_kidney_fields', f: health_condition_kidney %>
@@ -70,16 +72,18 @@
                 </a>
               </div>
             </div>
-            <div class="card-body py-2">
-              <%= link_to_add_association f, :health_condition_diseases,
-                                          class: 'btn btn-sm btn-primary', role: 'button',
-                                          data: {
-                                            'association-insertion-node': '#diseases',
-                                            'association-insertion-method': 'append'
-                                          } do %>
-                <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
-              <% end %>
-            </div>
+            <% unless show?(f.object.persisted?) %>
+              <div class="card-body py-2">
+                <%= link_to_add_association f, :health_condition_diseases,
+                                            class: 'btn btn-sm btn-primary', role: 'button',
+                                            data: {
+                                              'association-insertion-node': '#diseases',
+                                              'association-insertion-method': 'append'
+                                            } do %>
+                  <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                <% end %>
+              </div>
+            <% end %>
             <div id="diseases" class="card-body">
               <%= f.simple_fields_for :health_condition_kidneys do |health_condition_disease| %>
                 <%= render 'application/health_condition_disease_fields', f: health_condition_disease %>

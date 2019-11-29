@@ -6,13 +6,11 @@ module Api
     before_action :set_health_condition, only: %i[show update destroy]
 
     # GET /health_conditions/1
-    api :GET, '/health_conditions/:id', 'GET Health Condition'
     def show
       render_json @health_condition
     end
 
     # POST /health_conditions
-    api :POST, '/health_conditions', 'POST Health Condition'
     def create
       @health_condition = HealthCondition.new(health_condition_params)
 
@@ -24,8 +22,6 @@ module Api
     end
 
     # PATCH/PUT /health_conditions/1
-    api :PATCH, '/health_conditions/:id', 'PATCH Health Condition'
-    api :PUT, '/health_conditions/:id', 'PUT Health Condition'
     def update
       if @health_condition.update(health_condition_params)
         render_json @health_condition, :ok, true
@@ -35,7 +31,6 @@ module Api
     end
 
     # DELETE /health_conditions/1
-    api :DELETE, '/health_conditions/:id', 'DELETE Health Condition'
     def destroy
       @health_condition.destroy
     end

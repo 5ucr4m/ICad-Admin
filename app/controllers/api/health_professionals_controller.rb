@@ -6,7 +6,6 @@ module Api
     before_action :set_health_professional, only: %i[show edit update destroy]
 
     # GET /health_professionals
-    api :GET, '/health_professionals', 'GET Health Professionals List'
     def index
       @query = HealthProfessional.ransack(params[:q])
       @health_professionals = @query.result
@@ -22,13 +21,11 @@ module Api
     end
 
     # GET /health_professionals/1
-    api :GET, '/health_professionals/:id', 'GET Health Professional'
     def show
       render_json @health_professional
     end
 
     # POST /health_professionals
-    api :POST, '/health_professionals', 'POST Health Professional'
     def create
       @health_professional = HealthProfessional.new(health_professional_params)
       @cbo_selected = @health_professional.cbo_code.presence
@@ -41,8 +38,6 @@ module Api
     end
 
     # PATCH/PUT /health_professionals/1
-    api :PATCH, '/health_professionals/:id', 'PATCH Health Professional'
-    api :PUT, '/health_professionals/:id', 'PUT Health Professional'
     def update
       if @health_professional.update(health_professional_params)
         render_json @health_professional, :ok, true
@@ -52,7 +47,6 @@ module Api
     end
 
     # DELETE /health_professionals/1
-    api :DELETE, '/health_professionals/:id', 'DELETE Health Professional'
     def destroy
       @health_professional.destroy
     end

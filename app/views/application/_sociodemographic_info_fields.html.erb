@@ -37,16 +37,18 @@
           <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
         </div>
       </div>
-      <div class="card-body py-2">
-        <%= link_to_add_association f, :family_member_disabilities,
-                                    class: 'btn btn-sm btn-primary', role: 'button',
-                                    data: {
-                                      'association-insertion-node': '#family_member_disabilities',
-                                      'association-insertion-method': 'append'
-                                    } do %>
-          <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
-        <% end %>
-      </div>
+      <% unless show?(f.object.persisted?) %>
+        <div class="card-body py-2">
+          <%= link_to_add_association f, :family_member_disabilities,
+                                      class: 'btn btn-sm btn-primary', role: 'button',
+                                      data: {
+                                        'association-insertion-node': '#family_member_disabilities',
+                                        'association-insertion-method': 'append'
+                                      } do %>
+            <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+          <% end %>
+        </div>
+      <% end %>
       <div id="family_member_disabilities" class="card-body">
         <%= f.simple_fields_for :family_member_disabilities do |family_member_disability| %>
           <%= render 'application/family_member_disability_fields', f: family_member_disability %>

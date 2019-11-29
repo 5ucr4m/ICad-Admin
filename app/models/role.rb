@@ -13,8 +13,6 @@ class Role < ApplicationRecord
   ].freeze
 
   AGENT_FORMS = [
-    Family,
-    FamilyMember,
     HomeRegistration,
     HomeVisitRegistration,
     IndividualRegistration

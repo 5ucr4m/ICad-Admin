@@ -1,29 +1,90 @@
 {
-  "homeVisitRegistration": {
+  "individualRegistration": {
     "familyMemberId": 0,
-    "homeVisitFormsAttributes": [
-      {
-        "id": 0,
-        "turnId": 0,
-        "handbookNumber": "text",
-        "cnsNumber": "text",
-        "birthDate": "2019-01-01",
-        "genderId": 0,
-        "otherVisit": true,
-        "outcomeId": 0,
-        "microArea": "text",
-        "homeTypeId": 0,
-        "weightMonitoring": "text",
-        "heightMonitoring": "text",
-        "_destroy":  true,
-        "homeVisitReasonsAttributes": [
-          {
-            "id": 0,
-            "reasonId": 0,
-            "_destroy": true
-          }
-        ]
-      }
-    ]
+    "refuseRegistration": true,
+    "formUpdated": true,
+    "healthConditionAttributes": {
+      "id": 0,
+      "hospitalizationCause": "string",
+      "otherConditionOne": "string",
+      "otherConditionTwo": "string",
+      "otherConditionThree": "string",
+      "medicinalPlantsUsed": "string",
+      "maternityReference": "string",
+      "weightSituationId": 0,
+      "alcoholDependent": true,
+      "otherDrugsDependent": true,
+      "smoker": true,
+      "pregnant": true,
+      "bedridden": true,
+      "domiciled": true,
+      "diabetic": true,
+      "respiratory": true,
+      "hypertension": true,
+      "cancer": true,
+      "kidneys": true,
+      "leprosy": true,
+      "tuberculosis": true,
+      "avcStroke": true,
+      "hadHeartAttack": true,
+      "hadHeartDisease": true,
+      "recentlyHospitalized": true,
+      "mentalIssue": true,
+      "integrativePractices": true,
+      "medicinalPlants": true
+    },
+    "inStreetSituationAttributes": {
+      "id": 0,
+      "kinshipDegree": "string",
+      "otherAccompanied": "string",
+      "mealsPerDayId": 0,
+      "hasOtherAccompanied": true,
+      "familiarReference": "string",
+      "receiveBenefits": true,
+      "inStreetSituation": true,
+      "hasPersonalHygiene": true,
+      "familyVisit": true,
+      "streetSituationTimeId": 0,
+      "inStreetHygieneAccessesAttributes": [
+        {
+          "id": 0,
+          "hygieneAccessId": 0,
+          "_destroy": true
+        }
+      ]
+    },
+    "sociodemographicInfoAttributes": {
+      "id": 0,
+      "educationLevelId": 0,
+      "occupationId": 0,
+      "sexualOrientationId": 0,
+      "traditionalCommunityName": "string",
+      "parentRelationId": 0,
+      "jobMarketSituationId": 0,
+      "desireOrientation": true,
+      "attendFolkHealer": true,
+      "traditionalCommunity": true,
+      "attendSchool": true,
+      "communityGroup": true,
+      "healthPlan": true,
+      "hasAnyDisability": true,
+      "desireGender": true,
+      "genderIdentityId": 0,
+      "familyMemberDisabilitiesAttributes": [
+        {
+          "id": 0,
+          "disabilityId": 0,
+          "_destroy": true
+        }
+      ]
+    },
+    "cancelRegistrationAttributes": {
+      "id": 0,
+      "leftReasonId": 0,
+      "deceaseDate": "2019-01-01",
+      "deceaseNumber": "string"
+    },
+    "initialDateHour": "datetime",
+    "finalDateHour": "datetime"
   }
 }

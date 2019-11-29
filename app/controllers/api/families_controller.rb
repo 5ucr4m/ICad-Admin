@@ -6,7 +6,6 @@ module Api
     before_action :set_family, only: %i[show update destroy]
 
     # GET /families
-    api :GET, '/families', 'GET Families List'
     def index
       @query = Family.ransack(params[:q])
       @families = @query.result.includes(:company, :home_registration)
@@ -17,13 +16,11 @@ module Api
     end
 
     # GET /families/1
-    api :GET, '/families/:id', 'GET Family by ID'
     def show
       render_json @family
     end
 
     # POST /families
-    api :POST, '/families', 'POST a Family'
     def create
       @family = Family.new(family_params)
 
@@ -37,8 +34,6 @@ module Api
     end
 
     # PATCH/PUT /families/1
-    api :PATCH, '/families/:id', 'PATCH Family'
-    api :PUT, '/families/:id', 'PUT Family'
     def update
       if @family.update(family_params)
         render_json @family, :ok, true
@@ -48,7 +43,6 @@ module Api
     end
 
     # DELETE /families/1
-    api :DELETE, '/families/:id', 'Delete Family'
     def destroy
       @family.destroy
     end
@@ -73,6 +67,7 @@ module Api
                                      :tp_cds_origin,
                                      :home_type_id,
                                      :finished,
+                                     :home_registration_id,
                                      family_members_attributes: %i[
                                        id
                                        name
@@ -99,51 +94,6 @@ module Api
                                        unknown_mother
                                        responsible
                                        out_area
-                                     ],
-                                     home_registration_attributes: [
-                                       :id,
-                                       :health_professional_id,
-                                       :home_type_id,
-                                       permanence_institution_attributes: %i[
-                                         id
-                                         name
-                                         other_linked_professionals
-                                         responsible_name
-                                         responsible_cns
-                                         institutional_role
-                                         responsible_phone
-                                       ],
-                                       living_condition_attributes: %i[
-                                         id
-                                         water_supply_id
-                                         rural_production_area_id
-                                         garbage_disposal_id
-                                         bathroom_drainage_id
-                                         home_location_id
-                                         home_wall_material_id
-                                         rooms
-                                         residents
-                                         home_situation_id
-                                         electric_power
-                                         home_access_id
-                                         home_type_id
-                                         water_treatment_id
-                                       ],
-                                       address_attributes: %i[
-                                         id
-                                         address_type_id
-                                         patio
-                                         number
-                                         zip
-                                         complement
-                                         district
-                                         city_id
-                                         referential_phone
-                                         home_phone
-                                         reference
-                                         out_area
-                                         micro_area
-                                       ]
                                      ])
     end
   end

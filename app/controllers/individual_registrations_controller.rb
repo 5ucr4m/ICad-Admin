@@ -17,6 +17,7 @@ class IndividualRegistrationsController < WebController
   # GET /individual_registrations/1
   def show
     breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
+    @individual_registration.build_relationships
   end
 
   # GET /individual_registrations/new
@@ -30,6 +31,7 @@ class IndividualRegistrationsController < WebController
   # GET /individual_registrations/1/edit
   def edit
     breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
+    @individual_registration.build_relationships
   end
 
   # POST /individual_registrations

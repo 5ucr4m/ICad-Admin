@@ -17,13 +17,11 @@ module Api
     end
 
     # GET /home_registrations/1
-    api :GET, '/home_registrations/:id', 'GET Home Registration'
     def show
       render_json @home_registration
     end
 
     # POST /home_registrations
-    api :POST, '/home_registrations', 'GET Home Registrations List'
     def create
       @home_registration = current_user.home_registrations.build(home_registration_params)
 
@@ -35,8 +33,6 @@ module Api
     end
 
     # PATCH/PUT /home_registrations/1
-    api :PATCH, '/home_registrations/:id', 'PATCH Home Registration'
-    api :PUT, '/home_registrations/:id', 'PUT Home Registration'
     def update
       if @home_registration.update(home_registration_params)
         render_json @home_registration, :ok
@@ -46,7 +42,6 @@ module Api
     end
 
     # DELETE /home_registrations/1
-    api :DELETE, '/home_registrations/:id', 'DELETE Home Registration'
     def destroy
       @home_registration.destroy
     end
@@ -69,15 +64,26 @@ module Api
                                                 :uuid_form_origin,
                                                 :home_type_id,
                                                 :finished,
-                                                families_attributes: %i[
-                                                  id
-                                                  responsible_birth_date
-                                                  responsible_cns_number
-                                                  members_quantity
-                                                  handbook_number
-                                                  family_income_id
-                                                  reside_since
-                                                  moving
+                                                families_attributes: [
+                                                  :id,
+                                                  :responsible_birth_date,
+                                                  :responsible_cns_number,
+                                                  :members_quantity,
+                                                  :handbook_number,
+                                                  :family_income_id,
+                                                  :reside_since,
+                                                  :moving,
+                                                  :_destroy,
+                                                  family_members_attributes: %i[
+                                                    social_name city_id
+                                                    birth_date unknown_mother mother_name
+                                                    email nationality_id name cns_number
+                                                    cns_responsible phone pis_pasep_number
+                                                    birth_country_id race_id gender_id
+                                                    responsible ethnicity_id unknown_father
+                                                    father_name naturalized_at naturalize_decree
+                                                    brazil_entry_date micro_area out_area _destroy
+                                                  ]
                                                 ],
                                                 address_attributes: %i[
                                                   id

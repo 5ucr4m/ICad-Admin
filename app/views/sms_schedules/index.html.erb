@@ -37,6 +37,10 @@
           <td><%= t("activerecord.attributes.sms_schedule.statuses.#{sms_schedule.status}").upcase %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: sms_schedule %>
+            <%= button_tag class: 'btn p-1 btn-success mr-1 btn-send-sms', title: 'Enviar Mensagens',
+                           data: {schedule: sms_schedule.slug} do %>
+              <i class="fas fa-upload"></i>
+            <% end %>
           </td>
         </tr>
       <% end %>

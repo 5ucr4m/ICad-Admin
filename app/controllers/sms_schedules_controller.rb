@@ -2,7 +2,7 @@
 
 class SmsSchedulesController < WebController
   load_and_authorize_resource find_by: :slug
-  before_action :set_sms_schedule, only: %i[show edit update destroy]
+  before_action :set_sms_schedule, only: %i[show edit update destroy send_sms_messages]
 
   breadcrumb SmsSchedule.model_name.human(count: 2), :sms_schedules_path
 
@@ -54,6 +54,11 @@ class SmsSchedulesController < WebController
   def destroy
     @sms_schedule.destroy
     redirect_to sms_schedules_url, notice: 'Sms schedule was successfully destroyed.'
+  end
+
+  def send_sms_messages
+    SmsScheduleJob.perform_later(@sms_schedule)
+    render_json({ message: 'Lote de SMS enviado com sucesso!' }, :ok)
   end
 
   private

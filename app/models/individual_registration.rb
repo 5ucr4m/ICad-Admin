@@ -67,11 +67,11 @@ class IndividualRegistration < ApplicationRecord
   before_create :generate_uuid
 
   def build_relationships
-    build_health_condition
-    build_family_member
-    build_in_street_situation
-    build_sociodemographic_info
-    build_cancel_registration
+    build_health_condition unless health_condition.persisted?
+    build_family_member unless health_condition.persisted?
+    build_in_street_situation unless health_condition.persisted?
+    build_sociodemographic_info unless health_condition.persisted?
+    build_cancel_registration unless health_condition.persisted?
   end
 
   private

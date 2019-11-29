@@ -8,3 +8,4 @@ production:
   - default
   - mailers
   - broadcasters
+  - sms_schedules

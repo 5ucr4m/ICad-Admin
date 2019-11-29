@@ -19,20 +19,23 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-        <th><%= IndividualRegistration.human_attribute_name :family_member %></th>
-        <th><%= IndividualRegistration.human_attribute_name :uuid %></th>
-        <th><%= IndividualRegistration.human_attribute_name :uuid_form_origin %></th>
-        <th><%= IndividualRegistration.human_attribute_name :uuid_citizen %></th>
+        <th><%= FamilyMember.human_attribute_name :name %></th>
+        <th><%= FamilyMember.human_attribute_name :social_name %></th>
+        <th><%= FamilyMember.human_attribute_name :birth_date %></th>
+        <th><%= FamilyMember.human_attribute_name :cns_number %></th>
+        <th><%= FamilyMember.human_attribute_name :gender %></th>
         <th><%= t('helpers.labels.actions') %></th>
       </tr>
       </thead>
       <tbody>
       <% @individual_registrations.each do |individual_registration| %>
         <tr>
-          <td><%= individual_registration&.family_member&.legal_full_name %></td>
-          <td><%= individual_registration.uuid %></td>
-          <td><%= individual_registration.uuid_form_origin %></td>
-          <td><%= individual_registration.uuid_citizen %></td>
+          <td><%= individual_registration&.family_member&.name %></td>
+          <td><%= individual_registration&.family_member&.social_name %></td>
+          <td><%= individual_registration&.family_member&.birth_date.strftime('%d/%m/%Y') %></td>
+          <td><%= individual_registration&.family_member&.cns_number %></td>
+          <td><%= individual_registration&.family_member&.gender.name_formatted %></td>
+
           <td class="text-center">
             <%= render 'application/table_links', f: individual_registration %>
           </td>

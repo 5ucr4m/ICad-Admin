@@ -62,43 +62,22 @@ module Api
     # Only allow a trusted parameter "white list" through.
     def individual_registration_params
       params.require(:individual_registration).permit(
-        :health_condition_id,
-        :in_street_situation_id,
         :family_member_id,
-        :sociodemographic_info_id,
-        :cancel_registration_id,
         :refuse_registration,
-        :form_updated, :uuid,
+        :form_updated,
+        :uuid,
         :uuid_form_origin,
         :uuid_citizen,
         :tp_cds_origin,
         family_member_attributes: %i[
-          id
-          family_id
-          social_name
-          city_id
-          birth_date
-          unknown_mother
-          mother_name
-          email
-          nationality_id
-          name
-          cns_number
-          cns_responsible
-          phone
-          pis_pasep_number
-          birth_country_id
-          race_id
-          gender_id
-          responsible
-          ethnicity_id
-          unknown_father
-          father_name
-          naturalized_at
-          naturalize_decree
-          brazil_entry_date
-          micro_area
-          out_area
+          family_id social_name city_id
+          birth_date unknown_mother mother_name
+          email nationality_id name cns_number
+          cns_responsible phone pis_pasep_number
+          birth_country_id race_id gender_id
+          responsible ethnicity_id unknown_father
+          father_name naturalized_at naturalize_decree
+          brazil_entry_date micro_area out_area
         ],
         health_condition_attributes: %i[
           id

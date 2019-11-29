@@ -62,7 +62,11 @@ Rails.application.routes.draw do
   end
   resources :roles
   resources :sms_messages
-  resources :sms_schedules
+  resources :sms_schedules do
+    member do
+      post 'send_sms_messages'
+    end
+  end
   resources :vaccines
   resources :periods
   resources :period_items, only: %i[index show]
@@ -96,6 +100,8 @@ Rails.application.routes.draw do
 
     resources :states
     resources :cities
+    resources :families, only: %i[show update]
+    resources :family_members, only: %i[show update]
 
     # Home Registrations
     resources :home_registrations, except: %i[new edit] do

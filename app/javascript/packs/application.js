@@ -11,6 +11,7 @@ require('cleave.js');
 require('selectize');
 require('cleave.js/dist/addons/cleave-phone.br');
 require('select2');
+require('sweetalert2');
 require("chartkick").use(require("highcharts"));
 require("channels");
 

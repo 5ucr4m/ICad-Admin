@@ -8,7 +8,7 @@
   <% end %>
 <% end %>
 <% if can? :destroy, f.model_name.singular.camelize.constantize %>
-  <%= link_to f, class: 'btn p-1 btn-danger', method: :delete,
+  <%= link_to f, class: 'btn p-1 btn-danger mr-1', method: :delete,
               data: {confirm: "Confirma a remoção do registro de código ##{f.id}?"},
               role: 'button' do %>
     <i class="fas fa-trash p-0"></i>
