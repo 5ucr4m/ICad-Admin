@@ -31,8 +31,14 @@
 #  fk_rails_...  (home_registration_id => home_registrations.id)
 #
 
-class FamilySerializer < ActiveModel::Serializer
-  attributes :id, :responsible_birth_date, :responsible_cns_number, :members_quantity, :handbook_number, :family_income_id, :reside_since, :moving, :slug
+class FamilySerializer < ApplicationSerializer
+  attributes :id, :responsible_birth_date, :responsible_cns_number,
+             :members_quantity, :handbook_number, :family_income_id,
+             :reside_since, :moving, :slug
   has_one :home_registration
   has_one :company
+
+  def id
+    object.slug
+  end
 end

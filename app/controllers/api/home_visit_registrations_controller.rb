@@ -8,7 +8,9 @@ module Api
     # GET /home_visit_registrations
     def index
       @query = HomeVisitRegistration.ransack(params[:q])
-      @pagy, @home_visit_registrations = pagy(@query.result, page: params[:page], items: 10)
+      @result = @query.result
+      @result = @result.where(user: current_user) if current_user.agent?
+      render_json @result
     end
 
     # GET /home_visit_registrations/1

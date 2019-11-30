@@ -15,7 +15,8 @@
             </div>
           </div>
           <%= f.input :cns_number_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <%= f.input :family_handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <%= f.input :family_handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}",
+                      required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
           <div class="col-lg-12">
             <div class="form-group">
               <label class="form-label"><%= FamilyMember.human_attribute_name :race %> em</label>
@@ -77,7 +78,7 @@
         <% end %>
         <% content_for :table_body do %>
           <tbody>
-          <% cache('family_member_report_list') do %>
+          <%= cache('family_member_report_list') do %>
             <% @list.each do |family_member| %>
               <tr>
                 <td><%= family_member.name %></td>

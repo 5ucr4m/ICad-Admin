@@ -20,4 +20,16 @@ class Vaccination < ApplicationRecord
   accepts_nested_attributes_for :vaccination_vaccines, allow_destroy: true
 
   ransack_alias :search, :id_to_s
+
+  before_validation :set_user
+
+  private
+
+  def set_user
+    return if user.blank?
+    return if family_member.blank?
+    return unless family_member&.user&.blank?
+
+    self.family_member.user = user
+  end
 end

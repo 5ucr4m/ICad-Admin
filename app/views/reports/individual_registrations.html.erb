@@ -112,14 +112,14 @@
         <% end %>
         <% content_for :table_body do %>
           <tbody>
-          <% cache('individual_registration_report_list') do %>
+          <%= cache('individual_registration_report_list') do %>
             <% @list.each do |individual_registration| %>
               <tr>
-                <td><%= individual_registration.family_member.full_name %></td>
-                <td><%= individual_registration.sociodemographic_info.gender_identity.name_formatted %></td>
-                <td><%= individual_registration.sociodemographic_info.occupation.name_formatted %></td>
-                <td><%= individual_registration.sociodemographic_info.parent_relation.name_formatted %></td>
-                <td><%= individual_registration.sociodemographic_info.job_market_situation.name_formatted %></td>
+                <td><%= individual_registration.family_member.name %></td>
+                <td><%= individual_registration&.sociodemographic_info&.gender_identity&.name_formatted %></td>
+                <td><%= individual_registration&.sociodemographic_info&.occupation&.name_formatted %></td>
+                <td><%= individual_registration&.sociodemographic_info&.parent_relation&.name_formatted %></td>
+                <td><%= individual_registration&.sociodemographic_info&.job_market_situation&.name_formatted %></td>
               </tr>
             <% end %>
           <% end %>

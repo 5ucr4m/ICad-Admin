@@ -9,10 +9,7 @@ module Api
     def index
       @query = HomeRegistration.ransack(params[:q])
       @home_registrations = @query.result.includes(:company, :home_registration)
-      unless params[:health_professional_id].blank?
-        @home_registrations = @home_registrations.where(health_professional_id:
-                                                          params[:health_professional_id])
-      end
+      @home_registration = @home_registration.where(user: current_user) if current_user.agent?
       render_json @home_registrations
     end
 

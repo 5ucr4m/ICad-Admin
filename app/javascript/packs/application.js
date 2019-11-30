@@ -168,7 +168,7 @@ window.addEventListener('DOMContentLoaded', function (e) {
     theme: 'bootstrap4',
     width: '100%',
     multiple: true,
-    placeholder: 'Selecione os Grupos'
+    placeholder: 'Selecione'
   });
 
   $('.selectize').selectize();

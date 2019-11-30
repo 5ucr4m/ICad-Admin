@@ -31,10 +31,14 @@
 #  fk_rails_...  (vaccination_strategy_id => generic_models.id)
 #
 
-class VaccineSerializer < ActiveModel::Serializer
+class VaccineSerializer < ApplicationSerializer
   attributes :id, :description, :lot_number, :manufacturer, :slug
   has_one :immunobiological
   has_one :vaccination_strategy
   has_one :dose
   has_one :company
+
+  def id
+    object.slug
+  end
 end

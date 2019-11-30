@@ -25,8 +25,12 @@
 #  fk_rails_...  (pet_type_id => generic_models.id)
 #
 
-class HomeRegistrationPetSerializer < ActiveModel::Serializer
+class HomeRegistrationPetSerializer < ApplicationSerializer
   attributes :id, :slug
   has_one :home_registration
   has_one :pet_type
+
+  def id
+    object.slug
+  end
 end

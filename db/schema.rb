@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_27_180326) do
+ActiveRecord::Schema.define(version: 2019_11_30_165341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,11 +123,13 @@ ActiveRecord::Schema.define(version: 2019_11_27_180326) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.bigint "user_id"
     t.index ["company_id"], name: "index_families_on_company_id"
     t.index ["discarded_at"], name: "index_families_on_discarded_at"
     t.index ["family_income_id"], name: "index_families_on_family_income_id"
     t.index ["home_registration_id"], name: "index_families_on_home_registration_id"
     t.index ["ip"], name: "index_families_on_ip"
+    t.index ["user_id"], name: "index_families_on_user_id"
   end
 
   create_table "family_member_disabilities", force: :cascade do |t|
@@ -178,6 +180,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_180326) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.bigint "user_id"
     t.index ["birth_country_id"], name: "index_family_members_on_birth_country_id"
     t.index ["city_id"], name: "index_family_members_on_city_id"
     t.index ["company_id"], name: "index_family_members_on_company_id"
@@ -188,6 +191,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_180326) do
     t.index ["ip"], name: "index_family_members_on_ip"
     t.index ["nationality_id"], name: "index_family_members_on_nationality_id"
     t.index ["race_id"], name: "index_family_members_on_race_id"
+    t.index ["user_id"], name: "index_family_members_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -1011,6 +1015,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_180326) do
   add_foreign_key "families", "companies"
   add_foreign_key "families", "generic_models", column: "family_income_id"
   add_foreign_key "families", "home_registrations"
+  add_foreign_key "families", "users"
   add_foreign_key "family_member_disabilities", "companies"
   add_foreign_key "family_member_disabilities", "generic_models", column: "disability_id"
   add_foreign_key "family_member_disabilities", "sociodemographic_infos"
@@ -1022,6 +1027,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_180326) do
   add_foreign_key "family_members", "generic_models", column: "gender_id"
   add_foreign_key "family_members", "generic_models", column: "nationality_id"
   add_foreign_key "family_members", "generic_models", column: "race_id"
+  add_foreign_key "family_members", "users"
   add_foreign_key "generic_models", "generic_models"
   add_foreign_key "header_transports", "cities"
   add_foreign_key "header_transports", "companies"

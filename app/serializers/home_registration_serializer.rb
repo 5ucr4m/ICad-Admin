@@ -43,7 +43,7 @@
 #  fk_rails_...  (permanence_institution_id => permanence_institutions.id)
 #
 
-class HomeRegistrationSerializer < ActiveModel::Serializer
+class HomeRegistrationSerializer < ApplicationSerializer
   attributes :id, :location_x, :location_y, :form_updated, :pet_quantity,
              :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished, :slug
 
@@ -55,4 +55,8 @@ class HomeRegistrationSerializer < ActiveModel::Serializer
   has_one :company
   has_many :families
   has_many :home_registration_pets
+
+  def id
+    object.slug
+  end
 end

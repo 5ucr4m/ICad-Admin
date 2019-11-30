@@ -24,7 +24,11 @@
 #  fk_rails_...  (generic_model_id => generic_models.id)
 #
 
-class GenericModelSerializer < ActiveModel::Serializer
+class GenericModelSerializer < ApplicationSerializer
   attributes :id, :name, :description, :reference, :generic_field, :generic_class, :slug
   has_one :generic_model
+
+  def id
+    object.slug
+  end
 end

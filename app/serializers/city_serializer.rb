@@ -23,7 +23,7 @@
 #  fk_rails_...  (state_id => states.id)
 #
 
-class CitySerializer < ActiveModel::Serializer
+class CitySerializer < ApplicationSerializer
   attributes :id, :name, :abbreviation, :code, :reference, :slug, :state
   has_one :state
 

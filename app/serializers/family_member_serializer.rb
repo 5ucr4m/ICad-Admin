@@ -58,7 +58,7 @@
 #  fk_rails_...  (race_id => generic_models.id)
 #
 
-class FamilyMemberSerializer < ActiveModel::Serializer
+class FamilyMemberSerializer < ApplicationSerializer
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::DateHelper
   attributes :id, :social_name, :birth_date, :unknown_mother,
@@ -74,6 +74,10 @@ class FamilyMemberSerializer < ActiveModel::Serializer
   has_one :gender
   has_one :ethnicity
   has_one :company
+
+  def id
+    object.slug
+  end
 
   def lat
     object.location_x

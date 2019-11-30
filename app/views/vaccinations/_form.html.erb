@@ -1,6 +1,6 @@
 <%= simple_form_for(@vaccination) do |f| %>
   <% content_for :body do %>
-    <%= f.input :patient_type, collection: Vaccination.patient_types, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :patient_type, collection: Vaccination.patient_types.collect{|p,k| [t("activerecord.attributes.vaccination.patient_types.#{p}").upcase, p]}, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.association :vaccination_campaign, collection: VaccinationCampaign.active_campaigns, label_method: :title,
                       wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.association :turn, collection: GenericModel.turns, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>

@@ -24,8 +24,12 @@
 #  fk_rails_...  (family_member_id => family_members.id)
 #
 
-class HomeVisitRegistrationSerializer < ActiveModel::Serializer
+class HomeVisitRegistrationSerializer < ApplicationSerializer
   attributes :id, :uuid, :tp_cds_origin, :slug
   has_one :family_member
   has_one :company
+
+  def id
+    object.slug
+  end
 end

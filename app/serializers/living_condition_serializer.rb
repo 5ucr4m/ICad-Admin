@@ -51,7 +51,7 @@
 #  fk_rails_...  (water_supply_id => generic_models.id)
 #  fk_rails_...  (water_treatment_id => generic_models.id)
 #
-class LivingConditionSerializer < ActiveModel::Serializer
+class LivingConditionSerializer < ApplicationSerializer
   attributes :id, :rooms, :residents, :electric_power, :slug
 
   has_one :water_supply
@@ -64,4 +64,8 @@ class LivingConditionSerializer < ActiveModel::Serializer
   has_one :home_access
   has_one :home_type
   has_one :water_treatment
+
+  def id
+    object.slug
+  end
 end

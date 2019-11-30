@@ -100,8 +100,8 @@ Rails.application.routes.draw do
 
     resources :states
     resources :cities
-    resources :families, only: %i[show update]
-    resources :family_members, only: %i[show update]
+    resources :families, only: %i[index show update]
+    resources :family_members, only: %i[index show update]
 
     # Home Registrations
     resources :home_registrations, except: %i[new edit] do

@@ -45,12 +45,16 @@
 #  fk_rails_...  (health_professional_id => health_professionals.id)
 #
 
-class UserSerializer < ActiveModel::Serializer
+class UserSerializer < ApplicationSerializer
   include Rails.application.routes.url_helpers
 
   attributes :id, :email, :cns_code, :full_name, :cnes_code, :ine_code, :federal_registry
 
   belongs_to :health_professional
+
+  def id
+    object.slug
+  end
 
   def health_professional
     HealthProfessional.strip_company_scope.find(object.health_professional_id)

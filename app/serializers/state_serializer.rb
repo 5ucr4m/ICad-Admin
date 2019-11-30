@@ -23,7 +23,11 @@
 #  fk_rails_...  (country_id => generic_models.id)
 #
 
-class StateSerializer < ActiveModel::Serializer
+class StateSerializer < ApplicationSerializer
   attributes :id, :name, :abbreviation, :code, :reference, :slug
   has_one :country
+
+  def id
+    object.slug
+  end
 end

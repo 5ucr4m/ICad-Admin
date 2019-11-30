@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class VaccinationSerializer < ActiveModel::Serializer
+class VaccinationSerializer < ApplicationSerializer
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::DateHelper
 
@@ -14,6 +14,10 @@ class VaccinationSerializer < ActiveModel::Serializer
   has_one :family_member
   has_one :local_service
   has_one :company
+
+  def id
+    object.slug
+  end
 
   def lng
     object.family_member.location_x

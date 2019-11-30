@@ -7,14 +7,10 @@ class ReportsController < WebController
     @query = Family.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @family_members = @result.map(&:family_members).flatten
-    respond_to do |format|
-      format.html {
-        @pagy, @list = pagy(@result, page: params[:page], items: 10)
-      }
-      format.json {
-        render_json @result.map(&:family_members).flatten
-      }
+    if @result.empty?
+      blank_return
+    else
+      query_return @result, @result.map(&:family_members).flatten
     end
   end
 
@@ -22,13 +18,10 @@ class ReportsController < WebController
     @query = FamilyMember.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    respond_to do |format|
-      format.html {
-        @pagy, @list = pagy(@result, page: params[:page], items: 10)
-      }
-      format.json {
-        render_json @result
-      }
+    if @result.empty?
+      blank_return
+    else
+      query_return @result, @result
     end
   end
 
@@ -36,14 +29,10 @@ class ReportsController < WebController
     @query = IndividualRegistration.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @pagy, @list = pagy(@result, page: params[:page], items: 10)
-    respond_to do |format|
-      format.html {
-        @pagy, @list = pagy(@result, page: params[:page], items: 10)
-      }
-      format.json {
-        render_json @result.map(&:family_member).flatten
-      }
+    if @result.empty?
+      blank_return
+    else
+      query_return @result, @result.map(&:family_member).flatten
     end
   end
 
@@ -51,13 +40,10 @@ class ReportsController < WebController
     @query = HomeRegistration.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    respond_to do |format|
-      format.html {
-        @pagy, @list = pagy(@result, page: params[:page], items: 10)
-      }
-      format.json {
-        render_json @result.map(&:family_members).flatten
-      }
+    if @result.empty?
+      blank_return
+    else
+      query_return @result, @result.map(&:family_members).flatten
     end
   end
 
@@ -65,13 +51,10 @@ class ReportsController < WebController
     @query = HomeVisitForm.ransack(permitted_params)
     @result = @query.result
     @result = @result.includes(:user).where(user: current_user)
-    respond_to do |format|
-      format.html {
-        @pagy, @list = pagy(@result, page: params[:page], items: 10)
-      }
-      format.json {
-        render_json @result.map(&:family_member).flatten
-      }
+    if @result.empty?
+      blank_return
+    else
+      query_return @result, @result.map(&:family_member).flatten
     end
   end
 
@@ -79,13 +62,10 @@ class ReportsController < WebController
     @query = Vaccination.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    respond_to do |format|
-      format.html {
-        @pagy, @list = pagy(@result, page: params[:page], items: 10)
-      }
-      format.json {
-        render_json @result.map(&:family_member).flatten
-      }
+    if @result.empty?
+      blank_return
+    else
+      query_return @result, @result.map(&:family_member).flatten
     end
   end
 
@@ -95,5 +75,27 @@ class ReportsController < WebController
     return if params[:q].blank?
 
     params[:q].delete_if { |_query, value| value.blank? || value == false }
+  end
+
+  def blank_return
+    respond_to do |format|
+      format.html do
+        @pagy, @list = pagy(@result, page: params[:page], items: 10)
+      end
+      format.json do
+        render_json []
+      end
+    end
+  end
+
+  def query_return(result, family_members)
+    respond_to do |format|
+      format.html do
+        @pagy, @list = pagy(result, page: params[:page], items: 10)
+      end
+      format.json do
+        render_json family_members
+      end
+    end
   end
 end

@@ -39,7 +39,7 @@ class FamiliesController < WebController
   # POST /families
   def create
     breadcrumb t('helpers.submit.new'), new_family_path
-    @family = Family.new(family_params)
+    @family = current_user.families.build(family_params)
     @city_selected = @family&.home_registration&.address&.city.presence
 
     if @family.save

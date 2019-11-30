@@ -38,7 +38,7 @@ class Family < ApplicationRecord
   belongs_to :home_registration, optional: true
   belongs_to :company, optional: true
   belongs_to :family_income, class_name: 'GenericModel'
-  has_one :user, through: :home_registration
+  belongs_to :user, optional: true
 
   has_many :family_members, dependent: :nullify
 
@@ -46,6 +46,8 @@ class Family < ApplicationRecord
 
   validates :responsible_cns_number, :responsible_birth_date, :members_quantity,
             :handbook_number, :reside_since, presence: true
+
+  before_validation :set_user_to_family_members
 
   ransack_alias :search, :id_to_s_or_handbook_number
 
@@ -55,5 +57,17 @@ class Family < ApplicationRecord
 
   def family_name
     handbook_number
+  end
+
+  private
+
+  def set_user_to_family_members
+    return if family_members.blank?
+
+    family_members.each do |fm|
+      next if fm&.user.present?
+
+      fm.user = user
+    end
   end
 end

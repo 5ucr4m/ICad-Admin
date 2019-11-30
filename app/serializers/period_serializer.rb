@@ -23,7 +23,11 @@
 #  fk_rails_...  (company_id => companies.id)
 #
 
-class PeriodSerializer < ActiveModel::Serializer
+class PeriodSerializer < ApplicationSerializer
   attributes :id, :competence, :start_date, :end_date, :deadline, :slug
   has_one :company
+
+  def id
+    object.slug
+  end
 end

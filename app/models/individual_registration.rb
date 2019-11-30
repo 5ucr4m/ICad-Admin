@@ -65,6 +65,7 @@ class IndividualRegistration < ApplicationRecord
   ransack_alias :search, :id_to_s_or_family_member_legal_full_name_or_family_member_federal_registry
 
   before_create :generate_uuid
+  before_validation :set_user
 
   def build_relationships
     build_health_condition unless health_condition.persisted?
@@ -80,5 +81,13 @@ class IndividualRegistration < ApplicationRecord
     return if uuid.present?
 
     self.uuid = SecureRandom.uuid
+  end
+
+  def set_user
+    return if user.blank?
+    return if family_member.blank?
+    return unless family_member&.user.blank?
+
+    self.family_member.user = user
   end
 end

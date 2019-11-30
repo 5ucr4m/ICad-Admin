@@ -29,7 +29,9 @@
 #  fk_rails_...  (city_id => cities.id)
 #
 
-class CompanySerializer < ActiveModel::Serializer
-  attributes :id, :legal_full_name, :fancy_name, :federal_registry, :state_registry, :patio, :number, :zip, :reference, :district, :complement, :slug
+class CompanySerializer < ApplicationSerializer
+  attributes :id, :legal_full_name, :fancy_name, :federal_registry,
+             :state_registry, :patio, :number, :zip,
+             :reference, :district, :complement, :slug
   has_one :city
 end

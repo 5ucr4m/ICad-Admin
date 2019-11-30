@@ -42,7 +42,7 @@
 #  fk_rails_...  (sociodemographic_info_id => sociodemographic_infos.id)
 #
 
-class IndividualRegistrationSerializer < ActiveModel::Serializer
+class IndividualRegistrationSerializer < ApplicationSerializer
   attributes :id, :refuse_registration, :form_updated, :uuid, :uuid_form_origin, :uuid_citizen, :tp_cds_origin, :slug
   has_one :health_condition
   has_one :in_street_situation
@@ -50,4 +50,8 @@ class IndividualRegistrationSerializer < ActiveModel::Serializer
   has_one :sociodemographic_info
   has_one :cancel_registration
   has_one :company
+
+  def id
+    object.slug
+  end
 end
