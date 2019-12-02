@@ -20,7 +20,7 @@ module Api
 
     # POST /family_members
     def create
-      @family_member = FamilyMember.new(family_member_params)
+      @family_member = current_user.family_members.build(family_member_params)
 
       if @family_member.save
         render_json @family_member, :created

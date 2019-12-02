@@ -20,7 +20,7 @@ module Api
 
     # POST /families
     def create
-      @family = Family.new(family_params)
+      @family = current_user.families.build(family_params)
 
       @city_selected = @family&.home_registration&.address&.city.presence
 
