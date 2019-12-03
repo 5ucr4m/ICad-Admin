@@ -75,10 +75,6 @@ class FamilyMemberSerializer < ApplicationSerializer
   has_one :ethnicity
   has_one :company
 
-  def id
-    object.slug
-  end
-
   def lat
     object.location_x
   end

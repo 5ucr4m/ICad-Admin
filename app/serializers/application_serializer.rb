@@ -1,6 +1,4 @@
-class ApplicationSerializer < ActiveModel::Serializer
+# frozen_string_literal: true
 
-  def id
-    object.slug
-  end
+class ApplicationSerializer < ActiveModel::Serializer
 end

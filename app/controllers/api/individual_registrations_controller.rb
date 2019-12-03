@@ -57,8 +57,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_individual_registration
-      @individual_registration = IndividualRegistration
-                                 .friendly.find(params[:id])
+      @individual_registration = IndividualRegistration.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

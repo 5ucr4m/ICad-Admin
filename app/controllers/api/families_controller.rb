@@ -2,7 +2,7 @@
 
 module Api
   class FamiliesController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_family, only: %i[show update destroy]
 
     # GET /families
@@ -49,7 +49,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_family
-      @family = Family.friendly.find(params[:id])
+      @family = Family.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

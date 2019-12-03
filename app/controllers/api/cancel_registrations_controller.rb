@@ -2,7 +2,7 @@
 
 module Api
   class CancelRegistrationsController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_cancel_registration, only: %i[show update destroy]
 
     # GET /cancel_registrations/1
@@ -43,7 +43,7 @@ module Api
                                CancelRegistration
                                  .find_by(individual_registration_id: params[:individual_registration_id])
                              else
-                               CancelRegistration.friendly.find(params[:id])
+                               CancelRegistration.find(params[:id])
                              end
     end
 

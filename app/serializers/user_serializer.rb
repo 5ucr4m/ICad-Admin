@@ -52,10 +52,6 @@ class UserSerializer < ApplicationSerializer
 
   belongs_to :health_professional
 
-  def id
-    object.slug
-  end
-
   def health_professional
     HealthProfessional.strip_company_scope.find(object.health_professional_id)
   end

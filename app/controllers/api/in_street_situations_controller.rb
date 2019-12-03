@@ -2,7 +2,7 @@
 
 module Api
   class InStreetSituationsController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_in_street_situation, only: %i[show update destroy]
 
     # GET /in_street_situations/1
@@ -43,7 +43,7 @@ module Api
                                InStreetSituation
                                  .find_by(individual_registration_id: params[:individual_registration_id])
                              else
-                               InStreetSituation.friendly.find(params[:id])
+                               InStreetSituation.find(params[:id])
                              end
     end
 

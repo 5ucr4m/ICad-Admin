@@ -2,7 +2,7 @@
 
 module Api
   class StatesController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_state, only: %i[show]
 
     # GET /states
@@ -22,7 +22,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_state
-      @state = State.friendly.find(params[:id])
+      @state = State.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

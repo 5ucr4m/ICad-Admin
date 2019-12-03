@@ -24,10 +24,6 @@
 #
 
 class PeriodSerializer < ApplicationSerializer
-  attributes :id, :competence, :start_date, :end_date, :deadline, :slug
+  attributes :id, :competence, :start_date, :end_date, :deadline
   has_one :company
-
-  def id
-    object.slug
-  end
 end

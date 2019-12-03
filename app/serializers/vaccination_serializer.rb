@@ -6,7 +6,7 @@ class VaccinationSerializer < ApplicationSerializer
 
   attributes :id, :uuid, :tp_cds_origin, :patient_type, :traveller,
              :leprosy_communicant, :pregnant, :puerperal,
-             :initial_date_hour, :final_date_hour, :slug, :lng, :lat, :url,
+             :initial_date_hour, :final_date_hour, :lng, :lat, :url,
              :name, :gender, :age, :vaccinated
   has_one :header_transport
   has_one :vaccination_campaign
@@ -14,10 +14,6 @@ class VaccinationSerializer < ApplicationSerializer
   has_one :family_member
   has_one :local_service
   has_one :company
-
-  def id
-    object.slug
-  end
 
   def lng
     object.family_member.location_x

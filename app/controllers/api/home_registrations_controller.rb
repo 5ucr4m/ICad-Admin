@@ -2,14 +2,16 @@
 
 module Api
   class HomeRegistrationsController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_home_registration, only: %i[show update destroy]
 
     # GET /home_registrations
     def index
       @query = HomeRegistration.ransack(params[:q])
       @home_registrations = @query.result.includes(:company, :home_registration)
-      @home_registration = @home_registration.where(user: current_user) if current_user.agent?
+      if current_user.agent?
+        @home_registration = @home_registration.where(user: current_user)
+      end
       render_json @home_registrations
     end
 
@@ -47,7 +49,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_home_registration
-      @home_registration = HomeRegistration.friendly.find(params[:id])
+      @home_registration = HomeRegistration.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

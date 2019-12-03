@@ -2,14 +2,16 @@
 
 module Api
   class FamilyMembersController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_family_member, only: %i[show update destroy]
 
     # GET /family_members
     def index
       @query = FamilyMember.ransack(params[:q])
       @family_members = @query.result.includes(:family)
-      @family_members = @family_members.where(user: current_user) if current_user.agent?
+      if current_user.agent?
+        @family_members = @family_members.where(user: current_user)
+      end
       render_json @family_members
     end
 
@@ -47,7 +49,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_family_member
-      @family_member = FamilyMember.friendly.find(params[:id])
+      @family_member = FamilyMember.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

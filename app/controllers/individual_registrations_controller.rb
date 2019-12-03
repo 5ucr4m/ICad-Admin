@@ -11,7 +11,7 @@ class IndividualRegistrationsController < WebController
     @query = IndividualRegistration.ransack(params[:q])
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @pagy, @individual_registrations = pagy(@result, page: params[:page], items: 10)
+    @pagy, @individual_registrations = pagy(@result.includes(family_member: [:gender]), page: params[:page], items: 10)
   end
 
   # GET /individual_registrations/1

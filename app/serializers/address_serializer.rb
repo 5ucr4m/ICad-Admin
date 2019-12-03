@@ -37,13 +37,9 @@
 
 class AddressSerializer < ApplicationSerializer
   attributes :id, :patio, :number, :zip, :complement, :district,
-             :referential_phone, :home_phone, :reference, :out_area, :micro_area, :state, :slug
+             :referential_phone, :home_phone, :reference, :out_area, :micro_area, :state
   has_one :city
   has_one :address_type
-
-  def id
-    object.slug
-  end
 
   def state
     object.state.abbreviation

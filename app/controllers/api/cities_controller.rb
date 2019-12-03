@@ -2,7 +2,6 @@
 
 module Api
   class CitiesController < Api::ApiController
-    #load_and_authorize_resource find_by: :slug
     skip_before_action :authenticate_user!
     before_action :set_city, only: %i[show]
 
@@ -25,7 +24,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_city
-      @city = City.friendly.find(params[:id])
+      @city = City.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

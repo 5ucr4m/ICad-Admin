@@ -2,7 +2,7 @@
 
 module Api
   class HealthEstablishmentsController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_health_establishment, only: %i[show edit update destroy]
 
     # GET /health_establishments
@@ -45,8 +45,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_health_establishment
-      @health_establishment = HealthEstablishment
-                              .friendly.find(params[:id])
+      @health_establishment = HealthEstablishment.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

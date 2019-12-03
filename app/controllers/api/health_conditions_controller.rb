@@ -2,7 +2,7 @@
 
 module Api
   class HealthConditionsController < Api::ApiController
-    load_and_authorize_resource find_by: :slug
+    load_and_authorize_resource
     before_action :set_health_condition, only: %i[show update destroy]
 
     # GET /health_conditions/1
@@ -43,7 +43,7 @@ module Api
                             HealthCondition
                               .find_by(individual_registration_id: params[:individual_registration_id])
                           else
-                            HealthCondition.friendly.find(params[:id])
+                            HealthCondition.find(params[:id])
                           end
     end
 

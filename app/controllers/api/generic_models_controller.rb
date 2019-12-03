@@ -18,7 +18,7 @@ module Api
 
     # Use callbacks to share common setup or constraints between actions.
     def set_generic_model
-      @generic_model = GenericModel.friendly.find(params[:id])
+      @generic_model = GenericModel.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -24,7 +24,7 @@
 #
 
 class CitySerializer < ApplicationSerializer
-  attributes :id, :name, :abbreviation, :code, :reference, :slug, :state
+  attributes :id, :name, :abbreviation, :code, :reference, :state
   has_one :state
 
   def state

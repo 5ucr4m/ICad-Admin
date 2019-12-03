@@ -32,6 +32,6 @@
 class CompanySerializer < ApplicationSerializer
   attributes :id, :legal_full_name, :fancy_name, :federal_registry,
              :state_registry, :patio, :number, :zip,
-             :reference, :district, :complement, :slug
+             :reference, :district, :complement
   has_one :city
 end

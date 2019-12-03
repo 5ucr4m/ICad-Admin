@@ -32,13 +32,9 @@
 #
 
 class VaccineSerializer < ApplicationSerializer
-  attributes :id, :description, :lot_number, :manufacturer, :slug
+  attributes :id, :description, :lot_number, :manufacturer
   has_one :immunobiological
   has_one :vaccination_strategy
   has_one :dose
   has_one :company
-
-  def id
-    object.slug
-  end
 end

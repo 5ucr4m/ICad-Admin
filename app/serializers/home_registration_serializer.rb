@@ -45,7 +45,7 @@
 
 class HomeRegistrationSerializer < ApplicationSerializer
   attributes :id, :location_x, :location_y, :form_updated, :pet_quantity,
-             :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished, :slug
+             :refuse_registration, :tp_cds_origin, :uuid, :uuid_form_origin, :finished
 
   has_one :health_professional
   has_one :living_condition
@@ -55,8 +55,4 @@ class HomeRegistrationSerializer < ApplicationSerializer
   has_one :company
   has_many :families
   has_many :home_registration_pets
-
-  def id
-    object.slug
-  end
 end

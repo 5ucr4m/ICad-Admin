@@ -34,11 +34,7 @@
 class HealthEstablishmentSerializer < ApplicationSerializer
   attributes :id, :cnes_code, :unit_code, :legal_full_name,
              :fancy_name, :federal_registry, :state_registry,
-             :manager_full_name, :manager_federal_registry, :registry_at, :slug
+             :manager_full_name, :manager_federal_registry, :registry_at
   has_one :unit_type
   has_one :company
-
-  def id
-    object.slug
-  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSmsPermissionToSupport < SeedMigration::Migration
   def up
     Role::ADMIN_SUPPORT.each do |model|
@@ -6,9 +8,7 @@ class AddSmsPermissionToSupport < SeedMigration::Migration
     end
   end
 
-  def down
-
-  end
+  def down; end
 
   private
 

@@ -24,10 +24,6 @@
 #
 
 class StateSerializer < ApplicationSerializer
-  attributes :id, :name, :abbreviation, :code, :reference, :slug
+  attributes :id, :name, :abbreviation, :code, :reference
   has_one :country
-
-  def id
-    object.slug
-  end
 end

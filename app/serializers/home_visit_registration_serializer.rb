@@ -25,11 +25,7 @@
 #
 
 class HomeVisitRegistrationSerializer < ApplicationSerializer
-  attributes :id, :uuid, :tp_cds_origin, :slug
+  attributes :id, :uuid, :tp_cds_origin
   has_one :family_member
   has_one :company
-
-  def id
-    object.slug
-  end
 end

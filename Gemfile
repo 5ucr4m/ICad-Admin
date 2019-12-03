@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 gem 'active_model_serializers'
+gem 'acts-as-taggable-on'
 gem 'apipie-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -52,7 +53,6 @@ gem 'simple_form'
 gem 'sinatra', require: false
 gem 'title'
 gem 'webpacker', '~> 4.0'
-gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'better_errors'

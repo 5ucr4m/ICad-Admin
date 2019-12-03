@@ -26,11 +26,7 @@
 #
 
 class HomeRegistrationPetSerializer < ApplicationSerializer
-  attributes :id, :slug
+  attributes :id
   has_one :home_registration
   has_one :pet_type
-
-  def id
-    object.slug
-  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUserToFamilyAndFamilyMember < ActiveRecord::Migration[6.0]
   def change
     add_reference :families, :user, foreign_key: true, index: true

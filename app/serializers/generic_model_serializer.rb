@@ -25,10 +25,6 @@
 #
 
 class GenericModelSerializer < ApplicationSerializer
-  attributes :id, :name, :description, :reference, :generic_field, :generic_class, :slug
+  attributes :id, :name, :description, :reference, :generic_field, :generic_class
   has_one :generic_model
-
-  def id
-    object.slug
-  end
 end
