@@ -57,7 +57,7 @@ module Api
       params.require(:family).permit(:responsible_birth_date,
                                      :responsible_cns_number,
                                      :members_quantity, :handbook_number,
-                                     :family_income, :reside_since,
+                                     :family_income_id, :reside_since,
                                      :moving, :home_registration_id,
                                      :form_updated,
                                      :pet_quantity,
@@ -65,7 +65,6 @@ module Api
                                      :tp_cds_origin,
                                      :home_type_id,
                                      :finished,
-                                     :home_registration_id,
                                      family_members_attributes: %i[
                                        id
                                        name
