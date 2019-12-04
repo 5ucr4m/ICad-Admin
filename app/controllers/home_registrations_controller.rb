@@ -39,7 +39,7 @@ class HomeRegistrationsController < WebController
     @address_type_selected = @home_registration.address.address_type.presence
 
     if @home_registration.save
-      redirect_to @home_registration, notice: 'Home registration was successfully created.'
+      redirect_to home_registrations_url, notice: 'Home registration was successfully created.'
     else
       render :new
     end
@@ -49,7 +49,7 @@ class HomeRegistrationsController < WebController
   def update
     breadcrumb @home_registration.slug, home_registration_path(@home_registration)
     if @home_registration.update(home_registration_params)
-      redirect_to @home_registration, notice: 'Home registration was successfully updated.'
+      redirect_to home_registrations_url, notice: 'Home registration was successfully updated.'
     else
       render :edit
     end

@@ -112,7 +112,7 @@
         <% end %>
         <% content_for :table_body do %>
           <tbody>
-          <%= cache('individual_registration_report_list') do %>
+          <% cache('individual_registration_report_list') do %>
             <% @list.each do |individual_registration| %>
               <tr>
                 <td><%= individual_registration.family_member.name %></td>

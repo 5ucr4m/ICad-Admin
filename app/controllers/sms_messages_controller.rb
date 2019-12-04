@@ -34,7 +34,7 @@ class SmsMessagesController < WebController
     @sms_message = SmsMessage.new(sms_message_params)
 
     if @sms_message.save
-      redirect_to @sms_message, notice: 'Sms message was successfully created.'
+      redirect_to sms_messages_url, notice: 'Sms message was successfully created.'
     else
       render :new
     end
@@ -44,7 +44,7 @@ class SmsMessagesController < WebController
   def update
     breadcrumb @sms_message.slug, sms_message_path(@sms_message)
     if @sms_message.update(sms_message_params)
-      redirect_to @sms_message, notice: 'Sms message was successfully updated.'
+      redirect_to sms_messages_url, notice: 'Sms message was successfully updated.'
     else
       render :edit
     end

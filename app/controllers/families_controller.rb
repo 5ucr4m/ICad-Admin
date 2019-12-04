@@ -43,7 +43,7 @@ class FamiliesController < WebController
     @city_selected = @family&.home_registration&.address&.city.presence
 
     if @family.save
-      redirect_to @family, notice: 'Family was successfully created.'
+      redirect_to families_url, notice: 'Family was successfully created.'
     else
       render :new
     end
@@ -53,7 +53,7 @@ class FamiliesController < WebController
   def update
     breadcrumb @family.slug, family_path(@family)
     if @family.update(family_params)
-      redirect_to @family, notice: 'Family was successfully updated.'
+      redirect_to families_url, notice: 'Family was successfully updated.'
     else
       render :edit
     end

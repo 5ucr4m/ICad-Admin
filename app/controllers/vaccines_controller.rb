@@ -28,7 +28,7 @@ class VaccinesController < WebController
     @vaccine = Vaccine.new(vaccine_params)
 
     if @vaccine.save
-      redirect_to @vaccine, notice: 'Vaccine was successfully created.'
+      redirect_to vaccines_url, notice: 'Vaccine was successfully created.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class VaccinesController < WebController
   # PATCH/PUT /vaccines/1
   def update
     if @vaccine.update(vaccine_params)
-      redirect_to @vaccine, notice: 'Vaccine was successfully updated.'
+      redirect_to vaccines_url, notice: 'Vaccine was successfully updated.'
     else
       render :edit
     end

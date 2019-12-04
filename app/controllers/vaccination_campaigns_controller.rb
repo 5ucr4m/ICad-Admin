@@ -35,7 +35,7 @@ class VaccinationCampaignsController < WebController
     @vaccination_campaign = VaccinationCampaign.new(vaccination_campaign_params)
 
     if @vaccination_campaign.save
-      redirect_to @vaccination_campaign, notice: 'Vaccination campaign was successfully created.'
+      redirect_to vaccination_campaigns_url, notice: 'Vaccination campaign was successfully created.'
     else
       render :new
     end
@@ -45,7 +45,7 @@ class VaccinationCampaignsController < WebController
   def update
     breadcrumb @vaccination_campaign.slug, vaccination_campaign_path(@vaccination_campaign)
     if @vaccination_campaign.update(vaccination_campaign_params)
-      redirect_to @vaccination_campaign, notice: 'Vaccination campaign was successfully updated.'
+      redirect_to vaccination_campaigns_url, notice: 'Vaccination campaign was successfully updated.'
     else
       render :edit
     end

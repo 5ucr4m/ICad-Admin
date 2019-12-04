@@ -10,7 +10,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
-      query_return @result, @result.map(&:family_members).flatten
+      query_return @result, @result.includes(family_members: [:ethnicity, :gender, :home_registration]).map(&:family_members).flatten
     end
   end
 
@@ -21,6 +21,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
+      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
       query_return @result, @result
     end
   end
@@ -32,6 +33,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
+      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
       query_return @result, @result.map(&:family_member).flatten
     end
   end
@@ -43,6 +45,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
+      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
       query_return @result, @result.map(&:family_members).flatten
     end
   end
@@ -54,6 +57,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
+      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
       query_return @result, @result.map(&:family_member).flatten
     end
   end
@@ -65,6 +69,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
+      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
       query_return @result, @result.map(&:family_member).flatten
     end
   end

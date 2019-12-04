@@ -34,7 +34,7 @@ class PeriodsController < WebController
     @period = Period.new(period_params)
 
     if @period.save
-      redirect_to @period, notice: 'Period was successfully created.'
+      redirect_to periods_url, notice: 'Period was successfully created.'
     else
       render :new
     end
@@ -44,7 +44,7 @@ class PeriodsController < WebController
   def update
     breadcrumb @period.slug, period_path(@period)
     if @period.update(period_params)
-      redirect_to @period, notice: 'Period was successfully updated.'
+      redirect_to periods_url, notice: 'Period was successfully updated.'
     else
       render :edit
     end

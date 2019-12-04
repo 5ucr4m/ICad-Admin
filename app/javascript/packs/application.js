@@ -12,6 +12,7 @@ require('selectize');
 require('cleave.js/dist/addons/cleave-phone.br');
 require('select2');
 require('sweetalert2');
+require('flatpickr');
 require("chartkick").use(require("highcharts"));
 require("channels");
 
@@ -19,6 +20,7 @@ import '../stylesheets/application';
 import * as Pagy from './pagy.js.erb';
 import superagent from 'superagent';
 import * as $ from 'jquery';
+import flatpickr from 'flatpickr';
 
 window.Pagy = Pagy;
 window.$ = window.jQuery = $;
@@ -140,6 +142,24 @@ window.addEventListener('DOMContentLoaded', function (e) {
   const zipInput = document.querySelector('.zip');
   const federalRegistryCnpj = document.querySelector('.federal-registry');
   const federalRegistryCpf = document.querySelector('.cpf');
+  const phoneInput = document.querySelector('.phone');
+  const dateInput = document.querySelector('.datepicker');
+  const dateTimeInput = document.querySelector('.datepicker-time');
+
+  if (phoneInput) {
+    new Cleave('.phone', {
+      phone: true,
+      phoneRegionCode: 'BR'
+    });
+  }
+
+  flatpickr('.datepicker', {
+    enableTime: true
+  });
+
+  flatpickr('.datepicker-time', {
+    enableTime: true
+  });
 
   if (federalRegistryCpf) {
     new Cleave('.cpf', {

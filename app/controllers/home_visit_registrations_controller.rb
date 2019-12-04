@@ -38,7 +38,7 @@ class HomeVisitRegistrationsController < WebController
     @city_selected = @home_visit_registration&.family_member&.city&.presence
 
     if @home_visit_registration.save
-      redirect_to @home_visit_registration, notice: 'Home visit registration was successfully created.'
+      redirect_to home_visit_registrations_url, notice: 'Home visit registration was successfully created.'
     else
       render :new
     end
@@ -48,7 +48,7 @@ class HomeVisitRegistrationsController < WebController
   def update
     breadcrumb @home_visit_registration.slug, home_visit_registration_path(@home_visit_registration)
     if @home_visit_registration.update(home_visit_registration_params)
-      redirect_to @home_visit_registration, notice: 'Home visit registration was successfully updated.'
+      redirect_to home_visit_registrations_url, notice: 'Home visit registration was successfully updated.'
     else
       render :edit
     end

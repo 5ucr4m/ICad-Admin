@@ -26,7 +26,7 @@ class HomeVisitFormsController < WebController
     @home_visit_form = HomeVisitForm.new(home_visit_form_params)
 
     if @home_visit_form.save
-      redirect_to @home_visit_form, notice: 'Home visit form was successfully created.'
+      redirect_to home_visit_forms_url, notice: 'Home visit form was successfully created.'
     else
       render :new
     end
@@ -35,7 +35,7 @@ class HomeVisitFormsController < WebController
   # PATCH/PUT /home_visit_forms/1
   def update
     if @home_visit_form.update(home_visit_form_params)
-      redirect_to @home_visit_form, notice: 'Home visit form was successfully updated.'
+      redirect_to home_visit_forms_url, notice: 'Home visit form was successfully updated.'
     else
       render :edit
     end

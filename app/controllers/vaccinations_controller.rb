@@ -37,7 +37,7 @@ class VaccinationsController < WebController
     @vaccination = current_user.vaccinations.build(vaccination_params)
 
     if @vaccination.save
-      redirect_to @vaccination, notice: 'Vaccination was successfully created.'
+      redirect_to vaccinations_url, notice: 'Vaccination was successfully created.'
     else
       render :new
     end
@@ -47,7 +47,7 @@ class VaccinationsController < WebController
   def update
     breadcrumb @vaccination.slug, vaccination_path(@vaccination)
     if @vaccination.update(vaccination_params)
-      redirect_to @vaccination, notice: 'Vaccination was successfully updated.'
+      redirect_to vaccinations_url, notice: 'Vaccination was successfully updated.'
     else
       render :edit
     end

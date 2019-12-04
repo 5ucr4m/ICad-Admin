@@ -13,11 +13,11 @@
           </h3>
           <div class="card-options">
             <h3 class="card-title text-blue-deep">
-              Total de fichas: <span class="font-weight-bold"><%= @pagy.count %></span>
+              Total de fichas: <span class="font-weight-bold"><%= @pagy&.count || 0 %></span>
             </h3>
           </div>
         </div>
-        <% if @period_items.any? %>
+        <% if @period_items&.any? %>
           <div class="table-responsive">
             <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
               <thead>

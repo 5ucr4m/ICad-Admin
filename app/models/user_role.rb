@@ -31,4 +31,6 @@ class UserRole < ApplicationRecord
   has_one :user, through: :user_company
 
   ransack_alias :search, :id_to_s
+
+  validates_uniqueness_of :role_id, scope: [:user_company_id, :role_id]
 end

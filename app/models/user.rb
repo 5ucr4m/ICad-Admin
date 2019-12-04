@@ -78,6 +78,7 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
+  validate :check_user_roles
 
   accepts_nested_attributes_for :health_professional, allow_destroy: false
   accepts_nested_attributes_for :user_companies, allow_destroy: true
@@ -122,7 +123,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    role.admin?
+    role.admin? && role.admin
   end
 
   def mayor?
@@ -170,10 +171,18 @@ class User < ApplicationRecord
   end
 
   def current_company
-    user_companies.find_by(current: true) || user_companies.first
+    user_companies.includes(:company).find_by(current: true) || user_companies.includes(:company).first
   end
 
   def current_role
     user_roles.find_by(user_company: current_company) || user_roles.first
+  end
+
+  def check_user_roles
+    return if user_companies.blank?
+
+    if user_companies.map(&:company).uniq.count > user_companies.count
+      errors.add(:base, 'Não é permitido ter multiplas funções na mesma Prefeitura.')
+    end
   end
 end

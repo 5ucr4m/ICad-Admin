@@ -1,8 +1,8 @@
 <nav class="header d-lg-flex p-0 collapse" id="menu">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row align-items-center">
-      <div class="col-lg-4 ml-auto">
-        <div class="form-control font-weight-bold text-blue-deep text-center"><%= "#{current_user.company.id.to_s.rjust(4, '0')} - #{current_user.company.legal_full_name}" %></div>
+      <div class="col-lg-5 ml-auto">
+        <div class="form-control font-weight-bold text-blue-deep"><%= "#{current_user.company.id.to_s.rjust(4, '0')} - #{current_user.company.legal_full_name}" %></div>
       </div>
       <div class="col-lg order-lg-first">
         <ul class="nav nav-tabs border-0 flex-column flex-lg-row">

@@ -9,7 +9,11 @@ class UsersController < WebController
   # GET /users
   def index
     @query = User.ransack(params[:q])
-    @pagy, @users = pagy(@query.result.includes(health_professional: [:professional_team]), page: params[:page], items: 10)
+    @pagy, @users = pagy(@query.result
+                             .includes(
+                               health_professional: [:professional_team]
+                             ),
+                         page: params[:page], items: 10)
   end
 
   # GET /users/1
@@ -36,7 +40,7 @@ class UsersController < WebController
     @cbo_selected = @user&.health_professional&.cbo_code&.presence
 
     if @user.save
-      redirect_to users_path, notice: 'User was successfully created.'
+      redirect_to users_url, notice: 'User was successfully created.'
     else
       render :new
     end
@@ -46,7 +50,7 @@ class UsersController < WebController
   def update
     if @user.update(user_params)
       @user.avatar.attach(params[:avatar]) unless @user.avatar.attached?
-      redirect_to user_path(@user), notice: 'User was successfully updated.'
+      redirect_to users_url, notice: 'User was successfully updated.'
     else
       @cbo_selected = @user&.health_professional&.cbo_code&.presence
       render :edit
@@ -63,7 +67,7 @@ class UsersController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.friendly.find(current_user.slug)
+    @user = User.where(slug: params[:id]).includes(:user_roles).first
     @cbo_selected = @user&.health_professional&.cbo_code&.presence
     unless @user&.health_professional&.persisted?
       @user.build_health_professional
@@ -72,19 +76,11 @@ class UsersController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation,
+    params.require(:user).permit(:email,
+                                 :password,
+                                 :password_confirmation,
                                  :avatar,
-                                 health_professional_attributes: %i[
-                                   id
-                                   cns_code
-                                   cbo_code_id
-                                   full_name
-                                   fancy_name
-                                   federal_registry
-                                   state_registry
-                                   health_establishment_id
-                                   professional_team_id
-                                 ],
+                                 :health_professional_id,
                                  user_companies_attributes: [
                                    :id,
                                    :user_id,

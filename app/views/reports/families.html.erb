@@ -73,7 +73,7 @@
         <% end %>
         <% content_for :table_body do %>
           <tbody>
-          <%= cache('family_report_list') do %>
+          <% cache('family_report_list') do %>
             <% @list.each do |family| %>
               <tr>
                 <td><%= family.responsible_birth_date.strftime('%d/%m/%Y') %></td>

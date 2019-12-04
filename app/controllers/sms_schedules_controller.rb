@@ -34,7 +34,7 @@ class SmsSchedulesController < WebController
     @sms_schedule = SmsSchedule.new(sms_schedule_params)
 
     if @sms_schedule.save
-      redirect_to @sms_schedule, notice: 'Sms schedule was successfully created.'
+      redirect_to sms_schedules_url, notice: 'Sms schedule was successfully created.'
     else
       render :new
     end
@@ -44,7 +44,7 @@ class SmsSchedulesController < WebController
   def update
     breadcrumb @sms_schedule.slug, sms_schedule_path(@sms_schedule)
     if @sms_schedule.update(sms_schedule_params)
-      redirect_to @sms_schedule, notice: 'Sms schedule was successfully updated.'
+      redirect_to sms_schedules_url, notice: 'Sms schedule was successfully updated.'
     else
       render :edit
     end

@@ -36,7 +36,7 @@ class HealthProfessionalsController < WebController
     @health_professional = HealthProfessional.new(health_professional_params)
 
     if @health_professional.save
-      redirect_to @health_professional, notice: 'Health professional was successfully created.'
+      redirect_to health_professionals_url, notice: 'Health professional was successfully created.'
     else
       render :new
     end
@@ -46,7 +46,7 @@ class HealthProfessionalsController < WebController
   def update
     breadcrumb @health_professional.slug, health_professional_path(@health_professional)
     if @health_professional.update(health_professional_params)
-      redirect_to @health_professional, notice: 'Health professional was successfully updated.'
+      redirect_to health_professionals_url, notice: 'Health professional was successfully updated.'
     else
       render :edit
     end
@@ -67,7 +67,7 @@ class HealthProfessionalsController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def health_professional_params
-    params.require(:health_professional).permit(:cns_code, :cbo_code_id, :full_name,
+    params.require(:health_professional).permit(:cns_code, :phone, :cbo_code_id, :full_name,
                                                 :federal_registry, :state_registry,
                                                 :professional_team_id)
   end

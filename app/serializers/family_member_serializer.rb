@@ -66,14 +66,6 @@ class FamilyMemberSerializer < ApplicationSerializer
              :phone, :pis_pasep_number, :responsible, :unknown_father,
              :father_name, :naturalized_at, :naturalize_decree,
              :brazil_entry_date, :micro_area, :out_area, :slug, :lat, :lng, :age, :gender, :url
-  has_one :family
-  has_one :city
-  has_one :nationality
-  has_one :birth_country
-  has_one :race
-  has_one :gender
-  has_one :ethnicity
-  has_one :company
 
   def lat
     object.location_x

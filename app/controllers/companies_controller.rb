@@ -27,7 +27,7 @@ class CompaniesController < WebController
     @company = Company.new(company_params)
     @city_selected = @company.city.presence
     if @company.save
-      redirect_to @company, notice: 'Company was successfully created.'
+      redirect_to companies_url, notice: 'Company was successfully created.'
     else
       render :new
     end
@@ -36,7 +36,7 @@ class CompaniesController < WebController
   # PATCH/PUT /companies/1
   def update
     if @company.update(company_params)
-      redirect_to @company, notice: 'Company was successfully updated.'
+      redirect_to companies_url, notice: 'Company was successfully updated.'
     else
       render :edit
     end

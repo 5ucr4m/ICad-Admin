@@ -40,7 +40,7 @@ class IndividualRegistrationsController < WebController
     @individual_registration = current_user.individual_registrations.build(individual_registration_params)
 
     if @individual_registration.save
-      redirect_to @individual_registration, notice: 'Individual registration was successfully created.'
+      redirect_to individual_registrations_url, notice: 'Individual registration was successfully created.'
     else
       render :new
     end
@@ -50,7 +50,7 @@ class IndividualRegistrationsController < WebController
   def update
     breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
     if @individual_registration.update(individual_registration_params)
-      redirect_to @individual_registration, notice: 'Individual registration was successfully updated.'
+      redirect_to individual_registrations_url, notice: 'Individual registration was successfully updated.'
     else
       render :edit
     end

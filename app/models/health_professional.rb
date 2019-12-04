@@ -12,13 +12,16 @@ class HealthProfessional < ApplicationRecord
 
   has_many :home_registrations, dependent: :destroy
 
+  scope :without_user, -> {left_outer_joins(:user).where(users: {id: nil})}
+
   # before_validation :set_health_establishment
   # before_create :find_health_professional
 
   attr_accessor :cnes_code
 
   validates :cns_code, :full_name, :federal_registry, presence: true
-  validate :check_federal_registry, :check_cns_code
+
+  validates :federal_registry, :cns_code, uniqueness: true
 
   ransack_alias :search, :id_to_s_or_full_name_or_federal_registry_or_state_registry_or_cns_code
 
@@ -61,19 +64,5 @@ class HealthProfessional < ApplicationRecord
     self.legal_full_name = hp['Nome']['Nome']
     self.federal_registry = hp['CPF']['numeroCPF']
     self.cns_code = hp['CNS']['numeroCNS']
-  end
-
-  def check_federal_registry
-    return if federal_registry.blank?
-    return unless HealthProfessional.exists?(federal_registry: federal_registry)
-
-    errors.add(:federal_registry, 'já cadastrado')
-  end
-
-  def check_cns_code
-    return if cns_code.blank?
-    return unless HealthProfessional.exists?(cns_code: cns_code)
-
-    errors.add(:cns_code, 'já cadastrado')
   end
 end

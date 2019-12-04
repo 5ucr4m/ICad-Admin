@@ -28,7 +28,7 @@ class RolesController < WebController
     @role = Role.new(role_params)
 
     if @role.save
-      redirect_to @role, notice: 'Role was successfully created.'
+      redirect_to roles_url, notice: 'Role was successfully created.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class RolesController < WebController
   # PATCH/PUT /roles/1
   def update
     if @role.update(role_params)
-      redirect_to @role, notice: 'Role was successfully updated.'
+      redirect_to roles_url, notice: 'Role was successfully updated.'
     else
       render :edit
     end

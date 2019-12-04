@@ -33,7 +33,7 @@ class CitiesController < WebController
     @city = City.new(city_params)
 
     if @city.save
-      redirect_to @city, notice: 'City was successfully created.'
+      redirect_to cities_url, notice: 'City was successfully created.'
     else
       render :new
     end
@@ -42,7 +42,7 @@ class CitiesController < WebController
   # PATCH/PUT /cities/1
   def update
     if @city.update(city_params)
-      redirect_to @city, notice: 'City was successfully updated.'
+      redirect_to cities_url, notice: 'City was successfully updated.'
     else
       render :edit
     end

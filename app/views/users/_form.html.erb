@@ -7,13 +7,13 @@
             <div class="col-lg-12">
               <div class="card">
                 <% if f.object.avatar.attached? %>
-                  <%= image_tag url_for(f.object.avatar) %>
+                  <%= image_tag url_for(f.object.avatar), id: 'current_avatar' %>
                 <% else %>
-                  <%= image_tag '//via.placeholder.com/200' %>
+                  <%= image_tag '//via.placeholder.com/200', id: 'current_avatar' %>
                 <% end %>
                 <% unless show?(f.object.persisted?) %>
                   <div class="card-footer">
-                    <%= f.file_field :avatar, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+                    <%= f.file_field :avatar, accept: "image/x-png,image/gif,image/jpeg" %>
                   </div>
                 <% end %>
               </div>
@@ -22,31 +22,17 @@
         </div>
         <div class="col-lg-10">
           <div class="row">
-            <%= f.input :email, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+            <%= f.input :email, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
             <% unless f.object.persisted? %>
               <%= f.input :password, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
               <%= f.input :password_confirmation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
             <% end %>
+            <%= f.association :health_professional,
+                              label_method: :name_formatted,
+                              collection: @user.persisted? ? [@user.health_professional] : HealthProfessional.without_user,
+                              wrapper_html: {class: 'col-lg-6 col-sm-12'},
+                              input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="card mb-3">
-        <div class="card-header">
-          <h3 class="card-title">
-            <i class="fas fa-user mr-2"></i><%= HealthProfessional.model_name.human(count: 1) %>
-          </h3>
-          <div class="card-options">
-            <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
-              <i class="fe fe-chevron-up"></i>
-            </a>
-          </div>
-        </div>
-        <div class="card-body pb-2">
-          <%= f.simple_fields_for :health_professional do |health_professional| %>
-            <%= render 'application/health_professional_fields', f: health_professional %>
-          <% end %>
         </div>
       </div>
     </div>

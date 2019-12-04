@@ -42,7 +42,7 @@ class FamilyMembersController < WebController
     set_selected_options
 
     if @family_member.save
-      redirect_to @family_member, notice: 'Family member was successfully created.'
+      redirect_to family_members_url, notice: 'Family member was successfully created.'
     else
       render :new
     end
@@ -52,7 +52,7 @@ class FamilyMembersController < WebController
   def update
     breadcrumb @family_member.slug, family_member_path(@family_member)
     if @family_member.update(family_member_params)
-      redirect_to @family_member, notice: 'Family member was successfully updated.'
+      redirect_to family_members_url, notice: 'Family member was successfully updated.'
     else
       render :edit
     end
