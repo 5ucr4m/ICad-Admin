@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class HomeVisitFormsController < WebController
-  load_and_authorize_resource find_by: :slug
+  load_and_authorize_resource
   before_action :set_home_visit_form, only: %i[show edit update destroy]
 
   # GET /home_visit_forms
   def index
     @query = HomeVisitForm.ransack(params[:q])
-    @pagy, @home_visit_forms = pagy(@query.result, page: params[:page], items: 10)
+    @result = @query.result.includes(:company, :home_registration)
+    @result = @result.where(user: current_user) if current_user.agent?
+    @pagy, @home_visit_forms = pagy(@result, page: params[:page], items: 10)
   end
 
   # GET /home_visit_forms/1
@@ -23,7 +25,7 @@ class HomeVisitFormsController < WebController
 
   # POST /home_visit_forms
   def create
-    @home_visit_form = HomeVisitForm.new(home_visit_form_params)
+    @home_visit_form = current_user.home_visit_forms.build(home_visit_form_params)
 
     if @home_visit_form.save
       redirect_to home_visit_forms_url, notice: 'Home visit form was successfully created.'
@@ -68,8 +70,10 @@ class HomeVisitFormsController < WebController
                                             :home_type_id,
                                             :weight_monitoring,
                                             :height_monitoring,
-                                            home_visit_registration_attributes: %i[
-                                              family_member_id
+                                            :home_visit_registration_id,
+                                            home_visit_reasons_attributes: %i[
+                                              id
+                                              reason_id
                                               _destroy
                                             ])
   end

@@ -43,7 +43,8 @@
 #
 
 class IndividualRegistrationSerializer < ApplicationSerializer
-  attributes :id, :refuse_registration, :form_updated, :uuid, :uuid_form_origin, :uuid_citizen, :tp_cds_origin
+  attributes :id, :refuse_registration, :form_updated, :uuid,
+             :uuid_form_origin, :uuid_citizen, :tp_cds_origin
   has_one :health_condition
   has_one :in_street_situation
   has_one :family_member

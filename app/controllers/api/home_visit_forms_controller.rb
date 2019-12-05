@@ -8,7 +8,8 @@ module Api
     # GET /home_visit_forms
     def index
       @query = HomeVisitForm.ransack(params[:q])
-      @home_visit_forms = @query.result.includes(:company, :home_registration)
+      @result = @query.result.includes(:company, :home_registration)
+      @result = @result.where(user: current_user) if current_user.agent?
       if params[:home_visit_registration_id]
         @home_visit_forms = @home_visit_forms.where(home_visit_registration_id: params[:home_visit_registration_id])
       end
@@ -22,7 +23,7 @@ module Api
 
     # POST /home_visit_forms
     def create
-      @home_visit_form = HomeVisitForm.new(home_visit_form_params)
+      @home_visit_form = current_user.home_visit_forms.build(home_visit_form_params)
 
       if @home_visit_form.save
         render_json @home_visit_form, :created
@@ -76,10 +77,6 @@ module Api
                                                 id
                                                 reason_id
                                                 _destroy
-                                              ],
-                                              home_visit_registration_attributes: %i[
-                                                id
-                                                family_member_id
                                               ])
     end
   end

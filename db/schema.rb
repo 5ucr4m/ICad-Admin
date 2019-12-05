@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_044436) do
+ActiveRecord::Schema.define(version: 2019_12_05_044621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -424,6 +424,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_044436) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.bigint "user_id"
     t.index ["company_id"], name: "index_home_visit_forms_on_company_id"
     t.index ["discarded_at"], name: "index_home_visit_forms_on_discarded_at"
     t.index ["gender_id"], name: "index_home_visit_forms_on_gender_id"
@@ -432,6 +433,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_044436) do
     t.index ["ip"], name: "index_home_visit_forms_on_ip"
     t.index ["outcome_id"], name: "index_home_visit_forms_on_outcome_id"
     t.index ["turn_id"], name: "index_home_visit_forms_on_turn_id"
+    t.index ["user_id"], name: "index_home_visit_forms_on_user_id"
   end
 
   create_table "home_visit_reasons", force: :cascade do |t|
@@ -1064,6 +1066,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_044436) do
   add_foreign_key "home_visit_forms", "generic_models", column: "outcome_id"
   add_foreign_key "home_visit_forms", "generic_models", column: "turn_id"
   add_foreign_key "home_visit_forms", "home_visit_registrations"
+  add_foreign_key "home_visit_forms", "users"
   add_foreign_key "home_visit_reasons", "companies"
   add_foreign_key "home_visit_reasons", "generic_models", column: "reason_id"
   add_foreign_key "home_visit_reasons", "home_visit_forms"

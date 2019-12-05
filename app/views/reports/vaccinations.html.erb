@@ -66,17 +66,15 @@
         <% end %>
         <% content_for :table_body do %>
           <tbody>
-          <% cache('vaccination_report_list') do %>
-            <% @list.each do |vaccination| %>
-              <tr>
-                <td><%= vaccination.family_member.name %></td>
-                <td><%= vaccination.family_member.social_name %></td>
-                <td><%= vaccination.family_member.cns_number %></td>
-                <td><%= vaccination.family_member.birth_date.strftime('%d/%m/%Y') %></td>
-                <td><%= vaccination.family_member.city.name %></td>
-                <td><%= vaccination.family_member&.family&.handbook_number %></td>
-              </tr>
-            <% end %>
+          <% @list.each do |vaccination| %>
+            <tr>
+              <td><%= vaccination.family_member.name %></td>
+              <td><%= vaccination.family_member.social_name %></td>
+              <td><%= vaccination.family_member.cns_number %></td>
+              <td><%= vaccination.family_member.birth_date.strftime('%d/%m/%Y') %></td>
+              <td><%= vaccination.family_member.city.name %></td>
+              <td><%= vaccination.family_member&.family&.handbook_number %></td>
+            </tr>
           <% end %>
           </tbody>
         <% end %>

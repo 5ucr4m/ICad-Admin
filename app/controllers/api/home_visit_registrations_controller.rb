@@ -30,7 +30,6 @@ module Api
     # POST /home_visit_registrations
     def create
       @home_visit_registration = current_user.home_visit_registrations.build(home_visit_registration_params)
-      @city_selected = @home_visit_registration.family_member.city.presence
 
       if @home_visit_registration.save
         render_json @home_visit_registration, :created

@@ -10,6 +10,7 @@ class Ability
       can :manage, :all
     else
       can :manage, user, slug: user.slug
+      can :manage, HomeVisitForm if user.agent?
       user.role.permissions.each do |permission|
         model = permission.model_reference.singularize.constantize
         if user.role.agent? && Role::AGENT_FORMS.include?(model)

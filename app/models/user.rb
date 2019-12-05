@@ -63,6 +63,7 @@ class User < ApplicationRecord
   has_many :roles, through: :user_roles
   has_many :permissions, through: :roles
   has_many :home_visit_registrations
+  has_many :home_visit_forms
   has_many :home_registrations
   has_many :individual_registrations
   has_many :vaccinations

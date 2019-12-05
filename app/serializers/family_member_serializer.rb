@@ -67,6 +67,15 @@ class FamilyMemberSerializer < ApplicationSerializer
              :father_name, :naturalized_at, :naturalize_decree,
              :brazil_entry_date, :micro_area, :out_area, :slug, :lat, :lng, :age, :gender, :url
 
+  has_one :family
+  has_one :company
+  has_one :nationality
+  has_one :birth_country
+  has_one :gender
+  has_one :ethnicity
+  has_one :race
+  has_one :city
+
   def lat
     object.location_x
   end

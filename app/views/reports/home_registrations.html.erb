@@ -72,19 +72,17 @@
         <% end %>
         <% content_for :table_body do %>
           <tbody>
-          <% cache('home_registration_report_list') do %>
-            <% @list.each do |home_registration| %>
-              <tr>
-                <td><%= home_registration.home_registration.full_name %></td>
-                <td><%= home_registration.pet_quantity %></td>
-                <td><%= home_registration.refuse_registration ? 'SIM' : 'NÃO' %></td>
-                <td><%= home_registration.living_condition.water_supply.name_formatted %></td>
-                <td><%= home_registration.living_condition.rural_production_area.name_formatted %></td>
-                <td><%= home_registration.living_condition.garbage_disposal.name_formatted %></td>
-                <td><%= home_registration.living_condition.bathroom_drainage.name_formatted %></td>
-                <td><%= home_registration.living_condition.home_location.name_formatted %></td>
-              </tr>
-            <% end %>
+          <% @list.each do |home_registration| %>
+            <tr>
+              <td><%= home_registration.home_registration.full_name %></td>
+              <td><%= home_registration.pet_quantity %></td>
+              <td><%= home_registration.refuse_registration ? 'SIM' : 'NÃO' %></td>
+              <td><%= home_registration.living_condition.water_supply.name_formatted %></td>
+              <td><%= home_registration.living_condition.rural_production_area.name_formatted %></td>
+              <td><%= home_registration.living_condition.garbage_disposal.name_formatted %></td>
+              <td><%= home_registration.living_condition.bathroom_drainage.name_formatted %></td>
+              <td><%= home_registration.living_condition.home_location.name_formatted %></td>
+            </tr>
           <% end %>
           </tbody>
         <% end %>

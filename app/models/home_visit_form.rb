@@ -52,7 +52,7 @@ class HomeVisitForm < ApplicationRecord
   belongs_to :outcome, class_name: 'GenericModel'
   belongs_to :home_type, class_name: 'GenericModel'
   belongs_to :company, optional: true
-  has_one :user, through: :home_visit_registration
+  belongs_to :user
 
   has_many :home_visit_reasons, dependent: :destroy
   has_one :family_member, through: :home_visit_registration

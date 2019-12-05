@@ -129,11 +129,8 @@ Rails.application.routes.draw do
     end
 
     # Home Visit Registrations
-    resources :home_visit_registrations, except: %i[index new edit] do
-      shallow do
-        resources :home_visit_forms, except: %i[index new edit]
-      end
-    end
+    resources :home_visit_registrations
+    resources :home_visit_forms
 
     # States & Cities
     resources :states, only: %i[index show] do
