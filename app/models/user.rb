@@ -79,7 +79,7 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
-  validate :check_user_roles
+  #validate :check_user_roles
 
   accepts_nested_attributes_for :health_professional, allow_destroy: false
   accepts_nested_attributes_for :user_companies, allow_destroy: true
