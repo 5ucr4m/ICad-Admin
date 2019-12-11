@@ -60,19 +60,24 @@
       <div class="card-body p-4">
         <div class="tabs-content">
           <div class="tab-pane fade show active" id="families" role="tabpanel" aria-labelledby="families-tab">
-            <%= render 'application/chart', title: Family.model_name.human(count: 2), id: 'chart-families' %>
+            <%= render 'application/chart', id: 'chart-families' %>
+            <h4 class="mt-2 mb-0 text-center"><%= Family.model_name.human(count: 2) %></h4>
           </div>
           <div class="tab-pane fade" id="family-members" role="tabpanel" aria-labelledby="family-members-tab">
-            <%= render 'application/chart', title: FamilyMember.model_name.human(count: 2), id: 'chart-family-members' %>
+            <%= render 'application/chart', id: 'chart-family-members' %>
+            <h4 class="mt-2 mb-0 text-center"><%= FamilyMember.model_name.human(count: 2) %></h4>
           </div>
           <div class="tab-pane fade" id="individual-registrations" role="tabpanel" aria-labelledby="individual-registrations-tab">
-            <%= render 'application/chart', title: HomeRegistration.model_name.human(count: 2), id: 'chart-individual-registrations' %>
+            <%= render 'application/chart', id: 'chart-individual-registrations' %>
+            <h4 class="mt-2 mb-0 text-center"><%= IndividualRegistration.model_name.human(count: 2) %></h4>
           </div>
           <div class="tab-pane fade" id="home-registrations" role="tabpanel" aria-labelledby="home-registrations-tab">
-            <%= render 'application/chart', title: HomeRegistration.model_name.human(count: 2), id: 'chart-home-registrations' %>
+            <%= render 'application/chart', id: 'chart-home-registrations' %>
+            <h4 class="mt-2 mb-0 text-center"><%= HomeRegistration.model_name.human(count: 2) %></h4>
           </div>
           <div class="tab-pane fade" id="home-visit-registrations" role="tabpanel" aria-labelledby="home-visit-registrations-tab">
-            <%= render 'application/chart', title: HomeVisitRegistration.model_name.human(count: 2), id: 'chart-home-visit-registrations' %>
+            <%= render 'application/chart', id: 'chart-home-visit-registrations' %>
+            <h4 class="mt-2 mb-0 text-center"><%= HomeVisitRegistration.model_name.human(count: 2) %></h4>
           </div>
         </div>
       </div>

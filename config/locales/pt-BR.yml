@@ -10,6 +10,30 @@ pt-BR:
         other: Login
       registration:
         other: Profile
+      address:
+        one: Endereço
+        other: Endereço
+      cancel_registration:
+        one: Saída do Cadastro
+        other: Saída do Cadastro
+      health_condition_kidney:
+        one: Problema Renal
+        other: Problemas Renais
+      health_condition_disease:
+        one: Problemas de Saúde
+        other: Problemas de Saúde
+      health_condition:
+        one: Condição de Saúde
+        other: Condições de Saúde
+      sociodemographic_info:
+        one: Informações Sociodemográficas
+        other: Informações Sociodemográficas
+      in_street_situation:
+        one: Em Situação de Rua
+        other: Em Situação de Rua
+      family_member_disability:
+        one: Deficiência
+        other: Deficiências
       company:
         one: Prefeitura
         other: Prefeituras
@@ -55,8 +79,8 @@ pt-BR:
         other: Equipes
         icon: fas fa-users-cog
       health_establishment:
-        one: UBS
-        other: UBS
+        one: Unidade Básica de Saúde
+        other: Unidades Básicas de Saúde
         icon: fas fa-hospital
       home_registration:
         one: Ficha de Cadastro Domicilar e Territorial
@@ -82,6 +106,12 @@ pt-BR:
         one: Ficha de Cadastro Individual
         other: Fichas de Cadastro Individual
         icon: fas fa-notes-medical
+      living_condition:
+        one: Condições de Moradia
+        other: Condições de Moradia
+      permanence_institution:
+        one: Instituição de Permanência
+        other: Instituição de Permanência
       vaccine:
         one: Vacina
         other: Vacinas
@@ -111,7 +141,281 @@ pt-BR:
         other: Mensagens SMS
         icon: fas fa-sms
     attributes:
+      address:
+        patio: Logradouro
+        number: Número
+        zip: CEP
+        complement: Complemento
+        district: Bairro/Distrito
+        city: Cidade
+        referential_phone: Telefone Referência
+        home_phone: Telefone Residêncial
+        reference: Referência
+        out_area: Fora área
+        micro_area: Microárea
+      family:
+        home_registration: Cadastro Domiciliar
+        responsible_birth_date: Data Nascimento Responsável
+        responsible_cns_number: CNS Responsável
+        members_quantity: Quantidade Membros
+        handbook_number: Número Prontuário
+        family_income: Renda Familiar
+        reside_since: Reside desde
+        moving: Mudou-se
+      family_member:
+        age: Idade
+        family: Família
+        social_name: Nome Social
+        city: Cidade
+        birth_date: Data Nascimento
+        unknown_mother: Desconhece nome Mãe
+        mother_name: Nome Mãe
+        email: E-mail
+        nationality: Nacionalidade
+        name: Nome Completo
+        cns_number: CNS
+        cns_responsible: CNS Responsável
+        phone: Telefone Celular
+        pis_pasep_number: NIS/PIS/PASEP
+        birth_country: País Nascimento
+        race: Raça/Cor
+        gender: Sexo
+        responsible: Responsável
+        ethnicity: Etnia
+        unknown_father: Desconhece nome Pai
+        father_name: Nome Pai
+        naturalized_at: Naturalizado em
+        naturalize_decree: Portaria Natualização
+        brazil_entry_date: Data entrada Brasil
+        micro_area: Microárea
+        out_area: Fora área
+      health_condition:
+        hospitalization_cause: Causa de internação
+        other_condition_one: Outra condição de saúde 1
+        other_condition_two: Outra condição de saúde 2
+        other_condition_three: Outra condição de saúde 3
+        medicinal_plants_used: Plantas Medicinais usadas
+        maternity_reference: Maternidade de Referência
+        weight_situation: Situação de peso
+        alcohol_dependent: Dependente álcool
+        other_drugs_dependent: Outras drogas
+        smoker: Fumante
+        pregnant: Gestante
+        bedridden: Acamado
+        domicilied: Domiciliado
+        diabetic: Diabético
+        respiratory: Tem doença respiratória
+        hypertension: Tem hipertensão
+        cancer: Tem ou teve cancer
+        kidneys: Tem ou teve doença nos rins
+        leprosy: Tem Hanseníase
+        tuberculosis: Tem Tuberbulose
+        avc_stroke: Teve AVC ou Derrame
+        had_heart_attack: Teve infarto
+        had_heart_disease: Teve Doença Cardíaca
+        recently_hospitalized: Internado nos últimos 12 meses
+        mental_issue: Diagnóstico ou Problema Mental
+        integrative_practices: Práticas Integrativas/Complementares
+        medicinal_plants: Usa Plantas Medicinais
+      health_condition_disease:
+        disease_type: Tipo Doença
+      health_condition_kidney:
+        kidney_problem_type: Tipo Problema de Rim
+      health_establishment:
+        cnes_code: Código CNES
+        legal_full_name: Razão Social
+        unit_code: Código da Unidade
+        fancy_name: Nome Fantasia
+        state_registry: Inscrição Estadual
+        federal_registry: CNPJ
+        manager_full_name: Nome Completo do Gestor
+        manager_federal_registry: CPF do Gestor
+        registry_at: Registrado em
+        unit_type: Tipo de Unidade
+      health_professional:
+        cns_code: Código CNS
+        cbo_code: Código CBO
+        full_name: Nome Completo
+        federal_registry: CPF
+        state_registry: RG
+        phone: Telefone
+        professional_team: Equipe
+      home_registration_pet:
+        home_registration: Cadastro Residêncial
+        pet_type: Tipo de Animal
+      home_registration:
+        location_x: Latitude
+        location_y: Longitude
+        health_professional: Profissional de Saúde
+        living_condition: Condição de Moradia
+        address: Endereço
+        form_updated: Formulário atualizado
+        pet_quantity: Quantidade de Animais
+        refuse_registration: Recusou-se o registro
+        uuid: Código único
+        uuid_form_origin: Código único de origem
+        home_type: Tipo de Domicílio
+        permanence_institution: Instituição de Permanência
+        finished: Ficha encerrada
+      home_visit_form:
+        turn: Turno
+        handbook_number: Código da Ficha
+        cns_number: Código CNS
+        birth_date: Data Nascimento
+        gender: Sexo
+        other_visit: Visita compartilhada
+        outcome: Desfecho
+        out_area: Cidadão fora da área
+        home_type: Tipo de Imóvel
+        weight_monitoring: Acompanhamento de Peso
+        height_monitoring: Acompanhamento de Altura
+        micro_area: Micro área do Cidadão
+      home_visit_reason:
+        reason: Motivo de visita
+      home_visit_registration:
+        family_member: Membro Familiar
+      in_street_hygiene_access:
+        in_street_situation: Em situação de Rua
+        hygiene_access: Higiene Pessoal
+      in_street_situation_meal:
+        in_street_situation: Em situação de Rua
+        meal_origin_type: Origem Alimentação
+      in_street_situation:
+        kinship_degree: Grau Parentesco Familiar
+        other_accompanied: Outra Instituição
+        meals_per_day: Alimentações por dia
+        has_other_accompanied: Acompanhado por outra Instituição
+        familiar_reference: Possui referencia familiar
+        receive_benefits: Recebe Benefícios
+        in_street_situation: Em Situação de Rua
+        has_personal_hygiene: Acesso Higiene Pessoal
+        family_visit: Visita Familiar frequente
+        street_situation_time: Tempo Situação de Rua
+      individual_registration:
+        health_condition: Condição de Saúde
+        in_street_situation: Em Situação de Rua
+        family_member: Membro Familiar
+        sociodemographic_info: Informações Sóciodemográficas
+        refuse_registration: Recusou Cadastramento
+        cancel_registration: Saída do Cadastro
+      cancel_registration:
+        left_reason: Motivo saída
+        decease_date: Data Óbito
+        decease_number: Declaração Óbito
+      living_condition:
+        water_supply: Abastecimento Água
+        rural_production_area: Área Produção Rural
+        garbage_disposal: Destino Lixo
+        bathroom_drainage: Escoamento Banheiro
+        home_location: Localização Domicílio
+        home_wall_material: Tipo material predominante Parede
+        rooms: Cômodos
+        residents: Moradores
+        home_situation: Situação Moradia
+        electric_power: Energia Elétrica
+        home_access: Acesso Domicílio
+        home_type: Tipo Domicílio
+        water_treatment: Tratramento Água
+      period_items:
+        ibge_code: Código IBGE
+        serialized_ine: Código INE
+        lot_number: Lote
+        sender_counter_key: Chave Emissor
+        sender_installation_uuid: Código Emissor
+        sender_federal_registry: CNPJ Emissor
+        sender_legal_name: Razão social Emissor
+        sender_phone: Telefone Emissor
+        sender_email: E-mail Emissor
+        sender_software_version: Versão Software Emissor
+        sender_database_version: Versão Banco Emissor
+        origin_counter_key: Chave Origem
+        origin_installation_uuid: Código Origem
+        origin_federal_registry: CNPJ Origem
+        origin_legal_name: Razão social Origem
+        origin_phone: Telefone Origem
+        origin_email: E-mail Origem
+        origin_software_version: Versão Software Origem
+        origin_database_version: Versão Banco Origem
+        app_version: Versão Aplicação
+        period: Período
+      period:
+        competence: Competência
+        start_date: Data Inicial
+        end_date: Data Final
+        deadline: Data Limite
+      permanence_institution:
+        name: Nome
+        other_linked_professionals: Outros Profissionais vinculados
+        responsible_name: Nome Responsável Técnico
+        responsible_cns: CNS Responsável
+        institutional_role: Cargo Instituição
+        responsible_phone: Telefone Responsável
+      professional_team:
+        name: Nome
+        code: Código
+        health_establishment: Estabelecimento de Saúde
+      responsible_children:
+        responsible_child_type: Tipo Responsável Criança
+      sms_messages:
+        date_sent: Data Envio
+        number: Número
+        status: Status
+        sms_schedule: Agendamento
+      sms_schedule:
+        scheduled_date: Data Agendamento
+        message: Mensagem
+        role_groups: Grupos de Envio
+        status: Status
+        statuses:
+          standby: Espera
+          sent: Enviado
+          blocked: Bloqueado
+      sociodemographic_info:
+        education_level: Grau Instrução
+        occupation: Ocupação
+        sexual_orientation: Orientação Sexual
+        tradicional_community_name: Nome Comunidade Tradicional
+        parent_relation: Relação Parentesco
+        job_market_situation: Situação Mercado de Trabalho
+        desire_orientation: Deseja informar Orientação Sexual
+        attend_folk_healer: Frequenta Benzedeira
+        traditional_community: Membro Comunidade Tradicional
+        attend_school: Frequenta Escola
+        community_group: Participa Grupo Comunitário
+        health_plan: Possui Plano Saúde
+        has_any_disability: Tem alguma Deficiência
+        desire_gender: Deseja informar Identidade Gênero
+        gender_identity: Identidade Gênero
+      state:
+        name: Nome
+        abbreviation: Sigla
+        code: Código ESUS
+        reference: IBGE
+        country: País
+      user:
+        email: E-mail
+        health_professional: Profissional de Saúde
+        avatar: Avatar
+      vaccination_campaign:
+        title: Título
+        description: Descrição
+        period_start: Período início
+        period_end: Período fim
+        age_initial: Idade inicial
+        age_end: Idade limite
       vaccination:
+        vaccine: Vacinas
+        patient_type: Tipo Paciente
+        vaccination_campaign: Campanha de Vacinação
+        turn: Turno
+        family_member: Membro Familiar
+        local_service: Local Atendimento
+        traveller: Viajante
+        leprosy_communicant: Comunicante Hanseníase
+        pregnant: Grávida
+        puerperal: Puérpera
+        initial_date_hour: Data Hora Inicial
+        final_date_hour: Data Hora Final
         patient_types:
           men: Homem
           woman: Mulher
@@ -119,11 +423,13 @@ pt-BR:
           child: Criança
           newborn: 'Rescém nascido'
           elderly: Idoso
-      sms_schedule:
-        statuses:
-          standby: Espera
-          sent: Enviado
-          blocked: Bloqueado
+      vaccine:
+        description: Descrição
+        immunobiological: Código Imunobiológico
+        vaccination_strategy: Estratégia Vacinação
+        dose: Dose
+        lot_number: Lote
+        manufacturer: Fabricante
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'
@@ -277,6 +583,9 @@ pt-BR:
       create: Novo(a)
       update: Atualizar
       destroy: Remover
+      action: Ação
+      clear: Limpar
+      search: Pesquisar
     messages:
       success:
         create: 'Registro de %{model} inserido com sucesso!'

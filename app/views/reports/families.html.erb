@@ -6,16 +6,8 @@
           <h3 class="card-title font-weight-bold">Filtro de <%= Family.model_name.human(count: 2) %></h3>
         </div>
         <div class="card-body p-2 o-auto" style="height: 35rem;">
-          <div class="col-lg-12">
-            <div class="row">
-              <%= f.input :responsible_birth_date_gteq, required: false, label: "#{Family.human_attribute_name :responsible_birth_date} de",
-                          as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-              <%= f.input :responsible_birth_date_lteq, label: 'até', required: false,
-                          as: :date, html5: true, wrapper_html: {class: 'btn-remove col-lg-6 col-sm-12'} %>
-            </div>
-          </div>
-          <%= f.input :responsible_cns_number_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <%= f.input :handbook_number_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <%= f.input :responsible_cns_number_eq, label: "#{Family.human_attribute_name :responsible_cns_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+          <%= f.input :handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
           <div class="col-lg-12">
             <div class="row">
               <%= f.input :members_quantity_gteq, required: false, label: "#{Family.human_attribute_name :members_quantity} de",
@@ -45,11 +37,11 @@
         </div>
         <div class="card-footer text-center">
           <%= link_to families_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
-            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.submit.clear") %></span>
+            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.actions.clear") %></span>
           <% end %>
           <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
                          data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
-            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.submit.search") %></span>
+            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.actions.search") %></span>
           <% end %>
         </div>
       <% end %>
@@ -61,7 +53,6 @@
         <% content_for :table_header do %>
           <thead>
           <tr>
-            <th><%= Family.human_attribute_name :responsible_birth_date %></th>
             <th><%= Family.human_attribute_name :responsible_cns_number %></th>
             <th><%= Family.human_attribute_name :handbook_number %></th>
             <th><%= Family.human_attribute_name :members_quantity %></th>
@@ -75,7 +66,6 @@
           <tbody>
           <% @list.each do |family| %>
             <tr>
-              <td><%= family.responsible_birth_date.strftime('%d/%m/%Y') %></td>
               <td><%= family.responsible_cns_number %></td>
               <td><%= family.handbook_number %></td>
               <td><%= family.members_quantity %></td>

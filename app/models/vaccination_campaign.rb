@@ -31,5 +31,5 @@ class VaccinationCampaign < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_title_or_description
 
-  scope :active_campaigns, -> { where('period_end <= ?', Time.current) }
+  scope :active_campaigns, -> { where('period_end >= ?', Time.current) }
 end

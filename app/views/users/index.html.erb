@@ -25,7 +25,7 @@
         <th><%= HealthProfessional.human_attribute_name :cns_code %></th>
         <th><%= HealthProfessional.human_attribute_name :health_establishment %></th>
         <% if can? :manage, User %>
-          <th><%= t('helpers.labels.actions') %></th>
+          <th><%= t('helpers.actions.action') %></th>
         <% end %>
       </tr>
       </thead>

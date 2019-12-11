@@ -22,17 +22,23 @@
         <th><%= Vaccination.human_attribute_name :id %></th>
         <th><%= Vaccination.human_attribute_name :patient_type %></th>
         <th><%= Vaccination.human_attribute_name :vaccination_campaign %></th>
+        <th><%= Vaccination.human_attribute_name :vaccine %></th>
         <th><%= Vaccination.human_attribute_name :family_member %></th>
-        <th><%= t('helpers.labels.actions') %></th>
+        <th><%= FamilyMember.human_attribute_name :birth_date %></th>
+        <th><%= FamilyMember.human_attribute_name :age %></th>
+        <th><%= t('helpers.actions.action') %></th>
       </tr>
       </thead>
       <tbody>
       <% @vaccinations.each do |vaccination| %>
         <tr>
           <td><%= vaccination.id %></td>
-          <td><%= vaccination.patient_type %></td>
+          <td><%= t("activerecord.attributes.vaccination.patient_types.#{vaccination.patient_type}").upcase %></td>
           <td><%= vaccination.vaccination_campaign.title %></td>
+          <td><%= vaccination.vaccines.map(&:description).join(', ') %></td>
           <td><%= vaccination.family_member.name %></td>
+          <td><%= vaccination.family_member.birth_date.strftime('%d/%m/%Y') %></td>
+          <td><%= vaccination.family_member.age.upcase %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: vaccination %>
           </td>

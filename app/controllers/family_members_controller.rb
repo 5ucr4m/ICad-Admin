@@ -12,7 +12,7 @@ class FamilyMembersController < WebController
     @result = @query.result
     respond_to do |format|
       format.html do
-        @pagy, @family_members = pagy(@result.includes(:city, :race, :gender),
+        @pagy, @family_members = pagy(@result.includes(:race, :gender, city: [:state]),
                                       page: params[:page], items: 10)
       end
       format.json { render_json @result.includes(:city, :race, :gender) }

@@ -5,12 +5,12 @@ class ReportsController < WebController
 
   def families
     @query = Family.ransack(permitted_params)
-    @result = @query.result
+    @result = @query.result.includes(:family_income)
     @result = @result.where(user: current_user) if current_user.agent?
     if @result.empty?
       blank_return
     else
-      query_return @result, @result.includes(family_members: [:ethnicity, :gender, :home_registration]).map(&:family_members).flatten
+      query_return @result, @result.includes(family_members: %i[ethnicity gender home_registration]).map(&:family_members).flatten
     end
   end
 
@@ -21,7 +21,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
-      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
+      @result = @result.includes(:ethnicity, :gender, :home_registration, city: [:state])
       query_return @result, @result
     end
   end
@@ -33,7 +33,9 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
-      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
+      @result = @result.includes(sociodemographic_info:
+                                     %i[gender_identity parent_relation occupation job_market_situation],
+                                 family_member: %i[ethnicity gender home_registration])
       query_return @result, @result.map(&:family_member).flatten
     end
   end
@@ -45,7 +47,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
-      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
+      @result = @result.includes(family_members: %i[ethnicity gender home_registration])
       query_return @result, @result.map(&:family_members).flatten
     end
   end
@@ -57,7 +59,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
-      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
+      @result = @result.includes(family_members: %i[ethnicity gender home_registration])
       query_return @result, @result.map(&:family_member).flatten
     end
   end
@@ -69,7 +71,7 @@ class ReportsController < WebController
     if @result.empty?
       blank_return
     else
-      @result = @result.includes(family_members: [:ethnicity, :gender, :home_registration])
+      @result = @result.includes(family_members: %i[ethnicity gender home_registration])
       query_return @result, @result.map(&:family_member).flatten
     end
   end

@@ -64,6 +64,7 @@ class VaccinationsController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_vaccination
     @vaccination = Vaccination.friendly.find(params[:id])
+    @family_member = @vaccination.family_member.presence
   end
 
   # Only allow a trusted parameter "white list" through.
@@ -72,6 +73,11 @@ class VaccinationsController < WebController
                                         :header_transport_id, :vaccination_campaign_id,
                                         :turn_id, :family_member_id, :local_service_id,
                                         :traveller, :leprosy_communicant, :pregnant,
-                                        :puerperal, :initial_date_hour, :final_date_hour)
+                                        :puerperal, :initial_date_hour, :final_date_hour,
+                                        vaccination_vaccines_attributes: %i[
+                                          id
+                                          vaccine_id
+                                          _destroy
+                                        ])
   end
 end
