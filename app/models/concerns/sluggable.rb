@@ -16,6 +16,16 @@ module Sluggable
   private
 
   def generate_slug
-    self.slug = SecureRandom.uuid.delete('-') if slug.blank?
+    uuuid = SecureRandom.uuid
+    model_name = self.class.model_name.name.constantize
+    if uuid_classes.include?(model_name)
+      self.uuid = uuuid if uuid.blank?
+      self.uuid_form_origin = uuuid if model_name != Vaccination && uuid_form_origin.blank?
+    end
+    self.slug = uuuid.delete('-') if slug.blank?
+  end
+
+  def uuid_classes
+    [HomeRegistration, HomeVisitRegistration, IndividualRegistration, Vaccination]
   end
 end

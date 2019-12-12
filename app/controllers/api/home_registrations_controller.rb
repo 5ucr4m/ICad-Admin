@@ -8,11 +8,9 @@ module Api
     # GET /home_registrations
     def index
       @query = HomeRegistration.ransack(params[:q])
-      @home_registrations = @query.result.includes(:company, :home_registration)
-      if current_user.agent?
-        @home_registration = @home_registration.where(user: current_user)
-      end
-      render_json @home_registrations
+      @result = @query.result.includes(:company, :home_registration)
+      @result = @result.where(user: current_user) if current_user.agent?
+      render_json @result
     end
 
     # GET /home_registrations/1

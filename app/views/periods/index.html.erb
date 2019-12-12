@@ -33,9 +33,9 @@
             <% month = period.competence.split('/')[0].to_i %>
             <% year = period.competence.split('/')[1].to_i %>
             <% if month == Time.current.month && year == Time.current.year %>
-              <%= "#{t('date.month_names')[month]}/#{year}" %> (Atual)
+              <%= "#{t('date.month_names')[month]}/#{year} (Atual)".upcase %>
             <% else %>
-              <%= "#{t('date.month_names')[month]}/#{year}" %>
+              <%= "#{t('date.month_names')[month]}/#{year}".upcase %>
             <% end %>
           </td>
           <td><%= period.start_date.strftime('%d/%m/%Y') %></td>
