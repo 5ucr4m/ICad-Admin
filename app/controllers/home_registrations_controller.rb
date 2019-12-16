@@ -65,9 +65,15 @@ class HomeRegistrationsController < WebController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_home_registration
-    @home_registration = HomeRegistration.friendly.find(params[:id])
-    @city_selected = @home_registration.address.city.presence
-    @address_type_selected = @home_registration.address.address_type.presence
+    @home_registration = if current_user.agent?
+                           current_user.homer_registrations
+                                       .includes(families: [:family_members]).friendly.find(params[:id])
+                         else
+                           HomeRegistration.all
+                                           .includes(families: [:family_members]).friendly.find(params[:id])
+                         end
+    @city_selected = @home_registration&.address&.city&.presence
+    @address_type_selected = @home_registration&.address&.address_type&.presence
   end
 
   # Only allow a trusted parameter "white list" through.

@@ -56,36 +56,56 @@ class IndividualRegistration < ApplicationRecord
 
   has_one :period_item, as: :registrable, dependent: :destroy
 
-  accepts_nested_attributes_for :family_member, allow_destroy: false
-  accepts_nested_attributes_for :health_condition, allow_destroy: false
-  accepts_nested_attributes_for :in_street_situation, allow_destroy: false
-  accepts_nested_attributes_for :sociodemographic_info, allow_destroy: false
-  accepts_nested_attributes_for :cancel_registration, allow_destroy: false
+  accepts_nested_attributes_for :family_member, allow_destroy: false, reject_if: :all_blank
+  accepts_nested_attributes_for :health_condition, allow_destroy: false, reject_if: :all_blank
+  accepts_nested_attributes_for :in_street_situation, allow_destroy: false, reject_if: :all_blank
+  accepts_nested_attributes_for :sociodemographic_info, allow_destroy: false, reject_if: :all_blank
+  accepts_nested_attributes_for :cancel_registration, allow_destroy: false, reject_if: :all_blank
 
   ransack_alias :search, :id_to_s_or_family_member_legal_full_name_or_family_member_federal_registry
 
-  before_create :generate_uuid
   before_validation :set_user
 
+  amoeba do
+    customize(lambda { |orig, dup|
+      uuid = SecureRandom.uuid
+      dup.uuid = uuid
+      dup.uuid_form_origin = orig.uuid
+      dup.slug = uuid.delete('-')
+    })
+    set service_at: nil
+  end
+
   def build_relationships
-    build_health_condition unless health_condition.persisted?
-    build_family_member unless health_condition.persisted?
-    build_in_street_situation unless health_condition.persisted?
-    build_sociodemographic_info unless health_condition.persisted?
-    build_cancel_registration unless health_condition.persisted?
+    build_health_condition if health_condition.blank?
+    build_family_member if family_member.blank?
+    build_in_street_situation if in_street_situation.blank?
+    build_sociodemographic_info if sociodemographic_info.blank?
+    build_cancel_registration if cancel_registration.blank?
+  end
+
+  def dup_individual_registration
+    ir = amoeba_dup
+    ir.health_condition = health_condition.amoeba_dup
+    ir.in_street_situation = in_street_situation.amoeba_dup
+    ir.sociodemographic_info = sociodemographic_info.amoeba_dup
+    health_condition.discard
+    in_street_situation.discard
+    sociodemographic_info.discard
+    if cancel_registration.present?
+      ir.cancel_registration = cancel_registration.amoeba_dup
+      cancel_registration.discard
+    end
+    ir.save
+    update(uuid_form_update: ir.uuid)
+    discard
+    ir
   end
 
   private
 
-  def generate_uuid
-    return if uuid.present?
-
-    self.uuid = SecureRandom.uuid
-  end
-
   def set_user
-    return if user.blank?
-    return if family_member.blank?
+    return if user.blank? || family_member.blank?
     return unless family_member&.user.blank?
 
     family_member.user = user

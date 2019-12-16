@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_044621) do
+ActiveRecord::Schema.define(version: 2019_12_16_054410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -393,6 +393,8 @@ ActiveRecord::Schema.define(version: 2019_12_05_044621) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.string "uuid_form_update"
+    t.datetime "service_at"
     t.index ["address_id"], name: "index_home_registrations_on_address_id"
     t.index ["company_id"], name: "index_home_registrations_on_company_id"
     t.index ["discarded_at"], name: "index_home_registrations_on_discarded_at"
@@ -425,6 +427,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_044621) do
     t.datetime "discarded_at"
     t.datetime "ip"
     t.bigint "user_id"
+    t.datetime "service_at"
     t.index ["company_id"], name: "index_home_visit_forms_on_company_id"
     t.index ["discarded_at"], name: "index_home_visit_forms_on_discarded_at"
     t.index ["gender_id"], name: "index_home_visit_forms_on_gender_id"
@@ -463,6 +466,8 @@ ActiveRecord::Schema.define(version: 2019_12_05_044621) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.string "uuid_form_update"
+    t.datetime "service_at"
     t.index ["company_id"], name: "index_home_visit_registrations_on_company_id"
     t.index ["discarded_at"], name: "index_home_visit_registrations_on_discarded_at"
     t.index ["family_member_id"], name: "index_home_visit_registrations_on_family_member_id"
@@ -547,6 +552,8 @@ ActiveRecord::Schema.define(version: 2019_12_05_044621) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.string "uuid_form_update"
+    t.datetime "service_at"
     t.index ["cancel_registration_id"], name: "index_individual_registrations_on_cancel_registration_id"
     t.index ["company_id"], name: "index_individual_registrations_on_company_id"
     t.index ["discarded_at"], name: "index_individual_registrations_on_discarded_at"
@@ -962,6 +969,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_044621) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
     t.datetime "ip"
+    t.datetime "service_at"
     t.index ["company_id"], name: "index_vaccinations_on_company_id"
     t.index ["discarded_at"], name: "index_vaccinations_on_discarded_at"
     t.index ["family_member_id"], name: "index_vaccinations_on_family_member_id"

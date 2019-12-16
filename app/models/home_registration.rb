@@ -49,7 +49,6 @@ class HomeRegistration < ApplicationRecord
 
   belongs_to :health_professional
   belongs_to :home_type, class_name: 'GenericModel'
-
   belongs_to :address
   belongs_to :living_condition
   belongs_to :permanence_institution, optional: true
@@ -72,10 +71,39 @@ class HomeRegistration < ApplicationRecord
 
   ransack_alias :search, :id_to_s
 
+  amoeba do
+    customize(lambda { |orig, dup|
+      uuid = SecureRandom.uuid
+      dup.uuid = uuid
+      dup.uuid_form_origin = orig.uuid
+      dup.slug = uuid.delete('-')
+    })
+    exclude_association :home_registration_pets
+    exclude_association :families
+    set service_at: nil
+  end
+
   def build_relationships
     build_living_condition
     build_address
     build_permanence_institution
+  end
+
+  def dup_home_registration
+    hr = amoeba_dup
+    hr.address = address.amoeba_dup
+    hr.living_condition = living_condition.amoeba_dup
+    address.discard
+    living_condition.discard
+    if permanence_institution.blank?
+      hr.permanence_institution = permanence_institution.amoeba_dup
+      permanence_institution.discard
+    end
+    hr.save
+    update(uuid_form_update: hr.uuid)
+    families.update(home_registration: hr)
+    discard
+    hr
   end
 
   private

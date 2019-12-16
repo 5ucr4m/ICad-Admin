@@ -35,7 +35,7 @@ module HomeVisitRegistrationService
       ht << XML::Node.new('profissionalCNS', health_professional.cns_code) # valid
       ht << XML::Node.new('cboCodigo_2002', health_professional.cbo_code.reference) # valid
       ht << XML::Node.new('cnes', health_establishment.cnes_code) # valid
-      ht << XML::Node.new('dataAtendimento', home_visit_registration.created_at) # valid
+      ht << XML::Node.new('dataAtendimento', home_visit_registration.service_at.strftime('%Q')) # valid
       ht << XML::Node.new('codigoIbgeMunicipio', data.ibge_code) # valid
 
       home_visit_registration.home_visit_forms.each do |hvf|

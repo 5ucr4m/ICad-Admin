@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="card-body">
-          <% if f.object.families.any? %>
+          <% if f.object.families.includes(:family_members).any? %>
             <div class="row">
               <div class="col-12">
                 <%= f.simple_fields_for :families do |family| %>

@@ -42,10 +42,10 @@ class ChartsController < WebController
   private
 
   def set_data
-    @families = user.agent? ? Family.where(user: user) : Family.all
-    @family_members = user.agent? ? FamilyMember.where(user: user) : FamilyMember.all
-    @home_registrations = user.agent? ? HomeRegistration.where(user: user) : HomeRegistration.all
-    @home_visit_registrations = user.agent? ? HomeVisitRegistration.where(user: user) : HomeVisitRegistration.all
-    @individual_registrations = user.agent? ? IndividualRegistration.where(user: user) : HomeVisitRegistration.all
+    @families = user.agent? ? Family.unscoped.where(user: user) : Family.unscoped.all
+    @family_members = user.agent? ? FamilyMember.unscoped.where(user: user) : FamilyMember.unscoped.all
+    @home_registrations = user.agent? ? HomeRegistration.unscoped.where(user: user) : HomeRegistration.unscoped.all
+    @home_visit_registrations = user.agent? ? HomeVisitRegistration.unscoped.where(user: user) : HomeVisitRegistration.unscoped.all
+    @individual_registrations = user.agent? ? IndividualRegistration.unscoped.where(user: user) : HomeVisitRegistration.unscoped.all
   end
 end

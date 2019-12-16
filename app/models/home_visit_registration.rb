@@ -43,8 +43,26 @@ class HomeVisitRegistration < ApplicationRecord
 
   before_validation :set_user
 
+  amoeba do
+    customize(lambda { |_orig, dup|
+      uuid = SecureRandom.uuid
+      dup.uuid = uuid
+      dup.slug = uuid.delete('-')
+    })
+    exclude_association :home_visit_forms
+    set service_at: nil
+  end
+
   def build_relation_ships
     build_family_member
+  end
+
+  def dup_home_visit_registration
+    hvr = amoeba_dup
+    hvr.save
+    update(uuid_form_update: hvr.uuid)
+    discard
+    hvr
   end
 
   private

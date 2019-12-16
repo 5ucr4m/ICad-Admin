@@ -12,7 +12,7 @@ class HealthProfessional < ApplicationRecord
 
   has_many :home_registrations, dependent: :destroy
 
-  scope :without_user, -> {left_outer_joins(:user).where(users: {id: nil})}
+  scope :without_user, -> { left_outer_joins(:user).where(users: { id: nil }) }
 
   # before_validation :set_health_establishment
   # before_create :find_health_professional

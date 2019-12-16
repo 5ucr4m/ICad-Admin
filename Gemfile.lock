@@ -77,6 +77,8 @@ GEM
     akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
+    amoeba (3.1.0)
+      activerecord (>= 3.2.6)
     annotate (3.0.2)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 13.0)
@@ -121,6 +123,8 @@ GEM
     crass (1.0.5)
     database_cleaner (1.7.0)
     debug_inspector (0.0.3)
+    deep_cloneable (3.0.0)
+      activerecord (>= 3.1.0, < 7)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -469,6 +473,7 @@ DEPENDENCIES
   active_model_serializers
   active_record_query_trace
   acts-as-taggable-on
+  amoeba
   annotate
   apipie-rails
   bcrypt (~> 3.1.7)
@@ -484,6 +489,7 @@ DEPENDENCIES
   cocoon
   cpf_cnpj
   database_cleaner
+  deep_cloneable
   devise-i18n
   devise_token_auth
   discard (~> 1.0)

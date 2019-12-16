@@ -257,6 +257,7 @@ pt-BR:
         home_type: Tipo de Domicílio
         permanence_institution: Instituição de Permanência
         finished: Ficha encerrada
+        service_at: Atendimento em
       home_visit_form:
         turn: Turno
         handbook_number: Código da Ficha
@@ -270,10 +271,12 @@ pt-BR:
         weight_monitoring: Acompanhamento de Peso
         height_monitoring: Acompanhamento de Altura
         micro_area: Micro área do Cidadão
+        service_at: Último atendimento
       home_visit_reason:
         reason: Motivo de visita
       home_visit_registration:
         family_member: Membro Familiar
+        service_at: Atendimento em
       in_street_hygiene_access:
         in_street_situation: Em situação de Rua
         hygiene_access: Higiene Pessoal
@@ -298,6 +301,7 @@ pt-BR:
         sociodemographic_info: Informações Sóciodemográficas
         refuse_registration: Recusou Cadastramento
         cancel_registration: Saída do Cadastro
+        service_at: Atendimento em
       cancel_registration:
         left_reason: Motivo saída
         decease_date: Data Óbito
@@ -416,6 +420,7 @@ pt-BR:
         puerperal: Puérpera
         initial_date_hour: Data Hora Inicial
         final_date_hour: Data Hora Final
+        service_at: Atendimento em
         patient_types:
           men: Homem
           woman: Mulher

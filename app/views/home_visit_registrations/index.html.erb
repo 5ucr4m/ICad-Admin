@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-12 col-lg-6 p-0">
           <%= search_form_for @query do |f| %>
-          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
           <% end %>
         </div>
       </div>
@@ -19,23 +19,23 @@
     <table class="table card-table table-vcenter text-nowrap table-hover">
       <thead>
       <tr>
-                  <th><%= HomeVisitRegistration.human_attribute_name :family_member %></th>
-                  <th><%= HomeVisitRegistration.human_attribute_name :uuid %></th>
-                  <th><%= HomeVisitRegistration.human_attribute_name :tp_cds_origin %></th>
-                  <th><%= HomeVisitRegistration.human_attribute_name :company %></th>
-                  <th><%= HomeVisitRegistration.human_attribute_name :slug %></th>
-                <th><%= t('helpers.actions.action') %></th>
+        <th><%= FamilyMember.human_attribute_name :name %></th>
+        <th><%= FamilyMember.human_attribute_name :social_name %></th>
+        <th><%= FamilyMember.human_attribute_name :age %></th>
+        <th><%= HomeVisitForm.human_attribute_name :service_at %></th>
+        <th><%= t('helpers.actions.action') %></th>
       </tr>
       </thead>
       <tbody>
-      <% @home_visit_registrations.each do |home_visit_registration| %>
+      <% @home_visit_registrations.includes(:family_member).each do |home_visit_registration| %>
         <tr>
-                      <td><%= home_visit_registration.family_member_id %></td>
-                      <td><%= home_visit_registration.uuid %></td>
-                      <td><%= home_visit_registration.tp_cds_origin %></td>
-                      <td><%= home_visit_registration.company_id %></td>
-                      <td><%= home_visit_registration.slug %></td>
-                    <td class="text-center">
+          <td><%= home_visit_registration.family_member.name %></td>
+          <td><%= home_visit_registration.family_member.social_name %></td>
+          <td><%= home_visit_registration.family_member.age.upcase %></td>
+          <td><%= home_visit_registration.home_visit_forms.blank? ?
+                    home_visit_registration.service_at&.strftime('%d/%m/%Y - %I:%M %p') :
+                    home_visit_registration.home_visit_forms&.last&.service_at&.strftime('%d/%m/%Y - %I:%M %p') %></td>
+          <td class="text-center">
             <%= render 'application/table_links', f: home_visit_registration %>
           </td>
         </tr>
