@@ -66,10 +66,7 @@ module Api
         :family_member_id,
         :refuse_registration,
         :form_updated,
-        :uuid,
-        :uuid_form_origin,
-        :uuid_citizen,
-        :tp_cds_origin,
+        :service_at,
         family_member_attributes: %i[
           family_id social_name city_id
           birth_date unknown_mother mother_name

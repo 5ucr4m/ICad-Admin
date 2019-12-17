@@ -16,26 +16,23 @@
 <div class="card mb-3">
   <div class="card-status bg-transparent"></div>
   <div class="card-header p-4">
-    <div class="col-sm-12 col-lg-12">
-      <div class="form-row">
-        <div class="col-sm-12 col-lg-6 p-0">
-          <div class="row">
-            <div class="col-lg-9">
-              <% if @list.any? %>
-                <h1 class="pt-2 card-title mb-2">
-                  <% if @list.count.zero? %>
-                    Nenhum registro encontrado
-                  <% elsif @list.count > 1 %>
-                    <strong class="mr-1"><%= @list.count %></strong>registros encontrados
-                  <% else %>
-                    <strong class="mr-1"><%= @list.count %></strong>registro encontrado
-                  <% end %>
-                </h1>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
+    <h3 class="card-title">
+      <% if @list.any? %>
+        <h1 class="pt-2 card-title mb-2">
+          <% if @list.count.zero? %>
+            Nenhum registro encontrado
+          <% elsif @list.count > 1 %>
+            <strong class="mr-1"><%= @list.count %></strong>registros encontrados
+          <% else %>
+            <strong class="mr-1"><%= @list.count %></strong>registro encontrado
+          <% end %>
+        </h1>
+      <% end %>
+    </h3>
+    <div class="card-options mr-1">
+      <button class="btn btn-primary" data-toggle="modal" data-target="#search-form-modal">
+        <i class="fas fa-search mr-2"></i><%= t('helpers.actions.search') %>
+      </button>
     </div>
   </div>
   <% if @list.empty? %>

@@ -60,7 +60,8 @@ module Api
                                       :home_phone,
                                       :reference,
                                       :out_area,
-                                      :micro_area)
+                                      :micro_area,
+                                      :home_registration)
     end
   end
 end

@@ -72,6 +72,7 @@ module Api
                                               :home_type_id,
                                               :weight_monitoring,
                                               :height_monitoring,
+                                              :service_at,
                                               :home_visit_registration_id,
                                               home_visit_reasons_attributes: %i[
                                                 id

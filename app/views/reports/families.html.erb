@@ -1,59 +1,70 @@
 <div class="row">
-  <div class="col-lg-3">
-    <div class="card mb-0">
-      <%= search_form_for @query, url: families_reports_path do |f| %>
-        <div class="card-header">
-          <h3 class="card-title font-weight-bold">Filtro de <%= Family.model_name.human(count: 2) %></h3>
-        </div>
-        <div class="card-body p-2 o-auto" style="height: 35rem;">
-          <%= f.input :responsible_cns_number_eq, label: "#{Family.human_attribute_name :responsible_cns_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <%= f.input :handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <div class="col-lg-12">
-            <div class="row">
-              <%= f.input :members_quantity_gteq, required: false, label: "#{Family.human_attribute_name :members_quantity} de",
-                          as: :integer, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-              <%= f.input :members_quantity_lteq, required: false, label: "até",
-                          as: :integer, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+  <%= search_form_for @query, url: families_reports_path do |f| %>
+    <div class="modal fade" id="search-form-modal"
+         tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-label">
+              Filtro de <%= Family.model_name.human(count: 2) %>
+            </h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body p-2 o-auto" style="height: 35rem;">
+              <%= f.input :responsible_cns_number_eq, label: "#{Family.human_attribute_name :responsible_cns_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+              <%= f.input :handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+              <div class="col-lg-12">
+                <div class="row">
+                  <%= f.input :members_quantity_gteq, required: false, label: "#{Family.human_attribute_name :members_quantity} de",
+                              as: :integer, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                  <%= f.input :members_quantity_lteq, required: false, label: "até",
+                              as: :integer, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="row">
+                  <%= f.input :reside_since_gteq, required: false, label: "#{Family.human_attribute_name :reside_since} de",
+                              as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                  <%= f.input :reside_since_gteq, required: false, label: "até",
+                              as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label class="form-label"><%= Family.human_attribute_name :family_income %> em</label>
+                  <%= select_tag :family_income_id_in,
+                                 options_from_collection_for_select(GenericModel.family_incomes,
+                                                                    :id, :name_formatted, params[:family_income_id_in]),
+                                 {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
+                </div>
+              </div>
+              <%= f.input :moving_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-3 mb-3'} %>
             </div>
           </div>
-          <div class="col-lg-12">
-            <div class="row">
-              <%= f.input :reside_since_gteq, required: false, label: "#{Family.human_attribute_name :reside_since} de",
-                          as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-              <%= f.input :reside_since_gteq, required: false, label: "até",
-                          as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-            </div>
+          <div class="modal-footer">
+            <%= link_to families_reports_path, class: 'btn btn-block btn-sm-block btn-danger' do %>
+              <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.actions.clear") %></span>
+            <% end %>
+            <%= button_tag class: 'btn btn-block btn-sm-block btn-primary',
+                           data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
+              <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.actions.search") %></span>
+            <% end %>
           </div>
-          <div class="col-lg-12">
-            <div class="form-group">
-              <label class="form-label"><%= Family.human_attribute_name :family_income %> em</label>
-              <%= select_tag :family_income_id_in,
-                             options_from_collection_for_select(GenericModel.family_incomes,
-                                                                :id, :name_formatted, params[:family_income_id_in]),
-                             {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
-            </div>
-          </div>
-          <%= f.input :moving_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-3 mb-3'} %>
         </div>
-        <div class="card-footer text-center">
-          <%= link_to families_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
-            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.actions.clear") %></span>
-          <% end %>
-          <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
-                         data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
-            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.actions.search") %></span>
-          <% end %>
-        </div>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div class="col-lg-9">
+  <% end %>
+  <div class="col-lg-12">
     <div class="row">
       <div class="col-lg-12">
         <% content_for :table_header do %>
           <thead>
           <tr>
             <th><%= Family.human_attribute_name :responsible_cns_number %></th>
+            <th><%= Family.human_attribute_name :responsible_name %></th>
             <th><%= Family.human_attribute_name :handbook_number %></th>
             <th><%= Family.human_attribute_name :members_quantity %></th>
             <th><%= Family.human_attribute_name :reside_since %></th>
@@ -67,6 +78,7 @@
           <% @list.each do |family| %>
             <tr>
               <td><%= family.responsible_cns_number %></td>
+              <td><%= family.family_members&.responsible&.find_by(cns_number: family.responsible_cns_number)&.name %></td>
               <td><%= family.handbook_number %></td>
               <td><%= family.members_quantity %></td>
               <td><%= family.reside_since.strftime('%d/%m/%Y') %></td>

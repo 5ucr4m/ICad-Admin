@@ -74,6 +74,7 @@ class IndividualRegistration < ApplicationRecord
       dup.slug = uuid.delete('-')
     })
     set service_at: nil
+    exclude_association :period_item
   end
 
   def build_relationships

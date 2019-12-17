@@ -41,9 +41,22 @@ class Period < ApplicationRecord
   validates_uniqueness_of :competence
   validate :check_start_date, :check_end_date, :check_competence, :check_deadline_period
 
-  scope :current_period, lambda {
+  scope :change_period, lambda {
+    strip_company_scope.current_periods.each do |period|
+      puts "PERIOD ITEMS #{period.period_items.count}\n"
+      next if period.period_items.blank?
+
+      period.period_items.find_each(&:dup_registry)
+    end
+  }
+
+  scope :current_periods, lambda {
     last_day = Time.zone.today.end_of_month.to_date + 1.month
-    where('start_date >= ? AND deadline < ?', Time.zone.today.beginning_of_month.to_date, last_day).first
+    where('start_date >= ? AND deadline < ?', Time.zone.today.beginning_of_month.to_date, last_day)
+  }
+
+  scope :current_period, lambda {
+    current_periods.first
   }
 
   def name_formatted

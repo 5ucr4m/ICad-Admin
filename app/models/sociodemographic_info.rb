@@ -59,6 +59,7 @@ class SociodemographicInfo < ApplicationRecord
   belongs_to :company, optional: true
 
   has_many :family_member_disabilities, dependent: :destroy
+  has_one :individual_registration, dependent: :destroy
 
   accepts_nested_attributes_for :family_member_disabilities, allow_destroy: true
 

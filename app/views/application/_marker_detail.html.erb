@@ -1,1 +1,5 @@
-'<p class="text-center font-weight-bold"><%= link_to vaccination.family_member.name, vaccination.family_member %></p><p>Idade: <%= vaccination.family_member.age %></p>"".html_safe
+'<p class="text-center font-weight-bold"><%= link_to vaccination.family_member.name, vaccination.family_member %></p><p>Idade: <% if family_member.birth_date.year == Time.current.year %>
+  <%= distance_of_time_in_words(family_member.birth_date, Time.current.to_date, only: :months).upcase %>
+<% else %>
+  <%= distance_of_time_in_words(family_member.birth_date, Time.current.to_date, only: :years).upcase %>
+<% end %></p>"".html_safe

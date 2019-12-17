@@ -58,6 +58,8 @@ class HealthCondition < ApplicationRecord
   has_many :health_condition_kidneys, dependent: :destroy
   has_many :health_condition_diseases, dependent: :destroy
 
+  has_one :individual_registration, dependent: :destroy
+
   accepts_nested_attributes_for :health_condition_kidneys, allow_destroy: true
   accepts_nested_attributes_for :health_condition_diseases, allow_destroy: true
 

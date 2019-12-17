@@ -43,5 +43,7 @@ class Address < ApplicationRecord
   belongs_to :city
   belongs_to :company, optional: true
 
+  has_one :home_registration, dependent: :destroy
+
   ransack_alias :search, :id_to_s
 end

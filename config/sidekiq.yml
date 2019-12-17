@@ -9,3 +9,4 @@ production:
   - mailers
   - broadcasters
   - sms_schedules
+  - periods

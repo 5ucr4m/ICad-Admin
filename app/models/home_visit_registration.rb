@@ -50,6 +50,7 @@ class HomeVisitRegistration < ApplicationRecord
       dup.slug = uuid.delete('-')
     })
     exclude_association :home_visit_forms
+    exclude_association :period_item
     set service_at: nil
   end
 

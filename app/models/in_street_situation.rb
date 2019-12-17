@@ -44,6 +44,8 @@ class InStreetSituation < ApplicationRecord
   has_many :in_street_situation_meals
   has_many :in_street_hygiene_accesses
 
+  has_one :individual_registration, dependent: :destroy
+
   accepts_nested_attributes_for :in_street_situation_meals, allow_destroy: true
   accepts_nested_attributes_for :in_street_hygiene_accesses, allow_destroy: true
 

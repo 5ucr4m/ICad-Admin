@@ -74,12 +74,15 @@ class FamilyMember < ApplicationRecord
 
   has_one :home_registration, through: :family
   has_one :individual_registration, dependent: :destroy
+  has_one :home_visit_registration, dependent: :destroy
   has_many :vaccinations
   has_many :vaccines, through: :vaccinations
 
   validates :name, :birth_date, :cns_number, presence: true
 
   before_validation :set_user
+
+  scope :responsible, -> {where(responsible: true)}
 
   ransack_alias :search, :id_to_s_or_name_or_social_name_or_federal_registry_or_state_registry_or_cns_number
 

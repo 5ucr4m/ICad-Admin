@@ -61,6 +61,7 @@ module Api
                                                 :uuid_form_origin,
                                                 :home_type_id,
                                                 :finished,
+                                                :service_at,
                                                 families_attributes: [
                                                   :id,
                                                   :responsible_birth_date,

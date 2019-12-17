@@ -25,7 +25,8 @@ module Api
     end
 
     # GET /home_visit_registrations/1/edit
-    def edit; end
+    def edit;
+    end
 
     # POST /home_visit_registrations
     def create
@@ -61,9 +62,10 @@ module Api
 
     # Only allow a trusted parameter "white list" through.
     def home_visit_registration_params
-      params.require(:home_visit_registration).permit(:uuid, :tp_cds_origin,
-                                                      :family_member_id,
-                                                      family_member_attributes: %i[
+      params.require(:home_visit_registration).permit(
+          :family_member_id,
+          :service_at,
+          family_member_attributes: %i[
                                                         id
                                                         family_id
                                                         name
@@ -91,27 +93,27 @@ module Api
                                                         responsible
                                                         out_area
                                                       ],
-                                                      home_visit_forms_attributes: [
-                                                        :id,
-                                                        :turn_id,
-                                                        :handbook_number,
-                                                        :cns_number,
-                                                        :birth_date,
-                                                        :gender_id,
-                                                        :other_visit,
-                                                        :outcome_id,
-                                                        :micro_area,
-                                                        :out_area,
-                                                        :home_type_id,
-                                                        :weight_monitoring,
-                                                        :height_monitoring,
-                                                        :_destroy,
-                                                        home_visit_reasons_attributes: %i[
+          home_visit_forms_attributes: [
+              :id,
+              :turn_id,
+              :handbook_number,
+              :cns_number,
+              :birth_date,
+              :gender_id,
+              :other_visit,
+              :outcome_id,
+              :micro_area,
+              :out_area,
+              :home_type_id,
+              :weight_monitoring,
+              :height_monitoring,
+              :_destroy,
+              home_visit_reasons_attributes: %i[
                                                           id
                                                           reason_id
                                                           _destroy
                                                         ]
-                                                      ])
+          ])
     end
   end
 end

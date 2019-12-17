@@ -1,66 +1,76 @@
 <div class="row">
-  <div class="col-lg-3">
-    <div class="card mb-0">
-      <%= search_form_for @query, url: family_members_reports_path do |f| %>
-        <div class="card-header">
-          <h3 class="card-title font-weight-bold">Filtro de <%= FamilyMember.model_name.human(count: 2) %></h3>
+  <%= search_form_for @query, url: family_members_reports_path do |f| %>
+    <div class="modal fade" id="search-form-modal"
+         tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-label">
+              Filtro de <%= FamilyMember.model_name.human(count: 2) %>
+            </h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body p-2 o-auto" style="height: 35rem;">
+              <div class="col-lg-12">
+                <div class="row">
+                  <%= f.input :birth_date_gteq, required: false, label: "#{FamilyMember.human_attribute_name :birth_date} de",
+                              as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                  <%= f.input :birth_date_lteq, label: 'até', required: false,
+                              as: :date, html5: true, wrapper_html: {class: 'btn-remove col-lg-6 col-sm-12'} %>
+                </div>
+              </div>
+              <%= f.input :cns_number_eq, label: "#{FamilyMember.human_attribute_name :cns_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+              <%= f.input :family_handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}",
+                          required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label class="form-label"><%= FamilyMember.human_attribute_name :race %></label>
+                  <%= select_tag :race_id_in,
+                                 options_from_collection_for_select(GenericModel.races,
+                                                                    :id, :name_formatted, params[:race_id_in]),
+                                 {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label class="form-label"><%= FamilyMember.human_attribute_name :gender %></label>
+                  <%= select_tag :gender_id_in,
+                                 options_from_collection_for_select(GenericModel.genders,
+                                                                    :id, :name_formatted, params[:gender_id_in]),
+                                 {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label class="form-label"><%= FamilyMember.human_attribute_name :ethnicity %></label>
+                  <%= select_tag :ethnicity_id_in,
+                                 options_from_collection_for_select(GenericModel.ethnicities,
+                                                                    :id, :name_formatted, params[:ethnicity_id_in]),
+                                 {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
+                </div>
+              </div>
+              <%= f.input :family_family_income_id_in, label: "#{Family.human_attribute_name :family_income}", as: :select, collection: GenericModel.family_incomes, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :out_area_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-3 mb-3'} %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= link_to family_members_reports_path, class: 'btn btn-block btn-sm-block btn-danger' do %>
+              <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.actions.clear") %></span>
+            <% end %>
+            <%= button_tag class: 'btn btn-block btn-sm-block btn-primary',
+                           data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
+              <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.actions.search") %></span>
+            <% end %>
+          </div>
         </div>
-        <div class="card-body p-2 o-auto" style="height: 35rem;">
-          <div class="col-lg-12">
-            <div class="row">
-              <%= f.input :birth_date_gteq, required: false, label: "#{FamilyMember.human_attribute_name :birth_date} de",
-                          as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-              <%= f.input :birth_date_lteq, label: 'até', required: false,
-                          as: :date, html5: true, wrapper_html: {class: 'btn-remove col-lg-6 col-sm-12'} %>
-            </div>
-          </div>
-          <%= f.input :cns_number_eq, label: "#{FamilyMember.human_attribute_name :cns_number}", required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <%= f.input :family_handbook_number_eq, label: "#{Family.human_attribute_name :handbook_number}",
-                      required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <div class="col-lg-12">
-            <div class="form-group">
-              <label class="form-label"><%= FamilyMember.human_attribute_name :race %></label>
-              <%= select_tag :race_id_in,
-                             options_from_collection_for_select(GenericModel.races,
-                                                                :id, :name_formatted, params[:race_id_in]),
-                             {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
-            </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="form-group">
-              <label class="form-label"><%= FamilyMember.human_attribute_name :gender %></label>
-              <%= select_tag :gender_id_in,
-                             options_from_collection_for_select(GenericModel.genders,
-                                                                :id, :name_formatted, params[:gender_id_in]),
-                             {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
-            </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="form-group">
-              <label class="form-label"><%= FamilyMember.human_attribute_name :ethnicity %></label>
-              <%= select_tag :ethnicity_id_in,
-                             options_from_collection_for_select(GenericModel.ethnicities,
-                                                                :id, :name_formatted, params[:ethnicity_id_in]),
-                             {include_blank: true, multiple: true, class: 'select2-multiple form-control'} %>
-            </div>
-          </div>
-          <%= f.input :family_family_income_id_in, label: "#{Family.human_attribute_name :family_income}", as: :select, collection: GenericModel.family_incomes, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :out_area_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-6 col-sm-12 pl-3 mb-3'} %>
-        </div>
-        <div class="card-footer text-center">
-          <%= link_to family_members_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
-            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.actions.clear") %></span>
-          <% end %>
-          <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
-                         data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
-            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.actions.search") %></span>
-          <% end %>
-        </div>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div class="col-lg-9">
+  <% end %>
+  <div class="col-lg-12">
     <div class="row">
       <div class="col-lg-12">
         <% content_for :table_header do %>
@@ -71,6 +81,7 @@
             <th><%= FamilyMember.human_attribute_name :birth_date %></th>
             <th><%= FamilyMember.human_attribute_name :age %></th>
             <th><%= FamilyMember.human_attribute_name :city %></th>
+            <th><%= Address.human_attribute_name :district %></th>
             <th><%= FamilyMember.human_attribute_name :gender %></th>
             <th><%= FamilyMember.human_attribute_name :family %></th>
           </tr>
@@ -83,8 +94,13 @@
               <td><%= family_member.name %></td>
               <td><%= family_member.cns_number %></td>
               <td><%= family_member.birth_date.strftime('%d/%m/%Y') %></td>
-              <td><%= family_member.age.upcase %></td>
+              <% if family_member.birth_date.year == Time.current.year %>
+                <td><%= distance_of_time_in_words(family_member.birth_date, Time.current.to_date, only: :months).upcase %></td>
+              <% else %>
+                <td><%= distance_of_time_in_words(family_member.birth_date, Time.current.to_date, only: :years).upcase %></td>
+              <% end %>
               <td><%= family_member.city.name_formatted %></td>
+              <td><%= family_member&.home_registration&.address&.district %></td>
               <td><%= family_member.gender.name %></td>
               <td><%= family_member&.family&.handbook_number %></td>
             </tr>

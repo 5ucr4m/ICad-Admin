@@ -80,6 +80,7 @@ class HomeRegistration < ApplicationRecord
     })
     exclude_association :home_registration_pets
     exclude_association :families
+    exclude_association :period_item
     set service_at: nil
   end
 
@@ -91,11 +92,15 @@ class HomeRegistration < ApplicationRecord
 
   def dup_home_registration
     hr = amoeba_dup
-    hr.address = address.amoeba_dup
-    hr.living_condition = living_condition.amoeba_dup
-    address.discard
-    living_condition.discard
-    if permanence_institution.blank?
+    unless address.blank?
+      hr.address = address.amoeba_dup
+      address.discard
+    end
+    unless living_condition.blank?
+      hr.living_condition = living_condition.amoeba_dup
+      living_condition.discard
+    end
+    unless permanence_institution.blank?
       hr.permanence_institution = permanence_institution.amoeba_dup
       permanence_institution.discard
     end

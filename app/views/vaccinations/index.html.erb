@@ -38,7 +38,11 @@
           <td><%= vaccination.vaccines.map(&:description).join(', ') %></td>
           <td><%= vaccination.family_member.name %></td>
           <td><%= vaccination.family_member.birth_date.strftime('%d/%m/%Y') %></td>
-          <td><%= vaccination.family_member.age.upcase %></td>
+          <% if vaccination.family_member.birth_date.year == Time.current.year %>
+            <td><%= distance_of_time_in_words(vaccination.family_member.birth_date, Time.current.to_date, only: :months).upcase %></td>
+          <% else %>
+            <td><%= distance_of_time_in_words(vaccination.family_member.birth_date, Time.current.to_date, only: :years).upcase %></td>
+          <% end %>
           <td class="text-center">
             <%= render 'application/table_links', f: vaccination %>
           </td>

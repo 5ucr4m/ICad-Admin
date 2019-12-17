@@ -57,4 +57,17 @@ class PeriodItem < ApplicationRecord
   belongs_to :user
 
   ransack_alias :search, :id_to_s
+
+  def dup_registry
+    object = registrable_type.constantize.find(registrable_id)
+    case registrable_type
+    when HomeRegistration.model_name.name
+      object.dup_home_registration
+    when IndividualRegistration.model_name.name
+      object.dup_individual_registration
+    when HomeVisitRegistration.model_name.name
+      object.dup_home_visit_registration
+    else nil
+    end
+  end
 end

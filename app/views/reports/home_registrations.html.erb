@@ -1,59 +1,69 @@
 <div class="row">
-  <div class="col-lg-3">
-    <div class="card mb-0">
-      <%= search_form_for @query, url: home_registrations_reports_path do |f| %>
-        <div class="card-header">
-          <h3 class="card-title font-weight-bold">Filtro de <%= HomeRegistration.model_name.human(count: 2)[10..-1][0..19] %></h3>
-        </div>
-        <div class="card-body p-2 o-auto" style="height: 35rem;">
-          <%= f.input :health_professional_id_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <%= f.input :living_condition_rooms_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
-          <div class="col-lg-12">
-            <div class="row">
-              <%= f.input :pet_quantity_gteq, as: :integer, required: false, label: "#{HomeRegistration.human_attribute_name :pet_quantity} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-              <%= f.input :pet_quantity_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+  <%= search_form_for @query, url: home_registrations_reports_path do |f| %>
+    <div class="modal fade" id="search-form-modal"
+         tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-label">
+              Filtro de <%= HomeRegistration.model_name.human(count: 2)[10..-1][0..19] %>
+            </h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body p-2 o-auto" style="height: 35rem;">
+              <%= f.input :health_professional_id_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+              <%= f.input :living_condition_rooms_eq, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12'} %>
+              <div class="col-lg-12">
+                <div class="row">
+                  <%= f.input :pet_quantity_gteq, as: :integer, required: false, label: "#{HomeRegistration.human_attribute_name :pet_quantity} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                  <%= f.input :pet_quantity_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                </div>
+              </div>
+              <%= f.input :home_type_id_in, as: :select, collection: GenericModel.residence_types, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <div class="col-lg-12">
+                <div class="row">
+                  <%= f.input :living_condition_residents_gteq, as: :integer, required: false, label: "#{LivingCondition.human_attribute_name :residents} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                  <%= f.input :living_condition_residents_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
+                </div>
+              </div>
+              <%= f.input :living_condition_water_supply_id_in, as: :select, collection: GenericModel.water_supplies, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_garbage_disposal_id_in, as: :select, collection: GenericModel.garbage_disposals, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_bathroom_drainage_id_in, as: :select, collection: GenericModel.bathroom_drainage, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_home_location_id_in, as: :select, collection: GenericModel.home_locations, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_home_situation_id_in, as: :select, collection: GenericModel.home_situations, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_home_wall_material_id_in, as: :select, collection: GenericModel.home_wall_materials, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_home_type_id_in, as: :select, collection: GenericModel.home_types, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_water_treatment_id_in, as: :select, collection: GenericModel.water_treatments, required: false,
+                          wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
+              <%= f.input :living_condition_electric_power_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
+              <%= f.input :refuse_registration_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
             </div>
           </div>
-          <%= f.input :home_type_id_in, as: :select, collection: GenericModel.residence_types, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <div class="col-lg-12">
-            <div class="row">
-              <%= f.input :living_condition_residents_gteq, as: :integer, required: false, label: "#{LivingCondition.human_attribute_name :residents} de", wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-              <%= f.input :living_condition_residents_lteq, as: :integer, label: 'até', required: false, wrapper_html: {class: 'col-lg-6 col-sm-12'} %>
-            </div>
+          <div class="modal-footer">
+            <%= link_to home_registrations_reports_path, class: 'btn btn-block btn-sm-block btn-danger' do %>
+              <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.actions.clear") %></span>
+            <% end %>
+            <%= button_tag class: 'btn btn-block btn-sm-block btn-primary',
+                           data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
+              <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.actions.search") %></span>
+            <% end %>
           </div>
-          <%= f.input :living_condition_water_supply_id_in, as: :select, collection: GenericModel.water_supplies, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_garbage_disposal_id_in, as: :select, collection: GenericModel.garbage_disposals, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_bathroom_drainage_id_in, as: :select, collection: GenericModel.bathroom_drainage, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_home_location_id_in, as: :select, collection: GenericModel.home_locations, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_home_situation_id_in, as: :select, collection: GenericModel.home_situations, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_home_wall_material_id_in, as: :select, collection: GenericModel.home_wall_materials, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_home_type_id_in, as: :select, collection: GenericModel.home_types, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_water_treatment_id_in, as: :select, collection: GenericModel.water_treatments, required: false,
-                      wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2-multiple', multiple: true} %>
-          <%= f.input :living_condition_electric_power_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
-          <%= f.input :refuse_registration_true, as: :boolean, required: false, wrapper_html: {class: 'col-lg-12 col-sm-12 pl-3 mb-3'} %>
         </div>
-        <div class="card-footer text-center">
-          <%= link_to home_registrations_reports_path, class: 'btn btn-block btn-sm-block btn-danger btn-submit' do %>
-            <i class="fas fa-redo-alt mr-2"></i><span class="btn-title"><%= t("helpers.submit.clear") %></span>
-          <% end %>
-          <%= button_tag class: 'btn btn-block btn-sm-block btn-primary btn-submit',
-                         data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Pesquisando...'.html_safe} do %>
-            <i class="fas fa-search mr-2"></i><span class="btn-title"><%= t("helpers.submit.search") %></span>
-          <% end %>
-        </div>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div class="col-lg-9">
+  <% end %>
+  <div class="col-lg-12">
     <div class="row">
       <div class="col-lg-12">
         <% content_for :table_header do %>
@@ -74,14 +84,14 @@
           <tbody>
           <% @list.each do |home_registration| %>
             <tr>
-              <td><%= home_registration.home_registration.full_name %></td>
+              <td><%= home_registration.health_professional.full_name %></td>
               <td><%= home_registration.pet_quantity %></td>
               <td><%= home_registration.refuse_registration ? 'SIM' : 'NÃO' %></td>
-              <td><%= home_registration.living_condition.water_supply.name_formatted %></td>
-              <td><%= home_registration.living_condition.rural_production_area.name_formatted %></td>
-              <td><%= home_registration.living_condition.garbage_disposal.name_formatted %></td>
-              <td><%= home_registration.living_condition.bathroom_drainage.name_formatted %></td>
-              <td><%= home_registration.living_condition.home_location.name_formatted %></td>
+              <td><%= home_registration.living_condition&.water_supply&.name_formatted %></td>
+              <td><%= home_registration.living_condition&.rural_production_area&.name_formatted %></td>
+              <td><%= home_registration.living_condition&.garbage_disposal&.name_formatted %></td>
+              <td><%= home_registration.living_condition&.bathroom_drainage&.name_formatted %></td>
+              <td><%= home_registration.living_condition&.home_location&.name_formatted %></td>
             </tr>
           <% end %>
           </tbody>

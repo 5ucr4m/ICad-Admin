@@ -31,7 +31,11 @@
         <tr>
           <td><%= home_visit_registration.family_member.name %></td>
           <td><%= home_visit_registration.family_member.social_name %></td>
-          <td><%= home_visit_registration.family_member.age.upcase %></td>
+          <% if home_visit_registration.family_member.birth_date.year == Time.current.year %>
+            <td><%= distance_of_time_in_words(home_visit_registration.family_member.birth_date, Time.current.to_date, only: :months).upcase %></td>
+          <% else %>
+            <td><%= distance_of_time_in_words(home_visit_registration.family_member.birth_date, Time.current.to_date, only: :years).upcase %></td>
+          <% end %>
           <td><%= home_visit_registration.home_visit_forms.blank? ?
                     home_visit_registration.service_at&.strftime('%d/%m/%Y - %I:%M %p') :
                     home_visit_registration.home_visit_forms&.last&.service_at&.strftime('%d/%m/%Y - %I:%M %p') %></td>

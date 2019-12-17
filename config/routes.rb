@@ -104,18 +104,9 @@ Rails.application.routes.draw do
     resources :family_members
 
     # Home Registrations
-    resources :home_registrations, except: %i[new edit] do
-      shallow do
-        resources :families, except: %i[new edit] do
-          shallow do
-            resources :family_members, except: %i[new edit]
-          end
-        end
-        resources :living_conditions, except: %i[index new edit]
-        resources :addresses, except: %i[index new edit]
-        resources :responsible_children, except: %i[new edit]
-      end
-    end
+    resources :home_registrations, except: %i[new edit]
+    resources :living_conditions, except: %i[index new edit]
+    resources :addresses, except: %i[index new edit]
 
     # Professional Teams
     resources :professional_teams, except: %i[new edit] do
@@ -140,15 +131,12 @@ Rails.application.routes.draw do
     end
 
     # Individual Registrations
-    resources :individual_registrations, except: %i[new edit] do
-      shallow do
-        resources :family_members, except: %i[index new edit]
-        resources :health_conditions, except: %i[index new edit]
-        resources :in_street_situations, except: %i[index new edit]
-        resources :sociodemographic_infos, except: %i[index new edit]
-        resources :cancel_registrations, except: %i[index new edit]
-      end
-    end
+    resources :individual_registrations, except: %i[new edit]
+    resources :health_conditions, except: %i[index new edit]
+    resources :living_conditions, except: %i[index new edit]
+    resources :in_street_situations, except: %i[index new edit]
+    resources :sociodemographic_infos, except: %i[index new edit]
+    resources :cancel_registrations, except: %i[index new edit]
 
     # Health Establishments
     resources :health_establishments, except: %i[index new edit] do

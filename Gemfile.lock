@@ -113,6 +113,9 @@ GEM
     case_transform (0.2)
       activesupport
     chartkick (3.2.1)
+    clockwork (2.0.4)
+      activesupport
+      tzinfo
     cocoon (1.2.14)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
@@ -486,6 +489,7 @@ DEPENDENCIES
   cancancan
   capybara
   chartkick
+  clockwork
   cocoon
   cpf_cnpj
   database_cleaner
