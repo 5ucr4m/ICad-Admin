@@ -60,6 +60,7 @@ class GenericModel < ApplicationRecord
   scope :meals_origin_types, -> { where(generic_field: :meals_origin_type) }
   scope :respiratory_diseases, -> { where(generic_field: :respiratory_disease) }
   scope :kidney_problems, -> { where(generic_field: :kidney_problem) }
+  scope :heart_diseases, -> { where(generic_field: :heart_disease) }
   scope :turns, -> { where(generic_field: :turn) }
   scope :outcomes, -> { where(generic_field: :outcome) }
   scope :visit_reasons, -> { where(generic_field: :reason) }

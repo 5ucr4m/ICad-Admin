@@ -77,7 +77,12 @@ module Api
                                                :mental_issue,
                                                :integrative_practices,
                                                :medicinal_plants,
-                                               health_condition_diseases_attributes: %i[
+                                               health_condition_hearts_attributes: %i[
+                                                 id
+                                                 disease_type_id
+                                                 _destroy
+                                               ],
+                                               health_condition_respiratories_attributes: %i[
                                                  id
                                                  disease_type_id
                                                  _destroy

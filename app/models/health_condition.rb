@@ -56,12 +56,14 @@ class HealthCondition < ApplicationRecord
   belongs_to :company, optional: true
 
   has_many :health_condition_kidneys, dependent: :destroy
-  has_many :health_condition_diseases, dependent: :destroy
+  has_many :health_condition_hearts, dependent: :destroy
+  has_many :health_condition_respiratories, dependent: :destroy
 
   has_one :individual_registration, dependent: :destroy
 
   accepts_nested_attributes_for :health_condition_kidneys, allow_destroy: true
-  accepts_nested_attributes_for :health_condition_diseases, allow_destroy: true
+  accepts_nested_attributes_for :health_condition_hearts, allow_destroy: true
+  accepts_nested_attributes_for :health_condition_respiratories, allow_destroy: true
 
   ransack_alias :search, :id_to_s
 end

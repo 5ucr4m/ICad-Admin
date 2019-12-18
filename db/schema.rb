@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_16_054410) do
+ActiveRecord::Schema.define(version: 2019_12_18_002106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,20 +239,17 @@ ActiveRecord::Schema.define(version: 2019_12_16_054410) do
     t.index ["shared_lot_form_id"], name: "index_header_transports_on_shared_lot_form_id"
   end
 
-  create_table "health_condition_diseases", force: :cascade do |t|
+  create_table "health_condition_hearts", force: :cascade do |t|
     t.bigint "health_condition_id"
     t.bigint "disease_type_id"
     t.bigint "company_id"
+    t.datetime "discarded_at"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "discarded_at"
-    t.datetime "ip"
-    t.index ["company_id"], name: "index_health_condition_diseases_on_company_id"
-    t.index ["discarded_at"], name: "index_health_condition_diseases_on_discarded_at"
-    t.index ["disease_type_id"], name: "index_health_condition_diseases_on_disease_type_id"
-    t.index ["health_condition_id"], name: "index_health_condition_diseases_on_health_condition_id"
-    t.index ["ip"], name: "index_health_condition_diseases_on_ip"
+    t.index ["company_id"], name: "index_health_condition_hearts_on_company_id"
+    t.index ["disease_type_id"], name: "index_health_condition_hearts_on_disease_type_id"
+    t.index ["health_condition_id"], name: "index_health_condition_hearts_on_health_condition_id"
   end
 
   create_table "health_condition_kidneys", force: :cascade do |t|
@@ -269,6 +266,19 @@ ActiveRecord::Schema.define(version: 2019_12_16_054410) do
     t.index ["health_condition_id"], name: "index_health_condition_kidneys_on_health_condition_id"
     t.index ["ip"], name: "index_health_condition_kidneys_on_ip"
     t.index ["kidney_problem_id"], name: "index_health_condition_kidneys_on_kidney_problem_id"
+  end
+
+  create_table "health_condition_respiratories", force: :cascade do |t|
+    t.bigint "health_condition_id"
+    t.bigint "disease_type_id"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "slug"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_health_condition_respiratories_on_company_id"
+    t.index ["disease_type_id"], name: "index_health_condition_respiratories_on_disease_type_id"
+    t.index ["health_condition_id"], name: "index_health_condition_respiratories_on_health_condition_id"
   end
 
   create_table "health_conditions", force: :cascade do |t|
@@ -1045,12 +1055,15 @@ ActiveRecord::Schema.define(version: 2019_12_16_054410) do
   add_foreign_key "header_transports", "header_transports", column: "main_lot_form_id"
   add_foreign_key "header_transports", "header_transports", column: "shared_lot_form_id"
   add_foreign_key "header_transports", "health_professionals"
-  add_foreign_key "health_condition_diseases", "companies"
-  add_foreign_key "health_condition_diseases", "generic_models", column: "disease_type_id"
-  add_foreign_key "health_condition_diseases", "health_conditions"
+  add_foreign_key "health_condition_hearts", "companies"
+  add_foreign_key "health_condition_hearts", "generic_models", column: "disease_type_id"
+  add_foreign_key "health_condition_hearts", "health_conditions"
   add_foreign_key "health_condition_kidneys", "companies"
   add_foreign_key "health_condition_kidneys", "generic_models", column: "kidney_problem_id"
   add_foreign_key "health_condition_kidneys", "health_conditions"
+  add_foreign_key "health_condition_respiratories", "companies"
+  add_foreign_key "health_condition_respiratories", "generic_models", column: "disease_type_id"
+  add_foreign_key "health_condition_respiratories", "health_conditions"
   add_foreign_key "health_conditions", "companies"
   add_foreign_key "health_conditions", "generic_models", column: "weight_situation_id"
   add_foreign_key "health_establishments", "companies"

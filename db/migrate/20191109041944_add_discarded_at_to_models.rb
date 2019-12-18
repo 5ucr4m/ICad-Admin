@@ -44,7 +44,7 @@ class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
     add_column :family_member_disabilities, :ip, :datetime
     add_column :header_transports, :ip, :datetime
     add_column :health_conditions, :ip, :datetime
-    add_column :health_condition_diseases, :ip, :datetime
+    add_column :health_condition_hearts, :ip, :datetime
     add_column :health_condition_kidneys, :ip, :datetime
     add_column :health_establishments, :ip, :datetime
     add_column :health_professionals, :ip, :datetime
@@ -79,7 +79,7 @@ class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
     add_index :family_member_disabilities, :discarded_at
     add_index :header_transports, :discarded_at
     add_index :health_conditions, :discarded_at
-    add_index :health_condition_diseases, :discarded_at
+    add_index :health_condition_hearts, :discarded_at
     add_index :health_condition_kidneys, :discarded_at
     add_index :health_establishments, :discarded_at
     add_index :health_professionals, :discarded_at
@@ -114,7 +114,7 @@ class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
     add_index :family_member_disabilities, :ip
     add_index :header_transports, :ip
     add_index :health_conditions, :ip
-    add_index :health_condition_diseases, :ip
+    add_index :health_condition_hearts, :ip
     add_index :health_condition_kidneys, :ip
     add_index :health_establishments, :ip
     add_index :health_professionals, :ip

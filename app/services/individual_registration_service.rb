@@ -22,7 +22,7 @@ module IndividualRegistrationService
       cs << XML::Node.new('descricaoOutraCondicao3', health_condition.other_condition_three) # valid
       cs << XML::Node.new('descricaoPlantasMedicinaisUsadas', health_condition.medicinal_plants_used) # valid
 
-      health_condition.health_condition_diseases.each do |disease|
+      health_condition.health_condition_hearts.each do |disease|
         case disease.disease_type.reference.to_i
         when 24, 25, 26
           cs << XML::Node.new('doencaCardiaca', disease.disease_type.reference) # valid

@@ -19,9 +19,12 @@ pt-BR:
       health_condition_kidney:
         one: Problema Renal
         other: Problemas Renais
-      health_condition_disease:
-        one: Problemas de Saúde
-        other: Problemas de Saúde
+      health_condition_heart:
+        one: Problemas Cardíacos
+        other: Problemas Cardíacos
+      health_condition_respiratory:
+        one: Problemas Respiratórios
+        other: Problemas Respiratórios
       health_condition:
         one: Condição de Saúde
         other: Condições de Saúde
@@ -31,6 +34,9 @@ pt-BR:
       in_street_situation:
         one: Em Situação de Rua
         other: Em Situação de Rua
+      in_street_hygiene_access:
+        one: Higiene Pessoal
+        other: Higiene Pessoal
       family_member_disability:
         one: Deficiência
         other: Deficiências
@@ -189,6 +195,8 @@ pt-BR:
         brazil_entry_date: Data entrada Brasil
         micro_area: Microárea
         out_area: Fora área
+      family_member_disability:
+        disability: Deficiência
       health_condition:
         hospitalization_cause: Causa de internação
         other_condition_one: Outra condição de saúde 1
@@ -217,10 +225,12 @@ pt-BR:
         mental_issue: Diagnóstico ou Problema Mental
         integrative_practices: Práticas Integrativas/Complementares
         medicinal_plants: Usa Plantas Medicinais
-      health_condition_disease:
-        disease_type: Tipo Doença
+      health_condition_heart:
+        disease_type: Tipo Problema
+      health_condition_respiratory:
+        disease_type: Tipo Problema
       health_condition_kidney:
-        kidney_problem_type: Tipo Problema de Rim
+        kidney_problem: Tipo Problema
       health_establishment:
         cnes_code: Código CNES
         legal_full_name: Razão Social
