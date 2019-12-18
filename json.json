@@ -1,22 +1,14 @@
 {
-  "homeVisitForm": {
-    "turnId": 0,
-    "handbookNumber": "string",
-    "cnsNumber": "string",
-    "birthDate": "string",
-    "genderId": 0,
-    "otherVisit": "string",
-    "outcomeId": 0,
-    "microArea": "string",
-    "outArea": "string",
-    "home_typeId": 0,
-    "weightMonitoring": "string",
-    "heightMonitoring": "string",
-    "homeVisitRegistrationId": 0,
-    "homeVisitReasonsAttributes": {
-      "id": 0,
-      "reasonId": 0,
-      "_destroy": true
-    }
+  "healthConditionHeartsAttributes": {
+    "diseaseTypeId": 0,
+    "_destroy": true
+  },
+  "healthConditionRespiratoriesAttributes": {
+    "diseaseTypeId": 0,
+    "_destroy": true
+  },
+  "healthConditionKidneysAttributes": {
+    "kidneyProblemId": 0,
+    "_destroy": true
   }
 }

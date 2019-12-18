@@ -77,35 +77,49 @@ module Api
           father_name naturalized_at naturalize_decree
           brazil_entry_date micro_area out_area
         ],
-        health_condition_attributes: %i[
-          id
-          hospitalization_cause
-          other_condition_one
-          other_condition_two
-          other_condition_three
-          medicinal_plants_used
-          maternity_reference
-          weight_situation_id
-          alcohol_dependent
-          other_drugs_dependent
-          smoker
-          pregnant
-          bedridden
-          domiciled
-          diabetic
-          respiratory
-          hypertension
-          cancer
-          kidneys
-          leprosy
-          tuberculosis
-          avc_stroke
-          had_heart_attack
-          had_heart_disease
-          recently_hospitalized
-          mental_issue
-          integrative_practices
-          medicinal_plants
+        health_condition_attributes: [
+          :id,
+          :hospitalization_cause,
+          :other_condition_one,
+          :other_condition_two,
+          :other_condition_three,
+          :medicinal_plants_used,
+          :maternity_reference,
+          :weight_situation_id,
+          :alcohol_dependent,
+          :other_drugs_dependent,
+          :smoker,
+          :pregnant,
+          :bedridden,
+          :domiciled,
+          :respiratory,
+          :hypertension,
+          :cancer,
+          :kidneys,
+          :leprosy,
+          :tuberculosis,
+          :avc_stroke,
+          :had_heart_attack,
+          :had_heart_disease,
+          :recently_hospitalized,
+          :mental_issue,
+          :integrative_practices,
+          :medicinal_plants,
+          health_condition_hearts_attributes: %i[
+            id
+            disease_type_id
+            destroy
+          ],
+          health_condition_kidneys_attributes: %i[
+            id
+            kidney_problem_id
+            destroy
+          ],
+          health_condition_respiratories_attributes: %i[
+            id
+            disease_type_id
+            destroy
+          ]
         ],
         in_street_situation_attributes: [
           :id,
