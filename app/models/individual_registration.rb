@@ -55,12 +55,14 @@ class IndividualRegistration < ApplicationRecord
   belongs_to :user
 
   has_one :period_item, as: :registrable, dependent: :destroy
+  has_one :responsible_child
 
   accepts_nested_attributes_for :family_member, allow_destroy: false, reject_if: :all_blank
   accepts_nested_attributes_for :health_condition, allow_destroy: false, reject_if: :all_blank
   accepts_nested_attributes_for :in_street_situation, allow_destroy: false, reject_if: :all_blank
   accepts_nested_attributes_for :sociodemographic_info, allow_destroy: false, reject_if: :all_blank
   accepts_nested_attributes_for :cancel_registration, allow_destroy: false, reject_if: :all_blank
+  accepts_nested_attributes_for :responsible_child, allow_destroy: false, reject_if: :all_blank
 
   ransack_alias :search, :id_to_s_or_family_member_legal_full_name_or_family_member_federal_registry
 

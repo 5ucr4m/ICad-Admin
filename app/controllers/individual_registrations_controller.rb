@@ -171,6 +171,11 @@ class IndividualRegistrationsController < WebController
                                                         id
                                                         hygiene_access_id
                                                         _destroy
+                                                      ],
+                                                      in_street_situation_meals_attributes: %i[
+                                                        id
+                                                        meal_origin_type_id
+                                                        _destroy
                                                       ]
                                                     ],
                                                     sociodemographic_info_attributes: [
@@ -201,6 +206,10 @@ class IndividualRegistrationsController < WebController
                                                       left_reason_id
                                                       decease_date
                                                       decease_number
+                                                    ],
+                                                    responsible_child_attributes: %i[
+                                                      id
+                                                      responsible_child_type_id
                                                     ])
   end
 end
