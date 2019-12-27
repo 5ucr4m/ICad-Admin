@@ -25,8 +25,7 @@
 #
 
 class HomeVisitRegistrationSerializer < ApplicationSerializer
-  attributes :id, :uuid, :tp_cds_origin
+  attributes :id, :uuid, :tp_cds_origin, :service_at
   has_one :family_member
-  has_one :company
   has_many :home_visit_forms
 end

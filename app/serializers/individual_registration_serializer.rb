@@ -44,11 +44,10 @@
 
 class IndividualRegistrationSerializer < ApplicationSerializer
   attributes :id, :refuse_registration, :form_updated, :uuid,
-             :uuid_form_origin, :uuid_citizen, :tp_cds_origin
+             :uuid_form_origin, :uuid_citizen, :tp_cds_origin, :service_at
   has_one :health_condition
   has_one :in_street_situation
   has_one :family_member
   has_one :sociodemographic_info
   has_one :cancel_registration
-  has_one :company
 end

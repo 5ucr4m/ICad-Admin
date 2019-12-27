@@ -68,13 +68,15 @@ class FamilyMemberSerializer < ApplicationSerializer
              :brazil_entry_date, :micro_area, :out_area, :slug, :lat, :lng, :age, :gender, :url
 
   has_one :family
-  has_one :company
   has_one :nationality
   has_one :birth_country
   has_one :gender
   has_one :ethnicity
   has_one :race
   has_one :city
+  has_one :individual_registration
+  has_one :home_visit_registration
+  has_many :vaccinations
 
   def lat
     object.location_x

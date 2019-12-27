@@ -8,7 +8,11 @@ module Api
     # GET /family_members
     def index
       @query = FamilyMember.ransack(params[:q])
-      @family_members = @query.result.includes(:family)
+      @family_members = @query.result.includes(:family, :home_registration,
+                                               :vaccinations, :home_visit_registration,
+                                               :individual_registration, :race, :gender,
+                                               :ethnicity, :birth_country,
+                                               :nationality, city: [:state])
       if current_user.agent?
         @family_members = @family_members.where(user: current_user)
       end

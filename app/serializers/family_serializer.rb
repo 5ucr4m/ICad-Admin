@@ -37,7 +37,6 @@ class FamilySerializer < ApplicationSerializer
              :reside_since, :moving
 
   has_one :home_registration
-  has_one :company
   has_one :family_income
   has_many :family_members
 end

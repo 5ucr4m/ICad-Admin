@@ -25,6 +25,6 @@
 #
 
 class GenericModelSerializer < ApplicationSerializer
-  attributes :id, :name, :description, :reference, :generic_field, :generic_class
+  attributes :id, :name, :description, :reference
   has_one :generic_model
 end
