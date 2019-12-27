@@ -87,7 +87,7 @@ class User < ApplicationRecord
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
   def active_for_authentication?
-    super && agent? && company.present?
+    super && (agent? && company.present?) || admin?
   end
 
   def company
