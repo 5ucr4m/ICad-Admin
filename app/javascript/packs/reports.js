@@ -94,7 +94,6 @@ function buildMap(data) {
 
   if (data) {
     features = data.map((v) => {
-      v = v.attributes;
       let lng = v.lng;
       let lat = v.lat;
       let patientType = v.patientType;

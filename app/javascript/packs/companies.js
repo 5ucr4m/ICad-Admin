@@ -11,7 +11,7 @@ function getSelectedCity() {
     .end((err, res) => {
       if (res.body) {
         let data = res.body.data.map((city) => {
-          return city.attributes
+          return city
         });
         data = data[0];
         const newOption = new Option(`${data.code} - ${data.name} - ${data.state}`, data.id, true, true);

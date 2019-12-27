@@ -73,7 +73,7 @@ function getCity(cityCode) {
     .end((err, res) => {
       if (res.body) {
         let data = res.body.data.map((city) => {
-          return city.attributes
+          return city
         });
         data = data[0];
         data['id'] = res.body.data[0].id;
@@ -237,12 +237,13 @@ window.addEventListener('DOMContentLoaded', function (e) {
           };
         },
         processResults: function (data) {
+          data = data.cities;
           return {
-            results: data.data.map((city) => {
+            results: data.map((city) => {
               if (city) {
                 return {
                   id: city.id,
-                  text: `${city.attributes.code} - ${city.attributes.name} - ${city.attributes.state}`
+                  text: `${city.code} - ${city.name} - ${city.state}`
                 };
               }
             })
@@ -275,12 +276,13 @@ window.addEventListener('DOMContentLoaded', function (e) {
           };
         },
         processResults: function (data) {
+          data = data.genericModels;
           return {
-            results: data.data.map((cboType) => {
+            results: data.map((cboType) => {
               if (cboType) {
                 return {
                   id: cboType.id,
-                  text: `${cboType.attributes.reference} - ${cboType.attributes.name}`
+                  text: `${cboType.reference} - ${cboType.name}`
                 };
               }
             })
@@ -313,12 +315,13 @@ window.addEventListener('DOMContentLoaded', function (e) {
           };
         },
         processResults: function (data) {
+          data = data.genericModels;
           return {
-            results: data.data.map((cboType) => {
+            results: data.map((cboType) => {
               if (cboType) {
                 return {
                   id: cboType.id,
-                  text: `${cboType.attributes.reference} - ${cboType.attributes.name}`
+                  text: `${cboType.reference} - ${cboType.name}`
                 };
               }
             })
@@ -351,12 +354,13 @@ window.addEventListener('DOMContentLoaded', function (e) {
           };
         },
         processResults: function (data) {
+          data = data.genericModels;
           return {
-            results: data.data.map((cboType) => {
+            results: data.map((cboType) => {
               if (cboType) {
                 return {
                   id: cboType.id,
-                  text: `${cboType.attributes.reference} - ${cboType.attributes.name}`
+                  text: `${cboType.reference} - ${cboType.name}`
                 };
               }
             })
@@ -388,13 +392,14 @@ window.addEventListener('DOMContentLoaded', function (e) {
             page: 1
           };
         },
-        processResults: function (response) {
+        processResults: function (data) {
+          data = data.families;
           return {
-            results: response.data.map((data) => {
+            results: data.map((data) => {
               if (data) {
                 return {
                   id: data.id,
-                  text: `${data.attributes.handbookNumber}`
+                  text: `${data.handbookNumber}`
                 };
               }
             })
@@ -427,12 +432,13 @@ window.addEventListener('DOMContentLoaded', function (e) {
           };
         },
         processResults: function (data) {
+          data = data.familyMembers;
           return {
-            results: data.data.map((fm) => {
+            results: data.map((fm) => {
               if (fm) {
                 return {
                   id: fm.id,
-                  text: `${fm.attributes.cnsNumber} - ${fm.attributes.name}`
+                  text: `${fm.cnsNumber} - ${fm.name}`
                 };
               }
             })
