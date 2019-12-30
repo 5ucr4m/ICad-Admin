@@ -42,6 +42,6 @@ class AddressSerializer < ApplicationSerializer
   has_one :address_type
 
   def state
-    object.state.abbreviation
+    object.city.state.abbreviation
   end
 end
