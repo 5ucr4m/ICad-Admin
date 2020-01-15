@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_18_002106) do
+ActiveRecord::Schema.define(version: 2019_12_18_000830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["address_type_id"], name: "index_addresses_on_address_type_id"
     t.index ["city_id"], name: "index_addresses_on_city_id"
     t.index ["company_id"], name: "index_addresses_on_company_id"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_cancel_registrations_on_company_id"
     t.index ["discarded_at"], name: "index_cancel_registrations_on_discarded_at"
     t.index ["ip"], name: "index_cancel_registrations_on_ip"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.bigint "user_id"
     t.index ["company_id"], name: "index_families_on_company_id"
     t.index ["discarded_at"], name: "index_families_on_discarded_at"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_family_member_disabilities_on_company_id"
     t.index ["disability_id"], name: "index_family_member_disabilities_on_disability_id"
     t.index ["discarded_at"], name: "index_family_member_disabilities_on_discarded_at"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.bigint "user_id"
     t.index ["birth_country_id"], name: "index_family_members_on_birth_country_id"
     t.index ["city_id"], name: "index_family_members_on_city_id"
@@ -229,7 +229,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["city_id"], name: "index_header_transports_on_city_id"
     t.index ["company_id"], name: "index_header_transports_on_company_id"
     t.index ["discarded_at"], name: "index_header_transports_on_discarded_at"
@@ -244,10 +244,12 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.bigint "disease_type_id"
     t.bigint "company_id"
     t.datetime "discarded_at"
+    t.string "ip"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_health_condition_hearts_on_company_id"
+    t.index ["discarded_at"], name: "index_health_condition_hearts_on_discarded_at"
     t.index ["disease_type_id"], name: "index_health_condition_hearts_on_disease_type_id"
     t.index ["health_condition_id"], name: "index_health_condition_hearts_on_health_condition_id"
   end
@@ -260,7 +262,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_health_condition_kidneys_on_company_id"
     t.index ["discarded_at"], name: "index_health_condition_kidneys_on_discarded_at"
     t.index ["health_condition_id"], name: "index_health_condition_kidneys_on_health_condition_id"
@@ -314,7 +316,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_health_conditions_on_company_id"
     t.index ["discarded_at"], name: "index_health_conditions_on_discarded_at"
     t.index ["ip"], name: "index_health_conditions_on_ip"
@@ -337,7 +339,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_health_establishments_on_company_id"
     t.index ["discarded_at"], name: "index_health_establishments_on_discarded_at"
     t.index ["ip"], name: "index_health_establishments_on_ip"
@@ -356,7 +358,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.string "phone"
     t.index ["cbo_code_id"], name: "index_health_professionals_on_cbo_code_id"
     t.index ["company_id"], name: "index_health_professionals_on_company_id"
@@ -373,7 +375,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_home_registration_pets_on_company_id"
     t.index ["discarded_at"], name: "index_home_registration_pets_on_discarded_at"
     t.index ["home_registration_id"], name: "index_home_registration_pets_on_home_registration_id"
@@ -402,7 +404,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.string "uuid_form_update"
     t.datetime "service_at"
     t.index ["address_id"], name: "index_home_registrations_on_address_id"
@@ -435,7 +437,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.bigint "user_id"
     t.datetime "service_at"
     t.index ["company_id"], name: "index_home_visit_forms_on_company_id"
@@ -457,7 +459,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_home_visit_reasons_on_company_id"
     t.index ["discarded_at"], name: "index_home_visit_reasons_on_discarded_at"
     t.index ["home_visit_form_id"], name: "index_home_visit_reasons_on_home_visit_form_id"
@@ -475,7 +477,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.string "uuid_form_update"
     t.datetime "service_at"
     t.index ["company_id"], name: "index_home_visit_registrations_on_company_id"
@@ -493,7 +495,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_in_street_hygiene_accesses_on_company_id"
     t.index ["discarded_at"], name: "index_in_street_hygiene_accesses_on_discarded_at"
     t.index ["hygiene_access_id"], name: "index_in_street_hygiene_accesses_on_hygiene_access_id"
@@ -509,7 +511,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_in_street_situation_meals_on_company_id"
     t.index ["discarded_at"], name: "index_in_street_situation_meals_on_discarded_at"
     t.index ["in_street_situation_id"], name: "index_in_street_situation_meals_on_in_street_situation_id"
@@ -533,7 +535,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_in_street_situations_on_company_id"
     t.index ["discarded_at"], name: "index_in_street_situations_on_discarded_at"
     t.index ["ip"], name: "index_in_street_situations_on_ip"
@@ -561,7 +563,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.string "uuid_form_update"
     t.datetime "service_at"
     t.index ["cancel_registration_id"], name: "index_individual_registrations_on_cancel_registration_id"
@@ -594,7 +596,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["bathroom_drainage_id"], name: "index_living_conditions_on_bathroom_drainage_id"
     t.index ["company_id"], name: "index_living_conditions_on_company_id"
     t.index ["discarded_at"], name: "index_living_conditions_on_discarded_at"
@@ -643,7 +645,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_period_items_on_company_id"
     t.index ["discarded_at"], name: "index_period_items_on_discarded_at"
     t.index ["ip"], name: "index_period_items_on_ip"
@@ -663,7 +665,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_periods_on_company_id"
     t.index ["discarded_at"], name: "index_periods_on_discarded_at"
     t.index ["ip"], name: "index_periods_on_ip"
@@ -681,7 +683,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_permanence_institutions_on_company_id"
     t.index ["discarded_at"], name: "index_permanence_institutions_on_discarded_at"
     t.index ["ip"], name: "index_permanence_institutions_on_ip"
@@ -707,7 +709,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_professional_teams_on_company_id"
     t.index ["discarded_at"], name: "index_professional_teams_on_discarded_at"
     t.index ["health_establishment_id"], name: "index_professional_teams_on_health_establishment_id"
@@ -722,7 +724,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_responsible_children_on_company_id"
     t.index ["discarded_at"], name: "index_responsible_children_on_discarded_at"
     t.index ["individual_registration_id"], name: "index_responsible_children_on_individual_registration_id"
@@ -737,7 +739,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["discarded_at"], name: "index_role_permissions_on_discarded_at"
     t.index ["ip"], name: "index_role_permissions_on_ip"
     t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
@@ -772,7 +774,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_sms_messages_on_company_id"
     t.index ["discarded_at"], name: "index_sms_messages_on_discarded_at"
     t.index ["ip"], name: "index_sms_messages_on_ip"
@@ -789,7 +791,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.string "name"
     t.index ["company_id"], name: "index_sms_schedules_on_company_id"
     t.index ["discarded_at"], name: "index_sms_schedules_on_discarded_at"
@@ -817,7 +819,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_sociodemographic_infos_on_company_id"
     t.index ["discarded_at"], name: "index_sociodemographic_infos_on_discarded_at"
     t.index ["education_level_id"], name: "index_sociodemographic_infos_on_education_level_id"
@@ -935,7 +937,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_vaccination_campaigns_on_company_id"
     t.index ["discarded_at"], name: "index_vaccination_campaigns_on_discarded_at"
     t.index ["ip"], name: "index_vaccination_campaigns_on_ip"
@@ -949,7 +951,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_vaccination_vaccines_on_company_id"
     t.index ["discarded_at"], name: "index_vaccination_vaccines_on_discarded_at"
     t.index ["ip"], name: "index_vaccination_vaccines_on_ip"
@@ -978,7 +980,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.datetime "service_at"
     t.index ["company_id"], name: "index_vaccinations_on_company_id"
     t.index ["discarded_at"], name: "index_vaccinations_on_discarded_at"
@@ -1003,7 +1005,7 @@ ActiveRecord::Schema.define(version: 2019_12_18_002106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
-    t.datetime "ip"
+    t.string "ip"
     t.index ["company_id"], name: "index_vaccines_on_company_id"
     t.index ["discarded_at"], name: "index_vaccines_on_discarded_at"
     t.index ["dose_id"], name: "index_vaccines_on_dose_id"

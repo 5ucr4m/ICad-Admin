@@ -11,7 +11,7 @@
   <%= f.input :traditional_community_name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <%= f.association :parent_relation, collection: GenericModel.parent_relations,
                     label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-  <%= f.association :gender_identity, collection: GenericModel.genders,
+  <%= f.association :gender_identity, collection: GenericModel.gender_identities,
                     label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <%= f.association :job_market_situation, collection: GenericModel.job_market_situations,
                     label_method: :name_formatted, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>

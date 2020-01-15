@@ -9,7 +9,6 @@ class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
     add_column :family_member_disabilities, :discarded_at, :datetime
     add_column :header_transports, :discarded_at, :datetime
     add_column :health_conditions, :discarded_at, :datetime
-    add_column :health_condition_diseases, :discarded_at, :datetime
     add_column :health_condition_kidneys, :discarded_at, :datetime
     add_column :health_establishments, :discarded_at, :datetime
     add_column :health_professionals, :discarded_at, :datetime
@@ -37,40 +36,39 @@ class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
     add_column :vaccines, :discarded_at, :datetime
     add_column :role_permissions, :discarded_at, :datetime
 
-    add_column :addresses, :ip, :datetime
-    add_column :cancel_registrations, :ip, :datetime
-    add_column :families, :ip, :datetime
-    add_column :family_members, :ip, :datetime
-    add_column :family_member_disabilities, :ip, :datetime
-    add_column :header_transports, :ip, :datetime
-    add_column :health_conditions, :ip, :datetime
-    add_column :health_condition_hearts, :ip, :datetime
-    add_column :health_condition_kidneys, :ip, :datetime
-    add_column :health_establishments, :ip, :datetime
-    add_column :health_professionals, :ip, :datetime
-    add_column :home_registrations, :ip, :datetime
-    add_column :home_registration_pets, :ip, :datetime
-    add_column :home_visit_forms, :ip, :datetime
-    add_column :home_visit_reasons, :ip, :datetime
-    add_column :home_visit_registrations, :ip, :datetime
-    add_column :in_street_hygiene_accesses, :ip, :datetime
-    add_column :in_street_situations, :ip, :datetime
-    add_column :in_street_situation_meals, :ip, :datetime
-    add_column :individual_registrations, :ip, :datetime
-    add_column :living_conditions, :ip, :datetime
-    add_column :periods, :ip, :datetime
-    add_column :period_items, :ip, :datetime
-    add_column :permanence_institutions, :ip, :datetime
-    add_column :professional_teams, :ip, :datetime
-    add_column :responsible_children, :ip, :datetime
-    add_column :sms_messages, :ip, :datetime
-    add_column :sms_schedules, :ip, :datetime
-    add_column :sociodemographic_infos, :ip, :datetime
-    add_column :vaccinations, :ip, :datetime
-    add_column :vaccination_campaigns, :ip, :datetime
-    add_column :vaccination_vaccines, :ip, :datetime
-    add_column :vaccines, :ip, :datetime
-    add_column :role_permissions, :ip, :datetime
+    add_column :addresses, :ip, :string
+    add_column :cancel_registrations, :ip, :string
+    add_column :families, :ip, :string
+    add_column :family_members, :ip, :string
+    add_column :family_member_disabilities, :ip, :string
+    add_column :header_transports, :ip, :string
+    add_column :health_conditions, :ip, :string
+    add_column :health_condition_kidneys, :ip, :string
+    add_column :health_establishments, :ip, :string
+    add_column :health_professionals, :ip, :string
+    add_column :home_registrations, :ip, :string
+    add_column :home_registration_pets, :ip, :string
+    add_column :home_visit_forms, :ip, :string
+    add_column :home_visit_reasons, :ip, :string
+    add_column :home_visit_registrations, :ip, :string
+    add_column :in_street_hygiene_accesses, :ip, :string
+    add_column :in_street_situations, :ip, :string
+    add_column :in_street_situation_meals, :ip, :string
+    add_column :individual_registrations, :ip, :string
+    add_column :living_conditions, :ip, :string
+    add_column :periods, :ip, :string
+    add_column :period_items, :ip, :string
+    add_column :permanence_institutions, :ip, :string
+    add_column :professional_teams, :ip, :string
+    add_column :responsible_children, :ip, :string
+    add_column :sms_messages, :ip, :string
+    add_column :sms_schedules, :ip, :string
+    add_column :sociodemographic_infos, :ip, :string
+    add_column :vaccinations, :ip, :string
+    add_column :vaccination_campaigns, :ip, :string
+    add_column :vaccination_vaccines, :ip, :string
+    add_column :vaccines, :ip, :string
+    add_column :role_permissions, :ip, :string
 
     add_index :addresses, :discarded_at
     add_index :cancel_registrations, :discarded_at
@@ -79,7 +77,6 @@ class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
     add_index :family_member_disabilities, :discarded_at
     add_index :header_transports, :discarded_at
     add_index :health_conditions, :discarded_at
-    add_index :health_condition_hearts, :discarded_at
     add_index :health_condition_kidneys, :discarded_at
     add_index :health_establishments, :discarded_at
     add_index :health_professionals, :discarded_at
@@ -114,7 +111,6 @@ class AddDiscardedAtToModels < ActiveRecord::Migration[6.0]
     add_index :family_member_disabilities, :ip
     add_index :header_transports, :ip
     add_index :health_conditions, :ip
-    add_index :health_condition_hearts, :ip
     add_index :health_condition_kidneys, :ip
     add_index :health_establishments, :ip
     add_index :health_professionals, :ip

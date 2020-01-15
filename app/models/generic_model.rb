@@ -35,6 +35,7 @@ class GenericModel < ApplicationRecord
   scope :nationalities, -> { where(generic_field: :nationality) }
   scope :races, -> { where(generic_field: :race) }
   scope :genders, -> { where(generic_field: :gender) }
+  scope :gender_identities, -> {where(generic_field: :gender_identity)}
   scope :ethnicities, -> { where(generic_field: :ethnicity) }
   scope :countries, -> { where(generic_field: :country) }
   scope :address_types, -> { where(generic_field: :address_type) }
