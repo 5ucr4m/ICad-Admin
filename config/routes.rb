@@ -79,6 +79,10 @@ Rails.application.routes.draw do
       get 'family_members'
       get 'vaccination_campaigns'
       get 'individual_registrations'
+      get 'resume_registry'
+      get 'sociodemographic_situation'
+      get 'street_situation'
+      get 'family_member_disabilities'
     end
   end
 

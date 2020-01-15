@@ -79,7 +79,7 @@
           </div>
         <% end %>
       </div>
-      <div class="card<%= ' card-collapsed' unless @home_registration.address.errors.any? %> mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration&.address&.errors&.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-map-marked-alt mr-2"></i><%= Address.model_name.human(count: 2) %>
@@ -94,7 +94,7 @@
           <% end %>
         </div>
       </div>
-      <div class="card<%= ' card-collapsed' unless @home_registration.living_condition.errors.any? %> mb-3">
+      <div class="card<%= ' card-collapsed' unless @home_registration&.living_condition&.errors&.any? %> mb-3">
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-hand-holding mr-2"></i><%= LivingCondition.model_name.human(count: 2) %>

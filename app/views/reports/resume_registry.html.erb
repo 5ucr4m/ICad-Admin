@@ -1,0 +1,35 @@
+<div class="row mt-5">
+  <div class="col-lg-12">
+    <%= form_for synthetic_reports_reports_path do |f| %>
+      <div class="card">
+        <div class="card-header p-4">
+          <h3 class="mb-0">
+            <i class="fas fa-map mr-2"></i>Relatórios de Cadastro do Território
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-label"><%= t('activerecord.attributes.period.report') %></label>
+                <%= f.select 'start_date', ['resume_registry', 2, 3, 4, 5, 6].collect { |a| [a, a] }, {}, {name: 'synthetic_report', class: 'form-control select2', include_blank: true} %>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="form-label"><%= t('activerecord.attributes.period.start_date') %></label>
+                <%= f.text_field 'start_date', type: 'date', name: 'start_date', class: 'form-control' %>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label class="form-label"><%= t('activerecord.attributes.period.end_date') %></label>
+                <%= f.text_field 'end_date', type: 'date', name: 'end_date', class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

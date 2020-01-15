@@ -78,6 +78,22 @@ class ReportsController < WebController
     end
   end
 
+  def resume_registry
+    @family_members = FamilyMember.where(created_at: params[:start_date]..params[:end_date]).count
+  end
+
+  def sociodemographic_situation
+
+  end
+
+  def street_situation
+
+  end
+
+  def family_member_disabilities
+
+  end
+
   private
 
   def permitted_params
