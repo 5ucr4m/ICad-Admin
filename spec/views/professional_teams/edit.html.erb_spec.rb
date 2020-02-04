@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe 'professional_teams/edit', type: :view do
+RSpec.describe('professional_teams/edit', type: :view) do
   before(:each) do
     @professional_team = assign(:professional_team, ProfessionalTeam.create!(
-                                                      name: 'MyString',
-                                                      code: 'MyString',
-                                                      active: false,
-                                                      health_establishment: nil,
-                                                      slug: 'MyString',
-                                                      company: nil
-                                                    ))
+      name: 'MyString',
+      code: 'MyString',
+      active: false,
+      health_establishment: nil,
+      slug: 'MyString',
+      company: nil
+    ))
   end
 
   it 'renders the edit professional_team form' do

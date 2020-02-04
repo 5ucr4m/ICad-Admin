@@ -2,54 +2,61 @@
 
 module Api
   class IndividualRegistrationsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_individual_registration, only: %i[show edit update destroy]
 
     # GET /individual_registrations
     def index
+      authorize(IndividualRegistration)
       @query = IndividualRegistration.ransack(params[:q])
       @result = @query.result
       @result = @result.where(user: current_user) if current_user.agent?
-      render_json @result
+      render_json(@result)
     end
 
     # GET /individual_registrations/1
     def show
-      render_json @individual_registration
+      authorize(@individual_registration)
+      render_json(@individual_registration)
     end
 
     # GET /individual_registrations/new
     def new
+      authorize(IndividualRegistration)
       @individual_registration = IndividualRegistration.new
       @individual_registration.build_relationships
       @occupation_selected = @individual_registration.sociodemographic_info.occupation.presence
     end
 
     # GET /individual_registrations/1/edit
-    def edit; end
+    def edit
+      authorize(@individual_registration)
+    end
 
     # POST /individual_registrations
     def create
+      authorize(IndividualRegistration)
       @individual_registration = current_user.individual_registrations.build(individual_registration_params)
 
       if @individual_registration.save
-        render_json @individual_registration, :created
+        render_json(@individual_registration, :created)
       else
-        unprocessable_entity @individual_registration
+        unprocessable_entity(@individual_registration)
       end
     end
 
     # PATCH/PUT /individual_registrations/1
     def update
+      authorize(@individual_registration)
       if @individual_registration.update(individual_registration_params)
-        render_json @individual_registration, :ok, true
+        render_json(@individual_registration, :ok, true)
       else
-        unprocessable_entity @individual_registration
+        unprocessable_entity(@individual_registration)
       end
     end
 
     # DELETE /individual_registrations/1
     def destroy
+      authorize(@individual_registration)
       @individual_registration.destroy
     end
 
@@ -119,7 +126,7 @@ module Api
             id
             disease_type_id
             destroy
-          ]
+          ],
         ],
         in_street_situation_attributes: [
           :id,
@@ -142,7 +149,7 @@ module Api
             id
             meal_origin_type_id
             _destroy
-          ]
+          ],
         ],
         sociodemographic_info_attributes: [
           :id,
@@ -165,7 +172,7 @@ module Api
             id
             disability_id
             _destroy
-          ]
+          ],
         ],
         cancel_registration_attributes: %i[
           id

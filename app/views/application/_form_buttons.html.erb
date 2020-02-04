@@ -1,12 +1,12 @@
 <% if controller_name == 'users' && !current_user.role.admin? %>
   <% if action_name == 'show' %>
-    <% if can? :update, f %>
+    <% if policy :update, f %>
       <%= link_to edit_user_path(current_user), class: 'btn btn-sm-block btn-primary', role: 'button' do %>
         <i class="fas fa-edit mr-2"></i><span class="btn-title"><%= t 'helpers.submit.edit' %></span>
       <% end %>
     <% end %>
   <% else %>
-    <% if can? :manage, f %>
+    <% if policy :manage, f %>
       <%= button_tag class: 'btn btn-sm-block btn-primary btn-submit',
                      data: {disable_with: '<i class="fas fa-spinner fa-spin"></i>Salvando...'.html_safe} do %>
         <i class="fas fa-save mr-2"></i><span class="btn-title"><%= t("helpers.submit.submit") %></span>

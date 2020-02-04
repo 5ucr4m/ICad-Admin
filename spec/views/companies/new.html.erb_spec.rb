@@ -2,22 +2,22 @@
 
 require 'rails_helper'
 
-RSpec.describe 'companies/new', type: :view do
+RSpec.describe('companies/new', type: :view) do
   before(:each) do
     assign(:company, Company.new(
-                       legal_full_name: 'MyString',
-                       fancy_name: 'MyString',
-                       federal_registry: 'MyString',
-                       state_registry: 'MyString',
-                       patio: 'MyString',
-                       number: 'MyString',
-                       zip: 'MyString',
-                       reference: 'MyString',
-                       district: 'MyString',
-                       city: nil,
-                       complement: 'MyString',
-                       slug: 'MyString'
-                     ))
+      legal_full_name: 'MyString',
+      fancy_name: 'MyString',
+      federal_registry: 'MyString',
+      state_registry: 'MyString',
+      patio: 'MyString',
+      number: 'MyString',
+      zip: 'MyString',
+      reference: 'MyString',
+      district: 'MyString',
+      city: nil,
+      complement: 'MyString',
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new company form' do

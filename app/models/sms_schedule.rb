@@ -14,7 +14,7 @@ class SmsSchedule < ApplicationRecord
 
   ransack_alias :search, :id_to_s
 
-  enum status: %i[standby sent blocked]
+  enum status: { standby: 0, sent: 1, blocked: 2 }
 
   validates :scheduled_date, :message, :status, :role_groups, presence: true
 

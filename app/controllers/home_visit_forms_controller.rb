@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class HomeVisitFormsController < WebController
-  load_and_authorize_resource
   before_action :set_home_visit_form, only: %i[show edit update destroy]
 
   # GET /home_visit_forms
   def index
+    authorize(HomeVisitForm)
     @query = HomeVisitForm.ransack(params[:q])
     @result = @query.result.includes(:company, :home_registration)
     @result = @result.where(user: current_user) if current_user.agent?
@@ -13,40 +13,48 @@ class HomeVisitFormsController < WebController
   end
 
   # GET /home_visit_forms/1
-  def show; end
+  def show
+    authorize(@home_visit_form)
+  end
 
   # GET /home_visit_forms/new
   def new
+    authorize(HomeVisitForm)
     @home_visit_form = HomeVisitForm.new
   end
 
   # GET /home_visit_forms/1/edit
-  def edit; end
+  def edit
+    authorize(@home_visit_form)
+  end
 
   # POST /home_visit_forms
   def create
+    authorize(HomeVisitForm)
     @home_visit_form = current_user.home_visit_forms.build(home_visit_form_params)
 
     if @home_visit_form.save
-      redirect_to home_visit_forms_url, notice: 'Home visit form was successfully created.'
+      redirect_to(home_visit_forms_url, notice: 'Home visit form was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /home_visit_forms/1
   def update
+    authorize(@home_visit_form)
     if @home_visit_form.update(home_visit_form_params)
-      redirect_to home_visit_forms_url, notice: 'Home visit form was successfully updated.'
+      redirect_to(home_visit_forms_url, notice: 'Home visit form was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /home_visit_forms/1
   def destroy
+    authorize(@home_visit_form)
     @home_visit_form.destroy
-    redirect_to home_visit_forms_url, notice: 'Home visit form was successfully destroyed.'
+    redirect_to(home_visit_forms_url, notice: 'Home visit form was successfully destroyed.')
   end
 
   private

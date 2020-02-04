@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'home_visit_registrations/new', type: :view do
+RSpec.describe('home_visit_registrations/new', type: :view) do
   before(:each) do
     assign(:home_visit_registration, HomeVisitRegistration.new(
-                                       family_member: nil,
-                                       uuid: 'MyString',
-                                       tp_cds_origin: 'MyString',
-                                       company: nil,
-                                       slug: 'MyString'
-                                     ))
+      family_member: nil,
+      uuid: 'MyString',
+      tp_cds_origin: 'MyString',
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new home_visit_registration form' do

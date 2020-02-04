@@ -1,52 +1,60 @@
 # frozen_string_literal: true
 
 class RolesController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_role, only: %i[show edit update destroy]
 
   breadcrumb Role.model_name.human(count: 2), :roles_path
 
   # GET /roles
   def index
+    authorize(Role)
     @query = Role.ransack(params[:q])
     @pagy, @roles = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /roles/1
-  def show; end
+  def show
+    authorize(@role)
+  end
 
   # GET /roles/new
   def new
+    authorize(Role)
     @role = Role.new
   end
 
   # GET /roles/1/edit
-  def edit; end
+  def edit
+    authorize(Role)
+  end
 
   # POST /roles
   def create
+    authorize(Role)
     @role = Role.new(role_params)
 
     if @role.save
-      redirect_to roles_url, notice: 'Role was successfully created.'
+      redirect_to(roles_url, notice: 'Role was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /roles/1
   def update
+    authorize(@role)
     if @role.update(role_params)
-      redirect_to roles_url, notice: 'Role was successfully updated.'
+      redirect_to(roles_url, notice: 'Role was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /roles/1
   def destroy
+    authorize(@role)
     @role.destroy
-    redirect_to roles_url, notice: 'Role was successfully destroyed.'
+    redirect_to(roles_url, notice: 'Role was successfully destroyed.')
   end
 
   private

@@ -4,7 +4,7 @@ class Vaccination < ApplicationRecord
   include Sluggable
   include Tenantable
 
-  enum patient_type: %i[men woman teenage child newborn elderly]
+  enum patient_type: { men: 0, woman: 1, teenage: 2, child: 3, newborn: 4, elderly: 5 }
 
   belongs_to :header_transport, optional: true
   belongs_to :vaccination_campaign

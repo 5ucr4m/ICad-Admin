@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe VaccinesController, type: :controller do
+RSpec.describe(VaccinesController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # Vaccine. As you add validations to Vaccine, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe VaccinesController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      Vaccine.create! valid_attributes
+      Vaccine.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      vaccine = Vaccine.create! valid_attributes
+      vaccine = Vaccine.create!(valid_attributes)
       get :show, params: { id: vaccine.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      vaccine = Vaccine.create! valid_attributes
+      vaccine = Vaccine.create!(valid_attributes)
       get :edit, params: { id: vaccine.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe VaccinesController, type: :controller do
       it 'creates a new Vaccine' do
         expect do
           post :create, params: { vaccine: valid_attributes }, session: valid_session
-        end.to change(Vaccine, :count).by(1)
+        end.to(change(Vaccine, :count).by(1))
       end
 
       it 'redirects to the created vaccine' do
         post :create, params: { vaccine: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(Vaccine.last)
+        expect(response).to(redirect_to(Vaccine.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { vaccine: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe VaccinesController, type: :controller do
       end
 
       it 'updates the requested vaccine' do
-        vaccine = Vaccine.create! valid_attributes
+        vaccine = Vaccine.create!(valid_attributes)
         put :update, params: { id: vaccine.to_param, vaccine: new_attributes }, session: valid_session
         vaccine.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the vaccine' do
-        vaccine = Vaccine.create! valid_attributes
+        vaccine = Vaccine.create!(valid_attributes)
         put :update, params: { id: vaccine.to_param, vaccine: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(vaccine)
+        expect(response).to(redirect_to(vaccine))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        vaccine = Vaccine.create! valid_attributes
+        vaccine = Vaccine.create!(valid_attributes)
         put :update, params: { id: vaccine.to_param, vaccine: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested vaccine' do
-      vaccine = Vaccine.create! valid_attributes
+      vaccine = Vaccine.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: vaccine.to_param }, session: valid_session
-      end.to change(Vaccine, :count).by(-1)
+      end.to(change(Vaccine, :count).by(-1))
     end
 
     it 'redirects to the vaccines list' do
-      vaccine = Vaccine.create! valid_attributes
+      vaccine = Vaccine.create!(valid_attributes)
       delete :destroy, params: { id: vaccine.to_param }, session: valid_session
-      expect(response).to redirect_to(vaccines_url)
+      expect(response).to(redirect_to(vaccines_url))
     end
   end
 end

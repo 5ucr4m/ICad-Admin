@@ -2,36 +2,36 @@
 
 require 'rails_helper'
 
-RSpec.describe 'health_establishments/index', type: :view do
+RSpec.describe('health_establishments/index', type: :view) do
   before(:each) do
     assign(:health_establishments, [
-             HealthEstablishment.create!(
-               cnes_code: 'Cnes Code',
-               unit_code: 'Unit Code',
-               legal_full_name: 'Legal Full Name',
-               fancy_name: 'Fancy Name',
-               federal_registry: 'Federal Registry',
-               state_registry: 'State Registry',
-               manager_full_name: 'Manager Full Name',
-               manager_federal_registry: 'Manager Federal Registry',
-               unit_type: nil,
-               company: nil,
-               slug: 'Slug'
-             ),
-             HealthEstablishment.create!(
-               cnes_code: 'Cnes Code',
-               unit_code: 'Unit Code',
-               legal_full_name: 'Legal Full Name',
-               fancy_name: 'Fancy Name',
-               federal_registry: 'Federal Registry',
-               state_registry: 'State Registry',
-               manager_full_name: 'Manager Full Name',
-               manager_federal_registry: 'Manager Federal Registry',
-               unit_type: nil,
-               company: nil,
-               slug: 'Slug'
-             )
-           ])
+      HealthEstablishment.create!(
+        cnes_code: 'Cnes Code',
+        unit_code: 'Unit Code',
+        legal_full_name: 'Legal Full Name',
+        fancy_name: 'Fancy Name',
+        federal_registry: 'Federal Registry',
+        state_registry: 'State Registry',
+        manager_full_name: 'Manager Full Name',
+        manager_federal_registry: 'Manager Federal Registry',
+        unit_type: nil,
+        company: nil,
+        slug: 'Slug'
+      ),
+      HealthEstablishment.create!(
+        cnes_code: 'Cnes Code',
+        unit_code: 'Unit Code',
+        legal_full_name: 'Legal Full Name',
+        fancy_name: 'Fancy Name',
+        federal_registry: 'Federal Registry',
+        state_registry: 'State Registry',
+        manager_full_name: 'Manager Full Name',
+        manager_federal_registry: 'Manager Federal Registry',
+        unit_type: nil,
+        company: nil,
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of health_establishments' do

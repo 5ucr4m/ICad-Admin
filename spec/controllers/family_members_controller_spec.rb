@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe FamilyMembersController, type: :controller do
+RSpec.describe(FamilyMembersController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # FamilyMember. As you add validations to FamilyMember, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe FamilyMembersController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      FamilyMember.create! valid_attributes
+      FamilyMember.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      family_member = FamilyMember.create! valid_attributes
+      family_member = FamilyMember.create!(valid_attributes)
       get :show, params: { id: family_member.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      family_member = FamilyMember.create! valid_attributes
+      family_member = FamilyMember.create!(valid_attributes)
       get :edit, params: { id: family_member.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe FamilyMembersController, type: :controller do
       it 'creates a new FamilyMember' do
         expect do
           post :create, params: { family_member: valid_attributes }, session: valid_session
-        end.to change(FamilyMember, :count).by(1)
+        end.to(change(FamilyMember, :count).by(1))
       end
 
       it 'redirects to the created family_member' do
         post :create, params: { family_member: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(FamilyMember.last)
+        expect(response).to(redirect_to(FamilyMember.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { family_member: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe FamilyMembersController, type: :controller do
       end
 
       it 'updates the requested family_member' do
-        family_member = FamilyMember.create! valid_attributes
+        family_member = FamilyMember.create!(valid_attributes)
         put :update, params: { id: family_member.to_param, family_member: new_attributes }, session: valid_session
         family_member.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the family_member' do
-        family_member = FamilyMember.create! valid_attributes
+        family_member = FamilyMember.create!(valid_attributes)
         put :update, params: { id: family_member.to_param, family_member: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(family_member)
+        expect(response).to(redirect_to(family_member))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        family_member = FamilyMember.create! valid_attributes
+        family_member = FamilyMember.create!(valid_attributes)
         put :update, params: { id: family_member.to_param, family_member: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested family_member' do
-      family_member = FamilyMember.create! valid_attributes
+      family_member = FamilyMember.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: family_member.to_param }, session: valid_session
-      end.to change(FamilyMember, :count).by(-1)
+      end.to(change(FamilyMember, :count).by(-1))
     end
 
     it 'redirects to the family_members list' do
-      family_member = FamilyMember.create! valid_attributes
+      family_member = FamilyMember.create!(valid_attributes)
       delete :destroy, params: { id: family_member.to_param }, session: valid_session
-      expect(response).to redirect_to(family_members_url)
+      expect(response).to(redirect_to(family_members_url))
     end
   end
 end

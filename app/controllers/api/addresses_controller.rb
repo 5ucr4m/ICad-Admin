@@ -2,36 +2,39 @@
 
 module Api
   class AddressesController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_address, only: %i[show update destroy]
 
     # GET /addresses/1
     def show
-      render_json @address
+      authorize(@address)
+      render_json(@address)
     end
 
     # POST /addresses
     def create
+      authorize(Address)
       @address = Addresses.new(address_params)
 
       if @address.save
-        render_json @address, :created
+        render_json(@address, :created)
       else
-        unprocessable_entity @address
+        unprocessable_entity(@address)
       end
     end
 
     # PATCH/PUT /addresses/1
     def update
+      authorize(@address)
       if @address.update(address_params)
-        render_json @address, :ok, true
+        render_json(@address, :ok, true)
       else
-        unprocessable_entity @address
+        unprocessable_entity(@address)
       end
     end
 
     # DELETE /addresses/1
     def destroy
+      authorize(@address)
       @address.destroy
     end
 
@@ -40,10 +43,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_address
       @address = if params[:home_registration_id]
-                   Address
-                     .find_by(home_registration_id: params[:home_registration_id])
-                 else
-                   Address.find(params[:id])
+        Address
+          .find_by(home_registration_id: params[:home_registration_id])
+      else
+        Address.find(params[:id])
                  end
     end
 

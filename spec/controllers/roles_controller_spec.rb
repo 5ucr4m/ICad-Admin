@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe RolesController, type: :controller do
+RSpec.describe(RolesController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # Role. As you add validations to Role, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe RolesController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      Role.create! valid_attributes
+      Role.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      role = Role.create! valid_attributes
+      role = Role.create!(valid_attributes)
       get :show, params: { id: role.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      role = Role.create! valid_attributes
+      role = Role.create!(valid_attributes)
       get :edit, params: { id: role.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe RolesController, type: :controller do
       it 'creates a new Role' do
         expect do
           post :create, params: { role: valid_attributes }, session: valid_session
-        end.to change(Role, :count).by(1)
+        end.to(change(Role, :count).by(1))
       end
 
       it 'redirects to the created role' do
         post :create, params: { role: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(Role.last)
+        expect(response).to(redirect_to(Role.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { role: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe RolesController, type: :controller do
       end
 
       it 'updates the requested role' do
-        role = Role.create! valid_attributes
+        role = Role.create!(valid_attributes)
         put :update, params: { id: role.to_param, role: new_attributes }, session: valid_session
         role.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the role' do
-        role = Role.create! valid_attributes
+        role = Role.create!(valid_attributes)
         put :update, params: { id: role.to_param, role: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(role)
+        expect(response).to(redirect_to(role))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        role = Role.create! valid_attributes
+        role = Role.create!(valid_attributes)
         put :update, params: { id: role.to_param, role: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested role' do
-      role = Role.create! valid_attributes
+      role = Role.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: role.to_param }, session: valid_session
-      end.to change(Role, :count).by(-1)
+      end.to(change(Role, :count).by(-1))
     end
 
     it 'redirects to the roles list' do
-      role = Role.create! valid_attributes
+      role = Role.create!(valid_attributes)
       delete :destroy, params: { id: role.to_param }, session: valid_session
-      expect(response).to redirect_to(roles_url)
+      expect(response).to(redirect_to(roles_url))
     end
   end
 end

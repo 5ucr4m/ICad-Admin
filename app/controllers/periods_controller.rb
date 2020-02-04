@@ -1,66 +1,74 @@
 # frozen_string_literal: true
 
 class PeriodsController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_period, only: %i[show edit update destroy export export_xml]
 
   breadcrumb Period.model_name.human(count: 2), :periods_path
 
   # GET /periods
   def index
+    authorize(Period)
     @query = Period.ransack(params[:q])
     @pagy, @periods = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /periods/1
   def show
-    breadcrumb @period.slug, period_path(@period)
+    authorize(@period)
+    breadcrumb(@period.slug, period_path(@period))
   end
 
   # GET /periods/new
   def new
-    breadcrumb t('helpers.submit.new'), new_period_path
+    authorize(Period)
+    breadcrumb(t('helpers.submit.new'), new_period_path)
     @period = Period.new
   end
 
   # GET /periods/1/edit
   def edit
-    breadcrumb @period.slug, period_path(@period)
+    authorize(@period)
+    breadcrumb(@period.slug, period_path(@period))
   end
 
   # POST /periods
   def create
-    breadcrumb t('helpers.submit.new'), new_period_path
+    authorize(Period)
+    breadcrumb(t('helpers.submit.new'), new_period_path)
     @period = Period.new(period_params)
 
     if @period.save
-      redirect_to periods_url, notice: 'Period was successfully created.'
+      redirect_to(periods_url, notice: 'Period was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /periods/1
   def update
-    breadcrumb @period.slug, period_path(@period)
+    authorize(@period)
+    breadcrumb(@period.slug, period_path(@period))
     if @period.update(period_params)
-      redirect_to periods_url, notice: 'Period was successfully updated.'
+      redirect_to(periods_url, notice: 'Period was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /periods/1
   def destroy
+    authorize(@period)
     @period.destroy
-    redirect_to periods_url, notice: 'Period was successfully destroyed.'
+    redirect_to(periods_url, notice: 'Period was successfully destroyed.')
   end
 
   def export
-    redirect_to @period if request.post?
+    authorize(@period)
+    redirect_to(@period) if request.post?
   end
 
   def period_items
+    authorize(Period, :period_items?)
     @period_items = @period.period_items
   end
 

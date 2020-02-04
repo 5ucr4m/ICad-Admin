@@ -2,24 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe 'roles/index', type: :view do
+RSpec.describe('roles/index', type: :view) do
   before(:each) do
     assign(:roles, [
-             Role.create!(
-               name: 'Name',
-               description: 'MyText',
-               role_type: 2,
-               admin: false,
-               slug: 'Slug'
-             ),
-             Role.create!(
-               name: 'Name',
-               description: 'MyText',
-               role_type: 2,
-               admin: false,
-               slug: 'Slug'
-             )
-           ])
+      Role.create!(
+        name: 'Name',
+        description: 'MyText',
+        role_type: 2,
+        admin: false,
+        slug: 'Slug'
+      ),
+      Role.create!(
+        name: 'Name',
+        description: 'MyText',
+        role_type: 2,
+        admin: false,
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of roles' do

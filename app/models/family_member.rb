@@ -82,7 +82,7 @@ class FamilyMember < ApplicationRecord
 
   before_validation :set_user
 
-  scope :responsible, -> {where(responsible: true)}
+  scope :responsible, -> { where(responsible: true) }
 
   ransack_alias :search, :id_to_s_or_name_or_social_name_or_federal_registry_or_state_registry_or_cns_number
 

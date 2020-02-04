@@ -2,47 +2,51 @@
 
 module Api
   class HomeVisitFormsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_home_visit_form, only: %i[show update destroy]
 
     # GET /home_visit_forms
     def index
+      authorize(HomeVisitForm)
       @query = HomeVisitForm.ransack(params[:q])
       @result = @query.result.includes(:company, :home_registration)
       @result = @result.where(user: current_user) if current_user.agent?
       if params[:home_visit_registration_id]
         @home_visit_forms = @home_visit_forms.where(home_visit_registration_id: params[:home_visit_registration_id])
       end
-      render_json @home_visit_forms
+      render_json(@home_visit_forms)
     end
 
     # GET /home_visit_forms/1
     def show
-      render_json @home_visit_form
+      authorize(@home_visit_form)
+      render_json(@home_visit_form)
     end
 
     # POST /home_visit_forms
     def create
+      authorize(HomeVisitForm)
       @home_visit_form = current_user.home_visit_forms.build(home_visit_form_params)
 
       if @home_visit_form.save
-        render_json @home_visit_form, :created
+        render_json(@home_visit_form, :created)
       else
-        unprocessable_entity @home_visit_form
+        unprocessable_entity(@home_visit_form)
       end
     end
 
     # PATCH/PUT /home_visit_forms/1
     def update
+      authorize(@home_visit_form)
       if @home_visit_form.update(home_visit_form_params)
-        render_json @home_visit_form, :ok, true
+        render_json(@home_visit_form, :ok, true)
       else
-        unprocessable_entity @home_visit_form
+        unprocessable_entity(@home_visit_form)
       end
     end
 
     # DELETE /home_visit_forms/1
     def destroy
+      authorize(@home_visit_form)
       @home_visit_form.destroy
     end
 
@@ -51,10 +55,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_home_visit_form
       @home_visit_form = if params[:home_visit_registration_id]
-                           HomeVisitForm
-                             .find_by(home_visit_registration_id: params[:home_visit_registration_id])
-                         else
-                           HomeVisitForm.find(params[:id])
+        HomeVisitForm
+          .find_by(home_visit_registration_id: params[:home_visit_registration_id])
+      else
+        HomeVisitForm.find(params[:id])
                          end
     end
 

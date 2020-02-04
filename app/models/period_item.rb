@@ -67,7 +67,6 @@ class PeriodItem < ApplicationRecord
       object.dup_individual_registration
     when HomeVisitRegistration.model_name.name
       object.dup_home_visit_registration
-    else nil
     end
   end
 end

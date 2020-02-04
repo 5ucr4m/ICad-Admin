@@ -2,26 +2,26 @@
 
 require 'rails_helper'
 
-RSpec.describe 'professional_teams/index', type: :view do
+RSpec.describe('professional_teams/index', type: :view) do
   before(:each) do
     assign(:professional_teams, [
-             ProfessionalTeam.create!(
-               name: 'Name',
-               code: 'Code',
-               active: false,
-               health_establishment: nil,
-               slug: 'Slug',
-               company: nil
-             ),
-             ProfessionalTeam.create!(
-               name: 'Name',
-               code: 'Code',
-               active: false,
-               health_establishment: nil,
-               slug: 'Slug',
-               company: nil
-             )
-           ])
+      ProfessionalTeam.create!(
+        name: 'Name',
+        code: 'Code',
+        active: false,
+        health_establishment: nil,
+        slug: 'Slug',
+        company: nil
+      ),
+      ProfessionalTeam.create!(
+        name: 'Name',
+        code: 'Code',
+        active: false,
+        health_establishment: nil,
+        slug: 'Slug',
+        company: nil
+      ),
+    ])
   end
 
   it 'renders a list of professional_teams' do

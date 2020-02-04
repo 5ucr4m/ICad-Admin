@@ -1,5 +1,21 @@
 ---
 pt-BR:
+  modules:
+    administration:
+      icon: fas fa-lock
+      label: Administração
+    configuration:
+      icon: fas fa-cog
+      label: Configuração
+    reports:
+      icon: fas fa-chart-bar
+      label: Relatórios
+    forms:
+      icon: fas fa-folder-open
+      label: Fichas
+    registries:
+      icon: fas fa-file-signature
+      label: Cadastros
   titles:
     application: ICADX - Sistema de Gestão de UBS - %{subtitle}
   activerecord:
@@ -64,10 +80,6 @@ pt-BR:
         one: Função
         other: Funções
         icon: fas fa-user-shield
-      permission:
-        one: Permissão
-        other: Permissões
-        icon: fas fa-check
       health_professional:
         one: Profissional de Saúde
         other: Profissionais de Saúde

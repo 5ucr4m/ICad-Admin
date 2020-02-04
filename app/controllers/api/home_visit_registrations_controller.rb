@@ -2,53 +2,60 @@
 
 module Api
   class HomeVisitRegistrationsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_home_visit_registration, only: %i[show edit update destroy]
 
     # GET /home_visit_registrations
     def index
+      authorize(HomeVisitRegistration)
       @query = HomeVisitRegistration.ransack(params[:q])
       @result = @query.result
       @result = @result.where(user: current_user) if current_user.agent?
-      render_json @result
+      render_json(@result)
     end
 
     # GET /home_visit_registrations/1
     def show
-      render_json @home_visit_registration
+      authorize(@home_visit_registration)
+      render_json(@home_visit_registration)
     end
 
     # GET /home_visit_registrations/new
     def new
+      authorize(HomeVisitRegistration)
       @home_visit_registration = HomeVisitRegistration.new
       @home_visit_registration.build_family_member
     end
 
     # GET /home_visit_registrations/1/edit
-    def edit; end
+    def edit
+      authorize(@home_visit_registration)
+    end
 
     # POST /home_visit_registrations
     def create
+      authorize(HomeVisitRegistration)
       @home_visit_registration = current_user.home_visit_registrations.build(home_visit_registration_params)
 
       if @home_visit_registration.save
-        render_json @home_visit_registration, :created
+        render_json(@home_visit_registration, :created)
       else
-        unprocessable_entity @home_visit_registration
+        unprocessable_entity(@home_visit_registration)
       end
     end
 
     # PATCH/PUT /home_visit_registrations/1
     def update
+      authorize(@home_visit_registration)
       if @home_visit_registration.update(home_visit_registration_params)
-        render_json @home_visit_registration, :created
+        render_json(@home_visit_registration, :created)
       else
-        unprocessable_entity @home_visit_registration
+        unprocessable_entity(@home_visit_registration)
       end
     end
 
     # DELETE /home_visit_registrations/1
     def destroy
+      authorize(@home_visit_registration)
       @home_visit_registration.destroy
     end
 
@@ -111,7 +118,7 @@ module Api
             id
             reason_id
             _destroy
-          ]
+          ],
         ]
       )
     end

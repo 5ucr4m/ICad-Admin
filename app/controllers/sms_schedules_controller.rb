@@ -1,62 +1,69 @@
 # frozen_string_literal: true
 
 class SmsSchedulesController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_sms_schedule, only: %i[show edit update destroy send_sms_messages]
 
   breadcrumb SmsSchedule.model_name.human(count: 2), :sms_schedules_path
 
   # GET /sms_schedules
   def index
+    authorize(SmsSchedule)
     @query = SmsSchedule.ransack(params[:q])
     @pagy, @sms_schedules = pagy(@query.result.includes(:taggings), page: params[:page], items: 10)
   end
 
   # GET /sms_schedules/1
   def show
-    breadcrumb @sms_schedule.slug, sms_schedule_path(@sms_schedule)
+    authorize(@sms_schedule)
+    breadcrumb(@sms_schedule.slug, sms_schedule_path(@sms_schedule))
   end
 
   # GET /sms_schedules/new
   def new
-    breadcrumb t('helpers.submit.new'), new_sms_schedule_path
+    authorize(SmsSchedule)
+    breadcrumb(t('helpers.submit.new'), new_sms_schedule_path)
     @sms_schedule = SmsSchedule.new
   end
 
   # GET /sms_schedules/1/edit
   def edit
-    breadcrumb @sms_schedule.slug, sms_schedule_path(@sms_schedule)
+    authorize(@sms_schedule)
+    breadcrumb(@sms_schedule.slug, sms_schedule_path(@sms_schedule))
   end
 
   # POST /sms_schedules
   def create
-    breadcrumb t('helpers.submit.new'), new_sms_schedule_path
+    authorize(SmsSchedule)
+    breadcrumb(t('helpers.submit.new'), new_sms_schedule_path)
     @sms_schedule = SmsSchedule.new(sms_schedule_params)
 
     if @sms_schedule.save
-      redirect_to sms_schedules_url, notice: 'Sms schedule was successfully created.'
+      redirect_to(sms_schedules_url, notice: 'Sms schedule was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /sms_schedules/1
   def update
-    breadcrumb @sms_schedule.slug, sms_schedule_path(@sms_schedule)
+    authorize(@sms_schedule)
+    breadcrumb(@sms_schedule.slug, sms_schedule_path(@sms_schedule))
     if @sms_schedule.update(sms_schedule_params)
-      redirect_to sms_schedules_url, notice: 'Sms schedule was successfully updated.'
+      redirect_to(sms_schedules_url, notice: 'Sms schedule was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /sms_schedules/1
   def destroy
+    authorize(@sms_schedule)
     @sms_schedule.destroy
-    redirect_to sms_schedules_url, notice: 'Sms schedule was successfully destroyed.'
+    redirect_to(sms_schedules_url, notice: 'Sms schedule was successfully destroyed.')
   end
 
   def send_sms_messages
+    authorize(@sms_schedule)
     SmsScheduleJob.perform_later(@sms_schedule)
     render_json({ message: 'Lote de SMS enviado com sucesso!' }, :ok)
   end

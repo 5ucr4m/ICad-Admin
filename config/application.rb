@@ -13,7 +13,7 @@ Bundler.require(*Rails.groups)
 module IcadX
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults(6.0)
 
     # Where the I18n library should search for translation files
     config.i18n.load_path += Dir[Rails.root.join('lib', 'locale', '*.{rb,yml}')]
@@ -23,7 +23,7 @@ module IcadX
     config.i18n.default_locale = :'pt-BR'
 
     # Rack attack
-    config.middleware.use Rack::Attack
+    config.middleware.use(Rack::Attack)
 
     # Lograge config
     config.lograge.enabled = true

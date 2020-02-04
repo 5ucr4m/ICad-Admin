@@ -2,18 +2,18 @@
 
 require 'rails_helper'
 
-RSpec.describe 'families/new', type: :view do
+RSpec.describe('families/new', type: :view) do
   before(:each) do
     assign(:family, Family.new(
-                      home_registration: nil,
-                      responsible_cns_number: 'MyString',
-                      members_quantity: 1,
-                      handbook_number: 'MyString',
-                      family_income_id: 1,
-                      moving: false,
-                      company: nil,
-                      slug: 'MyString'
-                    ))
+      home_registration: nil,
+      responsible_cns_number: 'MyString',
+      members_quantity: 1,
+      handbook_number: 'MyString',
+      family_income_id: 1,
+      moving: false,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new family form' do

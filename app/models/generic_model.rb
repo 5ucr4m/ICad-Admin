@@ -78,7 +78,6 @@ class GenericModel < ApplicationRecord
   scope :doses, -> { where(generic_field: :dose) }
   scope :disabilities, -> { where(generic_field: :citizen_disability) }
   scope :by_module_reference, ->(reference) { app_modules.find_by(reference: reference) }
-  scope :permissions, ->(reference) { Permission.where(app_module: by_module_reference(reference)) }
 
   def name_formatted
     return name.mb_chars.upcase if reference.blank?

@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe HealthProfessionalsController, type: :controller do
+RSpec.describe(HealthProfessionalsController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # HealthProfessional. As you add validations to HealthProfessional, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe HealthProfessionalsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      HealthProfessional.create! valid_attributes
+      HealthProfessional.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      health_professional = HealthProfessional.create! valid_attributes
+      health_professional = HealthProfessional.create!(valid_attributes)
       get :show, params: { id: health_professional.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      health_professional = HealthProfessional.create! valid_attributes
+      health_professional = HealthProfessional.create!(valid_attributes)
       get :edit, params: { id: health_professional.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe HealthProfessionalsController, type: :controller do
       it 'creates a new HealthProfessional' do
         expect do
           post :create, params: { health_professional: valid_attributes }, session: valid_session
-        end.to change(HealthProfessional, :count).by(1)
+        end.to(change(HealthProfessional, :count).by(1))
       end
 
       it 'redirects to the created health_professional' do
         post :create, params: { health_professional: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(HealthProfessional.last)
+        expect(response).to(redirect_to(HealthProfessional.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { health_professional: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe HealthProfessionalsController, type: :controller do
       end
 
       it 'updates the requested health_professional' do
-        health_professional = HealthProfessional.create! valid_attributes
+        health_professional = HealthProfessional.create!(valid_attributes)
         put :update, params: { id: health_professional.to_param, health_professional: new_attributes }, session: valid_session
         health_professional.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the health_professional' do
-        health_professional = HealthProfessional.create! valid_attributes
+        health_professional = HealthProfessional.create!(valid_attributes)
         put :update, params: { id: health_professional.to_param, health_professional: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(health_professional)
+        expect(response).to(redirect_to(health_professional))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        health_professional = HealthProfessional.create! valid_attributes
+        health_professional = HealthProfessional.create!(valid_attributes)
         put :update, params: { id: health_professional.to_param, health_professional: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested health_professional' do
-      health_professional = HealthProfessional.create! valid_attributes
+      health_professional = HealthProfessional.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: health_professional.to_param }, session: valid_session
-      end.to change(HealthProfessional, :count).by(-1)
+      end.to(change(HealthProfessional, :count).by(-1))
     end
 
     it 'redirects to the health_professionals list' do
-      health_professional = HealthProfessional.create! valid_attributes
+      health_professional = HealthProfessional.create!(valid_attributes)
       delete :destroy, params: { id: health_professional.to_param }, session: valid_session
-      expect(response).to redirect_to(health_professionals_url)
+      expect(response).to(redirect_to(health_professionals_url))
     end
   end
 end

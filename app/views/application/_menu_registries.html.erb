@@ -1,0 +1,23 @@
+<li class="nav-item dropdown">
+  <a href="javascript:void(0)" class="nav-link <%= "active" if !%w(dashboards reports).include?(controller_name) &&
+    Role::REGISTRIES.include?(controller_name.singularize.camelize.constantize) %> py-4" data-toggle="dropdown" aria-expanded="false">
+    <i class="<%= t('modules.registries.icon') %> mr-2"></i><%= t('modules.registries.label') %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+    <%= link_to vaccines_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.vaccine.icon') %> dropdown-icon"></i><%= t('activerecord.models.vaccine.other') %>
+    <% end %>
+    <%= link_to professional_teams_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.professional_team.icon') %> dropdown-icon"></i><%= t('activerecord.models.professional_team.other') %>
+    <% end %>
+    <%= link_to period_items_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.period_item.icon') %> dropdown-icon"></i><%= t('activerecord.models.period_item.other') %>
+    <% end %>
+    <%= link_to health_professionals_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.health_professional.icon') %> dropdown-icon"></i><%= t('activerecord.models.health_professional.other') %>
+    <% end %>
+    <%= link_to health_establishments_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.health_establishment.icon') %> dropdown-icon"></i><%= t('activerecord.models.health_establishment.other') %>
+    <% end %>
+  </div>
+</li>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HealthConditionHeart < ApplicationRecord
   include Sluggable
   include Tenantable

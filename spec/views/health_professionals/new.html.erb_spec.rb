@@ -2,18 +2,18 @@
 
 require 'rails_helper'
 
-RSpec.describe 'health_professionals/new', type: :view do
+RSpec.describe('health_professionals/new', type: :view) do
   before(:each) do
     assign(:health_professional, HealthProfessional.new(
-                                   cns_code: 'MyString',
-                                   cbo_code: nil,
-                                   full_name: 'MyString',
-                                   federal_registry: 'MyString',
-                                   state_registry: 'MyString',
-                                   professional_team: nil,
-                                   company: nil,
-                                   slug: 'MyString'
-                                 ))
+      cns_code: 'MyString',
+      cbo_code: nil,
+      full_name: 'MyString',
+      federal_registry: 'MyString',
+      state_registry: 'MyString',
+      professional_team: nil,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new health_professional form' do

@@ -2,24 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe 'sms_schedules/index', type: :view do
+RSpec.describe('sms_schedules/index', type: :view) do
   before(:each) do
     assign(:sms_schedules, [
-             SmsSchedule.create!(
-               message: 'MyText',
-               group: 2,
-               status: 3,
-               slug: 'Slug',
-               company: nil
-             ),
-             SmsSchedule.create!(
-               message: 'MyText',
-               group: 2,
-               status: 3,
-               slug: 'Slug',
-               company: nil
-             )
-           ])
+      SmsSchedule.create!(
+        message: 'MyText',
+        group: 2,
+        status: 3,
+        slug: 'Slug',
+        company: nil
+      ),
+      SmsSchedule.create!(
+        message: 'MyText',
+        group: 2,
+        status: 3,
+        slug: 'Slug',
+        company: nil
+      ),
+    ])
   end
 
   it 'renders a list of sms_schedules' do

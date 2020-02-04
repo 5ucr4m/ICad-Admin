@@ -2,6 +2,7 @@
 
 class DashboardsController < WebController
   def dashboard
+    authorize(:dashboard, :dashboard?)
     @vaccination_campaigns = VaccinationCampaign.last(5)
     @periods = Period.order(end_date: :desc).last(3)
     @families = user.agent? ? Family.where(user: user).count : Family.count

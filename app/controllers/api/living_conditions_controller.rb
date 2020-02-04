@@ -2,36 +2,39 @@
 
 module Api
   class LivingConditionsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_living_condition, only: %i[show update destroy]
 
     # GET /living_conditions/1
     def show
-      render_json @living_condition
+      authorize(@living_condition)
+      render_json(@living_condition)
     end
 
     # POST /living_conditions
     def create
+      authorize(LivingCondition)
       @living_condition = LivingCondition.new(living_condition_params)
 
       if @living_condition.save
-        render_json @living_condition, :created
+        render_json(@living_condition, :created)
       else
-        unprocessable_entity @living_condition
+        unprocessable_entity(@living_condition)
       end
     end
 
     # PATCH/PUT /living_conditions/1
     def update
+      authorize(@living_condition)
       if @living_condition.update(living_condition_params)
-        render_json @living_condition, :ok, true
+        render_json(@living_condition, :ok, true)
       else
-        unprocessable_entity @living_condition
+        unprocessable_entity(@living_condition)
       end
     end
 
     # DELETE /living_conditions/1
     def destroy
+      authorize(@living_condition)
       @living_condition.destroy
     end
 
@@ -40,10 +43,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_living_condition
       @living_condition = if params[:home_registration_id]
-                            LivingCondition
-                              .find_by(home_registration_id: params[:home_registration_id])
-                          else
-                            LivingCondition.find(params[:id])
+        LivingCondition
+          .find_by(home_registration_id: params[:home_registration_id])
+      else
+        LivingCondition.find(params[:id])
                           end
     end
 

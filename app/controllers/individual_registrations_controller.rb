@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class IndividualRegistrationsController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_individual_registration, only: %i[show edit update destroy]
 
   breadcrumb IndividualRegistration.model_name.human(count: 2), :individual_registrations_path
 
   # GET /individual_registrations
   def index
+    authorize(IndividualRegistration)
     @query = IndividualRegistration.ransack(params[:q])
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
@@ -16,13 +16,15 @@ class IndividualRegistrationsController < WebController
 
   # GET /individual_registrations/1
   def show
-    breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
+    authorize(@individual_registration)
+    breadcrumb(@individual_registration.slug, individual_registration_path(@individual_registration))
     @individual_registration.build_relationships
   end
 
   # GET /individual_registrations/new
   def new
-    breadcrumb t('helpers.submit.new'), new_individual_registration_path
+    authorize(IndividualRegistration)
+    breadcrumb(t('helpers.submit.new'), new_individual_registration_path)
     @individual_registration = IndividualRegistration.new
     @individual_registration.build_relationships
     @occupation_selected = @individual_registration.sociodemographic_info.occupation.presence
@@ -30,36 +32,40 @@ class IndividualRegistrationsController < WebController
 
   # GET /individual_registrations/1/edit
   def edit
-    breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
+    authorize(@individual_registration)
+    breadcrumb(@individual_registration.slug, individual_registration_path(@individual_registration))
     @individual_registration.build_relationships
   end
 
   # POST /individual_registrations
   def create
-    breadcrumb t('helpers.submit.new'), new_individual_registration_path
+    authorize(IndividualRegistration)
+    breadcrumb(t('helpers.submit.new'), new_individual_registration_path)
     @individual_registration = current_user.individual_registrations.build(individual_registration_params)
 
     if @individual_registration.save
-      redirect_to individual_registrations_url, notice: 'Individual registration was successfully created.'
+      redirect_to(individual_registrations_url, notice: 'Individual registration was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /individual_registrations/1
   def update
-    breadcrumb @individual_registration.slug, individual_registration_path(@individual_registration)
+    authorize(@individual_registration)
+    breadcrumb(@individual_registration.slug, individual_registration_path(@individual_registration))
     if @individual_registration.update(individual_registration_params)
-      redirect_to individual_registrations_url, notice: 'Individual registration was successfully updated.'
+      redirect_to(individual_registrations_url, notice: 'Individual registration was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /individual_registrations/1
   def destroy
+    authorize(@individual_registration)
     @individual_registration.destroy
-    redirect_to individual_registrations_url, notice: 'Individual registration was successfully destroyed.'
+    redirect_to(individual_registrations_url, notice: 'Individual registration was successfully destroyed.')
   end
 
   private
@@ -153,7 +159,7 @@ class IndividualRegistrationsController < WebController
                                                         id
                                                         disease_type_id
                                                         destroy
-                                                      ]
+                                                      ],
                                                     ],
                                                     in_street_situation_attributes: [
                                                       :id,
@@ -176,7 +182,7 @@ class IndividualRegistrationsController < WebController
                                                         id
                                                         meal_origin_type_id
                                                         _destroy
-                                                      ]
+                                                      ],
                                                     ],
                                                     sociodemographic_info_attributes: [
                                                       :id,
@@ -199,7 +205,7 @@ class IndividualRegistrationsController < WebController
                                                         id
                                                         disability_id
                                                         _destroy
-                                                      ]
+                                                      ],
                                                     ],
                                                     cancel_registration_attributes: %i[
                                                       id

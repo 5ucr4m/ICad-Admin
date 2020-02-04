@@ -1,0 +1,23 @@
+<li class="nav-item dropdown">
+  <a href="javascript:void(0)" class="nav-link <%= "active" if !%w(dashboards reports).include?(controller_name) &&
+    Role::ADMINISTRATION.include?(controller_name.singularize.camelize.constantize) %> py-4" data-toggle="dropdown" aria-expanded="false">
+    <i class="<%= t('modules.administration.icon') %> mr-2"></i><%= t('modules.administration.label') %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+    <%= link_to companies_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.company.icon') %> dropdown-icon"></i><%= t('activerecord.models.company.other') %>
+    <% end %>
+    <%= link_to users_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.user.icon') %> dropdown-icon"></i><%= t('activerecord.models.user.other') %>
+    <% end %>
+    <%= link_to roles_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.role.icon') %> dropdown-icon"></i><%= t('activerecord.models.role.other') %>
+    <% end %>
+    <%= link_to states_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.state.icon') %> dropdown-icon"></i><%= t('activerecord.models.state.other') %>
+    <% end %>
+    <%= link_to cities_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.city.icon') %> dropdown-icon"></i><%= t('activerecord.models.city.other') %>
+    <% end %>
+  </div>
+</li>

@@ -2,52 +2,59 @@
 
 module Api
   class ProfessionalTeamsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_professional_team, only: %i[show edit update destroy]
 
     # GET /professional_teams
     def index
+      authorize(ProfessionalTeam)
       @query = ProfessionalTeam.ransack(params[:q])
       @pagy, @professional_teams = pagy(@query.result, page: params[:page], items: 10)
     end
 
     # GET /professional_teams/1
     def show
-      render_json @professional_team
+      authorize(@professional_team)
+      render_json(@professional_team)
     end
 
     # GET /professional_teams/new
     def new
+      authorize(ProfessionalTeam)
       @professional_team = ProfessionalTeam.new
     end
 
     # GET /professional_teams/1/edit
-    def edit; end
+    def edit
+      authorize(@professional_team)
+    end
 
     # POST /professional_teams
     def create
+      authorize(ProfessionalTeam)
       @professional_team = ProfessionalTeam.new(professional_team_params)
 
       if @professional_team.save
-        render_json @professional_team, :created
+        render_json(@professional_team, :created)
       else
-        unprocessable_entity @professional_team
+        unprocessable_entity(@professional_team)
       end
     end
 
     # PATCH/PUT /professional_teams/1
     def update
+      authorize(@professional_team)
       if @professional_team.update(professional_team_params)
-        render_json @professional_team, :ok, true
+        render_json(@professional_team, :ok, true)
       else
-        unprocessable_entity @professional_team
+        unprocessable_entity(@professional_team)
       end
     end
 
     # DELETE /professional_teams/1
     def destroy
+      authorize(@professional_team)
       @professional_team.destroy
-      redirect_to professional_teams_url, notice: 'Professional team was successfully destroyed.'
+      redirect_to(professional_teams_url, notice: 'Professional team was successfully destroyed.')
     end
 
     private

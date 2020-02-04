@@ -2,24 +2,24 @@
 
 require 'rails_helper'
 
-RSpec.describe 'vaccinations/new', type: :view do
+RSpec.describe('vaccinations/new', type: :view) do
   before(:each) do
     assign(:vaccination, Vaccination.new(
-                           uuid: 'MyString',
-                           tp_cds_origin: 'MyString',
-                           patient_type: 1,
-                           header_transport: nil,
-                           vaccination_campaign: nil,
-                           turn: nil,
-                           family_member: nil,
-                           local_service: nil,
-                           traveller: false,
-                           leprosy_communicant: false,
-                           pregnant: false,
-                           puerperal: false,
-                           company: nil,
-                           slug: 'MyString'
-                         ))
+      uuid: 'MyString',
+      tp_cds_origin: 'MyString',
+      patient_type: 1,
+      header_transport: nil,
+      vaccination_campaign: nil,
+      turn: nil,
+      family_member: nil,
+      local_service: nil,
+      traveller: false,
+      leprosy_communicant: false,
+      pregnant: false,
+      puerperal: false,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new vaccination form' do

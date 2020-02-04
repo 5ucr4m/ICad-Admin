@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Clockwork
   configure do |config|
     config[:sleep_timeout] = 5

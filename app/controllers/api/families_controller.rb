@@ -2,46 +2,50 @@
 
 module Api
   class FamiliesController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_family, only: %i[show update destroy]
 
     # GET /families
     def index
+      authorize(Family)
       @query = Family.ransack(params[:q])
       @families = @query.result.includes(:company, :home_registration)
       @families = @families.where(user: current_user) if current_user.agent?
-      render_json @families
+      render_json(@families)
     end
 
     # GET /families/1
     def show
-      render_json @family
+      authorize(@family)
+      render_json(@family)
     end
 
     # POST /families
     def create
+      authorize(@family)
       @family = current_user.families.build(family_params)
 
       @city_selected = @family&.home_registration&.address&.city.presence
 
       if @family.save
-        render_json @family, :created
+        render_json(@family, :created)
       else
-        unprocessable_entity @family
+        unprocessable_entity(@family)
       end
     end
 
     # PATCH/PUT /families/1
     def update
+      authorize(@family)
       if @family.update(family_params)
-        render_json @family, :ok, true
+        render_json(@family, :ok, true)
       else
-        unprocessable_entity @family
+        unprocessable_entity(@family)
       end
     end
 
     # DELETE /families/1
     def destroy
+      authorize(@family)
       @family.destroy
     end
 

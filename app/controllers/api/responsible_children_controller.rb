@@ -2,36 +2,39 @@
 
 module Api
   class ResponsibleChildrenController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_responsible_child, only: %i[show update destroy]
 
     # GET /responsible_children/1
     def show
-      render_json @responsible_child
+      authorize(@responsible_child)
+      render_json(@responsible_child)
     end
 
     # POST /responsible_children
     def create
+      authorize(ResponsibleChild)
       @responsible_child = ResponsibleChild.new(responsible_child_params)
 
       if @responsible_child.save
-        render_json @responsible_child, :created
+        render_json(@responsible_child, :created)
       else
-        unprocessable_entity @responsible_child
+        unprocessable_entity(@responsible_child)
       end
     end
 
     # PATCH/PUT /responsible_children/1
     def update
+      authorize(@responsible_child)
       if @responsible_child.update(responsible_child_params)
-        render_json @responsible_child, :ok, true
+        render_json(@responsible_child, :ok, true)
       else
-        unprocessable_entity @responsible_child
+        unprocessable_entity(@responsible_child)
       end
     end
 
     # DELETE /responsible_children/1
     def destroy
+      authorize(@responsible_child)
       @responsible_child.destroy
     end
 
@@ -40,10 +43,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_responsible_child
       @responsible_child = if params[:individual_registration_id]
-                             ResponsibleChild
-                               .find_by(individual_registration_id: params[:individual_registration_id])
-                           else
-                             ResponsibleChild.find(params[:id])
+        ResponsibleChild
+          .find_by(individual_registration_id: params[:individual_registration_id])
+      else
+        ResponsibleChild.find(params[:id])
                            end
     end
 

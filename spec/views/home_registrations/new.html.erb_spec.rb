@@ -2,26 +2,26 @@
 
 require 'rails_helper'
 
-RSpec.describe 'home_registrations/new', type: :view do
+RSpec.describe('home_registrations/new', type: :view) do
   before(:each) do
     assign(:home_registration, HomeRegistration.new(
-                                 location_x: 'MyString',
-                                 location_y: 'MyString',
-                                 health_professional: nil,
-                                 living_condition: nil,
-                                 address: nil,
-                                 form_updated: false,
-                                 pet_quantity: 1,
-                                 refuse_registration: false,
-                                 tp_cds_origin: 1,
-                                 uuid: 'MyString',
-                                 uuid_form_origin: 'MyString',
-                                 home_type: nil,
-                                 permanence_institution: nil,
-                                 finished: false,
-                                 company: nil,
-                                 slug: 'MyString'
-                               ))
+      location_x: 'MyString',
+      location_y: 'MyString',
+      health_professional: nil,
+      living_condition: nil,
+      address: nil,
+      form_updated: false,
+      pet_quantity: 1,
+      refuse_registration: false,
+      tp_cds_origin: 1,
+      uuid: 'MyString',
+      uuid_form_origin: 'MyString',
+      home_type: nil,
+      permanence_institution: nil,
+      finished: false,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new home_registration form' do

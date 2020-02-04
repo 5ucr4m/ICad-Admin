@@ -2,6 +2,7 @@
 
 module Api
   class ApiController < ApplicationController
+    include Pundit
     include RenderJson
     include JsonExceptionHandler
     include DeviseTokenAuth::Concerns::SetUserByToken
@@ -14,7 +15,7 @@ module Api
 
     respond_to :json
 
-    rescue_from CanCan::AccessDenied do |_exception|
+    rescue_from Pundit::NotAuthorizedError do |_exception|
       respond_to do |format|
         format.json { head :unauthorized, content_type: 'application/json' }
       end

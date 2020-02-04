@@ -24,18 +24,18 @@ module Api
       end
 
       def render_create_success
-        render json: @resource, serializer: UserSerializer
+        render(json: @resource, serializer: UserSerializer)
       end
 
       def render_create_error_bad_credentials
-        not_authorized I18n.t('devise.failure.invalid', authentication_keys: %w[email CNS].join(', '))
+        not_authorized(I18n.t('devise.failure.invalid', authentication_keys: %w[email CNS].join(', ')))
       end
 
       def continue_sign_in(resource, resource_name)
         set_flash_message!(:notice, :signed_in)
         sign_in(resource_name, resource)
         yield resource if block_given?
-        respond_with resource, location: after_sign_in_path_for(resource)
+        respond_with(resource, location: after_sign_in_path_for(resource))
       end
     end
   end

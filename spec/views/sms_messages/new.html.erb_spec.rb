@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'sms_messages/new', type: :view do
+RSpec.describe('sms_messages/new', type: :view) do
   before(:each) do
     assign(:sms_message, SmsMessage.new(
-                           number: 1,
-                           status: 1,
-                           sms_schedule: nil,
-                           slug: 'MyString',
-                           company: nil
-                         ))
+      number: 1,
+      status: 1,
+      sms_schedule: nil,
+      slug: 'MyString',
+      company: nil
+    ))
   end
 
   it 'renders new sms_message form' do

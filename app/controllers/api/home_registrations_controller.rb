@@ -2,7 +2,6 @@
 
 module Api
   class HomeRegistrationsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_home_registration, only: %i[show update destroy]
 
     # GET /home_registrations
@@ -10,12 +9,12 @@ module Api
       @query = HomeRegistration.ransack(params[:q])
       @result = @query.result
       @result = @result.where(user: current_user) if current_user.agent?
-      render_json @result
+      render_json(@result)
     end
 
     # GET /home_registrations/1
     def show
-      render_json @home_registration
+      render_json(@home_registration)
     end
 
     # POST /home_registrations
@@ -23,18 +22,18 @@ module Api
       @home_registration = current_user.home_registrations.build(home_registration_params)
 
       if @home_registration.save
-        render_json @home_registration, :created, true
+        render_json(@home_registration, :created, true)
       else
-        unprocessable_entity @home_registration
+        unprocessable_entity(@home_registration)
       end
     end
 
     # PATCH/PUT /home_registrations/1
     def update
       if @home_registration.update(home_registration_params)
-        render_json @home_registration, :ok
+        render_json(@home_registration, :ok)
       else
-        unprocessable_entity @home_registration
+        unprocessable_entity(@home_registration)
       end
     end
 
@@ -81,7 +80,7 @@ module Api
                                                     responsible ethnicity_id unknown_father
                                                     father_name naturalized_at naturalize_decree
                                                     brazil_entry_date micro_area out_area _destroy
-                                                  ]
+                                                  ],
                                                 ],
                                                 address_attributes: %i[
                                                   id

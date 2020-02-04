@@ -6,12 +6,13 @@ module Api
     before_action :set_query, except: %i[types cbo_types ethnicity_types]
 
     def types
+      authorize(GenericModel, :types)
       generic_models = Rails.cache.fetch('generic_models') do
         GenericModel.all
-                    .select(:id, :name, :reference, :generic_field)
-                    .group_by(&:generic_field)
+          .select(:id, :name, :reference, :generic_field)
+          .group_by(&:generic_field)
       end
-      render json: generic_models, adapter: false
+      render(json: generic_models, adapter: false)
     end
 
     private

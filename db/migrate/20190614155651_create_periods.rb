@@ -3,12 +3,12 @@
 class CreatePeriods < ActiveRecord::Migration[6.0]
   def change
     create_table :periods do |t|
-      t.string :competence
-      t.date :start_date
-      t.date :end_date
-      t.date :deadline
-      t.belongs_to :company, foreign_key: true, index: true
-      t.string :slug
+      t.string(:competence)
+      t.date(:start_date)
+      t.date(:end_date)
+      t.date(:deadline)
+      t.belongs_to(:company, foreign_key: true, index: true)
+      t.string(:slug)
 
       t.timestamps
     end

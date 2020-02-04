@@ -11,7 +11,6 @@ gem 'amoeba'
 gem 'apipie-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'cancancan'
 gem 'chartkick'
 gem 'clockwork'
 gem 'cocoon'
@@ -39,6 +38,7 @@ gem 'pagy'
 gem 'paper_trail'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
+gem 'pundit'
 gem 'rack-attack'
 gem 'rack-cors'
 gem 'rack-timeout'
@@ -63,6 +63,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'

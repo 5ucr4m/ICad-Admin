@@ -8,7 +8,7 @@ module HomeVisitRegistrationService
   NAMESPACES = {
     'xmlns:ns2': 'http://esus.ufsc.br/dadoinstalacao',
     'xmlns:ns3': 'http://esus.ufsc.br/dadotransporte',
-    'xmlns:ns4': 'http://esus.ufsc.br/fichavisitadomiciliarmaster'
+    'xmlns:ns4': 'http://esus.ufsc.br/fichavisitadomiciliarmaster',
   }.freeze
 
   class << self
@@ -28,7 +28,7 @@ module HomeVisitRegistrationService
       vd << XML::Node.new('tpCdsOrigem', 3) # valid
 
       health_professional = home_visit_registration.family_member.family
-                                                   .home_registration.health_professional
+        .home_registration.health_professional
       health_establishment = health_professional.professional_team.health_establishment
 
       vd << ht = XML::Node.new('headerTransport') # valid

@@ -61,15 +61,14 @@ class User < ApplicationRecord
   has_many :companies, through: :user_companies
   has_many :user_roles, through: :user_companies
   has_many :roles, through: :user_roles
-  has_many :permissions, through: :roles
-  has_many :home_visit_registrations
-  has_many :home_visit_forms
-  has_many :home_registrations
-  has_many :individual_registrations
-  has_many :vaccinations
-  has_many :families
-  has_many :family_members
-  has_many :period_items
+  has_many :home_visit_registrations, dependent: :nullify
+  has_many :home_visit_forms, dependent: :nullify
+  has_many :home_registrations, dependent: :nullify
+  has_many :individual_registrations, dependent: :nullify
+  has_many :vaccinations, dependent: :nullify
+  has_many :families, dependent: :nullify
+  has_many :family_members, dependent: :nullify
+  has_many :period_items, dependent: :nullify
 
   accepts_nested_attributes_for :user_companies, allow_destroy: true
   accepts_nested_attributes_for :health_professional, allow_destroy: false
@@ -79,7 +78,7 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
-  #validate :check_user_roles
+  # validate :check_user_roles
 
   accepts_nested_attributes_for :health_professional, allow_destroy: false
   accepts_nested_attributes_for :user_companies, allow_destroy: true
@@ -94,9 +93,7 @@ class User < ApplicationRecord
     current_company&.company
   end
 
-  def role
-    current_role.role
-  end
+  delegate :role, to: :current_role
 
   def send_confirmation_notification?
     skip_confirmation!
@@ -127,46 +124,25 @@ class User < ApplicationRecord
     role.admin? && role.admin
   end
 
-  def mayor?
-    role.mayor?
+  def not_admin?
+    !admin?
   end
 
-  def support?
-    role.support?
-  end
-
-  def secretary?
-    role.secretary?
-  end
-
-  def doctor?
-    role.doctor?
-  end
-
-  def nurse?
-    role.nurse?
-  end
-
-  def nurse_aux?
-    role.nurse_aux?
-  end
-
-  def agent?
-    role.agent?
-  end
-
-  def dentist?
-    role.dentist?
-  end
-
-  def dentist_aux?
-    role.dentist_aux?
-  end
+  delegate :mayor?, to: :role
+  delegate :support?, to: :role
+  delegate :secretary?, to: :role
+  delegate :doctor?, to: :role
+  delegate :nurse?, to: :role
+  delegate :nurse_aux?, to: :role
+  delegate :agent?, to: :role
+  delegate :dentist?, to: :role
+  delegate :dentist_aux?, to: :role
+  delegate :citizen?, to: :role
 
   private
 
   def professional
-    return if health_professional&.blank?
+    return if health_professional.blank?
 
     health_professional
   end

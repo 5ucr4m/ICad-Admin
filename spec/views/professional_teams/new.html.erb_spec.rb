@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe 'professional_teams/new', type: :view do
+RSpec.describe('professional_teams/new', type: :view) do
   before(:each) do
     assign(:professional_team, ProfessionalTeam.new(
-                                 name: 'MyString',
-                                 code: 'MyString',
-                                 active: false,
-                                 health_establishment: nil,
-                                 slug: 'MyString',
-                                 company: nil
-                               ))
+      name: 'MyString',
+      code: 'MyString',
+      active: false,
+      health_establishment: nil,
+      slug: 'MyString',
+      company: nil
+    ))
   end
 
   it 'renders new professional_team form' do

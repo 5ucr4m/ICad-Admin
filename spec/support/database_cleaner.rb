@@ -40,12 +40,12 @@ RSpec.configure do |config|
     drive_shares = Capybara.current_driver == :rack_test
 
     DatabaseCleaner.strategy = if drive_shares
-                                 :transaction
-                               else
-                                 # Non-:rack_test driver is probably a driver for a JavaScript browser
-                                 # with a Rack app under test that does *not* share a database
-                                 # connection with the specs, so we must use truncation strategy.
-                                 :truncation
+      :transaction
+    else
+      # Non-:rack_test driver is probably a driver for a JavaScript browser
+      # with a Rack app under test that does *not* share a database
+      # connection with the specs, so we must use truncation strategy.
+      :truncation
     end
   end
 

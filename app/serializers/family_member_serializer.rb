@@ -91,7 +91,7 @@ class FamilyMemberSerializer < ApplicationSerializer
   end
 
   def age
-    distance_of_time_in_words object.birth_date, Time.current.to_date, only: :months
+    distance_of_time_in_words(object.birth_date, Time.current.to_date, only: :months)
   end
 
   def url

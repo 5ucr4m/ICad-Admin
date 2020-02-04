@@ -7,6 +7,7 @@ class CitiesController < WebController
 
   # GET /cities
   def index
+    authorize(City)
     @query = City.ransack(params[:q])
     respond_to do |format|
       format.html do
@@ -18,40 +19,48 @@ class CitiesController < WebController
   end
 
   # GET /cities/1
-  def show; end
+  def show
+    authorize(@city)
+  end
 
   # GET /cities/new
   def new
+    authorize(City)
     @city = City.new
   end
 
   # GET /cities/1/edit
-  def edit; end
+  def edit
+    authorize(@city)
+  end
 
   # POST /cities
   def create
+    authorize(@city)
     @city = City.new(city_params)
 
     if @city.save
-      redirect_to cities_url, notice: 'City was successfully created.'
+      redirect_to(cities_url, notice: 'City was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /cities/1
   def update
+    authorize(@city)
     if @city.update(city_params)
-      redirect_to cities_url, notice: 'City was successfully updated.'
+      redirect_to(cities_url, notice: 'City was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /cities/1
   def destroy
+    authorize(@city)
     @city.destroy
-    redirect_to cities_url, notice: 'City was successfully destroyed.'
+    redirect_to(cities_url, notice: 'City was successfully destroyed.')
   end
 
   private

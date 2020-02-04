@@ -2,36 +2,39 @@
 
 module Api
   class HealthConditionsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_health_condition, only: %i[show update destroy]
 
     # GET /health_conditions/1
     def show
-      render_json @health_condition
+      authorize(@health_condition)
+      render_json(@health_condition)
     end
 
     # POST /health_conditions
     def create
+      authorize(HealthCondition)
       @health_condition = HealthCondition.new(health_condition_params)
 
       if @health_condition.save
-        render_json @health_condition, :created
+        render_json(@health_condition, :created)
       else
-        unprocessable_entity @health_condition
+        unprocessable_entity(@health_condition)
       end
     end
 
     # PATCH/PUT /health_conditions/1
     def update
+      authorize(@health_condition)
       if @health_condition.update(health_condition_params)
-        render_json @health_condition, :ok, true
+        render_json(@health_condition, :ok, true)
       else
-        unprocessable_entity @health_condition
+        unprocessable_entity(@health_condition)
       end
     end
 
     # DELETE /health_conditions/1
     def destroy
+      authorize(@health_condition)
       @health_condition.destroy
     end
 
@@ -40,10 +43,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_health_condition
       @health_condition = if params[:individual_registration_id]
-                            HealthCondition
-                              .find_by(individual_registration_id: params[:individual_registration_id])
-                          else
-                            HealthCondition.find(params[:id])
+        HealthCondition
+          .find_by(individual_registration_id: params[:individual_registration_id])
+      else
+        HealthCondition.find(params[:id])
                           end
     end
 

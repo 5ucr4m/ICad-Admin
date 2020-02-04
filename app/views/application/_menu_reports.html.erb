@@ -1,0 +1,25 @@
+<li class="nav-item dropdown">
+  <a href="javascript:void(0)" class="nav-link <%= "#{'active font-weight-bold' if controller_name == 'reports'}" %> py-4" data-toggle="dropdown" aria-expanded="false">
+    <i class="<%= t('modules.reports.icon') %> mr-2"></i><%= t('modules.reports.label') %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+    <%= link_to families_reports_path, class: 'dropdown-item' do %>
+      <i class="<%= t("activerecord.models.family.icon") %> dropdown-icon"></i>Relatório de <%= Family.model_name.human(count: 2) %>
+    <% end %>
+    <%= link_to family_members_reports_path, class: 'dropdown-item' do %>
+      <i class="<%= t("activerecord.models.family_member.icon") %> dropdown-icon"></i>Relatório de <%= FamilyMember.model_name.human(count: 2) %>
+    <% end %>
+    <%= link_to individual_registrations_reports_path, class: 'dropdown-item' do %>
+      <i class="<%= t("activerecord.models.individual_registration.icon") %> dropdown-icon"></i>Relatório de <%= IndividualRegistration.model_name.human(count: 2) %>
+    <% end %>
+    <%= link_to home_registrations_reports_path, class: 'dropdown-item' do %>
+      <i class="<%= t("activerecord.models.home_registration.icon") %> dropdown-icon"></i>Relatório de <%= HomeRegistration.model_name.human(count: 2) %>
+    <% end %>
+    <%= link_to home_visit_registrations_reports_path, class: 'dropdown-item' do %>
+      <i class="<%= t("activerecord.models.home_visit_registration.icon") %> dropdown-icon"></i>Relatório de <%= HomeVisitRegistration.model_name.human(count: 2) %>
+    <% end %>
+    <%= link_to vaccinations_reports_path, class: 'dropdown-item' do %>
+      <i class="<%= t("activerecord.models.vaccination.icon") %> dropdown-icon"></i>Relatório de <%= Vaccination.model_name.human(count: 2) %>
+    <% end %>
+  </div>
+</li>

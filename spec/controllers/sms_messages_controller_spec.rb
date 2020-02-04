@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe SmsMessagesController, type: :controller do
+RSpec.describe(SmsMessagesController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # SmsMessage. As you add validations to SmsMessage, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe SmsMessagesController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      SmsMessage.create! valid_attributes
+      SmsMessage.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      sms_message = SmsMessage.create! valid_attributes
+      sms_message = SmsMessage.create!(valid_attributes)
       get :show, params: { id: sms_message.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      sms_message = SmsMessage.create! valid_attributes
+      sms_message = SmsMessage.create!(valid_attributes)
       get :edit, params: { id: sms_message.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe SmsMessagesController, type: :controller do
       it 'creates a new SmsMessage' do
         expect do
           post :create, params: { sms_message: valid_attributes }, session: valid_session
-        end.to change(SmsMessage, :count).by(1)
+        end.to(change(SmsMessage, :count).by(1))
       end
 
       it 'redirects to the created sms_message' do
         post :create, params: { sms_message: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(SmsMessage.last)
+        expect(response).to(redirect_to(SmsMessage.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { sms_message: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe SmsMessagesController, type: :controller do
       end
 
       it 'updates the requested sms_message' do
-        sms_message = SmsMessage.create! valid_attributes
+        sms_message = SmsMessage.create!(valid_attributes)
         put :update, params: { id: sms_message.to_param, sms_message: new_attributes }, session: valid_session
         sms_message.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the sms_message' do
-        sms_message = SmsMessage.create! valid_attributes
+        sms_message = SmsMessage.create!(valid_attributes)
         put :update, params: { id: sms_message.to_param, sms_message: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(sms_message)
+        expect(response).to(redirect_to(sms_message))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        sms_message = SmsMessage.create! valid_attributes
+        sms_message = SmsMessage.create!(valid_attributes)
         put :update, params: { id: sms_message.to_param, sms_message: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested sms_message' do
-      sms_message = SmsMessage.create! valid_attributes
+      sms_message = SmsMessage.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: sms_message.to_param }, session: valid_session
-      end.to change(SmsMessage, :count).by(-1)
+      end.to(change(SmsMessage, :count).by(-1))
     end
 
     it 'redirects to the sms_messages list' do
-      sms_message = SmsMessage.create! valid_attributes
+      sms_message = SmsMessage.create!(valid_attributes)
       delete :destroy, params: { id: sms_message.to_param }, session: valid_session
-      expect(response).to redirect_to(sms_messages_url)
+      expect(response).to(redirect_to(sms_messages_url))
     end
   end
 end

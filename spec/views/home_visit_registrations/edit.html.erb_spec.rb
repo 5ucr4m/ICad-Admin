@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'home_visit_registrations/edit', type: :view do
+RSpec.describe('home_visit_registrations/edit', type: :view) do
   before(:each) do
     @home_visit_registration = assign(:home_visit_registration, HomeVisitRegistration.create!(
-                                                                  family_member: nil,
-                                                                  uuid: 'MyString',
-                                                                  tp_cds_origin: 'MyString',
-                                                                  company: nil,
-                                                                  slug: 'MyString'
-                                                                ))
+      family_member: nil,
+      uuid: 'MyString',
+      tp_cds_origin: 'MyString',
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit home_visit_registration form' do

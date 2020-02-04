@@ -38,7 +38,7 @@ class Period < ApplicationRecord
 
   ransack_alias :search, :id_to_s
 
-  validates_uniqueness_of :competence
+  validates :competence, uniqueness: true
   validate :check_start_date, :check_end_date, :check_competence, :check_deadline_period
 
   scope :change_period, lambda {

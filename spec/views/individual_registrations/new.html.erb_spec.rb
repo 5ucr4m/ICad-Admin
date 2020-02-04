@@ -2,23 +2,23 @@
 
 require 'rails_helper'
 
-RSpec.describe 'individual_registrations/new', type: :view do
+RSpec.describe('individual_registrations/new', type: :view) do
   before(:each) do
     assign(:individual_registration, IndividualRegistration.new(
-                                       health_condition: nil,
-                                       in_street_situation: nil,
-                                       family_member: nil,
-                                       sociodemographic_info: nil,
-                                       cancel_registration: nil,
-                                       refuse_registration: false,
-                                       form_updated: false,
-                                       uuid: 'MyString',
-                                       uuid_form_origin: 'MyString',
-                                       uuid_citizen: 'MyString',
-                                       tp_cds_origin: 1,
-                                       company: nil,
-                                       slug: 'MyString'
-                                     ))
+      health_condition: nil,
+      in_street_situation: nil,
+      family_member: nil,
+      sociodemographic_info: nil,
+      cancel_registration: nil,
+      refuse_registration: false,
+      form_updated: false,
+      uuid: 'MyString',
+      uuid_form_origin: 'MyString',
+      uuid_citizen: 'MyString',
+      tp_cds_origin: 1,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new individual_registration form' do

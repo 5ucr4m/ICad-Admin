@@ -8,7 +8,7 @@ module HomeRegistrationService
   NAMESPACES = {
     'xmlns:ns2': 'http://esus.ufsc.br/dadoinstalacao',
     'xmlns:ns3': 'http://esus.ufsc.br/dadotransporte',
-    'xmlns:ns4': 'http://esus.ufsc.br/cadastrodomiciliar'
+    'xmlns:ns4': 'http://esus.ufsc.br/cadastrodomiciliar',
   }.freeze
 
   class << self
@@ -31,7 +31,7 @@ module HomeRegistrationService
         end
       end
 
-      home_type = [2, 3, 4, 5, 6, 12, 99].include? data.home_type.reference.to_i
+      home_type = [2, 3, 4, 5, 6, 12, 99].include?(data.home_type.reference.to_i)
 
       if home_type || !data.refuse_registration
         home_registration.living_condition do |hc|

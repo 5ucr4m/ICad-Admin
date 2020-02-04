@@ -7,7 +7,7 @@
       <div class="d-flex order-lg-2 ml-auto">
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-            <span class="avatar" style="background-image: url(<%= image_path(current_user.avatar.attached? ? url_for(current_user.avatar) : 'logo.png') %>)"></span>
+            <%= image_tag(current_user.avatar.attached? ? current_user.avatar : 'logo.png', class: 'avatar') %>
             <span class="ml-2 d-none d-lg-block">
               <span class="text-blue-deep font-weight-bold"><%= current_user.email %></span>
                 <small class="text-muted font-weight-bold d-block mt-1">

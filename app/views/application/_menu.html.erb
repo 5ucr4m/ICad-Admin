@@ -11,7 +11,19 @@
               <i class="fas fa-chart-line mr-2"></i>Dashboard
             <% end %>
           </li>
-          <%= render current_user.admin? ? 'menu_list_admin' : 'menu_list_user' %>
+          <% if current_user.admin? || current_user.support? %>
+            <%= render 'menu_registries' %>
+          <% end %>
+          <% if current_user.admin? || current_user.agent? || current_user.support? %>
+            <%= render 'menu_forms' %>
+          <% end %>
+          <% if current_user.admin? || current_user.support? %>
+            <%= render 'menu_administration' %>
+            <%= render 'menu_configuration' %>
+          <% end %>
+          <% if current_user.role.present? %>
+            <%= render 'menu_reports' %>
+          <% end %>
         </ul>
       </div>
     </div>

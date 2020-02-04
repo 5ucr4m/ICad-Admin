@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe 'states/edit', type: :view do
+RSpec.describe('states/edit', type: :view) do
   before(:each) do
     @state = assign(:state, State.create!(
-                              name: 'MyString',
-                              abbreviation: 'MyString',
-                              code: 'MyString',
-                              reference: 'MyString',
-                              country: nil,
-                              slug: 'MyString'
-                            ))
+      name: 'MyString',
+      abbreviation: 'MyString',
+      code: 'MyString',
+      reference: 'MyString',
+      country: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit state form' do

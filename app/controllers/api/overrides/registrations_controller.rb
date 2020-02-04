@@ -12,11 +12,11 @@ module Api
       protected
 
       def render_create_success
-        render json: @resource, serializer: UserSerializer
+        render(json: @resource, serializer: UserSerializer)
       end
 
       def render_update_success
-        render json: @resource, serializer: UserSerializer
+        render(json: @resource, serializer: UserSerializer)
       end
 
       def account_update_params

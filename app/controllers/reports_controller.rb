@@ -4,18 +4,20 @@ class ReportsController < WebController
   breadcrumb 'Relatórios', :root_path
 
   def families
+    authorize(:report, :families?)
     @query = Family.ransack(permitted_params)
     @result = @query.result.includes(:family_income)
     @result = @result.where(user: current_user) if current_user.agent?
     if @result.empty?
       blank_return
     else
-      query_return @result, @result.includes(family_members: [:ethnicity, :gender, :home_registration, :race,
-                                                              :birth_country, :nationality, :company, city: [:state]]).map(&:family_members).flatten
+      query_return(@result, @result.includes(family_members: [:ethnicity, :gender, :home_registration, :race,
+                                                              :birth_country, :nationality, :company, city: [:state]]).map(&:family_members).flatten)
     end
   end
 
   def family_members
+    authorize(:report, :family_members?)
     @query = FamilyMember.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
@@ -24,11 +26,12 @@ class ReportsController < WebController
     else
       @result = @result.includes(:ethnicity, :gender, :home_registration, :race,
                                  :birth_country, :nationality, :company, city: [:state])
-      query_return @result, @result
+      query_return(@result, @result)
     end
   end
 
   def individual_registrations
+    authorize(:report, :individual_registrations?)
     @query = IndividualRegistration.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
@@ -38,11 +41,12 @@ class ReportsController < WebController
       @result = @result.includes(sociodemographic_info:
                                      %i[gender_identity parent_relation occupation job_market_situation],
                                  family_member: %i[ethnicity gender home_registration])
-      query_return @result, @result.map(&:family_member).flatten
+      query_return(@result, @result.map(&:family_member).flatten)
     end
   end
 
   def home_registrations
+    authorize(:report, :home_registrations?)
     @query = HomeRegistration.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
@@ -50,11 +54,12 @@ class ReportsController < WebController
       blank_return
     else
       @result = @result.includes(family_members: %i[ethnicity gender home_registration])
-      query_return @result, @result.map(&:family_members).flatten
+      query_return(@result, @result.map(&:family_members).flatten)
     end
   end
 
   def home_visit_registrations
+    authorize(:report, :home_visit_registrations?)
     @query = HomeVisitForm.ransack(permitted_params)
     @result = @query.result
     @result = @result.includes(:user).where(user: current_user)
@@ -62,11 +67,12 @@ class ReportsController < WebController
       blank_return
     else
       @result = @result.includes(family_members: %i[ethnicity gender home_registration])
-      query_return @result, @result.map(&:family_member).flatten
+      query_return(@result, @result.map(&:family_member).flatten)
     end
   end
 
   def vaccinations
+    authorize(:report, :vaccinations?)
     @query = Vaccination.ransack(permitted_params)
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
@@ -74,24 +80,25 @@ class ReportsController < WebController
       blank_return
     else
       @result = @result.includes(family_member: %i[ethnicity gender home_registration])
-      query_return @result, @result.map(&:family_member).flatten
+      query_return(@result, @result.map(&:family_member).flatten)
     end
   end
 
   def resume_registry
+    authorize(:report, :resume_registry?)
     @family_members = FamilyMember.where(created_at: params[:start_date]..params[:end_date]).count
   end
 
   def sociodemographic_situation
-
+    authorize(:report, :sociodemographic_situation?)
   end
 
   def street_situation
-
+    authorize(:report, :street_situation?)
   end
 
   def family_member_disabilities
-
+    authorize(:report, :family_member_disabilities?)
   end
 
   private

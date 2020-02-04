@@ -2,30 +2,30 @@
 
 require 'rails_helper'
 
-RSpec.describe 'families/index', type: :view do
+RSpec.describe('families/index', type: :view) do
   before(:each) do
     assign(:families, [
-             Family.create!(
-               home_registration: nil,
-               responsible_cns_number: 'Responsible Cns Number',
-               members_quantity: 2,
-               handbook_number: 'Handbook Number',
-               family_income_id: 3,
-               moving: false,
-               company: nil,
-               slug: 'Slug'
-             ),
-             Family.create!(
-               home_registration: nil,
-               responsible_cns_number: 'Responsible Cns Number',
-               members_quantity: 2,
-               handbook_number: 'Handbook Number',
-               family_income_id: 3,
-               moving: false,
-               company: nil,
-               slug: 'Slug'
-             )
-           ])
+      Family.create!(
+        home_registration: nil,
+        responsible_cns_number: 'Responsible Cns Number',
+        members_quantity: 2,
+        handbook_number: 'Handbook Number',
+        family_income_id: 3,
+        moving: false,
+        company: nil,
+        slug: 'Slug'
+      ),
+      Family.create!(
+        home_registration: nil,
+        responsible_cns_number: 'Responsible Cns Number',
+        members_quantity: 2,
+        handbook_number: 'Handbook Number',
+        family_income_id: 3,
+        moving: false,
+        company: nil,
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of families' do

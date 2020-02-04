@@ -11,13 +11,15 @@
           <h3 class="card-title">
             <i class="fas <%= t('activerecord.models.period_item.icon') %> mr-2"></i><%= PeriodItem.model_name.human(count: 2) %>
           </h3>
-          <div class="card-options">
-            <h3 class="card-title text-blue-deep">
-              Total de fichas: <span class="font-weight-bold"><%= @pagy&.count || 0 %></span>
-            </h3>
-          </div>
+          <% if @period&.period_items&.any? %>
+            <div class="card-options">
+              <h3 class="card-title text-blue-deep">
+                Total de fichas: <span class="font-weight-bold"><%= @pagy&.count || 0 %></span>
+              </h3>
+            </div>
+          <% end %>
         </div>
-        <% if @period_items&.any? %>
+        <% if @period&.period_items&.any? %>
           <div class="table-responsive">
             <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
               <thead>

@@ -2,36 +2,39 @@
 
 module Api
   class CancelRegistrationsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_cancel_registration, only: %i[show update destroy]
 
     # GET /cancel_registrations/1
     def show
-      render_json @cancel_registration
+      authorize(@cancel_registration)
+      render_json(@cancel_registration)
     end
 
     # POST /cancel_registrations
     def create
+      authorize(CancelRegistration)
       @cancel_registration = CancelRegistration.new(cancel_registration_params)
 
       if @cancel_registration.save
-        render_json @cancel_registration, :created
+        render_json(@cancel_registration, :created)
       else
-        unprocessable_entity @cancel_registration
+        unprocessable_entity(@cancel_registration)
       end
     end
 
     # PATCH/PUT /cancel_registrations/1
     def update
+      authorize(@cancel_registration)
       if @cancel_registration.update(cancel_registration_params)
-        render_json @cancel_registration, :ok, true
+        render_json(@cancel_registration, :ok, true)
       else
-        unprocessable_entity @cancel_registration
+        unprocessable_entity(@cancel_registration)
       end
     end
 
     # DELETE /cancel_registrations/1
     def destroy
+      authorize(@cancel_registration)
       @cancel_registration.destroy
     end
 
@@ -40,10 +43,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_cancel_registration
       @cancel_registration = if params[:individual_registration_id]
-                               CancelRegistration
-                                 .find_by(individual_registration_id: params[:individual_registration_id])
-                             else
-                               CancelRegistration.find(params[:id])
+        CancelRegistration
+          .find_by(individual_registration_id: params[:individual_registration_id])
+      else
+        CancelRegistration.find(params[:id])
                              end
     end
 

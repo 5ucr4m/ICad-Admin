@@ -26,7 +26,7 @@
         <th><%= GenericModel.human_attribute_name :generic_class %></th>
         <th><%= GenericModel.human_attribute_name :generic_model %></th>
         <th><%= GenericModel.human_attribute_name :slug %></th>
-        <% if can? :manage, GenericModel %>
+        <% if policy(GenericModel).show? %>
           <th><%= t('helpers.actions.action') %></th>
         <% end %>
       </tr>
@@ -41,7 +41,7 @@
           <td><%= generic_model.generic_class %></td>
           <td><%= generic_model.generic_model_id %></td>
           <td><%= generic_model.slug %></td>
-          <% if can? :manage, GenericModel %>
+          <% if policy(GenericModel).show? %>
             <td>
               <%= render 'application/table_links', f: generic_model %>
             </td>

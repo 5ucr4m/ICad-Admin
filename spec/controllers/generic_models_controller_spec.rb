@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe GenericModelsController, type: :controller do
+RSpec.describe(GenericModelsController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # GenericModel. As you add validations to GenericModel, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe GenericModelsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      GenericModel.create! valid_attributes
+      GenericModel.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      generic_model = GenericModel.create! valid_attributes
+      generic_model = GenericModel.create!(valid_attributes)
       get :show, params: { id: generic_model.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      generic_model = GenericModel.create! valid_attributes
+      generic_model = GenericModel.create!(valid_attributes)
       get :edit, params: { id: generic_model.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe GenericModelsController, type: :controller do
       it 'creates a new GenericModel' do
         expect do
           post :create, params: { generic_model: valid_attributes }, session: valid_session
-        end.to change(GenericModel, :count).by(1)
+        end.to(change(GenericModel, :count).by(1))
       end
 
       it 'redirects to the created generic_model' do
         post :create, params: { generic_model: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(GenericModel.last)
+        expect(response).to(redirect_to(GenericModel.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { generic_model: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe GenericModelsController, type: :controller do
       end
 
       it 'updates the requested generic_model' do
-        generic_model = GenericModel.create! valid_attributes
+        generic_model = GenericModel.create!(valid_attributes)
         put :update, params: { id: generic_model.to_param, generic_model: new_attributes }, session: valid_session
         generic_model.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the generic_model' do
-        generic_model = GenericModel.create! valid_attributes
+        generic_model = GenericModel.create!(valid_attributes)
         put :update, params: { id: generic_model.to_param, generic_model: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(generic_model)
+        expect(response).to(redirect_to(generic_model))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        generic_model = GenericModel.create! valid_attributes
+        generic_model = GenericModel.create!(valid_attributes)
         put :update, params: { id: generic_model.to_param, generic_model: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested generic_model' do
-      generic_model = GenericModel.create! valid_attributes
+      generic_model = GenericModel.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: generic_model.to_param }, session: valid_session
-      end.to change(GenericModel, :count).by(-1)
+      end.to(change(GenericModel, :count).by(-1))
     end
 
     it 'redirects to the generic_models list' do
-      generic_model = GenericModel.create! valid_attributes
+      generic_model = GenericModel.create!(valid_attributes)
       delete :destroy, params: { id: generic_model.to_param }, session: valid_session
-      expect(response).to redirect_to(generic_models_url)
+      expect(response).to(redirect_to(generic_models_url))
     end
   end
 end

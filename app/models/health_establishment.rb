@@ -57,6 +57,6 @@ class HealthEstablishment < ApplicationRecord
   def check_federal_registry
     return if federal_registry.blank?
 
-    CNPJ.valid? federal_registry
+    CNPJ.valid?(federal_registry)
   end
 end

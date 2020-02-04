@@ -36,39 +36,41 @@
         </div>
       </div>
     </div>
-    <% if can? :manage, User %>
-      <div class="col-12">
-        <div class="card mb-3">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i class="fas fa-check mr-2"></i><%= Role.model_name.human(count: 2) %>
-            </h3>
-            <div class="card-options">
-              <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
-                <i class="fe fe-chevron-up"></i>
-              </a>
+    <% if @user.persisted? && current_user.admin? && current_user.email != @user.email || !@user.persisted? %>
+      <% if can? :manage, User %>
+        <div class="col-12">
+          <div class="card mb-3">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-check mr-2"></i><%= Role.model_name.human(count: 2) %>
+              </h3>
+              <div class="card-options">
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+                  <i class="fe fe-chevron-up"></i>
+                </a>
+              </div>
             </div>
-          </div>
-          <% unless show?(f.object.persisted?) %>
-            <div class="card-body py-2">
-              <%= link_to_add_association f, :user_companies,
-                                          class: 'btn btn-sm btn-primary', role: 'button',
-                                          data: {
-                                            'association-insertion-node': '#user_companies',
-                                            'association-insertion-method': 'append'
-                                          },
-                                          wrap_object: Proc.new { |user_company| user_company.user_roles.build unless user_company.persisted?; user_company } do %>
-                <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+            <% unless show?(f.object.persisted?) %>
+              <div class="card-body py-2">
+                <%= link_to_add_association f, :user_companies,
+                                            class: 'btn btn-sm btn-primary', role: 'button',
+                                            data: {
+                                              'association-insertion-node': '#user_companies',
+                                              'association-insertion-method': 'append'
+                                            },
+                                            wrap_object: Proc.new { |user_company| user_company.user_roles.build unless user_company.persisted?; user_company } do %>
+                  <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                <% end %>
+              </div>
+            <% end %>
+            <div id="user_companies" class="card-body px-3">
+              <%= f.simple_fields_for :user_companies do |user_company| %>
+                <%= render 'application/user_company_fields', f: user_company %>
               <% end %>
             </div>
-          <% end %>
-          <div id="user_companies" class="card-body px-3">
-            <%= f.simple_fields_for :user_companies do |user_company| %>
-              <%= render 'application/user_company_fields', f: user_company %>
-            <% end %>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @user} %>

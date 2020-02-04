@@ -1,5 +1,0 @@
-<div class="nested-fields">
-  <%= f.association :role, collection: Permission.all,
-                    label_method: :model_reference,
-                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-</div>

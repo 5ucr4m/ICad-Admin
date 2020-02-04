@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class HomeRegistrationsController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_home_registration, only: %i[show edit update destroy]
 
   breadcrumb HomeRegistration.model_name.human(count: 2), :home_registrations_path
 
   # GET /home_registrations
   def index
+    authorize(HomeRegistration)
     @query = HomeRegistration.ransack(params[:q])
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
@@ -16,49 +16,55 @@ class HomeRegistrationsController < WebController
 
   # GET /home_registrations/1
   def show
-    breadcrumb @home_registration.slug, home_registration_path(@home_registration)
+    authorize(@home_registration)
+    breadcrumb(@home_registration.slug, home_registration_path(@home_registration))
   end
 
   # GET /home_registrations/new
   def new
-    breadcrumb t('helpers.submit.new'), new_home_registration_path
+    authorize(HomeRegistration)
+    breadcrumb(t('helpers.submit.new'), new_home_registration_path)
     @home_registration = HomeRegistration.new
     @home_registration.build_relationships
   end
 
   # GET /home_registrations/1/edit
   def edit
-    breadcrumb @home_registration.slug, home_registration_path(@home_registration)
+    authorize(@home_registration)
+    breadcrumb(@home_registration.slug, home_registration_path(@home_registration))
   end
 
   # POST /home_registrations
   def create
-    breadcrumb t('helpers.submit.new'), new_home_registration_path
+    authorize(HomeRegistration)
+    breadcrumb(t('helpers.submit.new'), new_home_registration_path)
     @home_registration = current_user.home_registrations.build(home_registration_params)
     @city_selected = @home_registration.address.city.presence
     @address_type_selected = @home_registration.address.address_type.presence
 
     if @home_registration.save
-      redirect_to home_registrations_url, notice: 'Home registration was successfully created.'
+      redirect_to(home_registrations_url, notice: 'Home registration was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /home_registrations/1
   def update
-    breadcrumb @home_registration.slug, home_registration_path(@home_registration)
+    authorize(@home_registration)
+    breadcrumb(@home_registration.slug, home_registration_path(@home_registration))
     if @home_registration.update(home_registration_params)
-      redirect_to home_registrations_url, notice: 'Home registration was successfully updated.'
+      redirect_to(home_registrations_url, notice: 'Home registration was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /home_registrations/1
   def destroy
+    authorize(@home_registration)
     @home_registration.destroy
-    redirect_to home_registrations_url, notice: 'Home registration was successfully destroyed.'
+    redirect_to(home_registrations_url, notice: 'Home registration was successfully destroyed.')
   end
 
   private
@@ -66,11 +72,11 @@ class HomeRegistrationsController < WebController
   # Use callbacks to share common setup or constraints between actions.
   def set_home_registration
     @home_registration = if current_user.agent?
-                           current_user.homer_registrations
-                                       .includes(families: [:family_members]).friendly.find(params[:id])
-                         else
-                           HomeRegistration.all
-                                           .includes(families: [:family_members]).friendly.find(params[:id])
+      current_user.homer_registrations
+        .includes(families: [:family_members]).friendly.find(params[:id])
+    else
+      HomeRegistration.all
+        .includes(families: [:family_members]).friendly.find(params[:id])
                          end
     @city_selected = @home_registration&.address&.city&.presence
     @address_type_selected = @home_registration&.address&.address_type&.presence

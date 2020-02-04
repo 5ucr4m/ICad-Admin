@@ -6,5 +6,5 @@ require_relative 'config/environment'
 require 'sidekiq/web'
 
 # Initialize Sidekiq and Rails Application.
-run Sidekiq::Web
-run Rails.application
+run(Sidekiq::Web)
+run(Rails.application)

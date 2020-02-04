@@ -50,73 +50,64 @@
   <% end %>
 </div>
 <div class="row row-cards">
-  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-    <div class="card mb-3">
-      <div class="card-header">
-        <h3 class="font-weight-bold py-4 mb-0">
-          <i class="far fa-chart-bar mr-2"></i>Gráficos
-        </h3>
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row">
+      <div class="col-lg-6 mb-0">
+        <%= render 'application/periods', periods: @periods %>
       </div>
-      <div class="card-body p-4">
-        <div class="tabs-content">
-          <div class="tab-pane fade show active" id="families" role="tabpanel" aria-labelledby="families-tab">
-            <%= render 'application/chart', id: 'chart-families' %>
+      <div class="col-lg-6 mb-0">
+        <%= render 'application/vaccination_campaigns', vaccination_campaigns: @vaccination_campaigns %>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3">
+          <div class="card-header">
             <h4 class="mt-2 mb-0 text-center"><%= Family.model_name.human(count: 2) %></h4>
           </div>
-          <div class="tab-pane fade" id="family-members" role="tabpanel" aria-labelledby="family-members-tab">
-            <%= render 'application/chart', id: 'chart-family-members' %>
-            <h4 class="mt-2 mb-0 text-center"><%= FamilyMember.model_name.human(count: 2) %></h4>
-          </div>
-          <div class="tab-pane fade" id="individual-registrations" role="tabpanel" aria-labelledby="individual-registrations-tab">
-            <%= render 'application/chart', id: 'chart-individual-registrations' %>
-            <h4 class="mt-2 mb-0 text-center"><%= IndividualRegistration.model_name.human(count: 2) %></h4>
-          </div>
-          <div class="tab-pane fade" id="home-registrations" role="tabpanel" aria-labelledby="home-registrations-tab">
-            <%= render 'application/chart', id: 'chart-home-registrations' %>
-            <h4 class="mt-2 mb-0 text-center"><%= HomeRegistration.model_name.human(count: 2) %></h4>
-          </div>
-          <div class="tab-pane fade" id="home-visit-registrations" role="tabpanel" aria-labelledby="home-visit-registrations-tab">
-            <%= render 'application/chart', id: 'chart-home-visit-registrations' %>
-            <h4 class="mt-2 mb-0 text-center"><%= HomeVisitRegistration.model_name.human(count: 2) %></h4>
+          <div class="card-body p-1">
+            <%= render 'application/chart', id: 'chart-families' %>
           </div>
         </div>
       </div>
-      <div class="nav card-tabs card-tabs-bottom" role="tablist">
-        <div id="families-tab" class="card-tabs-item text-center nav-link active"
-             data-toggle="tab" data-target="#families" role="tab" aria-controls="families" aria-selected="true" title="<%= Family.model_name.human(count: 2) %>">
-          <h5 class="py-0 mb-0">
-            <i class="<%= t('activerecord.models.family.icon') %>"></i>
-          </h5>
+      <div class="col-lg-4">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h4 class="mt-2 mb-0 text-center"><%= FamilyMember.model_name.human(count: 2) %></h4>
+          </div>
+          <div class="card-body p-1">
+            <%= render 'application/chart', id: 'chart-family-members' %>
+          </div>
         </div>
-        <div id="family-members-tab" class="card-tabs-item text-center nav-link"
-             data-toggle="tab" data-target="#family-members" role="tab" aria-controls="family-member" aria-selected="false" title="<%= FamilyMember.model_name.human(count: 2) %>">
-          <h5 class="py-0 mb-0">
-            <i class="<%= t('activerecord.models.family_member.icon') %>"></i>
-          </h5>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h4 class="mt-2 mb-0 text-center"><%= IndividualRegistration.model_name.human(count: 2) %></h4>
+          </div>
+          <div class="card-body p-1">
+            <%= render 'application/chart', id: 'chart-individual-registrations' %>
+          </div>
         </div>
-        <div id="individual-registrations-tab" class="card-tabs-item text-center nav-link"
-             data-toggle="tab" data-target="#individual-registrations" role="tab" aria-controls="individual-registrations" aria-selected="false" title="<%= IndividualRegistration.model_name.human(count: 2) %>">
-          <h5 class="py-0 mb-0">
-            <i class="<%= t('activerecord.models.individual_registration.icon') %>"></i>
-          </h5>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h4 class="mt-2 mb-0 text-center"><%= HomeRegistration.model_name.human(count: 2) %></h4>
+          </div>
+          <div class="card-body p-1">
+            <%= render 'application/chart', id: 'chart-home-registrations' %>
+          </div>
         </div>
-        <div id="home-registrations-tab" class="card-tabs-item text-center nav-link"
-             data-toggle="tab" data-target="#home-registrations" role="tab" aria-controls="home-registrations" aria-selected="false" title="<%= HomeRegistration.model_name.human(count: 2) %>">
-          <h5 class="py-0 mb-0">
-            <i class="<%= t('activerecord.models.home_registration.icon') %>"></i>
-          </h5>
-        </div>
-        <div id="home-visit-registrations-tab" class="card-tabs-item text-center nav-link"
-             data-toggle="tab" data-target="#home-visit-registrations" role="tab" aria-controls="home-visit-registrations" aria-selected="false" title="<%= HomeVisitRegistration.model_name.human(count: 2) %>">
-          <h5 class="py-0 mb-0">
-            <i class="<%= t('activerecord.models.home_visit_registration.icon') %>"></i>
-          </h5>
+      </div>
+      <div class="col-lg-4">
+        <div class="card mb-3">
+          <div class="card-header">
+            <h4 class="mt-2 mb-0 text-center"><%= HomeVisitRegistration.model_name.human(count: 2) %></h4>
+          </div>
+          <div class="card-body p-1">
+            <%= render 'application/chart', id: 'chart-home-visit-registrations' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-    <%= render 'application/periods', periods: @periods %>
-    <%= render 'application/vaccination_campaigns', vaccination_campaigns: @vaccination_campaigns %>
   </div>
 </div>

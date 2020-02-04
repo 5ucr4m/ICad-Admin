@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRespiratoryDiseasesTypes < SeedMigration::Migration
   def up
     GenericModel.create!(name: 'Asma'.mb_chars.upcase, reference: 30, generic_field: :respiratory_disease, generic_class: HealthConditionRespiratory.model_name.name)
@@ -6,7 +8,5 @@ class CreateRespiratoryDiseasesTypes < SeedMigration::Migration
     GenericModel.create!(name: 'Não sabe'.mb_chars.upcase, reference: 33, generic_field: :respiratory_disease, generic_class: HealthConditionRespiratory.model_name.name)
   end
 
-  def down
-
-  end
+  def down; end
 end

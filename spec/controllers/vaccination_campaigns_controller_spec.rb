@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe VaccinationCampaignsController, type: :controller do
+RSpec.describe(VaccinationCampaignsController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # VaccinationCampaign. As you add validations to VaccinationCampaign, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe VaccinationCampaignsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      VaccinationCampaign.create! valid_attributes
+      VaccinationCampaign.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      vaccination_campaign = VaccinationCampaign.create! valid_attributes
+      vaccination_campaign = VaccinationCampaign.create!(valid_attributes)
       get :show, params: { id: vaccination_campaign.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      vaccination_campaign = VaccinationCampaign.create! valid_attributes
+      vaccination_campaign = VaccinationCampaign.create!(valid_attributes)
       get :edit, params: { id: vaccination_campaign.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe VaccinationCampaignsController, type: :controller do
       it 'creates a new VaccinationCampaign' do
         expect do
           post :create, params: { vaccination_campaign: valid_attributes }, session: valid_session
-        end.to change(VaccinationCampaign, :count).by(1)
+        end.to(change(VaccinationCampaign, :count).by(1))
       end
 
       it 'redirects to the created vaccination_campaign' do
         post :create, params: { vaccination_campaign: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(VaccinationCampaign.last)
+        expect(response).to(redirect_to(VaccinationCampaign.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { vaccination_campaign: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe VaccinationCampaignsController, type: :controller do
       end
 
       it 'updates the requested vaccination_campaign' do
-        vaccination_campaign = VaccinationCampaign.create! valid_attributes
+        vaccination_campaign = VaccinationCampaign.create!(valid_attributes)
         put :update, params: { id: vaccination_campaign.to_param, vaccination_campaign: new_attributes }, session: valid_session
         vaccination_campaign.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the vaccination_campaign' do
-        vaccination_campaign = VaccinationCampaign.create! valid_attributes
+        vaccination_campaign = VaccinationCampaign.create!(valid_attributes)
         put :update, params: { id: vaccination_campaign.to_param, vaccination_campaign: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(vaccination_campaign)
+        expect(response).to(redirect_to(vaccination_campaign))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        vaccination_campaign = VaccinationCampaign.create! valid_attributes
+        vaccination_campaign = VaccinationCampaign.create!(valid_attributes)
         put :update, params: { id: vaccination_campaign.to_param, vaccination_campaign: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested vaccination_campaign' do
-      vaccination_campaign = VaccinationCampaign.create! valid_attributes
+      vaccination_campaign = VaccinationCampaign.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: vaccination_campaign.to_param }, session: valid_session
-      end.to change(VaccinationCampaign, :count).by(-1)
+      end.to(change(VaccinationCampaign, :count).by(-1))
     end
 
     it 'redirects to the vaccination_campaigns list' do
-      vaccination_campaign = VaccinationCampaign.create! valid_attributes
+      vaccination_campaign = VaccinationCampaign.create!(valid_attributes)
       delete :destroy, params: { id: vaccination_campaign.to_param }, session: valid_session
-      expect(response).to redirect_to(vaccination_campaigns_url)
+      expect(response).to(redirect_to(vaccination_campaigns_url))
     end
   end
 end

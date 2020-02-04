@@ -2,20 +2,21 @@
 
 module Api
   class StatesController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_state, only: %i[show]
 
     # GET /states
     def index
+      authorize(State)
       states = Rails.cache.fetch('states') do
         State.all
       end
-      render json: states, adapter: false
+      render(json: states, adapter: false)
     end
 
     # GET /states/1
     def show
-      render_json @state
+      authorize(@state)
+      render_json(@state)
     end
 
     private

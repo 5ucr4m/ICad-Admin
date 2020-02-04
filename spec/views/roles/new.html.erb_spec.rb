@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'roles/new', type: :view do
+RSpec.describe('roles/new', type: :view) do
   before(:each) do
     assign(:role, Role.new(
-                    name: 'MyString',
-                    description: 'MyText',
-                    role_type: 1,
-                    admin: false,
-                    slug: 'MyString'
-                  ))
+      name: 'MyString',
+      description: 'MyText',
+      role_type: 1,
+      admin: false,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new role form' do

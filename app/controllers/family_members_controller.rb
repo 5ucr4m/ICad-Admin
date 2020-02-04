@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class FamilyMembersController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_family_member, only: %i[show edit update destroy]
 
   breadcrumb FamilyMember.model_name.human(count: 2), :family_members_path
 
   # GET /family_members
   def index
+    authorize(FamilyMember)
     @query = FamilyMember.ransack(params[:q])
     @result = @query.result
     respond_to do |format|
@@ -21,47 +21,53 @@ class FamilyMembersController < WebController
 
   # GET /family_members/1
   def show
-    breadcrumb @family_member.slug, family_member_path(@family_member)
+    authorize(@family_member)
+    breadcrumb(@family_member.slug, family_member_path(@family_member))
   end
 
   # GET /family_members/new
   def new
-    breadcrumb "#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path
+    authorize(FamilyMember)
+    breadcrumb("#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path)
     @family_member = FamilyMember.new
   end
 
   # GET /family_members/1/edit
   def edit
-    breadcrumb @family_member.slug, family_member_path(@family_member)
+    authorize(@family_member)
+    breadcrumb(@family_member.slug, family_member_path(@family_member))
   end
 
   # POST /family_members
   def create
-    breadcrumb "#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path
+    authorize(FamilyMember)
+    breadcrumb("#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path)
     @family_member = current_user.family_members.build(family_member_params)
     set_selected_options
 
     if @family_member.save
-      redirect_to family_members_url, notice: 'Family member was successfully created.'
+      redirect_to(family_members_url, notice: 'Family member was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /family_members/1
   def update
-    breadcrumb @family_member.slug, family_member_path(@family_member)
+    authorize(@family_member)
+    breadcrumb(@family_member.slug, family_member_path(@family_member))
     if @family_member.update(family_member_params)
-      redirect_to family_members_url, notice: 'Family member was successfully updated.'
+      redirect_to(family_members_url, notice: 'Family member was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /family_members/1
   def destroy
+    authorize(@family_member)
     @family_member.destroy
-    redirect_to family_members_url, notice: 'Family member was successfully destroyed.'
+    redirect_to(family_members_url, notice: 'Family member was successfully destroyed.')
   end
 
   private

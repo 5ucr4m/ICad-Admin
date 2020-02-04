@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe StatesController, type: :controller do
+RSpec.describe(StatesController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # State. As you add validations to State, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe StatesController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      State.create! valid_attributes
+      State.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      state = State.create! valid_attributes
+      state = State.create!(valid_attributes)
       get :show, params: { id: state.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      state = State.create! valid_attributes
+      state = State.create!(valid_attributes)
       get :edit, params: { id: state.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe StatesController, type: :controller do
       it 'creates a new State' do
         expect do
           post :create, params: { state: valid_attributes }, session: valid_session
-        end.to change(State, :count).by(1)
+        end.to(change(State, :count).by(1))
       end
 
       it 'redirects to the created state' do
         post :create, params: { state: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(State.last)
+        expect(response).to(redirect_to(State.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { state: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe StatesController, type: :controller do
       end
 
       it 'updates the requested state' do
-        state = State.create! valid_attributes
+        state = State.create!(valid_attributes)
         put :update, params: { id: state.to_param, state: new_attributes }, session: valid_session
         state.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the state' do
-        state = State.create! valid_attributes
+        state = State.create!(valid_attributes)
         put :update, params: { id: state.to_param, state: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(state)
+        expect(response).to(redirect_to(state))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        state = State.create! valid_attributes
+        state = State.create!(valid_attributes)
         put :update, params: { id: state.to_param, state: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested state' do
-      state = State.create! valid_attributes
+      state = State.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: state.to_param }, session: valid_session
-      end.to change(State, :count).by(-1)
+      end.to(change(State, :count).by(-1))
     end
 
     it 'redirects to the states list' do
-      state = State.create! valid_attributes
+      state = State.create!(valid_attributes)
       delete :destroy, params: { id: state.to_param }, session: valid_session
-      expect(response).to redirect_to(states_url)
+      expect(response).to(redirect_to(states_url))
     end
   end
 end

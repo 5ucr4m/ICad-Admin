@@ -1,64 +1,72 @@
 # frozen_string_literal: true
 
 class GenericModelsController < WebController
-  load_and_authorize_resource find_by: :slug
   skip_authorize_resource only: %i[address_types cbo_types ethnicity_types]
   before_action :set_generic_model, only: %i[show edit update destroy]
   before_action :set_query, except: %i[index new create show edit update destroy]
 
   # GET /generic_models
   def index
+    authorize(GenericModel)
     @query = GenericModel.ransack(params[:q])
     @pagy, @generic_models = pagy(@query.result, page: params[:page], items: 10)
   end
 
   def address_types
-    render_json @query.result.address_types.includes(:generic_model)
+    render_json(@query.result.address_types.includes(:generic_model))
   end
 
   def cbo_types
-    render_json @query.result.cbo_types.includes(:generic_model)
+    render_json(@query.result.cbo_types.includes(:generic_model))
   end
 
   def ethnicity_types
-    render_json @query.result.ethnicities.includes(:generic_model)
+    render_json(@query.result.ethnicities.includes(:generic_model))
   end
 
   # GET /generic_models/1
-  def show; end
+  def show
+    authorize(@generic_model)
+  end
 
   # GET /generic_models/new
   def new
+    authorize(@generic_model)
     @generic_model = GenericModel.new
   end
 
   # GET /generic_models/1/edit
-  def edit; end
+  def edit
+    authorize(@generic_model)
+  end
 
   # POST /generic_models
   def create
+    authorize(GenericModel)
     @generic_model = GenericModel.new(generic_model_params)
 
     if @generic_model.save
-      redirect_to @generic_model, notice: 'Generic model was successfully created.'
+      redirect_to(@generic_model, notice: 'Generic model was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /generic_models/1
   def update
+    authorize(@generic_model)
     if @generic_model.update(generic_model_params)
-      redirect_to @generic_model, notice: 'Generic model was successfully updated.'
+      redirect_to(@generic_model, notice: 'Generic model was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /generic_models/1
   def destroy
+    authorize(@generic_model)
     @generic_model.destroy
-    redirect_to generic_models_url, notice: 'Generic model was successfully destroyed.'
+    redirect_to(generic_models_url, notice: 'Generic model was successfully destroyed.')
   end
 
   private

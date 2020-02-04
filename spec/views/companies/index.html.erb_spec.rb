@@ -2,38 +2,38 @@
 
 require 'rails_helper'
 
-RSpec.describe 'companies/index', type: :view do
+RSpec.describe('companies/index', type: :view) do
   before(:each) do
     assign(:companies, [
-             Company.create!(
-               legal_full_name: 'Legal Full Name',
-               fancy_name: 'Fancy Name',
-               federal_registry: 'Federal Registry',
-               state_registry: 'State Registry',
-               patio: 'Patio',
-               number: 'Number',
-               zip: 'Zip',
-               reference: 'Reference',
-               district: 'District',
-               city: nil,
-               complement: 'Complement',
-               slug: 'Slug'
-             ),
-             Company.create!(
-               legal_full_name: 'Legal Full Name',
-               fancy_name: 'Fancy Name',
-               federal_registry: 'Federal Registry',
-               state_registry: 'State Registry',
-               patio: 'Patio',
-               number: 'Number',
-               zip: 'Zip',
-               reference: 'Reference',
-               district: 'District',
-               city: nil,
-               complement: 'Complement',
-               slug: 'Slug'
-             )
-           ])
+      Company.create!(
+        legal_full_name: 'Legal Full Name',
+        fancy_name: 'Fancy Name',
+        federal_registry: 'Federal Registry',
+        state_registry: 'State Registry',
+        patio: 'Patio',
+        number: 'Number',
+        zip: 'Zip',
+        reference: 'Reference',
+        district: 'District',
+        city: nil,
+        complement: 'Complement',
+        slug: 'Slug'
+      ),
+      Company.create!(
+        legal_full_name: 'Legal Full Name',
+        fancy_name: 'Fancy Name',
+        federal_registry: 'Federal Registry',
+        state_registry: 'State Registry',
+        patio: 'Patio',
+        number: 'Number',
+        zip: 'Zip',
+        reference: 'Reference',
+        district: 'District',
+        city: nil,
+        complement: 'Complement',
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of companies' do

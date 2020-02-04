@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe 'cities/edit', type: :view do
+RSpec.describe('cities/edit', type: :view) do
   before(:each) do
     @city = assign(:city, City.create!(
-                            name: 'MyString',
-                            abbreviation: 'MyString',
-                            code: 'MyString',
-                            state: nil,
-                            reference: 'MyString',
-                            slug: 'MyString'
-                          ))
+      name: 'MyString',
+      abbreviation: 'MyString',
+      code: 'MyString',
+      state: nil,
+      reference: 'MyString',
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit city form' do

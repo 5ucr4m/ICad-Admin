@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe 'generic_models/edit', type: :view do
+RSpec.describe('generic_models/edit', type: :view) do
   before(:each) do
     @generic_model = assign(:generic_model, GenericModel.create!(
-                                              name: 'MyString',
-                                              description: 'MyString',
-                                              reference: 'MyString',
-                                              generic_field: 'MyString',
-                                              generic_class: 'MyString',
-                                              generic_model: nil,
-                                              slug: 'MyString'
-                                            ))
+      name: 'MyString',
+      description: 'MyString',
+      reference: 'MyString',
+      generic_field: 'MyString',
+      generic_class: 'MyString',
+      generic_model: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit generic_model form' do

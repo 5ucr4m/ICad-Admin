@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe 'states/new', type: :view do
+RSpec.describe('states/new', type: :view) do
   before(:each) do
     assign(:state, State.new(
-                     name: 'MyString',
-                     abbreviation: 'MyString',
-                     code: 'MyString',
-                     reference: 'MyString',
-                     country: nil,
-                     slug: 'MyString'
-                   ))
+      name: 'MyString',
+      abbreviation: 'MyString',
+      code: 'MyString',
+      reference: 'MyString',
+      country: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new state form' do

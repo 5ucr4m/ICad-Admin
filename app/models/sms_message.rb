@@ -7,7 +7,7 @@ class SmsMessage < ApplicationRecord
   belongs_to :sms_schedule, optional: true
   belongs_to :company, optional: true
 
-  enum status: %i[standby sent blocked]
+  enum status: { standby: 0, sent: 1, blocked: 2 }
 
   ransack_alias :search, :id_to_s
 end

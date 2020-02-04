@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class FamiliesController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_family, only: %i[show edit update destroy]
 
   breadcrumb Family.model_name.human(count: 2), :families_path
@@ -20,12 +19,12 @@ class FamiliesController < WebController
 
   # GET /families/1
   def show
-    breadcrumb @family.slug, family_path(@family)
+    breadcrumb(@family.slug, family_path(@family))
   end
 
   # GET /families/new
   def new
-    breadcrumb t('helpers.submit.new'), new_family_path
+    breadcrumb(t('helpers.submit.new'), new_family_path)
     @family = Family.new
     @family.family_members.build
     @family.build_relationships.build_relationships
@@ -33,36 +32,36 @@ class FamiliesController < WebController
 
   # GET /families/1/edit
   def edit
-    breadcrumb @family.slug, family_path(@family)
+    breadcrumb(@family.slug, family_path(@family))
   end
 
   # POST /families
   def create
-    breadcrumb t('helpers.submit.new'), new_family_path
+    breadcrumb(t('helpers.submit.new'), new_family_path)
     @family = current_user.families.build(family_params)
     @city_selected = @family&.home_registration&.address&.city.presence
 
     if @family.save
-      redirect_to families_url, notice: 'Family was successfully created.'
+      redirect_to(families_url, notice: 'Family was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /families/1
   def update
-    breadcrumb @family.slug, family_path(@family)
+    breadcrumb(@family.slug, family_path(@family))
     if @family.update(family_params)
-      redirect_to families_url, notice: 'Family was successfully updated.'
+      redirect_to(families_url, notice: 'Family was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /families/1
   def destroy
     @family.destroy
-    redirect_to families_url, notice: 'Family was successfully destroyed.'
+    redirect_to(families_url, notice: 'Family was successfully destroyed.')
   end
 
   private
@@ -155,7 +154,7 @@ class FamiliesController < WebController
                                        reference
                                        out_area
                                        micro_area
-                                     ]
+                                     ],
                                    ])
   end
 end

@@ -2,30 +2,30 @@
 
 require 'rails_helper'
 
-RSpec.describe 'health_professionals/index', type: :view do
+RSpec.describe('health_professionals/index', type: :view) do
   before(:each) do
     assign(:health_professionals, [
-             HealthProfessional.create!(
-               cns_code: 'Cns Code',
-               cbo_code: nil,
-               full_name: 'Full Name',
-               federal_registry: 'Federal Registry',
-               state_registry: 'State Registry',
-               professional_team: nil,
-               company: nil,
-               slug: 'Slug'
-             ),
-             HealthProfessional.create!(
-               cns_code: 'Cns Code',
-               cbo_code: nil,
-               full_name: 'Full Name',
-               federal_registry: 'Federal Registry',
-               state_registry: 'State Registry',
-               professional_team: nil,
-               company: nil,
-               slug: 'Slug'
-             )
-           ])
+      HealthProfessional.create!(
+        cns_code: 'Cns Code',
+        cbo_code: nil,
+        full_name: 'Full Name',
+        federal_registry: 'Federal Registry',
+        state_registry: 'State Registry',
+        professional_team: nil,
+        company: nil,
+        slug: 'Slug'
+      ),
+      HealthProfessional.create!(
+        cns_code: 'Cns Code',
+        cbo_code: nil,
+        full_name: 'Full Name',
+        federal_registry: 'Federal Registry',
+        state_registry: 'State Registry',
+        professional_team: nil,
+        company: nil,
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of health_professionals' do

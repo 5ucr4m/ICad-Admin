@@ -2,26 +2,26 @@
 
 require 'rails_helper'
 
-RSpec.describe 'cities/index', type: :view do
+RSpec.describe('cities/index', type: :view) do
   before(:each) do
     assign(:cities, [
-             City.create!(
-               name: 'Name',
-               abbreviation: 'Abbreviation',
-               code: 'Code',
-               state: nil,
-               reference: 'Reference',
-               slug: 'Slug'
-             ),
-             City.create!(
-               name: 'Name',
-               abbreviation: 'Abbreviation',
-               code: 'Code',
-               state: nil,
-               reference: 'Reference',
-               slug: 'Slug'
-             )
-           ])
+      City.create!(
+        name: 'Name',
+        abbreviation: 'Abbreviation',
+        code: 'Code',
+        state: nil,
+        reference: 'Reference',
+        slug: 'Slug'
+      ),
+      City.create!(
+        name: 'Name',
+        abbreviation: 'Abbreviation',
+        code: 'Code',
+        state: nil,
+        reference: 'Reference',
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of cities' do

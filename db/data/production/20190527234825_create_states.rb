@@ -32,7 +32,7 @@ class CreateStates < SeedMigration::Migration
 
     country = GenericModel.find_by(generic_field: :country, reference: 31)
     http = Net::HTTP.new('raw.githubusercontent.com', 443); http.use_ssl = true
-    states = JSON.parse http.get('/celsodantas/br_populate/master/states.json').body
+    states = JSON.parse(http.get('/celsodantas/br_populate/master/states.json').body)
 
     states.each do |state|
       state_obj = State.find_by(name: state['name'].mb_chars.upcase)

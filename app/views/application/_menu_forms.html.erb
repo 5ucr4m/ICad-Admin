@@ -1,0 +1,26 @@
+<li class="nav-item dropdown">
+  <a href="javascript:void(0)" class="nav-link <%= "active" if !%w(dashboards reports).include?(controller_name) &&
+    Role::FORMS.include?(controller_name.singularize.camelize.constantize) %> py-4" data-toggle="dropdown" aria-expanded="false">
+    <i class="<%= t('modules.forms.icon') %> mr-2"></i><%= t('modules.forms.label') %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+    <%= link_to families_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.family.icon') %> dropdown-icon"></i><%= t('activerecord.models.family.other') %>
+    <% end %>
+    <%= link_to family_members_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.family_member.icon') %> dropdown-icon"></i><%= t('activerecord.models.family_member.other') %>
+    <% end %>
+    <%= link_to vaccinations_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.vaccination.icon') %> dropdown-icon"></i><%= t('activerecord.models.vaccination.other') %>
+    <% end %>
+    <%= link_to individual_registrations_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.individual_registration.icon') %> dropdown-icon"></i><%= t('activerecord.models.individual_registration.other') %>
+    <% end %>
+    <%= link_to home_visit_registrations_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.home_visit_registration.icon') %> dropdown-icon"></i><%= t('activerecord.models.home_visit_registration.other') %>
+    <% end %>
+    <%= link_to home_registrations_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.home_registration.icon') %> dropdown-icon"></i><%= t('activerecord.models.home_registration.other') %>
+    <% end %>
+  </div>
+</li>

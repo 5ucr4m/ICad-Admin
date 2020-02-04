@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe PeriodsController, type: :controller do
+RSpec.describe(PeriodsController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # Period. As you add validations to Period, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe PeriodsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      Period.create! valid_attributes
+      Period.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      period = Period.create! valid_attributes
+      period = Period.create!(valid_attributes)
       get :show, params: { id: period.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      period = Period.create! valid_attributes
+      period = Period.create!(valid_attributes)
       get :edit, params: { id: period.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe PeriodsController, type: :controller do
       it 'creates a new Period' do
         expect do
           post :create, params: { period: valid_attributes }, session: valid_session
-        end.to change(Period, :count).by(1)
+        end.to(change(Period, :count).by(1))
       end
 
       it 'redirects to the created period' do
         post :create, params: { period: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(Period.last)
+        expect(response).to(redirect_to(Period.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { period: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe PeriodsController, type: :controller do
       end
 
       it 'updates the requested period' do
-        period = Period.create! valid_attributes
+        period = Period.create!(valid_attributes)
         put :update, params: { id: period.to_param, period: new_attributes }, session: valid_session
         period.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the period' do
-        period = Period.create! valid_attributes
+        period = Period.create!(valid_attributes)
         put :update, params: { id: period.to_param, period: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(period)
+        expect(response).to(redirect_to(period))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        period = Period.create! valid_attributes
+        period = Period.create!(valid_attributes)
         put :update, params: { id: period.to_param, period: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested period' do
-      period = Period.create! valid_attributes
+      period = Period.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: period.to_param }, session: valid_session
-      end.to change(Period, :count).by(-1)
+      end.to(change(Period, :count).by(-1))
     end
 
     it 'redirects to the periods list' do
-      period = Period.create! valid_attributes
+      period = Period.create!(valid_attributes)
       delete :destroy, params: { id: period.to_param }, session: valid_session
-      expect(response).to redirect_to(periods_url)
+      expect(response).to(redirect_to(periods_url))
     end
   end
 end

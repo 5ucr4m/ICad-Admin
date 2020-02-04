@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-RSpec.describe 'vaccination_campaigns/edit', type: :view do
+RSpec.describe('vaccination_campaigns/edit', type: :view) do
   before(:each) do
     @vaccination_campaign = assign(:vaccination_campaign, VaccinationCampaign.create!(
-                                                            title: 'MyString',
-                                                            description: 'MyString',
-                                                            age_initial: 1,
-                                                            age_end: 1,
-                                                            company: nil,
-                                                            slug: 'MyString'
-                                                          ))
+      title: 'MyString',
+      description: 'MyString',
+      age_initial: 1,
+      age_end: 1,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit vaccination_campaign form' do

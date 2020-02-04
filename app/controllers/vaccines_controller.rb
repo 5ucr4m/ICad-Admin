@@ -1,52 +1,60 @@
 # frozen_string_literal: true
 
 class VaccinesController < WebController
-  load_and_authorize_resource find_by: :slug
   before_action :set_vaccine, only: %i[show edit update destroy]
 
   breadcrumb Vaccine.model_name.human(count: 2), :vaccines_path
 
   # GET /vaccines
   def index
+    authorize(Vaccine)
     @query = Vaccine.ransack(params[:q])
     @pagy, @vaccines = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /vaccines/1
-  def show; end
+  def show
+    authorize(@vaccine)
+  end
 
   # GET /vaccines/new
   def new
+    authorize(Vaccine)
     @vaccine = Vaccine.new
   end
 
   # GET /vaccines/1/edit
-  def edit; end
+  def edit
+    authorize(@vaccine)
+  end
 
   # POST /vaccines
   def create
+    authorize(Vaccine)
     @vaccine = Vaccine.new(vaccine_params)
 
     if @vaccine.save
-      redirect_to vaccines_url, notice: 'Vaccine was successfully created.'
+      redirect_to(vaccines_url, notice: 'Vaccine was successfully created.')
     else
-      render :new
+      render(:new)
     end
   end
 
   # PATCH/PUT /vaccines/1
   def update
+    authorize(@vaccine)
     if @vaccine.update(vaccine_params)
-      redirect_to vaccines_url, notice: 'Vaccine was successfully updated.'
+      redirect_to(vaccines_url, notice: 'Vaccine was successfully updated.')
     else
-      render :edit
+      render(:edit)
     end
   end
 
   # DELETE /vaccines/1
   def destroy
+    authorize(@vaccine)
     @vaccine.destroy
-    redirect_to vaccines_url, notice: 'Vaccine was successfully destroyed.'
+    redirect_to(vaccines_url, notice: 'Vaccine was successfully destroyed.')
   end
 
   private

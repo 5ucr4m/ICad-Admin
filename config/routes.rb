@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
       [user, password] == [ENV['SIDEKIQ_USERNAME'], ENV['SIDEKIQ_PASSWORD']]
     end
-    Sidekiq::Web.set :session_secret, Rails.application.secrets[:secret_key_base]
+    Sidekiq::Web.set(:session_secret, Rails.application.secrets[:secret_key_base])
   end
 
   get 'dashboard', to: 'dashboards#dashboard'
@@ -88,9 +88,9 @@ Rails.application.routes.draw do
 
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
-    sign_out: 'logout'
+    sign_out: 'logout',
   }, controllers: {
-    registrations: 'registrations'
+    registrations: 'registrations',
   }
 
   devise_scope :user do
@@ -99,7 +99,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-      sessions: 'api/overrides/sessions'
+      sessions: 'api/overrides/sessions',
     }
 
     resources :states

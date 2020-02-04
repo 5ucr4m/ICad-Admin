@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe 'periods/edit', type: :view do
+RSpec.describe('periods/edit', type: :view) do
   before(:each) do
     @period = assign(:period, Period.create!(
-                                company: nil,
-                                slug: 'MyString'
-                              ))
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit period form' do

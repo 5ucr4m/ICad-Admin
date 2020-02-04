@@ -2,34 +2,34 @@
 
 require 'rails_helper'
 
-RSpec.describe 'family_members/edit', type: :view do
+RSpec.describe('family_members/edit', type: :view) do
   before(:each) do
     @family_member = assign(:family_member, FamilyMember.create!(
-                                              family: nil,
-                                              social_name: 'MyString',
-                                              city: nil,
-                                              unknown_mother: false,
-                                              mother_name: 'MyString',
-                                              email: 'MyString',
-                                              nationality: nil,
-                                              name: 'MyString',
-                                              cns_number: 'MyString',
-                                              cns_responsible: 'MyString',
-                                              phone: 'MyString',
-                                              pis_pasep_number: 'MyString',
-                                              birth_country: nil,
-                                              race: nil,
-                                              gender: nil,
-                                              responsible: false,
-                                              ethnicity: nil,
-                                              unknown_father: false,
-                                              father_name: 'MyString',
-                                              naturalize_decree: 'MyString',
-                                              micro_area: 'MyString',
-                                              out_area: false,
-                                              company: nil,
-                                              slug: 'MyString'
-                                            ))
+      family: nil,
+      social_name: 'MyString',
+      city: nil,
+      unknown_mother: false,
+      mother_name: 'MyString',
+      email: 'MyString',
+      nationality: nil,
+      name: 'MyString',
+      cns_number: 'MyString',
+      cns_responsible: 'MyString',
+      phone: 'MyString',
+      pis_pasep_number: 'MyString',
+      birth_country: nil,
+      race: nil,
+      gender: nil,
+      responsible: false,
+      ethnicity: nil,
+      unknown_father: false,
+      father_name: 'MyString',
+      naturalize_decree: 'MyString',
+      micro_area: 'MyString',
+      out_area: false,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit family_member form' do

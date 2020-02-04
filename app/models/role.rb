@@ -7,54 +7,42 @@ class Role < ApplicationRecord
     HealthEstablishment,
     HealthProfessional,
     ProfessionalTeam,
-    VaccinationCampaign,
     Vaccine,
-    Period
+    PeriodItem,
   ].freeze
 
-  AGENT_FORMS = [
+  FORMS = [
+    Family,
+    FamilyMember,
     HomeRegistration,
     HomeVisitRegistration,
-    IndividualRegistration
+    IndividualRegistration,
+    Vaccination,
   ].freeze
 
-  OTHER_FORMS = [
-    Vaccination
-  ].freeze
-
-  REPORTS = [
-    PeriodItem
-  ].freeze
-
-  AGENT_REPORTS = [
-    PeriodItem
-  ].freeze
-
-  ADMIN_CONFIGURATION = [
+  ADMINISTRATION = [
     User,
     Company,
     City,
     Role,
-    State
+    State,
   ].freeze
 
-  USER_CONFIGURATION = [
-    User
-  ].freeze
-
-  ADMIN_SUPPORT = [
+  CONFIGURATION = [
+    Period,
     SmsSchedule,
-    SmsMessage
+    SmsMessage,
+    VaccinationCampaign,
   ].freeze
+
+  REPORTS = [].freeze
 
   has_many :user_roles
   has_many :user_companies, through: :user_roles
   has_many :companies, through: :user_companies
   has_many :users, through: :companies
-  has_many :role_permissions
-  has_many :permissions, through: :role_permissions
 
-  enum role_type: %i[admin mayor secretary doctor nurse nurse_aux agent dentist dentist_aux support]
+  enum role_type: { admin: 0, mayor: 1, secretary: 2, doctor: 3, nurse: 4, nurse_aux: 5, agent: 6, dentist: 7, dentist_aux: 8, support: 9, citizen: 10 }
 
   ransack_alias :search, :id_to_s
 

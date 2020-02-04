@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'roles/edit', type: :view do
+RSpec.describe('roles/edit', type: :view) do
   before(:each) do
     @role = assign(:role, Role.create!(
-                            name: 'MyString',
-                            description: 'MyText',
-                            role_type: 1,
-                            admin: false,
-                            slug: 'MyString'
-                          ))
+      name: 'MyString',
+      description: 'MyText',
+      role_type: 1,
+      admin: false,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit role form' do

@@ -92,15 +92,15 @@ class HomeRegistration < ApplicationRecord
 
   def dup_home_registration
     hr = amoeba_dup
-    unless address.blank?
+    if address.present?
       hr.address = address.amoeba_dup
       address.discard
     end
-    unless living_condition.blank?
+    if living_condition.present?
       hr.living_condition = living_condition.amoeba_dup
       living_condition.discard
     end
-    unless permanence_institution.blank?
+    if permanence_institution.present?
       hr.permanence_institution = permanence_institution.amoeba_dup
       permanence_institution.discard
     end

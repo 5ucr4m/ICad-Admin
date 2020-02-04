@@ -2,18 +2,18 @@
 
 require 'rails_helper'
 
-RSpec.describe 'families/edit', type: :view do
+RSpec.describe('families/edit', type: :view) do
   before(:each) do
     @family = assign(:family, Family.create!(
-                                home_registration: nil,
-                                responsible_cns_number: 'MyString',
-                                members_quantity: 1,
-                                handbook_number: 'MyString',
-                                family_income_id: 1,
-                                moving: false,
-                                company: nil,
-                                slug: 'MyString'
-                              ))
+      home_registration: nil,
+      responsible_cns_number: 'MyString',
+      members_quantity: 1,
+      handbook_number: 'MyString',
+      family_income_id: 1,
+      moving: false,
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders the edit family form' do

@@ -16,7 +16,7 @@ module EstabelecimentoSaudeService
     'xmlns:soap': 'http://www.w3.org/2003/05/soap-envelope',
     'xmlns:fil': 'http://servicos.saude.gov.br/wsdl/mensageria/v1r0/filtropesquisaestabelecimentosaude',
     'xmlns:cod': 'http://servicos.saude.gov.br/schema/cnes/v1r0/codigocnes',
-    'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj'
+    'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj',
   }.freeze
 
   NAMESPACES_PRODUCAO = {
@@ -26,15 +26,15 @@ module EstabelecimentoSaudeService
     'xmlns:soap': 'http://www.w3.org/2003/05/soap-envelope',
     'xmlns:fil': 'http://servicos.saude.gov.br/wsdl/mensageria/v1r0/filtropesquisaestabelecimentosaude',
     'xmlns:cod': 'http://servicos.saude.gov.br/schema/cnes/v1r0/codigocnes',
-    'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj'
+    'xmlns:cnpj': 'http://servicos.saude.gov.br/schema/corporativo/pessoajuridica/v1r0/cnpj',
   }.freeze
 
   class << self
     def call(operation, obj)
       urls = if Rails.env.development?
-               [URL_HOMOLOGACAO, NAMESPACES_HOMOLOGACAO]
-             else
-               [URL_PRODUCAO, NAMESPACES_PRODUCAO]
+        [URL_HOMOLOGACAO, NAMESPACES_HOMOLOGACAO]
+      else
+        [URL_PRODUCAO, NAMESPACES_PRODUCAO]
              end
       request = OpenStruct.new(operation: operation, url: urls[0],
                                body: send(operation, obj), namespaces: urls[1])

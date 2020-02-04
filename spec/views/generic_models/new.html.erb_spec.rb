@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe 'generic_models/new', type: :view do
+RSpec.describe('generic_models/new', type: :view) do
   before(:each) do
     assign(:generic_model, GenericModel.new(
-                             name: 'MyString',
-                             description: 'MyString',
-                             reference: 'MyString',
-                             generic_field: 'MyString',
-                             generic_class: 'MyString',
-                             generic_model: nil,
-                             slug: 'MyString'
-                           ))
+      name: 'MyString',
+      description: 'MyString',
+      reference: 'MyString',
+      generic_field: 'MyString',
+      generic_class: 'MyString',
+      generic_model: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new generic_model form' do

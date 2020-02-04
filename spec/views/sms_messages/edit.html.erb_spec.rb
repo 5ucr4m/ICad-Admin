@@ -2,15 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe 'sms_messages/edit', type: :view do
+RSpec.describe('sms_messages/edit', type: :view) do
   before(:each) do
     @sms_message = assign(:sms_message, SmsMessage.create!(
-                                          number: 1,
-                                          status: 1,
-                                          sms_schedule: nil,
-                                          slug: 'MyString',
-                                          company: nil
-                                        ))
+      number: 1,
+      status: 1,
+      sms_schedule: nil,
+      slug: 'MyString',
+      company: nil
+    ))
   end
 
   it 'renders the edit sms_message form' do

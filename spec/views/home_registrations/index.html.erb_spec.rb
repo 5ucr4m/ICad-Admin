@@ -2,46 +2,46 @@
 
 require 'rails_helper'
 
-RSpec.describe 'home_registrations/index', type: :view do
+RSpec.describe('home_registrations/index', type: :view) do
   before(:each) do
     assign(:home_registrations, [
-             HomeRegistration.create!(
-               location_x: 'Location X',
-               location_y: 'Location Y',
-               health_professional: nil,
-               living_condition: nil,
-               address: nil,
-               form_updated: false,
-               pet_quantity: 2,
-               refuse_registration: false,
-               tp_cds_origin: 3,
-               uuid: 'Uuid',
-               uuid_form_origin: 'Uuid Form Origin',
-               home_type: nil,
-               permanence_institution: nil,
-               finished: false,
-               company: nil,
-               slug: 'Slug'
-             ),
-             HomeRegistration.create!(
-               location_x: 'Location X',
-               location_y: 'Location Y',
-               health_professional: nil,
-               living_condition: nil,
-               address: nil,
-               form_updated: false,
-               pet_quantity: 2,
-               refuse_registration: false,
-               tp_cds_origin: 3,
-               uuid: 'Uuid',
-               uuid_form_origin: 'Uuid Form Origin',
-               home_type: nil,
-               permanence_institution: nil,
-               finished: false,
-               company: nil,
-               slug: 'Slug'
-             )
-           ])
+      HomeRegistration.create!(
+        location_x: 'Location X',
+        location_y: 'Location Y',
+        health_professional: nil,
+        living_condition: nil,
+        address: nil,
+        form_updated: false,
+        pet_quantity: 2,
+        refuse_registration: false,
+        tp_cds_origin: 3,
+        uuid: 'Uuid',
+        uuid_form_origin: 'Uuid Form Origin',
+        home_type: nil,
+        permanence_institution: nil,
+        finished: false,
+        company: nil,
+        slug: 'Slug'
+      ),
+      HomeRegistration.create!(
+        location_x: 'Location X',
+        location_y: 'Location Y',
+        health_professional: nil,
+        living_condition: nil,
+        address: nil,
+        form_updated: false,
+        pet_quantity: 2,
+        refuse_registration: false,
+        tp_cds_origin: 3,
+        uuid: 'Uuid',
+        uuid_form_origin: 'Uuid Form Origin',
+        home_type: nil,
+        permanence_institution: nil,
+        finished: false,
+        company: nil,
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of home_registrations' do

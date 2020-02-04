@@ -2,26 +2,26 @@
 
 require 'rails_helper'
 
-RSpec.describe 'states/index', type: :view do
+RSpec.describe('states/index', type: :view) do
   before(:each) do
     assign(:states, [
-             State.create!(
-               name: 'Name',
-               abbreviation: 'Abbreviation',
-               code: 'Code',
-               reference: 'Reference',
-               country: nil,
-               slug: 'Slug'
-             ),
-             State.create!(
-               name: 'Name',
-               abbreviation: 'Abbreviation',
-               code: 'Code',
-               reference: 'Reference',
-               country: nil,
-               slug: 'Slug'
-             )
-           ])
+      State.create!(
+        name: 'Name',
+        abbreviation: 'Abbreviation',
+        code: 'Code',
+        reference: 'Reference',
+        country: nil,
+        slug: 'Slug'
+      ),
+      State.create!(
+        name: 'Name',
+        abbreviation: 'Abbreviation',
+        code: 'Code',
+        reference: 'Reference',
+        country: nil,
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of states' do

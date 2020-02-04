@@ -40,10 +40,10 @@ class HealthProfessional < ApplicationRecord
 
     he_saved = HealthEstablishment.find_by(cnes_code: he['CodigoCNES']['codigo'])
 
-    if he_saved
-      self.health_establishment = he_saved
+    self.health_establishment = if he_saved
+      he_saved
     else
-      self.health_establishment = HealthEstablishment.create!(
+      HealthEstablishment.create!(
         unit_code: he['CodigoUnidade']['codigo'],
         fancy_name: he['nomeFantasia']['Nome'],
         legal_full_name: he['nomeEmpresarial']['Nome'],

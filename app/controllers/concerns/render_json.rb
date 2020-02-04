@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module RenderJson
-  def render_json(object, status = :ok, persisted = false)
-    if object.is_a? ActiveRecord::Relation
-      render json: object.page(params[:page])
+  def render_json(object, status = :ok, persisted = false, type = nil)
+    if object.is_a?(ActiveRecord::Relation)
+      render(json: object.page(params[:page]))
     elsif persisted
       render(json: object, status: status, location: object)
     else
-      render(json: object, status: status)
+      render(json: object, status: status, root: type&.model_name&.name&.pluralize || 'data')
     end
   end
 end

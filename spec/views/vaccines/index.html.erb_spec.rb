@@ -2,30 +2,30 @@
 
 require 'rails_helper'
 
-RSpec.describe 'vaccines/index', type: :view do
+RSpec.describe('vaccines/index', type: :view) do
   before(:each) do
     assign(:vaccines, [
-             Vaccine.create!(
-               description: 'Description',
-               immunobiological: nil,
-               vaccination_strategy: nil,
-               dose: nil,
-               lot_number: 'Lot Number',
-               manufacturer: 'Manufacturer',
-               company: nil,
-               slug: 'Slug'
-             ),
-             Vaccine.create!(
-               description: 'Description',
-               immunobiological: nil,
-               vaccination_strategy: nil,
-               dose: nil,
-               lot_number: 'Lot Number',
-               manufacturer: 'Manufacturer',
-               company: nil,
-               slug: 'Slug'
-             )
-           ])
+      Vaccine.create!(
+        description: 'Description',
+        immunobiological: nil,
+        vaccination_strategy: nil,
+        dose: nil,
+        lot_number: 'Lot Number',
+        manufacturer: 'Manufacturer',
+        company: nil,
+        slug: 'Slug'
+      ),
+      Vaccine.create!(
+        description: 'Description',
+        immunobiological: nil,
+        vaccination_strategy: nil,
+        dose: nil,
+        lot_number: 'Lot Number',
+        manufacturer: 'Manufacturer',
+        company: nil,
+        slug: 'Slug'
+      ),
+    ])
   end
 
   it 'renders a list of vaccines' do

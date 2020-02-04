@@ -25,7 +25,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe ProfessionalTeamsController, type: :controller do
+RSpec.describe(ProfessionalTeamsController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # ProfessionalTeam. As you add validations to ProfessionalTeam, be sure to
   # adjust the attributes here as well.
@@ -44,32 +44,32 @@ RSpec.describe ProfessionalTeamsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      ProfessionalTeam.create! valid_attributes
+      ProfessionalTeam.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      professional_team = ProfessionalTeam.create! valid_attributes
+      professional_team = ProfessionalTeam.create!(valid_attributes)
       get :show, params: { id: professional_team.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      professional_team = ProfessionalTeam.create! valid_attributes
+      professional_team = ProfessionalTeam.create!(valid_attributes)
       get :edit, params: { id: professional_team.to_param }, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
@@ -78,19 +78,19 @@ RSpec.describe ProfessionalTeamsController, type: :controller do
       it 'creates a new ProfessionalTeam' do
         expect do
           post :create, params: { professional_team: valid_attributes }, session: valid_session
-        end.to change(ProfessionalTeam, :count).by(1)
+        end.to(change(ProfessionalTeam, :count).by(1))
       end
 
       it 'redirects to the created professional_team' do
         post :create, params: { professional_team: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(ProfessionalTeam.last)
+        expect(response).to(redirect_to(ProfessionalTeam.last))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { professional_team: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
@@ -102,40 +102,40 @@ RSpec.describe ProfessionalTeamsController, type: :controller do
       end
 
       it 'updates the requested professional_team' do
-        professional_team = ProfessionalTeam.create! valid_attributes
+        professional_team = ProfessionalTeam.create!(valid_attributes)
         put :update, params: { id: professional_team.to_param, professional_team: new_attributes }, session: valid_session
         professional_team.reload
         skip('Add assertions for updated state')
       end
 
       it 'redirects to the professional_team' do
-        professional_team = ProfessionalTeam.create! valid_attributes
+        professional_team = ProfessionalTeam.create!(valid_attributes)
         put :update, params: { id: professional_team.to_param, professional_team: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(professional_team)
+        expect(response).to(redirect_to(professional_team))
       end
     end
 
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        professional_team = ProfessionalTeam.create! valid_attributes
+        professional_team = ProfessionalTeam.create!(valid_attributes)
         put :update, params: { id: professional_team.to_param, professional_team: invalid_attributes }, session: valid_session
-        expect(response).to be_successful
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe 'DELETE #destroy' do
     it 'destroys the requested professional_team' do
-      professional_team = ProfessionalTeam.create! valid_attributes
+      professional_team = ProfessionalTeam.create!(valid_attributes)
       expect do
         delete :destroy, params: { id: professional_team.to_param }, session: valid_session
-      end.to change(ProfessionalTeam, :count).by(-1)
+      end.to(change(ProfessionalTeam, :count).by(-1))
     end
 
     it 'redirects to the professional_teams list' do
-      professional_team = ProfessionalTeam.create! valid_attributes
+      professional_team = ProfessionalTeam.create!(valid_attributes)
       delete :destroy, params: { id: professional_team.to_param }, session: valid_session
-      expect(response).to redirect_to(professional_teams_url)
+      expect(response).to(redirect_to(professional_teams_url))
     end
   end
 end

@@ -2,11 +2,11 @@
 
 module Api
   class HealthProfessionalsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_health_professional, only: %i[show edit update destroy]
 
     # GET /health_professionals
     def index
+      authorize(@health_professional)
       @query = HealthProfessional.ransack(params[:q])
       @health_professionals = @query.result
       if params[:professional_team_id]
@@ -15,39 +15,43 @@ module Api
       if params[:health_establishment_id]
         @health_professionals = @health_professionals.where(health_establishment_id: params[:health_establishment_id])
       end
-      render_json @health_professionals.includes(:cbo_code,
+      render_json(@health_professionals.includes(:cbo_code,
                                                  :professional_team,
-                                                 :health_establishment)
+                                                 :health_establishment))
     end
 
     # GET /health_professionals/1
     def show
-      render_json @health_professional
+      authorize(@health_professional)
+      render_json(@health_professional)
     end
 
     # POST /health_professionals
     def create
+      authorize(HealthProfessional)
       @health_professional = HealthProfessional.new(health_professional_params)
       @cbo_selected = @health_professional.cbo_code.presence
 
       if @health_professional.save
-        render_json @health_professional, :created
+        render_json(@health_professional, :created)
       else
-        unprocessable_entity @health_professional
+        unprocessable_entity(@health_professional)
       end
     end
 
     # PATCH/PUT /health_professionals/1
     def update
+      authorize(@health_professional)
       if @health_professional.update(health_professional_params)
-        render_json @health_professional, :ok, true
+        render_json(@health_professional, :ok, true)
       else
-        unprocessable_entity @health_professional
+        unprocessable_entity(@health_professional)
       end
     end
 
     # DELETE /health_professionals/1
     def destroy
+      authorize(@health_professional)
       @health_professional.destroy
     end
 

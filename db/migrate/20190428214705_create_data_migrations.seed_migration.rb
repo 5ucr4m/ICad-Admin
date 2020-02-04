@@ -4,15 +4,15 @@
 class CreateDataMigrations < ActiveRecord::Migration[6.0]
   def up
     create_table SeedMigration.migration_table_name do |t|
-      t.string :version
-      t.integer :runtime
-      t.datetime :migrated_on
+      t.string(:version)
+      t.integer(:runtime)
+      t.datetime(:migrated_on)
 
       t.timestamps
     end
   end
 
   def down
-    drop_table SeedMigration.migration_table_name
+    drop_table(SeedMigration.migration_table_name)
   end
 end

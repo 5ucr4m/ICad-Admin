@@ -12,6 +12,8 @@ class ProfessionalTeam < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_name_or_code_or_health_establishment_legal_full_name
 
+  scope :active?, -> { where(active: true) }
+
   def name_formatted
     "#{code} - #{name}"
   end

@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe 'periods/new', type: :view do
+RSpec.describe('periods/new', type: :view) do
   before(:each) do
     assign(:period, Period.new(
-                      company: nil,
-                      slug: 'MyString'
-                    ))
+      company: nil,
+      slug: 'MyString'
+    ))
   end
 
   it 'renders new period form' do

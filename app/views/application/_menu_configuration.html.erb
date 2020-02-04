@@ -1,0 +1,20 @@
+<li class="nav-item dropdown">
+  <a href="javascript:void(0)" class="nav-link <%= "active" if !%w(dashboards reports).include?(controller_name) &&
+    Role::CONFIGURATION.include?(controller_name.singularize.camelize.constantize) %> py-4" data-toggle="dropdown" aria-expanded="false">
+    <i class="<%= t('modules.configuration.icon') %> mr-2"></i><%= t('modules.configuration.label') %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+    <%= link_to periods_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.period.icon') %> dropdown-icon"></i><%= t('activerecord.models.period.other') %>
+    <% end %>
+    <%= link_to sms_schedules_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.sms_schedule.icon') %> dropdown-icon"></i><%= t('activerecord.models.sms_schedule.other') %>
+    <% end %>
+    <%= link_to sms_messages_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.sms_message.icon') %> dropdown-icon"></i><%= t('activerecord.models.sms_message.other') %>
+    <% end %>
+    <%= link_to vaccination_campaigns_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.vaccination_campaign.icon') %> dropdown-icon"></i><%= t('activerecord.models.vaccination_campaign.other') %>
+    <% end %>
+  </div>
+</li>

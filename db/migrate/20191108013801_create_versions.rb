@@ -11,14 +11,14 @@ class CreateVersions < ActiveRecord::Migration[6.0]
 
   def change
     create_table :versions do |t|
-      t.string :item_type, null: false
-      t.integer :item_id, null: false, limit: 8
-      t.string :event, null: false
-      t.string :whodunnit
-      t.text :object, limit: TEXT_BYTES
-      t.string :ip
-      t.string :user_agent
-      t.string :company_id
+      t.string(:item_type, null: false)
+      t.integer(:item_id, null: false, limit: 8)
+      t.string(:event, null: false)
+      t.string(:whodunnit)
+      t.text(:object, limit: TEXT_BYTES)
+      t.string(:ip)
+      t.string(:user_agent)
+      t.string(:company_id)
 
       # Known issue in MySQL: fractional second precision
       # -------------------------------------------------
@@ -33,8 +33,8 @@ class CreateVersions < ActiveRecord::Migration[6.0]
       # version of ActiveRecord with support for fractional seconds in MySQL.
       # (https://github.com/rails/rails/pull/14359)
       #
-      t.datetime :created_at
+      t.datetime(:created_at)
     end
-    add_index :versions, %i[item_type item_id]
+    add_index(:versions, %i[item_type item_id])
   end
 end

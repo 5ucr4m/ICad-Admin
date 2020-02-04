@@ -2,42 +2,46 @@
 
 module Api
   class HealthEstablishmentsController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_health_establishment, only: %i[show edit update destroy]
 
     # GET /health_establishments
     def index
+      authorize(HealthEstablishment)
       @query = HealthEstablishment.ransack(params[:q])
-      render_json @query.result.page(params[:page])
+      render_json(@query.result.page(params[:page]))
     end
 
     # GET /health_establishments/1
     def show
-      render_json @health_establishment
+      authorize(@health_establishment)
+      render_json(@health_establishment)
     end
 
     # POST /health_establishments
     def create
+      authorize(HealthEstablishment)
       @health_establishment = HealthEstablishment.new(health_establishment_params)
 
       if @health_establishment.save
-        render_json @health_establishment, :created
+        render_json(@health_establishment, :created)
       else
-        unprocessable_entity @health_establishment
+        unprocessable_entity(@health_establishment)
       end
     end
 
     # PATCH/PUT /health_establishments/1
     def update
+      authorize(@health_establishment)
       if @health_establishment.update(health_establishment_params)
-        render_json @health_establishment, :ok, true
+        render_json(@health_establishment, :ok, true)
       else
-        unprocessable_entity @health_establishment
+        unprocessable_entity(@health_establishment)
       end
     end
 
     # DELETE /health_establishments/1
     def destroy
+      authorize(@health_establishment)
       @health_establishment.destroy
     end
 

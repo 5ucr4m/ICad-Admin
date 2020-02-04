@@ -2,36 +2,39 @@
 
 module Api
   class SociodemographicInfosController < Api::ApiController
-    load_and_authorize_resource
     before_action :set_sociodemographic_info, only: %i[show update destroy]
 
     # GET /sociodemographic_infos/1
     def show
-      render_json @sociodemographic_info
+      authorize(@sociodemographic_info)
+      render_json(@sociodemographic_info)
     end
 
     # POST /sociodemographic_infos
     def create
+      authorize(SociodemographicInfo)
       @sociodemographic_info = SociodemographicInfo.new(sociodemographic_info_params)
 
       if @sociodemographic_info.save
-        render_json @sociodemographic_info, :created
+        render_json(@sociodemographic_info, :created)
       else
-        unprocessable_entity @sociodemographic_info
+        unprocessable_entity(@sociodemographic_info)
       end
     end
 
     # PATCH/PUT /sociodemographic_infos/1
     def update
+      authorize(@sociodemographic_info)
       if @sociodemographic_info.update(sociodemographic_info_params)
-        render_json @sociodemographic_info, :ok, true
+        render_json(@sociodemographic_info, :ok, true)
       else
-        unprocessable_entity @sociodemographic_info
+        unprocessable_entity(@sociodemographic_info)
       end
     end
 
     # DELETE /sociodemographic_infos/1
     def destroy
+      authorize(@sociodemographic_info)
       @sociodemographic_info.destroy
     end
 
@@ -40,10 +43,10 @@ module Api
     # Use callbacks to share common setup or constraints between actions.
     def set_sociodemographic_info
       @sociodemographic_info = if params[:individual_registration_id]
-                                 SociodemographicInfo
-                                   .find_by(individual_registration_id: params[:individual_registration_id])
-                               else
-                                 SociodemographicInfo.find(params[:id])
+        SociodemographicInfo
+          .find_by(individual_registration_id: params[:individual_registration_id])
+      else
+        SociodemographicInfo.find(params[:id])
                                end
     end
 

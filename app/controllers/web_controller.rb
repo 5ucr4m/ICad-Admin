@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class WebController < ApplicationController
+  include Pundit
   include RenderJson
   include Pagy::Backend
   include JsonExceptionHandler
@@ -13,11 +14,11 @@ class WebController < ApplicationController
 
   breadcrumb 'Dashboard', :root_path
 
-  rescue_from CanCan::AccessDenied do |_exception|
+  rescue_from Pundit::NotAuthorizedError do |_exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'application/json' }
       format.html do
-        redirect_to send(@referrer), flash: { error: t('errors.messages.forbidden') }
+        redirect_to root_path, flash: { error: t('errors.messages.forbidden') }
       end
       format.js { head :forbidden, content_type: 'text/html' }
     end
