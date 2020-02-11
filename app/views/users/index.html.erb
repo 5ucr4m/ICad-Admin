@@ -24,7 +24,7 @@
         <th><%= User.human_attribute_name :health_professional %></th>
         <th><%= HealthProfessional.human_attribute_name :cns_code %></th>
         <th><%= HealthProfessional.human_attribute_name :health_establishment %></th>
-        <% if can? :manage, User %>
+        <% if policy(User).update? || policy(User).destroy? %>
           <th><%= t('helpers.actions.action') %></th>
         <% end %>
       </tr>
@@ -37,7 +37,7 @@
           <td><%= user&.health_professional&.full_name %></td>
           <td><%= user&.health_professional&.cns_code %></td>
           <td><%= user&.health_professional&.professional_team&.health_establishment&.cnes_code %></td>
-          <% if can? :manage, User %>
+          <% if policy(User).update? || policy(User).destroy? %>
             <td>
               <%= render 'application/table_links', f: user %>
             </td>

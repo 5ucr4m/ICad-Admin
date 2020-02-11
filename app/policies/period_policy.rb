@@ -1,6 +1,6 @@
 class PeriodPolicy < ApplicationPolicy
   def index?
-    user&.role&.present?
+    user&.role&.present? && !user.doctor? && !user.citizen?
   end
 
   def show?
@@ -30,6 +30,11 @@ class PeriodPolicy < ApplicationPolicy
   def period_items?
     index?
   end
+
+  def manage?
+    create? && update? && destroy?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

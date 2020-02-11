@@ -42,6 +42,6 @@ class ReportPolicy < Struct.new(:user, :report)
   private
 
   def default_policy
-    user&.role&.present?
+    user&.role&.present? && !user.doctor? && !user.citizen?
   end
 end

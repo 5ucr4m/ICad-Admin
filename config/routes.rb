@@ -3,7 +3,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  apipie
   # Sidekiq web config
   scope :monitoring do
     mount Sidekiq::Web => '/sidekiq'
@@ -46,7 +45,7 @@ Rails.application.routes.draw do
     end
   end
   resources :family_members
-
+  resources :medicines
   resources :home_registrations
   resources :professional_teams
   resources :health_professionals

@@ -42,7 +42,8 @@ class Role < ApplicationRecord
   has_many :companies, through: :user_companies
   has_many :users, through: :companies
 
-  enum role_type: { admin: 0, mayor: 1, secretary: 2, doctor: 3, nurse: 4, nurse_aux: 5, agent: 6, dentist: 7, dentist_aux: 8, support: 9, citizen: 10 }
+  enum role_type: { admin: 0, mayor: 1, secretary: 2, doctor: 3, nurse: 4,
+                    nurse_aux: 5, agent: 6, dentist: 7, dentist_aux: 8, support: 9, citizen: 10 }
 
   ransack_alias :search, :id_to_s
 

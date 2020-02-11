@@ -6,6 +6,7 @@ module Api
 
     # GET /home_registrations
     def index
+      authorize(HomeRegistration)
       @query = HomeRegistration.ransack(params[:q])
       @result = @query.result
       @result = @result.where(user: current_user) if current_user.agent?
@@ -14,11 +15,13 @@ module Api
 
     # GET /home_registrations/1
     def show
+      authorize(HomeRegistration)
       render_json(@home_registration)
     end
 
     # POST /home_registrations
     def create
+      authorize(HomeRegistration)
       @home_registration = current_user.home_registrations.build(home_registration_params)
 
       if @home_registration.save
@@ -30,6 +33,7 @@ module Api
 
     # PATCH/PUT /home_registrations/1
     def update
+      authorize(HomeRegistration)
       if @home_registration.update(home_registration_params)
         render_json(@home_registration, :ok)
       else
@@ -39,6 +43,7 @@ module Api
 
     # DELETE /home_registrations/1
     def destroy
+      authorize(HomeRegistration)
       @home_registration.destroy
     end
 

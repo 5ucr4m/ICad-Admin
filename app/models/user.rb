@@ -50,7 +50,8 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
-  belongs_to :health_professional, optional: true
+  has_one :health_professional, dependent: :nullify
+  has_one :family_member, dependent: :nullify
 
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable
@@ -67,7 +68,6 @@ class User < ApplicationRecord
   has_many :individual_registrations, dependent: :nullify
   has_many :vaccinations, dependent: :nullify
   has_many :families, dependent: :nullify
-  has_many :family_members, dependent: :nullify
   has_many :period_items, dependent: :nullify
 
   accepts_nested_attributes_for :user_companies, allow_destroy: true
@@ -85,8 +85,13 @@ class User < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
+  scope :not_admin, -> {filter(&:not_admin?)}
+  scope :without_user, -> { left_outer_joins(:health_professional).where(health_professionals: { id: nil }) }
+
   def active_for_authentication?
-    super && (agent? && company.present?) || admin?
+    super do |_s|
+      agent? && company.present? || admin?
+    end
   end
 
   def company
@@ -126,6 +131,10 @@ class User < ApplicationRecord
 
   def not_admin?
     !admin?
+  end
+
+  def not_citizen?
+    !citizen?
   end
 
   delegate :mayor?, to: :role

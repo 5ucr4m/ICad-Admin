@@ -32,6 +32,10 @@ class VaccinationCampaignPolicy < ApplicationPolicy
     update?
   end
 
+  def manage?
+    create? && update? && destroy?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

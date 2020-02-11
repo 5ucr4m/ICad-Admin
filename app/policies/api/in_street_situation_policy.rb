@@ -1,7 +1,7 @@
 module Api
   class InStreetSituationPolicy < ApplicationPolicy
     def index?
-      user&.role&.present?
+      user&.role&.present? && !user.doctor? && !user.citizen?
     end
 
     def show?

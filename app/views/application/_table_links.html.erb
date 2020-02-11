@@ -1,14 +1,14 @@
 <%= link_to f, class: 'btn p-1 btn-info mr-1', title: t('helpers.actions.show'), role: 'button' do %>
   <i class="far fa-eye p-0"></i>
 <% end %>
-<% if can? :update, f.model_name.singular.camelize.constantize %>
+<% if policy(f.model_name.singular.camelize.constantize).update? %>
   <%= link_to send("edit_#{f.model_name.singular}_path", f),
               title: t('helpers.actions.edit'),
               class: 'btn p-1 btn-primary mr-1', role: 'button' do %>
     <i class="fas fa-edit p-0"></i>
   <% end %>
 <% end %>
-<% if can? :destroy, f.model_name.singular.camelize.constantize %>
+<% if policy(f.model_name.singular.camelize.constantize).destroy? %>
   <%= link_to f, class: 'btn p-1 btn-danger mr-1', method: :delete,
               data: {confirm: "Confirma a remoção do registro de código ##{f.id}?"},
               title: t('helpers.actions.destroy'),

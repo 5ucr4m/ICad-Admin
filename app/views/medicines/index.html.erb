@@ -1,0 +1,64 @@
+<%= render 'application/page_header', model: Medicine %>
+<div class="card">
+  <div class="card-status bg-transparent"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy, model: Medicine, url: new_medicine_path %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+        <th><%= Medicine.human_attribute_name :substance %></th>
+        <th><%= Medicine.human_attribute_name :laboratory %></th>
+        <th><%= Medicine.human_attribute_name :laboratory_registry %></th>
+        <th><%= Medicine.human_attribute_name :ggrem_code %></th>
+        <th><%= Medicine.human_attribute_name :registry %></th>
+        <th><%= Medicine.human_attribute_name :active_principle %></th>
+        <th><%= Medicine.human_attribute_name :therapeutic_class %></th>
+        <th><%= Medicine.human_attribute_name :product_type %></th>
+        <th><%= Medicine.human_attribute_name :stripe %></th>
+        <% if policy(Medicine).show? %>
+          <th><%= t('helpers.actions.action') %></th>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% @medicines.each do |medicine| %>
+        <tr>
+          <td><%= medicine.substance %></td>
+          <td><%= medicine.laboratory %></td>
+          <td><%= medicine.laboratory_registry %></td>
+          <td><%= medicine.ggrem_code %></td>
+          <td><%= medicine.registry %></td>
+          <td><%= medicine.ean_one %></td>
+          <td><%= medicine.ean_two %></td>
+          <td><%= medicine.ean_three %></td>
+          <td><%= medicine.active_principle %></td>
+          <td><%= medicine.therapeutic_class_id %></td>
+          <td><%= medicine.product_type_id %></td>
+          <td><%= medicine.stripe_id %></td>
+          <% if policy(Medicine).show? %>
+            <td class="text-center">
+              <%= render 'application/table_links', f: medicine %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= render 'application/footer_links', url: new_medicine_path, model: Medicine %>
+  </div>
+</div>

@@ -77,6 +77,9 @@ class GenericModel < ApplicationRecord
   scope :vaccination_strategies, -> { where(generic_field: :vaccination_strategy) }
   scope :doses, -> { where(generic_field: :dose) }
   scope :disabilities, -> { where(generic_field: :citizen_disability) }
+  scope :therapeutic_classes, -> { where(generic_field: :therapeutic_class) }
+  scope :product_types, -> { where(generic_field: :product_type) }
+  scope :stripes, -> { where(generic_field: :stripe) }
   scope :by_module_reference, ->(reference) { app_modules.find_by(reference: reference) }
 
   def name_formatted

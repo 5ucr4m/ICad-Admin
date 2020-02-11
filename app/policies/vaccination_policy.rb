@@ -1,6 +1,6 @@
 class VaccinationPolicy < ApplicationPolicy
   def index?
-    user&.role&.present?
+    user&.role&.present? && !user.doctor? && !user.citizen?
   end
 
   def show?
@@ -26,6 +26,11 @@ class VaccinationPolicy < ApplicationPolicy
   def destroy?
     update?
   end
+
+  def manage?
+    create? && update? && destroy?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

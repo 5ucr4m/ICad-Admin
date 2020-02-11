@@ -31,7 +31,7 @@
     <%= link_to send("#{f.model_name.plural}_path"),
                 class: 'btn btn-sm-block btn-danger btn-cancel', role: 'button' do %>
       <i class="fa fa-undo mr-2"></i>
-      <span class="btn-title"><%= t can?(:create, f.model_name.singular.camelcase.constantize) || can?(:create, f) ? 'helpers.submit.cancel' : 'helpers.submit.back' %></span>
+      <span class="btn-title"><%= t policy(f.model_name.singular.camelcase.constantize).manage? || policy(f).manage? ? 'helpers.submit.cancel' : 'helpers.submit.back' %></span>
     <% end %>
   <% end %>
 <% end %>

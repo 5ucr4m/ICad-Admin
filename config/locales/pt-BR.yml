@@ -158,6 +158,10 @@ pt-BR:
         one: Mensagem SMS
         other: Mensagens SMS
         icon: fas fa-sms
+      medicine:
+        one: Medicamento
+        other: Medicamentos
+        icon: fas fa-pills
     attributes:
       address:
         patio: Logradouro
@@ -457,6 +461,20 @@ pt-BR:
         dose: Dose
         lot_number: Lote
         manufacturer: Fabricante
+      medicine:
+        name: Produto
+        substance: Substância
+        laboratory: Laboratório
+        laboratory_registry: CNPJ
+        ggrem_code: Código GGREM
+        registry: Registro
+        ean_one: EAN 1
+        ean_two: EAN 2
+        ean_three: EAN 3
+        presentation: Apresentação
+        therapeutic_class: Classe Terapêutica
+        product_type: Tipo de Produto
+        stripe: Tarja
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

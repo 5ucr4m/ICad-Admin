@@ -52,12 +52,16 @@
 <div class="row row-cards">
   <div class="col-lg-12 col-md-12 col-sm-12">
     <div class="row">
-      <div class="col-lg-6 mb-0">
-        <%= render 'application/periods', periods: @periods %>
-      </div>
-      <div class="col-lg-6 mb-0">
-        <%= render 'application/vaccination_campaigns', vaccination_campaigns: @vaccination_campaigns %>
-      </div>
+      <% if Period.any? %>
+        <div class="col-lg-6 mb-0">
+          <%= render 'application/periods', periods: @periods %>
+        </div>
+      <% end %>
+      <% if VaccinationCampaign.any? %>
+        <div class="col-lg-6 mb-0">
+          <%= render 'application/vaccination_campaigns', vaccination_campaigns: @vaccination_campaigns %>
+        </div>
+      <% end %>
       <div class="col-lg-4">
         <div class="card mb-3">
           <div class="card-header">

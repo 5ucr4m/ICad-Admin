@@ -27,17 +27,12 @@
               <%= f.input :password, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
               <%= f.input :password_confirmation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
             <% end %>
-            <%= f.association :health_professional,
-                              label_method: :name_formatted,
-                              collection: @user.persisted? ? [@user.health_professional] : HealthProfessional.without_user,
-                              wrapper_html: {class: 'col-lg-6 col-sm-12'},
-                              input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
           </div>
         </div>
       </div>
     </div>
     <% if @user.persisted? && current_user.admin? && current_user.email != @user.email || !@user.persisted? %>
-      <% if can? :manage, User %>
+      <% if policy(User).manage? %>
         <div class="col-12">
           <div class="card mb-3">
             <div class="card-header">

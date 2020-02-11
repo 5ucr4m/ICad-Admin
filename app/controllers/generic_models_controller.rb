@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class GenericModelsController < WebController
-  skip_authorize_resource only: %i[address_types cbo_types ethnicity_types]
   before_action :set_generic_model, only: %i[show edit update destroy]
   before_action :set_query, except: %i[index new create show edit update destroy]
 
@@ -13,14 +12,17 @@ class GenericModelsController < WebController
   end
 
   def address_types
+    authorize(GenericModel)
     render_json(@query.result.address_types.includes(:generic_model))
   end
 
   def cbo_types
+    authorize(GenericModel)
     render_json(@query.result.cbo_types.includes(:generic_model))
   end
 
   def ethnicity_types
+    authorize(GenericModel)
     render_json(@query.result.ethnicities.includes(:generic_model))
   end
 

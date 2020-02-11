@@ -2,7 +2,7 @@ module Api
   # frozen_string_literal: true
   class HomeRegistrationPolicy < ::ApplicationPolicy
     def index?
-      user&.role&.present?
+      user&.role&.present? && !user.doctor? && !user.citizen?
     end
 
     def show?

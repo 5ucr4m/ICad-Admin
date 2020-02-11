@@ -8,11 +8,11 @@ class HealthProfessional < ApplicationRecord
   belongs_to :professional_team, optional: true
   belongs_to :company, optional: true
 
-  has_one :user, dependent: :destroy
+  has_one :health_establishment, through: :professional_team
+
+  belongs_to :user, optional: true, dependent: :destroy
 
   has_many :home_registrations, dependent: :destroy
-
-  scope :without_user, -> { left_outer_joins(:user).where(users: { id: nil }) }
 
   # before_validation :set_health_establishment
   # before_create :find_health_professional
