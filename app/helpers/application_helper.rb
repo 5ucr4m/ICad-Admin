@@ -52,10 +52,16 @@ module ApplicationHelper
     end
   end
 
-  def treatment_title(role_type)
+  def treatment_title(role_type, gender_type = nil)
     case role_type
     when 'mayor'
       'Vossa Excelência'
+    when 'doctor'
+      if gender_type == 1
+        'Olá Dr.'
+      else
+        'Olá Dra.'
+      end
     else
       'Olá'
     end

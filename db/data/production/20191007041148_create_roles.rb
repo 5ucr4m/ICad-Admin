@@ -13,6 +13,7 @@ class CreateRoles < SeedMigration::Migration
     Role.create!(name: 'Auxiliar de Consultório Dentário', description: 'Auxiliar de Consultório Dentário', role_type: 'dentist_aux', admin: false)
     Role.create!(name: 'Suporte', description: 'Suporte do Sistema', role_type: 'support', admin: false)
     Role.create!(name: 'Cidadão', description: 'Cidadão', role_type: 'citizen', admin: false)
+    Role.create!(name: 'Atendimento', description: 'Atendimento', role_type: 'service', admin: false)
   end
 
   def down; end

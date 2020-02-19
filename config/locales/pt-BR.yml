@@ -162,6 +162,10 @@ pt-BR:
         one: Medicamento
         other: Medicamentos
         icon: fas fa-pills
+      appointment_booking:
+        one: Agendamento
+        other: Agendamentos
+        icon: fas fa-calendar-check
     attributes:
       address:
         patio: Logradouro
@@ -475,6 +479,15 @@ pt-BR:
         therapeutic_class: Classe Terapêutica
         product_type: Tipo de Produto
         stripe: Tarja
+      appointment_booking:
+        health_professional: Profissional
+        family_member: Cidadão
+        appointment_date: Data agendamento
+        start_hour: Hora início
+        end_hour: Hora fim
+        observation: Observação
+        phone: Contato
+        medical_procedure: Procedimento Médico
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

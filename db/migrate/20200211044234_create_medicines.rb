@@ -2,6 +2,7 @@
 class CreateMedicines < ActiveRecord::Migration[6.0]
   def change
     create_table :medicines do |t|
+      t.string(:name)
       t.string(:substance)
       t.string(:laboratory)
       t.string(:laboratory_registry)
@@ -10,7 +11,7 @@ class CreateMedicines < ActiveRecord::Migration[6.0]
       t.string(:ean_one)
       t.string(:ean_two)
       t.string(:ean_three)
-      t.string(:active_principle)
+      t.string(:presentation)
       t.belongs_to(:therapeutic_class, foreign_key: { to_table: :generic_models }, index: true)
       t.belongs_to(:product_type, foreign_key: { to_table: :generic_models }, index: true)
       t.belongs_to(:stripe, foreign_key: { to_table: :generic_models }, index: true)

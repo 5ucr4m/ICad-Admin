@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0-alpha",
+    "@rails/actiontext": "^6.0.2-1",
     "@rails/activestorage": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.2.0",
@@ -20,7 +21,8 @@
     "selectize": "^0.12.6",
     "superagent": "^5.0.5",
     "superagent-no-cache": "^0.1.1",
-    "sweetalert2": "^9.4.0"
+    "sweetalert2": "^9.4.0",
+    "trix": "^1.0.0"
   },
   "version": "0.1.0",
   "devDependencies": {

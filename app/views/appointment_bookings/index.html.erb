@@ -1,0 +1,51 @@
+<%= render 'application/page_header', model: AppointmentBooking %>
+<div class="card">
+  <div class="card-status bg-transparent"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy, model: AppointmentBooking, url: new_appointment_booking_path %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+            <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+        <th><%= AppointmentBooking.human_attribute_name :health_professional %></th>
+        <th><%= AppointmentBooking.human_attribute_name :family_member %></th>
+        <th><%= AppointmentBooking.human_attribute_name :appointment_date %></th>
+        <th><%= AppointmentBooking.human_attribute_name :start_hour %></th>
+        <th><%= AppointmentBooking.human_attribute_name :end_hour %></th>
+        <th><%= AppointmentBooking.human_attribute_name :medical_procedure %></th>
+        <th><%= t('helpers.actions.action') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @appointment_bookings.each do |appointment_booking| %>
+        <tr>
+          <td><%= appointment_booking.health_professional.full_name %></td>
+          <td><%= appointment_booking.family_member.name %></td>
+          <td><%= appointment_booking.appointment_date&.strftime('%d/%m/%Y') %></td>
+          <td><%= appointment_booking.start_hour&.strftime('%d/%m/%Y') %></td>
+          <td><%= appointment_booking.end_hour&.strftime('%d/%m/%Y') %></td>
+          <td><%= appointment_booking.medical_procedure.name %></td>
+          <td class="text-center">
+            <%= render 'application/table_links', f: appointment_booking %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= render 'application/footer_links', url: new_appointment_booking_path, model: AppointmentBooking %>
+  </div>
+</div>

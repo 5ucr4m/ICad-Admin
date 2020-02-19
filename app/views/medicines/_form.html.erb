@@ -1,6 +1,15 @@
 <%= simple_form_for(@medicine) do |f| %>
   <% content_for :body do %>
+    <%= f.input :name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :substance, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :presentation, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.association :therapeutic_class, collection: GenericModel.therapeutic_classes,
+                      wrapper_html: {class: 'col-lg-6 col-sm-12'},
+                      input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :product_type, collection: GenericModel.product_types,
+                      wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :stripe, collection: GenericModel.stripes,
+                      wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.input :laboratory, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :laboratory_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :ggrem_code, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
@@ -8,11 +17,6 @@
     <%= f.input :ean_one, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :ean_two, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :ean_three, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :active_principle, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :therapeutic_class, collection: [], wrapper_html: {class: 'col-lg-3 col-sm-12'},
-                      input_html: {class: 'therapeutic-classes', disabled: show?(f.object.persisted?)} %>
-    <%= f.association :product_type, collection: GenericModel.product_types, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-    <%= f.association :stripe, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @medicine} %>
 <% end %>

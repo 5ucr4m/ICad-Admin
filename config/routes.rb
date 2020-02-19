@@ -45,7 +45,6 @@ Rails.application.routes.draw do
     end
   end
   resources :family_members
-  resources :medicines
   resources :home_registrations
   resources :professional_teams
   resources :health_professionals
@@ -66,6 +65,8 @@ Rails.application.routes.draw do
       post 'send_sms_messages'
     end
   end
+  resources :medicines
+  resources :appointment_bookings
   resources :vaccines
   resources :periods
   resources :period_items, only: %i[index show]

@@ -4,6 +4,7 @@ RSpec.describe "medicines/index", type: :view do
   before(:each) do
     assign(:medicines, [
       Medicine.create!(
+        :name => "Name",
         :substance => "Substance",
         :laboratory => "Laboratory",
         :laboratory_registry => "Laboratory Registry",
@@ -12,7 +13,7 @@ RSpec.describe "medicines/index", type: :view do
         :ean_one => "Ean One",
         :ean_two => "Ean Two",
         :ean_three => "Ean Three",
-        :active_principle => "Active Principle",
+        :presentation => "Presentation",
         :therapeutic_class => nil,
         :product_type => nil,
         :stripe => nil,
@@ -21,6 +22,7 @@ RSpec.describe "medicines/index", type: :view do
         :ip => "Ip"
       ),
       Medicine.create!(
+        :name => "Name",
         :substance => "Substance",
         :laboratory => "Laboratory",
         :laboratory_registry => "Laboratory Registry",
@@ -29,7 +31,7 @@ RSpec.describe "medicines/index", type: :view do
         :ean_one => "Ean One",
         :ean_two => "Ean Two",
         :ean_three => "Ean Three",
-        :active_principle => "Active Principle",
+        :presentation => "Presentation",
         :therapeutic_class => nil,
         :product_type => nil,
         :stripe => nil,
@@ -42,6 +44,7 @@ RSpec.describe "medicines/index", type: :view do
 
   it "renders a list of medicines" do
     render
+    assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => "Substance".to_s, :count => 2
     assert_select "tr>td", :text => "Laboratory".to_s, :count => 2
     assert_select "tr>td", :text => "Laboratory Registry".to_s, :count => 2
@@ -50,7 +53,7 @@ RSpec.describe "medicines/index", type: :view do
     assert_select "tr>td", :text => "Ean One".to_s, :count => 2
     assert_select "tr>td", :text => "Ean Two".to_s, :count => 2
     assert_select "tr>td", :text => "Ean Three".to_s, :count => 2
-    assert_select "tr>td", :text => "Active Principle".to_s, :count => 2
+    assert_select "tr>td", :text => "Presentation".to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2
     assert_select "tr>td", :text => nil.to_s, :count => 2

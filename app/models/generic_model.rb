@@ -80,6 +80,7 @@ class GenericModel < ApplicationRecord
   scope :therapeutic_classes, -> { where(generic_field: :therapeutic_class) }
   scope :product_types, -> { where(generic_field: :product_type) }
   scope :stripes, -> { where(generic_field: :stripe) }
+  scope :medical_procedures, -> { where(generic_field: :medical_procedure) }
   scope :by_module_reference, ->(reference) { app_modules.find_by(reference: reference) }
 
   def name_formatted

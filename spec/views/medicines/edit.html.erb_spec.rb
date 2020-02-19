@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "medicines/edit", type: :view do
   before(:each) do
     @medicine = assign(:medicine, Medicine.create!(
+      :name => "MyString",
       :substance => "MyString",
       :laboratory => "MyString",
       :laboratory_registry => "MyString",
@@ -11,7 +12,7 @@ RSpec.describe "medicines/edit", type: :view do
       :ean_one => "MyString",
       :ean_two => "MyString",
       :ean_three => "MyString",
-      :active_principle => "MyString",
+      :presentation => "MyString",
       :therapeutic_class => nil,
       :product_type => nil,
       :stripe => nil,
@@ -25,6 +26,8 @@ RSpec.describe "medicines/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", medicine_path(@medicine), "post" do
+
+      assert_select "input[name=?]", "medicine[name]"
 
       assert_select "input[name=?]", "medicine[substance]"
 
@@ -42,7 +45,7 @@ RSpec.describe "medicines/edit", type: :view do
 
       assert_select "input[name=?]", "medicine[ean_three]"
 
-      assert_select "input[name=?]", "medicine[active_principle]"
+      assert_select "input[name=?]", "medicine[presentation]"
 
       assert_select "input[name=?]", "medicine[therapeutic_class_id]"
 

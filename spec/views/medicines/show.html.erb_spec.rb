@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "medicines/show", type: :view do
   before(:each) do
     @medicine = assign(:medicine, Medicine.create!(
+      :name => "Name",
       :substance => "Substance",
       :laboratory => "Laboratory",
       :laboratory_registry => "Laboratory Registry",
@@ -11,7 +12,7 @@ RSpec.describe "medicines/show", type: :view do
       :ean_one => "Ean One",
       :ean_two => "Ean Two",
       :ean_three => "Ean Three",
-      :active_principle => "Active Principle",
+      :presentation => "Presentation",
       :therapeutic_class => nil,
       :product_type => nil,
       :stripe => nil,
@@ -23,6 +24,7 @@ RSpec.describe "medicines/show", type: :view do
 
   it "renders attributes in <p>" do
     render
+    expect(rendered).to match(/Name/)
     expect(rendered).to match(/Substance/)
     expect(rendered).to match(/Laboratory/)
     expect(rendered).to match(/Laboratory Registry/)
@@ -31,7 +33,7 @@ RSpec.describe "medicines/show", type: :view do
     expect(rendered).to match(/Ean One/)
     expect(rendered).to match(/Ean Two/)
     expect(rendered).to match(/Ean Three/)
-    expect(rendered).to match(/Active Principle/)
+    expect(rendered).to match(/Presentation/)
     expect(rendered).to match(//)
     expect(rendered).to match(//)
     expect(rendered).to match(//)

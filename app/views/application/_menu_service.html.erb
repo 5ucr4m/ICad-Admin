@@ -1,0 +1,11 @@
+<li class="nav-item dropdown">
+  <a href="javascript:void(0)" class="nav-link <%= "active" if !%w(dashboards reports).include?(controller_name) &&
+    Role::REGISTRIES.include?(controller_name.singularize.camelize.constantize) %> py-4" data-toggle="dropdown" aria-expanded="false">
+    <i class="<%= t('modules.registries.icon') %> mr-2"></i><%= t('modules.registries.label') %>
+  </a>
+  <div class="dropdown-menu dropdown-menu-arrow" x-placement="bottom-start">
+    <%= link_to appointment_bookings_path, class: 'dropdown-item' do %>
+      <i class="<%= t('activerecord.models.appointment_booking.icon') %> dropdown-icon"></i><%= t('activerecord.models.appointment_booking.other') %>
+    <% end %>
+  </div>
+</li>

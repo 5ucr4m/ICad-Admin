@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_27_122818) do
+ActiveRecord::Schema.define(version: 2020_02_12_040602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +70,29 @@ ActiveRecord::Schema.define(version: 2019_11_27_122818) do
     t.index ["company_id"], name: "index_addresses_on_company_id"
     t.index ["discarded_at"], name: "index_addresses_on_discarded_at"
     t.index ["ip"], name: "index_addresses_on_ip"
+  end
+
+  create_table "appointment_bookings", force: :cascade do |t|
+    t.bigint "health_professional_id"
+    t.bigint "family_member_id"
+    t.date "appointment_date"
+    t.datetime "start_hour"
+    t.datetime "end_hour"
+    t.text "observation"
+    t.string "phone"
+    t.bigint "medical_procedure_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_appointment_bookings_on_company_id"
+    t.index ["discarded_at"], name: "index_appointment_bookings_on_discarded_at"
+    t.index ["family_member_id"], name: "index_appointment_bookings_on_family_member_id"
+    t.index ["health_professional_id"], name: "index_appointment_bookings_on_health_professional_id"
+    t.index ["ip"], name: "index_appointment_bookings_on_ip"
+    t.index ["medical_procedure_id"], name: "index_appointment_bookings_on_medical_procedure_id"
   end
 
   create_table "cancel_registrations", force: :cascade do |t|
@@ -612,6 +645,34 @@ ActiveRecord::Schema.define(version: 2019_11_27_122818) do
     t.index ["water_treatment_id"], name: "index_living_conditions_on_water_treatment_id"
   end
 
+  create_table "medicines", force: :cascade do |t|
+    t.string "name"
+    t.string "substance"
+    t.string "laboratory"
+    t.string "laboratory_registry"
+    t.string "ggrem_code"
+    t.string "registry"
+    t.string "ean_one"
+    t.string "ean_two"
+    t.string "ean_three"
+    t.string "presentation"
+    t.bigint "therapeutic_class_id"
+    t.bigint "product_type_id"
+    t.bigint "stripe_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_medicines_on_company_id"
+    t.index ["discarded_at"], name: "index_medicines_on_discarded_at"
+    t.index ["ip"], name: "index_medicines_on_ip"
+    t.index ["product_type_id"], name: "index_medicines_on_product_type_id"
+    t.index ["stripe_id"], name: "index_medicines_on_stripe_id"
+    t.index ["therapeutic_class_id"], name: "index_medicines_on_therapeutic_class_id"
+  end
+
   create_table "period_items", force: :cascade do |t|
     t.string "serialized_uuid"
     t.bigint "serialized_type_id"
@@ -849,6 +910,7 @@ ActiveRecord::Schema.define(version: 2019_11_27_122818) do
   create_table "user_companies", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "company_id"
+    t.integer "current_module", default: 0
     t.boolean "current"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
@@ -1005,6 +1067,10 @@ ActiveRecord::Schema.define(version: 2019_11_27_122818) do
   add_foreign_key "addresses", "cities"
   add_foreign_key "addresses", "companies"
   add_foreign_key "addresses", "generic_models", column: "address_type_id"
+  add_foreign_key "appointment_bookings", "companies"
+  add_foreign_key "appointment_bookings", "family_members"
+  add_foreign_key "appointment_bookings", "generic_models", column: "medical_procedure_id"
+  add_foreign_key "appointment_bookings", "health_professionals"
   add_foreign_key "cancel_registrations", "companies"
   add_foreign_key "cancel_registrations", "generic_models", column: "left_reason_id"
   add_foreign_key "cities", "states"
@@ -1098,6 +1164,10 @@ ActiveRecord::Schema.define(version: 2019_11_27_122818) do
   add_foreign_key "living_conditions", "generic_models", column: "rural_production_area_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_supply_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_treatment_id"
+  add_foreign_key "medicines", "companies"
+  add_foreign_key "medicines", "generic_models", column: "product_type_id"
+  add_foreign_key "medicines", "generic_models", column: "stripe_id"
+  add_foreign_key "medicines", "generic_models", column: "therapeutic_class_id"
   add_foreign_key "period_items", "companies"
   add_foreign_key "period_items", "generic_models", column: "serialized_type_id"
   add_foreign_key "period_items", "periods"

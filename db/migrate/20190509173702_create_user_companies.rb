@@ -5,6 +5,7 @@ class CreateUserCompanies < ActiveRecord::Migration[6.0]
     create_table :user_companies do |t|
       t.belongs_to(:user, foreign_key: true, index: true)
       t.belongs_to(:company, foreign_key: true, index: true)
+      t.integer(:current_module, default: 0)
       t.boolean(:current)
       t.string(:slug)
 

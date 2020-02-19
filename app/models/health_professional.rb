@@ -5,13 +5,12 @@ class HealthProfessional < ApplicationRecord
   include Tenantable
 
   belongs_to :cbo_code, class_name: 'GenericModel'
+  belongs_to :gender, class_name: 'GenericModel'
   belongs_to :professional_team, optional: true
   belongs_to :company, optional: true
-
-  has_one :health_establishment, through: :professional_team
-
   belongs_to :user, optional: true, dependent: :destroy
 
+  has_one :health_establishment, through: :professional_team
   has_many :home_registrations, dependent: :destroy
 
   # before_validation :set_health_establishment
@@ -20,8 +19,9 @@ class HealthProfessional < ApplicationRecord
   attr_accessor :cnes_code
 
   validates :cns_code, :full_name, :federal_registry, presence: true
-
   validates :federal_registry, :cns_code, uniqueness: true
+
+  scope :only_doctors, -> {left_outer_joins(:user).where(users: { roles: [Role.doctor.first, Role.dentist.first] })}
 
   ransack_alias :search, :id_to_s_or_full_name_or_federal_registry_or_state_registry_or_cns_code
 

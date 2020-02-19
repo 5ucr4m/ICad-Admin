@@ -14,6 +14,8 @@ require('select2');
 require('sweetalert2');
 require('flatpickr');
 require("chartkick").use(require("highcharts"));
+require("trix");
+require("@rails/actiontext");
 require("channels");
 
 import '../stylesheets/application';

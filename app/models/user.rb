@@ -85,8 +85,20 @@ class User < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
 
-  scope :not_admin, -> {filter(&:not_admin?)}
+  scope :not_admin, -> { filter(&:not_admin?) }
   scope :without_user, -> { left_outer_joins(:health_professional).where(health_professionals: { id: nil }) }
+
+  delegate :mayor?, to: :role
+  delegate :support?, to: :role
+  delegate :secretary?, to: :role
+  delegate :doctor?, to: :role
+  delegate :nurse?, to: :role
+  delegate :nurse_aux?, to: :role
+  delegate :agent?, to: :role
+  delegate :dentist?, to: :role
+  delegate :dentist_aux?, to: :role
+  delegate :citizen?, to: :role
+  delegate :service?, to: :role
 
   def active_for_authentication?
     super do |_s|
@@ -96,6 +108,14 @@ class User < ApplicationRecord
 
   def company
     current_company&.company
+  end
+
+  def administrative?
+    current_company.administrative?
+  end
+
+  def service?
+    current_company.service?
   end
 
   delegate :role, to: :current_role
@@ -136,17 +156,6 @@ class User < ApplicationRecord
   def not_citizen?
     !citizen?
   end
-
-  delegate :mayor?, to: :role
-  delegate :support?, to: :role
-  delegate :secretary?, to: :role
-  delegate :doctor?, to: :role
-  delegate :nurse?, to: :role
-  delegate :nurse_aux?, to: :role
-  delegate :agent?, to: :role
-  delegate :dentist?, to: :role
-  delegate :dentist_aux?, to: :role
-  delegate :citizen?, to: :role
 
   private
 

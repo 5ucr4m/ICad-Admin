@@ -31,7 +31,23 @@ class UserCompany < ApplicationRecord
 
   has_many :user_roles, dependent: :destroy
 
+  enum current_module: { administrative: 0, service: 1 }
+
   accepts_nested_attributes_for :user_roles, allow_destroy: false
 
+  before_validation :assign_default_module
+
   ransack_alias :search, :id_to_s
+
+  private
+
+  def assign_default_module
+    return if user&.role.blank?
+
+    self.current_module = if user.doctor? || user.service?
+      1
+    else
+      0
+                          end
+  end
 end

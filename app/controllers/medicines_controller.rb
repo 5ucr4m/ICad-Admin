@@ -70,9 +70,9 @@ class MedicinesController < WebController
 
   # Only allow a trusted parameter "white list" through.
   def medicine_params
-    params.require(:medicine).permit(:substance, :laboratory, :laboratory_registry,
+    params.require(:medicine).permit(:name, :substance, :laboratory, :laboratory_registry,
                                      :ggrem_code, :registry, :ean_one, :ean_two, :ean_three,
-                                     :active_principle, :therapeutic_class_id, :product_type_id,
+                                     :presentation, :therapeutic_class_id, :product_type_id,
                                      :stripe_id)
   end
 end
