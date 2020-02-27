@@ -67,7 +67,6 @@ class User < ApplicationRecord
   has_many :individual_registrations, dependent: :nullify
   has_many :vaccinations, dependent: :nullify
   has_many :families, dependent: :nullify
-  has_many :family_members, dependent: :nullify
   has_many :period_items, dependent: :nullify
 
   validates :email,
@@ -84,6 +83,7 @@ class User < ApplicationRecord
 
   scope :not_admin, -> { filter(&:not_admin?) }
   scope :without_user, -> { left_outer_joins(:health_professional).where(health_professionals: { id: nil }) }
+  scope :citizens, -> {filter(&:citizen?)}
 
   delegate :mayor?, to: :role
   delegate :support?, to: :role

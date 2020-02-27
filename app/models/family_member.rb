@@ -75,8 +75,10 @@ class FamilyMember < ApplicationRecord
   has_one :home_registration, through: :family
   has_one :individual_registration, dependent: :destroy
   has_one :home_visit_registration, dependent: :destroy
+  has_many :home_visit_forms, through: :home_visit_registration
   has_many :vaccinations, dependent: :destroy
   has_many :vaccines, through: :vaccinations
+  has_many :appointment_bookings
 
   validates :name, :birth_date, :cns_number, presence: true
 

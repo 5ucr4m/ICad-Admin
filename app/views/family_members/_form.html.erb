@@ -30,13 +30,14 @@
     <%= f.input :pis_pasep_number, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.association :race, collection: GenericModel.races, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.association :gender, collection: GenericModel.genders, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :user, collection: User.citizens, label_method: :email, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%= f.input :micro_area, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.association :ethnicity,
                       collection: @ethnicity_selected ? [@ethnicity_selected] : [],
                       selected: @ethnicity_selected,
                       label_method: :name_formatted,
                       wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'ethnicity-types', disabled: show?(f.object.persisted?)} %>
-    <%= f.input :micro_area, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <div class="col-lg-6 col-sm-12">
+    <div class="col-lg-12 col-sm-12">
       <div class="form-row">
         <%= f.input :unknown_father, wrapper_html: {class: 'pl-2 col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :unknown_mother, wrapper_html: {class: 'pl-2 col-lg-6 col-sm-12 pl-2'}, input_html: {disabled: show?(f.object.persisted?)} %>

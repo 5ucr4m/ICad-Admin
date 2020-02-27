@@ -93,6 +93,6 @@ class FamilyMembersController < WebController
                                           :birth_country_id, :race_id, :gender_id,
                                           :responsible, :ethnicity_id, :unknown_father,
                                           :father_name, :naturalized_at, :naturalize_decree,
-                                          :brazil_entry_date, :micro_area, :out_area)
+                                          :brazil_entry_date, :micro_area, :out_area, :user_id)
   end
 end

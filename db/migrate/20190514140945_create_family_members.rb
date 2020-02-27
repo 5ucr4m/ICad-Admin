@@ -29,8 +29,8 @@ class CreateFamilyMembers < ActiveRecord::Migration[6.0]
       t.string(:micro_area)
       t.boolean(:out_area)
       t.belongs_to(:company, foreign_key: true, index: true)
-      t.string(:slug)
       t.belongs_to(:user, foreign_key: true, index: true)
+      t.string(:slug)
 
       t.timestamps
     end

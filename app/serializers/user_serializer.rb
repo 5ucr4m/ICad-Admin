@@ -48,7 +48,7 @@
 class UserSerializer < ApplicationSerializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :email, :cns_code, :federal_registry, :state_registry
+  attributes :id, :email, :cns_code
 
   attribute :full_name, if: :not_citizen?
   attribute :cnes_code, if: :not_citizen?
@@ -56,10 +56,12 @@ class UserSerializer < ApplicationSerializer
   attribute :health_professional_id, if: :not_citizen?
   attribute :professional_team, if: :not_citizen?
   attribute :health_establishment, if: :not_citizen?
+  attribute :federal_registry, if: :not_citizen?
+  attribute :state_registry, if: :not_citizen?
 
   attribute :name, if: :citizen?
   attribute :social_name, if: :citizen?
-  attribute :address, if: :citizen?
+  attribute :patio, if: :citizen?
   attribute :city, if: :citizen?
   attribute :state, if: :citizen?
   attribute :birth_date, if: :citizen?
@@ -71,13 +73,46 @@ class UserSerializer < ApplicationSerializer
   attribute :complement, if: :citizen?
   attribute :reference, if: :citizen?
   attribute :referential_phone, if: :citizen?
-  attribute :home_phone, if: :citizen?
+  attribute :vaccinations, if: :citizen?
+  attribute :appointment_bookings, if: :citizen?
+  attribute :home_registration, if: :citizen?
+  attribute :individual_registration, if: :citizen?
+  attribute :home_visit_forms, if: :citizen?
+  attribute :vaccines, if: :citizen?
 
   delegate :citizen?, to: :object
   delegate :not_citizen?, to: :object
 
+  def vaccinations
+    user_info&.vaccinations
+  end
+
+  def appointment_bookings
+    user_info&.appointment_bookings
+  end
+
+  def home_registration
+    user_info&.home_registration
+  end
+
+  def individual_registration
+    user_info&.individual_registration
+  end
+
+  def home_visit_forms
+    user_info&.home_visit_forms
+  end
+
+  def vaccines
+    user_info&.vaccines
+  end
+
   def cns_code
-    user_info&.cns_code
+    if object.citizen?
+      user_info&.cns_number
+    else
+      user_info&.cns_code
+    end
   end
 
   def health_professional_id
@@ -97,10 +132,14 @@ class UserSerializer < ApplicationSerializer
   end
 
   def federal_registry
+    return unless object.agent?
+
     user_info&.federal_registry
   end
 
   def state_registry
+    return unless object.agent?
+
     user_info&.state_registry
   end
 
@@ -145,7 +184,7 @@ class UserSerializer < ApplicationSerializer
   end
 
   def complement
-    address&.&complement
+    address&.& complement
   end
 
   def reference
@@ -182,17 +221,19 @@ class UserSerializer < ApplicationSerializer
     RailsMultitenant::GlobalContextRegistry[:company_id] = object.company.id
     health_professionals = HealthProfessional.strip_company_scope.all
 
-    health_professionals.where(id: object.health_professional.id).first
+    health_professionals.find_by(id: object.health_professional.id)
   end
 
   def family_member
     RailsMultitenant::GlobalContextRegistry[:company_id] = object.company.id
-    health_professionals = FamilyMember.strip_company_scope.all
+    family_members = FamilyMember.strip_company_scope.all
 
-    health_professionals.where(id: object.family_member.id).first
+    family_members.find_by(id: object.family_member.id)
   end
 
   def address
+    return unless object.citizen?
+    return if user_info&.family.blank?
     user_info&.family&.home_registration&.address
   end
 end
