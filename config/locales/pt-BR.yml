@@ -491,6 +491,9 @@ pt-BR:
         observation: Observação
         phone: Contato
         medical_procedure: Procedimento Médico
+        priority: Prioridade
+        priority_order: Ordem de prioridade
+        status: Status
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :appointment_bookings
   # Sidekiq web config
   scope :monitoring do
     mount Sidekiq::Web => '/sidekiq'
@@ -66,7 +67,6 @@ Rails.application.routes.draw do
     end
   end
   resources :medicines
-  resources :appointment_bookings
   resources :vaccines
   resources :periods
   resources :period_items, only: %i[index show]
