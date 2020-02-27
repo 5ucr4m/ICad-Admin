@@ -47,20 +47,19 @@
             </div>
             <% unless show?(f.object.persisted?) %>
               <div class="card-body py-2">
-                <%= link_to_add_association f, :user_companies,
+                <%= link_to_add_association f, :user_roles,
                                             class: 'btn btn-sm btn-primary', role: 'button',
                                             data: {
-                                              'association-insertion-node': '#user_companies',
+                                              'association-insertion-node': '#user_roles',
                                               'association-insertion-method': 'append'
-                                            },
-                                            wrap_object: Proc.new { |user_company| user_company.user_roles.build unless user_company.persisted?; user_company } do %>
+                                            } do %>
                   <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
                 <% end %>
               </div>
             <% end %>
-            <div id="user_companies" class="card-body px-3">
-              <%= f.simple_fields_for :user_companies do |user_company| %>
-                <%= render 'application/user_company_fields', f: user_company %>
+            <div id="user_roles" class="card-body px-3">
+              <%= f.simple_fields_for :user_roles do |user_role| %>
+                <%= render 'application/user_role_fields', f: user_role %>
               <% end %>
             </div>
           </div>

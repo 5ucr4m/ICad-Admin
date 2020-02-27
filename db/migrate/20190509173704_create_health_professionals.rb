@@ -11,6 +11,7 @@ class CreateHealthProfessionals < ActiveRecord::Migration[6.0]
       t.string(:phone)
       t.belongs_to(:professional_team, foreign_key: true, index: true)
       t.belongs_to(:user, foreign_key: true, index: true)
+      t.belongs_to(:gender, foreign_key: { to_table: :generic_models }, index: true)
       t.belongs_to(:company, foreign_key: true, index: true)
       t.string(:slug)
 

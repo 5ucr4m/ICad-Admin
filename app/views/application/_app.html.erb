@@ -6,11 +6,19 @@
       <%= render 'application/flashes' %>
       <% if controller_name == 'dashboards' %>
         <div class="page-header my-3">
-          <h1 class="page-title font-weight-bold">
-            <i class="fas fa-chart-line mr-2"></i>Dashboard
-          </h1>
+          <% if current_user.on_administrative? %>
+            <h1 class="page-title font-weight-bold">
+              <i class="fas fa-chart-line mr-2"></i>Dashboard
+            </h1>
+          <% else %>
+            <h1 class="page-title font-weight-bold">
+              <i class="fas fa-notes-medical mr-2"></i>Atendimento
+            </h1>
+          <% end %>
           <div class="page-options d-none d-md-block ml-auto">
-            <h4 class="m-0"><%= treatment_title current_user.role.role_type %> <span class="text-blue-night"><%= current_user&.health_professional&.full_name || current_user.email %></span>. Bem-vindo a sua página!</h4>
+            <h4 class="m-0"><%= treatment_title current_user.role.role_type, current_user&.health_professional&.gender&.reference %>
+              <span class="text-blue-night"><%= current_user&.health_professional&.full_name || current_user.email %></span>.
+              Bem-vindo a sua página!</h4>
           </div>
         </div>
       <% else %>

@@ -16,7 +16,7 @@ require('flatpickr');
 require("chartkick").use(require("highcharts"));
 require("trix");
 require("@rails/actiontext");
-require("channels");
+require('channels');
 
 import '../stylesheets/application';
 import * as Pagy from './pagy.js.erb';
@@ -156,7 +156,8 @@ window.addEventListener('DOMContentLoaded', function (e) {
   }
 
   flatpickr('.datepicker', {
-    enableTime: true
+    enableTime: false,
+    inline: true
   });
 
   flatpickr('.datepicker-time', {

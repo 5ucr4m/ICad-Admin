@@ -23,6 +23,7 @@
         <th><%= HealthProfessional.human_attribute_name :cns_code %></th>
         <th><%= HealthProfessional.human_attribute_name :user %></th>
         <th><%= HealthProfessional.human_attribute_name :full_name %></th>
+        <th><%= HealthProfessional.human_attribute_name :gender %></th>
         <th><%= HealthProfessional.human_attribute_name :federal_registry %></th>
         <th><%= HealthProfessional.human_attribute_name :state_registry %></th>
         <th><%= HealthProfessional.human_attribute_name :professional_team %></th>
@@ -37,6 +38,7 @@
           <td><%= health_professional.cns_code %></td>
           <td><%= health_professional&.user&.email %></td>
           <td><%= health_professional.full_name %></td>
+          <td><%= health_professional.gender.name_formatted %></td>
           <td><%= health_professional.federal_registry %></td>
           <td><%= health_professional.state_registry %></td>
           <td><%= health_professional&.professional_team&.name %></td>

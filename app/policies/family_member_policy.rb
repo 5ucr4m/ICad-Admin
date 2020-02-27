@@ -1,6 +1,6 @@
 class FamilyMemberPolicy < ApplicationPolicy
   def index?
-    user&.role&.present? && !user.doctor? && !user.citizen?
+    user&.user_roles&.present? && !user.citizen?
   end
 
   def show?

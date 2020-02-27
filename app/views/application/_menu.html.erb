@@ -12,7 +12,7 @@
             <% end %>
           </li>
           <% if current_user.admin? || current_user.support? || current_user.doctor? || current_user.service? %>
-            <% if current_user.administrative? %>
+            <% if current_user.on_administrative? %>
               <%= render 'menu_registries' %>
             <% else %>
               <%= render 'menu_service' %>

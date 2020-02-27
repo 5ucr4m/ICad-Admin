@@ -2,6 +2,9 @@
 @import url("https://preview.tabler.io/assets/css/dashboard.css");
 @import "select2/dist/css/select2.min";
 @import "@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4";
+@import "flatpickr/dist/flatpickr.min.css";
+@import '@fullcalendar/core/main.css';
+@import '@fullcalendar/daygrid/main.css';
 @import 'trix/dist/trix.css';
 @import 'actiontext';
 
@@ -435,3 +438,10 @@ a.card-options-collapse .badge .bg-blue-deep .text-white {
 .btn-block + .btn-block {
   margin-top: 0;
 }
+
+div.fc-bg > table > tbody > tr > td, div.fc-bg > table > thead > tr > td,
+.fc-content-skeleton table thead tr td, .fc-highlight-skeleton > table > tbody > tr > td.fc-highlight {
+  cursor: pointer;
+  font-size: 14px
+}
+

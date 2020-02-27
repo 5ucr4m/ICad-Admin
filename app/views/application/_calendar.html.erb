@@ -1,17 +1,33 @@
-<div class="col-lg-12">
-  <div class="card">
-    <div class="card-header">
-
-    </div>
-    <div class="card-body">
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      <i class="<%= t('activerecord.models.appointment_booking.icon') %> mr-2"></i><%= AppointmentBooking.model_name.human(count: 2) %>
+    </h3>
+    <% if policy(AppointmentBooking).new? %>
+      <div class="card-options">
+        <%= link_to new_appointment_booking_path, class: 'btn btn-primary', role: 'button' do %>
+          <i class="fas fa-plus mr-2"></i>Novo
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="card-body border-bottom p-4">
+    <%= form_with url: appointment_bookings_path, id: 'form-search', local: false, method: :get do |f| %>
       <div class="row">
-        <div class="col-lg-4 col-sm-12">
-          <%= select_tag :health_professional, class: 'form-control' %>
+        <div class="col-lg-8 col-sm-12">
+          <div class="form-group mb-0">
+            <label class="form-label"><%= AppointmentBooking.human_attribute_name :health_professional %></label>
+            <%= f.select :health_professional_id_eq,
+                           options_from_collection_for_select(HealthProfessional.only_doctors,
+                                                              :id, :name_formatted, params[:health_professional_id_eq]),
+                           {include_blank: true}, id: 'health-professional', name: 'q[health_professional_id_eq]', class: 'select2 form-control' %>
+            <%= f.hidden_field :appointment_date, id: 'appointment-date', name: 'q[appointment_date_eq]' %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card-body">
-
-    </div>
+    <% end %>
+  </div>
+  <div id="appointment-bookings">
+    <%= render 'application/appointment_bookings' %>
   </div>
 </div>

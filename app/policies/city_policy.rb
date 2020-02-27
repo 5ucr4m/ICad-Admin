@@ -1,6 +1,6 @@
 class CityPolicy < ApplicationPolicy
   def index?
-    user.support?
+    user&.user_roles&.any?
   end
 
   def show?

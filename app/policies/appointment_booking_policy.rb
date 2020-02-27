@@ -4,11 +4,11 @@ class AppointmentBookingPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.doctor? && record.health_professional == user&.health_professional || user.service?
+    user.admin? || user.doctor? || user.service?
   end
 
   def new?
-    user.admin? || user.service?
+    user.admin? || user.service? || user.doctor?
   end
 
   def create?
@@ -16,15 +16,15 @@ class AppointmentBookingPolicy < ApplicationPolicy
   end
 
   def update?
-    show?
+    user.admin?
   end
 
   def edit?
-    update?
+    user.admin?
   end
 
   def destroy?
-    new?
+    user.admin?
   end
 
   def manage?

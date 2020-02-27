@@ -270,6 +270,8 @@ pt-BR:
         state_registry: RG
         phone: Telefone
         professional_team: Equipe
+        user: Usuário
+        gender: Gênero
       home_registration_pet:
         home_registration: Cadastro Residêncial
         pet_type: Tipo de Animal
@@ -387,6 +389,7 @@ pt-BR:
       professional_team:
         name: Nome
         code: Código
+        active: Ativa?
         health_establishment: Estabelecimento de Saúde
       responsible_children:
         responsible_child_type: Tipo Responsável Criança
@@ -481,7 +484,7 @@ pt-BR:
         stripe: Tarja
       appointment_booking:
         health_professional: Profissional
-        family_member: Cidadão
+        family_member: Paciente
         appointment_date: Data agendamento
         start_hour: Hora início
         end_hour: Hora fim
@@ -527,7 +530,7 @@ pt-BR:
       - Sábado
     formats:
       default: "%d/%m/%Y"
-      long: "%d de %B de %Y"
+      long: "%A, %d de %B de %Y"
       short: "%d de %B"
     month_names:
       -

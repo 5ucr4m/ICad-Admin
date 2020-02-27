@@ -34,8 +34,8 @@
           <td><%= appointment_booking.health_professional.full_name %></td>
           <td><%= appointment_booking.family_member.name %></td>
           <td><%= appointment_booking.appointment_date&.strftime('%d/%m/%Y') %></td>
-          <td><%= appointment_booking.start_hour&.strftime('%d/%m/%Y') %></td>
-          <td><%= appointment_booking.end_hour&.strftime('%d/%m/%Y') %></td>
+          <td><%= appointment_booking.start_hour&.strftime('%H:%M') %></td>
+          <td><%= appointment_booking.end_hour&.strftime('%H:%M') %></td>
           <td><%= appointment_booking.medical_procedure.name %></td>
           <td class="text-center">
             <%= render 'application/table_links', f: appointment_booking %>

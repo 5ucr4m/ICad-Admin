@@ -75,6 +75,6 @@ class HealthProfessionalsController < WebController
   def health_professional_params
     params.require(:health_professional).permit(:cns_code, :phone, :cbo_code_id, :full_name,
                                                 :federal_registry, :state_registry,
-                                                :professional_team_id, :user_id)
+                                                :professional_team_id, :user_id, :gender_id)
   end
 end

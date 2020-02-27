@@ -386,6 +386,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
     t.string "phone"
     t.bigint "professional_team_id"
     t.bigint "user_id"
+    t.bigint "gender_id"
     t.bigint "company_id"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
@@ -395,6 +396,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
     t.index ["cbo_code_id"], name: "index_health_professionals_on_cbo_code_id"
     t.index ["company_id"], name: "index_health_professionals_on_company_id"
     t.index ["discarded_at"], name: "index_health_professionals_on_discarded_at"
+    t.index ["gender_id"], name: "index_health_professionals_on_gender_id"
     t.index ["ip"], name: "index_health_professionals_on_ip"
     t.index ["professional_team_id"], name: "index_health_professionals_on_professional_team_id"
     t.index ["user_id"], name: "index_health_professionals_on_user_id"
@@ -907,26 +909,18 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "user_companies", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "company_id"
-    t.integer "current_module", default: 0
-    t.boolean "current"
-    t.string "slug"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_user_companies_on_company_id"
-    t.index ["user_id"], name: "index_user_companies_on_user_id"
-  end
-
   create_table "user_roles", force: :cascade do |t|
-    t.bigint "user_company_id"
+    t.bigint "company_id"
+    t.bigint "user_id"
     t.bigint "role_id"
+    t.boolean "current_company", default: true
+    t.integer "current_module"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_user_roles_on_company_id"
     t.index ["role_id"], name: "index_user_roles_on_role_id"
-    t.index ["user_company_id"], name: "index_user_roles_on_user_company_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -1112,6 +1106,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
   add_foreign_key "health_establishments", "generic_models", column: "unit_type_id"
   add_foreign_key "health_professionals", "companies"
   add_foreign_key "health_professionals", "generic_models", column: "cbo_code_id"
+  add_foreign_key "health_professionals", "generic_models", column: "gender_id"
   add_foreign_key "health_professionals", "professional_teams"
   add_foreign_key "health_professionals", "users"
   add_foreign_key "home_registration_pets", "companies"
@@ -1191,10 +1186,9 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
   add_foreign_key "sociodemographic_infos", "generic_models", column: "sexual_orientation_id"
   add_foreign_key "states", "generic_models", column: "country_id"
   add_foreign_key "taggings", "tags"
-  add_foreign_key "user_companies", "companies"
-  add_foreign_key "user_companies", "users"
+  add_foreign_key "user_roles", "companies"
   add_foreign_key "user_roles", "roles"
-  add_foreign_key "user_roles", "user_companies"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "vaccination_campaigns", "companies"
   add_foreign_key "vaccination_vaccines", "companies"
   add_foreign_key "vaccination_vaccines", "vaccinations"

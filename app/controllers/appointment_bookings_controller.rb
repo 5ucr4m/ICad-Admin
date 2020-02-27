@@ -13,12 +13,18 @@ class AppointmentBookingsController < WebController
       @result = @result.includes(:health_professional)
         .where(health_professional: HealthProfessional.find_by(user: current_user))
     end
-    @pagy, @appointment_bookings = pagy(@result, page: params[:page], items: 10)
+    @pagy, @appointment_bookings = pagy(@result.includes(:family_member,
+                                                         :medical_procedure, :health_professional), page: params[:page], items: 10)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /appointment_bookings/1
   def show
     authorize(@appointment_booking)
+    @family_member_selected = @appointment_booking.family_member.presence
   end
 
   # GET /appointment_bookings/new
@@ -39,6 +45,7 @@ class AppointmentBookingsController < WebController
     authorize(AppointmentBooking)
     breadcrumb(t('helpers.submit.new'), new_appointment_booking_path)
     @appointment_booking = AppointmentBooking.new(appointment_booking_params)
+    @family_member_selected = @appointment_booking.family_member.presence
 
     if @appointment_booking.save
       redirect_to(@appointment_booking, notice: 'Appointment booking was successfully created.')

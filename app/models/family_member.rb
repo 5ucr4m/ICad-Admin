@@ -86,6 +86,10 @@ class FamilyMember < ApplicationRecord
 
   ransack_alias :search, :id_to_s_or_name_or_social_name_or_federal_registry_or_state_registry_or_cns_number
 
+  def name_formatted
+    "#{cns_number} - #{name}"
+  end
+
   def location_x
     return if home_registration.blank?
 

@@ -57,10 +57,12 @@ module ApplicationHelper
     when 'mayor'
       'Vossa Excelência'
     when 'doctor'
-      if gender_type == 1
+      if gender_type.to_i == 0
         'Olá Dr.'
-      else
+      elsif gender_type.to_i == 1
         'Olá Dra.'
+      else
+        'Olá'
       end
     else
       'Olá'

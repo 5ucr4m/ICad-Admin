@@ -1,9 +1,10 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :user_role do
-    user_company { nil }
+    company { nil }
+    user { nil }
     role { nil }
-    slug { 'MyString' }
+    current_company { false }
+    current_module { 1 }
+    slug { "MyString" }
   end
 end
