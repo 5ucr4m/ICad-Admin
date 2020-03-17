@@ -1,0 +1,91 @@
+<%= render 'application/page_header', model: MedicalCare %>
+<div class="card">
+  <div class="card-status bg-transparent"></div>
+  <div class="card-header p-4">
+    <div class="col-sm-12 col-lg-12">
+      <div class="form-row">
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= render 'application/pagy_count', list: @pagy %>
+        </div>
+        <div class="col-sm-12 col-lg-6 p-0">
+          <%= search_form_for @query do |f| %>
+          <%= f.search_field :search_cont, class: 'form-control', placeholder: t('helpers.search') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0 m-0">
+    <table class="table card-table table-vcenter text-nowrap table-hover">
+      <thead>
+      <tr>
+                  <th><%= MedicalCare.human_attribute_name :appointment_booking %></th>
+                  <th><%= MedicalCare.human_attribute_name :appointment_demand %></th>
+                  <th><%= MedicalCare.human_attribute_name :appointment_reason %></th>
+                  <th><%= MedicalCare.human_attribute_name :appointment_brief %></th>
+                  <th><%= MedicalCare.human_attribute_name :cephalic_perimeter %></th>
+                  <th><%= MedicalCare.human_attribute_name :weight %></th>
+                  <th><%= MedicalCare.human_attribute_name :height %></th>
+                  <th><%= MedicalCare.human_attribute_name :imc %></th>
+                  <th><%= MedicalCare.human_attribute_name :calf_perimeter %></th>
+                  <th><%= MedicalCare.human_attribute_name :blood_pressure %></th>
+                  <th><%= MedicalCare.human_attribute_name :blood_pressure_to %></th>
+                  <th><%= MedicalCare.human_attribute_name :respiratory_rate %></th>
+                  <th><%= MedicalCare.human_attribute_name :heart_rate %></th>
+                  <th><%= MedicalCare.human_attribute_name :temperature %></th>
+                  <th><%= MedicalCare.human_attribute_name :saturation %></th>
+                  <th><%= MedicalCare.human_attribute_name :capillary_blood %></th>
+                  <th><%= MedicalCare.human_attribute_name :collected_time %></th>
+                  <th><%= MedicalCare.human_attribute_name :risk_vulnerability %></th>
+                  <th><%= MedicalCare.human_attribute_name :release_citizen %></th>
+                  <th><%= MedicalCare.human_attribute_name :medical_care %></th>
+                  <th><%= MedicalCare.human_attribute_name :other_appointment_booking %></th>
+                  <th><%= MedicalCare.human_attribute_name :user %></th>
+                  <th><%= MedicalCare.human_attribute_name :slug %></th>
+                  <th><%= MedicalCare.human_attribute_name :company %></th>
+                  <th><%= MedicalCare.human_attribute_name :discarded_at %></th>
+                  <th><%= MedicalCare.human_attribute_name :ip %></th>
+                <th><%= t('helpers.actions.action') %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @medical_cares.each do |medical_care| %>
+        <tr>
+                      <td><%= medical_care.appointment_booking_id %></td>
+                      <td><%= medical_care.appointment_demand_id %></td>
+                      <td><%= medical_care.appointment_reason_id %></td>
+                      <td><%= medical_care.appointment_brief %></td>
+                      <td><%= medical_care.cephalic_perimeter %></td>
+                      <td><%= medical_care.weight %></td>
+                      <td><%= medical_care.height %></td>
+                      <td><%= medical_care.imc %></td>
+                      <td><%= medical_care.calf_perimeter %></td>
+                      <td><%= medical_care.blood_pressure %></td>
+                      <td><%= medical_care.blood_pressure_to %></td>
+                      <td><%= medical_care.respiratory_rate %></td>
+                      <td><%= medical_care.heart_rate %></td>
+                      <td><%= medical_care.temperature %></td>
+                      <td><%= medical_care.saturation %></td>
+                      <td><%= medical_care.capillary_blood %></td>
+                      <td><%= medical_care.collected_time_id %></td>
+                      <td><%= medical_care.risk_vulnerability %></td>
+                      <td><%= medical_care.release_citizen %></td>
+                      <td><%= medical_care.medical_care_id %></td>
+                      <td><%= medical_care.other_appointment_booking_id %></td>
+                      <td><%= medical_care.user_id %></td>
+                      <td><%= medical_care.slug %></td>
+                      <td><%= medical_care.company_id %></td>
+                      <td><%= medical_care.discarded_at %></td>
+                      <td><%= medical_care.ip %></td>
+                    <td class="text-center">
+            <%= render 'application/table_links', f: medical_care %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= render 'application/footer_links', url: new_medical_care_path, model: MedicalCare %>
+  </div>
+</div>

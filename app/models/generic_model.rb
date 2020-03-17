@@ -35,7 +35,7 @@ class GenericModel < ApplicationRecord
   scope :nationalities, -> { where(generic_field: :nationality) }
   scope :races, -> { where(generic_field: :race) }
   scope :genders, -> { where(generic_field: :gender) }
-  scope :gender_identities, -> {where(generic_field: :gender_identity)}
+  scope :gender_identities, -> { where(generic_field: :gender_identity) }
   scope :ethnicities, -> { where(generic_field: :ethnicity) }
   scope :countries, -> { where(generic_field: :country) }
   scope :address_types, -> { where(generic_field: :address_type) }
@@ -81,6 +81,9 @@ class GenericModel < ApplicationRecord
   scope :product_types, -> { where(generic_field: :product_type) }
   scope :stripes, -> { where(generic_field: :stripe) }
   scope :medical_procedures, -> { where(generic_field: :medical_procedure) }
+  scope :collected_times, -> { where(generic_field: :collected_time) }
+  scope :demand_types, -> { where(generic_field: :demand_type) }
+  scope :carried_procedures, -> {where(generic_field: :carried_procedure)}
   scope :by_module_reference, ->(reference) { app_modules.find_by(reference: reference) }
 
   def name_formatted

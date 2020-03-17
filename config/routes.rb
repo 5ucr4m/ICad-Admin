@@ -3,6 +3,8 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :appointment_demands
+  resources :medical_cares
   resources :appointment_bookings
   # Sidekiq web config
   scope :monitoring do

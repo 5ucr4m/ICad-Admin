@@ -21,7 +21,7 @@ class VaccinationCampaignsController < WebController
 
   # GET /vaccination_campaigns/new
   def new
-    authorize(@vaccination_campaign)
+    authorize(VaccinationCampaign)
     breadcrumb(t('helpers.submit.new'), new_vaccination_campaign_path)
     @vaccination_campaign = VaccinationCampaign.new
   end

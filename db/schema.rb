@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_12_040602) do
+ActiveRecord::Schema.define(version: 2020_03_09_043806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -211,8 +211,8 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
     t.string "micro_area"
     t.boolean "out_area"
     t.bigint "company_id"
-    t.string "slug"
     t.bigint "user_id"
+    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "discarded_at"
@@ -648,6 +648,35 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
     t.index ["rural_production_area_id"], name: "index_living_conditions_on_rural_production_area_id"
     t.index ["water_supply_id"], name: "index_living_conditions_on_water_supply_id"
     t.index ["water_treatment_id"], name: "index_living_conditions_on_water_treatment_id"
+  end
+
+  create_table "medical_cares", force: :cascade do |t|
+    t.bigint "appointment_booking_id"
+    t.string "cephalic_perimeter"
+    t.string "weight"
+    t.string "height"
+    t.string "imc"
+    t.string "calf_perimeter"
+    t.string "blood_pressure"
+    t.string "blood_pressure_to"
+    t.string "respiratory_rate"
+    t.string "heart_rate"
+    t.string "temperature"
+    t.string "saturation"
+    t.string "capillary_blood"
+    t.bigint "collected_time_id"
+    t.integer "risk_vulnerability"
+    t.bigint "user_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["appointment_booking_id"], name: "index_medical_cares_on_appointment_booking_id"
+    t.index ["collected_time_id"], name: "index_medical_cares_on_collected_time_id"
+    t.index ["company_id"], name: "index_medical_cares_on_company_id"
+    t.index ["user_id"], name: "index_medical_cares_on_user_id"
   end
 
   create_table "medicines", force: :cascade do |t|
@@ -1162,6 +1191,10 @@ ActiveRecord::Schema.define(version: 2020_02_12_040602) do
   add_foreign_key "living_conditions", "generic_models", column: "rural_production_area_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_supply_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_treatment_id"
+  add_foreign_key "medical_cares", "appointment_bookings"
+  add_foreign_key "medical_cares", "companies"
+  add_foreign_key "medical_cares", "generic_models", column: "collected_time_id"
+  add_foreign_key "medical_cares", "users"
   add_foreign_key "medicines", "companies"
   add_foreign_key "medicines", "generic_models", column: "product_type_id"
   add_foreign_key "medicines", "generic_models", column: "stripe_id"
