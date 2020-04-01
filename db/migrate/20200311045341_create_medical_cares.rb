@@ -3,7 +3,7 @@ class CreateMedicalCares < ActiveRecord::Migration[6.0]
     create_table :medical_cares do |t|
       t.belongs_to :appointment_booking, foreign_key: true, index: true
       t.belongs_to :appointment_demand, foreign_key: true, index: true
-      t.belongs_to :appointment_reason, foreign_key: true, index: true
+      t.belongs_to :appointment_reason, foreign_key: {to_table: :generic_models}, index: true
       t.text :appointment_brief
       t.string :cephalic_perimeter
       t.string :weight
@@ -17,7 +17,7 @@ class CreateMedicalCares < ActiveRecord::Migration[6.0]
       t.string :temperature
       t.string :saturation
       t.string :capillary_blood
-      t.belongs_to :collected_time, foreign_key: true, index: true
+      t.belongs_to :collected_time, foreign_key: {to_table: :generic_models}, index: true
       t.integer :risk_vulnerability
       t.boolean :release_citizen
       t.belongs_to :medical_care, foreign_key: true, index: true
