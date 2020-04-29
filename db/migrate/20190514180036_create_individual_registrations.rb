@@ -13,7 +13,7 @@ class CreateIndividualRegistrations < ActiveRecord::Migration[6.0]
       t.string(:uuid)
       t.string(:uuid_form_origin)
       t.string(:uuid_citizen)
-      t.string :uuid_form_update
+      t.string(:uuid_form_update)
       t.integer(:tp_cds_origin)
       t.datetime(:initial_date_hour)
       t.datetime(:final_date_hour)

@@ -1,4 +1,4 @@
-<% if current_user.doctor? || current_user.dentist? || current_user.secretary? %>
+<% if current_user.doctor? || current_user.dentist? || current_user.secretary? || current_user.service? %>
   <%= render 'dashboard_service' %>
 <% else %>
   <%= render 'dashboard_administrative' %>

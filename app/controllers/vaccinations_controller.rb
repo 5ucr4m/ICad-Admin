@@ -80,6 +80,8 @@ class VaccinationsController < WebController
                                         :turn_id, :family_member_id, :local_service_id,
                                         :traveller, :leprosy_communicant, :pregnant,
                                         :puerperal, :initial_date_hour, :final_date_hour,
+                                        :way_administration_id, :local_application_id,
+                                        :deferral_date, :observation, :previous_dosage,
                                         vaccination_vaccines_attributes: %i[
                                           id
                                           vaccine_id

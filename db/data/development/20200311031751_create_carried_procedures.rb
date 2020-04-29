@@ -12,6 +12,5 @@ class CreateCarriedProcedures < SeedMigration::Migration
   end
 
   def down
-
   end
 end

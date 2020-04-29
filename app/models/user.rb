@@ -83,7 +83,7 @@ class User < ApplicationRecord
 
   scope :not_admin, -> { filter(&:not_admin?) }
   scope :without_user, -> { left_outer_joins(:health_professional).where(health_professionals: { id: nil }) }
-  scope :citizens, -> {filter(&:citizen?)}
+  scope :citizens, -> { filter(&:citizen?) }
 
   delegate :mayor?, to: :role
   delegate :support?, to: :role

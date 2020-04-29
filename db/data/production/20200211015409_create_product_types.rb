@@ -14,6 +14,5 @@ class CreateProductTypes < SeedMigration::Migration
   end
 
   def down
-
   end
 end

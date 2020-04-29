@@ -9,7 +9,7 @@ class Role < ApplicationRecord
     ProfessionalTeam,
     Vaccine,
     PeriodItem,
-    AppointmentBooking
+    AppointmentBooking,
   ].freeze
 
   FORMS = [

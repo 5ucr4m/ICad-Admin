@@ -21,7 +21,7 @@ class HealthProfessional < ApplicationRecord
   validates :cns_code, :full_name, :federal_registry, presence: true
   validates :federal_registry, :cns_code, uniqueness: true
 
-  scope :only_doctors, -> {joins(user: :user_roles).where(users: { user_roles: {role: [Role.doctor.first, Role.dentist.first]} })}
+  scope :only_doctors, -> { joins(user: :user_roles).where(users: { user_roles: { role: [Role.doctor.first, Role.dentist.first] } }) }
 
   ransack_alias :search, :id_to_s_or_full_name_or_federal_registry_or_state_registry_or_cns_code
 

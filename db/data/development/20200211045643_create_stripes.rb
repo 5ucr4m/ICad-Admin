@@ -7,6 +7,5 @@ class CreateStripes < SeedMigration::Migration
   end
 
   def down
-
   end
 end

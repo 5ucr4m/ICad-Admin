@@ -7,6 +7,5 @@ class CreateGenderIdentities < SeedMigration::Migration
   end
 
   def down
-
   end
 end

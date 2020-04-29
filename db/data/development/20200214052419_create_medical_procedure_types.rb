@@ -1,6 +1,5 @@
 class CreateMedicalProcedureTypes < SeedMigration::Migration
   def up
-
     GenericModel.create!(name: 'GERAL E NÃO ESPECÍFICO - 1 - Dor generalizada /múltipla'.mb_chars.upcase, reference: 'A01', generic_field: :medical_procedure, generic_class: AppointmentBooking.model_name.name)
     GenericModel.create!(name: 'GERAL E NÃO ESPECÍFICO - 1 - Arrepios/ calafrios'.mb_chars.upcase, reference: 'A02', generic_field: :medical_procedure, generic_class: AppointmentBooking.model_name.name)
     GenericModel.create!(name: 'GERAL E NÃO ESPECÍFICO - 1 - Febre'.mb_chars.upcase, reference: 'A03', generic_field: :medical_procedure, generic_class: AppointmentBooking.model_name.name)
@@ -730,7 +729,5 @@ class CreateMedicalProcedureTypes < SeedMigration::Migration
   end
 
   def down
-
   end
-
 end

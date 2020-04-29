@@ -1,21 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "appointment_demands/edit", type: :view do
+RSpec.describe("appointment_demands/edit", type: :view) do
   before(:each) do
     @appointment_demand = assign(:appointment_demand, AppointmentDemand.create!(
-      :family_member => nil,
-      :health_professional => nil,
-      :manage_medicine => false,
-      :curative => false,
-      :appointment_demand => false,
-      :initial_listening => false,
-      :examination => false,
-      :nebulization => false,
-      :dentistry => false,
-      :procedures => false,
-      :vaccine => false,
-      :company => nil,
-      :ip => "MyString"
+      family_member: nil,
+      health_professional: nil,
+      manage_medicine: false,
+      curative: false,
+      appointment_demand: false,
+      initial_listening: false,
+      examination: false,
+      nebulization: false,
+      dentistry: false,
+      procedures: false,
+      vaccine: false,
+      company: nil,
+      ip: "MyString"
     ))
   end
 
@@ -23,7 +23,6 @@ RSpec.describe "appointment_demands/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", appointment_demand_path(@appointment_demand), "post" do
-
       assert_select "input[name=?]", "appointment_demand[family_member_id]"
 
       assert_select "input[name=?]", "appointment_demand[health_professional_id]"

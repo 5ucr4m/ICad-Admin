@@ -9,7 +9,7 @@ class CreateAppointmentBookings < ActiveRecord::Migration[6.0]
       t.string(:end_hour)
       t.text(:observation)
       t.string(:phone)
-      t.belongs_to(:medical_procedure, foreign_key: {to_table: :generic_models}, index: true)
+      t.belongs_to(:medical_procedure, foreign_key: { to_table: :generic_models }, index: true)
       t.string(:slug)
       t.belongs_to(:company, foreign_key: true, index: true)
       t.integer(:status)

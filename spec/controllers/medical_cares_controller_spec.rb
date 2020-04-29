@@ -23,18 +23,17 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe MedicalCaresController, type: :controller do
-
+RSpec.describe(MedicalCaresController, type: :controller) do
   # This should return the minimal set of attributes required to create a valid
   # MedicalCare. As you add validations to MedicalCare, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     skip("Add a hash of attributes valid for your model")
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     skip("Add a hash of attributes invalid for your model")
-  }
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -43,99 +42,98 @@ RSpec.describe MedicalCaresController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      MedicalCare.create! valid_attributes
+      MedicalCare.create!(valid_attributes)
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe "GET #show" do
     it "returns a success response" do
-      medical_care = MedicalCare.create! valid_attributes
-      get :show, params: {id: medical_care.to_param}, session: valid_session
-      expect(response).to be_successful
+      medical_care = MedicalCare.create!(valid_attributes)
+      get :show, params: { id: medical_care.to_param }, session: valid_session
+      expect(response).to(be_successful)
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to(be_successful)
     end
   end
 
   describe "GET #edit" do
     it "returns a success response" do
-      medical_care = MedicalCare.create! valid_attributes
-      get :edit, params: {id: medical_care.to_param}, session: valid_session
-      expect(response).to be_successful
+      medical_care = MedicalCare.create!(valid_attributes)
+      get :edit, params: { id: medical_care.to_param }, session: valid_session
+      expect(response).to(be_successful)
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
       it "creates a new MedicalCare" do
-        expect {
-          post :create, params: {medical_care: valid_attributes}, session: valid_session
-        }.to change(MedicalCare, :count).by(1)
+        expect do
+          post :create, params: { medical_care: valid_attributes }, session: valid_session
+        end.to(change(MedicalCare, :count).by(1))
       end
 
       it "redirects to the created medical_care" do
-        post :create, params: {medical_care: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(MedicalCare.last)
+        post :create, params: { medical_care: valid_attributes }, session: valid_session
+        expect(response).to(redirect_to(MedicalCare.last))
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {medical_care: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        post :create, params: { medical_care: invalid_attributes }, session: valid_session
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
+      let(:new_attributes) do
         skip("Add a hash of attributes valid for your model")
-      }
+      end
 
       it "updates the requested medical_care" do
-        medical_care = MedicalCare.create! valid_attributes
-        put :update, params: {id: medical_care.to_param, medical_care: new_attributes}, session: valid_session
+        medical_care = MedicalCare.create!(valid_attributes)
+        put :update, params: { id: medical_care.to_param, medical_care: new_attributes }, session: valid_session
         medical_care.reload
         skip("Add assertions for updated state")
       end
 
       it "redirects to the medical_care" do
-        medical_care = MedicalCare.create! valid_attributes
-        put :update, params: {id: medical_care.to_param, medical_care: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(medical_care)
+        medical_care = MedicalCare.create!(valid_attributes)
+        put :update, params: { id: medical_care.to_param, medical_care: valid_attributes }, session: valid_session
+        expect(response).to(redirect_to(medical_care))
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        medical_care = MedicalCare.create! valid_attributes
-        put :update, params: {id: medical_care.to_param, medical_care: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        medical_care = MedicalCare.create!(valid_attributes)
+        put :update, params: { id: medical_care.to_param, medical_care: invalid_attributes }, session: valid_session
+        expect(response).to(be_successful)
       end
     end
   end
 
   describe "DELETE #destroy" do
     it "destroys the requested medical_care" do
-      medical_care = MedicalCare.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: medical_care.to_param}, session: valid_session
-      }.to change(MedicalCare, :count).by(-1)
+      medical_care = MedicalCare.create!(valid_attributes)
+      expect do
+        delete :destroy, params: { id: medical_care.to_param }, session: valid_session
+      end.to(change(MedicalCare, :count).by(-1))
     end
 
     it "redirects to the medical_cares list" do
-      medical_care = MedicalCare.create! valid_attributes
-      delete :destroy, params: {id: medical_care.to_param}, session: valid_session
-      expect(response).to redirect_to(medical_cares_url)
+      medical_care = MedicalCare.create!(valid_attributes)
+      delete :destroy, params: { id: medical_care.to_param }, session: valid_session
+      expect(response).to(redirect_to(medical_cares_url))
     end
   end
-
 end

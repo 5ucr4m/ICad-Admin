@@ -510,6 +510,5 @@ class CreateTherapeuticClassesTypes < SeedMigration::Migration
   end
 
   def down
-
   end
 end

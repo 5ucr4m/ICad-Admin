@@ -11,7 +11,7 @@ class AppointmentBookingsController < WebController
     @result = @query.result
     if current_user.doctor?
       @result = @result.includes(:health_professional)
-        .where(health_professional: HealthProfessional.find_by(user: current_user))
+                    .where(health_professional: HealthProfessional.find_by(user: current_user))
     end
     @pagy, @appointment_bookings = pagy(@result.includes(:family_member,
                                                          :medical_procedure, :health_professional), page: params[:page], items: 10)
@@ -24,6 +24,7 @@ class AppointmentBookingsController < WebController
   # GET /appointment_bookings/1
   def show
     authorize(@appointment_booking)
+    breadcrumb(@appointment_booking.slug, appointment_booking_path)
     @family_member_selected = @appointment_booking.family_member.presence
   end
 
@@ -83,6 +84,7 @@ class AppointmentBookingsController < WebController
   def appointment_booking_params
     params.require(:appointment_booking).permit(:health_professional_id, :family_member_id,
                                                 :appointment_date, :start_hour, :end_hour, :observation,
+                                                :priority,
                                                 :phone, :medical_procedure_id)
   end
 end

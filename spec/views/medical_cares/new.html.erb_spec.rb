@@ -1,33 +1,33 @@
 require 'rails_helper'
 
-RSpec.describe "medical_cares/new", type: :view do
+RSpec.describe("medical_cares/new", type: :view) do
   before(:each) do
     assign(:medical_care, MedicalCare.new(
-      :appointment_booking => nil,
-      :appointment_demand => nil,
-      :appointment_reason => nil,
-      :appointment_brief => "MyText",
-      :cephalic_perimeter => "MyString",
-      :weight => "MyString",
-      :height => "MyString",
-      :imc => "MyString",
-      :calf_perimeter => "MyString",
-      :blood_pressure => "MyString",
-      :blood_pressure_to => "MyString",
-      :respiratory_rate => "MyString",
-      :heart_rate => "MyString",
-      :temperature => "MyString",
-      :saturation => "MyString",
-      :capillary_blood => "MyString",
-      :collected_time => nil,
-      :risk_vulnerability => 1,
-      :release_citizen => false,
-      :medical_care => nil,
-      :other_appointment_booking => nil,
-      :user => nil,
-      :slug => "MyString",
-      :company => nil,
-      :ip => "MyString"
+      appointment_booking: nil,
+      appointment_demand: nil,
+      appointment_reason: nil,
+      appointment_brief: "MyText",
+      cephalic_perimeter: "MyString",
+      weight: "MyString",
+      height: "MyString",
+      imc: "MyString",
+      calf_perimeter: "MyString",
+      blood_pressure: "MyString",
+      blood_pressure_to: "MyString",
+      respiratory_rate: "MyString",
+      heart_rate: "MyString",
+      temperature: "MyString",
+      saturation: "MyString",
+      capillary_blood: "MyString",
+      collected_time: nil,
+      risk_vulnerability: 1,
+      release_citizen: false,
+      medical_care: nil,
+      other_appointment_booking: nil,
+      user: nil,
+      slug: "MyString",
+      company: nil,
+      ip: "MyString"
     ))
   end
 
@@ -35,7 +35,6 @@ RSpec.describe "medical_cares/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", medical_cares_path, "post" do
-
       assert_select "input[name=?]", "medical_care[appointment_booking_id]"
 
       assert_select "input[name=?]", "medical_care[appointment_demand_id]"

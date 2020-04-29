@@ -166,6 +166,18 @@ pt-BR:
         one: Agendamento
         other: Agendamentos
         icon: fas fa-calendar-check
+      appointment_demand:
+        one: Demanda
+        other: Demandas
+        icon: fas fa-hand-holding-medical
+      medical_care:
+        one: Atendimento Especializado
+        other: Atendimento Especializado
+        icon: fas fa-stethoscope
+      medical_care_procedure:
+        one: Procedimento Realizado
+        other: Procedimentos Realizados
+        icon: fas fa-notes-medical
     attributes:
       address:
         patio: Logradouro

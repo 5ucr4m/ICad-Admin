@@ -1,24 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe "medicines/new", type: :view do
+RSpec.describe("medicines/new", type: :view) do
   before(:each) do
     assign(:medicine, Medicine.new(
-      :name => "MyString",
-      :substance => "MyString",
-      :laboratory => "MyString",
-      :laboratory_registry => "MyString",
-      :ggrem_code => "MyString",
-      :registry => "MyString",
-      :ean_one => "MyString",
-      :ean_two => "MyString",
-      :ean_three => "MyString",
-      :presentation => "MyString",
-      :therapeutic_class => nil,
-      :product_type => nil,
-      :stripe => nil,
-      :slug => "MyString",
-      :company => nil,
-      :ip => "MyString"
+      name: "MyString",
+      substance: "MyString",
+      laboratory: "MyString",
+      laboratory_registry: "MyString",
+      ggrem_code: "MyString",
+      registry: "MyString",
+      ean_one: "MyString",
+      ean_two: "MyString",
+      ean_three: "MyString",
+      presentation: "MyString",
+      therapeutic_class: nil,
+      product_type: nil,
+      stripe: nil,
+      slug: "MyString",
+      company: nil,
+      ip: "MyString"
     ))
   end
 
@@ -26,7 +26,6 @@ RSpec.describe "medicines/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", medicines_path, "post" do
-
       assert_select "input[name=?]", "medicine[name]"
 
       assert_select "input[name=?]", "medicine[substance]"

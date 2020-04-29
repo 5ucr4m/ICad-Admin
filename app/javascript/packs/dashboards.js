@@ -97,8 +97,10 @@ document.addEventListener('DOMContentLoaded', function () {
       defaultView: 'dayGridMonth',
       plugins: [dayGridPlugin, interaction],
       dateClick: function(info) {
-        $('#appointment-date').val(info.dateStr);
-        Rails.fire(document.querySelector('#form-search'), 'submit');
+        $('#appointment-bookings-date').val(info.dateStr);
+        $('#appointment-demands-date').val(info.dateStr);
+        Rails.fire(document.querySelector('#form-search-bookings'), 'submit');
+        Rails.fire(document.querySelector('#form-search-demands'), 'submit');
       }
     });
 
