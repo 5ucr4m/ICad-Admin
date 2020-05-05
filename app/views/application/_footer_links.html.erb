@@ -1,6 +1,6 @@
 <div class="col-sm-12 col-lg-12 p-0">
   <div class="form-row">
-    <% if policy(model).create? %>
+    <% if url && policy(model).create? %>
       <div class="col-sm-12 col-lg-6 text-left">
         <%= link_to url, class: 'btn btn-primary align-middle mb-md-0 mb-sm-3' do %>
           <i class="fas fa-plus mr-2"></i>Novo

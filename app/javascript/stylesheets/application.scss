@@ -445,3 +445,11 @@ div.fc-bg > table > tbody > tr > td, div.fc-bg > table > thead > tr > td,
   font-size: 14px
 }
 
+.nav-pills .nav-link.active {
+  background: $color-blue-deep;
+}
+
+.nav-pills .nav-link.active h3 {
+  color: #fff !important;
+}
+

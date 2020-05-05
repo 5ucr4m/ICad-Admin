@@ -16,6 +16,7 @@ class CreatePatientMedicines < ActiveRecord::Migration[6.0]
       t.text(:recommendations)
       t.integer(:supply) # Fornecimento
       t.string(:slug)
+      t.belongs_to(:medicine, foreign_key: true, index: true)
       t.belongs_to(:pharmaceutical_form, foreign_key: { to_table: :generic_models }, index: true)
       t.belongs_to(:way_administration, foreign_key: { to_table: :generic_models }, index: true)
       t.belongs_to(:recipe_type, foreign_key: { to_table: :generic_models }, index: true)

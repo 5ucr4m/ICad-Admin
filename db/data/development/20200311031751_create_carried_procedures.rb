@@ -7,7 +7,7 @@ class CreateCarriedProcedures < SeedMigration::Migration
 
       next if csv[4] == 'NO_PROCEDIMENTO'
 
-      GenericModel.create!(name: csv[4].mb_chars.upcase, reference: csv[3], generic_field: :carried_procedure, generic_class: MedicalCare.model_name.name)
+      GenericModel.create!(name: csv[4].mb_chars.upcase, reference: csv[3], generic_field: :carried_procedure, generic_class: PatientRecord.model_name.name)
     end
   end
 

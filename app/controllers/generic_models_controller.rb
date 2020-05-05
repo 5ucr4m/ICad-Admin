@@ -26,6 +26,11 @@ class GenericModelsController < WebController
     render_json(@query.result.ethnicities.includes(:generic_model))
   end
 
+  def carried_procedures
+    authorize(GenericModel)
+    render_json(@query.result.carried_procedures.includes(:generic_model))
+  end
+
   # GET /generic_models/1
   def show
     authorize(@generic_model)

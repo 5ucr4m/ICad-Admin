@@ -1,0 +1,119 @@
+.nav-tabs {
+  border-bottom: 1px solid #e9ecf1;
+}
+
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  border: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  border-color: #f1f3f8 #f1f3f8 #e9ecf1;
+}
+
+.nav-tabs .nav-link.disabled {
+  color: #a8aeb7;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #7a828f;
+  background-color: #f5f7fb;
+  border-color: #e9ecf1 #e9ecf1 #f5f7fb;
+}
+
+.nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.card-tabs {
+  margin-bottom: 1.5rem;
+}
+
+.card-tabs .nav-tabs {
+  position: relative;
+  z-index: 1000;
+  border-bottom: 0;
+}
+
+.card-tabs .nav-tabs .nav-link {
+  background: rgba(53, 64, 82, 0.024);
+  border: 1px solid rgba(110, 117, 130, 0.2);
+  border-bottom: 0;
+}
+
+.card-tabs .nav-tabs .nav-link.active, .card-tabs .nav-tabs .nav-link:active, .card-tabs .nav-tabs .nav-link:hover {
+  border-color: rgba(110, 117, 130, 0.2);
+}
+
+.card-tabs .nav-tabs .nav-link.active {
+  background: #ffffff;
+}
+
+.card-tabs .nav-tabs .nav-item:not(:first-child) .nav-link {
+  border-top-left-radius: 0;
+}
+
+.card-tabs .nav-tabs .nav-item:not(:last-child) .nav-link {
+  border-top-right-radius: 0;
+}
+
+.card-tabs .nav-tabs .nav-item + .nav-item {
+  margin-left: -1px;
+}
+
+.card-tabs .nav-tabs-bottom {
+  margin-bottom: 0;
+}
+
+.card-tabs .nav-tabs-bottom .nav-item {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.card-tabs .nav-tabs-bottom .nav-item .nav-link {
+  border-top-width: 0;
+  border-bottom: 1px solid rgba(110, 117, 130, 0.2);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.card-tabs .card {
+  margin: 0;
+  border-top-left-radius: 0;
+}
+
+
+.nav-tabs .icon {
+  color: #6e7582; }
+
+.nav-tabs .nav-link {
+  padding: 0.75rem 1.25rem;
+  line-height: 20px;
+  color: #6e7582;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: .3s color, .3s border-color; }
+.nav-tabs .nav-link:hover {
+  color: #354052;
+  border-color: transparent; }
+.nav-tabs .nav-link.disabled {
+  color: rgba(110, 117, 130, 0.2); }
+.nav-tabs .nav-link.active {
+  color: #354052;
+  background: inherit;
+  border-color: transparent;
+  border-bottom-color: #206bc4; }
+
+.nav-tabs-alt .nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase; }

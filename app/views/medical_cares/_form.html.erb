@@ -1,6 +1,0 @@
-<%= simple_form_for(@medical_care) do |f| %>
-  <% content_for :body do %>
-    <%= render 'initial_hear', f: f %>
-  <% end %>
-  <%= render template: 'application/form', locals: {form: @medical_care} %>
-<% end %>

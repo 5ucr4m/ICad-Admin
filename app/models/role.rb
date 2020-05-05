@@ -10,6 +10,8 @@ class Role < ApplicationRecord
     Vaccine,
     PeriodItem,
     AppointmentBooking,
+    AppointmentDemand,
+    PatientRecord
   ].freeze
 
   FORMS = [

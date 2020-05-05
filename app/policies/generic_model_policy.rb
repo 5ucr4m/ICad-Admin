@@ -16,6 +16,10 @@ class GenericModelPolicy < ApplicationPolicy
     index?
   end
 
+  def carried_procedures?
+    index?
+  end
+
   class Scope < Scope
     def resolve
       scope.all

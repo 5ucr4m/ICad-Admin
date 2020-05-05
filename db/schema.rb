@@ -672,59 +672,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.index ["water_treatment_id"], name: "index_living_conditions_on_water_treatment_id"
   end
 
-  create_table "medical_care_procedures", force: :cascade do |t|
-    t.bigint "medical_care_id"
-    t.bigint "procedure_performed_id"
-    t.bigint "company_id"
-    t.string "slug"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_medical_care_procedures_on_company_id"
-    t.index ["medical_care_id"], name: "index_medical_care_procedures_on_medical_care_id"
-    t.index ["procedure_performed_id"], name: "index_medical_care_procedures_on_procedure_performed_id"
-  end
-
-  create_table "medical_cares", force: :cascade do |t|
-    t.bigint "appointment_booking_id"
-    t.bigint "appointment_demand_id"
-    t.bigint "appointment_reason_id"
-    t.text "appointment_brief"
-    t.string "cephalic_perimeter"
-    t.string "weight"
-    t.string "height"
-    t.string "imc"
-    t.string "calf_perimeter"
-    t.string "blood_pressure"
-    t.string "blood_pressure_to"
-    t.string "respiratory_rate"
-    t.string "heart_rate"
-    t.string "temperature"
-    t.string "saturation"
-    t.string "capillary_blood"
-    t.bigint "collected_time_id"
-    t.integer "risk_vulnerability"
-    t.boolean "release_citizen"
-    t.bigint "medical_care_id"
-    t.bigint "other_appointment_booking_id"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["appointment_booking_id"], name: "index_medical_cares_on_appointment_booking_id"
-    t.index ["appointment_demand_id"], name: "index_medical_cares_on_appointment_demand_id"
-    t.index ["appointment_reason_id"], name: "index_medical_cares_on_appointment_reason_id"
-    t.index ["collected_time_id"], name: "index_medical_cares_on_collected_time_id"
-    t.index ["company_id"], name: "index_medical_cares_on_company_id"
-    t.index ["medical_care_id"], name: "index_medical_cares_on_medical_care_id"
-    t.index ["other_appointment_booking_id"], name: "index_medical_cares_on_other_appointment_booking_id"
-    t.index ["user_id"], name: "index_medical_cares_on_user_id"
-  end
-
   create_table "medicines", force: :cascade do |t|
     t.string "name"
     t.string "substance"
@@ -854,7 +801,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
 
   create_table "patient_histories", force: :cascade do |t|
     t.bigint "family_member_id"
-    t.bigint "medical_care_id"
+    t.bigint "patient_record_id"
     t.bigint "patient_soap_id"
     t.bigint "user_id"
     t.string "slug"
@@ -865,7 +812,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_patient_histories_on_company_id"
     t.index ["family_member_id"], name: "index_patient_histories_on_family_member_id"
-    t.index ["medical_care_id"], name: "index_patient_histories_on_medical_care_id"
+    t.index ["patient_record_id"], name: "index_patient_histories_on_patient_record_id"
     t.index ["patient_soap_id"], name: "index_patient_histories_on_patient_soap_id"
     t.index ["user_id"], name: "index_patient_histories_on_user_id"
   end
@@ -937,6 +884,61 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.index ["family_member_id"], name: "index_patient_reactions_on_family_member_id"
     t.index ["reaction_id"], name: "index_patient_reactions_on_reaction_id"
     t.index ["user_id"], name: "index_patient_reactions_on_user_id"
+  end
+
+  create_table "patient_record_procedures", force: :cascade do |t|
+    t.bigint "patient_record_id"
+    t.bigint "procedure_performed_id"
+    t.bigint "company_id"
+    t.string "slug"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_patient_record_procedures_on_company_id"
+    t.index ["patient_record_id"], name: "index_patient_record_procedures_on_patient_record_id"
+    t.index ["procedure_performed_id"], name: "index_patient_record_procedures_on_procedure_performed_id"
+  end
+
+  create_table "patient_records", force: :cascade do |t|
+    t.bigint "appointment_booking_id"
+    t.bigint "appointment_demand_id"
+    t.bigint "appointment_reason_id"
+    t.bigint "family_member_id"
+    t.text "appointment_brief"
+    t.string "cephalic_perimeter"
+    t.string "weight"
+    t.string "height"
+    t.string "imc"
+    t.string "calf_perimeter"
+    t.string "blood_pressure"
+    t.string "blood_pressure_to"
+    t.string "respiratory_rate"
+    t.string "heart_rate"
+    t.string "temperature"
+    t.string "saturation"
+    t.string "capillary_blood"
+    t.bigint "collected_time_id"
+    t.integer "risk_vulnerability"
+    t.boolean "release_citizen"
+    t.bigint "patient_record_id"
+    t.bigint "other_appointment_booking_id"
+    t.bigint "user_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["appointment_booking_id"], name: "index_patient_records_on_appointment_booking_id"
+    t.index ["appointment_demand_id"], name: "index_patient_records_on_appointment_demand_id"
+    t.index ["appointment_reason_id"], name: "index_patient_records_on_appointment_reason_id"
+    t.index ["collected_time_id"], name: "index_patient_records_on_collected_time_id"
+    t.index ["company_id"], name: "index_patient_records_on_company_id"
+    t.index ["family_member_id"], name: "index_patient_records_on_family_member_id"
+    t.index ["other_appointment_booking_id"], name: "index_patient_records_on_other_appointment_booking_id"
+    t.index ["patient_record_id"], name: "index_patient_records_on_patient_record_id"
+    t.index ["user_id"], name: "index_patient_records_on_user_id"
   end
 
   create_table "patient_soap_certificates", force: :cascade do |t|
@@ -1636,17 +1638,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
   add_foreign_key "living_conditions", "generic_models", column: "rural_production_area_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_supply_id"
   add_foreign_key "living_conditions", "generic_models", column: "water_treatment_id"
-  add_foreign_key "medical_care_procedures", "companies"
-  add_foreign_key "medical_care_procedures", "generic_models", column: "procedure_performed_id"
-  add_foreign_key "medical_care_procedures", "medical_cares"
-  add_foreign_key "medical_cares", "appointment_bookings"
-  add_foreign_key "medical_cares", "appointment_bookings", column: "other_appointment_booking_id"
-  add_foreign_key "medical_cares", "appointment_demands"
-  add_foreign_key "medical_cares", "companies"
-  add_foreign_key "medical_cares", "generic_models", column: "appointment_reason_id"
-  add_foreign_key "medical_cares", "generic_models", column: "collected_time_id"
-  add_foreign_key "medical_cares", "medical_cares"
-  add_foreign_key "medical_cares", "users"
   add_foreign_key "medicines", "companies"
   add_foreign_key "medicines", "generic_models", column: "product_type_id"
   add_foreign_key "medicines", "generic_models", column: "stripe_id"
@@ -1669,7 +1660,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
   add_foreign_key "patient_conditions", "users"
   add_foreign_key "patient_histories", "companies"
   add_foreign_key "patient_histories", "family_members"
-  add_foreign_key "patient_histories", "medical_cares"
+  add_foreign_key "patient_histories", "patient_records"
   add_foreign_key "patient_histories", "patient_soaps"
   add_foreign_key "patient_histories", "users"
   add_foreign_key "patient_medicines", "companies"
@@ -1685,6 +1676,18 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
   add_foreign_key "patient_reactions", "family_members"
   add_foreign_key "patient_reactions", "generic_models", column: "reaction_id"
   add_foreign_key "patient_reactions", "users"
+  add_foreign_key "patient_record_procedures", "companies"
+  add_foreign_key "patient_record_procedures", "generic_models", column: "procedure_performed_id"
+  add_foreign_key "patient_record_procedures", "patient_records"
+  add_foreign_key "patient_records", "appointment_bookings"
+  add_foreign_key "patient_records", "appointment_bookings", column: "other_appointment_booking_id"
+  add_foreign_key "patient_records", "appointment_demands"
+  add_foreign_key "patient_records", "companies"
+  add_foreign_key "patient_records", "family_members"
+  add_foreign_key "patient_records", "generic_models", column: "appointment_reason_id"
+  add_foreign_key "patient_records", "generic_models", column: "collected_time_id"
+  add_foreign_key "patient_records", "patient_records"
+  add_foreign_key "patient_records", "users"
   add_foreign_key "patient_soap_certificates", "companies"
   add_foreign_key "patient_soap_certificates", "generic_models", column: "cid_code_id"
   add_foreign_key "patient_soap_certificates", "users"

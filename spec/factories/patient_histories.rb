@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :patient_history do
     family_member { nil }
-    medical_care { nil }
+    patient_record { nil }
     patient_soap { nil }
     user { nil }
     slug { "MyString" }

@@ -1,0 +1,6 @@
+<%= simple_form_for(@patient_record) do |f| %>
+  <% content_for :body do %>
+    <%= render 'card', f: f %>
+  <% end %>
+  <%= render template: 'application/form', locals: {form: @patient_record} %>
+<% end %>

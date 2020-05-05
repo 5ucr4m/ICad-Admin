@@ -1,0 +1,13 @@
+<% unless show?(f.object.persisted?) %>
+  <div class="card-body py-2">
+    <%= link_to_add_association f, :family_member,
+                                class: 'btn btn-sm btn-primary', role: 'button',
+                                data: {
+                                  'association-insertion-node': '#appointment-booking',
+                                  'association-insertion-method': 'append'
+                                } do %>
+      <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+    <% end %>
+  </div>
+<% end %>
+

@@ -3,9 +3,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :appointment_demands
-  resources :medical_cares
-  resources :appointment_bookings
   # Sidekiq web config
   scope :monitoring do
     mount Sidekiq::Web => '/sidekiq'
@@ -36,6 +33,7 @@ Rails.application.routes.draw do
       get 'address_types'
       get 'cbo_types'
       get 'ethnicity_types'
+      get 'carried_procedures'
     end
   end
 
@@ -47,7 +45,12 @@ Rails.application.routes.draw do
       post 'change_company'
     end
   end
-  resources :family_members
+  resources :appointment_demands
+  resources :appointment_bookings
+  resources :patient_records, only: :index
+  resources :family_members do
+    resources :patient_records, except: :index
+  end
   resources :home_registrations
   resources :professional_teams
   resources :health_professionals

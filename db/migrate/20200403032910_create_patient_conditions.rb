@@ -2,7 +2,7 @@
 class CreatePatientConditions < ActiveRecord::Migration[6.0]
   def change
     create_table :patient_conditions do |t|
-      t.belongs_to(:medical_care, foreign_key: true, index: true)
+      t.belongs_to(:family_member, foreign_key: true, index: true)
       t.belongs_to(:ciap_code, foreign_key: { to_table: :generic_models }, index: true)
       t.belongs_to(:cid_code, foreign_key: { to_table: :generic_models }, index: true)
       t.string(:other_condition)

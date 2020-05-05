@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AppointmentBooking < ApplicationRecord
   include Sluggable
   include Tenantable
@@ -10,6 +11,8 @@ class AppointmentBooking < ApplicationRecord
   belongs_to :company
 
   validates :appointment_date, :start_hour, :end_hour, :observation, presence: true
+
+  accepts_nested_attributes_for :family_member, allow_destroy: false
 
   ransack_alias :search, :id_to_s
 end

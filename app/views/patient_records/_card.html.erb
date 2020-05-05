@@ -1,0 +1,86 @@
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row text-center align-content-center">
+        <div class="col-lg-12">
+          <ul class="nav nav-pills card-header-pills" data-toggle="tabs">
+            <li class="nav-item d-block">
+              <a href="#face" class="nav-link active py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                <h3 class="card-title text-blue-deep">
+                  <i class="fas fa-notes-medical mr-2"></i>Folha de Rosto
+                </h3>
+              </a>
+            </li>
+            <li class="nav-item d-block">
+              <a href="#soap" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                <h3 class="card-title text-blue-deep">
+                  <i class="fas fa-hand-holding-medical mr-2"></i>SOAP
+                </h3>
+              </a>
+            </li>
+            <li class="nav-item d-block">
+              <a href="#monitoring" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                <h3 class="card-title text-blue-deep">
+                  <i class="fas fa-calendar-plus mr-2"></i>Acompanhamento
+                </h3>
+              </a>
+            </li>
+            <li class="nav-item d-block">
+              <a href="#preceding" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                <h3 class="card-title text-blue-deep">
+                  <i class="fas fa-book-medical mr-2"></i>Antecedentes
+                </h3>
+              </a>
+            </li>
+            <li class="nav-item d-block">
+              <a href="#history" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                <h3 class="card-title text-blue-deep">
+                  <i class="fas fa-history mr-2"></i>Histórico
+                </h3>
+              </a>
+            </li>
+            <li class="nav-item d-block">
+              <a href="#user-info" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                <h3 class="card-title text-blue-deep">
+                  <i class="far fa-address-card mr-2"></i>Dados Cadastrais
+                </h3>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body p-2">
+      <div class="tab-content">
+        <div class="tab-pane active" id="face">
+          <div class="row">
+            <%= render 'initial_hear', f: f %>
+            <%= render 'patient_contacts', f: f %>
+            <%= render 'patient_conditions', f: f %>
+            <%= render 'patient_reactions', f: f %>
+            <%#= render 'patient_vaccines', f: f %>
+            <%= render 'patient_medicines', f: f %>
+            <%= render 'patient_notes', f: f %>
+          </div>
+        </div>
+        <div class="tab-pane" id="soap">
+          <div class="row">
+            <%= render 'patient_contacts', f: f %>
+          </div>
+        </div>
+        <div class="tab-pane" id="monitoring">
+          monitoring
+        </div>
+        <div class="tab-pane" id="preceding">
+          preceding
+        </div>
+        <div class="tab-pane" id="history">
+          history
+        </div>
+        <div class="tab-pane" id="user-info">
+          info
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

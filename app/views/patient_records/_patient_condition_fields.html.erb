@@ -1,0 +1,14 @@
+<div class="nested-fields">
+  <div class="form-row">
+    <%= f.input :other_condition, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :year_initial, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :month_initial, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :day_initial, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :years_initial, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :months_initial, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :observations, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :situation, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+    <%= f.input :last_update, as: :date, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(@patient_record.persisted?)} %>
+  </div>
+</div>
+

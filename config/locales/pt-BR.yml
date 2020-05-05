@@ -170,11 +170,11 @@ pt-BR:
         one: Demanda
         other: Demandas
         icon: fas fa-hand-holding-medical
-      medical_care:
+      patient_record:
         one: Atendimento Especializado
         other: Atendimento Especializado
         icon: fas fa-stethoscope
-      medical_care_procedure:
+      patient_record_procedure:
         one: Procedimento Realizado
         other: Procedimentos Realizados
         icon: fas fa-notes-medical
