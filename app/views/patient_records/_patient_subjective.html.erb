@@ -1,0 +1,57 @@
+<div class="col-lg-12">
+  <div class="card card-collapsed mb-2">
+    <div class="card-header">
+      <h3 class="card-title">
+        Subjetivo
+      </h3>
+      <div class="card-options">
+        <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+          <i class="fe fe-chevron-up"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body p-2">
+      <div class="text-left">
+        <button type="submit" class="btn btn-sm btn-primary">
+          <i class="fas fa-save mr-2"></i>Salvar
+        </button>
+      </div>
+    </div>
+    <div class="card-body pb-2">
+      <div class="row">
+        <%= f.input :subjective, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <div class="col-lg-12">
+          <div class="card card-collapsed mb-2">
+            <div class="card-header">
+              <h3 class="card-title">
+                Motivos da Consulta
+              </h3>
+              <div class="card-options">
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+                  <i class="fe fe-chevron-up"></i>
+                </a>
+              </div>
+            </div>
+            <% unless show?(f.object.persisted?) %>
+              <div class="card-body py-2">
+                <%= link_to_add_association f, :patient_soap_reasons,
+                                            class: 'btn btn-sm btn-primary', role: 'button',
+                                            data: {
+                                              'association-insertion-node': '#patient-soap-reasons',
+                                              'association-insertion-method': 'append'
+                                            } do %>
+                  <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                <% end %>
+              </div>
+            <% end %>
+            <div id="patient-soap-reasons" class="card-body pb-2">
+              <%= f.simple_fields_for :patient_soap_reasons do |patient_soap_reason| %>
+                <%= render 'patient_soap_reason_fields', f: patient_soap_reason %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

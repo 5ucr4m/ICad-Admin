@@ -1,0 +1,187 @@
+<div class="col-lg-12">
+  <div class="card card-collapsed mb-2">
+    <div class="card-header">
+      <h3 class="card-title">
+        Plano
+      </h3>
+      <div class="card-options">
+        <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+          <i class="fe fe-chevron-up"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body p-2">
+      <div class="text-left">
+        <button type="submit" class="btn btn-sm btn-primary">
+          <i class="fas fa-save mr-2"></i>Salvar
+        </button>
+      </div>
+    </div>
+    <div class="card-body pb-2">
+      <div class="row">
+        <%= f.input :plan, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <div class="col-lg-12">
+          <div class="card card-collapsed mb-2">
+            <div class="card-header">
+              <h3 class="card-title">
+                Intervenção e/ou procedimentos
+              </h3>
+              <div class="card-options">
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+                  <i class="fe fe-chevron-up"></i>
+                </a>
+              </div>
+            </div>
+            <div id="patient-soap-interventions" class="card-body p-2">
+              <%= f.simple_fields_for :patient_soap_interventions do |patient_soap_intervention| %>
+                <%= render 'patient_soap_intervention_fields', f: patient_soap_intervention %>
+              <% end %>
+            </div>
+            <% unless show?(f.object.persisted?) %>
+              <div class="card-body p-2">
+                <%= link_to_add_association f, :patient_soap_interventions,
+                                            class: 'btn btn-sm btn-primary', role: 'button',
+                                            data: {
+                                              'association-insertion-node': '#patient-soap-interventions',
+                                              'association-insertion-method': 'append'
+                                            } do %>
+                  <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="row text-center align-content-center">
+                <div class="col-lg-12">
+                  <ul class="nav nav-pills card-header-pills" data-toggle="tabs">
+                    <li class="nav-item d-block">
+                      <a href="#certificate" class="nav-link active py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                        <h3 class="card-title text-blue-deep">
+                          Atestados
+                        </h3>
+                      </a>
+                    </li>
+                    <li class="nav-item d-block">
+                      <a href="#exams" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                        <h3 class="card-title text-blue-deep">
+                          Exames
+                        </h3>
+                      </a>
+                    </li>
+                    <li class="nav-item d-block">
+                      <a href="#reminders" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                        <h3 class="card-title text-blue-deep">
+                          Lembretes
+                        </h3>
+                      </a>
+                    </li>
+                    <li class="nav-item d-block">
+                      <a href="#prescription" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                        <h3 class="card-title text-blue-deep">
+                          Prescrição de Medicamentos
+                        </h3>
+                      </a>
+                    </li>
+                    <li class="nav-item d-block">
+                      <a href="#orientations" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                        <h3 class="card-title text-blue-deep">
+                          Orientações
+                        </h3>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card-body px-0 py-2">
+              <div class="tab-content">
+                <div class="tab-pane active" id="certificate">
+                  <div id="patient-soap-certificates" class="card-body p-2">
+                    <%= f.simple_fields_for :patient_soap_certificates do |patient_soap_certificate| %>
+                      <%= render 'patient_soap_certificate_fields', f: patient_soap_certificate %>
+                    <% end %>
+                  </div>
+                  <% unless show?(f.object.persisted?) %>
+                    <div class="card-body p-2">
+                      <%= link_to_add_association f, :patient_soap_certificates,
+                                                  class: 'btn btn-sm btn-primary', role: 'button',
+                                                  data: {
+                                                    'association-insertion-node': '#patient-soap-certificates',
+                                                    'association-insertion-method': 'append'
+                                                  } do %>
+                        <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="tab-pane" id="exams">
+                  <div id="patient-soap-exams" class="card-body p-2">
+                    <%= f.simple_fields_for :patient_soap_exams do |patient_soap_exam| %>
+                      <%= render 'patient_soap_exam_fields', f: patient_soap_exam %>
+                    <% end %>
+                  </div>
+                  <% unless show?(f.object.persisted?) %>
+                    <div class="card-body p-2">
+                      <%= link_to_add_association f, :patient_soap_exams,
+                                                  class: 'btn btn-sm btn-primary', role: 'button',
+                                                  data: {
+                                                    'association-insertion-node': '#patient-soap-exams',
+                                                    'association-insertion-method': 'append'
+                                                  } do %>
+                        <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="tab-pane" id="reminders">
+                  <div id="patient-soap-reminders" class="card-body p-2">
+                    <%= f.simple_fields_for :patient_soap_reminders do |patient_soap_reminder| %>
+                      <%= render 'patient_soap_reminder_fields', f: patient_soap_reminder %>
+                    <% end %>
+                  </div>
+                  <% unless show?(f.object.persisted?) %>
+                    <div class="card-body p-2">
+                      <%= link_to_add_association f, :patient_soap_reminders,
+                                                  class: 'btn btn-sm btn-primary', role: 'button',
+                                                  data: {
+                                                    'association-insertion-node': '#patient-soap-reminders',
+                                                    'association-insertion-method': 'append'
+                                                  } do %>
+                        <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="tab-pane" id="prescription">
+                  <div id="patient-soap-medicines" class="card-body p-2">
+                    <%= f.simple_fields_for :patient_soap_medicines do |patient_soap_medicine| %>
+                      <%= render 'patient_soap_medicine_fields', f: patient_soap_medicine %>
+                    <% end %>
+                  </div>
+                  <% unless show?(f.object.persisted?) %>
+                    <div class="card-body p-2">
+                      <%= link_to_add_association f, :patient_soap_medicines,
+                                                  class: 'btn btn-sm btn-primary', role: 'button',
+                                                  data: {
+                                                    'association-insertion-node': '#patient-soap-medicines',
+                                                    'association-insertion-method': 'append'
+                                                  } do %>
+                        <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="tab-pane" id="orientations">
+                  orientations
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

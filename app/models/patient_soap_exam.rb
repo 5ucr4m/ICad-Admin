@@ -1,6 +1,10 @@
 class PatientSoapExam < ApplicationRecord
-  belongs_to :patient_soap_objective, optional: true
-  belongs_to :exam, optional: true
+  include Tenantable
+  include Sluggable
+
+  belongs_to :patient_soap, optional: true
+  belongs_to :exam, class_name: 'GenericModel', optional: true
+  belongs_to :cid_code, class_name: 'GenericModel', optional: true
   belongs_to :user, optional: true
   belongs_to :company, optional: true
 

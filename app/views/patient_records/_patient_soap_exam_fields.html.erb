@@ -1,0 +1,38 @@
+<div class="nested-fields">
+  <div class="card <%= 'card-collapsed' if f.object.persisted? %> mb-2">
+    <div class="card-header">
+      <h3 class="card-title">
+        <%= f.object.persisted? ? "Exame #{f.object.ciap_code.name_formatted}" : 'Novo Exame' %>
+      </h3>
+      <% if f.object.persisted? %>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+            <i class="fe fe-chevron-up"></i>
+          </a>
+        </div>
+      <% end %>
+    </div>
+    <% unless show?(f.object.persisted?) %>
+      <div class="card-body p-2 text-left">
+        <%= link_to_remove_association f, class: 'btn btn-icon btn-sm btn-danger', role: 'button' do %>
+          <i class="fas fa-times mr-2"></i>Remover
+        <% end %>
+      </div>
+    <% end %>
+    <div class="card-body pb-2">
+      <div class="row">
+        <%= f.association :exam, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'exam-codes', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :cid_code, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'cid-codes', disabled: show?(f.object.persisted?)} %>
+        <%= f.input :request_date, as: :date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :accomplishment_date, as: :date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :result_date, as: :date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :glycated_hemoglobin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :high_cost, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :procedure_justification, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :observation, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :description, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      </div>
+    </div>
+  </div>
+</div>
+

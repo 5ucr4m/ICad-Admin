@@ -1,16 +1,20 @@
 FactoryBot.define do
   factory :patient_soap_exam do
-    patient_soap_objective { nil }
+    patient_soap { nil }
     exam { nil }
-    request_date { "2020-04-03" }
-    hemoglobin_glycated { "MyString" }
-    realization_date { "2020-04-03" }
-    result_date { "2020-04-03" }
-    description { "MyText" }
+    cid_code { nil }
+    request_date { "2020-05-06" }
     user { nil }
+    accomplishment_date { "2020-05-06" }
+    result_date { "2020-05-06" }
+    description { "MyText" }
+    glycated_hemoglobin { "MyString" }
+    procedure_justification { "MyText" }
+    observation { "MyText" }
+    high_cost { false }
     slug { "MyString" }
     company { nil }
-    discarded_at { "2020-04-03 20:43:10" }
+    discarded_at { "2020-05-06" }
     ip { "MyString" }
   end
 end

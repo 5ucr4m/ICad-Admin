@@ -1,15 +1,18 @@
 FactoryBot.define do
   factory :patient_soap_certificate do
+    patient_soap { nil }
+    blank_certificate { false }
+    default_certificate { false }
+    maternity_license { false }
     description { "MyText" }
-    issue_date_hour { "2020-04-03 21:48:21" }
+    issue_date { "2020-05-11 02:37:18" }
     cid_code { nil }
-    days { 1 }
     print_cid_code { false }
-    maternity_leave { false }
+    days { 1 }
     user { nil }
     slug { "MyString" }
     company { nil }
-    discarded_at { "2020-04-03 21:48:21" }
+    discarded_at { "2020-05-11 02:37:18" }
     ip { "MyString" }
   end
 end

@@ -1,4 +1,7 @@
 class PatientSoapReminder < ApplicationRecord
+  include Tenantable
+  include Sluggable
+
   belongs_to :patient_soap, optional: true
   belongs_to :user, optional: true
   belongs_to :company, optional: true

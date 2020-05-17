@@ -1,5 +1,9 @@
 class PatientSoapCertificate < ApplicationRecord
-  belongs_to :cid_code, optional: true
+  include Tenantable
+  include Sluggable
+
+  belongs_to :patient_soap, optional: true
+  belongs_to :cid_code, class_name: 'GenericModel', optional: true
   belongs_to :user, optional: true
   belongs_to :company, optional: true
 

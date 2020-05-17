@@ -81,12 +81,6 @@ class FamilyMember < ApplicationRecord
   has_many :patient_records, dependent: :destroy
   has_many :appointment_bookings, dependent: :destroy
   has_many :appointment_demands, dependent: :destroy
-  has_many :patient_conditions, dependent: :destroy
-  has_many :patient_medicines, dependent: :destroy
-  has_many :patient_reactions, dependent: :destroy
-  has_many :patient_observations, dependent: :destroy
-  has_many :patient_histories, dependent: :destroy
-
 
   validates :name, :birth_date, :cns_number, presence: true
 

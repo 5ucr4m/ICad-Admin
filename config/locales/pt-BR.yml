@@ -171,9 +171,9 @@ pt-BR:
         other: Demandas
         icon: fas fa-hand-holding-medical
       patient_record:
-        one: Atendimento Especializado
-        other: Atendimento Especializado
-        icon: fas fa-stethoscope
+        one: Prontuário
+        other: Prontuários
+        icon: fas fa-notes-medical
       patient_record_procedure:
         one: Procedimento Realizado
         other: Procedimentos Realizados

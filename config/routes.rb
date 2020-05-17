@@ -47,10 +47,8 @@ Rails.application.routes.draw do
   end
   resources :appointment_demands
   resources :appointment_bookings
-  resources :patient_records, only: :index
-  resources :family_members do
-    resources :patient_records, except: :index
-  end
+  resources :patient_records
+  resources :family_members
   resources :home_registrations
   resources :professional_teams
   resources :health_professionals

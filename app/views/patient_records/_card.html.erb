@@ -1,5 +1,5 @@
 <div class="col-lg-12">
-  <div class="card">
+  <div class="card mb-2">
     <div class="card-header">
       <div class="row text-center align-content-center">
         <div class="col-lg-12">
@@ -65,7 +65,12 @@
         </div>
         <div class="tab-pane" id="soap">
           <div class="row">
-            <%= render 'patient_contacts', f: f %>
+            <%= f.simple_fields_for :patient_soap do |patient_soap| %>
+              <%= render 'patient_subjective', f: patient_soap %>
+              <%= render 'patient_objective', f: patient_soap %>
+              <%= render 'patient_evaluation', f: patient_soap %>
+              <%= render 'patient_plan', f: patient_soap %>
+            <% end %>
           </div>
         </div>
         <div class="tab-pane" id="monitoring">

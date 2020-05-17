@@ -1,0 +1,137 @@
+<div class="col-lg-12">
+  <div class="card card-collapsed mb-2">
+    <div class="card-header">
+      <h3 class="card-title">
+        Objetivo
+      </h3>
+      <div class="card-options">
+        <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+          <i class="fe fe-chevron-up"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body p-2">
+      <div class="text-left">
+        <button type="submit" class="btn btn-sm btn-primary">
+          <i class="fas fa-save mr-2"></i>Salvar
+        </button>
+      </div>
+    </div>
+    <div class="card-body pb-2">
+      <div class="row">
+        <%= f.input :objective, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <div class="col-lg-4 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title text-blue-deep">
+                Antropometria
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <%= f.input :cephalic_perimeter, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :weight, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :height, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :imc, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :calf_perimeter, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title text-blue-deep">
+                Sinais Vitais
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <%= f.input :blood_pressure, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :blood_pressure_to, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :respiratory_rate, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :heart_rate, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :temperature, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.input :saturation, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title text-blue-deep">
+                Glicemia
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <%= f.input :capillary_blood, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                <%= f.association :collected_time, collection: [], wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title text-blue-deep">
+                Mulher
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <%= f.input :last_period_date, as: :date, html5: true, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="card card-collapsed mb-2">
+            <div class="card-header">
+              <h3 class="card-title">
+                Exames solicitados e/ou avaliados
+              </h3>
+              <div class="card-options">
+                <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+                  <i class="fe fe-chevron-up"></i>
+                </a>
+              </div>
+            </div>
+            <div class="card-body pb-2">
+              <% if @patient_record&.patient_soap&.patient_soap_exams.any? %>
+                <div id="patient-soap-exams" class="table-responsive">
+                  <table class="border-top table table-hover table-vcenter text-nowrap table-bordered">
+                    <thead>
+                    <tr>
+                      <th>Solicitado</th>
+                      <th>Avaliado</th>
+                      <th>Nome exame</th>
+                      <th>Resultado</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @patient_record&.patient_soap&.patient_soap_exams&.each do |exam| %>
+                      <tr>
+                        <td><%= exam.request_date&.strftime('%d/%m/%Y') %></td>
+                        <td><%= exam.accomplishment_date&.strftime('%d/%m/%Y') %></td>
+                        <td><%= exam.exam&.name_formatted %></td>
+                        <td><%= exam.result_date&.blank? ? 'NÃO' : 'SIM' %></td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              <% else %>
+                <div class="alert alert-warning mb-0">
+                  <div class="text-center font-weight-bold">Nenhum exame solicitado/avaliado.</div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

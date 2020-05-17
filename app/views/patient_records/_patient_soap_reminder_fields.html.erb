@@ -1,0 +1,31 @@
+<div class="nested-fields">
+  <div class="card <%= 'card-collapsed' if f.object.persisted? %> mb-2">
+    <div class="card-header">
+      <h3 class="card-title">
+        <%= f.object.persisted? ? "Exame #{f.object.ciap_code.name_formatted}" : 'Novo Lembrete' %>
+      </h3>
+      <% if f.object.persisted? %>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse">
+            <i class="fe fe-chevron-up"></i>
+          </a>
+        </div>
+      <% end %>
+    </div>
+    <% unless show?(f.object.persisted?) %>
+      <div class="card-body p-2 text-left">
+        <%= link_to_remove_association f, class: 'btn btn-icon btn-sm btn-danger', role: 'button' do %>
+          <i class="fas fa-times mr-2"></i>Remover
+        <% end %>
+      </div>
+    <% end %>
+    <div class="card-body pb-2">
+      <div class="row">
+        <%= f.input :private_reminder, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :active, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :description, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -11,93 +11,95 @@
       </div>
     </div>
     <div class="card-body pb-2">
-      <%= f.association :appointment_reason, collection: [], wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-      <%= f.input :appointment_brief, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-6 col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title text-blue-deep">
-                  Antropometria
-                </h3>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <%= f.input :cephalic_perimeter, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :weight, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :height, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :imc, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :calf_perimeter, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+      <div class="row">
+        <%= f.association :appointment_reason, collection: [], wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+        <%= f.input :appointment_brief, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-blue-deep">
+                    Antropometria
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <%= f.input :cephalic_perimeter, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :weight, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :height, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :imc, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :calf_perimeter, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title text-blue-deep">
-                  Sinais Vitais
-                </h3>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <%= f.input :blood_pressure, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :blood_pressure_to, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :respiratory_rate, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :heart_rate, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :temperature, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.input :saturation, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+            <div class="col-lg-6 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-blue-deep">
+                    Sinais Vitais
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <%= f.input :blood_pressure, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :blood_pressure_to, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :respiratory_rate, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :heart_rate, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :temperature, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.input :saturation, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title text-blue-deep">
-                  Glicemia
-                </h3>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <%= f.input :capillary_blood, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-                  <%= f.association :collected_time, collection: [], wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+            <div class="col-lg-6 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-blue-deep">
+                    Glicemia
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <%= f.input :capillary_blood, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                    <%= f.association :collected_time, collection: [], wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title text-blue-deep">
-                  Classificação de Risco/Vulnerabilidade
-                </h3>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <%= f.input :risk_vulnerability, wrapper_html: {class: 'col-lg-12 col-sm-12'}, html5: true, input_html: {disabled: show?(f.object.persisted?)} %>
+            <div class="col-lg-6 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-blue-deep">
+                    Classificação de Risco/Vulnerabilidade
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <%= f.input :risk_vulnerability, wrapper_html: {class: 'col-lg-12 col-sm-12'}, html5: true, input_html: {disabled: show?(f.object.persisted?)} %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title text-blue-deep">
-                  Desfecho da escuta inicial
-                </h3>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <%= f.input :release_citizen, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+            <div class="col-lg-6 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-blue-deep">
+                    Desfecho da escuta inicial
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <%= f.input :release_citizen, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <%= render 'patient_record_procedures', f: f %>
       </div>
-      <%= render 'patient_record_procedures', f: f %>
     </div>
   </div>
 </div>

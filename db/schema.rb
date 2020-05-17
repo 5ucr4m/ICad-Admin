@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_043316) do
+ActiveRecord::Schema.define(version: 2020_05_16_060327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -700,192 +700,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.index ["therapeutic_class_id"], name: "index_medicines_on_therapeutic_class_id"
   end
 
-  create_table "patient_background_familiars", force: :cascade do |t|
-    t.bigint "patient_background_id"
-    t.bigint "ciap_code_id"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ciap_code_id"], name: "index_patient_background_familiars_on_ciap_code_id"
-    t.index ["company_id"], name: "index_patient_background_familiars_on_company_id"
-    t.index ["patient_background_id"], name: "index_patient_background_familiars_on_patient_background_id"
-    t.index ["user_id"], name: "index_patient_background_familiars_on_user_id"
-  end
-
-  create_table "patient_background_obstetrics", force: :cascade do |t|
-    t.bigint "patient_background_id"
-    t.bigint "ciap_code_id"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ciap_code_id"], name: "index_patient_background_obstetrics_on_ciap_code_id"
-    t.index ["company_id"], name: "index_patient_background_obstetrics_on_company_id"
-    t.index ["patient_background_id"], name: "index_patient_background_obstetrics_on_patient_background_id"
-    t.index ["user_id"], name: "index_patient_background_obstetrics_on_user_id"
-  end
-
-  create_table "patient_backgrounds", force: :cascade do |t|
-    t.bigint "family_member_id"
-    t.integer "pregnant_type"
-    t.integer "childbirth"
-    t.integer "gestational_weeks"
-    t.integer "gestational_days"
-    t.integer "one_minute"
-    t.integer "five_minute"
-    t.integer "ten_minute"
-    t.string "baby_weight"
-    t.string "baby_height"
-    t.string "baby_cephalic_perimeter"
-    t.text "surgeries"
-    t.text "hospitalizations"
-    t.text "observations"
-    t.string "previous_pregnancy"
-    t.string "abortion"
-    t.string "vaginal_childbirth"
-    t.string "home_childbirth"
-    t.string "cesarean"
-    t.string "born_live"
-    t.string "live"
-    t.string "born_dead"
-    t.string "rn_minus"
-    t.string "rm_plus"
-    t.string "dead_first_week"
-    t.string "dead_after_week"
-    t.boolean "last_year_pregnancy"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_backgrounds_on_company_id"
-    t.index ["family_member_id"], name: "index_patient_backgrounds_on_family_member_id"
-    t.index ["user_id"], name: "index_patient_backgrounds_on_user_id"
-  end
-
-  create_table "patient_conditions", force: :cascade do |t|
-    t.bigint "family_member_id"
-    t.bigint "ciap_code_id"
-    t.bigint "cid_code_id"
-    t.string "other_condition"
-    t.integer "year_initial"
-    t.integer "month_initial"
-    t.integer "day_initial"
-    t.integer "years_initial"
-    t.integer "months_initial"
-    t.string "observations"
-    t.integer "situation"
-    t.date "last_update"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ciap_code_id"], name: "index_patient_conditions_on_ciap_code_id"
-    t.index ["cid_code_id"], name: "index_patient_conditions_on_cid_code_id"
-    t.index ["company_id"], name: "index_patient_conditions_on_company_id"
-    t.index ["family_member_id"], name: "index_patient_conditions_on_family_member_id"
-    t.index ["user_id"], name: "index_patient_conditions_on_user_id"
-  end
-
-  create_table "patient_histories", force: :cascade do |t|
-    t.bigint "family_member_id"
-    t.bigint "patient_record_id"
-    t.bigint "patient_soap_id"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_histories_on_company_id"
-    t.index ["family_member_id"], name: "index_patient_histories_on_family_member_id"
-    t.index ["patient_record_id"], name: "index_patient_histories_on_patient_record_id"
-    t.index ["patient_soap_id"], name: "index_patient_histories_on_patient_soap_id"
-    t.index ["user_id"], name: "index_patient_histories_on_user_id"
-  end
-
-  create_table "patient_medicines", force: :cascade do |t|
-    t.bigint "family_member_id"
-    t.date "prescription"
-    t.date "conclusion"
-    t.string "concentration"
-    t.string "dose"
-    t.boolean "unique_dose"
-    t.boolean "continuous_use"
-    t.string "dose_frequency"
-    t.date "treatment_date"
-    t.integer "treatment"
-    t.integer "treatment_type"
-    t.text "recommendations"
-    t.integer "supply"
-    t.string "slug"
-    t.bigint "pharmaceutical_form_id"
-    t.bigint "way_administration_id"
-    t.bigint "recipe_type_id"
-    t.bigint "user_id"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_medicines_on_company_id"
-    t.index ["family_member_id"], name: "index_patient_medicines_on_family_member_id"
-    t.index ["pharmaceutical_form_id"], name: "index_patient_medicines_on_pharmaceutical_form_id"
-    t.index ["recipe_type_id"], name: "index_patient_medicines_on_recipe_type_id"
-    t.index ["user_id"], name: "index_patient_medicines_on_user_id"
-    t.index ["way_administration_id"], name: "index_patient_medicines_on_way_administration_id"
-  end
-
-  create_table "patient_observations", force: :cascade do |t|
-    t.bigint "family_member_id"
-    t.text "observation"
-    t.boolean "confidential"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_observations_on_company_id"
-    t.index ["family_member_id"], name: "index_patient_observations_on_family_member_id"
-    t.index ["user_id"], name: "index_patient_observations_on_user_id"
-  end
-
-  create_table "patient_reactions", force: :cascade do |t|
-    t.bigint "family_member_id"
-    t.bigint "reaction_id"
-    t.string "agent_substance"
-    t.text "manifestations"
-    t.integer "criticity"
-    t.date "installation_date"
-    t.text "evolution"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_reactions_on_company_id"
-    t.index ["family_member_id"], name: "index_patient_reactions_on_family_member_id"
-    t.index ["reaction_id"], name: "index_patient_reactions_on_reaction_id"
-    t.index ["user_id"], name: "index_patient_reactions_on_user_id"
-  end
-
   create_table "patient_record_procedures", force: :cascade do |t|
     t.bigint "patient_record_id"
     t.bigint "procedure_performed_id"
@@ -942,12 +756,15 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
   end
 
   create_table "patient_soap_certificates", force: :cascade do |t|
+    t.bigint "patient_soap_id"
+    t.boolean "blank_certificate"
+    t.boolean "default_certificate"
+    t.boolean "maternity_license"
     t.text "description"
-    t.datetime "issue_date_hour"
+    t.datetime "issue_date"
     t.bigint "cid_code_id"
-    t.integer "days"
     t.boolean "print_cid_code"
-    t.boolean "maternity_leave"
+    t.integer "days"
     t.bigint "user_id"
     t.string "slug"
     t.bigint "company_id"
@@ -957,21 +774,15 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cid_code_id"], name: "index_patient_soap_certificates_on_cid_code_id"
     t.index ["company_id"], name: "index_patient_soap_certificates_on_company_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_certificates_on_patient_soap_id"
     t.index ["user_id"], name: "index_patient_soap_certificates_on_user_id"
   end
 
-  create_table "patient_soap_exams", force: :cascade do |t|
-    t.bigint "patient_soap_objective_id"
-    t.bigint "exam_id"
-    t.date "request_date"
-    t.string "hemoglobin_glycated"
-    t.date "realization_date"
-    t.date "result_date"
-    t.text "description"
-    t.text "justification"
-    t.text "observation"
-    t.boolean "high_cost"
+  create_table "patient_soap_conditions", force: :cascade do |t|
+    t.bigint "patient_soap_id"
+    t.bigint "ciap_code_id"
     t.bigint "cid_code_id"
+    t.boolean "active"
     t.bigint "user_id"
     t.string "slug"
     t.bigint "company_id"
@@ -979,17 +790,43 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.string "ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ciap_code_id"], name: "index_patient_soap_conditions_on_ciap_code_id"
+    t.index ["cid_code_id"], name: "index_patient_soap_conditions_on_cid_code_id"
+    t.index ["company_id"], name: "index_patient_soap_conditions_on_company_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_conditions_on_patient_soap_id"
+    t.index ["user_id"], name: "index_patient_soap_conditions_on_user_id"
+  end
+
+  create_table "patient_soap_exams", force: :cascade do |t|
+    t.bigint "patient_soap_id"
+    t.bigint "exam_id"
+    t.bigint "cid_code_id"
+    t.date "request_date"
+    t.bigint "user_id"
+    t.date "accomplishment_date"
+    t.date "result_date"
+    t.text "description"
+    t.string "glycated_hemoglobin"
+    t.text "procedure_justification"
+    t.text "observation"
+    t.boolean "high_cost"
+    t.string "slug"
+    t.bigint "company_id"
+    t.date "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["cid_code_id"], name: "index_patient_soap_exams_on_cid_code_id"
     t.index ["company_id"], name: "index_patient_soap_exams_on_company_id"
     t.index ["exam_id"], name: "index_patient_soap_exams_on_exam_id"
-    t.index ["patient_soap_objective_id"], name: "index_patient_soap_exams_on_patient_soap_objective_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_exams_on_patient_soap_id"
     t.index ["user_id"], name: "index_patient_soap_exams_on_user_id"
   end
 
   create_table "patient_soap_interventions", force: :cascade do |t|
     t.bigint "patient_soap_id"
-    t.bigint "sigtap_code_id"
     t.bigint "ciap_code_id"
+    t.bigint "cid_code_id"
     t.text "notes"
     t.bigint "user_id"
     t.string "slug"
@@ -999,14 +836,105 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ciap_code_id"], name: "index_patient_soap_interventions_on_ciap_code_id"
+    t.index ["cid_code_id"], name: "index_patient_soap_interventions_on_cid_code_id"
     t.index ["company_id"], name: "index_patient_soap_interventions_on_company_id"
     t.index ["patient_soap_id"], name: "index_patient_soap_interventions_on_patient_soap_id"
-    t.index ["sigtap_code_id"], name: "index_patient_soap_interventions_on_sigtap_code_id"
     t.index ["user_id"], name: "index_patient_soap_interventions_on_user_id"
   end
 
-  create_table "patient_soap_objectives", force: :cascade do |t|
+  create_table "patient_soap_medicines", force: :cascade do |t|
     t.bigint "patient_soap_id"
+    t.bigint "medicine_id"
+    t.string "concentration"
+    t.bigint "pharmaceutical_form_id"
+    t.bigint "administration_way_id"
+    t.bigint "recipe_type_id"
+    t.string "dose"
+    t.string "unique_dose"
+    t.string "continuous_dose"
+    t.bigint "dose_frequency_type_id"
+    t.string "dose_frequency"
+    t.string "dose_quantity"
+    t.date "treatment_date"
+    t.bigint "duration_type_id"
+    t.string "duration"
+    t.text "recommendations"
+    t.bigint "user_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["administration_way_id"], name: "index_patient_soap_medicines_on_administration_way_id"
+    t.index ["company_id"], name: "index_patient_soap_medicines_on_company_id"
+    t.index ["dose_frequency_type_id"], name: "index_patient_soap_medicines_on_dose_frequency_type_id"
+    t.index ["duration_type_id"], name: "index_patient_soap_medicines_on_duration_type_id"
+    t.index ["medicine_id"], name: "index_patient_soap_medicines_on_medicine_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_medicines_on_patient_soap_id"
+    t.index ["pharmaceutical_form_id"], name: "index_patient_soap_medicines_on_pharmaceutical_form_id"
+    t.index ["recipe_type_id"], name: "index_patient_soap_medicines_on_recipe_type_id"
+    t.index ["user_id"], name: "index_patient_soap_medicines_on_user_id"
+  end
+
+  create_table "patient_soap_problems", force: :cascade do |t|
+    t.bigint "patient_soap_id"
+    t.bigint "ciap_code_id"
+    t.bigint "cid_code_id"
+    t.text "notes"
+    t.boolean "active_problem"
+    t.bigint "user_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ciap_code_id"], name: "index_patient_soap_problems_on_ciap_code_id"
+    t.index ["cid_code_id"], name: "index_patient_soap_problems_on_cid_code_id"
+    t.index ["company_id"], name: "index_patient_soap_problems_on_company_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_problems_on_patient_soap_id"
+    t.index ["user_id"], name: "index_patient_soap_problems_on_user_id"
+  end
+
+  create_table "patient_soap_reasons", force: :cascade do |t|
+    t.bigint "patient_soap_id"
+    t.bigint "ciap_code_id"
+    t.text "notes"
+    t.bigint "user_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ciap_code_id"], name: "index_patient_soap_reasons_on_ciap_code_id"
+    t.index ["company_id"], name: "index_patient_soap_reasons_on_company_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_reasons_on_patient_soap_id"
+    t.index ["user_id"], name: "index_patient_soap_reasons_on_user_id"
+  end
+
+  create_table "patient_soap_reminders", force: :cascade do |t|
+    t.bigint "patient_soap_id", null: false
+    t.text "description"
+    t.boolean "private_reminder"
+    t.boolean "active"
+    t.bigint "user_id", null: false
+    t.string "slug"
+    t.bigint "company_id", null: false
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_patient_soap_reminders_on_company_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_reminders_on_patient_soap_id"
+    t.index ["user_id"], name: "index_patient_soap_reminders_on_user_id"
+  end
+
+  create_table "patient_soaps", force: :cascade do |t|
+    t.bigint "patient_record_id"
+    t.text "subjective"
+    t.text "objective"
     t.string "cephalic_perimeter"
     t.string "weight"
     t.string "height"
@@ -1021,126 +949,19 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
     t.string "capillary_blood"
     t.bigint "collected_time_id"
     t.boolean "vaccination_updated"
-    t.date "dum"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["collected_time_id"], name: "index_patient_soap_objectives_on_collected_time_id"
-    t.index ["company_id"], name: "index_patient_soap_objectives_on_company_id"
-    t.index ["patient_soap_id"], name: "index_patient_soap_objectives_on_patient_soap_id"
-    t.index ["user_id"], name: "index_patient_soap_objectives_on_user_id"
-  end
-
-  create_table "patient_soap_orientations", force: :cascade do |t|
-    t.bigint "patient_soap_id"
-    t.text "orientation"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_soap_orientations_on_company_id"
-    t.index ["patient_soap_id"], name: "index_patient_soap_orientations_on_patient_soap_id"
-    t.index ["user_id"], name: "index_patient_soap_orientations_on_user_id"
-  end
-
-  create_table "patient_soap_problems", force: :cascade do |t|
-    t.bigint "patient_soap_id"
-    t.bigint "medical_procedure_id"
-    t.bigint "cid_code_id"
-    t.text "notes"
-    t.boolean "active_condition"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["cid_code_id"], name: "index_patient_soap_problems_on_cid_code_id"
-    t.index ["company_id"], name: "index_patient_soap_problems_on_company_id"
-    t.index ["medical_procedure_id"], name: "index_patient_soap_problems_on_medical_procedure_id"
-    t.index ["patient_soap_id"], name: "index_patient_soap_problems_on_patient_soap_id"
-    t.index ["user_id"], name: "index_patient_soap_problems_on_user_id"
-  end
-
-  create_table "patient_soap_reasons", force: :cascade do |t|
-    t.bigint "patient_soap_id"
-    t.bigint "medical_procedure_id"
-    t.text "notes"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_soap_reasons_on_company_id"
-    t.index ["medical_procedure_id"], name: "index_patient_soap_reasons_on_medical_procedure_id"
-    t.index ["patient_soap_id"], name: "index_patient_soap_reasons_on_patient_soap_id"
-    t.index ["user_id"], name: "index_patient_soap_reasons_on_user_id"
-  end
-
-  create_table "patient_soap_referrals", force: :cascade do |t|
-    t.bigint "patient_soap_id"
-    t.bigint "expertise_id"
-    t.string "complement"
-    t.bigint "cid_code_id"
-    t.integer "risk_classification"
-    t.text "referral_reason"
-    t.text "observation"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["cid_code_id"], name: "index_patient_soap_referrals_on_cid_code_id"
-    t.index ["company_id"], name: "index_patient_soap_referrals_on_company_id"
-    t.index ["expertise_id"], name: "index_patient_soap_referrals_on_expertise_id"
-    t.index ["patient_soap_id"], name: "index_patient_soap_referrals_on_patient_soap_id"
-    t.index ["user_id"], name: "index_patient_soap_referrals_on_user_id"
-  end
-
-  create_table "patient_soap_reminders", force: :cascade do |t|
-    t.bigint "patient_soap_id"
-    t.boolean "public_reminder"
-    t.text "description"
-    t.boolean "active"
-    t.bigint "user_id"
-    t.string "slug"
-    t.bigint "company_id"
-    t.datetime "discarded_at"
-    t.string "ip"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_patient_soap_reminders_on_company_id"
-    t.index ["patient_soap_id"], name: "index_patient_soap_reminders_on_patient_soap_id"
-    t.index ["user_id"], name: "index_patient_soap_reminders_on_user_id"
-  end
-
-  create_table "patient_soaps", force: :cascade do |t|
-    t.bigint "family_member_id"
-    t.text "subject"
-    t.text "objective"
+    t.date "last_period_date"
     t.text "evaluation"
     t.text "plan"
-    t.bigint "user_id"
     t.string "slug"
+    t.bigint "user_id"
     t.bigint "company_id"
     t.datetime "discarded_at"
     t.string "ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["collected_time_id"], name: "index_patient_soaps_on_collected_time_id"
     t.index ["company_id"], name: "index_patient_soaps_on_company_id"
-    t.index ["family_member_id"], name: "index_patient_soaps_on_family_member_id"
+    t.index ["patient_record_id"], name: "index_patient_soaps_on_patient_record_id"
     t.index ["user_id"], name: "index_patient_soaps_on_user_id"
   end
 
@@ -1642,40 +1463,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
   add_foreign_key "medicines", "generic_models", column: "product_type_id"
   add_foreign_key "medicines", "generic_models", column: "stripe_id"
   add_foreign_key "medicines", "generic_models", column: "therapeutic_class_id"
-  add_foreign_key "patient_background_familiars", "companies"
-  add_foreign_key "patient_background_familiars", "generic_models", column: "ciap_code_id"
-  add_foreign_key "patient_background_familiars", "patient_backgrounds"
-  add_foreign_key "patient_background_familiars", "users"
-  add_foreign_key "patient_background_obstetrics", "companies"
-  add_foreign_key "patient_background_obstetrics", "generic_models", column: "ciap_code_id"
-  add_foreign_key "patient_background_obstetrics", "patient_backgrounds"
-  add_foreign_key "patient_background_obstetrics", "users"
-  add_foreign_key "patient_backgrounds", "companies"
-  add_foreign_key "patient_backgrounds", "family_members"
-  add_foreign_key "patient_backgrounds", "users"
-  add_foreign_key "patient_conditions", "companies"
-  add_foreign_key "patient_conditions", "family_members"
-  add_foreign_key "patient_conditions", "generic_models", column: "ciap_code_id"
-  add_foreign_key "patient_conditions", "generic_models", column: "cid_code_id"
-  add_foreign_key "patient_conditions", "users"
-  add_foreign_key "patient_histories", "companies"
-  add_foreign_key "patient_histories", "family_members"
-  add_foreign_key "patient_histories", "patient_records"
-  add_foreign_key "patient_histories", "patient_soaps"
-  add_foreign_key "patient_histories", "users"
-  add_foreign_key "patient_medicines", "companies"
-  add_foreign_key "patient_medicines", "family_members"
-  add_foreign_key "patient_medicines", "generic_models", column: "pharmaceutical_form_id"
-  add_foreign_key "patient_medicines", "generic_models", column: "recipe_type_id"
-  add_foreign_key "patient_medicines", "generic_models", column: "way_administration_id"
-  add_foreign_key "patient_medicines", "users"
-  add_foreign_key "patient_observations", "companies"
-  add_foreign_key "patient_observations", "family_members"
-  add_foreign_key "patient_observations", "users"
-  add_foreign_key "patient_reactions", "companies"
-  add_foreign_key "patient_reactions", "family_members"
-  add_foreign_key "patient_reactions", "generic_models", column: "reaction_id"
-  add_foreign_key "patient_reactions", "users"
   add_foreign_key "patient_record_procedures", "companies"
   add_foreign_key "patient_record_procedures", "generic_models", column: "procedure_performed_id"
   add_foreign_key "patient_record_procedures", "patient_records"
@@ -1690,43 +1477,47 @@ ActiveRecord::Schema.define(version: 2020_04_04_043316) do
   add_foreign_key "patient_records", "users"
   add_foreign_key "patient_soap_certificates", "companies"
   add_foreign_key "patient_soap_certificates", "generic_models", column: "cid_code_id"
+  add_foreign_key "patient_soap_certificates", "patient_soaps"
   add_foreign_key "patient_soap_certificates", "users"
+  add_foreign_key "patient_soap_conditions", "companies"
+  add_foreign_key "patient_soap_conditions", "generic_models", column: "ciap_code_id"
+  add_foreign_key "patient_soap_conditions", "generic_models", column: "cid_code_id"
+  add_foreign_key "patient_soap_conditions", "patient_soaps"
+  add_foreign_key "patient_soap_conditions", "users"
   add_foreign_key "patient_soap_exams", "companies"
   add_foreign_key "patient_soap_exams", "generic_models", column: "cid_code_id"
   add_foreign_key "patient_soap_exams", "generic_models", column: "exam_id"
-  add_foreign_key "patient_soap_exams", "patient_soap_objectives"
+  add_foreign_key "patient_soap_exams", "patient_soaps"
   add_foreign_key "patient_soap_exams", "users"
   add_foreign_key "patient_soap_interventions", "companies"
   add_foreign_key "patient_soap_interventions", "generic_models", column: "ciap_code_id"
-  add_foreign_key "patient_soap_interventions", "generic_models", column: "sigtap_code_id"
+  add_foreign_key "patient_soap_interventions", "generic_models", column: "cid_code_id"
   add_foreign_key "patient_soap_interventions", "patient_soaps"
   add_foreign_key "patient_soap_interventions", "users"
-  add_foreign_key "patient_soap_objectives", "companies"
-  add_foreign_key "patient_soap_objectives", "generic_models", column: "collected_time_id"
-  add_foreign_key "patient_soap_objectives", "patient_soaps"
-  add_foreign_key "patient_soap_objectives", "users"
-  add_foreign_key "patient_soap_orientations", "companies"
-  add_foreign_key "patient_soap_orientations", "patient_soaps"
-  add_foreign_key "patient_soap_orientations", "users"
+  add_foreign_key "patient_soap_medicines", "companies"
+  add_foreign_key "patient_soap_medicines", "generic_models", column: "administration_way_id"
+  add_foreign_key "patient_soap_medicines", "generic_models", column: "dose_frequency_type_id"
+  add_foreign_key "patient_soap_medicines", "generic_models", column: "duration_type_id"
+  add_foreign_key "patient_soap_medicines", "generic_models", column: "pharmaceutical_form_id"
+  add_foreign_key "patient_soap_medicines", "generic_models", column: "recipe_type_id"
+  add_foreign_key "patient_soap_medicines", "medicines"
+  add_foreign_key "patient_soap_medicines", "patient_soaps"
+  add_foreign_key "patient_soap_medicines", "users"
   add_foreign_key "patient_soap_problems", "companies"
+  add_foreign_key "patient_soap_problems", "generic_models", column: "ciap_code_id"
   add_foreign_key "patient_soap_problems", "generic_models", column: "cid_code_id"
-  add_foreign_key "patient_soap_problems", "generic_models", column: "medical_procedure_id"
   add_foreign_key "patient_soap_problems", "patient_soaps"
   add_foreign_key "patient_soap_problems", "users"
   add_foreign_key "patient_soap_reasons", "companies"
-  add_foreign_key "patient_soap_reasons", "generic_models", column: "medical_procedure_id"
-  add_foreign_key "patient_soap_reasons", "generic_models", column: "patient_soap_id"
+  add_foreign_key "patient_soap_reasons", "generic_models", column: "ciap_code_id"
+  add_foreign_key "patient_soap_reasons", "patient_soaps"
   add_foreign_key "patient_soap_reasons", "users"
-  add_foreign_key "patient_soap_referrals", "companies"
-  add_foreign_key "patient_soap_referrals", "generic_models", column: "cid_code_id"
-  add_foreign_key "patient_soap_referrals", "generic_models", column: "expertise_id"
-  add_foreign_key "patient_soap_referrals", "patient_soaps"
-  add_foreign_key "patient_soap_referrals", "users"
   add_foreign_key "patient_soap_reminders", "companies"
   add_foreign_key "patient_soap_reminders", "patient_soaps"
   add_foreign_key "patient_soap_reminders", "users"
   add_foreign_key "patient_soaps", "companies"
-  add_foreign_key "patient_soaps", "family_members"
+  add_foreign_key "patient_soaps", "generic_models", column: "collected_time_id"
+  add_foreign_key "patient_soaps", "patient_records"
   add_foreign_key "patient_soaps", "users"
   add_foreign_key "period_items", "companies"
   add_foreign_key "period_items", "generic_models", column: "serialized_type_id"

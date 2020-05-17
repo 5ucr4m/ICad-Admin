@@ -1,12 +1,13 @@
 FactoryBot.define do
-  factory :patient_soap_reason do
+  factory :patient_soap_condition do
     patient_soap { nil }
     ciap_code { nil }
-    notes { "MyText" }
+    cid_code { nil }
+    active { false }
     user { nil }
     slug { "MyString" }
     company { nil }
-    discarded_at { "2020-05-06 01:30:03" }
+    discarded_at { "2020-05-07 00:51:27" }
     ip { "MyString" }
   end
 end
