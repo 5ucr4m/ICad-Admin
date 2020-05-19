@@ -210,6 +210,10 @@ GEM
       railties (>= 4)
       request_store (~> 1.0)
     logstash-event (1.2.02)
+    lol_dba (2.2.0)
+      actionpack (>= 3.0, < 7.0)
+      activerecord (>= 3.0, < 7.0)
+      railties (>= 3.0, < 7.0)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -515,6 +519,7 @@ DEPENDENCIES
   loaf
   lograge
   logstash-event
+  lol_dba
   money-rails
   pagy
   paper_trail

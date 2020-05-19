@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'lol_dba'
 gem 'active_model_serializers'
 gem 'acts-as-taggable-on'
 gem 'amoeba'
