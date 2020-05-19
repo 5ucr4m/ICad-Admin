@@ -12,6 +12,10 @@ class HealthProfessional < ApplicationRecord
 
   has_one :health_establishment, through: :professional_team
   has_many :home_registrations, dependent: :destroy
+  has_many :appointment_bookings, dependent: :destroy
+  has_many :appointment_demands, dependent: :destroy
+  has_many :patient_record_bookings, class_name: 'PatientRecord', through: :appointment_bookings
+  has_many :patient_record_demands, class_name: 'PatientRecord', through: :appointment_demands
 
   # before_validation :set_health_establishment
   # before_create :find_health_professional

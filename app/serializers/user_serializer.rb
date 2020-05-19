@@ -74,11 +74,19 @@ class UserSerializer < ApplicationSerializer
   attribute :reference, if: :citizen?
   attribute :referential_phone, if: :citizen?
   attribute :vaccinations, if: :citizen?
-  attribute :appointment_bookings, if: :citizen?
   attribute :home_registration, if: :citizen?
   attribute :individual_registration, if: :citizen?
   attribute :home_visit_forms, if: :citizen?
   attribute :vaccines, if: :citizen?
+
+  attribute :professional_appointment_bookings, if: :not_citizen?
+  attribute :professional_appointment_demands, if: :not_citizen?
+  attribute :professional_patient_record_bookings, if: :not_citizen?
+  attribute :professional_patient_record_demands, if: :not_citizen?
+
+  attribute :appointment_bookings, if: :citizen?
+  attribute :appointment_demands, if: :citizen?
+  attribute :patient_records, if: :citizen?
 
   delegate :citizen?, to: :object
   delegate :not_citizen?, to: :object
@@ -89,6 +97,30 @@ class UserSerializer < ApplicationSerializer
 
   def appointment_bookings
     user_info&.appointment_bookings
+  end
+
+  def appointment_demands
+    user_info&.appointment_demands
+  end
+
+  def patient_records
+    user_info&.patient_records
+  end
+
+  def professional_appointment_bookings
+    user_info&.appointment_bookings
+  end
+
+  def professional_appointment_demands
+    user_info&.appointment_demands
+  end
+
+  def professional_patient_record_bookings
+    user_info&.patient_records
+  end
+
+  def professional_patient_record_demands
+    user_info&.patient_records
   end
 
   def home_registration

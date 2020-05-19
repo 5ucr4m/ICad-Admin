@@ -84,6 +84,9 @@ class GenericModel < ApplicationRecord
   scope :collected_times, -> { where(generic_field: :collected_time) }
   scope :demand_types, -> { where(generic_field: :demand_type) }
   scope :carried_procedures, -> { where(generic_field: :carried_procedure) }
+  scope :exams, -> { where(generic_field: :exam) }
+  scope :pharmaceutical_forms, -> { where(generic_field: :pharmaceutical_form) }
+  scope :specialties, -> { where(generic_field: :specialty) }
   scope :by_module_reference, ->(reference) { app_modules.find_by(reference: reference) }
 
   def name_formatted

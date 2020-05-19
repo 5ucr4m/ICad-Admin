@@ -13,22 +13,52 @@ class GenericModelsController < WebController
 
   def address_types
     authorize(GenericModel)
-    render_json(@query.result.address_types.includes(:generic_model))
+    render_json(@result.address_types)
   end
 
   def cbo_types
     authorize(GenericModel)
-    render_json(@query.result.cbo_types.includes(:generic_model))
+    render_json(@result.cbo_types)
   end
 
   def ethnicity_types
     authorize(GenericModel)
-    render_json(@query.result.ethnicities.includes(:generic_model))
+    render_json(@result.ethnicities)
   end
 
   def carried_procedures
     authorize(GenericModel)
-    render_json(@query.result.carried_procedures.includes(:generic_model))
+    render_json(@result.carried_procedures)
+  end
+
+  def exams
+    authorize(GenericModel)
+    render_json(@result.exams)
+  end
+
+  def pharmaceutical_forms
+    authorize(GenericModel)
+    render_json(@result.pharmaceutical_forms)
+  end
+
+  def collected_times
+    authorize(GenericModel)
+    render_json(@result.collected_times)
+  end
+
+  def duration_types
+    authorize(GenericModel)
+    render_json(@result.duration_types)
+  end
+
+  def dose_frequency_types
+    authorize(GenericModel)
+    render_json(@result.dose_frequency_types)
+  end
+
+  def specialties
+    authorize(GenericModel)
+    render_json(@result.specialties)
   end
 
   # GET /generic_models/1
@@ -80,6 +110,7 @@ class GenericModelsController < WebController
 
   def set_query
     @query = GenericModel.ransack(params[:q])
+    @result = @query.result.includes(:generic_model)
   end
 
   # Use callbacks to share common setup or constraints between actions.

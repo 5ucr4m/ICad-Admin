@@ -92,6 +92,13 @@
                         </h3>
                       </a>
                     </li>
+                    <li class="nav-item d-block">
+                      <a href="#referrals" class="nav-link py-2 font-weight-bold rounded-pill" data-toggle="tab">
+                        <h3 class="card-title text-blue-deep">
+                          Encaminhamentos
+                        </h3>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -175,7 +182,42 @@
                   <% end %>
                 </div>
                 <div class="tab-pane" id="orientations">
-                  orientations
+                  <div id="patient-soap-orientations" class="card-body p-2">
+                    <%= f.simple_fields_for :patient_soap_orientations do |patient_soap_orientation| %>
+                      <%= render 'patient_soap_orientation_fields', f: patient_soap_orientation %>
+                    <% end %>
+                  </div>
+                  <% unless show?(f.object.persisted?) %>
+                    <div class="card-body p-2">
+                      <%= link_to_add_association f, :patient_soap_orientations,
+                                                  class: 'btn btn-sm btn-primary', role: 'button',
+                                                  data: {
+                                                    'association-insertion-node': '#patient-soap-orientations',
+                                                    'association-insertion-method': 'append'
+                                                  } do %>
+                        <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="tab-pane" id="referrals">
+                  <div id="patient-soap-referrals" class="card-body p-2">
+                    <%= f.simple_fields_for :patient_soap_referrals do |patient_soap_referral| %>
+                      <%= render 'patient_soap_referral_fields', f: patient_soap_referral %>
+                    <% end %>
+                  </div>
+                  <% unless show?(f.object.persisted?) %>
+                    <div class="card-body p-2">
+                      <%= link_to_add_association f, :patient_soap_referrals,
+                                                  class: 'btn btn-sm btn-primary', role: 'button',
+                                                  data: {
+                                                    'association-insertion-node': '#patient-soap-referrals',
+                                                    'association-insertion-method': 'append'
+                                                  } do %>
+                        <i class="fas fa-plus mr-2" aria-hidden="true"></i>Novo
+                      <% end %>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             </div>

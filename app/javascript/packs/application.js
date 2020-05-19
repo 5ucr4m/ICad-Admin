@@ -289,6 +289,82 @@ $(document).ready(function() {
 
   $('#patient-soap-exams').on('cocoon:after-insert', function(e, object) {
     cidCodeSelect2();
+    $('.exam-codes').select2({
+      placeholder: 'Selecione',
+      language: 'pt-BR',
+      theme: 'bootstrap4',
+      width: '100%',
+      allowClear: true,
+      ajax: {
+        global: true,
+        url: '/generic_models/exams.json',
+        dataType: 'json',
+        delay: 300,
+        minimumInputLength: 3,
+        data: function (params) {
+          return {
+            q: {
+              search_cont: params.term ? params.term : document.querySelector('.select2-selection__rendered').innerHTML.split(' - ')[1]
+            },
+            page: 1
+          };
+        },
+        processResults: function (data) {
+          data = data.genericModels;
+          return {
+            results: data.map((cp) => {
+              if (cp) {
+                return {
+                  id: cp.id,
+                  text: `${cp.reference} - ${cp.name}`
+                };
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+  });
+
+  $('#patient-soap-referrals').on('cocoon:after-insert', function(e, object) {
+    cidCodeSelect2();
+    $('.specialties').select2({
+      placeholder: 'Selecione',
+      language: 'pt-BR',
+      theme: 'bootstrap4',
+      width: '100%',
+      allowClear: true,
+      ajax: {
+        global: true,
+        url: '/generic_models/specialties.json',
+        dataType: 'json',
+        delay: 300,
+        minimumInputLength: 3,
+        data: function (params) {
+          return {
+            q: {
+              search_cont: params.term ? params.term : document.querySelector('.select2-selection__rendered').innerHTML.split(' - ')[1]
+            },
+            page: 1
+          };
+        },
+        processResults: function (data) {
+          data = data.genericModels;
+          return {
+            results: data.map((cp) => {
+              if (cp) {
+                return {
+                  id: cp.id,
+                  text: `${cp.reference} - ${cp.name}`
+                };
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
   });
 
   $('#patient-soap-medicines').on('cocoon:after-insert', function(e, object) {
@@ -436,7 +512,7 @@ $(document).ready(function() {
         cache: true
       }
     });
-    $('.dose-frequencies-types').select2({
+    $('.dose-frequency-types').select2({
       placeholder: 'Selecione',
       language: 'pt-BR',
       theme: 'bootstrap4',

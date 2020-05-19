@@ -34,6 +34,13 @@ Rails.application.routes.draw do
       get 'cbo_types'
       get 'ethnicity_types'
       get 'carried_procedures'
+      get 'exams'
+      get 'pharmaceutical_forms'
+      get 'duration_types'
+      get 'dose_frequency_types'
+      get 'administration_ways'
+      get 'recipe_types'
+      get 'specialties'
     end
   end
 

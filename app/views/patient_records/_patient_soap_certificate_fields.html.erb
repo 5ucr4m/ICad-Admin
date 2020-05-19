@@ -25,7 +25,7 @@
         <%= f.input :default_certificate, wrapper_html: {class: 'col-lg-4 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :maternity_license, wrapper_html: {class: 'col-lg-4 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :issue_date, as: :datetime, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-        <%= f.association :cid_code, wrapper_html: {class: 'col-lg-9 col-sm-12'}, input_html: {class: 'cid-codes', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :cid_code, collection: [], wrapper_html: {class: 'col-lg-9 col-sm-12'}, input_html: {class: 'cid-codes', disabled: show?(f.object.persisted?)} %>
         <%= f.input :print_cid_code, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :description, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       </div>

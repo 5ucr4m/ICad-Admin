@@ -1,6 +1,6 @@
 <div class="nested-fields">
   <div class="form-row">
-    <%= f.association :ciap_code, collection: GenericModel.carried_procedures,
+    <%= f.association :ciap_code, collection: [],
                       label_method: :name_formatted,
                       wrapper_html: {class: 'col-lg-11 col-sm-12'},
                       input_html: {class: 'ciap-codes', disabled: show?(f.object.persisted?)} %>

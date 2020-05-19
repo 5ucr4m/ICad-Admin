@@ -2,7 +2,7 @@
   <div class="card <%= 'card-collapsed' if f.object.persisted? %> mb-2">
     <div class="card-header">
       <h3 class="card-title">
-        <%= f.object.persisted? ? f.object.ciap_code.name_formatted : 'Nova intervenção e/ou procedimento' %>
+        <%= f.object.persisted? ? "Orientação ##{f.object.id}" : 'Nova Orientação' %>
       </h3>
       <% if f.object.persisted? %>
         <div class="card-options">
@@ -21,11 +21,7 @@
     <% end %>
     <div class="card-body pb-2">
       <div class="row">
-        <%= f.association :ciap_code, collection: [], wrapper_html: {class: 'col-lg-6 col-sm-12'},
-                          input_html: {class: 'ciap-codes', disabled: show?(f.object.persisted?)} %>
-        <%= f.association :cid_code, collection: [], wrapper_html: {class: 'col-lg-6 col-sm-12'},
-                          input_html: {class: 'cid-codes', disabled: show?(f.object.persisted?)} %>
-        <%= f.input :notes, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+        <%= f.input :orientation, wrapper_html: {class: 'col-lg-12 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
       </div>
     </div>
   </div>

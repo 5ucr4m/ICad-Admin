@@ -21,17 +21,17 @@
     <% end %>
     <div class="card-body pb-2">
       <div class="row">
-        <%= f.association :medicine, wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'medicines', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :medicine, collection: [], wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'medicines', disabled: show?(f.object.persisted?)} %>
         <%= f.input :concentration, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-        <%= f.association :pharmaceutical_form, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'pharmaceutical-forms', disabled: show?(f.object.persisted?)} %>
-        <%= f.association :administration_way, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'administration-ways', disabled: show?(f.object.persisted?)} %>
-        <%= f.association :recipe_type, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'recipe-types', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :pharmaceutical_form, collection: [], wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'pharmaceutical-forms', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :administration_way, collection: [], wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'administration-ways', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :recipe_type, collection: [], wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'recipe-types', disabled: show?(f.object.persisted?)} %>
         <%= f.input :dose, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-        <%= f.association :dose_frequency_type, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'dose-frequencies-types', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :dose_frequency_type, collection: [], wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'dose-frequency-types', disabled: show?(f.object.persisted?)} %>
         <%= f.input :dose_frequency, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :dose_quantity, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :treatment_date, as: :date, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-        <%= f.association :duration_type, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'duration-types', disabled: show?(f.object.persisted?)} %>
+        <%= f.association :duration_type, collection: [], wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'duration-types', disabled: show?(f.object.persisted?)} %>
         <%= f.input :duration, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :unique_dose, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
         <%= f.input :continuous_dose, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>

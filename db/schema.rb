@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_060327) do
+ActiveRecord::Schema.define(version: 2020_05_19_054842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -877,6 +877,21 @@ ActiveRecord::Schema.define(version: 2020_05_16_060327) do
     t.index ["user_id"], name: "index_patient_soap_medicines_on_user_id"
   end
 
+  create_table "patient_soap_orientations", force: :cascade do |t|
+    t.bigint "patient_soap_id"
+    t.text "orientation"
+    t.bigint "user_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_patient_soap_orientations_on_company_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_orientations_on_patient_soap_id"
+    t.index ["user_id"], name: "index_patient_soap_orientations_on_user_id"
+  end
+
   create_table "patient_soap_problems", force: :cascade do |t|
     t.bigint "patient_soap_id"
     t.bigint "ciap_code_id"
@@ -912,6 +927,28 @@ ActiveRecord::Schema.define(version: 2020_05_16_060327) do
     t.index ["company_id"], name: "index_patient_soap_reasons_on_company_id"
     t.index ["patient_soap_id"], name: "index_patient_soap_reasons_on_patient_soap_id"
     t.index ["user_id"], name: "index_patient_soap_reasons_on_user_id"
+  end
+
+  create_table "patient_soap_referrals", force: :cascade do |t|
+    t.bigint "patient_soap_id"
+    t.bigint "specialty_id"
+    t.string "complement"
+    t.bigint "cid_code_id"
+    t.integer "risk_classification"
+    t.text "referral_reason"
+    t.text "observations"
+    t.bigint "user_id"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "discarded_at"
+    t.string "ip"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cid_code_id"], name: "index_patient_soap_referrals_on_cid_code_id"
+    t.index ["company_id"], name: "index_patient_soap_referrals_on_company_id"
+    t.index ["patient_soap_id"], name: "index_patient_soap_referrals_on_patient_soap_id"
+    t.index ["specialty_id"], name: "index_patient_soap_referrals_on_specialty_id"
+    t.index ["user_id"], name: "index_patient_soap_referrals_on_user_id"
   end
 
   create_table "patient_soap_reminders", force: :cascade do |t|
@@ -1503,6 +1540,9 @@ ActiveRecord::Schema.define(version: 2020_05_16_060327) do
   add_foreign_key "patient_soap_medicines", "medicines"
   add_foreign_key "patient_soap_medicines", "patient_soaps"
   add_foreign_key "patient_soap_medicines", "users"
+  add_foreign_key "patient_soap_orientations", "companies"
+  add_foreign_key "patient_soap_orientations", "patient_soaps"
+  add_foreign_key "patient_soap_orientations", "users"
   add_foreign_key "patient_soap_problems", "companies"
   add_foreign_key "patient_soap_problems", "generic_models", column: "ciap_code_id"
   add_foreign_key "patient_soap_problems", "generic_models", column: "cid_code_id"
@@ -1512,6 +1552,11 @@ ActiveRecord::Schema.define(version: 2020_05_16_060327) do
   add_foreign_key "patient_soap_reasons", "generic_models", column: "ciap_code_id"
   add_foreign_key "patient_soap_reasons", "patient_soaps"
   add_foreign_key "patient_soap_reasons", "users"
+  add_foreign_key "patient_soap_referrals", "companies"
+  add_foreign_key "patient_soap_referrals", "generic_models", column: "cid_code_id"
+  add_foreign_key "patient_soap_referrals", "generic_models", column: "specialty_id"
+  add_foreign_key "patient_soap_referrals", "patient_soaps"
+  add_foreign_key "patient_soap_referrals", "users"
   add_foreign_key "patient_soap_reminders", "companies"
   add_foreign_key "patient_soap_reminders", "patient_soaps"
   add_foreign_key "patient_soap_reminders", "users"
