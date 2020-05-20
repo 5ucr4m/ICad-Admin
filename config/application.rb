@@ -15,8 +15,6 @@ module IcadX
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(6.0)
 
-    # Where the I18n library should search for translation files
-    config.i18n.load_path += Dir[Rails.root.join('lib', 'locale', '*.{rb,yml}')]
     # Whitelist locales available for the application
     config.i18n.available_locales = %i[en pt-BR]
     # Set default locale to something other than :en
@@ -44,11 +42,11 @@ module IcadX
     config.logger = ActiveSupport::TaggedLogging.new(logger)
 
     # Cache config
-    config.cache_store = :redis_cache_store, { driver: :hiredis, url: "#{ENV['REDIS_URL']}/#{ENV['REDIS_CACHE_PATH']}" }
+    config.cache_store = :redis_cache_store, { driver: :hiredis, url: (ENV['REDIS_URL']).to_s }
 
     # ActiveJob with Sidekiq
     config.active_job.queue_adapter = :sidekiq
-    config.active_job.queue_name_prefix = "#{ENV['ACTIVE_JOB_QUEUE_PREFIX']}_#{Rails.env}"
+    config.active_job.queue_name_prefix = "icadx:jobs_#{Rails.env}"
 
     # Don't generate system test files.
     config.generators.system_tests = nil

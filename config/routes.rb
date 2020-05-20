@@ -3,6 +3,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get '/check', to: proc {[200, {}, ['it_works']]}
   # Sidekiq web config
   scope :monitoring do
     mount Sidekiq::Web => '/sidekiq'
