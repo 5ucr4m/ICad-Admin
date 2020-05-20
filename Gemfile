@@ -56,6 +56,7 @@ gem 'simple_form'
 gem 'sinatra', require: false
 gem 'title'
 gem 'webpacker', '~> 4.0'
+gem 'faker'
 
 group :development, :test do
   gem 'better_errors'
@@ -63,7 +64,6 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
