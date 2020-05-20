@@ -1,5 +1,7 @@
 FROM pawurb/ruby-jemalloc-node-yarn:latest
 
+RUN apt-get update && apt-get -qqyy install libxml2
+
 COPY Gemfile* /tmp/
 COPY package.json /tmp/
 COPY yarn.lock /tmp/
