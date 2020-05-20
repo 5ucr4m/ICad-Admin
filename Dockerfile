@@ -1,6 +1,6 @@
 FROM pawurb/ruby-jemalloc-node-yarn:latest
 
-RUN sudo apt-get -y install libxslt-dev libxml2-dev
+RUN apt-get -y install libxslt-dev libxml2-dev
 
 COPY Gemfile* /tmp/
 COPY package.json /tmp/
