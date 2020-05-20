@@ -22,7 +22,6 @@ gem 'devise_token_auth'
 gem 'discard', '~> 1.0'
 gem 'dotenv-rails'
 gem 'dotiw'
-gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 gem 'faraday'
 gem 'friendly_id'
 gem 'geocoder'
@@ -64,7 +63,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-
+  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
