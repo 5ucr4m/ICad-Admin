@@ -822,7 +822,7 @@ Layout/SpaceInsideRangeLiteral:
 Style/SymbolLiteral:
   Enabled: true
 
-Layout/Tab:
+Layout/IndentationStyle:
   Enabled: true
 
 Layout/TrailingWhitespace:
@@ -889,9 +889,6 @@ Lint/EmptyEnsure:
   Enabled: true
 
 Lint/EmptyInterpolation:
-  Enabled: true
-
-Lint/EndInMethod:
   Enabled: true
 
 Lint/EnsureReturn:
