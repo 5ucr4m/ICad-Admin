@@ -2,28 +2,39 @@
 class PatientRecordsController < WebController
   before_action :set_patient_record, only: %i[show edit update destroy]
 
+  breadcrumb PatientRecord.model_name.human(count: 2), :records_path
+
   # GET /patient_records
   def index
+    authorize(PatientRecord)
     @query = PatientRecord.ransack(params[:q])
     @pagy, @patient_records = pagy(@query.result, page: params[:page], items: 10)
   end
 
   # GET /patient_records/1
   def show
+    authorize(@patient_record)
+    breadcrumb(@patient_record.slug, family_member_patient_record_path(@patient_record))
   end
 
   # GET /patient_records/new
   def new
+    authorize(PatientRecord)
+    breadcrumb(t('helpers.submit.new'), new_family_member_patient_record_path)
     @patient_record = PatientRecord.new
     @patient_record.build_patient_soap
   end
 
   # GET /patient_records/1/edit
   def edit
+    authorize(@patient_record)
+    breadcrumb(@patient_record.slug, family_member_patient_record_path(@patient_record))
   end
 
   # POST /patient_records
   def create
+    authorize(PatientRecord)
+    breadcrumb(t('helpers.submit.new'), new_family_member_patient_record_path)
     @patient_record = PatientRecord.new(patient_record_params)
 
     if @patient_record.save
@@ -35,6 +46,8 @@ class PatientRecordsController < WebController
 
   # PATCH/PUT /patient_records/1
   def update
+    authorize(@patient_record)
+    breadcrumb(@patient_record.slug, family_member_patient_record_path(@patient_record))
     if @patient_record.update(patient_record_params)
       redirect_to(@patient_record, notice: 'Prontuário atualizado com sucesso!')
     else

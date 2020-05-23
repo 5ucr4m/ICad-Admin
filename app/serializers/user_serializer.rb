@@ -116,11 +116,11 @@ class UserSerializer < ApplicationSerializer
   end
 
   def professional_patient_record_bookings
-    user_info&.patient_records
+    user_info&.patient_record_bookings
   end
 
   def professional_patient_record_demands
-    user_info&.patient_records
+    user_info&.patient_record_demands
   end
 
   def home_registration
