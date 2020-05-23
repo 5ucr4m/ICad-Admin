@@ -9,18 +9,21 @@ module Api
       skip_before_action :verify_authenticity_token
       wrap_parameters format: []
 
-      # def create
-      #   super do |resource|
-      #     return render_create_error_bad_credentials unless authenticate_cns(resource)
-      #   end
-      # end
+      def create
+        super do |resource|
+          return render_create_error_bad_credentials unless authenticate_cns(resource)
+        end
+      end
 
       private
 
       def authenticate_cns(resource)
-        return false if resource.health_professional.blank?
-
-        resource.health_professional.cns_code == params[:cns_code]
+        RailsMultitenant::GlobalContextRegistry[:company_id] = resource.company.id
+        if resource.citizen?
+          resource.family_member.cns_number == params[:cns_code]
+        else
+          resource.health_professional.cns_code == params[:cns_code]
+        end
       end
 
       def render_create_success

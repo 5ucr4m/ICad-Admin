@@ -102,6 +102,7 @@ Rails.application.routes.draw do
     sign_out: 'logout',
   }, controllers: {
     registrations: 'registrations',
+    sessions: 'sessions'
   }
 
   devise_scope :user do

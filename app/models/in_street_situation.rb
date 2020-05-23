@@ -37,8 +37,8 @@ class InStreetSituation < ApplicationRecord
   include Sluggable
   include Tenantable
 
-  belongs_to :meals_per_day, class_name: 'GenericModel'
-  belongs_to :street_situation_time, class_name: 'GenericModel'
+  belongs_to :meals_per_day, class_name: 'GenericModel', optional: true
+  belongs_to :street_situation_time, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
 
   has_many :in_street_situation_meals

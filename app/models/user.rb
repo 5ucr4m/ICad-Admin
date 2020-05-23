@@ -97,12 +97,6 @@ class User < ApplicationRecord
   delegate :citizen?, to: :role
   delegate :service?, to: :role
 
-  def active_for_authentication?
-    super do |_s|
-      agent? && company.present? || admin?
-    end
-  end
-
   def company
     current_company&.company
   end

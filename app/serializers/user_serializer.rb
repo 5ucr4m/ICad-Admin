@@ -259,7 +259,6 @@ class UserSerializer < ApplicationSerializer
   def family_member
     RailsMultitenant::GlobalContextRegistry[:company_id] = object.company.id
     family_members = FamilyMember.strip_company_scope.all
-
     family_members.find_by(id: object.family_member.id)
   end
 
