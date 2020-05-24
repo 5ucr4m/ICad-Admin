@@ -4,6 +4,8 @@ class AppointmentDemand < ApplicationRecord
   belongs_to :health_professional
   belongs_to :company, optional: true
 
+  has_one :patient_record
+
   before_validation :check_demand
 
   ransack_alias :search, :id_to_s

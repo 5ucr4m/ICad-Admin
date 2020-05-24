@@ -10,6 +10,8 @@ class AppointmentBooking < ApplicationRecord
   belongs_to :medical_procedure, class_name: 'GenericModel'
   belongs_to :company
 
+  has_one :patient_record
+
   validates :appointment_date, :start_hour, :end_hour, :observation, presence: true
 
   accepts_nested_attributes_for :family_member, allow_destroy: false

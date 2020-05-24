@@ -717,6 +717,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_054842) do
   create_table "patient_records", force: :cascade do |t|
     t.bigint "appointment_booking_id"
     t.bigint "appointment_demand_id"
+    t.bigint "health_professional_id"
     t.bigint "appointment_reason_id"
     t.bigint "family_member_id"
     t.text "appointment_brief"
@@ -750,6 +751,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_054842) do
     t.index ["collected_time_id"], name: "index_patient_records_on_collected_time_id"
     t.index ["company_id"], name: "index_patient_records_on_company_id"
     t.index ["family_member_id"], name: "index_patient_records_on_family_member_id"
+    t.index ["health_professional_id"], name: "index_patient_records_on_health_professional_id"
     t.index ["other_appointment_booking_id"], name: "index_patient_records_on_other_appointment_booking_id"
     t.index ["patient_record_id"], name: "index_patient_records_on_patient_record_id"
     t.index ["user_id"], name: "index_patient_records_on_user_id"
@@ -1510,6 +1512,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_054842) do
   add_foreign_key "patient_records", "family_members"
   add_foreign_key "patient_records", "generic_models", column: "appointment_reason_id"
   add_foreign_key "patient_records", "generic_models", column: "collected_time_id"
+  add_foreign_key "patient_records", "health_professionals"
   add_foreign_key "patient_records", "patient_records"
   add_foreign_key "patient_records", "users"
   add_foreign_key "patient_soap_certificates", "companies"

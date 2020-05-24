@@ -4,6 +4,7 @@ class CreatePatientRecords < ActiveRecord::Migration[6.0]
     create_table :patient_records do |t|
       t.belongs_to(:appointment_booking, foreign_key: true, index: true)
       t.belongs_to(:appointment_demand, foreign_key: true, index: true)
+      t.belongs_to(:health_professional, foreign_key: true, index: true)
       t.belongs_to(:appointment_reason, foreign_key: { to_table: :generic_models }, index: true)
       t.belongs_to(:family_member, foreign_key: true, index: true)
       t.text(:appointment_brief)

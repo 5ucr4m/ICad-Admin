@@ -79,16 +79,21 @@ class UserSerializer < ApplicationSerializer
   attribute :home_visit_forms, if: :citizen?
   attribute :vaccines, if: :citizen?
 
-  attribute :professional_appointment_bookings, if: :not_citizen?
-  attribute :professional_appointment_demands, if: :not_citizen?
-  attribute :professional_patient_record_bookings, if: :not_citizen?
-  attribute :professional_patient_record_demands, if: :not_citizen?
+  attribute :doctor_appointment_bookings, if: :doctor?
+  attribute :doctor_appointment_demands, if: :doctor?
+  attribute :doctor_patient_records, if: :doctor?
+
+  attribute :agent_home_registrations, if: :agent?
+  attribute :agent_individual_registrations, if: :agent?
+  attribute :agent_home_visit_forms, if: :agent?
 
   attribute :appointment_bookings, if: :citizen?
   attribute :appointment_demands, if: :citizen?
   attribute :patient_records, if: :citizen?
 
   delegate :citizen?, to: :object
+  delegate :doctor?, to: :object
+  delegate :agent?, to: :object
   delegate :not_citizen?, to: :object
 
   def vaccinations
@@ -107,20 +112,16 @@ class UserSerializer < ApplicationSerializer
     user_info&.patient_records
   end
 
-  def professional_appointment_bookings
+  def doctor_appointment_bookings
     user_info&.appointment_bookings
   end
 
-  def professional_appointment_demands
+  def doctor_appointment_demands
     user_info&.appointment_demands
   end
 
-  def professional_patient_record_bookings
-    user_info&.patient_record_bookings
-  end
-
-  def professional_patient_record_demands
-    user_info&.patient_record_demands
+  def doctor_patient_records
+    user_info&.patient_records
   end
 
   def home_registration
@@ -133,6 +134,18 @@ class UserSerializer < ApplicationSerializer
 
   def home_visit_forms
     user_info&.home_visit_forms
+  end
+
+  def agent_home_registrations
+    object.home_registrations
+  end
+
+  def agent_individual_registrations
+    object&.individual_registrations
+  end
+
+  def agent_home_visit_forms
+    object&.home_visit_forms
   end
 
   def vaccines

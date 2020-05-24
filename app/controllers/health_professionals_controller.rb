@@ -10,7 +10,7 @@ class HealthProfessionalsController < WebController
     authorize(HealthProfessional)
     @query = HealthProfessional.ransack(params[:q])
     @pagy, @health_professionals = pagy(@query.result
-                                          .includes(:cbo_code, :professional_team, :user),
+                                          .includes(:cbo_code, :professional_team, :user, :gender),
                                         page: params[:page], items: 10)
   end
 
