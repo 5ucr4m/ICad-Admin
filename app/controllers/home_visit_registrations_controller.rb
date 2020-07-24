@@ -8,7 +8,7 @@ class HomeVisitRegistrationsController < WebController
   # GET /home_visit_registrations
   def index
     @query = HomeVisitRegistration.ransack(params[:q])
-    @result = @query.result
+    @result = @query.result.includes(:home_visit_forms)
     @result = @result.where(user: current_user) if current_user.agent?
     @pagy, @home_visit_registrations = pagy(@result, page: params[:page], items: 10)
   end
