@@ -11,8 +11,7 @@ class CitiesController < WebController
     @query = City.ransack(params[:q])
     respond_to do |format|
       format.html do
-        @pagy, @cities = pagy(@query.result.includes(:state)
-                                          .order(:name), page: params[:page], items: 10)
+        @pagy, @cities = pagy(@query.result.includes(:state).order(:name), page: params[:page], items: 10)
       end
       format.json { render_json @query.result.includes(:state).order(:name) }
     end

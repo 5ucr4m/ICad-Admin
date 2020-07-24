@@ -9,7 +9,7 @@ class VaccinesController < WebController
   def index
     authorize(Vaccine)
     @query = Vaccine.ransack(params[:q])
-    @pagy, @vaccines = pagy(@query.result, page: params[:page], items: 10)
+    @pagy, @vaccines = pagy(@query.result.includes(:immunobiological), page: params[:page], items: 10)
   end
 
   # GET /vaccines/1
