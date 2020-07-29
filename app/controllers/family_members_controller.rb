@@ -42,7 +42,8 @@ class FamilyMembersController < WebController
   def create
     authorize(FamilyMember)
     breadcrumb("#{t('helpers.submit.new')} #{FamilyMember.model_name.human}", new_family_member_path)
-    @family_member = current_user.family_members.build(family_member_params)
+    user = current_user
+    @family_member = current_user.family_member.build(family_member_params)
     set_selected_options
 
     if @family_member.save

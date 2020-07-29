@@ -200,6 +200,28 @@ pt-BR:
         family_income: Renda Familiar
         reside_since: Reside desde
         moving: Mudou-se
+      company:
+        legal_full_name: Razão Social
+        fancy_name: Nome Fantasia
+        federal_registry: CNPJ
+        state_registry: Inscrição Estadual
+        patio: Logradouro
+        number: Número
+        zip: CEP
+        reference: Referência
+        city: Cidade
+        complement: Complemento
+      role:
+        name: Nome
+        role_type: Tipo de Função
+        admin: Administrador
+        description: Descrição
+      city:
+        name: Nome
+        abbreviation: Abreviatura
+        code: Código
+        state: Estado
+        reference: Referência
       family_member:
         age: Idade
         family: Família
@@ -405,12 +427,13 @@ pt-BR:
         health_establishment: Estabelecimento de Saúde
       responsible_children:
         responsible_child_type: Tipo Responsável Criança
-      sms_messages:
+      sms_message:
         date_sent: Data Envio
         number: Número
         status: Status
         sms_schedule: Agendamento
       sms_schedule:
+        name: Nome
         scheduled_date: Data Agendamento
         message: Mensagem
         role_groups: Grupos de Envio

@@ -26,6 +26,8 @@ class RolesController < WebController
   # GET /roles/1/edit
   def edit
     authorize(Role)
+    the_role = Role.find( params[:id])
+    @role = the_role
   end
 
   # POST /roles

@@ -51,7 +51,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   has_one :health_professional, dependent: :nullify
-  has_one :family_member, dependent: :nullify
+  has_many :family_member, dependent: :nullify
 
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :lockable, :trackable

@@ -1,11 +1,11 @@
 <%= simple_form_for @individual_registration do |f| %>
   <% content_for :body do %>
-    <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :uuid_form_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :uuid_citizen, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12 d-none'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :uuid_form_origin, wrapper_html: {class: 'col-lg-3 col-sm-12 d-none'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :uuid_citizen, wrapper_html: {class: 'col-lg-3 col-sm-12 d-none'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12 d-none'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :refuse_registration, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :form_updated, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :form_updated, wrapper_html: {class: 'pl-2 col-lg-3 col-sm-12 d-none'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <div class="col-12">
       <br/>
       <div class="card<%= ' card-collapsed' unless @individual_registration.family_member&.errors&.any? %> mb-3">
