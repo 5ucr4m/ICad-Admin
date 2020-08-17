@@ -1,7 +1,9 @@
 <%= f.association :company, collection: [current_user.company],
                   label_method: :name_formatted,
+                  label: 'Empresa',
                   wrapper_html: {class: 'col-lg-6 col-sm-12'},
                   input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
 <%= f.association :role, collection: Role.all.where(admin: false).includes(:user_roles),
                   label_method: :name_formatted,
+                  label: 'Função',
                   wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>

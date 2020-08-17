@@ -47,7 +47,7 @@ class FamilyMembersController < WebController
     set_selected_options
 
     if @family_member.save
-      redirect_to(family_members_url, notice: 'Family member was successfully created.')
+      redirect_to(family_members_url, notice: 'Membro Familiar foi criado com sucesso.')
     else
       render(:new)
     end
@@ -58,7 +58,7 @@ class FamilyMembersController < WebController
     authorize(@family_member)
     breadcrumb(@family_member.slug, family_member_path(@family_member))
     if @family_member.update(family_member_params)
-      redirect_to(family_members_url, notice: 'Family member was successfully updated.')
+      redirect_to(family_members_url, notice: 'Membro Familiar foi atualizado com sucesso.')
     else
       render(:edit)
     end
@@ -68,7 +68,7 @@ class FamilyMembersController < WebController
   def destroy
     authorize(@family_member)
     @family_member.destroy
-    redirect_to(family_members_url, notice: 'Family member was successfully destroyed.')
+    redirect_to(family_members_url, notice: 'Membro Familiar foi removido com sucesso.')
   end
 
   private

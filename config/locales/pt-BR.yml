@@ -191,6 +191,7 @@ pt-BR:
         reference: Referência
         out_area: Fora área
         micro_area: Microárea
+        address_type: Tipo de Endereço
       family:
         home_registration: Cadastro Domiciliar
         responsible_birth_date: Data Nascimento Responsável
@@ -208,6 +209,7 @@ pt-BR:
         patio: Logradouro
         number: Número
         zip: CEP
+        district: Bairro
         reference: Referência
         city: Cidade
         complement: Complemento

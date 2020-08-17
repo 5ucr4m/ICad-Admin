@@ -4,7 +4,7 @@
     <%= f.association :vaccination_campaign, collection: VaccinationCampaign.active_campaigns, label_method: :title,
                       wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.association :turn, collection: GenericModel.turns, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
-    <%= f.association :family_member, collection: [@family_member], wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'family-members', disabled: show?(f.object.persisted?)} %>
+    <%= f.association :family_member, collection: [@family_member], wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {lang: 'es',  class: 'family-members', disabled: show?(f.object.persisted?)} %>
     <%= f.association :local_service, collection: GenericModel.local_services, label_method: :name_formatted, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <%= f.input :initial_date_hour, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :final_date_hour, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>

@@ -44,7 +44,7 @@ class UsersController < WebController
     @cbo_selected = @user&.health_professional&.cbo_code&.presence
 
     if @user.save
-      redirect_to(users_url, notice: 'User was successfully created.')
+      redirect_to(users_url, notice: 'Usuário foi criado com sucesso.')
     else
       render(:new)
     end
@@ -53,9 +53,10 @@ class UsersController < WebController
   # PATCH/PUT /users/1
   def update
     authorize(@user)
+
     if @user.update(user_params)
       @user.avatar.attach(params[:avatar]) unless @user.avatar.attached?
-      redirect_to(users_url, notice: 'User was successfully updated.')
+      redirect_to(users_url, notice: 'Usuário foi atualizado com sucesso.')
     else
       @cbo_selected = @user&.health_professional&.cbo_code&.presence
       render(:edit)
@@ -66,7 +67,7 @@ class UsersController < WebController
   def destroy
     authorize(@user)
     @user.destroy
-    redirect_to(users_url, notice: 'User was successfully destroyed.')
+    redirect_to(users_url, notice: 'Usuário foi removido com sucesso.')
   end
 
   private

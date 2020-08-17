@@ -38,7 +38,7 @@ class HealthEstablishmentsController < WebController
     @health_establishment = HealthEstablishment.new(health_establishment_params)
 
     if @health_establishment.save
-      redirect_to(health_establishments_url, notice: 'Health establishment was successfully created.')
+      redirect_to(health_establishments_url, notice: 'Unidade Básica de saude foi criada com sucesso.')
     else
       render(:new)
     end
@@ -49,7 +49,7 @@ class HealthEstablishmentsController < WebController
     authorize(@health_establishment)
     breadcrumb(@health_establishment.slug, health_establishment_path(@health_establishment))
     if @health_establishment.update(health_establishment_params)
-      redirect_to(health_establishments_url, notice: 'Health establishment was successfully updated.')
+      redirect_to(health_establishments_url, notice: 'Unidade Básica de saude foi atualizada com sucesso.')
     else
       render(:edit)
     end
@@ -59,7 +59,7 @@ class HealthEstablishmentsController < WebController
   def destroy
     authorize(@health_establishment)
     @health_establishment.destroy
-    redirect_to(health_establishments_url, notice: 'Health establishment was successfully destroyed.')
+    redirect_to(health_establishments_url, notice: 'Unidade Básica de saude foi removida com sucesso.')
   end
 
   private

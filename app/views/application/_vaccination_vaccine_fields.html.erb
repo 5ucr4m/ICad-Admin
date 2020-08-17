@@ -2,7 +2,9 @@
   <div class="form-row">
     <%= f.association :vaccine, collection: Vaccine.all,
                       label_method: :description,
-                      wrapper_html: {class: 'col-lg-11 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+                      label: 'Vacina',
+                      wrapper_html: {class: 'col-lg-11 col-sm-12'},
+                      input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
     <% unless show?(f.object.persisted?) %>
       <div class="col-lg-1 col-sm-12 text-center btn-remove">
         <%= link_to_remove_association f, class: 'btn btn-icon btn-danger btn-remove-nested', role: 'button' do %>

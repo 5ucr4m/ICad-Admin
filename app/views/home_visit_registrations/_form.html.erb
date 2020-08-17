@@ -1,7 +1,7 @@
 <%= simple_form_for @home_visit_registration do |f| %>
   <% content_for :body do %>
-    <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :uuid, wrapper_html: {class: 'col-lg-3 col-sm-12 d-none'}, input_html: {disabled: show?(f.object.persisted?)} %>
+    <%= f.input :tp_cds_origin, wrapper_html: {class: 'col-lg-3 col-sm-12 d-none'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <% if f.object.persisted? %>
       <div id="family_member_fields" class="col-12">
         <div class="card<%= ' card-collapsed' unless @home_visit_registration&.family_member&.errors&.any? %> mb-3">
@@ -30,7 +30,7 @@
               <a href="#" class="card-options-collapse badge bg-blue-deep text-white p-1" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
             </div>
           </div>
-          <% if can? :manage, HomeVisitRegistration %>
+          <%# if current_user.can? :manage, HomeVisitRegistration %>
             <% unless show?(f.object.persisted?) %>
               <div class="card-body py-2">
                 <%= link_to_add_association f, :home_visit_forms,
@@ -43,7 +43,7 @@
                 <% end %>
               </div>
             <% end %>
-          <% end %>
+          <%# end %>
           <div id="home_visit_forms" class="card-body">
             <%= f.simple_fields_for :home_visit_forms do |home_visit_form| %>
               <%= render 'application/home_visit_form_fields', f: home_visit_form %>

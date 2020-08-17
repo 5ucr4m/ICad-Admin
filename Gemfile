@@ -41,7 +41,7 @@ gem 'puma', '~> 3.11'
 gem 'pundit'
 gem 'rack-attack'
 gem 'rack-cors'
-gem 'rack-timeout'
+# gem 'rack-timeout'
 gem 'rails', '~> 6.0.3'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'rails_multitenant'
@@ -57,6 +57,8 @@ gem 'sinatra', require: false
 gem 'title'
 gem 'webpacker', '~> 4.0'
 gem 'faker'
+gem 'select2-rails'
+
 
 group :development, :test do
   gem 'better_errors'

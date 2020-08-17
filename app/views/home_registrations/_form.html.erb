@@ -22,24 +22,34 @@
           </div>
         </div>
         <div class="card-body">
-          <% if f.object.families.includes(:family_members).any? %>
             <div class="row">
               <div class="col-12">
-                <%= f.simple_fields_for :families do |family| %>
-                  <%= render 'application/family_fields', f: family %>
-                <% end %>
+                <%= f.association :families, collection: Family.all,
+                    label_method: :handbook_number,
+                    wrapper_html: {class: 'col-lg-6 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
               </div>
             </div>
-          <% else %>
-            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">
-              <div class="row">
-                <div class="col py-auto text-center font-weight-bold">
-                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Família registrada.
-                </div>
-              </div>
-            </div>
-          <% end %>
         </div>
+
+<!--        <div class="card-body">-->
+          <%# if f.object.families.includes(:family_members).any? %>
+<!--            <div class="row">-->
+<!--              <div class="col-12">-->
+                <%#= f.simple_fields_for :families do |family| %>
+                  <%#= render 'application/family_fields', f: family %>
+                <%# end %>
+<!--              </div>-->
+<!--            </div>-->
+          <%# else %>
+<!--            <div class="alert alert-warning alert-dismissible p-4 text-center" role="alert">-->
+<!--              <div class="row">-->
+<!--                <div class="col py-auto text-center font-weight-bold">-->
+<!--                  <i class="fas fa-exclamation-triangle mr-2"></i>Nenhuma Família registrada.-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          <%# end %>
+<!--        </div>-->
       </div>
       <div class="card<%= ' card-collapsed' unless @home_registration.home_registration_pets.map(&:errors).flatten.any? %> mb-3">
         <div class="card-header">

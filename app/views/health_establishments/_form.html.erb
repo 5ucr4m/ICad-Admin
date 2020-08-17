@@ -9,7 +9,7 @@
     <%= f.input :manager_full_name, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
     <%= f.input :manager_federal_registry, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'cpf', disabled: show?(f.object.persisted?)} %>
     <%= f.input :registry_at, html5: true, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {disabled: show?(f.object.persisted?)} %>
-    <%= f.association :unit_type, collection: GenericModel.unit_types, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
+    <%#= f.association :unit_type, collection: GenericModel.unit_types, wrapper_html: {class: 'col-lg-3 col-sm-12'}, input_html: {class: 'select2', disabled: show?(f.object.persisted?)} %>
   <% end %>
   <%= render template: 'application/form', locals: {form: @health_establishment} %>
 <% end %>

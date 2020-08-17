@@ -10,7 +10,6 @@ require('bootstrap/dist/js/bootstrap.bundle');
 require('cleave.js');
 require('selectize');
 require('cleave.js/dist/addons/cleave-phone.br');
-require('select2');
 require('sweetalert2');
 require('flatpickr');
 require("chartkick").use(require("highcharts"));
@@ -25,8 +24,13 @@ import superagent from 'superagent';
 import * as $ from 'jquery';
 import flatpickr from 'flatpickr';
 
+
+
 window.Pagy = Pagy;
 window.$ = window.jQuery = $;
+
+require('select2')
+require('select2/dist/js/i18n/pt-BR')
 
 function addLoadingSpin() {
   let divSpin = document.createElement('div');
@@ -222,6 +226,7 @@ $(document).ready(function() {
   $('div').on('cocoon:after-insert', function (e, object) {
     $(object).find('.select2').select2({
       placeholder: 'Selecione',
+      language: 'pt-BR',
       theme: 'bootstrap4',
       width: '100%',
       allowClear: true
@@ -631,6 +636,7 @@ window.addEventListener('DOMContentLoaded', function (e) {
 
   $('.select2').select2({
     placeholder: 'Selecione',
+    language: 'es',
     theme: 'bootstrap4',
     width: '100%',
     allowClear: true
@@ -638,6 +644,7 @@ window.addEventListener('DOMContentLoaded', function (e) {
 
   $('.select2-multiple').select2({
     theme: 'bootstrap4',
+    language: 'pt-BR',
     width: '100%',
     multiple: true,
     placeholder: 'Selecione'
@@ -901,3 +908,4 @@ window.addEventListener('DOMContentLoaded', function (e) {
     });
   });
 }, false);
+

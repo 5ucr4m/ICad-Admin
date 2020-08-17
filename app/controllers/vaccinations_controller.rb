@@ -11,7 +11,7 @@ class VaccinationsController < WebController
     @query = Vaccination.ransack(params[:q])
     @result = @query.result
     @result = @result.where(user: current_user) if current_user.agent?
-    @pagy, @vaccinations = pagy(@result.includes(:vaccination_campaign, :family_member),
+    @pagy, @vaccinations = pagy(@result.includes(:vaccination_campaign, :family_member, :vaccination_vaccines, :vaccines),
                                 page: params[:page], items: 10)
   end
 

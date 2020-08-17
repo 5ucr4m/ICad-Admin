@@ -43,7 +43,7 @@
                 <i class="fas <%= t('activerecord.models.home_visit_reason.icon') %> mr-2"></i><%= HomeVisitReason.model_name.human(count: 2) %>
               </h3>
             </div>
-            <% if can? :manage, HomeVisitRegistration %>
+            <%# if can? :manage, HomeVisitRegistration %>
               <% unless show?(f.object.persisted?) %>
                 <div class="card-body py-2">
                   <%= link_to_add_association f, :home_visit_reasons,
@@ -56,7 +56,7 @@
                   <% end %>
                 </div>
               <% end %>
-            <% end %>
+            <%# end %>
             <div id="home_visit_reasons" class="card-body">
               <%= f.simple_fields_for :home_visit_reasons do |home_visit_reason| %>
                 <%= render 'application/home_visit_reason_fields', f: home_visit_reason %>

@@ -11,8 +11,8 @@ class Vaccination < ApplicationRecord
   belongs_to :turn, class_name: 'GenericModel'
   belongs_to :family_member
   belongs_to :local_service, class_name: 'GenericModel'
-  belongs_to :way_administration, class_name: 'GenericModel'
-  belongs_to :local_application, class_name: 'GenericModel'
+  belongs_to :way_administration, class_name: 'GenericModel', optional: true
+  belongs_to :local_application, class_name: 'GenericModel', optional: true
   belongs_to :company, optional: true
   belongs_to :user
 
