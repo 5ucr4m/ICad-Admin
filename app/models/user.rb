@@ -74,9 +74,9 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
-  # validate :check_user_roles
+  validate :check_user_roles
 
-  accepts_nested_attributes_for :health_professional, allow_destroy: false
+  # accepts_nested_attributes_for :health_professional, allow_destroy: false
   accepts_nested_attributes_for :user_roles, allow_destroy: true
 
   ransack_alias :search, :id_to_s_or_email_or_health_professional_name_or_health_professional_cns_code
@@ -108,13 +108,6 @@ class User < ApplicationRecord
   def send_confirmation_notification?
     skip_confirmation!
     false
-  end
-
-  def update(params)
-    super(params)
-    puts "EDUUUUU ________--------________--------________--------________--------________--------________--------________--------________--------________--------________--------"
-    puts params
-    puts "EDUUUUU ________--------________--------________--------________--------________--------________--------________--------________--------________--------________--------"
   end
 
   def cns_code
@@ -166,7 +159,7 @@ class User < ApplicationRecord
   end
 
   def check_user_roles
-    return if user_companies.blank?
+    # return if user_companies.blank?
 
     if user_roles.map(&:company).uniq.count > user_roles.count
       errors.add(:base, 'Não é permitido ter multiplas funções na mesma Prefeitura.')

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'net/http'
 
 class UsersController < WebController
   before_action :set_user, only: %i[show edit update destroy]
@@ -38,12 +39,44 @@ class UsersController < WebController
 
   # POST /users
   def create
+
+    puts "00000000-------000000"
+    puts params.to_json
+    puts "00000000-------000000"
+    puts user_params.to_json
+    puts "00000000-------000000"
+
     authorize(User)
     @user = User.new(user_params)
     @user.avatar.attach(params[:avatar])
+
+    parsed_json = ActiveSupport::JSON.decode(params.to_json)
+
+
     @cbo_selected = @user&.health_professional&.cbo_code&.presence
 
     if @user.save
+
+      parsed_json["user"]["user_roles_attributes"].each { |value|
+        user_role = UserRole.new
+        user_role.user = @user
+        user_role.company_id = value[1]["company_id"]
+        user_role.role_id = value[1]["role_id"]
+        user_role.save
+      }
+
+      url = "http://192.168.15.10:9000/employer"
+      uri = URI(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      form_data = {
+          email: "l.eduardosoares@gmail.com",
+          password: "1234567",
+          token:  ::Digest::MD5.hexdigest( "l.eduardosoares@gmail.commvcssc3l1234567")
+      }
+      request = Net::HTTP::Post.new(uri.path, {'Content-Type' =>'application/json'})
+      request.body = form_data.to_json
+      http.request(request)
+
       redirect_to(users_url, notice: 'Usuário foi criado com sucesso.')
     else
       render(:new)
@@ -54,7 +87,20 @@ class UsersController < WebController
   def update
     authorize(@user)
 
+    parsed_json = ActiveSupport::JSON.decode(params.to_json)
+
     if @user.update(user_params)
+
+      @user.user_roles.delete_all
+
+      parsed_json["user"]["user_roles_attributes"].each { |value|
+        user_role = UserRole.new
+        user_role.user = @user
+        user_role.company_id = value[1]["company_id"]
+        user_role.role_id = value[1]["role_id"]
+        user_role.save
+      } unless parsed_json["user"]["user_roles_attributes"].nil?
+
       @user.avatar.attach(params[:avatar]) unless @user.avatar.attached?
       redirect_to(users_url, notice: 'Usuário foi atualizado com sucesso.')
     else
