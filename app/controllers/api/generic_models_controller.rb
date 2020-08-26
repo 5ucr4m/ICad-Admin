@@ -6,7 +6,7 @@ module Api
     before_action :set_query, except: %i[types cbo_types ethnicity_types]
 
     def types
-      authorize(GenericModel, :types)
+      authorize(GenericModel, :types, policy_class: Api::GenericModelPolicy )
       generic_models = Rails.cache.fetch('generic_models') do
         GenericModel.all
           .select(:id, :name, :reference, :generic_field)

@@ -9,7 +9,7 @@ module Api
       index?
     end
 
-    def types?
+    def types
       index?
     end
 

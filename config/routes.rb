@@ -164,9 +164,9 @@ Rails.application.routes.draw do
 
     # Generic Models
     resources :generic_models, only: :types do
-      collection do
-        get 'types'
-      end
+     collection do
+       get 'types'
+     end
     end
   end
 end

@@ -4,7 +4,7 @@ default: &default
   host: 127.0.0.1
   timeout: 5000
   username: icadx
-  password: theonlypassword
+  password: 123456788
   pool: <%= Integer(ENV.fetch("RAILS_MAX_THREADS") { 5 }) * Integer(ENV.fetch("WEB_CONCURRENCY") { 2 }) %>
   reaping_frequency: <%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
 development:
